@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en" data-base="../">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GreenGrass MVP — Product Plan · GreenGrass</title>
+<meta name="description" content="GreenGrass MVP — Product Plan — GreenGrass spec &amp; design documentation.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%232563eb'/%3E%3Cstop offset='1' stop-color='%2316a34a'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='32' height='32' rx='7' fill='url(%23g)'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="../assets/styles.css">
+</head>
+<body>
+<a class="skip-link" href="#content">Skip to content</a>
+<header class="site-header">
+  <button type="button" class="menu-toggle" aria-label="Toggle navigation" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+  <a class="brand" href="../index.html">
+    <span class="brand-mark" aria-hidden="true"></span>
+    <span class="brand-text"><strong>GreenGrass</strong><small>Spec & Design</small></span>
+  </a>
+  <div class="search">
+    <input type="search" id="search-input" placeholder="Search docs…" autocomplete="off" aria-label="Search documentation">
+    <div id="search-results" class="search-results" hidden></div>
+  </div>
+  <button type="button" class="theme-toggle" aria-label="Toggle dark mode" title="Toggle dark mode">
+    <span class="theme-icon" aria-hidden="true"></span>
+  </button>
+</header>
+<div class="layout">
+  <div class="sidebar-backdrop" hidden></div>
+  <aside class="sidebar" aria-label="Documentation navigation">
+    <nav class="nav">
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">Home<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../index.html">GreenGrass</a></li></ul></div>
+<div class="nav-section open"><button type="button" class="nav-section-title" aria-expanded="true">Specifications<span class="chev" aria-hidden="true"></span></button><ul><li><a href="./product.html">Project: GreenGrass</a></li><li><a href="./mvp.html" aria-current="page" class="active">GreenGrass MVP — Product Plan</a></li><li><a href="./users.html">Users &amp; Roles</a></li><li><a href="./workflows.html">Core Workflows</a></li><li><a href="./geography.html">Target Geography</a></li><li><a href="./security.html">Security &amp; Threat Model</a></li><li><a href="./compliance.html">Compliance &amp; Legal Framework</a></li><li><a href="./fundraising.html">Fundraising &amp; Payment Infrastructure</a></li><li><a href="./integrations.html">External Integrations</a></li><li><a href="./support.html">Tenant Support &amp; Onboarding</a></li><li><a href="./gotv.html">Get Out The Vote &amp; Election Day Operations</a></li><li><a href="./messaging.html">Internal Communications &amp; Notifications</a></li><li><a href="./press.html">Press, Media &amp; Public Communications</a></li></ul></div>
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">Architecture<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../design/architecture/system.html">System Architecture</a></li></ul></div>
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">UX Design<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../design/ux/00-overview.html">UX Design Overview</a></li><li><a href="../design/ux/01-information-architecture/navigation-model.html">Navigation Model</a></li><li><a href="../design/ux/01-information-architecture/screen-inventory.html">Screen Inventory</a></li><li><a href="../design/ux/01-information-architecture/persona-views.html">Persona Views</a></li><li><a href="../design/ux/01-information-architecture/url-structure.html">URL Structure</a></li><li><a href="../design/ux/02-global-patterns/pattern-catalog.html">Pattern Catalog</a></li><li><a href="../design/ux/02-global-patterns/offline-sync-patterns.html">Offline &amp; Sync Patterns</a></li><li><a href="../design/ux/02-global-patterns/notification-patterns.html">Notification Patterns</a></li><li><a href="../design/ux/02-global-patterns/search-patterns.html">Search Patterns</a></li><li><a href="../design/ux/02-global-patterns/settings-help-patterns.html">Settings &amp; Help Patterns</a></li><li><a href="../design/ux/02-global-patterns/security-ux-patterns.html">Security UX Patterns</a></li><li><a href="../design/ux/03-design-system/foundations.html">Design System Foundations</a></li><li><a href="../design/ux/03-design-system/theming-strategy.html">Theming Strategy</a></li><li><a href="../design/ux/03-design-system/component-inventory.html">Component Inventory</a></li><li><a href="../design/ux/03-design-system/responsive-strategy.html">Responsive Strategy</a></li><li><a href="../design/ux/04-wireframes/index.html">Wireframes</a></li><li><a href="../design/ux/04-wireframes/navigation-shell/navigation-shell.html">Navigation Shell Wireframes</a></li><li><a href="../design/ux/04-wireframes/dashboards/dashboards.html">Dashboard Wireframes</a></li><li><a href="../design/ux/04-wireframes/field-mode/field-mode.html">Field Mode Wireframes</a></li><li><a href="../design/ux/04-wireframes/onboarding/onboarding.html">Onboarding Wireframes</a></li><li><a href="../design/ux/04-wireframes/messaging/messaging.html">Messaging Wireframes</a></li><li><a href="../design/ux/04-wireframes/supporter/supporter-portal.html">Supporter Portal Wireframes</a></li><li><a href="../design/ux/04-wireframes/alliance/alliance.html">Alliance Wireframes</a></li><li><a href="../design/ux/04-wireframes/crm/crm.html">CRM / People Wireframes</a></li><li><a href="../design/ux/04-wireframes/field-ops/field-ops.html">Field Operations (Admin) Wireframes</a></li><li><a href="../design/ux/04-wireframes/fundraising/fundraising.html">Fundraising Wireframes</a></li><li><a href="../design/ux/04-wireframes/communications/communications.html">Communications Wireframes</a></li><li><a href="../design/ux/04-wireframes/social-media/social-media.html">Social Media Wireframes</a></li><li><a href="../design/ux/04-wireframes/events/events.html">Events Wireframes</a></li><li><a href="../design/ux/04-wireframes/press/press.html">Press &amp; Media Wireframes</a></li><li><a href="../design/ux/04-wireframes/activism/activism.html">Activism &amp; Engagement Campaign Wireframes</a></li><li><a href="../design/ux/04-wireframes/gotv/gotv.html">GOTV Admin Wireframes</a></li><li><a href="../design/ux/04-wireframes/settings/settings.html">Settings &amp; Admin Wireframes</a></li><li><a href="../design/ux/04-wireframes/auth/auth.html">Authentication Wireframes</a></li><li><a href="../design/ux/04-wireframes/profile/profile.html">User Profile Wireframes</a></li><li><a href="../design/ux/04-wireframes/help/help.html">Support &amp; Help Wireframes</a></li><li><a href="../design/ux/04-wireframes/public/public.html">Public Pages Wireframes</a></li><li><a href="../design/ux/04-wireframes/audit.html">Wireframe Audit Report</a></li></ul></div>
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">Decisions<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../decisions/001-platform-architecture.html">ADR-001: Platform Architecture &amp; Deployment</a></li><li><a href="../decisions/002-security-threat-model.html">ADR-002: Security &amp; Threat Model</a></li><li><a href="../decisions/003-identity-access-organization.html">ADR-003: Identity, Access &amp; Organization</a></li><li><a href="../decisions/004-data-model-integrity.html">ADR-004: Data Model &amp; Integrity</a></li><li><a href="../decisions/005-offline-first-sync.html">ADR-005: Offline-First &amp; Sync</a></li><li><a href="../decisions/006-field-operations-gotv.html">ADR-006: Field Operations &amp; GOTV</a></li><li><a href="../decisions/007-fundraising-payments.html">ADR-007: Fundraising &amp; Payments</a></li><li><a href="../decisions/008-communications-messaging.html">ADR-008: Communications &amp; Messaging</a></li><li><a href="../decisions/009-compliance-legal.html">ADR-009: Compliance &amp; Legal Framework</a></li><li><a href="../decisions/010-internationalization-localization.html">ADR-010: Internationalization &amp; Localization</a></li><li><a href="../decisions/011-design-system-ux.html">ADR-011: Design System &amp; UX Foundations</a></li><li><a href="../decisions/012-external-integrations.html">ADR-012: External Integrations</a></li><li><a href="../decisions/013-analytics-ai.html">ADR-013: Analytics &amp; AI</a></li><li><a href="../decisions/014-volunteer-onboarding.html">ADR-014: Volunteer &amp; Onboarding</a></li><li><a href="../decisions/015-product-scope.html">ADR-015: Product Scope Boundaries</a></li><li><a href="../decisions/016-cross-cutting-resolutions.html">ADR-016: Cross-Cutting Resolutions</a></li><li><a href="../decisions/ux-decisions.html">UX Decisions — Wireframe Phase</a></li></ul></div>
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">Diary<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../diary/index.html">Project Diary</a></li><li><a href="../diary/01-from-description-to-specification.html">Entry 1: From Description to Specification</a></li><li><a href="../diary/02-the-architecture-session.html">Entry 2: The Architecture Session</a></li><li><a href="../diary/03-information-architecture.html">Entry 3: Information Architecture</a></li><li><a href="../diary/04-design-system-and-wireframes.html">Entry 4: The Design System and Wireframes</a></li><li><a href="../diary/05-the-wireframe-audit.html">Entry 5: The Wireframe Audit</a></li><li><a href="../diary/06-resolving-the-open-questions.html">Entry 6: Resolving the Open Questions</a></li><li><a href="../diary/07-reconciling-the-architecture.html">Entry 7: Reconciling the Architecture</a></li><li><a href="../diary/08-housekeeping.html">Diary Entry 8: Housekeeping</a></li><li><a href="../diary/09-the-documentation-website.html">Diary Entry 9: The Documentation Website</a></li></ul></div>
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">Project &amp; Internal<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../claude/MEMORY.html">Memory</a></li><li><a href="../claude/SKILLS.html">Skills</a></li><li><a href="../CLAUDE.html">GreenGrass</a></li></ul></div>
+    </nav>
+  </aside>
+  <main id="content" class="content">
+    <nav class="breadcrumb" aria-label="Breadcrumb">Specifications</nav>
+    <article class="prose">
+<h1 id="greengrass-mvp-product-plan" tabindex="-1"><a class="heading-anchor" href="#greengrass-mvp-product-plan" aria-hidden="true">#</a> GreenGrass MVP — Product Plan</h1>
+<p><strong>The Coalition Data Trust: testing whether sovereign political organizations will pool data under the right rules</strong></p>
+<p>Pilot pair: MVC and PIP (Puerto Rico)
+Drafted: 2026-08-19</p>
+<hr>
+<h2 id="1-context" tabindex="-1"><a class="heading-anchor" href="#1-context" aria-hidden="true">#</a> 1. Context</h2>
+<p>GreenGrass has a complete specification — 12 spec documents, 37 UX documents, 236 wireframed screens, 16 ADRs — and no code. The full platform is a campaign operating system that asks a political party to migrate everything it does onto a new tool.</p>
+<p>Underneath that plan sits a single load-bearing assumption that has never been tested:</p>
+<blockquote>
+<p><strong>Sovereign political organizations will pool data with each other under the right rules.</strong></p>
+</blockquote>
+<p>Every alliance feature in the spec depends on it. The federation layer, the per-resource sharing contracts, cross-org dedup, joint campaigns, unanimous-consent fundraising splits, alliance key rotation — all of it presumes that parties who guard their lists as their core institutional asset will hand them into a shared arrangement if the governance is good enough.</p>
+<p>If that assumption is false, roughly a third of the specified product is dead weight and GreenGrass is a single-tenant campaign CRM competing with NationBuilder, NGP VAN, and Action Network on features. That is a much worse business.</p>
+<p>Everything else in the 16 ADRs is a normal engineering problem. This one is not. <strong>It should be tested first, cheaply, before the expensive build.</strong></p>
+<p>This plan scopes the smallest product that can test it, and specifies how the test is run and what would falsify it.</p>
+<hr>
+<h2 id="2-the-product-in-one-sentence" tabindex="-1"><a class="heading-anchor" href="#2-the-product-in-one-sentence" aria-hidden="true">#</a> 2. The product, in one sentence</h2>
+<p>Two or more parties in a joint campaign each upload whatever contact data they already have. The platform tells them who they collectively know and who overlaps — without any member seeing another's non-overlapping records, and without anyone becoming the owner of the merged result.</p>
+<p>No migration. No field app. No offline mode. Parties keep organizing exactly as they do today and hand over exports on whatever cadence they actually work at.</p>
+<h3 id="the-core-coordination-primitive-mutual-suppression" tabindex="-1"><a class="heading-anchor" href="#the-core-coordination-primitive-mutual-suppression" aria-hidden="true">#</a> The core coordination primitive: mutual suppression</h3>
+<p>The pilot ships exactly one operational feature, and it is deliberately narrow.</p>
+<p>Each party sends its own messages, under its own consent, from its own tooling. Before sending, it asks the shared layer: <em>has any other member contacted these people in the last N days?</em> The answer comes back as a yes/no flag per record.</p>
+<p>This is the right primitive for four reasons:</p>
+<ol>
+<li><strong>It is the minimum that delivers real value.</strong> Not double-messaging a shared supporter is the concrete, immediate pain of coalition work.</li>
+<li><strong>It is what the blind-index architecture gives you for free.</strong> No additional disclosure machinery.</li>
+<li><strong>It is legally cleaner than joint sending.</strong> Each party's contacts opted in to <em>that party</em>, not to a coalition entity. Suppression means no contact data leaves either party and no message is sent under ambiguous consent — only a &quot;skip this one&quot; signal returns. See §9.6.</li>
+<li><strong>It is directional and revocable.</strong> Nothing about non-overlapping records is disclosed in either direction, ever.</li>
+</ol>
+<p>Coverage-by-geography and don't-re-knock coordination are stretch goals, contingent on address data neither party may have (§4.3).</p>
+<hr>
+<h2 id="3-the-parties" tabindex="-1"><a class="heading-anchor" href="#3-the-parties" aria-hidden="true">#</a> 3. The parties</h2>
+<h3 id="mvc-movimiento-victoria-ciudadana" tabindex="-1"><a class="heading-anchor" href="#mvc-movimiento-victoria-ciudadana" aria-hidden="true">#</a> MVC — Movimiento Victoria Ciudadana</h3>
+<ul>
+<li>Founded 2019. Newer, and organizationally younger.</li>
+<li><strong>Runs NationBuilder.</strong> This is a gift: NationBuilder's CSV people export has stable, documented field names — <code>nationbuilder_id</code>, <code>first_name</code>, <code>last_name</code>, <code>email</code>, <code>phone_number</code>, <code>mobile_number</code>, <code>primary_address1</code>, <code>city</code>, <code>state</code>, <code>zip</code>, <code>tags</code>, <code>support_level</code>, <code>is_volunteer</code>, <code>do_not_contact</code>, <code>email_opt_in</code>, <code>mobile_opt_in</code>.</li>
+<li>Consent flags travel with the export, which matters — person-level consent overrides org-level sharing settings (<code>spec/users.md:87</code>).</li>
+<li><strong><code>support_level</code> and <code>tags</code> are exactly the fields that must never enter the shared view.</strong> MVC's own assessment of a voter is its most sensitive asset. The sharing contract's first job is to make excluding them obvious and default.</li>
+</ul>
+<h3 id="pip-partido-independentista-puertorriqueo" tabindex="-1"><a class="heading-anchor" href="#pip-partido-independentista-puertorriqueo" aria-hidden="true">#</a> PIP — Partido Independentista Puertorriqueño</h3>
+<ul>
+<li>Founded 1946. Much older, with a deep municipal committee structure across the island's 78 <em>municipios</em>.</li>
+<li><strong>Tooling unknown.</strong> This is a discovery task, not an assumption to paper over. Plausible states, roughly in order of likelihood: fragmented Excel/Google Sheets maintained by volunteers; a legacy local database; municipal committee lists held in pieces by different people; paper-adjacent records.</li>
+<li>Expect heterogeneous fragments, inconsistent formatting, and multiple custodians who each have to say yes.</li>
+</ul>
+<h3 id="the-asymmetry-is-the-most-important-fact-in-this-plan" tabindex="-1"><a class="heading-anchor" href="#the-asymmetry-is-the-most-important-fact-in-this-plan" aria-hidden="true">#</a> The asymmetry is the most important fact in this plan</h3>
+<p>MVC arrives with clean structured data from a modern tool. PIP likely arrives with fragments. That asymmetry drives three consequences, and each needs a designed response:</p>
+<table>
+<thead>
+<tr>
+<th>Consequence</th>
+<th>Response</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Match rates will be dragged down by PIP-side data quality, not MVC-side</td>
+<td>Budget hands-on data-wrangling support for PIP (§7). Tooling friction must not be allowed to masquerade as unwillingness — that is the single most likely way this pilot produces a false negative.</td>
+</tr>
+<tr>
+<td>PIP will experience the product as more work than MVC does</td>
+<td>Front-load PIP's effort into Phase 0/1, where a human does the work for them.</td>
+</tr>
+<tr>
+<td>The shared view may be dominated by MVC's contributions, making PIP look like a free-rider even if it isn't</td>
+<td><strong>The contribution ledger may be a liability with unequal parties.</strong> See Appendix, H8.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="starting-position" tabindex="-1"><a class="heading-anchor" href="#starting-position" aria-hidden="true">#</a> Starting position</h3>
+<p>Operationally, the two parties are starting from scratch: no shared data infrastructure, no pooled lists, nothing to inherit. The pilot builds on a blank slate.</p>
+<p><strong>Prior cycles are out of scope.</strong> Past arrangements between these parties are not a research subject for this project and are not to be raised — in interviews, in materials, or in the pilot framing. All discovery is prospective: what pooling would require going forward (§6.4).</p>
+<p>One planning consequence worth noting internally: because there is no inherited data-sharing relationship, there is no prior-cooperation confound to design around. MVC/PIP is a clean test of the assumption.</p>
+<hr>
+<h2 id="4-scope" tabindex="-1"><a class="heading-anchor" href="#4-scope" aria-hidden="true">#</a> 4. Scope</h2>
+<h3 id="41-what-gets-built" tabindex="-1"><a class="heading-anchor" href="#41-what-gets-built" aria-hidden="true">#</a> 4.1 What gets built</h3>
+<p>Roughly 12 screens. This build serves the experiment, not the market — it is deliberately thinner than a general v1 of the coalition product would be.</p>
+<table>
+<thead>
+<tr>
+<th>Area</th>
+<th>Screens</th>
+<th>Reuse</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Auth</td>
+<td>Passkey login + fallbacks</td>
+<td>AUTH-001–007 as drawn</td>
+</tr>
+<tr>
+<td>Onboarding</td>
+<td>Org setup (trimmed), BYOK ceremony</td>
+<td>WIZ-001, WIZ-003</td>
+</tr>
+<tr>
+<td>Import</td>
+<td>Upload → column map → preview → confirm; import history</td>
+<td>CRM-008–012</td>
+</tr>
+<tr>
+<td>Sharing contract</td>
+<td>Field-level, default-deny, per-member</td>
+<td>ALLY-005, the centerpiece</td>
+</tr>
+<tr>
+<td>Members</td>
+<td>Member list, affiliation request + approval</td>
+<td>ALLY-002–004</td>
+</tr>
+<tr>
+<td>Shared universe</td>
+<td>Overlap summary, suppression list, export</td>
+<td>New</td>
+</tr>
+<tr>
+<td>Audit</td>
+<td>Multilateral audit log, visible to all members</td>
+<td>SET-018, extended</td>
+</tr>
+<tr>
+<td>Contribution ledger</td>
+<td>What each member put in and got out</td>
+<td>New — and under test, see H8</td>
+</tr>
+</tbody>
+</table>
+<p>Genuinely new and unwireframed: the suppression query/response flow, the contribution ledger, and the exit/dissolution flow.</p>
+<h3 id="42-what-is-cut" tabindex="-1"><a class="heading-anchor" href="#42-what-is-cut" aria-hidden="true">#</a> 4.2 What is cut</h3>
+<p>All fundraising (20 screens), communications, events, press, activism, social, the GOTV war room (21), field mode and field ops (29 screens and by far the hardest engineering — offline SQLite, sync, conflict resolution, map tiles), supporter portal, messaging, help and training, most dashboards, most settings.</p>
+<p>Puerto Rico only. Spanish and English. RTL correctness maintained in CSS per ADR-010, but no Arabic ships.</p>
+<h3 id="43-the-input-shape-branch" tabindex="-1"><a class="heading-anchor" href="#43-the-input-shape-branch" aria-hidden="true">#</a> 4.3 The input-shape branch</h3>
+<p>The expected floor from both parties is a CSV of emails and phone numbers. Plan for both branches, because they produce different products:</p>
+<p><strong>Branch A — identifiers only (email + phone).</strong> Matching gets <em>easier</em>: exact match on normalized identifiers, no fuzzy-name problem at all. But coverage-by-geography is impossible, and the product collapses to overlap detection plus mutual suppression. <strong>This is still the whole pilot</strong> — it tests the assumption fully. Build for this branch.</p>
+<p><strong>Branch B — identifiers plus address/geography.</strong> Unlocks coverage maps, gap analysis, and turf coordination. Treat as stretch. Requires geocoding to <em>municipio</em> at minimum; precinct-level would be better but is unlikely to survive the data.</p>
+<p>Do not let Branch B's appeal delay Branch A. The assumption under test does not require a map.</p>
+<h3 id="44-kept-despite-looking-cuttable" tabindex="-1"><a class="heading-anchor" href="#44-kept-despite-looking-cuttable" aria-hidden="true">#</a> 4.4 Kept despite looking cuttable</h3>
+<ul>
+<li><strong>BYOK from day one</strong> (ADR-002). You cannot retrofit encryption onto a data trust after members have uploaded, and &quot;the platform itself cannot read your list&quot; is most of why a suspicious partner says yes.</li>
+<li><strong>The immutable audit trail from day one</strong> (ADR-004). It is the product, not the plumbing.</li>
+<li>Event sourcing is retained for provenance and audit, since it is the right shape for that anyway. The offline client is not built at all — ingest-only means there is no field device, so ADR-005's sync rationale is dormant.</li>
+</ul>
+<hr>
+<h2 id="5-the-assumption-decomposed" tabindex="-1"><a class="heading-anchor" href="#5-the-assumption-decomposed" aria-hidden="true">#</a> 5. The assumption, decomposed</h2>
+<p>&quot;They will pool data under the right rules&quot; is too coarse to test. It decomposes into seven falsifiable claims, ordered so that cheap ones gate expensive ones.</p>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Claim</th>
+<th>Measured by</th>
+<th>Pass bar</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>A1</strong></td>
+<td>They will upload at all — behaviorally, not in principle</td>
+<td>File received</td>
+<td>Both parties deliver within 30 days of signed agreement</td>
+</tr>
+<tr>
+<td><strong>A2</strong></td>
+<td>They will upload something real, not a token sample</td>
+<td>Row count vs. claimed list size</td>
+<td>Each file ≥50% of claimed total</td>
+</tr>
+<tr>
+<td><strong>A3</strong></td>
+<td>The data will match at a useful rate</td>
+<td>Deterministic match on normalized email/phone</td>
+<td>Overlap in the 5–60% band</td>
+</tr>
+<tr>
+<td><strong>A4</strong></td>
+<td>Seeing the overlap will not scare them off</td>
+<td>Withdrawal / contract tightening after the report</td>
+<td>Neither withdraws within 2 weeks</td>
+</tr>
+<tr>
+<td><strong>A5</strong></td>
+<td>They will act on the shared view</td>
+<td>Documented operational decisions changed</td>
+<td>≥1 per party, evidenced</td>
+</tr>
+<tr>
+<td><strong>A6</strong></td>
+<td>They will do it again</td>
+<td>Voluntary repeat uploads</td>
+<td>≥2 per party after the first</td>
+</tr>
+<tr>
+<td><strong>A7</strong></td>
+<td><strong>The rules are what made it possible</strong></td>
+<td>Separate blind interviews, pre and post</td>
+<td>Both say they would <em>not</em> have sent the file directly to the other party</td>
+</tr>
+</tbody>
+</table>
+<p><strong>A7 is the thesis.</strong> A1–A6 can all pass while A7 fails, and if A7 fails the product is a dedup utility rather than trust infrastructure. That is a different, smaller company — not necessarily fatal, but it must be known before the full build is funded.</p>
+<p>On the A3 band: below 5%, dedup is not worth the integration cost. Above 60%, the two parties are effectively holding one list, and the coordination problem is a different problem than the one specified. Both outcomes are informative; neither is a pass.</p>
+<hr>
+<h2 id="6-instrumentation" tabindex="-1"><a class="heading-anchor" href="#6-instrumentation" aria-hidden="true">#</a> 6. Instrumentation</h2>
+<h3 id="61-behavioral-signals-trust-measured-by-conduct-not-by-survey" tabindex="-1"><a class="heading-anchor" href="#61-behavioral-signals-trust-measured-by-conduct-not-by-survey" aria-hidden="true">#</a> 6.1 Behavioral signals — trust measured by conduct, not by survey</h3>
+<p>People overstate their willingness to share in interviews. Log conduct instead:</p>
+<ul>
+<li><strong>Time-to-upload from agreement.</strong> Hesitation is data.</li>
+<li><strong>What they withhold.</strong> Fields excluded from the sharing contract. Columns stripped before upload — for MVC this is directly measurable by diffing the delivered file's schema against NationBuilder's default export schema. Deletions are visible and meaningful.</li>
+<li><strong>Row count vs. claimed list size.</strong></li>
+<li><strong>Whether anyone ever opens the audit log.</strong> If nobody reads it, the trust machinery may be decorative — they trusted the counterparty, not the system. Direct probe at A7.</li>
+<li><strong>Whether the sharing contract changes after results land.</strong> Loosening indicates earned trust. Tightening indicates a scare, and the scare should be chased down in interview.</li>
+<li><strong>Who gets access.</strong> One person per org, or a team? Delegating access is a trust behavior.</li>
+</ul>
+<h3 id="62-interviews" tabindex="-1"><a class="heading-anchor" href="#62-interviews" aria-hidden="true">#</a> 6.2 Interviews</h3>
+<p>Structured, <strong>separately, never jointly.</strong> In a joint session neither party will say the uncomfortable thing. Three points: before any file moves, after the overlap report, after the pilot window closes.</p>
+<h3 id="63-the-counterfactual-recorded-before-exposure" tabindex="-1"><a class="heading-anchor" href="#63-the-counterfactual-recorded-before-exposure" aria-hidden="true">#</a> 6.3 The counterfactual, recorded before exposure</h3>
+<p>Ask both, in Phase 0, before they have seen anything: <em>&quot;If GreenGrass did not exist, how would you coordinate lists with a coalition partner?&quot;</em> Record verbatim. This is the control for A7 and it is worthless if collected after they have used the product.</p>
+<h3 id="64-the-readiness-interview-prospective-only" tabindex="-1"><a class="heading-anchor" href="#64-the-readiness-interview-prospective-only" aria-hidden="true">#</a> 6.4 The readiness interview — prospective only</h3>
+<p>Before building anything, interview both parties separately about what pooling would require <strong>going forward</strong>. Ask nothing about past cycles (§3).</p>
+<p>The forward-looking framing is not just diplomatic, it is better research. &quot;What would it take?&quot; gets a designable answer; &quot;why didn't you?&quot; gets a defense.</p>
+<p>Six questions, each aimed at a different class of blocker:</p>
+<table>
+<thead>
+<tr>
+<th>Question</th>
+<th>Surfaces</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>What would have to be true for you to put your contact list into a shared arrangement with a coalition partner?</td>
+<td>The general shape of the objection</td>
+</tr>
+<tr>
+<td>Who would have to sign off on that?</td>
+<td><strong>Authorization</strong> — how many yeses, at what level</td>
+</tr>
+<tr>
+<td>If you decided today, what would actually stop you next week?</td>
+<td><strong>Capacity</strong> — the practical, unglamorous blockers</td>
+</tr>
+<tr>
+<td>Do you know whether your supporters' opt-ins would cover coalition contact?</td>
+<td><strong>Legal</strong> (§9.6) — and whether they have even considered it</td>
+</tr>
+<tr>
+<td>How long would it take you to produce a clean export?</td>
+<td><strong>Data quality</strong> — and it calibrates PIP-side support needs (§3)</td>
+</tr>
+<tr>
+<td>What would you absolutely not include, under any rules?</td>
+<td><strong>The sharing contract's real requirements</strong></td>
+</tr>
+</tbody>
+</table>
+<p>That last question is the most directly useful thing in this plan for the build. It defines the default-deny field list in ALLY-005 from the parties' own words rather than from our guesses.</p>
+<p><strong>Why this matters beyond requirements-gathering:</strong> several of these blockers are not &quot;trust&quot; in the sense the spec assumes. The federation layer, per-resource sharing contracts, and unanimous-consent governance are all designed against a <em>suspicion</em> model. If the binding constraint is capacity, legality, or authorization, the elaborate consent machinery solves a problem these parties do not have. See §9.2.</p>
+<p><strong>Run before Phase 0 closes.</strong> It can reorder everything downstream.</p>
+<h3 id="65-the-contrast-pair" tabindex="-1"><a class="heading-anchor" href="#65-the-contrast-pair" aria-hidden="true">#</a> 6.5 The contrast pair</h3>
+<p>A second pair with no coalition history — conversation only, no build. One that says &quot;absolutely not, under any rules&quot; bounds the market; one that says &quot;under those rules, maybe&quot; is strong evidence for the thesis. Two meetings, high information per hour.</p>
+<hr>
+<h2 id="7-phases" tabindex="-1"><a class="heading-anchor" href="#7-phases" aria-hidden="true">#</a> 7. Phases</h2>
+<p>Anchored to the Puerto Rico electoral calendar. The next general election is November 2028, with primaries around mid-2028.</p>
+<h3 id="the-scheduling-problem-there-may-be-no-live-joint-campaign" tabindex="-1"><a class="heading-anchor" href="#the-scheduling-problem-there-may-be-no-live-joint-campaign" aria-hidden="true">#</a> The scheduling problem: there may be no live joint campaign</h3>
+<p>The MVP is defined as organizing data <em>within the context of a joint campaign</em>. With no coalition currently operating, <strong>there may be nothing to attach the pilot to during 2026–2027.</strong> That breaks A5 — if no shared operation is underway, there is no decision for the shared view to change, and A5 is the gate separating real pooling from theater.</p>
+<p>Three options, in preference order:</p>
+<ol>
+<li><strong>Target the 2028 coalition-formation window (recommended).</strong> If a coalition is negotiated for 2028, that negotiation happens through 2027 — before primaries, before the campaign proper. That is the sweet spot: the parties are actively deciding what to share, motivation is high, and electoral risk is low because no votes are being chased yet. The product shows up exactly when the question is live.</li>
+<li><strong>Attach to a non-electoral joint activity.</strong> A shared advocacy push, a joint fundraiser, a voter registration drive. Lower stakes but a real operation, which is enough for A5.</li>
+<li><strong>Run as an explicit dry run.</strong> Framed as infrastructure-building ahead of 2028. Cheapest, but highest risk of drift and of A5 going untested — nobody changes a decision because there is no decision to change.</li>
+</ol>
+<p>Do not run the first pilot during the 2028 campaign itself. Becoming a variable in a live election outcome is both an ethical problem and a guarantee of uninterpretable data.</p>
+<table>
+<thead>
+<tr>
+<th>Phase</th>
+<th>Window</th>
+<th>What happens</th>
+<th>Gates</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>0 — Consent &amp; framing</strong></td>
+<td>Sep–Oct 2026</td>
+<td>Participation agreement and DPA signed by both. Readiness and counterfactual interviews recorded. PIP tooling discovery. Legal review of cross-party consent (§9.6).</td>
+<td>—</td>
+</tr>
+<tr>
+<td><strong>1 — Manual Wizard-of-Oz</strong></td>
+<td>Nov 2026 – Jan 2027</td>
+<td>Both parties send a file. Match run <strong>by hand</strong>, offline, on an air-gapped machine. Report returned.</td>
+<td><strong>A1, A2, A3, A4</strong></td>
+</tr>
+<tr>
+<td><strong>2 — Build</strong></td>
+<td>Feb – Jun 2027</td>
+<td>The ~12 screens. Only if Phase 1 gates pass.</td>
+<td>—</td>
+</tr>
+<tr>
+<td><strong>3 — Live pilot</strong></td>
+<td>Jul 2027 – Jan 2028</td>
+<td>Timed to the coalition-formation window. Bounded slice — one senatorial district or a few municipios, not the island. Both parties operate mutual suppression against the shared ledger.</td>
+<td><strong>A5, A6, A7</strong></td>
+</tr>
+<tr>
+<td><strong>4 — Withdrawal test</strong></td>
+<td>Feb 2028</td>
+<td>Scheduled, consensual exercise of revocation and exit by one party.</td>
+<td>Exit integrity</td>
+</tr>
+<tr>
+<td><strong>Decision gate</strong></td>
+<td>Mar 2028</td>
+<td>Fund the full build, reposition, or stop.</td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+<h3 id="on-phase-1-and-its-honest-limitation" tabindex="-1"><a class="heading-anchor" href="#on-phase-1-and-its-honest-limitation" aria-hidden="true">#</a> On Phase 1 — and its honest limitation</h3>
+<p>The first test of A1–A4 needs no product at all. Two weeks of Python instead of four months of engineering.</p>
+<p>But there is a catch that must be stated plainly to both parties: <strong>in the manual version, we can see both files.</strong> The product's central claim is that nobody — including the platform — sees the other side's data. The manual test therefore validates <em>willingness to pool via a trusted human intermediary</em>, which is a weaker claim than the product makes.</p>
+<p>That is acceptable, because it is a <strong>necessary-but-not-sufficient gate</strong>: if they will not pool even with a trusted intermediary, they will certainly not pool with software. Phase 1 tests the floor. If they fail the floor, stop before spending the build budget.</p>
+<h3 id="on-phase-4-the-test-nobody-runs" tabindex="-1"><a class="heading-anchor" href="#on-phase-4-the-test-nobody-runs" aria-hidden="true">#</a> On Phase 4 — the test nobody runs</h3>
+<p>Deliberately exercising exit, on a schedule, while everyone is calm, is the most informative hour in the plan. If revocation is ambiguous or the export is incomplete, you learn it now rather than during a real dispute when the relationship is already failing. Offering the test is itself a trust signal.</p>
+<h3 id="team-and-cost" tabindex="-1"><a class="heading-anchor" href="#team-and-cost" aria-hidden="true">#</a> Team and cost</h3>
+<ul>
+<li>Phase 1: one person, ~3 weeks. Effectively free.</li>
+<li>Phase 2: 2 engineers + 1 designer, ~4 months.</li>
+<li>Phase 3: 1 engineer + <strong>1 dedicated partner-support person.</strong> The support role is not optional — it is the control against false negatives from PIP-side data friction (§3).</li>
+</ul>
+<hr>
+<h2 id="8-what-egalitarian-costs-architecturally" tabindex="-1"><a class="heading-anchor" href="#8-what-egalitarian-costs-architecturally" aria-hidden="true">#</a> 8. What &quot;egalitarian&quot; costs architecturally</h2>
+<p>Governance is N-party with unanimous consent. This is where the existing spec has to bend.</p>
+<ul>
+<li><strong>No lead org.</strong> ADR-016 §80 gives the joint campaign record to a lead org; unanimity breaks that. Requires an <strong>Alliance Steward</strong> role held symmetrically, one seat per member — which forces the open question at <code>design/ux/04-wireframes/alliance/alliance.md:1155</code> to resolve as <em>yes, dedicated role</em>.</li>
+<li><strong>Unanimous to expand sharing; unilateral to contract it.</strong> Grants need every member. Revocation is any one member's call, effective immediately. This asymmetry <em>is</em> the trust model: it means joining is never a trap.</li>
+<li><strong>Deadlock is a feature.</strong> With unanimity there is no majority to break ties. Status quo persists, no timeouts, no auto-approval. The spec already got this right for affiliation requests (ADR-016 §82, &quot;silence means no&quot;) — generalize it.</li>
+<li><strong>The platform is never the tiebreaker.</strong> No &quot;contact support to resolve the dispute.&quot; If members cannot agree, nothing happens. That commitment is what makes the arrangement safe for the <em>weaker</em> party in an unequal coalition — which, on data maturity, is PIP.</li>
+<li><strong>Shared view, not shared master.</strong> Per ADR-016 §80, no forced cross-org dedup. Records stay in each member's own systems; the shared universe is a view.</li>
+<li><strong>Exit is rehearsed, not theoretical.</strong> Leave with a full export of your own data plus the audit log covering your participation; your contribution drops out of the live view going forward.</li>
+</ul>
+<p><strong>The honest limit:</strong> equal rights do not equalize leverage. The party with more records learns more from the intersection than the party with fewer. The contribution ledger makes this visible and identity-only contribution mitigates it, but it cannot be designed away.</p>
+<hr>
+<h2 id="9-risks" tabindex="-1"><a class="heading-anchor" href="#9-risks" aria-hidden="true">#</a> 9. Risks</h2>
+<p><strong>9.1 No live joint campaign to test against.</strong> <em>Likelihood: high. Severity: high — it makes A5 untestable, and A5 is what separates real pooling from theater.</em> Mitigation: target the coalition-formation window, or attach to a non-electoral joint activity (§7).</p>
+<p><strong>9.2 The blocker may not be trust at all.</strong> <em>Likelihood: medium. Severity: strategic.</em> If the readiness interviews (§6.4) show the binding constraint is capacity, legality, or political authorization rather than suspicion, then the spec's elaborate consent machinery — the federation layer, per-resource sharing contracts, unanimous-consent governance — solves a problem these parties do not have. That does not kill the product, but it substantially rescopes it and lowers the value of the ADR-016 §78–82 alliance surface.</p>
+<p><strong>9.3 Asymmetric data maturity produces a false negative.</strong> <em>Likelihood: high. Severity: high.</em> PIP's friction gets misread as PIP's unwillingness. Mitigation: dedicated partner-support person; do the wrangling <em>for</em> them in Phase 1; measure willingness by decisions made, not by files formatted correctly.</p>
+<p><strong>9.4 Puerto Rico data quality.</strong> <em>Likelihood: certain. Severity: medium under Branch A, high under Branch B.</em></p>
+<ul>
+<li><strong>Two surnames.</strong> Paternal + maternal naming means <code>last_name</code> may hold one, both, or a hyphenated mash. Devastating for fuzzy name matching — and a strong argument for staying in Branch A, where names are not used for matching at all.</li>
+<li><strong>Phone formatting.</strong> +1 787 and +1 939 both serve PR; local formatting varies. Normalization to E.164 is mandatory and mostly solves this.</li>
+<li><strong>Addresses.</strong> <em>Urbanización</em> / <em>barrio</em> / rural-route conventions break US-standard address parsers. Do not assume USPS normalization works.</li>
+<li><strong>Diaspora.</strong> Many PR-connected donors and voters carry stateside phones and addresses. Cross-jurisdiction wrinkle for both matching and consent.</li>
+<li><strong>Electoral geography.</strong> 78 municipios, 8 senatorial districts, 40 representative districts, precincts and units, with the CEE as authority. If neither file carries precinct or municipio, the coverage feature dies — hence Branch A as the plan of record.</li>
+</ul>
+<p><strong>9.5 Political sensitivity.</strong> <em>Likelihood: low. Severity: severe.</em> A leak here is not a compliance incident, it is an inter-party scandal with named victims. The BYOK and no-platform-access posture is insurance on GreenGrass's own reputation as much as on theirs.</p>
+<p><strong>9.6 Cross-party consent may be legally impermissible.</strong> <em>Likelihood: medium. Severity: high if unaddressed.</em> Puerto Rico is a US jurisdiction: TCPA governs SMS, CAN-SPAM governs email. Each party's contacts opted in to <em>that party</em>, not to a coalition. Whether the original opt-in covers joint contact is a real question and <strong>must be answered in Phase 0, not discovered in Phase 3.</strong></p>
+<p>This risk is the direct reason the pilot operation is mutual suppression rather than joint sending. Suppression requires no new consent: each party contacts only its own opted-in people, and the only thing crossing the boundary is a suppression flag.</p>
+<p><strong>9.7 This may be a feature, not a company.</strong> <em>Likelihood: medium. Severity: strategic.</em> A coordination layer with no field app is easy to describe and easy to copy. Defensibility lives in the trust posture and the accumulated boundary data, not in the join itself.</p>
+<hr>
+<h2 id="10-kill-and-pivot-criteria" tabindex="-1"><a class="heading-anchor" href="#10-kill-and-pivot-criteria" aria-hidden="true">#</a> 10. Kill and pivot criteria</h2>
+<p>Decided in advance, so the decision is not made under sunk-cost pressure.</p>
+<table>
+<thead>
+<tr>
+<th>Signal</th>
+<th>Reading</th>
+<th>Action</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Either party refuses to upload after signing</td>
+<td>The thesis is wrong for this pair</td>
+<td><strong>Stop.</strong> Diagnose why before generalizing — the refusal reason is the most valuable data the pilot can produce</td>
+</tr>
+<tr>
+<td>Both say they would have just emailed the file (A7 fails)</td>
+<td>Not trust infrastructure; a dedup utility</td>
+<td><strong>Reposition.</strong> Different product, different pricing, much smaller alliance surface in the full build</td>
+</tr>
+<tr>
+<td>Match rate &lt;2% on clean identifiers</td>
+<td>Data quality, not trust, is the binding constraint</td>
+<td><strong>Pivot</strong> toward data quality and normalization as the product</td>
+</tr>
+<tr>
+<td>Both set sharing to maximum on the first try</td>
+<td>Granular controls are over-engineered for this segment</td>
+<td><strong>Simplify</strong> the sharing contract — a &quot;success&quot; that is a finding against the design</td>
+</tr>
+<tr>
+<td>Files arrive, overlap is computed, nobody changes any decision (A5 fails)</td>
+<td>Pooling is theater</td>
+<td><strong>Stop.</strong> Data that changes no behavior has no value to sell</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="11-open-questions-to-resolve-with-the-parties" tabindex="-1"><a class="heading-anchor" href="#11-open-questions-to-resolve-with-the-parties" aria-hidden="true">#</a> 11. Open questions to resolve with the parties</h2>
+<p>All prospective. Nothing here asks about prior cycles.</p>
+<ol>
+<li>Is a coalition being contemplated for 2028, and on what timeline is that decided? (Sets the Phase 3 window, §7 — currently the load-bearing unknown in the schedule.)</li>
+<li>What does PIP actually use, and who are the custodians of each fragment?</li>
+<li>Who at each party can say yes — and is it the same level of authority on both sides? (PIP's municipal committee structure may mean many yeses are needed.)</li>
+<li>Does either party's existing opt-in language contemplate coalition contact? (§9.6)</li>
+<li>What would each consider the <em>minimum</em> useful contribution — identifiers only, or would they go further?</li>
+<li>What would each absolutely not include, under any rules? (Defines the default-deny field list in ALLY-005.)</li>
+<li>Would either accept the contribution ledger being visible to all members, or must it be private to each? (Directly tests H8.)</li>
+</ol>
+<hr>
+<h2 id="appendix-hypotheses-beyond-the-core-assumption" tabindex="-1"><a class="heading-anchor" href="#appendix-hypotheses-beyond-the-core-assumption" aria-hidden="true">#</a> Appendix — Hypotheses beyond the core assumption</h2>
+<p><strong>H8 — The contribution ledger is a liability with unequal parties.</strong> It was designed to make free-riding legible and thereby make the arrangement fair. With MVC contributing clean structured volume and PIP contributing fragments, it may instead broadcast PIP's relative weakness and damage the relationship. Mitigations to test: normalize by list size; report <em>coverage delivered</em> rather than raw record counts; make the ledger private to each member by default.</p>
+<p><strong>H9 — The audit log is decorative.</strong> If neither party ever opens it, the trust was in the counterparty rather than the system, and the immutable-log investment does not carry its weight for this segment. Direct probe at A7.</p>
+<p><strong>H10 — Suppression alone justifies adoption.</strong> If mutual suppression is enough to drive repeat use with no map, no canvassing coordination, and no joint sending, the buildable product is far smaller than specified — and reaches market far sooner.</p>
+
+    </article>
+  </main>
+  <div class="toc-rail"><nav class="toc" aria-label="On this page"><div class="toc-label">On this page</div><ul><li class="toc-2"><a href="#1-context"># 1. Context</a></li><li class="toc-2"><a href="#2-the-product-in-one-sentence"># 2. The product, in one sentence</a></li><li class="toc-3"><a href="#the-core-coordination-primitive-mutual-suppression"># The core coordination primitive: mutual suppression</a></li><li class="toc-2"><a href="#3-the-parties"># 3. The parties</a></li><li class="toc-3"><a href="#mvc-movimiento-victoria-ciudadana"># MVC — Movimiento Victoria Ciudadana</a></li><li class="toc-3"><a href="#pip-partido-independentista-puertorriqueo"># PIP — Partido Independentista Puertorriqueño</a></li><li class="toc-3"><a href="#the-asymmetry-is-the-most-important-fact-in-this-plan"># The asymmetry is the most important fact in this plan</a></li><li class="toc-3"><a href="#starting-position"># Starting position</a></li><li class="toc-2"><a href="#4-scope"># 4. Scope</a></li><li class="toc-3"><a href="#41-what-gets-built"># 4.1 What gets built</a></li><li class="toc-3"><a href="#42-what-is-cut"># 4.2 What is cut</a></li><li class="toc-3"><a href="#43-the-input-shape-branch"># 4.3 The input-shape branch</a></li><li class="toc-3"><a href="#44-kept-despite-looking-cuttable"># 4.4 Kept despite looking cuttable</a></li><li class="toc-2"><a href="#5-the-assumption-decomposed"># 5. The assumption, decomposed</a></li><li class="toc-2"><a href="#6-instrumentation"># 6. Instrumentation</a></li><li class="toc-3"><a href="#61-behavioral-signals-trust-measured-by-conduct-not-by-survey"># 6.1 Behavioral signals — trust measured by conduct, not by survey</a></li><li class="toc-3"><a href="#62-interviews"># 6.2 Interviews</a></li><li class="toc-3"><a href="#63-the-counterfactual-recorded-before-exposure"># 6.3 The counterfactual, recorded before exposure</a></li><li class="toc-3"><a href="#64-the-readiness-interview-prospective-only"># 6.4 The readiness interview — prospective only</a></li><li class="toc-3"><a href="#65-the-contrast-pair"># 6.5 The contrast pair</a></li><li class="toc-2"><a href="#7-phases"># 7. Phases</a></li><li class="toc-3"><a href="#the-scheduling-problem-there-may-be-no-live-joint-campaign"># The scheduling problem: there may be no live joint campaign</a></li><li class="toc-3"><a href="#on-phase-1-and-its-honest-limitation"># On Phase 1 — and its honest limitation</a></li><li class="toc-3"><a href="#on-phase-4-the-test-nobody-runs"># On Phase 4 — the test nobody runs</a></li><li class="toc-3"><a href="#team-and-cost"># Team and cost</a></li><li class="toc-2"><a href="#8-what-egalitarian-costs-architecturally"># 8. What &amp;quot;egalitarian&amp;quot; costs architecturally</a></li><li class="toc-2"><a href="#9-risks"># 9. Risks</a></li><li class="toc-2"><a href="#10-kill-and-pivot-criteria"># 10. Kill and pivot criteria</a></li><li class="toc-2"><a href="#11-open-questions-to-resolve-with-the-parties"># 11. Open questions to resolve with the parties</a></li><li class="toc-2"><a href="#appendix-hypotheses-beyond-the-core-assumption"># Appendix — Hypotheses beyond the core assumption</a></li></ul></nav></div>
+</div>
+<script src="../assets/search.js" defer></script>
+<script src="../assets/app.js" defer></script>
+</body>
+</html>

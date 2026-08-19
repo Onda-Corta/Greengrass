@@ -22,8 +22,9 @@ GreenGrass/
 ├── CLAUDE.md                      # Project instructions (this file)
 ├── .claude/
 │   └── SKILLS.md                  # Project-specific skills
-├── spec/                          # Product specifications (12 docs)
+├── spec/                          # Product specifications (13 docs)
 │   ├── product.md                 # High-level product description
+│   ├── mvp.md                     # MVP product plan and pilot design
 │   ├── users.md                   # User personas and roles
 │   ├── workflows.md               # Core workflows and user journeys
 │   ├── geography.md               # Target geography and localization
