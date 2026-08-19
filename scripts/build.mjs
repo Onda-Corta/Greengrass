@@ -104,7 +104,7 @@ function extractTitle(source, fallbackName) {
 // Each entry: { title, match(relMd) -> bool, order(relMd) -> sortable }
 // ---------------------------------------------------------------------------
 const SPEC_ORDER = [
-  'product', 'users', 'workflows', 'geography', 'security', 'compliance',
+  'product', 'mvp', 'users', 'workflows', 'geography', 'security', 'compliance',
   'fundraising', 'integrations', 'support', 'gotv', 'messaging', 'press',
 ];
 const WIREFRAME_ORDER = [
