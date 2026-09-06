@@ -13,7 +13,7 @@ All spec and design work is done. The project is ready for implementation.
 Completed phases:
 1. **Product definition** — 12 spec documents covering product, users, workflows, security, compliance, etc.
 2. **UX design** — 37 documents: information architecture, global patterns, design system, 21 wireframes (236 screens)
-3. **Architecture** — system architecture document, 16 ADRs formalizing all decisions
+3. **Architecture** — system architecture document, 17 ADRs formalizing all decisions
 
 ## Project Structure
 
@@ -22,7 +22,7 @@ GreenGrass/
 ├── CLAUDE.md                      # Project instructions (this file)
 ├── .claude/
 │   └── SKILLS.md                  # Project-specific skills
-├── spec/                          # Product specifications (13 docs)
+├── spec/                          # Product specifications (14 docs)
 │   ├── product.md                 # High-level product description
 │   ├── mvp.md                     # MVP product plan and pilot design
 │   ├── users.md                   # User personas and roles
@@ -35,7 +35,8 @@ GreenGrass/
 │   ├── support.md                 # Tenant support and onboarding
 │   ├── gotv.md                    # GOTV and election day operations
 │   ├── messaging.md               # Internal communications and notifications
-│   └── press.md                   # Press, media, and public communications
+│   ├── press.md                   # Press, media, and public communications
+│   └── comms-intelligence.md      # Post-MVP roadmap: comms intelligence
 ├── design/
 │   ├── ux/                        # UX design artifacts (37 docs)
 │   │   ├── 00-overview.md         # Reading order and glossary
@@ -45,9 +46,10 @@ GreenGrass/
 │   │   └── 04-wireframes/         # 21 wireframe documents (236 screens)
 │   └── architecture/
 │       └── system.md              # System architecture and data model
-├── decisions/                     # Architecture Decision Records (16 ADRs)
+├── decisions/                     # Architecture Decision Records (17 ADRs)
 ├── diary/                         # Project diary (9 entries)
 ├── scripts/build.mjs              # Documentation site generator (Node + markdown-it)
+├── scripts/dev.sh                 # One-command local preview (install, build, serve)
 ├── site-assets/                   # Site styles + client-side scripts (search, nav)
 └── docs/                          # Generated documentation website (GitHub Pages)
 ```
