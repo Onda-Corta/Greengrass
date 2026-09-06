@@ -19,9 +19,21 @@ All product specifications, UX design artifacts, and architecture documents are 
 All of this documentation is also published as a browsable website — a left-hand sidebar table of contents linking every document, full-text search, an on-page outline, and dark mode. The site is generated from the Markdown sources by a small custom static generator (Node + `markdown-it`) and styled with GreenGrass's own design tokens, so it loads no external frameworks, fonts, or CDNs.
 
 ```bash
-npm install      # one-time: install the build tooling
+npm run dev      # install deps if needed, build, and serve — one command
+```
+
+`npm run dev` (`scripts/dev.sh`) is the only command you need: it installs the
+build tooling on first run, regenerates `docs/`, and serves it, printing the URL.
+It picks the first free port from 8000 up, so several worktrees can preview at
+once. `PORT=9000 npm run dev` pins a port; `npm run dev -- --build-only`
+regenerates without serving. Ctrl-C stops the server.
+
+The individual steps are still available if you want them:
+
+```bash
+npm install      # install the build tooling
 npm run build    # generate the site into docs/
-npm run serve    # preview at http://localhost:8000
+npm run serve    # serve docs/ on port 8000
 ```
 
 The Markdown files remain the canonical source; `docs/` is the generated rendering. On push to `main`, a GitHub Actions workflow rebuilds the site and deploys it to GitHub Pages (enable once under **Settings → Pages → Source: GitHub Actions**).
@@ -63,9 +75,10 @@ If you're new to the project, read the specs in this order:
 11. **[`spec/gotv.md`](spec/gotv.md)** — Get Out The Vote and election day operations.
 12. **[`spec/messaging.md`](spec/messaging.md)** — Internal communications, notifications, E2E encryption.
 13. **[`spec/press.md`](spec/press.md)** — Press, media, social media, public profiles, endorsements.
-14. **[`design/architecture/system.md`](design/architecture/system.md)** — System architecture, data model, infrastructure.
-15. **[`design/ux/00-overview.md`](design/ux/00-overview.md)** — UX design overview with reading order for all 37 UX documents.
-16. **[`decisions/`](decisions/)** — 16 Architecture Decision Records extracting and formalizing decisions from all spec and design documents.
+14. **[`spec/comms-intelligence.md`](spec/comms-intelligence.md)** — Post-MVP roadmap: media intelligence, fact check, media map, candidate vetting and opposition research, sequenced as iterations.
+15. **[`design/architecture/system.md`](design/architecture/system.md)** — System architecture, data model, infrastructure.
+16. **[`design/ux/00-overview.md`](design/ux/00-overview.md)** — UX design overview with reading order for all 37 UX documents.
+17. **[`decisions/`](decisions/)** — 17 Architecture Decision Records extracting and formalizing decisions from all spec and design documents.
 
 ## Project Structure
 
@@ -87,7 +100,8 @@ GreenGrass/
 │   ├── support.md                 # Tenant support and onboarding
 │   ├── gotv.md                    # GOTV and election day operations
 │   ├── messaging.md               # Internal communications
-│   └── press.md                   # Press, media, public communications
+│   ├── press.md                   # Press, media, public communications
+│   └── comms-intelligence.md      # Post-MVP roadmap: comms intelligence
 ├── design/
 │   ├── ux/                        # UX design artifacts
 │   │   ├── 00-overview.md         # Reading order and glossary
@@ -100,10 +114,12 @@ GreenGrass/
 ├── decisions/                     # Architecture Decision Records (ADRs)
 │   ├── 001-platform-architecture.md
 │   ├── ...                        # 002-015: security, identity, data, offline, etc.
-│   └── 016-cross-cutting-resolutions.md  # Resolution of 89 open questions
+│   ├── 016-cross-cutting-resolutions.md  # Resolution of 89 open questions
+│   └── 017-sharing-contract-trust-model.md  # The contract as universal trust primitive
 ├── diary/                         # Project diary (9 entries)
 ├── scripts/
-│   └── build.mjs                  # Documentation site generator
+│   ├── build.mjs                  # Documentation site generator
+│   └── dev.sh                     # One-command local preview (install, build, serve)
 ├── site-assets/                   # Site styles + client-side scripts (search, nav)
 ├── docs/                          # Generated documentation website (GitHub Pages)
 └── package.json                   # Build tooling (Node + markdown-it)

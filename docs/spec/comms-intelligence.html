@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en" data-base="../">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Comms Intelligence — Post-MVP Roadmap · GreenGrass</title>
+<meta name="description" content="Comms Intelligence — Post-MVP Roadmap — GreenGrass spec &amp; design documentation.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%232563eb'/%3E%3Cstop offset='1' stop-color='%2316a34a'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='32' height='32' rx='7' fill='url(%23g)'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="../assets/styles.css">
+</head>
+<body>
+<a class="skip-link" href="#content">Skip to content</a>
+<header class="site-header">
+  <button type="button" class="menu-toggle" aria-label="Toggle navigation" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+  <a class="brand" href="../index.html">
+    <span class="brand-mark" aria-hidden="true"></span>
+    <span class="brand-text"><strong>GreenGrass</strong><small>Spec & Design</small></span>
+  </a>
+  <div class="search">
+    <input type="search" id="search-input" placeholder="Search docs…" autocomplete="off" aria-label="Search documentation">
+    <div id="search-results" class="search-results" hidden></div>
+  </div>
+  <button type="button" class="theme-toggle" aria-label="Toggle dark mode" title="Toggle dark mode">
+    <span class="theme-icon" aria-hidden="true"></span>
+  </button>
+</header>
+<div class="layout">
+  <div class="sidebar-backdrop" hidden></div>
+  <aside class="sidebar" aria-label="Documentation navigation">
+    <nav class="nav">
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">Home<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../index.html">GreenGrass</a></li></ul></div>
+<div class="nav-section open"><button type="button" class="nav-section-title" aria-expanded="true">Specifications<span class="chev" aria-hidden="true"></span></button><ul><li><a href="./product.html">Project: GreenGrass</a></li><li><a href="./mvp.html">GreenGrass MVP — Product Plan</a></li><li><a href="./users.html">Users &amp; Roles</a></li><li><a href="./workflows.html">Core Workflows</a></li><li><a href="./geography.html">Target Geography</a></li><li><a href="./security.html">Security &amp; Threat Model</a></li><li><a href="./compliance.html">Compliance &amp; Legal Framework</a></li><li><a href="./fundraising.html">Fundraising &amp; Payment Infrastructure</a></li><li><a href="./integrations.html">External Integrations</a></li><li><a href="./support.html">Tenant Support &amp; Onboarding</a></li><li><a href="./gotv.html">Get Out The Vote &amp; Election Day Operations</a></li><li><a href="./messaging.html">Internal Communications &amp; Notifications</a></li><li><a href="./press.html">Press, Media &amp; Public Communications</a></li><li><a href="./comms-intelligence.html" aria-current="page" class="active">Comms Intelligence — Post-MVP Roadmap</a></li></ul></div>
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">Architecture<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../design/architecture/system.html">System Architecture</a></li></ul></div>
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">UX Design<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../design/ux/00-overview.html">UX Design Overview</a></li><li><a href="../design/ux/01-information-architecture/navigation-model.html">Navigation Model</a></li><li><a href="../design/ux/01-information-architecture/screen-inventory.html">Screen Inventory</a></li><li><a href="../design/ux/01-information-architecture/persona-views.html">Persona Views</a></li><li><a href="../design/ux/01-information-architecture/url-structure.html">URL Structure</a></li><li><a href="../design/ux/02-global-patterns/pattern-catalog.html">Pattern Catalog</a></li><li><a href="../design/ux/02-global-patterns/offline-sync-patterns.html">Offline &amp; Sync Patterns</a></li><li><a href="../design/ux/02-global-patterns/notification-patterns.html">Notification Patterns</a></li><li><a href="../design/ux/02-global-patterns/search-patterns.html">Search Patterns</a></li><li><a href="../design/ux/02-global-patterns/settings-help-patterns.html">Settings &amp; Help Patterns</a></li><li><a href="../design/ux/02-global-patterns/security-ux-patterns.html">Security UX Patterns</a></li><li><a href="../design/ux/03-design-system/foundations.html">Design System Foundations</a></li><li><a href="../design/ux/03-design-system/theming-strategy.html">Theming Strategy</a></li><li><a href="../design/ux/03-design-system/component-inventory.html">Component Inventory</a></li><li><a href="../design/ux/03-design-system/responsive-strategy.html">Responsive Strategy</a></li><li><a href="../design/ux/04-wireframes/index.html">Wireframes</a></li><li><a href="../design/ux/04-wireframes/navigation-shell/navigation-shell.html">Navigation Shell Wireframes</a></li><li><a href="../design/ux/04-wireframes/dashboards/dashboards.html">Dashboard Wireframes</a></li><li><a href="../design/ux/04-wireframes/field-mode/field-mode.html">Field Mode Wireframes</a></li><li><a href="../design/ux/04-wireframes/onboarding/onboarding.html">Onboarding Wireframes</a></li><li><a href="../design/ux/04-wireframes/messaging/messaging.html">Messaging Wireframes</a></li><li><a href="../design/ux/04-wireframes/supporter/supporter-portal.html">Supporter Portal Wireframes</a></li><li><a href="../design/ux/04-wireframes/alliance/alliance.html">Alliance Wireframes</a></li><li><a href="../design/ux/04-wireframes/crm/crm.html">CRM / People Wireframes</a></li><li><a href="../design/ux/04-wireframes/field-ops/field-ops.html">Field Operations (Admin) Wireframes</a></li><li><a href="../design/ux/04-wireframes/fundraising/fundraising.html">Fundraising Wireframes</a></li><li><a href="../design/ux/04-wireframes/communications/communications.html">Communications Wireframes</a></li><li><a href="../design/ux/04-wireframes/social-media/social-media.html">Social Media Wireframes</a></li><li><a href="../design/ux/04-wireframes/events/events.html">Events Wireframes</a></li><li><a href="../design/ux/04-wireframes/press/press.html">Press &amp; Media Wireframes</a></li><li><a href="../design/ux/04-wireframes/activism/activism.html">Activism &amp; Engagement Campaign Wireframes</a></li><li><a href="../design/ux/04-wireframes/gotv/gotv.html">GOTV Admin Wireframes</a></li><li><a href="../design/ux/04-wireframes/settings/settings.html">Settings &amp; Admin Wireframes</a></li><li><a href="../design/ux/04-wireframes/auth/auth.html">Authentication Wireframes</a></li><li><a href="../design/ux/04-wireframes/profile/profile.html">User Profile Wireframes</a></li><li><a href="../design/ux/04-wireframes/help/help.html">Support &amp; Help Wireframes</a></li><li><a href="../design/ux/04-wireframes/public/public.html">Public Pages Wireframes</a></li><li><a href="../design/ux/04-wireframes/audit.html">Wireframe Audit Report</a></li></ul></div>
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">Decisions<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../decisions/001-platform-architecture.html">ADR-001: Platform Architecture &amp; Deployment</a></li><li><a href="../decisions/002-security-threat-model.html">ADR-002: Security &amp; Threat Model</a></li><li><a href="../decisions/003-identity-access-organization.html">ADR-003: Identity, Access &amp; Organization</a></li><li><a href="../decisions/004-data-model-integrity.html">ADR-004: Data Model &amp; Integrity</a></li><li><a href="../decisions/005-offline-first-sync.html">ADR-005: Offline-First &amp; Sync</a></li><li><a href="../decisions/006-field-operations-gotv.html">ADR-006: Field Operations &amp; GOTV</a></li><li><a href="../decisions/007-fundraising-payments.html">ADR-007: Fundraising &amp; Payments</a></li><li><a href="../decisions/008-communications-messaging.html">ADR-008: Communications &amp; Messaging</a></li><li><a href="../decisions/009-compliance-legal.html">ADR-009: Compliance &amp; Legal Framework</a></li><li><a href="../decisions/010-internationalization-localization.html">ADR-010: Internationalization &amp; Localization</a></li><li><a href="../decisions/011-design-system-ux.html">ADR-011: Design System &amp; UX Foundations</a></li><li><a href="../decisions/012-external-integrations.html">ADR-012: External Integrations</a></li><li><a href="../decisions/013-analytics-ai.html">ADR-013: Analytics &amp; AI</a></li><li><a href="../decisions/014-volunteer-onboarding.html">ADR-014: Volunteer &amp; Onboarding</a></li><li><a href="../decisions/015-product-scope.html">ADR-015: Product Scope Boundaries</a></li><li><a href="../decisions/016-cross-cutting-resolutions.html">ADR-016: Cross-Cutting Resolutions</a></li><li><a href="../decisions/017-sharing-contract-trust-model.html">ADR-017: The Sharing Contract as Universal Trust Primitive</a></li><li><a href="../decisions/ux-decisions.html">UX Decisions — Wireframe Phase</a></li></ul></div>
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">Diary<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../diary/index.html">Project Diary</a></li><li><a href="../diary/01-from-description-to-specification.html">Entry 1: From Description to Specification</a></li><li><a href="../diary/02-the-architecture-session.html">Entry 2: The Architecture Session</a></li><li><a href="../diary/03-information-architecture.html">Entry 3: Information Architecture</a></li><li><a href="../diary/04-design-system-and-wireframes.html">Entry 4: The Design System and Wireframes</a></li><li><a href="../diary/05-the-wireframe-audit.html">Entry 5: The Wireframe Audit</a></li><li><a href="../diary/06-resolving-the-open-questions.html">Entry 6: Resolving the Open Questions</a></li><li><a href="../diary/07-reconciling-the-architecture.html">Entry 7: Reconciling the Architecture</a></li><li><a href="../diary/08-housekeeping.html">Diary Entry 8: Housekeeping</a></li><li><a href="../diary/09-the-documentation-website.html">Diary Entry 9: The Documentation Website</a></li></ul></div>
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">Project &amp; Internal<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../claude/MEMORY.html">Memory</a></li><li><a href="../claude/SKILLS.html">Skills</a></li><li><a href="../CLAUDE.html">GreenGrass</a></li></ul></div>
+    </nav>
+  </aside>
+  <main id="content" class="content">
+    <nav class="breadcrumb" aria-label="Breadcrumb">Specifications</nav>
+    <article class="prose">
+<h1 id="comms-intelligence-post-mvp-roadmap" tabindex="-1"><a class="heading-anchor" href="#comms-intelligence-post-mvp-roadmap" aria-hidden="true">#</a> Comms Intelligence — Post-MVP Roadmap</h1>
+<p><strong>Systematic media intelligence and controlled-access research, sequenced as the first iterations after the coalition data trust validates</strong></p>
+<p>Drafted: 2026-09-01
+Status: Roadmap. Depends on <code>spec/mvp.md</code> clearing its March 2028 decision gate. No existing spec has been modified.</p>
+<hr>
+<h2 id="1-what-this-is-and-what-it-is-not" tabindex="-1"><a class="heading-anchor" href="#1-what-this-is-and-what-it-is-not" aria-hidden="true">#</a> 1. What this is, and what it is not</h2>
+<p>Seven capabilities, requested as one tool:</p>
+<p>media monitoring · fact check · talking points · media map · analyst profiles · candidate vetting · opposition research</p>
+<p>The binding qualifier is <em>&quot;todo de forma sistemática, con acceso controlado&quot;</em> — systematic, with controlled access. Those two words carry more weight than any of the seven features, and much of this document is about them.</p>
+<p><strong>This is not an alternate MVP.</strong> <code>spec/mvp.md</code> tests the one question in the project that is not a normal engineering problem — whether sovereign political organizations will pool data under the right rules — and <code>spec/mvp.md:22</code> is right that it should be tested first and cheaply, before the expensive build. Nothing here displaces that. The pilot stays as specified: MVC and PIP, ingest-only, mutual suppression, the phases at <code>spec/mvp.md:216-223</code>.</p>
+<p>This document is what gets built <strong>after</strong> that question is answered: the first iterations of real product, ordered by dependency, each with the gate that releases it.</p>
+<p>Two things follow from the sequencing. §2 is why this domain goes first among the many that could. §3 is what it inherits from the MVP — which turns out to be more than a validated assumption.</p>
+<hr>
+<h2 id="2-why-this-domain-goes-first" tabindex="-1"><a class="heading-anchor" href="#2-why-this-domain-goes-first" aria-hidden="true">#</a> 2. Why this domain goes first</h2>
+<p>The full platform is large: fundraising, field operations, GOTV, events, activism, the supporter portal. Any of them could follow the pilot. Four reasons this one leads.</p>
+<p><strong>The spec already scheduled it.</strong> <code>spec/press.md:101</code> defers automated media monitoring in unusually forward language:</p>
+<blockquote>
+<p>Automated media monitoring is deferred not because it's unimportant, but because it deserves serious investment rather than a bolt-on integration. Existing media monitoring services (Meltwater, Cision, etc.) are expensive, Western-focused, and poorly cover regional and local media in the global south. This is a significant market gap. […] Revisit as a dedicated product initiative, not an afterthought.</p>
+</blockquote>
+<p>ADR-015 carries the same decision into the architecture record. This request did not arrive from outside the project — it was parked by it, with a note to come back.</p>
+<p><strong>There is standing demand evidence in the pilot geography.</strong> <code>puntos-ds.pages.dev</code> — a hand-built talking-points site from Democracia Socialista in Puerto Rico — exists. Topic filtering, keyword search, copy-to-clipboard, verification flags, and a footer warning about staleness. No platform, no budget, and enough sustained need to justify maintaining it. Hand-built internal tooling is the strongest demand signal available short of revenue, and this one is in the target market, solving one-seventh of the request, unprompted.</p>
+<p><strong>It asks the parties for nothing new.</strong> The pilot is ingest-only: the parties hand over files and get a suppression flag back. Every other domain in the platform asks them to migrate operations. Comms intelligence asks for no import, no field app, no offline client, no custodian sign-off, no new consent question. It is the shortest step from where the pilot leaves them.</p>
+<p><strong>It gives the trust relationship something to do.</strong> The pilot ends with two parties that have proven they will pool data and a single narrow operational feature. If nothing follows quickly, the relationship has no surface to live on. A shared media picture is the natural second thing coalition partners coordinate on, and it carries far lower stakes than pooling supporter lists — which is what makes it a good second ask rather than a good first one.</p>
+<hr>
+<h2 id="3-what-it-inherits-from-the-mvp" tabindex="-1"><a class="heading-anchor" href="#3-what-it-inherits-from-the-mvp" aria-hidden="true">#</a> 3. What it inherits from the MVP</h2>
+<p>The pilot is not only a validation. It builds four things this roadmap depends on, and one of them is a genuine surprise.</p>
+<table>
+<thead>
+<tr>
+<th>Built by the MVP</th>
+<th>Why this roadmap needs it</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>BYOK from day one</strong> (<code>spec/mvp.md:123</code>)</td>
+<td>The dossier store's central claim is that the platform cannot read the material. BYOK makes that true rather than contractual</td>
+</tr>
+<tr>
+<td><strong>Immutable audit trail from day one</strong> (<code>spec/mvp.md:124</code>)</td>
+<td>Chain of custody on research findings is the same machinery</td>
+</tr>
+<tr>
+<td><strong>Event sourcing for provenance</strong> (<code>spec/mvp.md:125</code>)</td>
+<td>The claims ledger <em>is</em> a provenance structure — same shape, different subject</td>
+</tr>
+<tr>
+<td><strong>The sharing contract, ALLY-005</strong> (<code>spec/mvp.md:97</code>)</td>
+<td>Field-level, default-deny, per-member. See below</td>
+</tr>
+<tr>
+<td><strong>A validated answer on whether the rules are what made it possible</strong> (A7)</td>
+<td>Determines whether anything below can be coalition-shared at all</td>
+</tr>
+</tbody>
+</table>
+<h3 id="31-the-sharing-contract-turns-out-to-be-the-media-maps-answer" tabindex="-1"><a class="heading-anchor" href="#31-the-sharing-contract-turns-out-to-be-the-media-maps-answer" aria-hidden="true">#</a> 3.1 The sharing contract turns out to be the media map's answer</h3>
+<p>The most useful thing the MVP leaves behind is the one built for a different purpose.</p>
+<p>An open question that would otherwise be hard: who owns the actor graph — the map of outlets, their ownership, financing, and alignment? Per-tenant means every campaign rebuilds it from scratch, which is enormous duplicated effort in exactly the organizations with the least capacity. GreenGrass-maintained is the strongest moat in the whole proposal and also a shared liability, since one bad alignment label on an outlet becomes every tenant's bad label.</p>
+<p>If the MVP passes, there is a third answer: <strong>coalition-shared, under the same default-deny field-level contract the pilot already built.</strong> Members contribute what they know about the media landscape, see the union, and withhold what they choose — the identical primitive, pointed at institutional knowledge instead of supporter records.</p>
+<p>And it is a <em>safer</em> second use of that machinery than the first. A media map contains no personal data of supporters, no consent question, and no <code>support_level</code> field that a party guards as its core asset (<code>spec/mvp.md:58</code>). If the sharing contract works anywhere, it works here. That makes this domain a natural place to extend the trust arrangement rather than to test it.</p>
+<p><strong>This only becomes available if the MVP passes.</strong> If A7 fails and the parties turn out to have trusted each other rather than the rules (<code>spec/mvp.md:144</code>), the actor graph falls back to per-tenant and the coalition-shared version is dropped.</p>
+<hr>
+<h2 id="4-what-greengrass-already-has" tabindex="-1"><a class="heading-anchor" href="#4-what-greengrass-already-has" aria-hidden="true">#</a> 4. What GreenGrass already has</h2>
+<p>The spec suite is partly ahead of the request and partly absent.</p>
+<table>
+<thead>
+<tr>
+<th>Capability</th>
+<th>Status</th>
+<th>Evidence</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Media monitoring</strong></td>
+<td>Deferred <strong>as a named strategic opportunity</strong></td>
+<td><code>spec/press.md:101</code>, <code>decisions/015-product-scope.md</code></td>
+</tr>
+<tr>
+<td><strong>Talking points</strong></td>
+<td><strong>Exists</strong> — versioned, topic-organized, team-shared</td>
+<td><code>spec/press.md:188-193</code>; PRESS-014 in <code>design/ux/04-wireframes/press/press.md:1007</code></td>
+</tr>
+<tr>
+<td><strong>Media map</strong></td>
+<td>Partial — contacts carry outlet, beat, coverage area; the landscape itself is prose</td>
+<td><code>spec/press.md:22-31</code>, <code>spec/press.md:223-229</code></td>
+</tr>
+<tr>
+<td><strong>Analyst profiles</strong></td>
+<td>Partial — journalists are Contact records with relationship state; analysts are a different object</td>
+<td><code>spec/press.md:20-31</code>, <code>spec/users.md:291-294</code></td>
+</tr>
+<tr>
+<td><strong>Fact check</strong></td>
+<td>Absent</td>
+<td>—</td>
+</tr>
+<tr>
+<td><strong>Candidate vetting</strong></td>
+<td>Absent. Nearest neighbor is configurable volunteer approval for infiltration risk, ADR-003</td>
+<td>—</td>
+</tr>
+<tr>
+<td><strong>Opposition research</strong></td>
+<td>Absent — appears only in the threat model, as something done <em>to</em> the campaign</td>
+<td><code>spec/security.md:17</code>, <code>spec/security.md:49</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="what-the-talking-points-reference-adds" tabindex="-1"><a class="heading-anchor" href="#what-the-talking-points-reference-adds" aria-hidden="true">#</a> What the talking-points reference adds</h3>
+<p><code>puntos-ds.pages.dev</code> has three things PRESS-014 does not:</p>
+<ol>
+<li><strong>The <em>lo que decimos / lo que contestamos</em> pairing.</strong> Offense and defense as one unit. PRESS-014 stores assertions; the reference stores assertions <em>and their rebuttals</em>, which is how the material is actually used under questioning.</li>
+<li><strong>Copy-to-clipboard per point.</strong> A small thing that reveals the real use case: someone is composing a reply right now, on a phone, mid-argument. PRESS-014 is designed for review, not for live use.</li>
+<li><strong>Per-point verification status</strong> — <em>&quot;Sin verificar.&quot;</em> The footer reads: <em>&quot;Uso interno. Los puntos cambian; verifica la fecha antes de citar públicamente.&quot;</em></li>
+</ol>
+<p>The third is the important one, and it is the seam where two of the seven requested features turn out to be one. A talking point with a verification status <em>is</em> a fact-check record. See §5.</p>
+<hr>
+<h2 id="5-seven-features-are-three-primitives" tabindex="-1"><a class="heading-anchor" href="#5-seven-features-are-three-primitives" aria-hidden="true">#</a> 5. Seven features are three primitives</h2>
+<p>Treating the request as seven features produces seven half-built tools. It is three data structures, and the iteration order in §9 follows from them.</p>
+<h3 id="51-the-actor-graph" tabindex="-1"><a class="heading-anchor" href="#51-the-actor-graph" aria-hidden="true">#</a> 5.1 The actor graph</h3>
+<p>Outlets, journalists, analysts, and monitoring targets are one structure, not four. The unit missing today is the <strong>outlet as a first-class record</strong>: ownership, financing, political or confessional alignment, reach, editorial line, sister properties, and who at it writes what.</p>
+<p><code>spec/press.md:223-229</code> describes exactly this — Lebanon's <em>&quot;confessional media landscape (outlets aligned with political/religious groups),&quot;</em> India's regional-language fragmentation, Puerto Rico's bilingual split — as prose, in a section titled &quot;Media Landscape Differences,&quot; and never models any of it. Every outlet in the platform today exists only as a text field on a journalist's contact record (<code>spec/press.md:24</code>).</p>
+<p>Analyst profiles fall out of the same graph. A journalist is someone you pitch. An analyst or commentator is someone you <em>predict</em> — their prior positions, their alignment, what they said last time this issue came up. Same graph, different edge.</p>
+<h3 id="52-the-claims-ledger" tabindex="-1"><a class="heading-anchor" href="#52-the-claims-ledger" aria-hidden="true">#</a> 5.2 The claims ledger</h3>
+<p>A claim, its sources, its verification status, its approved response, its history.</p>
+<p>Fact-check, the verification flag on a talking point, and an incoming monitoring hit are three views of one record. An attack surfaces in monitoring; it becomes a claim; the claim gets sourced and adjudicated; the adjudication becomes an approved response; the approved response is a talking point. Today those four steps live in four places, three of which do not exist.</p>
+<p>This is the primitive that makes the tool <em>systematic</em> rather than a folder of documents. It is also the one with no analogue anywhere in the current spec — though as §3 notes, it is structurally the same provenance shape the MVP's event sourcing already produces.</p>
+<h3 id="53-the-compartmented-dossier" tabindex="-1"><a class="heading-anchor" href="#53-the-compartmented-dossier" aria-hidden="true">#</a> 5.3 The compartmented dossier</h3>
+<p>Candidate vetting and opposition research are the same machinery pointed in two directions: a subject, a set of sourced findings, a chain of custody, an access list.</p>
+<p>Self-vetting is the easier sell and the more defensible product — finding the liability in your own candidate before the other side does. It is the same store, and it is why §9 sequences vetting before oppo.</p>
+<hr>
+<h2 id="6-acceso-controlado-does-not-exist-yet" tabindex="-1"><a class="heading-anchor" href="#6-acceso-controlado-does-not-exist-yet" aria-hidden="true">#</a> 6. &quot;Acceso controlado&quot; does not exist yet</h2>
+<p>This is the part of the request the platform cannot currently satisfy, and it is not a permissions tweak. It is the reason the dossier iterations sit last in §9.</p>
+<p>ADR-003 gives hybrid RBAC — stackable role templates with per-user overrides — plus attribute scoping by geography, team, and campaign. It answers <em>&quot;what can a Communications Director do, and over which region.&quot;</em> It has no answer for <em>&quot;only these four named people may open this file, and the Org Admin is not one of them.&quot;</em></p>
+<p>The press wireframes make the gap concrete: every screen from PRESS-001 to PRESS-015 is marked visible to <strong>OA, CD</strong> — Org Admin and Communications Director (<code>design/ux/04-wireframes/press/press.md:15-30</code>). Role-level, org-wide, no finer grain anywhere in the domain.</p>
+<p>A compartmented dossier store needs four things the platform does not have:</p>
+<table>
+<thead>
+<tr>
+<th>Requirement</th>
+<th>Current state</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Per-record access lists (named people, not roles)</td>
+<td>Not modeled</td>
+</tr>
+<tr>
+<td>Read logging</td>
+<td><strong>Explicitly declined</strong></td>
+</tr>
+<tr>
+<td>No superuser read path</td>
+<td><strong>Explicitly declined</strong></td>
+</tr>
+<tr>
+<td>Per-compartment key scope</td>
+<td>BYOK is per-tenant (ADR-002)</td>
+</tr>
+</tbody>
+</table>
+<p>Two of those are not gaps but active contradictions, and they should be resolved rather than papered over:</p>
+<ul>
+<li><strong><code>decisions/004-data-model-integrity.md:13</code></strong> commits to a full audit trail <em>&quot;for all data mutations.&quot;</em> Reads are not logged. For a dossier store, the read <em>is</em> the event worth logging — exfiltration by an insider leaves no mutation behind.</li>
+<li><strong><code>spec/security.md:404</code></strong> goes further and makes non-logging a <em>defense</em>: <em>&quot;Avoid logging unnecessary metadata (don't record which specific records a user viewed if you only need to know they logged in).&quot;</em> That is correct metadata-minimization reasoning for a canvassing app under state surveillance, and it is precisely inverted for a research compartment.</li>
+<li><strong><code>spec/security.md:330</code></strong> grants Platform Admin <em>&quot;silent access… to read tenant data for support and debugging without tenant notification.&quot;</em> Defensible for a CRM. Not defensible for a file on a sitting official.</li>
+</ul>
+<p>There is also a knock-on to the duress design. <code>spec/security.md:435</code> specifies a decoy passkey that opens a sanitized view. That feature is currently a nice-to-have for the highest tier. Add a dossier store and it becomes load-bearing — there is now something specific that a coerced login must not reveal.</p>
+<p><strong>Compartmentation is its own ADR and its own engineering effort, not a configuration of ADR-003.</strong> It is Iteration 4.</p>
+<hr>
+<h2 id="7-the-feasibility-risk-that-could-reshape-the-whole-plan" tabindex="-1"><a class="heading-anchor" href="#7-the-feasibility-risk-that-could-reshape-the-whole-plan" aria-hidden="true">#</a> 7. The feasibility risk that could reshape the whole plan</h2>
+<p>The monitoring pillar rests on an assumption nobody has tested, and it is testable cheaply and early.</p>
+<h3 id="71-wont-or-cant" tabindex="-1"><a class="heading-anchor" href="#71-wont-or-cant" aria-hidden="true">#</a> 7.1 &quot;Won't&quot; or &quot;can't&quot;?</h3>
+<p>Meltwater and Cision do not cover these markets. <code>spec/press.md:101</code> reads that as a market gap. It is equally consistent with a market <em>impossibility</em>, and the two imply completely different products:</p>
+<ul>
+<li><strong>Won't</strong> — the markets are real but too small and too fragmented to be worth a Western vendor's integration cost. Then GreenGrass's lower cost base and local-language focus are a genuine moat.</li>
+<li><strong>Can't</strong> — the coverage is not digitally reachable at any reasonable cost. Then no amount of focus helps, and the product is monitoring the sliver of media that happens to be scrapeable while missing the part that decides elections.</li>
+</ul>
+<p>Nothing in the spec suite answers this. §7.4 answers it in three weeks.</p>
+<h3 id="72-the-news-does-not-move-through-the-web" tabindex="-1"><a class="heading-anchor" href="#72-the-news-does-not-move-through-the-web" aria-hidden="true">#</a> 7.2 The news does not move through the web</h3>
+<p>In three of five target markets, the spec says the dominant news channel is a closed messaging network:</p>
+<ul>
+<li><strong>Brazil</strong> — <em>&quot;WhatsApp is the dominant communication channel (including for news sharing)&quot;</em> (<code>spec/press.md:226</code>)</li>
+<li><strong>India</strong> — <em>&quot;WhatsApp and YouTube are dominant digital channels. Regional language media is critical&quot;</em> (<code>spec/press.md:228</code>)</li>
+<li><strong>Lebanon</strong> — <em>&quot;WhatsApp is dominant for messaging&quot;</em> (<code>spec/press.md:229</code>)</li>
+</ul>
+<p>Monitoring closed messaging networks means surveilling private groups. <strong>The line, stated as a commitment alongside §8: this product does not do that.</strong> Not as a technical limitation. A political intelligence tool that ingests private group chat is a surveillance product, and building one for grassroots organizations in exactly the countries where that capability would be turned against them is not a thing GreenGrass should ship.</p>
+<p>That commitment has a cost, and it is the honest cost of the whole idea: in the markets where the platform is most needed, a principled monitoring product sees a minority of what actually circulates.</p>
+<p>Radio and television compound it. <code>spec/press.md:225</code> puts <em>&quot;strong local TV and radio&quot;</em> at the center of Puerto Rico's market and <code>spec/press.md:226</code> notes Brazil's mandated <em>horário eleitoral</em>. None of that is text-searchable without transcription infrastructure — buildable, a real cost line, and in nobody's estimate today.</p>
+<h3 id="73-puerto-rico-will-flatter-the-result" tabindex="-1"><a class="heading-anchor" href="#73-puerto-rico-will-flatter-the-result" aria-hidden="true">#</a> 7.3 Puerto Rico will flatter the result</h3>
+<p>The pilot parties are in Puerto Rico: a small, bilingual, well-digitized market with a manageable number of outlets and a US-adjacent web presence. Plausibly the <em>easiest</em> media environment in the entire target set.</p>
+<p>Monitoring that works in San Juan tells you close to nothing about Recife or Chennai. This is the mirror image of the situation <code>spec/mvp.md:82</code> describes for the data trust — for that experiment, PR is a clean test; for monitoring feasibility, it is the friendliest possible case and will overstate what generalizes.</p>
+<p><strong>Mitigation:</strong> the corpus probe runs on Brazil and one other market even though the first deployment is in Puerto Rico. Feasibility and adoption get measured in different places on purpose.</p>
+<h3 id="74-the-corpus-probe-run-it-early-it-costs-three-weeks" tabindex="-1"><a class="heading-anchor" href="#74-the-corpus-probe-run-it-early-it-costs-three-weeks" aria-hidden="true">#</a> 7.4 The corpus probe — run it early, it costs three weeks</h3>
+<p>One person, three weeks, and <strong>it does not need to wait for the MVP gate</strong>. It requires no engineering and no pilot party, so it can run alongside the pilot's own Phase 0 or 1 without competing for anyone.</p>
+<ol>
+<li>Pick two markets. <strong>Brazil and one of India or Lebanon</strong> — not Puerto Rico.</li>
+<li>Take one week of political news, as a domain expert would define it.</li>
+<li>Attempt to assemble it from reachable sources: RSS, sitemaps, public APIs, open archives, public social accounts.</li>
+<li>Measure: what fraction is retrievable without bespoke per-outlet work; what fraction sits behind paywalls, app-only distribution, radio, TV, or closed messaging; what the long tail of regional-language outlets costs to add.</li>
+</ol>
+<p>The output is a number per market and a cost curve. If reachable coverage is thin in Brazil, Iteration 3 is repositioned or dropped and the roadmap shortens to the ledger, the graph, and the dossier store — a smaller and different product, known about years before anyone builds it. That is the whole value of running it early.</p>
+<hr>
+<h2 id="8-the-doctrine" tabindex="-1"><a class="heading-anchor" href="#8-the-doctrine" aria-hidden="true">#</a> 8. The doctrine</h2>
+<p>Opposition research and candidate vetting are in scope at full capability. That is a defensible position, and it is defensible <strong>only</strong> with an explicit doctrine attached. These are commitments, not considerations, and they must exist in writing before Iteration 5 begins.</p>
+<h3 id="81-sourcing" tabindex="-1"><a class="heading-anchor" href="#81-sourcing" aria-hidden="true">#</a> 8.1 Sourcing</h3>
+<p><strong>Lawful sources only.</strong> Public records, published material, on-the-record statements, court and regulatory filings, campaign finance disclosures, licensed vendor data with documented provenance.</p>
+<p><strong>Prohibited, by design and not by policy alone:</strong> hacked or leaked material, pretexting or misrepresentation to obtain records, personal data of unclear origin, scraped private accounts, and anything obtained from a closed messaging group.</p>
+<h3 id="82-provenance-is-mandatory" tabindex="-1"><a class="heading-anchor" href="#82-provenance-is-mandatory" aria-hidden="true">#</a> 8.2 Provenance is mandatory</h3>
+<p>Every finding carries source, date, collector, and method. There is no free-text field for an unsourced assertion, because the moment there is, that is what the store fills with.</p>
+<p>This is what separates research from rumor. It is also the liability shield: a dossier where every line traces to a public record is defensible in a way that a document of assertions never is.</p>
+<h3 id="83-scope-limit" tabindex="-1"><a class="heading-anchor" href="#83-scope-limit" aria-hidden="true">#</a> 8.3 Scope limit</h3>
+<p><strong>Public conduct of public figures.</strong> Candidates, officeholders, and their political and financial conduct.</p>
+<p>Excluded by default: family members, minors, private medical and sexual matters. Override requires written justification, is logged, and is visible to the compartment owner. The default is the product's position; the override exists because there are real cases and pretending otherwise just moves the work off-platform.</p>
+<h3 id="84-the-data-subject-rights-collision" tabindex="-1"><a class="heading-anchor" href="#84-the-data-subject-rights-collision" aria-hidden="true">#</a> 8.4 The data-subject-rights collision</h3>
+<p>The largest unresolved question in this document.</p>
+<p><code>spec/compliance.md:212</code> commits GreenGrass to <em>&quot;LGPD/GDPR-level sensitive-data protections applied globally regardless of local law,&quot;</em> on the reasoning that all data on a political platform is political by nature. <code>spec/compliance.md:223-236</code> then enumerates access, correction, deletion, portability, and objection rights.</p>
+<p><strong>An opponent is a data subject.</strong> Under LGPD, PDPA, and DPDPA they hold rights over a dossier held about them — including access and deletion. A subject-access request against an oppo file is not an edge case; it is an obvious and cheap tactic, and the first campaign to use it against a GreenGrass tenant sets the precedent for the product.</p>
+<p>Three partial answers, none sufficient alone:</p>
+<ol>
+<li><strong>Journalistic and legitimate-interest exemptions.</strong> Real, but narrow, jurisdiction-specific, and generally written for press rather than for political operations.</li>
+<li><strong>Tenant-as-controller with a genuinely blind platform.</strong> GreenGrass is a processor (<code>spec/compliance.md:240</code>); the request goes to the tenant. BYOK — which the MVP already ships (<code>spec/mvp.md:123</code>) — makes platform blindness <em>true</em> rather than merely contractual, and directly conflicts with the silent Platform Admin read path at <code>spec/security.md:330</code>.</li>
+<li><strong>Public-record-only scope.</strong> Where the underlying facts are already public, the subject's position is weakest. The cleanest answer and also the narrowest product.</li>
+</ol>
+<p><strong>This goes to counsel per jurisdiction before a line of dossier code is written</strong>, and it belongs on the list at <code>spec/compliance.md:481</code>. It is a plausible reason for the dossier module to ship in some markets and not others.</p>
+<h3 id="85-access-and-retention" tabindex="-1"><a class="heading-anchor" href="#85-access-and-retention" aria-hidden="true">#</a> 8.5 Access and retention</h3>
+<ul>
+<li><strong>Compartmented by default.</strong> Sealed to a named access list, never to a role. Adding a person is an event, logged and visible to the compartment owner.</li>
+<li><strong>Reads are logged and the log is visible to the compartment owner.</strong> Reverses <code>spec/security.md:404</code> for this data class only, and the reversal must be scoped precisely so it does not leak back into field operations, where the original reasoning still holds.</li>
+<li><strong>No superuser read path.</strong> Org Admin can grant access; Org Admin cannot read. Platform Admin cannot read at all — the silent-access decision at <code>spec/security.md:330</code> is overridden for this data class, with no exception for support or debugging.</li>
+<li><strong>Forced expiry.</strong> Dossiers expire at the end of the electoral cycle unless renewed with written justification.</li>
+</ul>
+<h3 id="86-the-threat-model-inverts" tabindex="-1"><a class="heading-anchor" href="#86-the-threat-model-inverts" aria-hidden="true">#</a> 8.6 The threat model inverts</h3>
+<p><code>spec/security.md</code> is built on the premise that the campaign is the target of surveillance. A dossier store makes the campaign a high-value target for an entirely different reason — and a leak is not a compliance incident but an inter-party scandal with named victims. <code>spec/mvp.md:276</code> already makes precisely this argument about the data trust; it applies with more force here, because a dossier is <em>about</em> someone rather than merely containing them.</p>
+<p>Consequences to design for: separate encryption scope, and a serious argument for offering the dossier module <strong>self-host-only</strong>, so that GreenGrass never holds the material at all.</p>
+<h3 id="87-the-authoritarian-context-position" tabindex="-1"><a class="heading-anchor" href="#87-the-authoritarian-context-position" aria-hidden="true">#</a> 8.7 The authoritarian-context position</h3>
+<p><code>spec/geography.md:65-69</code> rates Thailand and India <em>&quot;Enhanced to Aggressive&quot;</em> and Lebanon <em>&quot;Aggressive&quot;</em> — for state surveillance capability and political pressure on opposition.</p>
+<p>A compartmented research store is precisely what a hostile state most wants to seize, and seizure endangers <strong>sources</strong>, not just the campaign. Someone who spoke to a researcher on condition of discretion is exposed by a store built to protect the researcher.</p>
+<p><strong>The hard position, stated as product policy: the dossier module is unavailable, or local-device-only, in the highest-threat jurisdictions.</strong> Refusing to ship a capability into a market where it converts into a target list is the correct call even though a competitor will make the opposite one.</p>
+<hr>
+<h2 id="9-the-iterations" tabindex="-1"><a class="heading-anchor" href="#9-the-iterations" aria-hidden="true">#</a> 9. The iterations</h2>
+<p>Ordered by dependency, not by appeal. Each releases only when its gate passes.</p>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Iteration</th>
+<th>Contains</th>
+<th>Gate to start</th>
+<th>Rough cost</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>0</strong></td>
+<td><strong>Corpus probe</strong></td>
+<td>§7.4. Two markets, one week of coverage, measure reachability</td>
+<td>None — runs alongside the MVP's Phase 0/1</td>
+<td>1 person, 3 weeks</td>
+</tr>
+<tr>
+<td><strong>1</strong></td>
+<td><strong>Talking points + claims ledger</strong></td>
+<td>PRESS-014 extended with the three additions from §4; claim records with sources, status, approved response</td>
+<td>MVP decision gate passed (<code>spec/mvp.md:223</code>)</td>
+<td>2 eng + 1 designer, ~6 weeks</td>
+</tr>
+<tr>
+<td><strong>2</strong></td>
+<td><strong>The actor graph</strong></td>
+<td>Outlet as first-class record; journalist and analyst profiles; media map views</td>
+<td>Iteration 1 in real use</td>
+<td>~8 weeks</td>
+</tr>
+<tr>
+<td><strong>3</strong></td>
+<td><strong>Monitoring ingestion</strong></td>
+<td>Source configuration, monitoring inbox, hit → coverage promotion feeding PRESS-010/011</td>
+<td><strong>Iteration 0 result</strong> — see kill criteria</td>
+<td>~12 weeks, plus ongoing corpus operations</td>
+</tr>
+<tr>
+<td><strong>4</strong></td>
+<td><strong>Compartmentation primitive</strong></td>
+<td>The ADR from §6, plus per-record access lists, read logging, key scoping</td>
+<td>Iterations 1–3 shipped; no dossier work starts before this</td>
+<td>~8 weeks, cross-cutting</td>
+</tr>
+<tr>
+<td><strong>5</strong></td>
+<td><strong>Candidate vetting</strong></td>
+<td>Self-vetting dossiers under the §8 doctrine</td>
+<td>Iteration 4 complete; doctrine written and adopted</td>
+<td>~6 weeks</td>
+</tr>
+<tr>
+<td><strong>6</strong></td>
+<td><strong>Opposition research</strong></td>
+<td>Same store, external subjects</td>
+<td><strong>Legal review complete per jurisdiction</strong> (§8.4)</td>
+<td>~4 weeks on top of 5</td>
+</tr>
+</tbody>
+</table>
+<h3 id="91-why-this-order" tabindex="-1"><a class="heading-anchor" href="#91-why-this-order" aria-hidden="true">#</a> 9.1 Why this order</h3>
+<p><strong>Iteration 1 first because it needs nothing.</strong> Talking points and the claims ledger require no new access-control primitive, no ingestion pipeline, and no legal review. They extend a screen that is already wireframed. It is the fastest path from the MVP gate to something a campaign uses daily.</p>
+<p><strong>Iteration 3 gated on Iteration 0 and nothing else.</strong> Monitoring is the most expensive pillar and the only one whose feasibility is genuinely unknown. Running the probe years ahead of the build is the cheapest risk reduction available anywhere in this plan.</p>
+<p><strong>Iteration 4 before 5 and 6, without exception.</strong> Shipping a dossier store on top of role-based permissions would be worse than not shipping it — it would create the appearance of compartmentation without the substance, which is the failure mode most likely to get someone hurt.</p>
+<p><strong>Iteration 5 before 6</strong> because self-vetting is the same machinery with far lower legal exposure, and it proves the compartment works on material where a mistake is survivable.</p>
+<h3 id="92-kept-from-the-start-despite-looking-deferrable" tabindex="-1"><a class="heading-anchor" href="#92-kept-from-the-start-despite-looking-deferrable" aria-hidden="true">#</a> 9.2 Kept from the start, despite looking deferrable</h3>
+<ul>
+<li><strong>Provenance on every claim, from Iteration 1.</strong> Retrofitting sourcing onto a ledger that already contains unsourced assertions does not work; the assertions never get sources.</li>
+<li><strong>Verification status on talking points, from Iteration 1.</strong> One field, and it is the seam that makes the ledger and the library one product rather than two.</li>
+</ul>
+<h3 id="93-screen-reuse" tabindex="-1"><a class="heading-anchor" href="#93-screen-reuse" aria-hidden="true">#</a> 9.3 Screen reuse</h3>
+<p>Most of this is not new drawing. Iteration 1 extends PRESS-014. Iteration 2 reuses CRM-001/002 patterns for the graph and PRESS-001/002 for person views. Iteration 3 feeds PRESS-010 and PRESS-011, which are already wireframed as manual-entry screens and become automatically populated. Genuinely new and unwireframed: the monitoring inbox, the claims ledger, the outlet record, and the compartment management surface.</p>
+<hr>
+<h2 id="10-gates-and-kill-criteria" tabindex="-1"><a class="heading-anchor" href="#10-gates-and-kill-criteria" aria-hidden="true">#</a> 10. Gates and kill criteria</h2>
+<p>Decided in advance, so the calls are not made under sunk-cost pressure.</p>
+<table>
+<thead>
+<tr>
+<th>Signal</th>
+<th>Reading</th>
+<th>Action</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>MVP decision gate says stop or reposition (<code>spec/mvp.md:223</code>)</td>
+<td>The premise this roadmap sits on changed</td>
+<td><strong>Re-derive.</strong> Iterations 1–3 may still stand alone as a single-tenant product; the coalition-shared actor graph (§3.1) does not</td>
+</tr>
+<tr>
+<td>A7 fails — they trusted each other, not the rules</td>
+<td>The sharing contract is not the asset it appeared to be</td>
+<td><strong>Actor graph goes per-tenant.</strong> Everything else proceeds</td>
+</tr>
+<tr>
+<td>Corpus probe returns &lt;30% reachable coverage in Brazil</td>
+<td>The gap is &quot;can't,&quot; not &quot;won't&quot;</td>
+<td><strong>Drop Iteration 3.</strong> Roadmap shortens to ledger, graph, dossiers — and that is known years early</td>
+</tr>
+<tr>
+<td>Iteration 1 ships and nobody authors a talking point in 6 weeks</td>
+<td>Consumption without authorship; it is a document, not a system</td>
+<td><strong>Stop before Iteration 2.</strong> Investigate whether the org has anyone whose job this is</td>
+</tr>
+<tr>
+<td>Only one person ever logs in</td>
+<td>One staffer's habit, not an org capability</td>
+<td><strong>Investigate.</strong> Single-user tools churn when that user leaves, and campaign turnover is high (<code>spec/press.md:52</code>)</td>
+</tr>
+<tr>
+<td>Legal review says dossiers are impermissible in 3+ target markets</td>
+<td>The research pillar is regionally bounded</td>
+<td><strong>Ship Iterations 1–4 and stop.</strong> Do not build a module sellable in two countries</td>
+</tr>
+<tr>
+<td>Any pressure to ship Iteration 5 before Iteration 4</td>
+<td>The failure mode that gets someone hurt</td>
+<td><strong>Refuse.</strong> This is the one line in the document with no override</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="11-what-to-start-now" tabindex="-1"><a class="heading-anchor" href="#11-what-to-start-now" aria-hidden="true">#</a> 11. What to start now</h2>
+<p>Nothing in §9 begins before the MVP gate, with one exception.</p>
+<p><strong>Run the corpus probe (Iteration 0) during the pilot.</strong> It costs one person three weeks, needs no engineering, needs no pilot party, and does not compete with the data trust's own Phase 1 — which <code>spec/mvp.md:239</code> prices at one person for three weeks and which stays exactly as specified. Running both is roughly six person-weeks total and answers two independent questions years before either build is funded.</p>
+<p>The corpus probe is also the only item here whose answer could restructure the roadmap rather than merely schedule it. If monitoring turns out to be intractable in Brazil, that changes what GreenGrass is selling — and it is much better to learn it in 2027 than in 2029.</p>
+<p>Everything else waits for March 2028.</p>
+<hr>
+<h2 id="12-open-questions" tabindex="-1"><a class="heading-anchor" href="#12-open-questions" aria-hidden="true">#</a> 12. Open questions</h2>
+<h3 id="for-legal-counsel-before-iteration-5" tabindex="-1"><a class="heading-anchor" href="#for-legal-counsel-before-iteration-5" aria-hidden="true">#</a> For legal counsel — before Iteration 5</h3>
+<ol>
+<li>Does any target jurisdiction offer an exemption that covers opposition research as a lawful basis, and how narrow is it? (§8.4.)</li>
+<li>Does tenant-as-controller with genuine platform blindness satisfy a subject-access request under LGPD or DPDPA, or does the tenant's obligation simply pass through?</li>
+<li>Does automated ingestion of published news content raise copyright or database-right exposure in any target market, and does storing full text versus headline-plus-link change the answer?</li>
+</ol>
+<h3 id="for-product" tabindex="-1"><a class="heading-anchor" href="#for-product" aria-hidden="true">#</a> For product</h3>
+<ol start="4">
+<li>If the coalition-shared actor graph (§3.1) is viable, does contributing to it create the same free-rider legibility problem as the contribution ledger at <code>spec/mvp.md:316</code> — and does H8's mitigation transfer?</li>
+<li>Does the claims ledger connect to the AI activism message generation at ADR-013, which already draws on talking points? If a claim's approved response can seed a generated message, the two systems are closer than this document assumes.</li>
+<li>Does self-vetting sell on its own, without opposition research attached? Same machinery, far lower exposure, possibly the more honest product.</li>
+</ol>
+<h3 id="for-the-pilot-parties-once-the-gate-passes" tabindex="-1"><a class="heading-anchor" href="#for-the-pilot-parties-once-the-gate-passes" aria-hidden="true">#</a> For the pilot parties, once the gate passes</h3>
+<ol start="7">
+<li>Would MVC, PIP, or DS pay for this, and at what tier?</li>
+<li>Who at a campaign of ten people owns this work today, and is it anyone's actual job? If the answer is &quot;nobody, it happens in a WhatsApp group,&quot; that is both the opportunity and the adoption problem.</li>
+</ol>
+
+    </article>
+  </main>
+  <div class="toc-rail"><nav class="toc" aria-label="On this page"><div class="toc-label">On this page</div><ul><li class="toc-2"><a href="#1-what-this-is-and-what-it-is-not"># 1. What this is, and what it is not</a></li><li class="toc-2"><a href="#2-why-this-domain-goes-first"># 2. Why this domain goes first</a></li><li class="toc-2"><a href="#3-what-it-inherits-from-the-mvp"># 3. What it inherits from the MVP</a></li><li class="toc-3"><a href="#31-the-sharing-contract-turns-out-to-be-the-media-maps-answer"># 3.1 The sharing contract turns out to be the media map's answer</a></li><li class="toc-2"><a href="#4-what-greengrass-already-has"># 4. What GreenGrass already has</a></li><li class="toc-3"><a href="#what-the-talking-points-reference-adds"># What the talking-points reference adds</a></li><li class="toc-2"><a href="#5-seven-features-are-three-primitives"># 5. Seven features are three primitives</a></li><li class="toc-3"><a href="#51-the-actor-graph"># 5.1 The actor graph</a></li><li class="toc-3"><a href="#52-the-claims-ledger"># 5.2 The claims ledger</a></li><li class="toc-3"><a href="#53-the-compartmented-dossier"># 5.3 The compartmented dossier</a></li><li class="toc-2"><a href="#6-acceso-controlado-does-not-exist-yet"># 6. &amp;quot;Acceso controlado&amp;quot; does not exist yet</a></li><li class="toc-2"><a href="#7-the-feasibility-risk-that-could-reshape-the-whole-plan"># 7. The feasibility risk that could reshape the whole plan</a></li><li class="toc-3"><a href="#71-wont-or-cant"># 7.1 &amp;quot;Won't&amp;quot; or &amp;quot;can't&amp;quot;?</a></li><li class="toc-3"><a href="#72-the-news-does-not-move-through-the-web"># 7.2 The news does not move through the web</a></li><li class="toc-3"><a href="#73-puerto-rico-will-flatter-the-result"># 7.3 Puerto Rico will flatter the result</a></li><li class="toc-3"><a href="#74-the-corpus-probe-run-it-early-it-costs-three-weeks"># 7.4 The corpus probe — run it early, it costs three weeks</a></li><li class="toc-2"><a href="#8-the-doctrine"># 8. The doctrine</a></li><li class="toc-3"><a href="#81-sourcing"># 8.1 Sourcing</a></li><li class="toc-3"><a href="#82-provenance-is-mandatory"># 8.2 Provenance is mandatory</a></li><li class="toc-3"><a href="#83-scope-limit"># 8.3 Scope limit</a></li><li class="toc-3"><a href="#84-the-data-subject-rights-collision"># 8.4 The data-subject-rights collision</a></li><li class="toc-3"><a href="#85-access-and-retention"># 8.5 Access and retention</a></li><li class="toc-3"><a href="#86-the-threat-model-inverts"># 8.6 The threat model inverts</a></li><li class="toc-3"><a href="#87-the-authoritarian-context-position"># 8.7 The authoritarian-context position</a></li><li class="toc-2"><a href="#9-the-iterations"># 9. The iterations</a></li><li class="toc-3"><a href="#91-why-this-order"># 9.1 Why this order</a></li><li class="toc-3"><a href="#92-kept-from-the-start-despite-looking-deferrable"># 9.2 Kept from the start, despite looking deferrable</a></li><li class="toc-3"><a href="#93-screen-reuse"># 9.3 Screen reuse</a></li><li class="toc-2"><a href="#10-gates-and-kill-criteria"># 10. Gates and kill criteria</a></li><li class="toc-2"><a href="#11-what-to-start-now"># 11. What to start now</a></li><li class="toc-2"><a href="#12-open-questions"># 12. Open questions</a></li><li class="toc-3"><a href="#for-legal-counsel-before-iteration-5"># For legal counsel — before Iteration 5</a></li><li class="toc-3"><a href="#for-product"># For product</a></li><li class="toc-3"><a href="#for-the-pilot-parties-once-the-gate-passes"># For the pilot parties, once the gate passes</a></li></ul></nav></div>
+</div>
+<script src="../assets/search.js" defer></script>
+<script src="../assets/app.js" defer></script>
+</body>
+</html>

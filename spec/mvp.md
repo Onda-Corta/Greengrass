@@ -123,6 +123,7 @@ Do not let Branch B's appeal delay Branch A. The assumption under test does not 
 - **BYOK from day one** (ADR-002). You cannot retrofit encryption onto a data trust after members have uploaded, and "the platform itself cannot read your list" is most of why a suspicious partner says yes.
 - **The immutable audit trail from day one** (ADR-004). It is the product, not the plumbing.
 - Event sourcing is retained for provenance and audit, since it is the right shape for that anyway. The offline client is not built at all — ingest-only means there is no field device, so ADR-005's sync rationale is dormant.
+- **A general sharing-contract schema, even though the pilot only needs the alliance case** (ADR-017). The contract at §4.1 is the platform's trust primitive at every boundary — alliance, party, candidacy, campaign, and compartment — not an alliance feature. Phase 2 is where that shape gets decided in practice. Keep the party reference polymorphic and the terms general; keep the UI exactly as narrow as this plan specifies. General schema, narrow UI. Same argument as BYOK above: you cannot retrofit generality onto a contract after it ships as an alliance feature.
 
 ---
 

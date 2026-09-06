@@ -5,6 +5,7 @@
   "description": "Static documentation website generator for the GreenGrass spec & design suite.",
   "type": "module",
   "scripts": {
+    "dev": "bash scripts/dev.sh",
     "build": "node scripts/build.mjs",
     "serve": "python3 -m http.server -d docs 8000"
   },
