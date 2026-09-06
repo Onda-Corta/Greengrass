@@ -2,7 +2,7 @@
 
 ## Purpose
 
-This document presents findings from a structural audit of all 21 wireframe documents completed during Phase 4 of UX design. The audit was conducted after all wireframes were complete to normalize structure, close coverage gaps, and consolidate cross-cutting concerns.
+This document presents findings from a structural audit of all 21 wireframe documents completed during Phase 4 of UX design. The audit ran after all wireframes were complete, to normalize structure, close coverage gaps, and consolidate cross-cutting concerns.
 
 ---
 
@@ -162,7 +162,7 @@ Per-screen offline behavior is declared in the Scope table of later-batch docume
 
 | Document | Grade | Notes |
 |----------|-------|-------|
-| field-mode.md | A+ | Offline behavior deeply specified throughout. Best-in-class. |
+| field-mode.md | A+ | Offline behavior deeply specified throughout. The bar the other docs should meet. |
 | messaging.md | B | Offline messaging section exists with detail, but no per-screen scope table |
 | alliance.md | C | Has an `## Offline Behavior` section but brief |
 | crm.md | C | Screen inventory says CRM-002 is Partial offline — not called out in doc |
@@ -231,7 +231,7 @@ The terminology conflicts are mostly benign — context disambiguates in each ca
 ### Priority 3 — Deferred to visual design phase
 
 7. **Design token annotation** — Add token references where load-bearing (touch targets, spacing deviations, color semantics). Do not annotate globally.
-8. **Terminology normalization** — Apply canonical terms during the sections being actively modified. No global search-and-replace.
+8. **Terminology normalization** — Apply canonical terms to sections as they're modified. No global search-and-replace.
 
 ---
 

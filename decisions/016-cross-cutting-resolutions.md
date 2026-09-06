@@ -298,7 +298,7 @@ Trigger event → wait N days → send message → wait N days → send message
 
 No branching logic. Linear sequences cover the core use cases: welcome series, pledge reminders, event follow-ups.
 
-**v2 tentpole feature: Visual Flow Builder.** A node-graph flow builder with branching logic (if opened → path A, if not → path B), visual drag-and-drop, and multi-channel orchestration within a single flow. This is a flagship v2 capability — it transforms the communications system from a message sender into a journey orchestrator. It should be designed and scoped as a major feature, not bolted on incrementally.
+**v2 tentpole feature: Visual Flow Builder.** A node-graph flow builder with branching logic (if opened → path A, if not → path B), visual drag-and-drop, and multi-channel orchestration within a single flow. This is a flagship v2 capability — it takes the communications system from sending one message at a time to running branching, multi-channel sequences. It should be designed and scoped as a major feature, not bolted on incrementally.
 
 #### #22: Social post approval workflow → Configurable; default all posts
 
@@ -310,7 +310,7 @@ The approval screen shows the post as it will appear on each platform (side-by-s
 
 v1: each campaign/post has direct file upload. A "recent uploads" panel shows the last 20 files uploaded across the org, providing lightweight reuse without dedicated asset management.
 
-**v2 tentpole feature: Shared Content Library.** A centralized asset management system with tagging, search, usage tracking, rights management, brand-approved asset collections, and cross-feature reuse (an image uploaded for a social post is findable when building an email campaign or event page). Like the visual flow builder, this is a flagship v2 capability that should be designed holistically, not as an afterthought.
+**v2 tentpole feature: Shared Content Library.** A centralized asset management system with tagging, search, usage tracking, rights management, brand-approved asset collections, and cross-feature reuse (an image uploaded for a social post is findable when building an email campaign or event page). Like the visual flow builder, this is a flagship v2 capability that should be designed as one system, not as an afterthought.
 
 ### Social Media (2 questions: #24–#25)
 

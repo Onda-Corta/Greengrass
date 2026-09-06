@@ -364,7 +364,7 @@ Country
 - **Import:** Orgs in countries without pre-loaded data can import their own geographic boundaries (GeoJSON, shapefiles). The import process validates, previews, and confirms before applying.
 - **Community contribution:** Orgs that import geographic data for a new jurisdiction can submit it back to GreenGrass as a candidate data set for other orgs in the same country.
 - **Maintenance:** Electoral boundaries change. Pre-loaded data is versioned and updated per election cycle for active countries.
-- **User-friendliness:** Data entry, import, and export across the platform should be as frictionless as possible — this applies to geographic data, voter files, and all other data types.
+- **User-friendliness:** Data entry, import, and export across the platform should be as easy as possible — this applies to geographic data, voter files, and all other data types.
 
 ### Export audit policy
 
@@ -1096,7 +1096,7 @@ The in-app help concierge is grounded strictly in the org's knowledge base and G
 
 Language detection: responds in the language the user types in. Falls back to the user's configured profile language if detection confidence is low.
 
-**v2 forward reference:** The BYOM infrastructure enables orgs to leverage their own fine-tuned models for the concierge — models that understand their specific terminology, organizational context, and operational patterns. This is additive; the grounding constraint (KB-only) remains regardless of the underlying model.
+**v2 forward reference:** The BYOM infrastructure lets orgs use their own fine-tuned models for the concierge — models that understand their specific terminology, organizational context, and operational patterns. This is additive; the grounding constraint (KB-only) remains regardless of the underlying model.
 
 ---
 

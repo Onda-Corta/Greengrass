@@ -6,7 +6,7 @@ Activism campaigns turn a supporter base into a coordinated political force — 
 
 The core UX challenge: the platform serves two radically different users in a single flow. Staff (OA, CD) build campaigns with talking points, targets, and strategy. Supporters — often first-time participants on a mobile phone — land on a public page and must complete an action in under two minutes, with zero training. The AI message generation adds a third concern: the supporter must understand what the AI wrote on their behalf, trust it, and approve it before sending.
 
-Design priorities: (1) friction-free public action pages that maximize completion rates, (2) AI-generated messages that feel personal and transparent, (3) staff tools for tracking impact and documenting outcomes.
+Design priorities: (1) public action pages stripped down enough that people actually finish them, (2) AI-generated messages that feel personal and transparent, (3) staff tools for tracking impact and documenting outcomes.
 
 ## Scope
 

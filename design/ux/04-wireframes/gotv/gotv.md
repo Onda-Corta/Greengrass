@@ -1849,7 +1849,7 @@ Real-time aggregation of entered results. The war room's view of how the electio
 
 ## GOTV-022: Post-Election Analysis
 
-Comprehensive retrospective on GOTV operation effectiveness. Used days/weeks after election day for organizational learning.
+Retrospective on how the GOTV operation actually went. Used days/weeks after election day, so the team knows what to change next time.
 
 ### Desktop
 

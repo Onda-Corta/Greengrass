@@ -4,7 +4,7 @@
 
 GreenGrass is a political organizing platform operating in the global south. This is not a standard enterprise security context. The people using this platform — candidates, organizers, volunteers, supporters — may face real-world consequences if their data is compromised: surveillance, harassment, arrest, or violence. Security failures are not just reputational or financial risks — they are safety risks.
 
-Every security decision must be evaluated against this reality.
+Evaluate every security decision against this reality.
 
 ---
 
@@ -211,7 +211,7 @@ A campaign in Country A should not have its data stored in or accessible from Co
 
 **Incorporation:**
 - GreenGrass will incorporate in a jurisdiction with strong, stable privacy and data protection laws — candidates include Estonia and Switzerland.
-- The jurisdiction should provide: robust data protection regulation, political stability, no history of extralegal data compulsion, and a legal framework that supports refusing foreign government data demands.
+- The jurisdiction should provide: strong data protection regulation, political stability, no history of extralegal data compulsion, and a legal framework that supports refusing foreign government data demands.
 
 <!-- REVISIT: Final incorporation decision requires legal counsel. Key factors: mutual legal assistance treaties (MLATs) the jurisdiction participates in, whether the jurisdiction can be pressured by larger powers, tax implications, and practical considerations for operating a global business. -->
 
@@ -437,7 +437,7 @@ In some contexts, devices may be physically seized at checkpoints, protests, or 
 - A duress login triggers a silent alert to the user's trusted contacts and Org Admin, so the organization knows a coercion event may be occurring.
 - **Available only on the aggressive tier.** Tenants operating in stable political environments don't need the complexity. Tenants in hostile environments can enable it.
 
-<!-- REVISIT: The decoy view needs careful design — it must look realistic enough to withstand casual inspection. Should it show plausible fake data, or an empty "new account" state? Needs UX design input. Also, the silent alert mechanism must be robust against network monitoring — the alert itself can't be the thing that gives away the duress. -->
+<!-- REVISIT: The decoy view needs careful design — it must look realistic enough to withstand casual inspection. Should it show plausible fake data, or an empty "new account" state? Needs UX design input. Also, the silent alert mechanism must not be detectable by network monitoring — the alert itself can't be the thing that gives away the duress. -->
 
 ---
 

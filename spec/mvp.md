@@ -54,7 +54,7 @@ Coverage-by-geography and don't-re-knock coordination are stretch goals, conting
 
 - Founded 2019. Newer, and organizationally younger.
 - **Runs NationBuilder.** This is a gift: NationBuilder's CSV people export has stable, documented field names — `nationbuilder_id`, `first_name`, `last_name`, `email`, `phone_number`, `mobile_number`, `primary_address1`, `city`, `state`, `zip`, `tags`, `support_level`, `is_volunteer`, `do_not_contact`, `email_opt_in`, `mobile_opt_in`.
-- Consent flags travel with the export, which matters — person-level consent overrides org-level sharing settings (`spec/users.md:87`).
+- Consent flags travel with the export, which matters — person-level consent overrides org-level sharing settings ([users.md § Cross-org sharing within alliances](users.md#cross-org-sharing-within-alliances)).
 - **`support_level` and `tags` are exactly the fields that must never enter the shared view.** MVC's own assessment of a voter is its most sensitive asset. The sharing contract's first job is to make excluding them obvious and default.
 
 ### PIP — Partido Independentista Puertorriqueño
@@ -114,7 +114,7 @@ The expected floor from both parties is a CSV of emails and phone numbers. Plan 
 
 **Branch A — identifiers only (email + phone).** Matching gets *easier*: exact match on normalized identifiers, no fuzzy-name problem at all. But coverage-by-geography is impossible, and the product collapses to overlap detection plus mutual suppression. **This is still the whole pilot** — it tests the assumption fully. Build for this branch.
 
-**Branch B — identifiers plus address/geography.** Unlocks coverage maps, gap analysis, and turf coordination. Treat as stretch. Requires geocoding to *municipio* at minimum; precinct-level would be better but is unlikely to survive the data.
+**Branch B — identifiers plus address/geography.** Makes coverage maps, gap analysis, and turf coordination possible. Treat as stretch. Requires geocoding to *municipio* at minimum; precinct-level would be better but is unlikely to survive the data.
 
 Do not let Branch B's appeal delay Branch A. The assumption under test does not require a map.
 
@@ -246,7 +246,7 @@ Deliberately exercising exit, on a schedule, while everyone is calm, is the most
 
 Governance is N-party with unanimous consent. This is where the existing spec has to bend.
 
-- **No lead org.** ADR-016 §80 gives the joint campaign record to a lead org; unanimity breaks that. Requires an **Alliance Steward** role held symmetrically, one seat per member — which forces the open question at `design/ux/04-wireframes/alliance/alliance.md:1155` to resolve as *yes, dedicated role*.
+- **No lead org.** ADR-016 §80 gives the joint campaign record to a lead org; unanimity breaks that. Requires an **Alliance Steward** role held symmetrically, one seat per member — which forces the open question at [alliance.md § Open Questions](../design/ux/04-wireframes/alliance/alliance.md#open-questions) to resolve as *yes, dedicated role*.
 - **Unanimous to expand sharing; unilateral to contract it.** Grants need every member. Revocation is any one member's call, effective immediately. This asymmetry *is* the trust model: it means joining is never a trap.
 - **Deadlock is a feature.** With unanimity there is no majority to break ties. Status quo persists, no timeouts, no auto-approval. The spec already got this right for affiliation requests (ADR-016 §82, "silence means no") — generalize it.
 - **The platform is never the tiebreaker.** No "contact support to resolve the dispute." If members cannot agree, nothing happens. That commitment is what makes the arrangement safe for the *weaker* party in an unequal coalition — which, on data maturity, is PIP.

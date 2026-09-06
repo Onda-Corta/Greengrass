@@ -214,6 +214,35 @@ a:hover { text-decoration: underline; }
 .search-results .sr-empty { padding: var(--space-3); color: var(--color-text-secondary); font-size: 14px; }
 .search-results mark { background: var(--mark-bg); color: inherit; border-radius: 2px; }
 
+/* Language switch: EN | ES. Sits beside the theme toggle and shares its
+   visual family. Current language is inert text; the other is a link. A link
+   marked --fallback goes to that language's home because this particular page
+   is not translated. */
+.lang-switch {
+  display: flex; align-items: center; flex: none;
+  height: 38px; padding: 2px;
+  border: 1px solid var(--color-border-strong);
+  background: var(--color-surface-sunken);
+  border-radius: var(--radius-md);
+}
+.lang-opt {
+  display: flex; align-items: center; justify-content: center;
+  height: 32px; min-width: 34px; padding: 0 var(--space-2);
+  font-size: 12px; font-weight: 700; letter-spacing: 0.04em;
+  color: var(--color-text-tertiary);
+  border-radius: calc(var(--radius-md) - 2px);
+}
+.lang-opt.active {
+  color: var(--color-text);
+  background: var(--color-surface-raised);
+  box-shadow: var(--elevation-1);
+}
+a.lang-opt:hover { color: var(--color-text); text-decoration: none; background: var(--color-primary-subtle); }
+a.lang-opt:focus-visible { outline: 2px solid var(--color-primary); outline-offset: 1px; }
+/* This page has no translation - the link still works, but says so. */
+a.lang-opt--fallback { opacity: 0.55; text-decoration: underline dotted; text-underline-offset: 3px; }
+a.lang-opt--fallback:hover { opacity: 1; }
+
 .theme-toggle {
   width: 38px; height: 38px; border: 1px solid var(--color-border-strong);
   background: var(--color-surface-sunken); border-radius: var(--radius-md);

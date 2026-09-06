@@ -23,3 +23,5 @@ The diary captures the process, decisions, surprises, and lessons learned from d
 8. **[Housekeeping](08-housekeeping.md)** — Documentation audit and consistency fixes. Stale READMEs, scrambled numbering in the UX overview, missing diary entries. Creating a memory file for session persistence. The project is now ready for implementation.
 
 9. **[The Documentation Website](09-the-documentation-website.md)** — Turning ~80 Markdown files into a browsable website with a sidebar table of contents. A custom static generator over a docs framework, styled with GreenGrass's own design tokens. How the build became an audit and caught 33 broken links, and why the Markdown stays canonical while the site is just the front door.
+
+10. **[The Spanish Edition](10-the-spanish-edition.md)** — Translating the 14 specs into Spanish and adding an EN/ES switch, plus a voice pass over the whole corpus. Why 108 line-number citations had to become heading anchors before a single word could be edited, a slugify bug that had been silently deleting every accent, and what happens when six translators coin vocabulary in parallel.

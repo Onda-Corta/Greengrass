@@ -50,7 +50,7 @@ The journey from "we want to use GreenGrass" to "we're running our campaign on i
 
 Sign up, configure, provision, go — no human in the loop. The platform handles tenant provisioning end-to-end: infrastructure spin-up, database creation, encryption key setup (BYOK flow or managed), and initial configuration.
 
-This is architecturally ambitious given per-country data residency and single-tenant isolation, but it's the right target. The provisioning pipeline must be robust enough to create isolated tenants in the correct country on demand.
+This is architecturally ambitious given per-country data residency and single-tenant isolation, but it's the right target. The provisioning pipeline must be reliable enough to create isolated tenants in the correct country on demand.
 
 <!-- REVISIT: The provisioning automation pipeline is a major piece of infrastructure work. Needs detailed treatment in the architecture spec — orchestration, country-specific hosting providers, failure handling, rollback. Early phases (alpha/pilot) may use a simpler pipeline with guardrails while full automation is built out. -->
 
@@ -855,7 +855,7 @@ The right freshness for the right context — a Field Director on canvassing day
 1. ~~**GOTV workflow**~~ — **RESOLVED.** Separate spec. Election day operations (rides to polls, poll monitoring, real-time voter check-in tracking) are a distinct, high-stakes workflow that warrants its own detailed spec document.
 2. ~~**Internal messaging workflow**~~ — **RESOLVED.** Needs its own spec pass. Candidate-to-staff and staff-to-staff communication workflows need detailed definition, particularly how they interact with E2E encryption (decided in security.md) and the candidate's curated interface.
 3. ~~**Press and media workflows**~~ — **RESOLVED.** In scope. Press contact management, media lists, press release distribution, delivery events, and media coverage tracking are within the platform's scope. Needs its own spec.
-4. ~~**Volunteer gamification**~~ — **RESOLVED.** Out of scope. There are better ways to optimize for meaningful engagement than cheap gamification. No leaderboards, badges, or achievement systems.
+4. ~~**Volunteer gamification**~~ — **RESOLVED.** Out of scope. There are better ways to keep volunteers coming back than cheap gamification. No leaderboards, badges, or achievement systems.
 5. ~~**Multi-campaign coordination within a single org**~~ — **RESOLVED.** Handled by existing campaign-level scoping in the permissions model (decided in users.md). Staff, data, and operations can be scoped to specific campaigns within a tenant. No additional workflow spec needed as long as campaign-level definitions remain consistent.
 
 ## Future Specs Identified

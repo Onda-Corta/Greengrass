@@ -296,7 +296,7 @@ Already decided in workflows.md: real-time fundraising thermometer, Finance Dire
 
 - **Not per-user pricing** — explicitly rejected. Campaigns shouldn't be penalized for having more volunteers.
 - **Not per-transaction pricing** — GreenGrass takes zero cut of donations (decided above).
-- **Accessible to resource-constrained campaigns** — free or very low-cost tier must exist and be genuinely usable, not crippled.
+- **Accessible to resource-constrained campaigns** — free or very low-cost tier must exist and be genuinely usable, not hobbled.
 - **Transparent** — no hidden fees, no surprise charges.
 
 ## Fraud Prevention

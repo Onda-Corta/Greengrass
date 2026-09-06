@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="es" data-base="../../" data-no-results="No hay resultados para">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Recaudación de fondos e infraestructura de pagos · GreenGrass</title>
+<meta name="description" content="Recaudación de fondos e infraestructura de pagos — Documentación de especificación y diseño de GreenGrass.">
+<link rel="alternate" hreflang="en" href="../../spec/fundraising.html">
+<link rel="alternate" hreflang="es" href="./fundraising.html">
+<link rel="alternate" hreflang="x-default" href="../../spec/fundraising.html">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%232563eb'/%3E%3Cstop offset='1' stop-color='%2316a34a'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='32' height='32' rx='7' fill='url(%23g)'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="../../assets/styles.css">
+</head>
+<body>
+<a class="skip-link" href="#content">Saltar al contenido</a>
+<header class="site-header">
+  <button type="button" class="menu-toggle" aria-label="Alternar navegación" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+  <a class="brand" href="../../es/index.html">
+    <span class="brand-mark" aria-hidden="true"></span>
+    <span class="brand-text"><strong>GreenGrass</strong><small>Especificación y diseño</small></span>
+  </a>
+  <div class="search">
+    <input type="search" id="search-input" placeholder="Buscar en la documentación…" autocomplete="off" aria-label="Buscar en la documentación">
+    <div id="search-results" class="search-results" hidden></div>
+  </div>
+  <nav class="lang-switch" aria-label="Idioma"><a class="lang-opt" href="../../spec/fundraising.html" hreflang="en" lang="en" title="View this page in English">EN</a><span class="lang-opt active" aria-current="true">ES</span></nav>
+  <button type="button" class="theme-toggle" aria-label="Alternar modo oscuro" title="Alternar modo oscuro">
+    <span class="theme-icon" aria-hidden="true"></span>
+  </button>
+</header>
+<div class="layout">
+  <div class="sidebar-backdrop" hidden></div>
+  <aside class="sidebar" aria-label="Navegación de la documentación">
+    <nav class="nav">
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">Inicio<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../index.html">GreenGrass</a></li></ul></div>
+<div class="nav-section open"><button type="button" class="nav-section-title" aria-expanded="true">Especificaciones<span class="chev" aria-hidden="true"></span></button><ul><li><a href="./product.html">Proyecto: GreenGrass</a></li><li><a href="./mvp.html">MVP de GreenGrass — plan de producto</a></li><li><a href="./users.html">Usuarios y roles</a></li><li><a href="./workflows.html">Flujos de trabajo principales</a></li><li><a href="./geography.html">Geografía objetivo</a></li><li><a href="./security.html">Seguridad y modelo de amenazas</a></li><li><a href="./compliance.html">Cumplimiento y marco legal</a></li><li><a href="./fundraising.html" aria-current="page" class="active">Recaudación de fondos e infraestructura de pagos</a></li><li><a href="./integrations.html">Integraciones externas</a></li><li><a href="./support.html">Soporte y puesta en marcha de organizaciones</a></li><li><a href="./gotv.html">GOTV y operaciones del día de elecciones</a></li><li><a href="./messaging.html">Comunicaciones internas y notificaciones</a></li><li><a href="./press.html">Prensa, medios y comunicaciones públicas</a></li><li><a href="./comms-intelligence.html">Inteligencia de comunicaciones — hoja de ruta post-MVP</a></li></ul></div>
+    </nav>
+  </aside>
+  <main id="content" class="content">
+    <nav class="breadcrumb" aria-label="Ruta de navegación">Especificaciones</nav>
+    <article class="prose">
+<h1 id="recaudación-de-fondos-e-infraestructura-de-pagos" tabindex="-1"><a class="heading-anchor" href="#recaudación-de-fondos-e-infraestructura-de-pagos" aria-hidden="true">#</a> Recaudación de fondos e infraestructura de pagos</h1>
+<h2 id="propósito" tabindex="-1"><a class="heading-anchor" href="#propósito" aria-hidden="true">#</a> Propósito</h2>
+<p>Este documento especifica las capacidades de recaudación de fondos y la infraestructura de pagos de GreenGrass. Parte de las decisiones tomadas en <a href="http://workflows.md" target="_blank" rel="noopener noreferrer">workflows.md</a> (flujos de donación, repartos entre alianzas, analítica), <a href="http://compliance.md" target="_blank" rel="noopener noreferrer">compliance.md</a> (bloqueo de contribuciones extranjeras, reportes de financiamiento de campaña, consentimiento), <a href="http://geography.md" target="_blank" rel="noopener noreferrer">geography.md</a> (métodos de pago por país) y <a href="http://system.md" target="_blank" rel="noopener noreferrer">system.md</a> (patrón de adaptador de pagos, modelo de datos).</p>
+<p>Recaudar fondos es una función de supervivencia para cualquier campaña política. En el Sur Global la infraestructura de pagos varía muchísimo — desde PIX en Brasil (instantáneo, gratis, omnipresente) hasta flujos basados en efectivo en Líbano (con el sistema bancario en crisis). GreenGrass tiene que manejar todo eso detrás de una interfaz consistente, y que cada transacción quede auditable, en cumplimiento y atribuida.</p>
+<h2 id="filosofía-de-recaudación" tabindex="-1"><a class="heading-anchor" href="#filosofía-de-recaudación" aria-hidden="true">#</a> Filosofía de recaudación</h2>
+<ol>
+<li><strong>Todo método de pago es de primera clase.</strong> Las donaciones en efectivo no son transacciones de segunda. PIX no es un parche para las tarjetas de crédito. El método de pago dominante de cada país recibe integración nativa, no capas de compatibilidad.</li>
+<li><strong>El cumplimiento es el producto.</strong> Los reportes de financiamiento de campaña, la divulgación de donantes, los límites de contribución — eso no es un impuesto sobre la funcionalidad de recaudación, es la razón por la que una campaña elige una plataforma hecha a propósito en vez de herramientas de pago genéricas.</li>
+<li><strong>Transparencia hacia el donante.</strong> El donante ve exactamente adónde va su dinero: cargos por procesamiento, repartos, monto neto que llega a la campaña. Sin cargos ocultos, sin repartos opacos.</li>
+<li><strong>Funciona sin conexión.</strong> Registrar una donación en efectivo tiene que funcionar sin conectividad. La sincronización ocurre al volver a estar en línea.</li>
+</ol>
+<h2 id="estrategia-de-procesadores-de-pago" tabindex="-1"><a class="heading-anchor" href="#estrategia-de-procesadores-de-pago" aria-hidden="true">#</a> Estrategia de procesadores de pago</h2>
+<h3 id="enfoque-de-selección-de-procesador" tabindex="-1"><a class="heading-anchor" href="#enfoque-de-selección-de-procesador" aria-hidden="true">#</a> Enfoque de selección de procesador</h3>
+<p><strong>DECIDIDO: híbrido — un procesador global como columna vertebral + procesadores locales para los métodos propios de cada país.</strong> Un procesador global (por ejemplo, Stripe) maneja las tarjetas de crédito y aporta la infraestructura de base. Los procesadores locales manejan los métodos específicos de cada país (PIX, UPI, PromptPay, ATH Móvil, OMT) para conseguir las mejores tarifas y cobertura nativa. El patrón de adaptador de pagos de <a href="http://system.md" target="_blank" rel="noopener noreferrer">system.md</a> soporta esto sin fricción: cada procesador es un adaptador detrás de una interfaz común.</p>
+<h3 id="plan-de-integración-de-pagos-por-país" tabindex="-1"><a class="heading-anchor" href="#plan-de-integración-de-pagos-por-país" aria-hidden="true">#</a> Plan de integración de pagos por país</h3>
+<table>
+<thead>
+<tr>
+<th>País</th>
+<th>Métodos principales</th>
+<th>Enfoque de procesador</th>
+<th>Moneda de liquidación</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Puerto Rico</td>
+<td>Tarjetas de crédito, ATH Móvil, Venmo, Zelle</td>
+<td>Tarjetas de crédito por procesador global; ATH Móvil vía ATH Business API; Venmo/Zelle vía sus respectivas APIs o registro manual</td>
+<td>USD</td>
+</tr>
+<tr>
+<td>Brasil</td>
+<td>PIX, Boleto, tarjetas de crédito</td>
+<td>PIX vía procesador local (por ejemplo, Mercado Pago, PagSeguro, o integración directa con el Banco Central); tarjetas de crédito vía procesador global o local</td>
+<td>BRL</td>
+</tr>
+<tr>
+<td>Tailandia</td>
+<td>PromptPay, TrueMoney, transferencia bancaria</td>
+<td>PromptPay vía procesador local (por ejemplo, Omise/Opn Payments); TrueMoney vía API; transferencia bancaria vía procesador local</td>
+<td>THB</td>
+</tr>
+<tr>
+<td>India</td>
+<td>UPI, Paytm, PhonePe, transferencia bancaria</td>
+<td>UPI vía agregador de pagos local (por ejemplo, Razorpay, Cashfree); las demás billeteras por el mismo agregador</td>
+<td>INR</td>
+</tr>
+<tr>
+<td>Líbano</td>
+<td>Efectivo, OMT, transferencia bancaria</td>
+<td>Efectivo registrado dentro de la plataforma; OMT por registro manual (no hay API); transferencias bancarias donde el sistema bancario lo permita</td>
+<td>USD (economía dolarizada de facto) o LBP</td>
+</tr>
+</tbody>
+</table>
+<h3 id="puesta-en-marcha-del-procesador" tabindex="-1"><a class="heading-anchor" href="#puesta-en-marcha-del-procesador" aria-hidden="true">#</a> Puesta en marcha del procesador</h3>
+<p>Cada organización tiene que configurar al menos un procesador de pagos durante la puesta en marcha (decidido en <a href="http://workflows.md" target="_blank" rel="noopener noreferrer">workflows.md</a>). La plataforma ofrece:</p>
+<ul>
+<li><strong>Asistente de configuración guiada</strong> — acompaña a la organización a conectar su cuenta o cuentas de procesador</li>
+<li><strong>Opciones de procesador preconfiguradas</strong> — lista por jurisdicción de procesadores soportados, con instrucciones de configuración</li>
+<li><strong>Modo de prueba</strong> — la organización puede crear donaciones de prueba para verificar su configuración antes de salir en vivo</li>
+<li><strong>Seguridad de credenciales</strong> — las llaves de API del procesador se guardan en HashiCorp Vault (según <a href="http://system.md" target="_blank" rel="noopener noreferrer">system.md</a>), cifradas en reposo, y nunca vuelven a exponerse en la interfaz después de la carga inicial</li>
+</ul>
+<h2 id="manejo-de-múltiples-monedas" tabindex="-1"><a class="heading-anchor" href="#manejo-de-múltiples-monedas" aria-hidden="true">#</a> Manejo de múltiples monedas</h2>
+<p><strong>DECIDIDO: se aceptan varias monedas, se liquida en una sola.</strong> La organización acepta donaciones en varias monedas, pero todas se liquidan en su moneda principal. La plataforma registra moneda original, monto original, tasa de conversión y monto liquidado. El donante da en su propia moneda (crítico para recaudar en la diáspora) y la campaña recibe todo en su moneda principal. Limpio para la contabilidad, sin necesidad de cuentas bancarias multimoneda.</p>
+<p>Implementación:</p>
+<ul>
+<li><strong>Cada donación registra:</strong> moneda original, monto original, tasa de conversión (si hubo), moneda de liquidación, monto de liquidación, cargos del procesador, monto neto</li>
+<li><strong>Las tasas de conversión</strong> se capturan en el momento de la transacción y se guardan de forma inmutable — no hay recálculo retroactivo</li>
+<li><strong>La moneda de visualización</strong> se configura por organización para paneles y reportes, y la moneda original siempre queda visible en el registro de cada transacción</li>
+<li><strong>Los repartos entre alianzas</strong> (decididos en <a href="http://workflows.md" target="_blank" rel="noopener noreferrer">workflows.md</a>) se calculan sobre el monto de liquidación, no sobre el original, para evitar discrepancias de conversión</li>
+</ul>
+<h2 id="tipos-de-donación-y-flujos" tabindex="-1"><a class="heading-anchor" href="#tipos-de-donación-y-flujos" aria-hidden="true">#</a> Tipos de donación y flujos</h2>
+<h3 id="donaciones-únicas" tabindex="-1"><a class="heading-anchor" href="#donaciones-únicas" aria-hidden="true">#</a> Donaciones únicas</h3>
+<p>Ya especificadas en <a href="http://workflows.md" target="_blank" rel="noopener noreferrer">workflows.md</a>. Adiciones clave:</p>
+<ul>
+<li><strong>Monto mínimo de donación</strong> — configurable por organización, con pisos específicos por jurisdicción donde apliquen</li>
+<li><strong>Monto máximo de donación</strong> — se aplican los límites de contribución de cada jurisdicción (<a href="http://compliance.md" target="_blank" rel="noopener noreferrer">compliance.md</a>), con verificación en tiempo real contra el acumulado del donante</li>
+<li><strong>Donaciones anónimas</strong> — permitidas donde la jurisdicción lo autorice, con registro aparte para cumplimiento (algunas jurisdicciones exigen identidad para donaciones por encima de cierto umbral aunque a la campaña se le muestren como &quot;anónimas&quot;)</li>
+</ul>
+<h3 id="donaciones-recurrentes" tabindex="-1"><a class="heading-anchor" href="#donaciones-recurrentes" aria-hidden="true">#</a> Donaciones recurrentes</h3>
+<p><a href="http://Workflows.md" target="_blank" rel="noopener noreferrer">Workflows.md</a> estableció que existen las donaciones recurrentes. Especificación detallada:</p>
+<h4 id="configuración" tabindex="-1"><a class="heading-anchor" href="#configuración" aria-hidden="true">#</a> Configuración</h4>
+<ul>
+<li>El donante elige la frecuencia: mensual (por defecto), semanal, trimestral, anual</li>
+<li>El donante fija el monto por período</li>
+<li>El método de pago tiene que soportar cargos recurrentes (tarjeta de crédito, autopago UPI, algunas configuraciones de PIX; no efectivo, no OMT, no Venmo/Zelle)</li>
+<li>El donante recibe una confirmación con términos claros: monto, frecuencia, fecha del próximo cargo, cómo cancelar</li>
+</ul>
+<h4 id="manejo" tabindex="-1"><a class="heading-anchor" href="#manejo" aria-hidden="true">#</a> Manejo</h4>
+<ul>
+<li><strong>Portal de autoservicio para donantes</strong> — el donante puede ver, modificar, pausar o cancelar sus donaciones recurrentes sin contactar a la campaña</li>
+<li><strong>Opciones de modificación:</strong> cambiar monto, cambiar frecuencia, cambiar método de pago, pausar (con fecha de reanudación), cancelar</li>
+<li><strong>Manejo del lado de la campaña:</strong> el Director de finanzas puede ver todos los donantes recurrentes, filtrar por estado (activo, pausado, fallido, cancelado) y exportar</li>
+</ul>
+<h4 id="procesamiento-de-pagos" tabindex="-1"><a class="heading-anchor" href="#procesamiento-de-pagos" aria-hidden="true">#</a> Procesamiento de pagos</h4>
+<ul>
+<li>La plataforma dispara los cargos recurrentes a través del procesador según el calendario</li>
+<li><strong>Lógica de reintento ante fallo:</strong></li>
+</ul>
+<p><strong>DECIDIDO: reintento inteligente.</strong> Reintentar en los momentos óptimos que recomiende el procesador cuando esa información esté disponible (hasta 4 intentos en 14 días), y caer a un calendario simple (día 1, 3, 7) con los procesadores que no dan datos de reintento inteligente. Tras el fallo final, se marca como fallida y se notifica tanto al donante (con enlace para actualizar el método de pago) como a la campaña.</p>
+<ul>
+<li><strong>En el fallo final:</strong> la donación recurrente se marca como fallida, se notifica al donante con enlace para actualizar el método de pago, y se notifica a la campaña en el panel de cumplimiento</li>
+<li><strong>Cargo exitoso:</strong> se genera el recibo, se actualiza el registro del donante, se crea una entrada en el registro de auditoría</li>
+</ul>
+<h4 id="notificaciones" tabindex="-1"><a class="heading-anchor" href="#notificaciones" aria-hidden="true">#</a> Notificaciones</h4>
+<ul>
+<li><strong>Recordatorio previo al cargo</strong> (opcional, configurable por la organización) — avisar al donante X días antes del próximo cargo</li>
+<li><strong>Confirmación de cargo exitoso</strong> — recibo por correo o SMS, según la preferencia del donante</li>
+<li><strong>Aviso de cargo fallido</strong> — notificación inmediata al donante con enlace para resolverlo</li>
+<li><strong>Método de pago por vencer</strong> — avisar al donante cuando la tarjeta se acerca a su vencimiento (si el procesador da ese dato)</li>
+</ul>
+<h3 id="promesas-de-donación" tabindex="-1"><a class="heading-anchor" href="#promesas-de-donación" aria-hidden="true">#</a> Promesas de donación</h3>
+<p><strong>DECIDIDO: las promesas de donación son de primera clase.</strong> El donante puede prometer una donación futura. La plataforma sigue el estado de la promesa (pendiente, cumplida, vencida), envía recordatorios configurables y conecta el cumplimiento con el pago real cuando llega. Las promesas son un tipo de donación formal con su propio ciclo de vida: se crean durante una jornada de llamadas o trabajo de campo, se envía el recordatorio según calendario, se cumplen cuando el donante completa el pago y vencen tras un plazo configurable. Conectan la operación de campo con el embudo de recaudación.</p>
+<h3 id="recaudación-entre-pares" tabindex="-1"><a class="heading-anchor" href="#recaudación-entre-pares" aria-hidden="true">#</a> Recaudación entre pares</h3>
+<p><strong>DECIDIDO: aplazado.</strong> No entra en el alfa ni en los primeros pilotos. Por ahora todas las páginas de donación las controla la campaña. Aun así, el modelo de datos debe dejar espacio para la recaudación entre pares (páginas creadas por simpatizantes y vinculadas a campañas, con seguimiento de atribución) para poder añadirla después sin una migración dolorosa.</p>
+<h2 id="formularios-de-donación" tabindex="-1"><a class="heading-anchor" href="#formularios-de-donación" aria-hidden="true">#</a> Formularios de donación</h2>
+<h3 id="tipos-de-formulario" tabindex="-1"><a class="heading-anchor" href="#tipos-de-formulario" aria-hidden="true">#</a> Tipos de formulario</h3>
+<ol>
+<li><strong>Página de donación alojada</strong> — formulario a página completa en el subdominio GreenGrass de la organización (o en un dominio propio). Con la marca de la campaña, optimizado para celular, multilingüe.</li>
+<li><strong>Widget incrustable</strong> — embebido de JavaScript para sitios de terceros. Muestra un formulario en línea o un modal. Respeta el estilo de la página anfitriona en lo posible.</li>
+<li><strong>Por enlace</strong> — URL compartible que abre la página de donación alojada. Funciona en SMS, WhatsApp, correo y redes sociales.</li>
+</ol>
+<h3 id="configuración-del-formulario" tabindex="-1"><a class="heading-anchor" href="#configuración-del-formulario" aria-hidden="true">#</a> Configuración del formulario</h3>
+<p>La organización configura sus formularios de donación con:</p>
+<ul>
+<li><strong>Montos sugeridos</strong> — hasta 5 montos predefinidos + opción de monto libre</li>
+<li><strong>Monto por defecto</strong> — cuál de los predefinidos viene preseleccionado (si alguno)</li>
+<li><strong>Opción recurrente</strong> — si se muestra el interruptor de recurrencia, y si lo recurrente o lo único es el valor por defecto</li>
+<li><strong>Opción de cargo por procesamiento</strong> — si se le ofrece al donante la opción de cubrir los cargos por procesamiento</li>
+<li><strong>Campos obligatorios</strong> — los datos del donante que exige cada jurisdicción (nombre, correo/teléfono, empleador/ocupación)</li>
+<li><strong>Campos personalizados</strong> — campos adicionales definidos por la organización (por ejemplo, &quot;¿Cómo te enteraste de nosotros?&quot;, talla de camiseta para donaciones de eventos)</li>
+<li><strong>Métodos de pago</strong> — cuáles de los métodos configurados se muestran en este formulario</li>
+<li><strong>Idioma</strong> — el idioma del formulario (de los idiomas configurados por la organización), con detección automática según el idioma del navegador o dispositivo de quien visita</li>
+<li><strong>Marca</strong> — logo, colores, imagen principal, mensaje de agradecimiento</li>
+<li><strong>Designación</strong> — asignación opcional a un fondo o campaña si la organización usa contabilidad por fondos</li>
+</ul>
+<h3 id="traslado-del-cargo-por-procesamiento" tabindex="-1"><a class="heading-anchor" href="#traslado-del-cargo-por-procesamiento" aria-hidden="true">#</a> Traslado del cargo por procesamiento</h3>
+<p><strong>DECIDIDO: casilla de consentimiento expreso.</strong> &quot;Agrega $X.XX para cubrir los cargos por procesamiento y que el 100% de tu donación llegue a [campaña].&quot; El cargo se calcula en tiempo real según la tarifa del procesador para el método de pago elegido, y se muestra antes de que el donante confirme. Que la casilla venga marcada o desmarcada por defecto lo configura la organización. Funcionalidad de MVP — es lo mínimo que se espera de una plataforma de recaudación para campañas.</p>
+<h3 id="analítica-del-formulario" tabindex="-1"><a class="heading-anchor" href="#analítica-del-formulario" aria-hidden="true">#</a> Analítica del formulario</h3>
+<p>Cada formulario de donación registra:</p>
+<ul>
+<li>Vistas, inicios (el donante empezó a llenar datos), completados, tasa de abandono</li>
+<li>Conversión por método de pago, tipo de dispositivo y fuente de referencia</li>
+<li>Monto promedio de donación</li>
+<li>Resultados de pruebas A/B (si se configuraron)</li>
+</ul>
+<p><strong>DECIDIDO: pruebas A/B integradas.</strong> La organización puede crear variantes del formulario (distintos montos sugeridos, textos, diseños), repartir el tráfico entre ellas y medir la conversión de cada una. La plataforma declara ganadora una variante según la métrica de éxito configurada (tasa de conversión, donación promedio, ingreso total). Es una capacidad central de optimización de recaudación.</p>
+<h2 id="cargos-por-procesamiento" tabindex="-1"><a class="heading-anchor" href="#cargos-por-procesamiento" aria-hidden="true">#</a> Cargos por procesamiento</h2>
+<h3 id="estructura-de-cargos" tabindex="-1"><a class="heading-anchor" href="#estructura-de-cargos" aria-hidden="true">#</a> Estructura de cargos</h3>
+<p><strong>DECIDIDO: cero comisión de plataforma.</strong> GreenGrass no se queda con nada de las donaciones. La organización paga solo los cargos del procesador de pagos. Cada dólar llega a la campaña. El ingreso viene enteramente de suscripciones y servicios de la plataforma. Es la alineación más fuerte con la misión y el posicionamiento más limpio — los incentivos financieros de GreenGrass están atados a la calidad de la plataforma, no al volumen de donaciones.</p>
+<h3 id="transparencia-de-cargos" tabindex="-1"><a class="heading-anchor" href="#transparencia-de-cargos" aria-hidden="true">#</a> Transparencia de cargos</h3>
+<p>Sea cual sea la estructura de cargos:</p>
+<ul>
+<li>El donante ve el total que se le va a cobrar, incluyendo cualquier cargo que haya elegido cubrir</li>
+<li>La campaña ve: donación bruta, cargo del procesador, monto neto</li>
+<li>El recibo muestra el monto completo de la donación (bruto), no el neto — el donante dio el monto completo; los cargos son un costo de operación de la campaña (a menos que el donante haya elegido cubrirlos)</li>
+</ul>
+<h3 id="cargos-esperados-por-método" tabindex="-1"><a class="heading-anchor" href="#cargos-esperados-por-método" aria-hidden="true">#</a> Cargos esperados por método</h3>
+<table>
+<thead>
+<tr>
+<th>Método de pago</th>
+<th>Cargo típico del procesador</th>
+<th>Notas</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Tarjeta de crédito</td>
+<td>2.9% + $0.30 (varía)</td>
+<td>El cargo más alto, el método más universal</td>
+</tr>
+<tr>
+<td>PIX (Brasil)</td>
+<td>0-1%</td>
+<td>Costo muy bajo, liquidación instantánea</td>
+</tr>
+<tr>
+<td>UPI (India)</td>
+<td>0% (subsidiado por el gobierno, puede cambiar)</td>
+<td>Hoy es gratis para los comercios</td>
+</tr>
+<tr>
+<td>PromptPay (Tailandia)</td>
+<td>0-0.25%</td>
+<td>Costo muy bajo</td>
+</tr>
+<tr>
+<td>ATH Móvil (PR)</td>
+<td>~1-2%</td>
+<td>Más bajo que las tarjetas de crédito</td>
+</tr>
+<tr>
+<td>Venmo/Zelle</td>
+<td>Varía</td>
+<td>Persona a persona puede ser gratis; las cuentas de negocio tienen cargos</td>
+</tr>
+<tr>
+<td>OMT (Líbano)</td>
+<td>Cargo fijo por transacción</td>
+<td>Basado en efectivo, la estructura de cargos varía</td>
+</tr>
+<tr>
+<td>Efectivo</td>
+<td>0% de cargo por procesamiento</td>
+<td>Pero tiene el costo administrativo de registrarlo y conciliarlo</td>
+</tr>
+</tbody>
+</table>
+<h2 id="manejo-de-donaciones-en-efectivo" tabindex="-1"><a class="heading-anchor" href="#manejo-de-donaciones-en-efectivo" aria-hidden="true">#</a> Manejo de donaciones en efectivo</h2>
+<p><a href="http://Workflows.md" target="_blank" rel="noopener noreferrer">Workflows.md</a> estableció el flujo básico del efectivo. Especificación detallada:</p>
+<h3 id="registro" tabindex="-1"><a class="heading-anchor" href="#registro" aria-hidden="true">#</a> Registro</h3>
+<ul>
+<li><strong>Funciona sin conexión</strong> — las donaciones en efectivo se pueden registrar sin conectividad (crítico en eventos y trabajo de campo)</li>
+<li><strong>Campos obligatorios:</strong> monto, fecha, quien recibió (el miembro del equipo o voluntario que recibió el efectivo)</li>
+<li><strong>Campos opcionales:</strong> nombre del donante, datos de contacto del donante, contexto del evento, designación, foto del recibo</li>
+<li><strong>Registro de anónimos:</strong> si el donante no quiere identificarse, se registra como anónimo con la constancia de quien recibió. Se aplican las reglas de la jurisdicción sobre límites a donaciones anónimas (por ejemplo, el límite de ₹2,000 en efectivo sin identidad en India)</li>
+</ul>
+<h3 id="cadena-de-custodia" tabindex="-1"><a class="heading-anchor" href="#cadena-de-custodia" aria-hidden="true">#</a> Cadena de custodia</h3>
+<p><strong>DECIDIDO: cadena de custodia completa.</strong> La plataforma registra quién recogió el efectivo, cada traspaso (voluntario → líder de equipo → personal de finanzas), cuándo se depositó y de qué depósito bancario forma parte. Cada traspaso es un evento registrado con quien entrega, quien recibe, marca de tiempo y monto. Crítico para el cumplimiento y la prevención de fraude en entornos con mucho efectivo, como Líbano.</p>
+<h3 id="conciliación" tabindex="-1"><a class="heading-anchor" href="#conciliación" aria-hidden="true">#</a> Conciliación</h3>
+<ul>
+<li>El Director de finanzas cruza los registros de donaciones en efectivo contra los registros de depósitos bancarios</li>
+<li>La plataforma resalta las discrepancias (donaciones registradas sin depósito que las respalde, depósitos sin registros que los expliquen)</li>
+<li>El estado de conciliación se registra por donación: sin conciliar, cuadrada, en disputa</li>
+<li>Los reportes de conciliación quedan disponibles para las presentaciones de cumplimiento</li>
+</ul>
+<h2 id="recaudación-en-alianza" tabindex="-1"><a class="heading-anchor" href="#recaudación-en-alianza" aria-hidden="true">#</a> Recaudación en alianza</h2>
+<p>Ya decidido en <a href="http://workflows.md" target="_blank" rel="noopener noreferrer">workflows.md</a>: repartos de donación configurables por campaña. Especificación detallada:</p>
+<h3 id="configuración-del-reparto" tabindex="-1"><a class="heading-anchor" href="#configuración-del-reparto" aria-hidden="true">#</a> Configuración del reparto</h3>
+<ul>
+<li>El administrador de la alianza define las reglas de reparto para cada campaña de recaudación conjunta</li>
+<li><strong>Tipos de reparto:</strong>
+<ul>
+<li><strong>Por porcentaje</strong> — cada organización miembro recibe un porcentaje configurado (tienen que sumar 100%)</li>
+<li><strong>Monto fijo primero</strong> — una organización recibe un monto fijo por donación y el resto se reparte por porcentaje entre las demás</li>
+<li><strong>Por umbral</strong> — los porcentajes cambian una vez que se alcanza una meta de recaudación (por ejemplo, 60/40 hasta que la organización A llegue a $50k, y después 40/60)</li>
+</ul>
+</li>
+</ul>
+<p><strong>DECIDIDO: consentimiento unánime.</strong> Todos los administradores de las organizaciones miembro tienen que aprobar cualquier cambio de reparto. El reparto del dinero es demasiado sensible para modificarlo de forma unilateral. La plataforma envía solicitudes de aprobación a todos los administradores, registra las respuestas y solo aplica el nuevo reparto cuando todos aprobaron. Los términos acordados originalmente siguen vigentes hasta que todos acepten los nuevos.</p>
+<h3 id="ejecución-del-reparto" tabindex="-1"><a class="heading-anchor" href="#ejecución-del-reparto" aria-hidden="true">#</a> Ejecución del reparto</h3>
+<ul>
+<li>La donación se procesa a través del procesador de pagos de la alianza</li>
+<li>La plataforma calcula los montos del reparto según las reglas configuradas</li>
+<li>El reparto se calcula sobre el monto neto (después de los cargos del procesador), salvo que se configure de otra forma</li>
+<li>La parte de cada organización miembro se registra como un asiento contable aparte</li>
+<li><strong>Momento del desembolso:</strong></li>
+</ul>
+<p><strong>DECIDIDO: configurable.</strong> La alianza elige desembolso inmediato o por lotes en cada campaña. El inmediato exige que cada organización miembro tenga su propia cuenta de pagos conectada; el de lotes acumula en la cuenta de la alianza y desembolsa según un calendario configurado (semanal, mensual). La alianza elige lo que le sirva a la campaña.</p>
+<h3 id="reportes-de-la-alianza" tabindex="-1"><a class="heading-anchor" href="#reportes-de-la-alianza" aria-hidden="true">#</a> Reportes de la alianza</h3>
+<ul>
+<li>Vista de la alianza: total recaudado, atribución por organización, montos del reparto, superposición de donantes entre organizaciones</li>
+<li>Vista de la organización miembro: solo su parte, con el detalle de las donaciones de los donantes que le fueron atribuidos</li>
+<li>Cumplimiento: la parte de cada organización se reporta por separado a efectos de financiamiento de campaña — una donación a una alianza no es una donación, son varias donaciones repartidas en el momento de la entrada</li>
+</ul>
+<h2 id="flujos-de-reembolso" tabindex="-1"><a class="heading-anchor" href="#flujos-de-reembolso" aria-hidden="true">#</a> Flujos de reembolso</h2>
+<h3 id="quién-puede-iniciarlo" tabindex="-1"><a class="heading-anchor" href="#quién-puede-iniciarlo" aria-hidden="true">#</a> Quién puede iniciarlo</h3>
+<ul>
+<li><strong>Director o Director de finanzas</strong> — puede iniciar reembolsos desde la plataforma</li>
+<li><strong>Autoservicio del donante</strong> — el donante no puede iniciar reembolsos directamente en la plataforma (tiene que usar el proceso de disputa de su procesador de pagos o contactar a la campaña)</li>
+<li><strong>Administrador de la plataforma</strong> — puede iniciar reembolsos en casos de fraude o problemas a nivel de plataforma</li>
+</ul>
+<h3 id="tipos-de-reembolso" tabindex="-1"><a class="heading-anchor" href="#tipos-de-reembolso" aria-hidden="true">#</a> Tipos de reembolso</h3>
+<ul>
+<li><strong>Reembolso total</strong> — se devuelve el monto completo de la donación</li>
+<li><strong>Reembolso parcial</strong> — se devuelve una parte de la donación (por ejemplo, si el donante pagó de más o quiere reducir una promesa)</li>
+</ul>
+<h3 id="proceso-de-reembolso" tabindex="-1"><a class="heading-anchor" href="#proceso-de-reembolso" aria-hidden="true">#</a> Proceso de reembolso</h3>
+<ol>
+<li>El Director de finanzas inicia el reembolso, elige la donación e ingresa el motivo</li>
+<li>La plataforma verifica: ¿esta donación es parte de un reparto de alianza? Si lo es, calcula los montos a reembolsar por organización</li>
+<li>Se envía el reembolso al procesador de pagos</li>
+<li>Al confirmar el procesador: se actualiza el registro de la donación, se actualiza el registro del donante, se crea la entrada en el registro de auditoría y se ajustan los reportes de cumplimiento</li>
+<li>Se notifica al donante del reembolso</li>
+</ol>
+<h3 id="restricciones-del-reembolso" tabindex="-1"><a class="heading-anchor" href="#restricciones-del-reembolso" aria-hidden="true">#</a> Restricciones del reembolso</h3>
+<ul>
+<li>Solo se puede reembolsar por el método de pago original</li>
+<li>Las donaciones en efectivo no se pueden &quot;reembolsar&quot; desde la plataforma — se manejan manualmente y se registran como ajuste manual</li>
+<li>Reembolsar una donación recurrente no cancela automáticamente el calendario de recurrencia — el Director de finanzas tiene que cancelarlo aparte si corresponde</li>
+<li>Por lo general el procesador no devuelve sus cargos — ese costo lo absorbe la campaña</li>
+</ul>
+<h2 id="experiencia-del-donante" tabindex="-1"><a class="heading-anchor" href="#experiencia-del-donante" aria-hidden="true">#</a> Experiencia del donante</h2>
+<h3 id="recibo-de-donación" tabindex="-1"><a class="heading-anchor" href="#recibo-de-donación" aria-hidden="true">#</a> Recibo de donación</h3>
+<p>Toda donación (incluyendo las de efectivo) genera un recibo que contiene:</p>
+<ul>
+<li>Nombre del donante (o &quot;Donante anónimo&quot;)</li>
+<li>Monto de la donación (bruto — lo que dio el donante, no el neto)</li>
+<li>Fecha</li>
+<li>Nombre de la campaña u organización e información de la entidad legal</li>
+<li>Constancia de deducibilidad fiscal si aplica (depende de la jurisdicción — en muchos de los países objetivo las donaciones políticas no son deducibles)</li>
+<li>Número de referencia de la transacción</li>
+<li>Para las recurrentes: fecha del próximo cargo e instrucciones para cancelar</li>
+</ul>
+<p>Los recibos se entregan por el canal preferido del donante (correo o SMS) y quedan disponibles en el portal de autoservicio.</p>
+<h3 id="portal-de-autoservicio-del-donante" tabindex="-1"><a class="heading-anchor" href="#portal-de-autoservicio-del-donante" aria-hidden="true">#</a> Portal de autoservicio del donante</h3>
+<p>Un donante con cuenta (o que crea una desde el enlace de un recibo) puede:</p>
+<ul>
+<li>Ver su historial de donaciones</li>
+<li>Descargar recibos</li>
+<li>Manejar sus donaciones recurrentes (modificar, pausar, cancelar)</li>
+<li>Actualizar métodos de pago</li>
+<li>Actualizar su información personal</li>
+<li>Manejar sus preferencias de comunicación (consentimiento)</li>
+</ul>
+<p><strong>DECIDIDO: ambas — acceso por niveles.</strong> Enlace mágico para acceso rápido (ver historial de donaciones, descargar recibos). Cuenta completa (passkey o correo) para las acciones de manejo (modificar donaciones recurrentes, actualizar el método de pago, cambiar datos personales). Poca fricción para lo común, autenticación en serio para todo lo que toque dinero.</p>
+<h3 id="estados-de-cuenta-anuales-del-donante" tabindex="-1"><a class="heading-anchor" href="#estados-de-cuenta-anuales-del-donante" aria-hidden="true">#</a> Estados de cuenta anuales del donante</h3>
+<p>Al cierre de cada año calendario (o fiscal, es configurable), la plataforma genera un estado de cuenta consolidado del donante:</p>
+<ul>
+<li>Todas las donaciones hechas en el período</li>
+<li>Monto total</li>
+<li>Desglose por campaña</li>
+<li>Información fiscalmente relevante según la jurisdicción</li>
+<li>Se envía automáticamente a todos los donantes que dieron durante el período</li>
+</ul>
+<h2 id="analítica-de-recaudación" tabindex="-1"><a class="heading-anchor" href="#analítica-de-recaudación" aria-hidden="true">#</a> Analítica de recaudación</h2>
+<p>Ya decidido en <a href="http://workflows.md" target="_blank" rel="noopener noreferrer">workflows.md</a>: termómetro de recaudación en tiempo real, panel del Director de finanzas con ingresos por canal, campaña y período, retención de donantes, salud de las recurrentes y desglose de efectivo contra digital.</p>
+<h3 id="analítica-adicional" tabindex="-1"><a class="heading-anchor" href="#analítica-adicional" aria-hidden="true">#</a> Analítica adicional</h3>
+<ul>
+<li><strong>Segmentación de donantes:</strong> primera vez contra repetidos, únicos contra recurrentes, tramos de monto, método de pago, canal de adquisición</li>
+<li><strong>Valor de vida del donante:</strong> contribuciones totales a lo largo del tiempo, frecuencia promedio, valor futuro proyectado</li>
+<li><strong>Identificación de donantes inactivos:</strong> donantes cuyas donaciones recurrentes terminaron o que no dan desde hace X meses</li>
+<li><strong>Retorno de la campaña:</strong> ingresos de recaudación contra el costo de las apelaciones (envíos de correo, costos de SMS, etc.)</li>
+<li><strong>Embudo de conversión:</strong> vista del formulario → inicio del formulario → intento de pago → donación exitosa, con análisis de abandono en cada paso</li>
+<li><strong>Distribución geográfica:</strong> donaciones mapeadas por ubicación del donante (donde el dato exista)</li>
+</ul>
+<h2 id="modelo-de-ingresos-de-la-plataforma" tabindex="-1"><a class="heading-anchor" href="#modelo-de-ingresos-de-la-plataforma" aria-hidden="true">#</a> Modelo de ingresos de la plataforma</h2>
+<p><strong>DECIDIDO: niveles de suscripción fija.</strong> Precio mensual o anual fijo según el nivel de funcionalidades (básico, profesional, empresarial). No está atado al volumen de donaciones, al número de usuarios ni a ninguna métrica de uso. Predecible para las campañas, simple de entender, sin sorpresas. Tiene que existir un nivel gratuito o de costo muy bajo que sea genuinamente usable para campañas con pocos recursos.</p>
+<h3 id="principios-de-precios-de-productmd-se-preservan-sin-importar-el-modelo" tabindex="-1"><a class="heading-anchor" href="#principios-de-precios-de-productmd-se-preservan-sin-importar-el-modelo" aria-hidden="true">#</a> Principios de precios (de <a href="http://product.md" target="_blank" rel="noopener noreferrer">product.md</a>, se preservan sin importar el modelo)</h3>
+<ul>
+<li><strong>No es precio por usuario</strong> — explícitamente rechazado. Una campaña no debería pagar más por tener más voluntarios.</li>
+<li><strong>No es precio por transacción</strong> — GreenGrass no se queda con nada de las donaciones (decidido arriba).</li>
+<li><strong>Accesible para campañas con pocos recursos</strong> — tiene que existir un nivel gratuito o de costo muy bajo, y tiene que ser genuinamente usable, no una versión mutilada.</li>
+<li><strong>Transparente</strong> — sin cargos ocultos, sin cobros sorpresa.</li>
+</ul>
+<h2 id="prevención-de-fraude" tabindex="-1"><a class="heading-anchor" href="#prevención-de-fraude" aria-hidden="true">#</a> Prevención de fraude</h2>
+<h3 id="indicadores-de-fraude-en-donaciones" tabindex="-1"><a class="heading-anchor" href="#indicadores-de-fraude-en-donaciones" aria-hidden="true">#</a> Indicadores de fraude en donaciones</h3>
+<p>La plataforma vigila:</p>
+<ul>
+<li><strong>Donaciones pequeñas y rápidas</strong> desde la misma fuente (fraccionamiento para esquivar los umbrales de divulgación)</li>
+<li><strong>Información del donante que no cuadra</strong> (el nombre en el método de pago no coincide con los datos que dio el donante)</li>
+<li><strong>Patrones geográficos inusuales</strong> (donaciones desde un país donde la campaña no opera, salvo que se espere aporte de la diáspora)</li>
+<li><strong>Verificaciones de velocidad</strong> (pico inusual de donaciones desde una sola IP o un solo dispositivo)</li>
+<li><strong>Actores conocidos</strong> (señales de fraude que provee el procesador)</li>
+</ul>
+<h3 id="respuesta-ante-fraude" tabindex="-1"><a class="heading-anchor" href="#respuesta-ante-fraude" aria-hidden="true">#</a> Respuesta ante fraude</h3>
+<ul>
+<li>Las donaciones marcadas quedan retenidas para revisión del Director de finanzas (similar al depósito en garantía de contribuciones extranjeras)</li>
+<li>El Director de finanzas puede aprobar, reembolsar o escalar</li>
+<li>Los patrones de fraude repetidos disparan alertas y pueden llevar al bloqueo del método de pago</li>
+<li>Todas las marcas de fraude y sus resoluciones quedan en el registro de auditoría</li>
+</ul>
+<h2 id="sincronización-de-donaciones-sin-conexión" tabindex="-1"><a class="heading-anchor" href="#sincronización-de-donaciones-sin-conexión" aria-hidden="true">#</a> Sincronización de donaciones sin conexión</h2>
+<p>Las donaciones en efectivo registradas sin conexión siguen el protocolo de sincronización por event sourcing (<a href="http://system.md" target="_blank" rel="noopener noreferrer">system.md</a>):</p>
+<ol>
+<li>La donación se registra en el dispositivo y se guarda en SQLCipher</li>
+<li>Se crea el evento: <code>DonationRecorded { amount, donor_info, collector, timestamp, event_context }</code></li>
+<li>Al haber conectividad: el evento se sincroniza con el servidor</li>
+<li>El servidor valida: verificación de duplicados (mismo colector, mismo monto, misma marca de tiempo = probable duplicado) y aplica las reglas de la jurisdicción</li>
+<li>La donación aparece en la cola de conciliación del Director de finanzas</li>
+<li>Si hay conflicto (la misma donación registrada por dos personas): fusionar y marcar, según las reglas de conflicto del trabajo de campo (<a href="http://workflows.md" target="_blank" rel="noopener noreferrer">workflows.md</a>)</li>
+</ol>
+<h2 id="preguntas-abiertas-resueltas" tabindex="-1"><a class="heading-anchor" href="#preguntas-abiertas-resueltas" aria-hidden="true">#</a> Preguntas abiertas resueltas</h2>
+<ol>
+<li><strong>Modelo de relación con el procesador de pagos</strong></li>
+</ol>
+<p><strong>DECIDIDO: comercio directo.</strong> Cada organización firma su propio acuerdo con el procesador de pagos. GreenGrass facilita la conexión (asistente de configuración guiada, opciones de procesador preconfiguradas) pero no es parte de la relación financiera. Es la separación de responsabilidad más limpia — GreenGrass es una plataforma de software, no un intermediario financiero. Evita la carga regulatoria de ser facilitador de pagos en cinco países.</p>
+<ol start="2">
+<li><strong>Donaciones en criptomonedas</strong></li>
+</ol>
+<p><strong>DECIDIDO: aplazado.</strong> No entra en el alfa ni en los pilotos. Si una organización acepta cripto por su propio procesador externo, la plataforma puede registrarlo como donación manual o externa. Ni se impide activamente ni se soporta activamente. Se revisa cuando haya claridad regulatoria en alguna de las jurisdicciones objetivo.</p>
+<ol start="3">
+<li><strong>Donaciones pareadas por empleadores</strong></li>
+</ol>
+<p><strong>DECIDIDO: aplazado.</strong> Es sobre todo una funcionalidad estadounidense y corporativa, poco relevante para la mayoría de las jurisdicciones del Sur Global en las fases tempranas. Se revisa cuando la plataforma madure y crezca el mercado estadounidense.</p>
+<!-- REVISIT: Integration with specific payment processors (API contracts, webhook formats, settlement timing) will need detailed technical specs per processor during implementation. Each processor adapter is its own mini-integration project. -->
+
+    </article>
+  </main>
+  <div class="toc-rail"><nav class="toc" aria-label="En esta página"><div class="toc-label">En esta página</div><ul><li class="toc-2"><a href="#propósito"># Propósito</a></li><li class="toc-2"><a href="#filosofía-de-recaudación"># Filosofía de recaudación</a></li><li class="toc-2"><a href="#estrategia-de-procesadores-de-pago"># Estrategia de procesadores de pago</a></li><li class="toc-3"><a href="#enfoque-de-selección-de-procesador"># Enfoque de selección de procesador</a></li><li class="toc-3"><a href="#plan-de-integración-de-pagos-por-país"># Plan de integración de pagos por país</a></li><li class="toc-3"><a href="#puesta-en-marcha-del-procesador"># Puesta en marcha del procesador</a></li><li class="toc-2"><a href="#manejo-de-múltiples-monedas"># Manejo de múltiples monedas</a></li><li class="toc-2"><a href="#tipos-de-donación-y-flujos"># Tipos de donación y flujos</a></li><li class="toc-3"><a href="#donaciones-únicas"># Donaciones únicas</a></li><li class="toc-3"><a href="#donaciones-recurrentes"># Donaciones recurrentes</a></li><li class="toc-3"><a href="#promesas-de-donación"># Promesas de donación</a></li><li class="toc-3"><a href="#recaudación-entre-pares"># Recaudación entre pares</a></li><li class="toc-2"><a href="#formularios-de-donación"># Formularios de donación</a></li><li class="toc-3"><a href="#tipos-de-formulario"># Tipos de formulario</a></li><li class="toc-3"><a href="#configuración-del-formulario"># Configuración del formulario</a></li><li class="toc-3"><a href="#traslado-del-cargo-por-procesamiento"># Traslado del cargo por procesamiento</a></li><li class="toc-3"><a href="#analítica-del-formulario"># Analítica del formulario</a></li><li class="toc-2"><a href="#cargos-por-procesamiento"># Cargos por procesamiento</a></li><li class="toc-3"><a href="#estructura-de-cargos"># Estructura de cargos</a></li><li class="toc-3"><a href="#transparencia-de-cargos"># Transparencia de cargos</a></li><li class="toc-3"><a href="#cargos-esperados-por-método"># Cargos esperados por método</a></li><li class="toc-2"><a href="#manejo-de-donaciones-en-efectivo"># Manejo de donaciones en efectivo</a></li><li class="toc-3"><a href="#registro"># Registro</a></li><li class="toc-3"><a href="#cadena-de-custodia"># Cadena de custodia</a></li><li class="toc-3"><a href="#conciliación"># Conciliación</a></li><li class="toc-2"><a href="#recaudación-en-alianza"># Recaudación en alianza</a></li><li class="toc-3"><a href="#configuración-del-reparto"># Configuración del reparto</a></li><li class="toc-3"><a href="#ejecución-del-reparto"># Ejecución del reparto</a></li><li class="toc-3"><a href="#reportes-de-la-alianza"># Reportes de la alianza</a></li><li class="toc-2"><a href="#flujos-de-reembolso"># Flujos de reembolso</a></li><li class="toc-3"><a href="#quién-puede-iniciarlo"># Quién puede iniciarlo</a></li><li class="toc-3"><a href="#tipos-de-reembolso"># Tipos de reembolso</a></li><li class="toc-3"><a href="#proceso-de-reembolso"># Proceso de reembolso</a></li><li class="toc-3"><a href="#restricciones-del-reembolso"># Restricciones del reembolso</a></li><li class="toc-2"><a href="#experiencia-del-donante"># Experiencia del donante</a></li><li class="toc-3"><a href="#recibo-de-donación"># Recibo de donación</a></li><li class="toc-3"><a href="#portal-de-autoservicio-del-donante"># Portal de autoservicio del donante</a></li><li class="toc-3"><a href="#estados-de-cuenta-anuales-del-donante"># Estados de cuenta anuales del donante</a></li><li class="toc-2"><a href="#analítica-de-recaudación"># Analítica de recaudación</a></li><li class="toc-3"><a href="#analítica-adicional"># Analítica adicional</a></li><li class="toc-2"><a href="#modelo-de-ingresos-de-la-plataforma"># Modelo de ingresos de la plataforma</a></li><li class="toc-3"><a href="#principios-de-precios-de-productmd-se-preservan-sin-importar-el-modelo"># Principios de precios (de product.md, se preservan sin importar el modelo)</a></li><li class="toc-2"><a href="#prevención-de-fraude"># Prevención de fraude</a></li><li class="toc-3"><a href="#indicadores-de-fraude-en-donaciones"># Indicadores de fraude en donaciones</a></li><li class="toc-3"><a href="#respuesta-ante-fraude"># Respuesta ante fraude</a></li><li class="toc-2"><a href="#sincronización-de-donaciones-sin-conexión"># Sincronización de donaciones sin conexión</a></li><li class="toc-2"><a href="#preguntas-abiertas-resueltas"># Preguntas abiertas resueltas</a></li></ul></nav></div>
+</div>
+<script src="../../assets/search.js" defer></script>
+<script src="../../assets/app.js" defer></script>
+</body>
+</html>

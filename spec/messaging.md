@@ -120,7 +120,7 @@ Alliances (workflows.md) need cross-org communication:
 - **Cross-org DMs** — alliance staff can send direct messages to staff at other member orgs (subject to alliance sharing rules).
 - **Alliance broadcasts** — the alliance coordinator can send announcements to all member orgs.
 
-**DECIDED: Per-org key negotiation.** Alliance messages use an independently generated alliance group key, distributed to each member org encrypted with that org's public key. Key rotation occurs on every alliance membership change (org joins or leaves), ensuring forward secrecy (new members can't read historical messages) and post-compromise security (departing members can't read future messages). The cryptographic ceremony of key rotation reinforces the significance of alliance membership changes and provides a natural UX anchor for the join/leave experience. More complex than federation-layer encryption, but consistent with the sovereignty model — no new trust boundary is introduced.
+**DECIDED: Per-org key negotiation.** Alliance messages use an independently generated alliance group key, distributed to each member org encrypted with that org's public key. Key rotation occurs on every alliance membership change (org joins or leaves), ensuring forward secrecy (new members can't read historical messages) and post-compromise security (departing members can't read future messages). Rotating the key is a real ceremony, which makes an org joining or leaving feel like the consequential act it is and gives the join/leave flow a concrete moment to build around. More complex than federation-layer encryption, but consistent with the sovereignty model — no new trust boundary is introduced.
 
 ## War Room Communication
 
@@ -145,7 +145,7 @@ Election day war rooms (gotv.md) have specialized communication needs:
 Per security.md and system.md decisions:
 
 - **Protocol:** Signal Protocol (Double Ratchet) or equivalent. Well-audited, widely implemented, handles multi-device gracefully.
-- **Key generation:** each user generates a public/private key pair during onboarding (system.md:467-470). Private keys never leave the device.
+- **Key generation:** each user generates a public/private key pair during onboarding ([system.md § Field mode authentication](../design/architecture/system.md#field-mode-authentication)). Private keys never leave the device.
 - **Multi-device:** users may have multiple devices (phone + desktop). Key distribution across devices uses the established pattern (new device must be authorized from an existing device or through trusted contact recovery).
 - **Group encryption:** Sender Keys protocol for group messages (each sender has a key shared with all group members — efficient for groups, one encryption operation per send regardless of group size).
 - **Key escrow (opt-in):** when the tenant enables key escrow, a copy of the user's private key is encrypted with the tenant's envelope key and stored server-side. Enables server-side search and device recovery without trusted contacts.
@@ -225,7 +225,7 @@ When GOTV operations are activated:
 
 ## Open Questions
 
-1. **Voice and video calls** — should the platform support voice/video calls between users (not phone banking to voters, which is covered in workflows.md)? This would add significant complexity but could replace the need for external tools like Signal or WhatsApp for internal coordination. Could potentially leverage the Jitsi integration (integrations.md) for this.
+1. **Voice and video calls** — should the platform support voice/video calls between users (not phone banking to voters, which is covered in workflows.md)? This would add significant complexity but could replace the need for external tools like Signal or WhatsApp for internal coordination. The Jitsi integration (integrations.md) could carry it.
 
 2. **Message reactions** — should users be able to react to messages with emoji? Low-effort acknowledgment without a full reply. Common in modern messaging. Minimal implementation cost but adds UI complexity.
 

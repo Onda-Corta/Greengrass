@@ -292,7 +292,7 @@ GreenGrass itself needs monitoring for operational health.
 - **Structured logging** — JSON-formatted logs with correlation IDs across services
 - **Centralized log aggregation** — all logs collected in a single searchable system
 
-**DECIDED: Loki + Grafana.** Grafana Loki for log aggregation, Grafana for querying. Lightweight, integrates with Prometheus/Grafana monitoring stack for a unified observability experience — metrics, logs, and dashboards in one ecosystem. Labels-based indexing keeps resource usage low.
+**DECIDED: Loki + Grafana.** Grafana Loki for log aggregation, Grafana for querying. Lightweight, and it plugs into the Prometheus/Grafana stack already in place — metrics, logs, and dashboards in one place, queried the same way. Labels-based indexing keeps resource usage low.
 
 ## Third-Party Integration via Public API
 

@@ -243,7 +243,7 @@ GreenGrass acts as a data processor on behalf of tenants (data controllers). Eac
 - **Sub-processor disclosure** — GreenGrass must maintain and disclose a list of all sub-processors (hosting providers, email infrastructure, payment processors, AI service providers)
 - **Data Protection Impact Assessment (DPIA)** — required under LGPD and PDPA for large-scale processing of sensitive data. GreenGrass should provide a template DPIA that tenants can adapt.
 
-**DECIDED: Tenant handles all.** Supporters contact the campaign/org directly. Tenant admins process requests using platform-provided self-service tools. Clean data-controller/data-processor separation — the relationship is between the supporter and the organization they engaged with. GreenGrass builds excellent tooling (data export, deletion workflows, correction forms, SLA tracking) but the tenant owns the interaction.
+**DECIDED: Tenant handles all.** Supporters contact the campaign/org directly. Tenant admins process requests using platform-provided self-service tools. Clean data-controller/data-processor separation — the relationship is between the supporter and the organization they engaged with. GreenGrass builds the tooling (data export, deletion workflows, correction forms, SLA tracking) but the tenant owns the interaction.
 
 #### Cross-Border Data Transfers
 
@@ -276,7 +276,7 @@ Every target jurisdiction requires some form of "Paid for by" disclaimer on poli
 
 - Automatically append jurisdiction-appropriate disclaimers to qualifying communications
 - Allow tenants to configure disclaimer text per jurisdiction
-- Ensure disclaimers are present on all outbound public-facing content (emails, social media posts, SMS if applicable)
+- Check that disclaimers are present on all outbound public-facing content (emails, social media posts, SMS if applicable)
 - Maintain records of all political communications for disclosure purposes
 
 #### Foreign Contribution Restrictions

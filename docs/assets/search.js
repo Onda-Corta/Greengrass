@@ -8,6 +8,10 @@
   if (!input || !resultsBox) return;
 
   var base = document.documentElement.getAttribute('data-base') || '';
+  // Search stays within the page's own language. One index holds every language;
+  // the `|| 'en'` defaults keep a stale, pre-i18n index working.
+  var lang = document.documentElement.lang || 'en';
+  var noResultsLabel = document.documentElement.getAttribute('data-no-results') || 'No results for';
   var index = null;
   var loading = false;
   var selected = -1;
@@ -18,7 +22,10 @@
     loading = true;
     fetch(base + 'assets/search-index.json')
       .then(function (r) { return r.json(); })
-      .then(function (data) { index = data; if (input.value) run(input.value); })
+      .then(function (data) {
+        index = data.filter(function (d) { return (d.lang || 'en') === lang; });
+        if (input.value) run(input.value);
+      })
       .catch(function () { loading = false; });
   }
 
@@ -74,7 +81,8 @@
       .slice(0, 12);
 
     if (!current.length) {
-      resultsBox.innerHTML = '<div class="sr-empty">No results for “' + escapeHtml(query) + '”</div>';
+      resultsBox.innerHTML = '<div class="sr-empty">' + escapeHtml(noResultsLabel) +
+        ' “' + escapeHtml(query) + '”</div>';
       show();
       return;
     }

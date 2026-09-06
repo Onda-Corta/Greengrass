@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="es" data-base="../../" data-no-results="No hay resultados para">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GOTV y operaciones del día de elecciones · GreenGrass</title>
+<meta name="description" content="GOTV y operaciones del día de elecciones — Documentación de especificación y diseño de GreenGrass.">
+<link rel="alternate" hreflang="en" href="../../spec/gotv.html">
+<link rel="alternate" hreflang="es" href="./gotv.html">
+<link rel="alternate" hreflang="x-default" href="../../spec/gotv.html">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%232563eb'/%3E%3Cstop offset='1' stop-color='%2316a34a'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='32' height='32' rx='7' fill='url(%23g)'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="../../assets/styles.css">
+</head>
+<body>
+<a class="skip-link" href="#content">Saltar al contenido</a>
+<header class="site-header">
+  <button type="button" class="menu-toggle" aria-label="Alternar navegación" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+  <a class="brand" href="../../es/index.html">
+    <span class="brand-mark" aria-hidden="true"></span>
+    <span class="brand-text"><strong>GreenGrass</strong><small>Especificación y diseño</small></span>
+  </a>
+  <div class="search">
+    <input type="search" id="search-input" placeholder="Buscar en la documentación…" autocomplete="off" aria-label="Buscar en la documentación">
+    <div id="search-results" class="search-results" hidden></div>
+  </div>
+  <nav class="lang-switch" aria-label="Idioma"><a class="lang-opt" href="../../spec/gotv.html" hreflang="en" lang="en" title="View this page in English">EN</a><span class="lang-opt active" aria-current="true">ES</span></nav>
+  <button type="button" class="theme-toggle" aria-label="Alternar modo oscuro" title="Alternar modo oscuro">
+    <span class="theme-icon" aria-hidden="true"></span>
+  </button>
+</header>
+<div class="layout">
+  <div class="sidebar-backdrop" hidden></div>
+  <aside class="sidebar" aria-label="Navegación de la documentación">
+    <nav class="nav">
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">Inicio<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../index.html">GreenGrass</a></li></ul></div>
+<div class="nav-section open"><button type="button" class="nav-section-title" aria-expanded="true">Especificaciones<span class="chev" aria-hidden="true"></span></button><ul><li><a href="./product.html">Proyecto: GreenGrass</a></li><li><a href="./mvp.html">MVP de GreenGrass — plan de producto</a></li><li><a href="./users.html">Usuarios y roles</a></li><li><a href="./workflows.html">Flujos de trabajo principales</a></li><li><a href="./geography.html">Geografía objetivo</a></li><li><a href="./security.html">Seguridad y modelo de amenazas</a></li><li><a href="./compliance.html">Cumplimiento y marco legal</a></li><li><a href="./fundraising.html">Recaudación de fondos e infraestructura de pagos</a></li><li><a href="./integrations.html">Integraciones externas</a></li><li><a href="./support.html">Soporte y puesta en marcha de organizaciones</a></li><li><a href="./gotv.html" aria-current="page" class="active">GOTV y operaciones del día de elecciones</a></li><li><a href="./messaging.html">Comunicaciones internas y notificaciones</a></li><li><a href="./press.html">Prensa, medios y comunicaciones públicas</a></li><li><a href="./comms-intelligence.html">Inteligencia de comunicaciones — hoja de ruta post-MVP</a></li></ul></div>
+    </nav>
+  </aside>
+  <main id="content" class="content">
+    <nav class="breadcrumb" aria-label="Ruta de navegación">Especificaciones</nav>
+    <article class="prose">
+<h1 id="gotv-y-operaciones-del-día-de-elecciones" tabindex="-1"><a class="heading-anchor" href="#gotv-y-operaciones-del-día-de-elecciones" aria-hidden="true">#</a> GOTV y operaciones del día de elecciones</h1>
+<h2 id="propósito" tabindex="-1"><a class="heading-anchor" href="#propósito" aria-hidden="true">#</a> Propósito</h2>
+<p>Este documento especifica las capacidades de GOTV (Get Out The Vote — movilización del voto) y de operaciones del día de elecciones de GreenGrass. El día de elecciones es el día más intenso, operativamente, de cualquier campaña: todo lo que la plataforma hizo antes — trabajo de campo, inscripción de votantes, recaudación de fondos, comunicaciones, capacitación — converge en unas pocas horas de ejecución donde todo está en juego.</p>
+<p>Las operaciones de GOTV se distinguen del trabajo de campo normal (<a href="http://workflows.md" target="_blank" rel="noopener noreferrer">workflows.md</a>) en varios sentidos:</p>
+<ul>
+<li><strong>Presión de tiempo.</strong> Los centros de votación cierran a una hora fija. Cada minuto cuenta.</li>
+<li><strong>Coordinación en tiempo real.</strong> La campaña necesita una imagen viva de quién votó y quién no, actualizada continuamente.</li>
+<li><strong>Muchas operaciones a la vez.</strong> Puerta a puerta, jornadas de llamadas, transporte a las urnas, observación electoral y coordinación desde el centro de mando ocurren en paralelo.</li>
+<li><strong>El costo de fallar es más alto.</strong> Un retraso de sincronización durante el trabajo de campo normal significa que el seguimiento se hace mañana. Un retraso de sincronización el día de elecciones significa que un votante no recibe contacto antes de que cierren los centros.</li>
+</ul>
+<p>Esta especificación se apoya en: <a href="http://workflows.md" target="_blank" rel="noopener noreferrer">workflows.md</a> (trabajo de campo, jornadas de llamadas, ciclo de vida de los turnos), <a href="http://integrations.md" target="_blank" rel="noopener noreferrer">integrations.md</a> (mapas, SMS, telefonía), <a href="http://users.md" target="_blank" rel="noopener noreferrer">users.md</a> (roles, permisos, alcance geográfico) y <a href="http://system.md" target="_blank" rel="noopener noreferrer">system.md</a> (analítica en tiempo real, sincronización sin conexión, event sourcing — el estado se deriva de un registro inmutable de eventos).</p>
+<h2 id="filosofía-de-gotv" tabindex="-1"><a class="heading-anchor" href="#filosofía-de-gotv" aria-hidden="true">#</a> Filosofía de GOTV</h2>
+<ol>
+<li><strong>Todo contacto es un contacto de movilización.</strong> El día de elecciones la única pregunta es &quot;¿ya votaste?&quot;. Todo lo demás — persuasión, inscripción, educación sobre temas — ya terminó.</li>
+<li><strong>En tiempo real o no sirve.</strong> Datos viejos el día de elecciones son peores que ningún dato. El sistema tiene que priorizar la velocidad y la frescura de la sincronización.</li>
+<li><strong>Capaz de trabajar sin conexión, pero optimizado para estar conectado.</strong> Las operaciones del día de elecciones se benefician enormemente de la conectividad (seguimiento de participación en vivo, reasignación dinámica). Trabajar sin conexión es la red de seguridad, no el modo normal.</li>
+<li><strong>Escalable al caos.</strong> El día de elecciones genera la carga pico: todos los voluntarios activos, todos los votantes bajo seguimiento, todas las operaciones corriendo a la vez. El sistema tiene que aguantarlo sin despeinarse.</li>
+</ol>
+<h2 id="preparación-previa-al-día-de-elecciones" tabindex="-1"><a class="heading-anchor" href="#preparación-previa-al-día-de-elecciones" aria-hidden="true">#</a> Preparación previa al día de elecciones</h2>
+<h3 id="definición-del-universo-gotv" tabindex="-1"><a class="heading-anchor" href="#definición-del-universo-gotv" aria-hidden="true">#</a> Definición del universo GOTV</h3>
+<p>Antes del día de elecciones, la campaña define su universo GOTV: la lista de votantes a los que va a movilizar.</p>
+<ul>
+<li><strong>Criterios del universo:</strong> datos de trabajo de campo, puntajes de apoyo, historial de voto, demografía, focalización geográfica</li>
+<li><strong>Universo GOTV típico:</strong> votantes identificados como simpatizantes (por trabajo de campo u otra identificación de votantes) que todavía no han votado (donde haya datos de voto adelantado)</li>
+<li><strong>Segmentos del universo:</strong> las campañas suelen priorizar los contactos — primero los simpatizantes firmes, después los que se inclinan a favor, y después los no contactados pero probablemente simpatizantes</li>
+</ul>
+<p><strong>DECIDIDO: Constructor automático de universo.</strong> La plataforma genera el universo GOTV automáticamente a partir de criterios configurables (umbrales de puntaje de apoyo, filtros de historial de voto, filtros geográficos). El equipo de campaña revisa, ajusta, añade o quita segmentos y lo cierra. Reduce el trabajo manual y da consistencia sin quitarle al equipo el control sobre el universo final.</p>
+<h3 id="seguimiento-del-voto-adelantado-y-ausente" tabindex="-1"><a class="heading-anchor" href="#seguimiento-del-voto-adelantado-y-ausente" aria-hidden="true">#</a> Seguimiento del voto adelantado y ausente</h3>
+<p>Muchas jurisdicciones permiten votar antes del día de elecciones. La plataforma tiene que saber quién ya votó para no gastar recursos de GOTV en gente que no necesita recordatorio.</p>
+<p><strong>DECIDIDO: Las dos cosas — alimentación por API donde exista, carga manual como recurso universal de reserva.</strong> Alimentaciones en tiempo real o diarias desde las jurisdicciones que las publican (algunos estados de EE. UU.), con retiro automático del universo GOTV de quienes votaron adelantado o por voto ausente. Carga manual de las listas de voto adelantado como recurso universal de reserva. Consistente con la estrategia de importación del padrón electoral (<a href="http://integrations.md" target="_blank" rel="noopener noreferrer">integrations.md</a>) y con el patrón de estar listos para API pero empezar por lo manual.</p>
+<h3 id="concentración-de-voluntarios" tabindex="-1"><a class="heading-anchor" href="#concentración-de-voluntarios" aria-hidden="true">#</a> Concentración de voluntarios</h3>
+<p>El día de elecciones se despliegan muchos voluntarios a la vez. La plataforma tiene que dar soporte a esa logística.</p>
+<ul>
+<li><strong>Puntos de concentración</strong> — lugares físicos donde los voluntarios se reúnen antes de salir a sus asignaciones (oficinas de campaña, centros comunitarios, iglesias, etc.)</li>
+<li><strong>Manejo de puntos de concentración:</strong> crear ubicaciones con dirección, capacidad, persona de contacto y horario</li>
+<li><strong>Asignación de voluntarios a puntos de concentración</strong> — cada voluntario sabe dónde presentarse</li>
+<li><strong>Registro de llegada en el punto de concentración</strong> — el Líder de equipo registra a los voluntarios y verifica que tengan la app y sus asignaciones cargadas</li>
+<li><strong>Control de materiales</strong> — seguimiento opcional de lo que se reparte en la concentración (material impreso, letreros, agua, etc.)</li>
+</ul>
+<h3 id="corte-de-territorios-para-gotv" tabindex="-1"><a class="heading-anchor" href="#corte-de-territorios-para-gotv" aria-hidden="true">#</a> Corte de territorios para GOTV</h3>
+<p>Los territorios del día de elecciones no son como los del trabajo de campo normal:</p>
+<ul>
+<li><strong>Más pequeños y compactos</strong> — se diseñan para completarse en 1-2 horas, no en un turno entero</li>
+<li><strong>Optimizados por densidad</strong> — se priorizan por densidad de simpatizantes, no por cobertura geográfica</li>
+<li><strong>Dinámicos</strong> — se pueden volver a cortar durante el día según los datos de participación (ver Operaciones en tiempo real más abajo)</li>
+<li><strong>Pasadas múltiples</strong> — el mismo territorio puede asignarse a distintos voluntarios para la pasada de la mañana, la de la tarde y la de la noche</li>
+</ul>
+<p>Las herramientas de manejo de territorios que ya existen (<a href="http://integrations.md" target="_blank" rel="noopener noreferrer">integrations.md</a> — dibujo, generación automática, asignación, optimización de listas de recorrido, visualización de cobertura) aplican aquí con parámetros específicos del día de elecciones.</p>
+<h3 id="preparación-de-observadores-electorales" tabindex="-1"><a class="heading-anchor" href="#preparación-de-observadores-electorales" aria-hidden="true">#</a> Preparación de observadores electorales</h3>
+<p>Los observadores electorales vigilan los centros de votación para detectar irregularidades. En casi todas las jurisdicciones es un rol definido por ley.</p>
+<ul>
+<li><strong>Inscripción de observadores</strong> — muchas jurisdicciones exigen inscribir a los observadores ante las autoridades electorales con antelación. La plataforma registra qué observadores están acreditados para cada centro.</li>
+<li><strong>Capacitación de observadores</strong> — capacitación específica de cada jurisdicción sobre lo que un observador puede y no puede hacer, qué mirar y cómo reportar incidentes. Se entrega por el módulo de capacitación (<a href="http://workflows.md" target="_blank" rel="noopener noreferrer">workflows.md</a>).</li>
+<li><strong>Asignación a centros de votación</strong> — asignar observadores a centros específicos, con suplentes por si alguien no aparece.</li>
+<li><strong>Manejo de credenciales</strong> — control de las credenciales o certificados que emiten las autoridades electorales.</li>
+</ul>
+<h3 id="plan-de-comunicaciones-del-día-de-elecciones" tabindex="-1"><a class="heading-anchor" href="#plan-de-comunicaciones-del-día-de-elecciones" aria-hidden="true">#</a> Plan de comunicaciones del día de elecciones</h3>
+<p>La secuencia de comunicaciones del día se configura de antemano:</p>
+<ul>
+<li><strong>Recordatorio de la mañana</strong> — &quot;Hoy son las elecciones. Los centros abren [horario]. Tu centro de votación es [lugar].&quot; Se envía a todo el universo GOTV por los canales configurados (SMS, WhatsApp, correo electrónico).</li>
+<li><strong>Seguimiento del mediodía</strong> — se envía a los votantes que todavía no están confirmados como votados. &quot;¿Ya votaste? Los centros cierran a las [hora].&quot;</li>
+<li><strong>Empuje de la tarde</strong> — mensaje más urgente a los simpatizantes que faltan. &quot;Los centros cierran en [X] horas.&quot;</li>
+<li><strong>Empuje final</strong> — mensaje de última oportunidad. &quot;Los centros cierran en 1 hora. Si necesitas transporte, [contacto].&quot;</li>
+</ul>
+<p><strong>DECIDIDO: Configurable por oleada.</strong> La campaña elige, para cada oleada, si va totalmente automatizada o si se dispara a mano. El recordatorio de la mañana puede ir automático, mientras que el empuje final quizá requiera disparo manual después de mirar los datos de participación en tiempo real. Cada oleada de la secuencia se configura por separado como envío automático o disparo manual.</p>
+<h2 id="operaciones-del-día-de-elecciones" tabindex="-1"><a class="heading-anchor" href="#operaciones-del-día-de-elecciones" aria-hidden="true">#</a> Operaciones del día de elecciones</h2>
+<h3 id="trabajo-de-campo-gotv-puerta-a-puerta" tabindex="-1"><a class="heading-anchor" href="#trabajo-de-campo-gotv-puerta-a-puerta" aria-hidden="true">#</a> Trabajo de campo GOTV (puerta a puerta)</h3>
+<p>El puerta a puerta del día de elecciones usa la misma infraestructura de trabajo de campo (<a href="http://workflows.md" target="_blank" rel="noopener noreferrer">workflows.md</a>), con diferencias clave:</p>
+<ul>
+<li><strong>El guion es más simple</strong> — &quot;¿Ya votaste hoy? ¿Necesitas transporte para ir a votar?&quot; Sin persuasión, sin discusión de temas.</li>
+<li><strong>Los resultados son binarios</strong> — votó, todavía no votó (necesita seguimiento), no estaba, no puede o no va a votar</li>
+<li><strong>La velocidad importa</strong> — interacciones más cortas, movimiento más rápido entre puertas</li>
+<li><strong>Listas de recorrido dinámicas</strong> — a medida que llegan datos de participación, los votantes confirmados como votados salen de las listas activas</li>
+</ul>
+<h4 id="actualización-de-las-listas-de-recorrido-gotv" tabindex="-1"><a class="heading-anchor" href="#actualización-de-las-listas-de-recorrido-gotv" aria-hidden="true">#</a> Actualización de las listas de recorrido GOTV</h4>
+<p><strong>DECIDIDO: Híbrido — el servidor empuja cuando hay conexión, el dispositivo jala como reserva.</strong> El servidor empuja las actualizaciones de la lista a los dispositivos en tiempo real cuando hay conexión. Los voluntarios pueden deslizar para actualizar cuando la conexión es intermitente. Las entradas viejas se marcan visualmente con un indicador de actualidad que muestra cuánto pasó desde la última sincronización. Consistente con la filosofía de la plataforma: capaz de trabajar sin conexión, pero optimizada para estar conectada.</p>
+<h3 id="llamadas-de-seguimiento-jornadas-de-llamadas" tabindex="-1"><a class="heading-anchor" href="#llamadas-de-seguimiento-jornadas-de-llamadas" aria-hidden="true">#</a> Llamadas de seguimiento (jornadas de llamadas)</h3>
+<p>Las jornadas de llamadas del día de elecciones apuntan a los votantes que todavía no han votado, con la misma infraestructura de siempre (<a href="http://workflows.md" target="_blank" rel="noopener noreferrer">workflows.md</a>, <a href="http://integrations.md" target="_blank" rel="noopener noreferrer">integrations.md</a>) y estas modificaciones:</p>
+<ul>
+<li><strong>Guion:</strong> &quot;Hola, soy [nombre] de [campaña]. ¿Ya votaste hoy? Los centros están abiertos hasta las [hora] en [lugar]. ¿Te podemos ayudar con algo, transporte o direcciones?&quot;</li>
+<li><strong>Lista de llamadas:</strong> sale del universo GOTV, filtrada para quitar a los votantes ya confirmados como votados</li>
+<li><strong>Actualización de la lista:</strong> la misma actualización dinámica de las listas de recorrido — los confirmados como votados salen</li>
+<li><strong>Registro de resultados:</strong> votó, va a votar más tarde (agendar rellamada), necesita transporte (genera solicitud de transporte), no va a votar, no contesta</li>
+<li><strong>Disparo de transporte:</strong> si un votante necesita transporte, quien está llamando crea la solicitud directamente desde la interfaz de llamada (ver Transporte a las urnas más abajo)</li>
+</ul>
+<h3 id="transporte-a-las-urnas" tabindex="-1"><a class="heading-anchor" href="#transporte-a-las-urnas" aria-hidden="true">#</a> Transporte a las urnas</h3>
+<p>Llevar gente a votar es un servicio central del GOTV, sobre todo en zonas con poco transporte público, para votantes mayores y para votantes con discapacidad.</p>
+<h4 id="flujo-de-una-solicitud-de-transporte" tabindex="-1"><a class="heading-anchor" href="#flujo-de-una-solicitud-de-transporte" aria-hidden="true">#</a> Flujo de una solicitud de transporte</h4>
+<ol>
+<li><strong>Se crea la solicitud</strong> — por quien está llamando (desde la llamada), por quien toca puertas (desde el contacto), por el propio votante (por la línea de texto de la campaña o un formulario web), o por el equipo (a mano)</li>
+<li><strong>La solicitud contiene:</strong> nombre del votante, dirección de recogida, teléfono, necesidades de accesibilidad (silla de ruedas, andador, etc.), hora preferida, centro de votación (asignado automáticamente según la dirección registrada del votante)</li>
+<li><strong>La solicitud entra a la cola</strong> — visible para el Coordinador de transporte (un rol del equipo o una subasignación de Líder de equipo)</li>
+<li><strong>Se asigna conductor</strong> — del grupo de conductores voluntarios. La asignación considera: cercanía, capacidad del vehículo, accesibilidad y ventana de tiempo.</li>
+<li><strong>Se notifica al conductor</strong> — recibe los detalles de la recogida por la app o por SMS</li>
+<li><strong>Recogida confirmada</strong> — el conductor confirma cuando recoge al votante</li>
+<li><strong>Entrega confirmada</strong> — el conductor confirma cuando deja al votante en el centro de votación</li>
+<li><strong>Se marca al votante</strong> — el estado de transporte del votante se actualiza en el seguimiento GOTV</li>
+</ol>
+<h4 id="manejo-de-conductores" tabindex="-1"><a class="heading-anchor" href="#manejo-de-conductores" aria-hidden="true">#</a> Manejo de conductores</h4>
+<ul>
+<li><strong>Registro de conductores</strong> — los voluntarios se inscriben como conductores con: tipo de vehículo, capacidad, características de accesibilidad, ventana de disponibilidad, zona geográfica</li>
+<li><strong>Cola de conductores</strong> — los conductores disponibles se le muestran al Coordinador de transporte, ordenados por cercanía a las solicitudes pendientes</li>
+<li><strong>Seguimiento de ida y vuelta</strong> — el sistema rastrea la disponibilidad de cada conductor (disponible, en camino a recoger, transportando, de regreso)</li>
+<li><strong>Viajes con varios pasajeros</strong> — a un conductor se le pueden asignar varias recogidas en secuencia si las direcciones están agrupadas</li>
+</ul>
+<p><strong>DECIDIDO: Los dos modos disponibles — la campaña elige.</strong> Modo despachador para campañas que quieren control manual total (el Coordinador de transporte empareja solicitudes con conductores sobre un mapa). Asignación automática con anulación para campañas que quieren que la plataforma empareje por cercanía, compatibilidad del vehículo y ventana de tiempo, y que el Coordinador pueda anular. La campaña elige el modo según su capacidad de voluntarios y su complejidad operativa.</p>
+<h3 id="observación-electoral" tabindex="-1"><a class="heading-anchor" href="#observación-electoral" aria-hidden="true">#</a> Observación electoral</h3>
+<p>Los observadores vigilan los centros de votación y reportan incidentes en tiempo real.</p>
+<h4 id="registro-de-llegada-del-observador" tabindex="-1"><a class="heading-anchor" href="#registro-de-llegada-del-observador" aria-hidden="true">#</a> Registro de llegada del observador</h4>
+<ul>
+<li>El observador llega a su centro asignado y registra su llegada desde la app</li>
+<li>La plataforma confirma: centro correcto, observador acreditado para ese centro, credenciales vigentes</li>
+<li>Estado del observador: llegada registrada, activo, incidente reportado, turno terminado</li>
+</ul>
+<h4 id="reporte-de-incidentes" tabindex="-1"><a class="heading-anchor" href="#reporte-de-incidentes" aria-hidden="true">#</a> Reporte de incidentes</h4>
+<p>Los observadores reportan incidentes con un formulario estructurado:</p>
+<ul>
+<li><strong>Categorías de incidente:</strong> filas largas, intimidación de votantes, falla de máquina, problemas de accesibilidad, proselitismo dentro de la zona restringida, listas de votantes ausentes o incorrectas, conducta del personal de mesa, otro</li>
+<li><strong>Severidad:</strong> informativo, preocupante, urgente, emergencia</li>
+<li><strong>Detalles:</strong> descripción libre, foto o video opcional</li>
+<li><strong>Ubicación:</strong> se etiqueta automáticamente al centro de votación asignado al observador</li>
+<li><strong>Fecha y hora:</strong> automática</li>
+</ul>
+<h4 id="escalamiento-de-incidentes" tabindex="-1"><a class="heading-anchor" href="#escalamiento-de-incidentes" aria-hidden="true">#</a> Escalamiento de incidentes</h4>
+<p><strong>DECIDIDO: Reglas de escalamiento configurables.</strong> La campaña define el enrutamiento según la severidad y la categoría del incidente. Las campañas pequeñas mandan todo a una sola persona. Las grandes usan escalamiento por niveles (lo rutinario a coordinadores regionales, lo urgente y las emergencias al centro de mando y al equipo legal). Las reglas se configuran durante la preparación del día de elecciones.</p>
+<h4 id="integración-con-protección-electoral" tabindex="-1"><a class="heading-anchor" href="#integración-con-protección-electoral" aria-hidden="true">#</a> Integración con protección electoral</h4>
+<p>Para campañas que participan en esfuerzos de protección electoral (líneas directas no partidistas de protección al votante, redes de observadores legales):</p>
+<ul>
+<li><strong>Número de línea directa a la vista</strong> — el número de la línea de protección electoral se configura y se muestra de forma prominente en la interfaz del observador y en la mensajería GOTV a los votantes</li>
+<li><strong>Reenvío de incidentes</strong> — opción de reenviar los reportes de los observadores a organizaciones externas de protección electoral (con el consentimiento correspondiente para compartir datos)</li>
+<li><strong>Alertas al equipo legal</strong> — los incidentes urgentes pueden disparar alertas al equipo legal de la campaña por el sistema de notificaciones de la plataforma</li>
+</ul>
+<h3 id="seguimiento-de-la-participación-en-tiempo-real" tabindex="-1"><a class="heading-anchor" href="#seguimiento-de-la-participación-en-tiempo-real" aria-hidden="true">#</a> Seguimiento de la participación en tiempo real</h3>
+<p>El sistema nervioso central de las operaciones del día: una vista en vivo de qué votantes del universo ya votaron y cuáles no.</p>
+<h4 id="fuentes-de-datos-de-participación" tabindex="-1"><a class="heading-anchor" href="#fuentes-de-datos-de-participación" aria-hidden="true">#</a> Fuentes de datos de participación</h4>
+<p>Los datos de participación pueden venir de varias fuentes:</p>
+<ol>
+<li><strong>Datos oficiales de voto adelantado y ausente</strong> — cargados o sincronizados antes del día de elecciones</li>
+<li><strong>Confirmaciones de puerta a puerta</strong> — quien toca puertas reporta &quot;el votante dice que ya votó&quot;</li>
+<li><strong>Confirmaciones telefónicas</strong> — quien llama confirma que el votante ya votó</li>
+<li><strong>Observaciones de observadores electorales</strong> — los observadores en los centros pueden confirmar votantes específicos (donde sea legal y práctico)</li>
+<li><strong>Datos oficiales de participación del día</strong> — algunas jurisdicciones publican actualizaciones periódicas de participación durante el día</li>
+<li><strong>Autorreporte del votante</strong> — votantes que responden a los mensajes de la campaña confirmando que votaron</li>
+</ol>
+<p><strong>DECIDIDO: Confirmaciones ponderadas por confianza.</strong> Cada fuente de datos de participación recibe un nivel de confianza distinto:</p>
+<ul>
+<li><strong>Confirmado</strong> — datos electorales oficiales (archivos de voto adelantado, alimentaciones de participación del día). El votante sale de las listas de contacto GOTV.</li>
+<li><strong>Probablemente votó</strong> — reporte de quien toca puertas, de quien llama, observación de un observador, autorreporte del votante. El votante baja de prioridad en las listas (se va al final) pero no sale del todo.
+La fuente siempre queda anotada en el registro de auditoría, para validar los modelos después de la elección.</li>
+</ul>
+<h4 id="panel-de-participación" tabindex="-1"><a class="heading-anchor" href="#panel-de-participación" aria-hidden="true">#</a> Panel de participación</h4>
+<p>El panel del día de elecciones es la interfaz principal del centro de mando:</p>
+<ul>
+<li><strong>Participación general</strong> — porcentaje del universo GOTV que ya votó, actualizado en tiempo real</li>
+<li><strong>Participación por geografía</strong> — vista de mapa con las tasas de participación por precinto o territorio, con código de color (rojo = participación baja, verde = alta)</li>
+<li><strong>Participación por segmento</strong> — desglose por fuerza del apoyo, demografía y geografía</li>
+<li><strong>Contactos pendientes</strong> — cuántos simpatizantes no han votado y no han sido contactados hoy</li>
+<li><strong>Estado de las operaciones</strong> — cuántos están tocando puertas, cuántos llamando, solicitudes de transporte pendientes, cobertura de observadores</li>
+<li><strong>Tiempo restante</strong> — cuenta regresiva al cierre de los centros, con proyección de participación final al ritmo actual</li>
+<li><strong>Alertas</strong> — incidentes de observadores, retrasos de sincronización, acumulación de solicitudes de transporte, problemas de entrega de mensajes</li>
+</ul>
+<h3 id="reasignación-dinámica-de-recursos" tabindex="-1"><a class="heading-anchor" href="#reasignación-dinámica-de-recursos" aria-hidden="true">#</a> Reasignación dinámica de recursos</h3>
+<p>A medida que avanza el día, la campaña tiene que mover recursos hacia donde más hacen falta.</p>
+<ul>
+<li><strong>Identificar zonas de baja participación</strong> — el panel resalta los precintos o territorios donde los simpatizantes del universo están por debajo de lo esperado</li>
+<li><strong>Reasignar el puerta a puerta</strong> — mover voluntarios de zonas con participación alta (donde el trabajo ya está hecho) a zonas de participación baja</li>
+<li><strong>Redirigir las llamadas</strong> — priorizar las listas de llamadas de los precintos con participación baja</li>
+<li><strong>Reforzar el transporte</strong> — si una zona concentra muchas solicitudes de transporte, mover conductores para allá</li>
+</ul>
+<p><strong>DECIDIDO: Sugerencias automáticas + aprobación humana en el centro de mando.</strong> La plataforma analiza los datos de participación en tiempo real y genera sugerencias de reasignación (por ejemplo: &quot;El precinto 7 va en 35% de participación con 3 horas por delante — considera mover 2 voluntarios del precinto 12, que va en 78%&quot;). Las sugerencias aparecen en el panel del centro de mando. El equipo del centro de mando aprueba, rechaza o modifica cada una. Apoyo a la decisión basado en datos, ejecución controlada por personas.</p>
+<h2 id="coordinación-de-gotv-en-alianzas" tabindex="-1"><a class="heading-anchor" href="#coordinación-de-gotv-en-alianzas" aria-hidden="true">#</a> Coordinación de GOTV en alianzas</h2>
+<p>Las alianzas que corren operaciones conjuntas de GOTV (decidido en <a href="http://workflows.md" target="_blank" rel="noopener noreferrer">workflows.md</a>) necesitan coordinación adicional:</p>
+<ul>
+<li><strong>Universo GOTV compartido</strong> — universo a nivel de alianza que combina los datos de simpatizantes de las organizaciones miembro, deduplicados, con la regla de &quot;no volver a tocar&quot; aplicada entre organizaciones</li>
+<li><strong>Asignación coordinada de territorios</strong> — sin solapamiento entre los territorios de las organizaciones miembro</li>
+<li><strong>Panel de participación compartido</strong> — vista a nivel de alianza de la participación en los territorios de todas las organizaciones miembro</li>
+<li><strong>Transporte coordinado entre organizaciones</strong> — las solicitudes de transporte de los contactos de cualquier organización miembro las puede atender un conductor de cualquier otra</li>
+<li><strong>Comunicaciones unificadas</strong> — opción de mensajería del día de elecciones a nivel de alianza junto con los mensajes de cada organización (con consentimiento, según <a href="http://compliance.md" target="_blank" rel="noopener noreferrer">compliance.md</a>)</li>
+</ul>
+<h2 id="después-del-día-de-elecciones" tabindex="-1"><a class="heading-anchor" href="#después-del-día-de-elecciones" aria-hidden="true">#</a> Después del día de elecciones</h2>
+<h3 id="inmediato-noche-electoral" tabindex="-1"><a class="heading-anchor" href="#inmediato-noche-electoral" aria-hidden="true">#</a> Inmediato (noche electoral)</h3>
+<ul>
+<li><strong>Seguimiento de resultados</strong> — a medida que llegan los resultados oficiales, la plataforma los muestra junto a los datos internos de la campaña (participación, puntajes de apoyo) para analizarlos</li>
+<li><strong>Captura de resultados</strong> — en jurisdicciones donde los resultados se publican físicamente en los centros de votación, los observadores pueden capturarlos en la plataforma para un conteo interno más rápido</li>
+</ul>
+<p><strong>DECIDIDO: Panel completo de resultados, con énfasis en la captura por observadores.</strong> La plataforma ofrece:</p>
+<ul>
+<li><strong>Captura de resultados por observadores</strong> — formulario estructurado para que los observadores y el equipo de la campaña ingresen los resultados de sus centros asignados a medida que se publican. Esta es la entrada principal de datos: los ojos propios de la campaña en el terreno.</li>
+<li><strong>Panel de agregación de resultados</strong> — despliegue en tiempo real de los resultados ingresados junto a los datos internos de la campaña (tasas de participación, puntajes de apoyo) para el análisis del centro de mando en la noche electoral.</li>
+<li><strong>Integración de resultados oficiales</strong> — donde las fuentes oficiales publiquen resultados legibles por máquina (APIs de comisiones electorales, alimentaciones de medios), la plataforma los puede ingerir. Pero la captura por observadores da la foto temprana más rápida y más confiable.</li>
+</ul>
+<h3 id="análisis-posterior-a-la-elección-días-después" tabindex="-1"><a class="heading-anchor" href="#análisis-posterior-a-la-elección-días-después" aria-hidden="true">#</a> Análisis posterior a la elección (días después)</h3>
+<ul>
+<li><strong>Análisis de participación</strong> — comparar la participación real contra las metas, por precinto y por segmento</li>
+<li><strong>Efectividad de las operaciones</strong> — tasas de contacto en campo, conversión de las jornadas de llamadas, tasa de viajes completados</li>
+<li><strong>Validación de modelos</strong> — comparar los puntajes de apoyo contra los resultados reales para mejorar la identificación de votantes a futuro</li>
+<li><strong>Desempeño de los voluntarios</strong> — turnos completados, contactos hechos, incidentes reportados (para reconocer a los voluntarios, no para castigarlos)</li>
+<li><strong>Revisión de la asignación de recursos</strong> — dónde sobraron y dónde faltaron recursos respecto a la necesidad</li>
+</ul>
+<h3 id="limpieza-de-datos" tabindex="-1"><a class="heading-anchor" href="#limpieza-de-datos" aria-hidden="true">#</a> Limpieza de datos</h3>
+<ul>
+<li><strong>Actualización del padrón electoral</strong> — marcar votantes que se mudaron, fallecieron o necesitan otro cambio de estado según los datos del día</li>
+<li><strong>Datos del cierre con voluntarios</strong> — recoger la retroalimentación de los voluntarios sobre qué funcionó y qué no</li>
+<li><strong>Archivo de los datos del día</strong> — los datos operativos del día de elecciones se archivan según la política de retención para auditoría (10 años, según <a href="http://compliance.md" target="_blank" rel="noopener noreferrer">compliance.md</a>)</li>
+</ul>
+<h2 id="consideraciones-por-jurisdicción" tabindex="-1"><a class="heading-anchor" href="#consideraciones-por-jurisdicción" aria-hidden="true">#</a> Consideraciones por jurisdicción</h2>
+<h3 id="puerto-rico-alfa" tabindex="-1"><a class="heading-anchor" href="#puerto-rico-alfa" aria-hidden="true">#</a> Puerto Rico (alfa)</h3>
+<ul>
+<li>Aplica la ley electoral de EE. UU. El GOTV es una práctica bien establecida en la cultura política estadounidense.</li>
+<li>La CEE administra las elecciones. Los centros de votación son información pública.</li>
+<li>Hay voto adelantado y voto ausente.</li>
+<li>Mensajería GOTV bilingüe (español/inglés).</li>
+</ul>
+<h3 id="brasil-piloto-1" tabindex="-1"><a class="heading-anchor" href="#brasil-piloto-1" aria-hidden="true">#</a> Brasil (piloto 1)</h3>
+<ul>
+<li>El voto es obligatorio. El foco del GOTV pasa de &quot;convencer de votar&quot; a &quot;convencer de votar por nosotros&quot; — la participación ya es alta.</li>
+<li>Urnas electrónicas: los resultados llegan rápido.</li>
+<li>El TSE restringe la campaña el día de elecciones — la plataforma tiene que hacer cumplir las reglas del período de campaña.</li>
+<li>El artículo 16 del Código Electoral restringe ciertas actividades de GOTV el propio día de elecciones.</li>
+</ul>
+<h3 id="tailandia-piloto-2" tabindex="-1"><a class="heading-anchor" href="#tailandia-piloto-2" aria-hidden="true">#</a> Tailandia (piloto 2)</h3>
+<ul>
+<li>La ley electoral tailandesa restringe las actividades de campaña en las 24-48 horas previas a la votación (la veda electoral). La plataforma tiene que hacerla cumplir.</li>
+<li>Se prohíbe la venta de alcohol durante el período electoral — no es asunto de la plataforma, pero importa para planificar actividades.</li>
+<li>Con un historial de intervención militar, las operaciones de GOTV tienen que elegir el nivel de seguridad con criterio agresivo.</li>
+</ul>
+<h3 id="india-piloto-3" tabindex="-1"><a class="heading-anchor" href="#india-piloto-3" aria-hidden="true">#</a> India (piloto 3)</h3>
+<ul>
+<li>Escala enorme: cientos de millones de votantes en varias fases (las elecciones indias duran semanas, no un día).</li>
+<li>Al ser por fases, el GOTV se repite para distintas circunscripciones en distintos días.</li>
+<li>El manejo a nivel de mesa de votación es crítico: las campañas indias se organizan por mesa.</li>
+<li>El Código Modelo de Conducta de la ECI restringe las actividades del día de elecciones.</li>
+</ul>
+<h3 id="líbano-piloto-4" tabindex="-1"><a class="heading-anchor" href="#líbano-piloto-4" aria-hidden="true">#</a> Líbano (piloto 4)</h3>
+<ul>
+<li>El sistema de escaños confesionales hace que el GOTV apunte a grupos específicos.</li>
+<li>Llevar gente a votar es un reto logístico mayor, dada la inestabilidad de la infraestructura.</li>
+<li>Múltiples preocupaciones de seguridad: las operaciones de GOTV en distintas zonas enfrentan niveles de amenaza distintos.</li>
+<li>La economía funciona en efectivo, así que los reembolsos de transporte pueden necesitar control de efectivo (según la cadena de custodia de efectivo en <a href="http://fundraising.md" target="_blank" rel="noopener noreferrer">fundraising.md</a>).</li>
+</ul>
+<h2 id="requisitos-técnicos" tabindex="-1"><a class="heading-anchor" href="#requisitos-técnicos" aria-hidden="true">#</a> Requisitos técnicos</h2>
+<h3 id="prioridad-de-sincronización-el-día-de-elecciones" tabindex="-1"><a class="heading-anchor" href="#prioridad-de-sincronización-el-día-de-elecciones" aria-hidden="true">#</a> Prioridad de sincronización el día de elecciones</h3>
+<p>El protocolo de sincronización por event sourcing (<a href="http://system.md" target="_blank" rel="noopener noreferrer">system.md</a>) tiene que estar afinado para el día de elecciones:</p>
+<ul>
+<li><strong>Los cambios de estado del votante tienen la máxima prioridad de sincronización</strong> — los eventos de &quot;el votante ya votó&quot; tienen que llegar a todos los clientes lo más rápido posible</li>
+<li><strong>Sube la frecuencia de sincronización</strong> — durante las operaciones del día, el intervalo baja de su cadencia normal a casi tiempo real (cada 30 segundos cuando hay conexión)</li>
+<li><strong>La resolución de conflictos favorece lo más reciente</strong> — si dos fuentes reportan estados contradictorios de un votante, gana el reporte más reciente</li>
+<li><strong>Optimización de ancho de banda</strong> — durante el GOTV los paquetes de sincronización deben ser mínimos (solo los cambios de estado, no los registros completos)</li>
+</ul>
+<h3 id="manejo-de-carga" tabindex="-1"><a class="heading-anchor" href="#manejo-de-carga" aria-hidden="true">#</a> Manejo de carga</h3>
+<p>El día de elecciones es la carga pico de la plataforma:</p>
+<ul>
+<li>Todos los voluntarios activos usando la app a la vez</li>
+<li>El panel de participación refrescándose sin parar desde el centro de mando</li>
+<li>Comunicaciones saliendo por oleadas a todo el universo GOTV</li>
+<li>Solicitudes de transporte entrando de forma continua</li>
+<li>Reportes de observadores llegando en flujo</li>
+</ul>
+<p>El sistema tiene que:</p>
+<ul>
+<li>Aguantar 10 veces la carga concurrente normal</li>
+<li>Actualizar el panel dentro de los 30 segundos de que cambien los datos subyacentes</li>
+<li>Completar los envíos de comunicaciones dentro de las ventanas de tiempo configuradas (sin retrasarse por acumulación en la cola)</li>
+<li>Mantener el retraso de sincronización bajo 2 minutos incluso en carga pico</li>
+</ul>
+<h3 id="resiliencia-sin-conexión" tabindex="-1"><a class="heading-anchor" href="#resiliencia-sin-conexión" aria-hidden="true">#</a> Resiliencia sin conexión</h3>
+<p>Si se pierde la conectividad durante el día de elecciones:</p>
+<ul>
+<li>Quienes tocan puertas siguen trabajando con las listas de recorrido en caché (igual que en el trabajo de campo normal)</li>
+<li>Las jornadas de llamadas no pueden operar (las llamadas requieren conexión)</li>
+<li>Las solicitudes de transporte se encolan localmente y salen cuando hay conexión</li>
+<li>Los reportes de incidentes de observadores se encolan localmente y salen cuando hay conexión</li>
+<li><strong>Diferencia crítica con el trabajo de campo normal:</strong> el día de elecciones, una lista de recorrido vieja hace perder tiempo con votantes que ya votaron. Hay que insistirle fuerte a los voluntarios para que se reconecten y actualicen.</li>
+</ul>
+<h2 id="preguntas-abiertas" tabindex="-1"><a class="heading-anchor" href="#preguntas-abiertas" aria-hidden="true">#</a> Preguntas abiertas</h2>
+<ol>
+<li>
+<p><strong>Seguimiento de boletas</strong> — algunas jurisdicciones de EE. UU. permiten rastrear boletas (el votante puede verificar si su boleta por correo se recibió y se contó). ¿Debería la plataforma integrarse con esos sistemas?</p>
+</li>
+<li>
+<p><strong>Encuestas a boca de urna</strong> — ¿debería la plataforma dar soporte a encuestas informales a boca de urna (preguntarle a los votantes que salen cómo votaron)? Legalmente complicado en muchas jurisdicciones.</p>
+</li>
+<li>
+<p><strong>Soporte para elecciones en varias fases</strong> — en India las elecciones se extienden por semanas, con distintos estados votando en distintos días. El sistema GOTV tiene que manejar varios días de elecciones para una sola campaña. ¿Cómo afecta eso al manejo del universo, la programación de voluntarios y el seguimiento de participación?</p>
+</li>
+<li>
+<p><strong>Excepción de gamificación</strong> — la gamificación está en general fuera de alcance (según <a href="http://workflows.md" target="_blank" rel="noopener noreferrer">workflows.md</a>), pero motivar a los voluntarios el día de elecciones es excepcionalmente importante. ¿Debería el panel mostrar tablas de posiciones o progreso de completitud solo para el día de elecciones?</p>
+</li>
+</ol>
+<!-- REVISIT: La metodología de pruebas de carga para el día de elecciones hay que definirla durante la planificación de la implementación. El supuesto de 10x necesita validarse contra el número real de voluntarios en campañas del tamaño objetivo. -->
+<!-- REVISIT: Hacer cumplir la veda electoral (Tailandia, el MCC de India) necesita integrarse con el sistema de control del período de campaña (compliance.md). El día de elecciones y la veda son un subconjunto de las restricciones del período de campaña. -->
+
+    </article>
+  </main>
+  <div class="toc-rail"><nav class="toc" aria-label="En esta página"><div class="toc-label">En esta página</div><ul><li class="toc-2"><a href="#propósito"># Propósito</a></li><li class="toc-2"><a href="#filosofía-de-gotv"># Filosofía de GOTV</a></li><li class="toc-2"><a href="#preparación-previa-al-día-de-elecciones"># Preparación previa al día de elecciones</a></li><li class="toc-3"><a href="#definición-del-universo-gotv"># Definición del universo GOTV</a></li><li class="toc-3"><a href="#seguimiento-del-voto-adelantado-y-ausente"># Seguimiento del voto adelantado y ausente</a></li><li class="toc-3"><a href="#concentración-de-voluntarios"># Concentración de voluntarios</a></li><li class="toc-3"><a href="#corte-de-territorios-para-gotv"># Corte de territorios para GOTV</a></li><li class="toc-3"><a href="#preparación-de-observadores-electorales"># Preparación de observadores electorales</a></li><li class="toc-3"><a href="#plan-de-comunicaciones-del-día-de-elecciones"># Plan de comunicaciones del día de elecciones</a></li><li class="toc-2"><a href="#operaciones-del-día-de-elecciones"># Operaciones del día de elecciones</a></li><li class="toc-3"><a href="#trabajo-de-campo-gotv-puerta-a-puerta"># Trabajo de campo GOTV (puerta a puerta)</a></li><li class="toc-3"><a href="#llamadas-de-seguimiento-jornadas-de-llamadas"># Llamadas de seguimiento (jornadas de llamadas)</a></li><li class="toc-3"><a href="#transporte-a-las-urnas"># Transporte a las urnas</a></li><li class="toc-3"><a href="#observación-electoral"># Observación electoral</a></li><li class="toc-3"><a href="#seguimiento-de-la-participación-en-tiempo-real"># Seguimiento de la participación en tiempo real</a></li><li class="toc-3"><a href="#reasignación-dinámica-de-recursos"># Reasignación dinámica de recursos</a></li><li class="toc-2"><a href="#coordinación-de-gotv-en-alianzas"># Coordinación de GOTV en alianzas</a></li><li class="toc-2"><a href="#después-del-día-de-elecciones"># Después del día de elecciones</a></li><li class="toc-3"><a href="#inmediato-noche-electoral"># Inmediato (noche electoral)</a></li><li class="toc-3"><a href="#análisis-posterior-a-la-elección-días-después"># Análisis posterior a la elección (días después)</a></li><li class="toc-3"><a href="#limpieza-de-datos"># Limpieza de datos</a></li><li class="toc-2"><a href="#consideraciones-por-jurisdicción"># Consideraciones por jurisdicción</a></li><li class="toc-3"><a href="#puerto-rico-alfa"># Puerto Rico (alfa)</a></li><li class="toc-3"><a href="#brasil-piloto-1"># Brasil (piloto 1)</a></li><li class="toc-3"><a href="#tailandia-piloto-2"># Tailandia (piloto 2)</a></li><li class="toc-3"><a href="#india-piloto-3"># India (piloto 3)</a></li><li class="toc-3"><a href="#líbano-piloto-4"># Líbano (piloto 4)</a></li><li class="toc-2"><a href="#requisitos-técnicos"># Requisitos técnicos</a></li><li class="toc-3"><a href="#prioridad-de-sincronización-el-día-de-elecciones"># Prioridad de sincronización el día de elecciones</a></li><li class="toc-3"><a href="#manejo-de-carga"># Manejo de carga</a></li><li class="toc-3"><a href="#resiliencia-sin-conexión"># Resiliencia sin conexión</a></li><li class="toc-2"><a href="#preguntas-abiertas"># Preguntas abiertas</a></li></ul></nav></div>
+</div>
+<script src="../../assets/search.js" defer></script>
+<script src="../../assets/app.js" defer></script>
+</body>
+</html>

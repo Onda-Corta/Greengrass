@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="es" data-base="../../" data-no-results="No hay resultados para">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Comunicaciones internas y notificaciones · GreenGrass</title>
+<meta name="description" content="Comunicaciones internas y notificaciones — Documentación de especificación y diseño de GreenGrass.">
+<link rel="alternate" hreflang="en" href="../../spec/messaging.html">
+<link rel="alternate" hreflang="es" href="./messaging.html">
+<link rel="alternate" hreflang="x-default" href="../../spec/messaging.html">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%232563eb'/%3E%3Cstop offset='1' stop-color='%2316a34a'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='32' height='32' rx='7' fill='url(%23g)'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="../../assets/styles.css">
+</head>
+<body>
+<a class="skip-link" href="#content">Saltar al contenido</a>
+<header class="site-header">
+  <button type="button" class="menu-toggle" aria-label="Alternar navegación" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+  <a class="brand" href="../../es/index.html">
+    <span class="brand-mark" aria-hidden="true"></span>
+    <span class="brand-text"><strong>GreenGrass</strong><small>Especificación y diseño</small></span>
+  </a>
+  <div class="search">
+    <input type="search" id="search-input" placeholder="Buscar en la documentación…" autocomplete="off" aria-label="Buscar en la documentación">
+    <div id="search-results" class="search-results" hidden></div>
+  </div>
+  <nav class="lang-switch" aria-label="Idioma"><a class="lang-opt" href="../../spec/messaging.html" hreflang="en" lang="en" title="View this page in English">EN</a><span class="lang-opt active" aria-current="true">ES</span></nav>
+  <button type="button" class="theme-toggle" aria-label="Alternar modo oscuro" title="Alternar modo oscuro">
+    <span class="theme-icon" aria-hidden="true"></span>
+  </button>
+</header>
+<div class="layout">
+  <div class="sidebar-backdrop" hidden></div>
+  <aside class="sidebar" aria-label="Navegación de la documentación">
+    <nav class="nav">
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">Inicio<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../index.html">GreenGrass</a></li></ul></div>
+<div class="nav-section open"><button type="button" class="nav-section-title" aria-expanded="true">Especificaciones<span class="chev" aria-hidden="true"></span></button><ul><li><a href="./product.html">Proyecto: GreenGrass</a></li><li><a href="./mvp.html">MVP de GreenGrass — plan de producto</a></li><li><a href="./users.html">Usuarios y roles</a></li><li><a href="./workflows.html">Flujos de trabajo principales</a></li><li><a href="./geography.html">Geografía objetivo</a></li><li><a href="./security.html">Seguridad y modelo de amenazas</a></li><li><a href="./compliance.html">Cumplimiento y marco legal</a></li><li><a href="./fundraising.html">Recaudación de fondos e infraestructura de pagos</a></li><li><a href="./integrations.html">Integraciones externas</a></li><li><a href="./support.html">Soporte y puesta en marcha de organizaciones</a></li><li><a href="./gotv.html">GOTV y operaciones del día de elecciones</a></li><li><a href="./messaging.html" aria-current="page" class="active">Comunicaciones internas y notificaciones</a></li><li><a href="./press.html">Prensa, medios y comunicaciones públicas</a></li><li><a href="./comms-intelligence.html">Inteligencia de comunicaciones — hoja de ruta post-MVP</a></li></ul></div>
+    </nav>
+  </aside>
+  <main id="content" class="content">
+    <nav class="breadcrumb" aria-label="Ruta de navegación">Especificaciones</nav>
+    <article class="prose">
+<h1 id="comunicaciones-internas-y-notificaciones" tabindex="-1"><a class="heading-anchor" href="#comunicaciones-internas-y-notificaciones" aria-hidden="true">#</a> Comunicaciones internas y notificaciones</h1>
+<h2 id="propósito" tabindex="-1"><a class="heading-anchor" href="#propósito" aria-hidden="true">#</a> Propósito</h2>
+<p>Este documento especifica el sistema de comunicación interna de GreenGrass: cómo el personal, los candidatos y los voluntarios se comunican entre sí dentro de la plataforma. Es distinto de las comunicaciones externas (campañas de correo, envíos masivos de SMS, contacto con votantes por WhatsApp), que se especifican en <a href="http://workflows.md" target="_blank" rel="noopener noreferrer">workflows.md</a>.</p>
+<p>Las comunicaciones internas fueron apareciendo como un hueco en varias especificaciones: <a href="http://workflows.md" target="_blank" rel="noopener noreferrer">workflows.md</a> las identificó como algo que necesitaba su propio documento, <a href="http://security.md" target="_blank" rel="noopener noreferrer">security.md</a> decidió cifrado de extremo a extremo (E2E) por defecto con custodia de llaves opcional, <a href="http://users.md" target="_blank" rel="noopener noreferrer">users.md</a> definió la mensajería candidato-equipo como capacidad central, y <a href="http://gotv.md" target="_blank" rel="noopener noreferrer">gotv.md</a> dejó clara la necesidad de coordinación en tiempo real desde el centro de mando.</p>
+<p>Las campañas políticas tienen requisitos de comunicación propios: los mensajes pueden contener información estratégica sensible, la rotación de personal es alta, las amenazas de seguridad son reales y el ritmo varía muchísimo (tranquilo entre elecciones, frenético durante el GOTV). El sistema de comunicación tiene que aguantar todo eso.</p>
+<h2 id="filosofía-de-comunicación" tabindex="-1"><a class="heading-anchor" href="#filosofía-de-comunicación" aria-hidden="true">#</a> Filosofía de comunicación</h2>
+<ol>
+<li><strong>Seguridad por defecto.</strong> Cifrado de extremo a extremo para todos los mensajes internos (decidido en <a href="http://security.md" target="_blank" rel="noopener noreferrer">security.md</a>). La plataforma no puede leer el contenido a menos que la organización active explícitamente la custodia de llaves.</li>
+<li><strong>Con forma de campaña, no de empresa.</strong> Las campañas no son compañías. Los patrones de comunicación son planos, rápidos y contextuales, no cadenas jerárquicas de aprobación. Esto tiene que sentirse más como Signal que como Outlook.</li>
+<li><strong>Rico en contexto.</strong> Un mensaje sobre un votante, una donación, un territorio o un evento debe enlazar a ese objeto. La comunicación y la acción ocurren en el mismo lugar.</li>
+<li><strong>Tolerante a la falta de conexión.</strong> Los mensajes se encolan sin conexión y se entregan al reconectar. No se pierde ningún mensaje.</li>
+<li><strong>Con el ruido bajo control.</strong> El día de elecciones genera cientos de eventos. El sistema de notificaciones tiene que ayudar a la gente a enfocarse, no ahogarla.</li>
+</ol>
+<h2 id="tipos-de-mensaje" tabindex="-1"><a class="heading-anchor" href="#tipos-de-mensaje" aria-hidden="true">#</a> Tipos de mensaje</h2>
+<h3 id="mensajes-directos" tabindex="-1"><a class="heading-anchor" href="#mensajes-directos" aria-hidden="true">#</a> Mensajes directos</h3>
+<p>Conversaciones uno a uno entre dos usuarios cualesquiera de la misma organización.</p>
+<ul>
+<li><strong>Entre personal</strong> — el caso más común. Director de campo a Coordinador de voluntarios, Director de comunicaciones a Administrador de la organización, etc.</li>
+<li><strong>Candidato a personal</strong> — los candidatos se comunican con su equipo clave por la misma interfaz de mensajería. Según <a href="http://users.md" target="_blank" rel="noopener noreferrer">users.md</a>, la interfaz del candidato está curada: ve una versión simplificada, pero la mensajería es completa.</li>
+<li><strong>Personal a voluntarios</strong> — los Líderes de equipo y el personal pueden escribirle a voluntarios individuales (cambios de horario, actualizaciones de asignación, seguimientos).</li>
+</ul>
+<h3 id="conversaciones-grupales" tabindex="-1"><a class="heading-anchor" href="#conversaciones-grupales" aria-hidden="true">#</a> Conversaciones grupales</h3>
+<p>Conversaciones de varias personas para coordinar equipos.</p>
+<ul>
+<li><strong>Grupos improvisados</strong> — cualquier usuario puede crear una conversación grupal y añadir gente. No hace falta estructura formal.</li>
+<li><strong>Grupos permanentes</strong> — grupos que duran toda la campaña (por ejemplo, &quot;Liderazgo&quot;, &quot;Equipo de campo&quot;, &quot;Finanzas&quot;). Los crea el personal; la membresía la maneja quien lo creó o los administradores de la organización.</li>
+<li><strong>Grupos ligados a equipos</strong> — se crean automáticamente al crear un Equipo (según la estructura de equipos de <a href="http://users.md" target="_blank" rel="noopener noreferrer">users.md</a>). Incluyen a todos sus integrantes. El Líder de equipo maneja la membresía.</li>
+</ul>
+<p><strong>DECIDIDO: Hilos opcionales.</strong> Por defecto los mensajes aparecen en un flujo cronológico plano, pero cualquier mensaje se puede responder como hilo. Los hilos evitan que las conversaciones laterales ensucien el flujo principal sin perder la simplicidad de un chat grupal cuando el grupo es chico. Equilibra la necesidad de velocidad de la campaña (chat plano) con la de escala (hilos cuando los grupos crecen durante el GOTV).</p>
+<h3 id="difusiones" tabindex="-1"><a class="heading-anchor" href="#difusiones" aria-hidden="true">#</a> Difusiones</h3>
+<p>Mensajes de uno a muchos, del personal hacia grupos grandes.</p>
+<ul>
+<li><strong>Anuncios a toda la organización</strong> — el Administrador de la organización o el personal designado puede mandar un mensaje a todo el personal, a todos los voluntarios o a toda la organización. Son de solo lectura: no se puede responder a la difusión (pero sí abrir un mensaje directo con quien la envió).</li>
+<li><strong>Difusiones por rol</strong> — envío a todos los que tienen cierto rol (todos los Líderes de equipo, todo el personal de campo).</li>
+<li><strong>Difusiones geográficas</strong> — envío a todo el personal y voluntarios asignados a una zona (precinto, distrito, región).</li>
+<li><strong>Difusiones por turno</strong> — envío a todos los voluntarios asignados a un turno o evento específico.</li>
+</ul>
+<p>Las difusiones no van cifradas de extremo a extremo: usan cifrado del lado del servidor (la llave de sobre de la organización), porque apuntan a grupos grandes y el intercambio individual de llaves no es práctico. Esto se advierte en la interfaz.</p>
+<h3 id="mensajes-contextuales" tabindex="-1"><a class="heading-anchor" href="#mensajes-contextuales" aria-hidden="true">#</a> Mensajes contextuales</h3>
+<p>Mensajes adjuntos a objetos específicos de la plataforma, para conversar en contexto.</p>
+<ul>
+<li><strong>Notas de votante o contacto</strong> — ya especificadas en <a href="http://workflows.md" target="_blank" rel="noopener noreferrer">workflows.md</a> (notas de trabajo de campo). Son datos, no mensajes, y se cifran según el modelo de datos.</li>
+<li><strong>Comentarios de evento</strong> — el personal puede discutir un evento (logística, problemas) en un hilo adjunto al evento.</li>
+<li><strong>Comentarios de turno</strong> — los Líderes de equipo y el personal pueden hablar de un turno específico (voluntarios que no aparecieron, problemas de materiales) en un hilo adjunto al turno.</li>
+<li><strong>Hilos de incidente</strong> — los incidentes reportados por observadores electorales (<a href="http://gotv.md" target="_blank" rel="noopener noreferrer">gotv.md</a>) tienen sus propios hilos de comentarios para discutir el escalamiento.</li>
+<li><strong>Donaciones marcadas</strong> — las donaciones marcadas por cumplimiento (<a href="http://fundraising.md" target="_blank" rel="noopener noreferrer">fundraising.md</a>) pueden tener hilos de discusión para su revisión.</li>
+</ul>
+<p><strong>DECIDIDO: Heredan la configuración de la organización.</strong> Los mensajes contextuales siguen el modo de cifrado de la organización. Si la organización tiene custodia de llaves activada, usan cifrado del lado del servidor (buscables, accesibles para cualquiera con permiso sobre el objeto padre). Si la organización está en modo E2E, los mensajes contextuales también son E2E (con la contrapartida de que no hay búsqueda del lado del servidor y el acceso requiere intercambio de llaves con cada participante).</p>
+<h2 id="notificaciones" tabindex="-1"><a class="heading-anchor" href="#notificaciones" aria-hidden="true">#</a> Notificaciones</h2>
+<h3 id="fuentes-de-notificaciones" tabindex="-1"><a class="heading-anchor" href="#fuentes-de-notificaciones" aria-hidden="true">#</a> Fuentes de notificaciones</h3>
+<p>La plataforma genera notificaciones desde muchos subsistemas:</p>
+<table>
+<thead>
+<tr>
+<th>Fuente</th>
+<th>Ejemplos</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Mensajería</strong></td>
+<td>Mensaje directo nuevo, mensaje nuevo de grupo, @mención, difusión recibida</td>
+</tr>
+<tr>
+<td><strong>Asignaciones</strong></td>
+<td>Turno nuevo, reasignación de territorio, cambio de punto de concentración</td>
+</tr>
+<tr>
+<td><strong>GOTV</strong></td>
+<td>Sugerencia de reasignación, solicitud de transporte, escalamiento de incidente de observador</td>
+</tr>
+<tr>
+<td><strong>Recaudación de fondos</strong></td>
+<td>Donación marcada por cumplimiento, fallo de donación recurrente, solicitud de reembolso</td>
+</tr>
+<tr>
+<td><strong>Cumplimiento</strong></td>
+<td>Límite de contribución cerca, vencimiento de consentimiento, fecha límite de reporte, solicitud de un titular de datos</td>
+</tr>
+<tr>
+<td><strong>Voluntarios</strong></td>
+<td>Alta de voluntario nuevo, capacitación completada, vencimiento de certificación</td>
+</tr>
+<tr>
+<td><strong>Eventos</strong></td>
+<td>Confirmación de asistencia, recordatorio de evento, cancelación de evento</td>
+</tr>
+<tr>
+<td><strong>Sistema</strong></td>
+<td>Alerta de seguridad, fallo de sincronización, aviso de actualización, notificación de brecha</td>
+</tr>
+</tbody>
+</table>
+<h3 id="canales-de-notificación" tabindex="-1"><a class="heading-anchor" href="#canales-de-notificación" aria-hidden="true">#</a> Canales de notificación</h3>
+<p>Las notificaciones se pueden entregar por varios canales:</p>
+<ul>
+<li><strong>En la app</strong> — contadores, bandeja de notificaciones, aviso emergente o banner para lo urgente. Siempre disponible.</li>
+<li><strong>Notificación push</strong> — push móvil vía Capacitor. Requiere permiso del dispositivo.</li>
+<li><strong>Resumen por correo</strong> — resumen configurable de notificaciones (inmediato, cada hora, diario o apagado). Para quien no vive dentro de la app.</li>
+<li><strong>SMS</strong> — reservado solo para alertas críticas (brechas de seguridad, escalamientos urgentes de GOTV). Requiere consentimiento expreso.</li>
+</ul>
+<h3 id="prioridad-de-las-notificaciones" tabindex="-1"><a class="heading-anchor" href="#prioridad-de-las-notificaciones" aria-hidden="true">#</a> Prioridad de las notificaciones</h3>
+<p><strong>DECIDIDO: Prioridad configurable por el usuario.</strong> Cada persona configura sus preferencias por fuente: qué canal de entrega (en la app, push, correo, SMS), qué nivel de prioridad, y silenciar o no. Control total sobre la propia experiencia de notificaciones. Las alertas de seguridad y las notificaciones de brecha son la única excepción: siempre se entregan con prioridad crítica y no se pueden silenciar.</p>
+<h3 id="no-molestar-y-horas-de-silencio" tabindex="-1"><a class="heading-anchor" href="#no-molestar-y-horas-de-silencio" aria-hidden="true">#</a> No molestar y horas de silencio</h3>
+<ul>
+<li><strong>Modo No molestar</strong> — suprime todas las notificaciones no críticas. Solo pasan las alertas de seguridad y los incidentes de observadores con severidad de emergencia.</li>
+<li><strong>Horas de silencio</strong> — configurables por usuario. Durante esas horas no se entrega nada salvo alertas críticas. Lo encolado se entrega cuando terminan.</li>
+<li><strong>Anulación del día de elecciones</strong> — durante las operaciones de GOTV activas, las horas de silencio quedan suspendidas para las notificaciones de GOTV (con consentimiento del usuario al configurar el día de elecciones).</li>
+</ul>
+<h2 id="comunicación-del-candidato" tabindex="-1"><a class="heading-anchor" href="#comunicación-del-candidato" aria-hidden="true">#</a> Comunicación del candidato</h2>
+<p>La persona candidata (<a href="http://users.md" target="_blank" rel="noopener noreferrer">users.md</a>) tiene necesidades de comunicación propias:</p>
+<h3 id="interfaz-curada" tabindex="-1"><a class="heading-anchor" href="#interfaz-curada" aria-hidden="true">#</a> Interfaz curada</h3>
+<ul>
+<li>Para el candidato la mensajería es una funcionalidad principal: es una de las cosas para las que más usa la plataforma.</li>
+<li>Su lista de mensajes muestra de forma prominente las conversaciones con el equipo clave (Gerente de campaña, Director de comunicaciones, Director de finanzas).</li>
+<li>Las conversaciones grupales en las que participa (por ejemplo, &quot;Liderazgo&quot;) están a mano.</li>
+<li>No ve todo el panorama de chats de la organización: solo las conversaciones en las que está.</li>
+</ul>
+<h3 id="patrones-propios-del-candidato" tabindex="-1"><a class="heading-anchor" href="#patrones-propios-del-candidato" aria-hidden="true">#</a> Patrones propios del candidato</h3>
+<ul>
+<li><strong>Mensajes de informe</strong> — el equipo puede mandar informes estructurados (puntos de mensaje, cambios de agenda, resúmenes de encuestas) que se ven distintos de la conversación casual. Son mensajes con plantilla propia, no chat libre.</li>
+<li><strong>Solicitudes de aprobación</strong> — el equipo puede mandar cosas para que el candidato apruebe (borrador de comunicado de prensa, publicación en redes, correo de recaudación). El candidato aprueba, rechaza o comenta. Queda registrado para auditoría.</li>
+<li><strong>Integración con la agenda</strong> — los mensajes pueden referirse a eventos del calendario. &quot;Tu evento de las 3pm en [lugar] se movió a las 4pm&quot;, con enlace al evento.</li>
+</ul>
+<h2 id="comunicación-en-alianzas" tabindex="-1"><a class="heading-anchor" href="#comunicación-en-alianzas" aria-hidden="true">#</a> Comunicación en alianzas</h2>
+<p>Las alianzas (<a href="http://workflows.md" target="_blank" rel="noopener noreferrer">workflows.md</a>) necesitan comunicación entre organizaciones:</p>
+<ul>
+<li><strong>Canal de coordinación de la alianza</strong> — una conversación grupal compartida con representantes designados de cada organización miembro. Opera en la capa de federación.</li>
+<li><strong>Mensajes directos entre organizaciones</strong> — el personal de la alianza puede escribirle directamente a personal de otras organizaciones miembro (sujeto a las reglas de intercambio de la alianza).</li>
+<li><strong>Difusiones de la alianza</strong> — quien coordina la alianza puede mandar anuncios a todas las organizaciones miembro.</li>
+</ul>
+<p><strong>DECIDIDO: Negociación de llaves por organización.</strong> Los mensajes de la alianza usan una llave de grupo generada de forma independiente, distribuida a cada organización miembro cifrada con su llave pública. La llave rota en cada cambio de membresía (cuando una organización entra o sale), lo que garantiza secreto hacia adelante (forward secrecy: los nuevos no pueden leer el historial) y seguridad tras compromiso (quien se va no puede leer lo que viene). Rotar la llave es una ceremonia de verdad, y eso hace que entrar o salir de la alianza se sienta como el acto consecuente que es, además de darle al flujo de entrada y salida un momento concreto sobre el cual construir. Es más complejo que cifrar en la capa de federación, pero es consistente con el modelo de soberanía: no se introduce ninguna frontera de confianza nueva.</p>
+<h2 id="comunicación-del-centro-de-mando" tabindex="-1"><a class="heading-anchor" href="#comunicación-del-centro-de-mando" aria-hidden="true">#</a> Comunicación del centro de mando</h2>
+<p>Los centros de mando del día de elecciones (<a href="http://gotv.md" target="_blank" rel="noopener noreferrer">gotv.md</a>) tienen necesidades de comunicación especializadas:</p>
+<h3 id="canal-del-centro-de-mando" tabindex="-1"><a class="heading-anchor" href="#canal-del-centro-de-mando" aria-hidden="true">#</a> Canal del centro de mando</h3>
+<ul>
+<li><strong>Canal dedicado</strong> — se crea automáticamente al activar las operaciones de GOTV para una elección. Incluye a todo el equipo del centro de mando (Administrador de la organización, Directores de campo, Coordinador de transporte, Director de comunicaciones, contactos del equipo legal).</li>
+<li><strong>Actualizaciones estructuradas</strong> — el canal recibe actualizaciones automáticas: hitos de participación, sugerencias de reasignación, alertas de acumulación de solicitudes de transporte, escalamientos de observadores.</li>
+<li><strong>Información fijada</strong> — la información de referencia queda fijada arriba: horas de cierre de los centros, contactos de emergencia, números de la línea legal, procedimientos de escalamiento.</li>
+</ul>
+<h3 id="comunicación-de-campo-durante-el-gotv" tabindex="-1"><a class="heading-anchor" href="#comunicación-de-campo-durante-el-gotv" aria-hidden="true">#</a> Comunicación de campo durante el GOTV</h3>
+<ul>
+<li><strong>Líder de equipo → centro de mando</strong> — los Líderes de equipo pueden escalar incidentes del terreno directamente al canal del centro de mando.</li>
+<li><strong>Centro de mando → campo</strong> — el equipo del centro de mando puede difundir a todos los voluntarios activos en campo (por ejemplo: &quot;A todo el equipo de campo: pasen a los territorios de la tarde ahora&quot;).</li>
+<li><strong>Mensajes de coordinación de transporte</strong> — las solicitudes de transporte y las asignaciones de conductores generan notificaciones en el hilo de coordinación de transporte.</li>
+</ul>
+<h2 id="requisitos-técnicos" tabindex="-1"><a class="heading-anchor" href="#requisitos-técnicos" aria-hidden="true">#</a> Requisitos técnicos</h2>
+<h3 id="implementación-del-cifrado-de-extremo-a-extremo" tabindex="-1"><a class="heading-anchor" href="#implementación-del-cifrado-de-extremo-a-extremo" aria-hidden="true">#</a> Implementación del cifrado de extremo a extremo</h3>
+<p>Según lo decidido en <a href="http://security.md" target="_blank" rel="noopener noreferrer">security.md</a> y <a href="http://system.md" target="_blank" rel="noopener noreferrer">system.md</a>:</p>
+<ul>
+<li><strong>Protocolo:</strong> Signal Protocol (Double Ratchet) o equivalente. Bien auditado, ampliamente implementado, maneja bien varios dispositivos.</li>
+<li><strong>Generación de llaves:</strong> cada usuario genera un par de llaves pública/privada durante la incorporación (<a href="../../design/architecture/system.html#field-mode-authentication">system.md § Autenticación en modo de campo</a>). Las llaves privadas nunca salen del dispositivo.</li>
+<li><strong>Varios dispositivos:</strong> una persona puede tener varios dispositivos (celular y computadora). La distribución de llaves entre dispositivos usa el patrón establecido (un dispositivo nuevo se autoriza desde uno existente o por recuperación con contactos de confianza).</li>
+<li><strong>Cifrado de grupo:</strong> protocolo Sender Keys para mensajes grupales (cada emisor tiene una llave compartida con todos los integrantes del grupo — eficiente, una sola operación de cifrado por envío sin importar el tamaño del grupo).</li>
+<li><strong>Custodia de llaves (opcional):</strong> cuando la organización activa la custodia, una copia de la llave privada del usuario se cifra con la llave de sobre de la organización y se guarda en el servidor. Habilita la búsqueda del lado del servidor y la recuperación de dispositivos sin contactos de confianza.</li>
+</ul>
+<h3 id="almacenamiento-de-mensajes" tabindex="-1"><a class="heading-anchor" href="#almacenamiento-de-mensajes" aria-hidden="true">#</a> Almacenamiento de mensajes</h3>
+<ul>
+<li><strong>En el dispositivo:</strong> los mensajes se guardan en la base de datos local cifrada (SQLCipher). Disponibles sin conexión.</li>
+<li><strong>En el servidor (modo E2E):</strong> el servidor guarda bloques cifrados. No puede leer el contenido. Guarda metadatos (emisor, destinatario, fecha y hora, ID del mensaje) para poder entregarlos.</li>
+<li><strong>En el servidor (modo custodia):</strong> el servidor puede descifrar e indexar los mensajes para búsqueda. Misma política de retención que el resto de los datos de la organización.</li>
+<li><strong>Retención:</strong> los mensajes siguen la política de retención configurada por la organización. Al vencer, se borran del servidor. Las copias en el dispositivo quedan hasta que el usuario las borre o se limpie el dispositivo.</li>
+</ul>
+<h3 id="entrega-de-mensajes" tabindex="-1"><a class="heading-anchor" href="#entrega-de-mensajes" aria-hidden="true">#</a> Entrega de mensajes</h3>
+<ul>
+<li><strong>Entrega en línea:</strong> los mensajes se entregan en tiempo real por conexión WebSocket.</li>
+<li><strong>Encolado sin conexión:</strong> si el destinatario está desconectado, el mensaje se encola en el servidor y se entrega en la próxima conexión. La cola sigue el mismo protocolo de sincronización que el resto de los datos (event sourcing, <a href="http://system.md" target="_blank" rel="noopener noreferrer">system.md</a>).</li>
+<li><strong>Confirmaciones de entrega:</strong> quien envía ve cuándo el mensaje llegó al servidor y cuándo llegó al dispositivo del destinatario. Se muestra con marcas de cotejo (una = enviado, dos = entregado).</li>
+</ul>
+<p><strong>DECIDIDO: Sin confirmaciones de lectura.</strong> La plataforma no registra ni muestra cuándo se leyó un mensaje. Solo confirmaciones de entrega (llegó al servidor, llegó al dispositivo). Privacidad primero, consistente con una filosofía de mensajería centrada en la seguridad.</p>
+<h3 id="búsqueda" tabindex="-1"><a class="heading-anchor" href="#búsqueda" aria-hidden="true">#</a> Búsqueda</h3>
+<ul>
+<li><strong>Modo E2E (sin custodia):</strong> la búsqueda es solo del lado del cliente. La app busca en la base local del dispositivo. Se limita a los mensajes que ese dispositivo sincronizó. No hay búsqueda del lado del servidor.</li>
+<li><strong>Modo custodia:</strong> búsqueda completa del lado del servidor sobre todos los mensajes. Los resultados respetan el acceso de cada persona: solo se busca en conversaciones en las que participa.</li>
+<li><strong>Mensajes contextuales:</strong> si usan cifrado del lado del servidor (según la decisión de arriba), siempre son buscables desde el servidor.</li>
+</ul>
+<h3 id="comportamiento-sin-conexión" tabindex="-1"><a class="heading-anchor" href="#comportamiento-sin-conexión" aria-hidden="true">#</a> Comportamiento sin conexión</h3>
+<ul>
+<li><strong>Lectura:</strong> todos los mensajes sincronizados están disponibles sin conexión. Se puede leer el historial completo.</li>
+<li><strong>Redacción:</strong> se pueden escribir y enviar mensajes sin conexión. Se encolan localmente y salen cuando vuelve la conectividad.</li>
+<li><strong>Recepción:</strong> los mensajes enviados mientras la persona estaba desconectada se encolan y se entregan al reconectar. No se pierde nada.</li>
+<li><strong>Sincronización de grupos:</strong> al volver en línea, la app sincroniza en orden cronológico los mensajes grupales que se perdió.</li>
+</ul>
+<h3 id="multimedia-y-archivos" tabindex="-1"><a class="heading-anchor" href="#multimedia-y-archivos" aria-hidden="true">#</a> Multimedia y archivos</h3>
+<ul>
+<li><strong>Formatos admitidos:</strong> imágenes, clips cortos de video, mensajes de voz, documentos PDF.</li>
+<li><strong>Límites de tamaño:</strong> configurables por organización (por defecto: 25MB por adjunto).</li>
+<li><strong>Almacenamiento:</strong> los adjuntos se guardan cifrados (E2E en modo sin custodia, llave de sobre en modo custodia). Cuentan contra la cuota de almacenamiento de la organización.</li>
+<li><strong>Miniaturas:</strong> para las imágenes se genera una miniatura cifrada para vista previa. En modo E2E, la miniatura se cifra con la misma llave que la imagen completa.</li>
+</ul>
+<p><strong>DECIDIDO: Mensajes de voz limitados a contextos de campo.</strong> Los mensajes de voz están disponibles en conversaciones de campo — canales de Líder de equipo, hilos de turno, centro de mando de GOTV y difusiones a campo — donde el equipo no puede escribir con facilidad (caminando entre puertas, manejando). No es una funcionalidad general para todas las conversaciones. La transcripción automática (para búsqueda y accesibilidad) queda para cuando exista la infraestructura de IA.</p>
+<h2 id="moderación-y-seguridad" tabindex="-1"><a class="heading-anchor" href="#moderación-y-seguridad" aria-hidden="true">#</a> Moderación y seguridad</h2>
+<h3 id="políticas-de-contenido" tabindex="-1"><a class="heading-anchor" href="#políticas-de-contenido" aria-hidden="true">#</a> Políticas de contenido</h3>
+<ul>
+<li>GreenGrass no modera el contenido de los mensajes internos: son comunicaciones privadas dentro de una organización política. La organización (su Administrador) es responsable de sus propios estándares de comunicación.</li>
+<li><strong>Excepción:</strong> la plataforma escanea contra hashes conocidos de CSAM (material de abuso sexual infantil), como exige la ley en casi todas las jurisdicciones, y bloquea ese contenido. El escaneo opera sobre hashes, no sobre el contenido, y funciona incluso en modo E2E.</li>
+</ul>
+<h3 id="reporte-de-abuso" tabindex="-1"><a class="heading-anchor" href="#reporte-de-abuso" aria-hidden="true">#</a> Reporte de abuso</h3>
+<ul>
+<li>Cualquier persona puede reportar un mensaje o una conversación al Administrador de la organización. El reporte incluye el contenido del mensaje (lo aporta quien reporta: la plataforma no rompe el E2E para extraerlo).</li>
+<li>Los Administradores pueden sacar gente de las conversaciones grupales y desactivarle la mensajería a usuarios específicos.</li>
+<li>No hay moderación a nivel de plataforma (GreenGrass) de los mensajes internos. Aplica la autonomía de la organización.</li>
+</ul>
+<h3 id="borrado-de-mensajes" tabindex="-1"><a class="heading-anchor" href="#borrado-de-mensajes" aria-hidden="true">#</a> Borrado de mensajes</h3>
+<ul>
+<li><strong>Quien envía puede borrar</strong> — se puede borrar el mensaje propio. En modo E2E, eso manda una solicitud de borrado a los dispositivos de todos los destinatarios (con el mejor esfuerzo: si un dispositivo está desconectado, el mensaje puede seguir ahí hasta que sincronice el borrado).
+<strong>DECIDIDO: Sin mensajes que desaparecen.</strong> Todos los mensajes persisten hasta que quien los envió los borre a mano o hasta que venza la política de retención de datos de la organización. Más simple, y evita posibles problemas de cumplimiento en jurisdicciones que exijan retener las comunicaciones de campaña.</li>
+</ul>
+<h2 id="modos-de-comunicación-específicos-del-gotv" tabindex="-1"><a class="heading-anchor" href="#modos-de-comunicación-específicos-del-gotv" aria-hidden="true">#</a> Modos de comunicación específicos del GOTV</h2>
+<h3 id="modo-día-de-elecciones" tabindex="-1"><a class="heading-anchor" href="#modo-día-de-elecciones" aria-hidden="true">#</a> Modo día de elecciones</h3>
+<p>Cuando se activan las operaciones de GOTV:</p>
+<ul>
+<li><strong>Cambian las prioridades de notificación</strong> — las notificaciones de GOTV (participación, sugerencias de reasignación, solicitudes de transporte, escalamientos de observadores) suben a prioridad alta.</li>
+<li><strong>El canal del centro de mando pasa a ser el principal</strong> — queda fijado arriba en la lista de mensajes de cada integrante del centro de mando.</li>
+<li><strong>Difusión a campo</strong> — el equipo del centro de mando gana un botón de un toque para difundir a todos los voluntarios activos en campo.</li>
+<li><strong>Actualizaciones automáticas de estado</strong> — el sistema publica resúmenes periódicos de participación en el canal del centro de mando (por ejemplo, cada 30 minutos).</li>
+</ul>
+<h3 id="cierre-después-de-la-elección" tabindex="-1"><a class="heading-anchor" href="#cierre-después-de-la-elección" aria-hidden="true">#</a> Cierre después de la elección</h3>
+<ul>
+<li>El modo día de elecciones se desactiva cuando cierran los centros (o a mano, por el Administrador de la organización).</li>
+<li>El canal del centro de mando sigue existiendo para la coordinación posterior, pero pierde su estatus de prioridad.</li>
+<li>Las prioridades de notificación vuelven a la normalidad.</li>
+<li>El historial de mensajes del día se conserva según la política de retención.</li>
+</ul>
+<h2 id="preguntas-abiertas" tabindex="-1"><a class="heading-anchor" href="#preguntas-abiertas" aria-hidden="true">#</a> Preguntas abiertas</h2>
+<ol>
+<li>
+<p><strong>Llamadas de voz y video</strong> — ¿debería la plataforma soportar llamadas de voz o video entre usuarios (no las llamadas a votantes, que están en <a href="http://workflows.md" target="_blank" rel="noopener noreferrer">workflows.md</a>)? Añadiría bastante complejidad, pero podría reemplazar la necesidad de herramientas externas como Signal o WhatsApp para coordinarse internamente. La integración con Jitsi (<a href="http://integrations.md" target="_blank" rel="noopener noreferrer">integrations.md</a>) podría cargar con eso.</p>
+</li>
+<li>
+<p><strong>Reacciones a mensajes</strong> — ¿debería la gente poder reaccionar a un mensaje con emoji? Es una forma barata de acusar recibo sin responder. Habitual en la mensajería moderna. Cuesta poco implementarlo, pero añade complejidad a la interfaz.</p>
+</li>
+<li>
+<p><strong>Reenvío de mensajes</strong> — ¿debería poderse reenviar un mensaje de una conversación a otra? Útil para compartir información entre equipos. Tiene implicaciones de privacidad: quien lo escribió puede no haberlo escrito para una audiencia más amplia.</p>
+</li>
+<li>
+<p><strong>Mensajes de bots y automatizaciones</strong> — ¿deberían los sistemas automatizados poder publicar en los canales (por ejemplo, &quot;Nuevo voluntario: [nombre]&quot; en el canal #volunteers)? Útil para estar al tanto, pero puede volverse ruidoso.</p>
+</li>
+<li>
+<p><strong>Puente con mensajería externa</strong> — parte del personal de campaña puede preferir sus herramientas de siempre (Signal, WhatsApp, Telegram) para la comunicación interna. ¿Debería la plataforma ofrecer un puente que refleje los mensajes internos en plataformas externas? Tiene implicaciones serias de seguridad y cumplimiento.</p>
+</li>
+</ol>
+<!-- REVISIT: La implementación del Signal Protocol necesita una auditoría de seguridad cuidadosa antes del lanzamiento. Considerar usar una biblioteca establecida (libsignal) en vez de implementarlo desde cero. -->
+<!-- REVISIT: Hay que analizar los costos de almacenamiento de los adjuntos multimedia en modo E2E. Los archivos cifrados de extremo a extremo no se pueden deduplicar del lado del servidor, lo que encarece el almacenamiento frente al cifrado del lado del servidor. -->
+
+    </article>
+  </main>
+  <div class="toc-rail"><nav class="toc" aria-label="En esta página"><div class="toc-label">En esta página</div><ul><li class="toc-2"><a href="#propósito"># Propósito</a></li><li class="toc-2"><a href="#filosofía-de-comunicación"># Filosofía de comunicación</a></li><li class="toc-2"><a href="#tipos-de-mensaje"># Tipos de mensaje</a></li><li class="toc-3"><a href="#mensajes-directos"># Mensajes directos</a></li><li class="toc-3"><a href="#conversaciones-grupales"># Conversaciones grupales</a></li><li class="toc-3"><a href="#difusiones"># Difusiones</a></li><li class="toc-3"><a href="#mensajes-contextuales"># Mensajes contextuales</a></li><li class="toc-2"><a href="#notificaciones"># Notificaciones</a></li><li class="toc-3"><a href="#fuentes-de-notificaciones"># Fuentes de notificaciones</a></li><li class="toc-3"><a href="#canales-de-notificación"># Canales de notificación</a></li><li class="toc-3"><a href="#prioridad-de-las-notificaciones"># Prioridad de las notificaciones</a></li><li class="toc-3"><a href="#no-molestar-y-horas-de-silencio"># No molestar y horas de silencio</a></li><li class="toc-2"><a href="#comunicación-del-candidato"># Comunicación del candidato</a></li><li class="toc-3"><a href="#interfaz-curada"># Interfaz curada</a></li><li class="toc-3"><a href="#patrones-propios-del-candidato"># Patrones propios del candidato</a></li><li class="toc-2"><a href="#comunicación-en-alianzas"># Comunicación en alianzas</a></li><li class="toc-2"><a href="#comunicación-del-centro-de-mando"># Comunicación del centro de mando</a></li><li class="toc-3"><a href="#canal-del-centro-de-mando"># Canal del centro de mando</a></li><li class="toc-3"><a href="#comunicación-de-campo-durante-el-gotv"># Comunicación de campo durante el GOTV</a></li><li class="toc-2"><a href="#requisitos-técnicos"># Requisitos técnicos</a></li><li class="toc-3"><a href="#implementación-del-cifrado-de-extremo-a-extremo"># Implementación del cifrado de extremo a extremo</a></li><li class="toc-3"><a href="#almacenamiento-de-mensajes"># Almacenamiento de mensajes</a></li><li class="toc-3"><a href="#entrega-de-mensajes"># Entrega de mensajes</a></li><li class="toc-3"><a href="#búsqueda"># Búsqueda</a></li><li class="toc-3"><a href="#comportamiento-sin-conexión"># Comportamiento sin conexión</a></li><li class="toc-3"><a href="#multimedia-y-archivos"># Multimedia y archivos</a></li><li class="toc-2"><a href="#moderación-y-seguridad"># Moderación y seguridad</a></li><li class="toc-3"><a href="#políticas-de-contenido"># Políticas de contenido</a></li><li class="toc-3"><a href="#reporte-de-abuso"># Reporte de abuso</a></li><li class="toc-3"><a href="#borrado-de-mensajes"># Borrado de mensajes</a></li><li class="toc-2"><a href="#modos-de-comunicación-específicos-del-gotv"># Modos de comunicación específicos del GOTV</a></li><li class="toc-3"><a href="#modo-día-de-elecciones"># Modo día de elecciones</a></li><li class="toc-3"><a href="#cierre-después-de-la-elección"># Cierre después de la elección</a></li><li class="toc-2"><a href="#preguntas-abiertas"># Preguntas abiertas</a></li></ul></nav></div>
+</div>
+<script src="../../assets/search.js" defer></script>
+<script src="../../assets/app.js" defer></script>
+</body>
+</html>

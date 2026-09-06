@@ -52,7 +52,7 @@ A few resolutions surfaced decisions bigger than the questions that prompted the
 
 - **Alliance data ownership** when joint campaigns end turned out to have a clean answer: the lead org retains the joint record; each member keeps data their own people generated. No member loses access to their own work. Simple, but it needed to be written down.
 
-Three features were explicitly flagged as v2 tentpole capabilities rather than just "deferred": the Visual Flow Builder (transforming communications from message sending to journey orchestration), the Shared Content Library (centralized asset management across all features), and Settings Delegation (controlled permission sharing beyond OA-only). Naming them as tentpoles rather than backlog items signals that they deserve holistic design, not incremental addition.
+Three features were explicitly flagged as v2 tentpole capabilities rather than just "deferred": the Visual Flow Builder (transforming communications from message sending to journey orchestration), the Shared Content Library (centralized asset management across all features), and Settings Delegation (controlled permission sharing beyond OA-only). Naming them as tentpoles rather than backlog items signals that they should be designed as a whole rather than bolted onto what already exists.
 
 ## 89 of 89
 

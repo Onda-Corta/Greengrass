@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="es" data-base="../../" data-no-results="No hay resultados para">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Usuarios y roles · GreenGrass</title>
+<meta name="description" content="Usuarios y roles — Documentación de especificación y diseño de GreenGrass.">
+<link rel="alternate" hreflang="en" href="../../spec/users.html">
+<link rel="alternate" hreflang="es" href="./users.html">
+<link rel="alternate" hreflang="x-default" href="../../spec/users.html">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%232563eb'/%3E%3Cstop offset='1' stop-color='%2316a34a'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='32' height='32' rx='7' fill='url(%23g)'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="../../assets/styles.css">
+</head>
+<body>
+<a class="skip-link" href="#content">Saltar al contenido</a>
+<header class="site-header">
+  <button type="button" class="menu-toggle" aria-label="Alternar navegación" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+  <a class="brand" href="../../es/index.html">
+    <span class="brand-mark" aria-hidden="true"></span>
+    <span class="brand-text"><strong>GreenGrass</strong><small>Especificación y diseño</small></span>
+  </a>
+  <div class="search">
+    <input type="search" id="search-input" placeholder="Buscar en la documentación…" autocomplete="off" aria-label="Buscar en la documentación">
+    <div id="search-results" class="search-results" hidden></div>
+  </div>
+  <nav class="lang-switch" aria-label="Idioma"><a class="lang-opt" href="../../spec/users.html" hreflang="en" lang="en" title="View this page in English">EN</a><span class="lang-opt active" aria-current="true">ES</span></nav>
+  <button type="button" class="theme-toggle" aria-label="Alternar modo oscuro" title="Alternar modo oscuro">
+    <span class="theme-icon" aria-hidden="true"></span>
+  </button>
+</header>
+<div class="layout">
+  <div class="sidebar-backdrop" hidden></div>
+  <aside class="sidebar" aria-label="Navegación de la documentación">
+    <nav class="nav">
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">Inicio<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../index.html">GreenGrass</a></li></ul></div>
+<div class="nav-section open"><button type="button" class="nav-section-title" aria-expanded="true">Especificaciones<span class="chev" aria-hidden="true"></span></button><ul><li><a href="./product.html">Proyecto: GreenGrass</a></li><li><a href="./mvp.html">MVP de GreenGrass — plan de producto</a></li><li><a href="./users.html" aria-current="page" class="active">Usuarios y roles</a></li><li><a href="./workflows.html">Flujos de trabajo principales</a></li><li><a href="./geography.html">Geografía objetivo</a></li><li><a href="./security.html">Seguridad y modelo de amenazas</a></li><li><a href="./compliance.html">Cumplimiento y marco legal</a></li><li><a href="./fundraising.html">Recaudación de fondos e infraestructura de pagos</a></li><li><a href="./integrations.html">Integraciones externas</a></li><li><a href="./support.html">Soporte y puesta en marcha de organizaciones</a></li><li><a href="./gotv.html">GOTV y operaciones del día de elecciones</a></li><li><a href="./messaging.html">Comunicaciones internas y notificaciones</a></li><li><a href="./press.html">Prensa, medios y comunicaciones públicas</a></li><li><a href="./comms-intelligence.html">Inteligencia de comunicaciones — hoja de ruta post-MVP</a></li></ul></div>
+    </nav>
+  </aside>
+  <main id="content" class="content">
+    <nav class="breadcrumb" aria-label="Ruta de navegación">Especificaciones</nav>
+    <article class="prose">
+<h1 id="usuarios-y-roles" tabindex="-1"><a class="heading-anchor" href="#usuarios-y-roles" aria-hidden="true">#</a> Usuarios y roles</h1>
+<h2 id="resumen" tabindex="-1"><a class="heading-anchor" href="#resumen" aria-hidden="true">#</a> Resumen</h2>
+<p>GreenGrass atiende a dos categorías distintas de personas:</p>
+<ol>
+<li><strong>Usuarios de la plataforma</strong> — personas que inician sesión y usan el software para dirigir una campaña o participar en ella</li>
+<li><strong>Registros de la base de datos</strong> — personas que existen en el CRM como contactos, votantes o constituyentes, pero que quizá nunca inicien sesión</li>
+</ol>
+<p>La descripción del producto pide &quot;acceso explícito con cuenta propia para <em>todo el mundo</em>&quot;. Eso significa que la frontera entre ambas categorías es porosa a propósito. Un registro de votante puede convertirse en usuario activo. Quien dona una vez por un formulario puede recibir después una invitación a ser voluntaria. El sistema tiene que soportar esa fluidez sin crear registros duplicados.</p>
+<hr>
+<h2 id="organizaciones" tabindex="-1"><a class="heading-anchor" href="#organizaciones" aria-hidden="true">#</a> Organizaciones</h2>
+<p>En GreenGrass, cada unidad cliente es una <strong>organización</strong>. Una organización puede ser:</p>
+<ul>
+<li>Una campaña política (una persona candidata a un cargo)</li>
+<li>Un partido político (entidad permanente que maneja varias campañas)</li>
+<li>Una organización de incidencia o activismo</li>
+<li>Una coalición o movimiento que coordina varios grupos</li>
+</ul>
+<h3 id="jerarquía-organizativa" tabindex="-1"><a class="heading-anchor" href="#jerarquía-organizativa" aria-hidden="true">#</a> Jerarquía organizativa</h3>
+<p><strong>DECIDIDO:</strong> El modelo organizativo es una federación de entidades soberanas conectadas por afiliación, no por propiedad.</p>
+<p><strong>Tipos de entidad:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Entidad</th>
+<th>Tipo de organización</th>
+<th>Descripción</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Alianza</td>
+<td>Ligera</td>
+<td>Coalición de partidos, organizaciones o candidatos. Tiene su propia facturación, personal, bolsa de voluntarios, datos de miembros y simpatizantes, y campañas conjuntas. No duplica el conjunto completo de herramientas de CRM, recaudación y comunicaciones de sus miembros.</td>
+</tr>
+<tr>
+<td>Partido / Organización</td>
+<td>Completa</td>
+<td>Partido político, organización de incidencia, movimiento. Acceso completo a la plataforma: CRM, recaudación de fondos, comunicaciones, analítica, facturación y cuentas propias.</td>
+</tr>
+<tr>
+<td>Candidato</td>
+<td>Completa</td>
+<td>Persona que se postula a un cargo. Acceso completo a la plataforma: datos, facturación y cuentas propias.</td>
+</tr>
+<tr>
+<td>Campaña</td>
+<td>Ninguna (hereda)</td>
+<td>Pertenece a su entidad matriz (candidato, partido, organización o alianza). Hereda la facturación y la estructura administrativa de su matriz.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Modelo de afiliación:</strong></p>
+<pre><code>Alianza (soberana, capa de coordinación)
+├── Partido / Organización (organización soberana) ── afiliación
+│   └── Campaña(s)
+├── Candidato (organización soberana) ── afiliación
+│   └── Campaña(s)
+└── Campaña conjunta (a nivel de alianza)
+</code></pre>
+<p>Un candidato también puede afiliarse directamente a un partido:</p>
+<pre><code>Partido (soberano)
+├── Candidato A (soberano, afiliado) ── afiliación
+├── Candidato B (soberano, afiliado) ── afiliación
+└── Campaña del partido
+</code></pre>
+<p><strong>Reglas:</strong></p>
+<ul>
+<li><strong>Toda entidad, salvo Campaña, es soberana.</strong> Cada una tiene sus propios datos, facturación, cuentas de usuario y control administrativo.</li>
+<li><strong>Las afiliaciones son voluntarias y no transfieren la propiedad.</strong> Un partido no es dueño de los datos de un candidato. Una alianza no es dueña de los datos de sus miembros. La afiliación define los límites de la cooperación, no el control.</li>
+<li><strong>Un candidato puede afiliarse a un partido u operar de forma independiente.</strong> Un candidato independiente con una sola campaña es sencillamente una organización soberana que opera por su cuenta.</li>
+<li><strong>Las campañas pertenecen a su entidad matriz</strong> (candidato, partido/organización o alianza). No son soberanas: heredan la facturación y la estructura administrativa de su matriz.</li>
+<li><strong>Las alianzas son organizaciones ligeras</strong> con capacidades operativas propias: cuentas de personal, bolsas de voluntarios, datos de miembros y simpatizantes, campañas conjuntas y facturación de los costos compartidos. No replican el conjunto completo de herramientas de la plataforma (CRM completo, herramientas de recaudación, suite de comunicaciones); esas siguen en manos de cada entidad miembro.</li>
+<li><strong>Operar por cuenta propia</strong> siempre es posible. Cualquier entidad puede funcionar sin afiliaciones.</li>
+</ul>
+<h3 id="intercambio-entre-organizaciones-dentro-de-una-alianza" tabindex="-1"><a class="heading-anchor" href="#intercambio-entre-organizaciones-dentro-de-una-alianza" aria-hidden="true">#</a> Intercambio entre organizaciones dentro de una alianza</h3>
+<p>Las alianzas permiten cooperar en límites definidos. Cada organización miembro elige qué comparte:</p>
+<p><strong>DECIDIDO:</strong> Todos los tipos de recurso se pueden compartir, con consentimiento expreso por recurso de cada organización miembro.</p>
+<p><strong>Recursos compartibles:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Recurso</th>
+<th>Descripción</th>
+<th>Nota sobre soberanía</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Bolsas de voluntarios</td>
+<td>Voluntarios disponibles para asignarse a cualquier campaña de un miembro</td>
+<td>La identidad de plataforma del voluntario sigue siendo suya; el historial de asignaciones se registra por organización</td>
+</tr>
+<tr>
+<td>Datos de contacto con votantes</td>
+<td>Resultados del trabajo de campo compartidos para no tocar dos veces la misma puerta</td>
+<td>Cada organización elige qué datos de contacto expone; sus etiquetas y puntajes internos quedan privados salvo que los comparta explícitamente</td>
+</tr>
+<tr>
+<td>Infraestructura de eventos</td>
+<td>Mítines conjuntos, listas de confirmación compartidas, calendarios coordinados</td>
+<td>El evento sigue perteneciendo a la organización que lo creó; las confirmaciones llegan a todas las organizaciones coanfitrionas</td>
+</tr>
+<tr>
+<td>Recaudación de fondos</td>
+<td>Páginas de recaudación conjunta con repartos de donaciones configurables</td>
+<td>Los registros financieros de cada organización siguen siendo soberanos; las reglas de reparto se definen a nivel de campaña</td>
+</tr>
+<tr>
+<td>Listas de comunicación</td>
+<td>Listas de simpatizantes compartidas para mensajería coordinada</td>
+<td>Las organizaciones comparten quién está en la lista, no su segmentación interna ni sus datos de participación</td>
+</tr>
+<tr>
+<td>Analítica</td>
+<td>Paneles agregados de toda la alianza</td>
+<td>Las organizaciones miembro ven agregados de toda la alianza; el desglose por organización requiere el consentimiento de esa organización</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Reglas de intercambio:</strong></p>
+<ul>
+<li><strong>Consentimiento expreso por recurso y por organización.</strong> Cada organización miembro elige explícitamente qué tipos de recurso comparte con la alianza. Nada se comparte por defecto.</li>
+<li><strong>Revocable.</strong> Una organización puede retirar un recurso compartido. Los datos ya copiados o ya usados (por ejemplo, un voluntario que ya trabajó un turno conjunto) permanecen en el registro de auditoría, pero el acceso continuo se corta.</li>
+<li><strong>Auditado.</strong> Toda concesión, toda revocación y todo acceso a datos entre organizaciones queda registrado.</li>
+<li><strong>Respeta el consentimiento de cada persona.</strong> Si un simpatizante se dio de baja del intercambio de datos en sus preferencias de plataforma, su registro queda fuera de los recursos compartidos sin importar la configuración de la organización.</li>
+</ul>
+<h3 id="pertenencia-a-varias-organizaciones" tabindex="-1"><a class="heading-anchor" href="#pertenencia-a-varias-organizaciones" aria-hidden="true">#</a> Pertenencia a varias organizaciones</h3>
+<p><strong>DECIDIDO:</strong> Identidad de plataforma con perfiles federados.</p>
+<p>Una persona tiene <strong>una sola identidad a nivel de plataforma</strong> y <strong>un perfil por cada organización</strong> a la que pertenece. La plataforma sabe que es la misma persona (lo que permite deduplicar y coordinar entre organizaciones al nivel de la alianza), pero cada organización solo ve sus propios datos sobre esa persona.</p>
+<p><strong>Reparto de la propiedad de los datos:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Pertenece a la persona (nivel de plataforma)</th>
+<th>Pertenece a la organización</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Credenciales de acceso (login, 2FA)</td>
+<td>Rol y permisos dentro de esa organización</td>
+</tr>
+<tr>
+<td>Nombre, datos de contacto, idioma preferido</td>
+<td>Horas de voluntariado, historial de turnos</td>
+</tr>
+<tr>
+<td>Preferencias de alta y baja en comunicaciones</td>
+<td>Asignaciones de trabajo de campo y notas de campo</td>
+</tr>
+<tr>
+<td>Historial de donaciones (como registro propio del donante)</td>
+<td>Etiquetas, puntajes y segmentos internos</td>
+</tr>
+<tr>
+<td>Membresías e historial de afiliaciones</td>
+<td>Notas del personal sobre la persona</td>
+</tr>
+<tr>
+<td>Preferencias globales de la cuenta</td>
+<td>Asignaciones de tareas y eventos</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Portabilidad:</strong> La identidad de plataforma de una persona es independiente de cualquier organización. Puede irse de una organización, entrar a otra o existir sin afiliación. Los datos de identidad viajan con la persona; los datos operativos específicos de cada organización se quedan con la organización.</p>
+<p><strong>Visibilidad de la alianza:</strong> Cuando las organizaciones miembro participan en una alianza, la capa de alianza puede ver que una persona existe en varias organizaciones miembro para efectos de coordinación (deduplicación, bolsas de voluntarios compartidas, listas de no volver a tocar la puerta). El <em>contenido</em> de los datos que cada organización tiene sobre esa persona no se expone a la alianza sin reglas de intercambio explícitas.</p>
+<!-- REVISIT: La frontera entre los datos que pertenecen a la persona y los que pertenecen a la organización va a necesitar pruebas de estrés a medida que definamos en detalle los flujos de trabajo de campo y la coordinación a nivel de alianza. El historial de contacto en el trabajo de campo es una zona gris conocida: es dato operativo de la campaña, pero también es el registro del trabajo de esa persona, y la alianza puede necesitar acceso selectivo para coordinar. -->
+<hr>
+<h2 id="roles-de-la-plataforma" tabindex="-1"><a class="heading-anchor" href="#roles-de-la-plataforma" aria-hidden="true">#</a> Roles de la plataforma</h2>
+<h3 id="administrador-de-la-organización" tabindex="-1"><a class="heading-anchor" href="#administrador-de-la-organización" aria-hidden="true">#</a> Administrador de la organización</h3>
+<p>El administrador de más alto nivel de una organización. Normalmente el gerente de campaña, el director del partido o quien lidera la organización.</p>
+<p><strong>Lo que puede hacer:</strong></p>
+<ul>
+<li>Acceso completo a todas las funcionalidades de la plataforma</li>
+<li>Manejar cuentas de personal, roles y permisos</li>
+<li>Configurar los ajustes de la organización (identidad visual, procesadores de pago, integraciones)</li>
+<li>Acceder a todos los datos (CRM, financieros, analítica)</li>
+<li>Manejar la facturación y la suscripción</li>
+</ul>
+<p><strong>Usuarios típicos:</strong> Gerente de campaña, director ejecutivo de un partido, fundador de la organización</p>
+<hr>
+<h3 id="personal" tabindex="-1"><a class="heading-anchor" href="#personal" aria-hidden="true">#</a> Personal</h3>
+<p>Trabajadores pagos o de alto rango de la campaña, con acceso por rol a áreas específicas de la plataforma. Personal no es un rol único: es una categoría con permisos configurables.</p>
+<p><strong>Subroles posibles del personal:</strong></p>
+<h4 id="director-de-comunicaciones" tabindex="-1"><a class="heading-anchor" href="#director-de-comunicaciones" aria-hidden="true">#</a> Director de comunicaciones</h4>
+<ul>
+<li>Crear y enviar campañas de correo, SMS y mensajes de WhatsApp</li>
+<li>Manejar las cuentas de redes sociales y su calendario</li>
+<li>Acceder a la analítica de participación</li>
+<li>Manejar plantillas de correo y SMS y listas de contactos</li>
+</ul>
+<h4 id="director-de-finanzas" tabindex="-1"><a class="heading-anchor" href="#director-de-finanzas" aria-hidden="true">#</a> Director de finanzas</h4>
+<ul>
+<li>Manejar los formularios de donación y la configuración del procesador de pagos</li>
+<li>Ver y exportar informes financieros</li>
+<li>Procesar reembolsos y manejar donaciones recurrentes</li>
+<li>Llevar el control de las donaciones en efectivo y generar informes de cumplimiento</li>
+</ul>
+<h4 id="director-de-campo" tabindex="-1"><a class="heading-anchor" href="#director-de-campo" aria-hidden="true">#</a> Director de campo</h4>
+<ul>
+<li>Manejar las operaciones de trabajo de campo y la asignación de territorios</li>
+<li>Supervisar las jornadas de inscripción de votantes</li>
+<li>Manejar las campañas de llamadas y sus guiones</li>
+<li>Acceder a la analítica de campo (puertas tocadas, llamadas hechas, contactos con votantes)</li>
+</ul>
+<h4 id="coordinador-de-voluntarios" tabindex="-1"><a class="heading-anchor" href="#coordinador-de-voluntarios" aria-hidden="true">#</a> Coordinador de voluntarios</h4>
+<ul>
+<li>Reclutar, incorporar y manejar voluntarios</li>
+<li>Crear y manejar turnos, eventos y asignaciones de tareas</li>
+<li>Comunicarse con los voluntarios</li>
+<li>Llevar el control de las horas y la actividad de los voluntarios</li>
+</ul>
+<h4 id="gestor-de-datos" tabindex="-1"><a class="heading-anchor" href="#gestor-de-datos" aria-hidden="true">#</a> Gestor de datos</h4>
+<ul>
+<li>Importar, exportar y limpiar los datos del CRM</li>
+<li>Manejar las importaciones del padrón electoral y la segmentación de listas</li>
+<li>Construir informes y consultas personalizadas</li>
+<li>Manejar la deduplicación y la calidad de los datos</li>
+</ul>
+<p><strong>DECIDIDO:</strong> Híbrido — plantillas de rol como punto de partida, con permisos ajustables por usuario.</p>
+<p>La plataforma viene con un conjunto de plantillas de rol de personal por defecto (Director de comunicaciones, Director de finanzas, Director de campo, Coordinador de voluntarios, Gestor de datos). Los administradores de la organización pueden:</p>
+<ul>
+<li>Asignar una plantilla tal cual a alguien del personal (cubre la mayoría de los casos)</li>
+<li>Asignar varias plantillas a una sola persona (la campaña de tres personas donde alguien hace comunicaciones y finanzas)</li>
+<li>Modificar permisos individuales sobre una plantilla (conceder o revocar capacidades específicas)</li>
+<li>Crear plantillas de rol propias para su organización</li>
+</ul>
+<p>Al apilarse, las plantillas se suman: asignar Director de comunicaciones y Director de finanzas concede la unión de ambos conjuntos de permisos. Las revocaciones explícitas mandan sobre las concesiones.</p>
+<hr>
+<h3 id="voluntario" tabindex="-1"><a class="heading-anchor" href="#voluntario" aria-hidden="true">#</a> Voluntario</h3>
+<p>Personas que se ofrecieron a ayudar a la campaña y recibieron acceso a la plataforma. Los voluntarios son el grupo de usuarios más grande y el más variable en alfabetización tecnológica y en capacidad de sus dispositivos.</p>
+<p><strong>Lo que puede hacer:</strong></p>
+<ul>
+<li>Ver sus turnos, tareas y eventos asignados</li>
+<li>Confirmar asistencia a eventos</li>
+<li>Usar las herramientas de trabajo de campo (móviles, funcionan sin conexión)</li>
+<li>Usar la interfaz de jornadas de llamadas</li>
+<li>Registrar su propia actividad</li>
+<li>Actualizar su perfil y sus preferencias de contacto</li>
+</ul>
+<p><strong>Lo que no puede hacer:</strong></p>
+<ul>
+<li>Ver información personal de otros voluntarios</li>
+<li>Acceder a datos financieros</li>
+<li>Enviar comunicaciones masivas</li>
+<li>Exportar datos</li>
+<li>Modificar registros del CRM más allá de los datos de campo que le tocan</li>
+</ul>
+<p><strong>Usuarios típicos:</strong> Vecinos de la comunidad, activistas, estudiantes, personas jubiladas, simpatizantes con poco tiempo</p>
+<p><strong>DECIDIDO:</strong> Los voluntarios tienen dos niveles — Voluntario y Líder de equipo de voluntarios.</p>
+<h4 id="líder-de-equipo-de-voluntarios" tabindex="-1"><a class="heading-anchor" href="#líder-de-equipo-de-voluntarios" aria-hidden="true">#</a> Líder de equipo de voluntarios</h4>
+<p>Un rol de liderazgo en terreno para manejar un grupo pequeño de voluntarios durante una operación (días de puerta a puerta, jornadas de llamadas, eventos). No es un rol de personal: los líderes de equipo siguen siendo voluntarios, pero con acceso adicional acotado.</p>
+<p><strong>Lo que puede hacer (además del rol base de Voluntario):</strong></p>
+<ul>
+<li>Ver la lista de su equipo (nombres y datos de contacto para coordinar)</li>
+<li>Registrar la entrada de los integrantes del equipo a turnos y eventos</li>
+<li>Ver el territorio asignado a su equipo y el avance del trabajo de campo</li>
+<li>Reasignar puertas o llamadas dentro de su equipo durante una operación</li>
+<li>Reportar problemas al personal o señalar fallas en la calidad de los datos</li>
+<li>Usar un panel ligero de equipo (asistencia, tasas de cumplimiento)</li>
+</ul>
+<p><strong>Lo que no puede hacer:</strong></p>
+<ul>
+<li>Ver equipos que no sean el suyo</li>
+<li>Crear o modificar turnos, eventos o asignaciones de territorio (eso le toca al Coordinador de voluntarios o al Director de campo)</li>
+<li>Acceder a los datos del CRM, los datos financieros o la analítica de toda la organización</li>
+<li>Enviar comunicaciones masivas</li>
+</ul>
+<hr>
+<h3 id="simpatizante" tabindex="-1"><a class="heading-anchor" href="#simpatizante" aria-hidden="true">#</a> Simpatizante</h3>
+<p>Alguien que expresó apoyo a la campaña —se inscribió en el sitio web, donó, fue a un evento, firmó una petición— pero no está haciendo voluntariado activo. Puede tener cuenta o no tenerla.</p>
+<p><strong>Si inicia sesión, puede:</strong></p>
+<ul>
+<li>Ver su propio perfil y su historial de donaciones</li>
+<li>Actualizar sus preferencias de contacto y sus altas en comunicaciones</li>
+<li>Confirmar asistencia a eventos públicos</li>
+<li>Ver los perfiles públicos del candidato o de la organización</li>
+<li>Donar</li>
+</ul>
+<p><strong>Usuarios típicos:</strong> Donantes, firmantes de peticiones, suscriptores del boletín, asistentes a eventos</p>
+<hr>
+<h3 id="candidato" tabindex="-1"><a class="heading-anchor" href="#candidato" aria-hidden="true">#</a> Candidato</h3>
+<p>La persona que se postula al cargo. En algunas campañas el candidato usa la plataforma a fondo; en otras, no la toca.</p>
+<p><strong>Lo que puede hacer:</strong></p>
+<ul>
+<li>Ver paneles e informes (de solo lectura o vistas curadas)</li>
+<li>Manejar su propio perfil público</li>
+<li>Ver totales de recaudación y asistencia a eventos</li>
+<li>Comunicarse con el equipo (mensajería interna)</li>
+</ul>
+<p><strong>DECIDIDO:</strong> Candidato es una plantilla de rol, no un tipo de rol aparte.</p>
+<p>La plantilla Candidato ofrece por defecto una interfaz curada y simplificada:</p>
+<ul>
+<li>Paneles de campaña y métricas clave (recaudación, actividad de voluntarios, eventos)</li>
+<li>Manejo del perfil público</li>
+<li>Totales de recaudación y panorama de donantes (sin la administración financiera completa)</li>
+<li>Asistencia a eventos y agenda próxima</li>
+<li>Mensajería interna con el equipo</li>
+</ul>
+<p>La plantilla deja fuera a propósito la complejidad operativa (manejo de datos, programación de turnos de voluntarios, herramientas de comunicación), pero como es una plantilla, los permisos se pueden ajustar para candidatos que quieran meter mano y tener acceso completo.</p>
+<p><strong>Nota de diseño:</strong> El sistema de plantillas es un patrón central de toda la plataforma. Todos los roles —los subroles del personal, los niveles de voluntariado y el candidato— están implementados como plantillas de permisos que se pueden asignar tal cual, apilar o personalizar. Así la plataforma trae buenos valores por defecto para las configuraciones más comunes y a la vez deja que cada organización ajuste el acceso a su estructura real.</p>
+<hr>
+<h2 id="tipos-de-registro-del-crm-sin-cuenta" tabindex="-1"><a class="heading-anchor" href="#tipos-de-registro-del-crm-sin-cuenta" aria-hidden="true">#</a> Tipos de registro del CRM (sin cuenta)</h2>
+<p>Estas son personas que existen en la base de datos pero que quizá no tengan cuenta en la plataforma.</p>
+<h3 id="votante-constituyente" tabindex="-1"><a class="heading-anchor" href="#votante-constituyente" aria-hidden="true">#</a> Votante / constituyente</h3>
+<p>Una persona del padrón electoral o de la base de constituyentes. Es el registro central del CRM.</p>
+<p><strong>Datos típicos:</strong></p>
+<ul>
+<li>Nombre, dirección, datos de contacto</li>
+<li>Precinto electoral / distrito electoral</li>
+<li>Estado de inscripción como votante</li>
+<li>Historial de votación (en qué elecciones participó, no por quién votó)</li>
+<li>Datos demográficos (edad, idioma preferido)</li>
+<li>Puntaje de apoyo o simpatía (a partir del trabajo de campo)</li>
+<li>Historial de comunicaciones (correos abiertos, puertas tocadas, llamadas hechas)</li>
+<li>Etiquetas y segmentos</li>
+<li>Relaciones dentro del hogar</li>
+</ul>
+<h3 id="donante" tabindex="-1"><a class="heading-anchor" href="#donante" aria-hidden="true">#</a> Donante</h3>
+<p>Una persona que hizo una aportación económica. Puede coincidir con cualquier otro tipo de registro.</p>
+<p><strong>Datos adicionales:</strong></p>
+<ul>
+<li>Historial de donaciones (montos, fechas, métodos)</li>
+<li>Estado de donación recurrente</li>
+<li>Información de cumplimiento (empleador, ocupación — varía según la jurisdicción)</li>
+</ul>
+<h3 id="contacto" tabindex="-1"><a class="heading-anchor" href="#contacto" aria-hidden="true">#</a> Contacto</h3>
+<p>Un registro de uso general para personas que no encajan bien como votante ni como donante. Puede tratarse de contactos de prensa, líderes de organizaciones aliadas, cargos electos o quienes dan su respaldo.</p>
+<hr>
+<h2 id="la-lista-única-y-la-deduplicación" tabindex="-1"><a class="heading-anchor" href="#la-lista-única-y-la-deduplicación" aria-hidden="true">#</a> La lista única y la deduplicación</h2>
+<p>La descripción del producto pide &quot;una lista única que deduplica personas&quot;. En la práctica, eso significa:</p>
+<ul>
+<li>Una persona debe tener un solo registro canónico, sin importar cuántas veces aparezca en distintas fuentes de datos</li>
+<li>Un votante que además dona y además hace voluntariado es <strong>un registro</strong> con varias facetas, no tres registros separados</li>
+<li>El rol o tipo se suma: un registro se etiqueta como votante + donante + voluntario, no se encasilla en una sola categoría</li>
+</ul>
+<h3 id="estrategia-de-deduplicación" tabindex="-1"><a class="heading-anchor" href="#estrategia-de-deduplicación" aria-hidden="true">#</a> Estrategia de deduplicación</h3>
+<p><strong>DECIDIDO:</strong> Coincidencia compuesta, con el número de celular como identificador principal.</p>
+<p>El motor de deduplicación usa coincidencia ponderada sobre varios campos, con pesos configurables por despliegue para dar cuenta de la calidad y la disponibilidad de datos de cada país.</p>
+<p><strong>Campos de coincidencia por prioridad:</strong></p>
+<ol>
+<li><strong>Número de celular (principal)</strong> — el de mayor peso. Es un identificador fuerte en contextos donde el celular manda y la penetración en el Sur Global es alta. Se normaliza a formato internacional (E.164).</li>
+<li><strong>Correo electrónico</strong> — secundario. Útil donde existe, pero no se asume universal.</li>
+<li><strong>Identificación nacional / de votante</strong> — coincidencia definitiva donde exista. Se trata como dato sensible, con las protecciones de almacenamiento correspondientes. Su disponibilidad y formato varían según el país.</li>
+<li><strong>Nombre + dirección</strong> — coincidencia difusa como señal de apoyo. Sirve para corroborar o sacar a la luz coincidencias posibles, no como criterio único.</li>
+</ol>
+<p><strong>Configurable por despliegue:</strong> Los pesos de coincidencia, los umbrales de confianza requeridos y qué campos están disponibles o son relevantes se pueden ajustar por organización o según el contexto del país. Un despliegue en un país con identificación nacional universal puede darle mucho peso a ese campo; uno donde es común compartir teléfono puede bajar el peso del celular y exigir un segundo campo coincidente.</p>
+<h3 id="comportamiento-de-la-fusión" tabindex="-1"><a class="heading-anchor" href="#comportamiento-de-la-fusión" aria-hidden="true">#</a> Comportamiento de la fusión</h3>
+<p><strong>DECIDIDO:</strong> Sugerir y confirmar.</p>
+<p>El sistema marca los posibles duplicados y los pone en una cola de revisión. Una persona con los permisos adecuados (Gestor de datos o Administrador de la organización) revisa y decide si fusiona, descarta o pospone. Nada se fusiona automáticamente: en un contexto político, el riesgo de atribuir mal una donación o perder historial de trabajo de campo es demasiado alto.</p>
+<p>La interfaz de revisión debe mostrar una comparación lado a lado de los registros candidatos, con el puntaje de confianza y qué campos coincidieron.</p>
+<hr>
+<h2 id="autenticación-y-acceso" tabindex="-1"><a class="heading-anchor" href="#autenticación-y-acceso" aria-hidden="true">#</a> Autenticación y acceso</h2>
+<p>La descripción del producto especifica &quot;acceso explícito con cuenta propia para todo el mundo, con preferencias de cuenta fáciles de manejar&quot;.</p>
+<h3 id="métodos-de-autenticación" tabindex="-1"><a class="heading-anchor" href="#métodos-de-autenticación" aria-hidden="true">#</a> Métodos de autenticación</h3>
+<p><strong>DECIDIDO:</strong> Passkeys como método principal. Nada de inicio de sesión con redes sociales.</p>
+<p><strong>Métodos de autenticación por prioridad:</strong></p>
+<ol>
+<li><strong>Passkeys / WebAuthn (principal)</strong> — lo más seguro, resistente al phishing, sin secretos compartidos. Encaja muy bien en celulares, donde el desbloqueo biométrico (huella, rostro) convierte crear y usar un passkey en un solo gesto. Sin costo por inicio de sesión. Elimina el riesgo de secuestro de SIM.</li>
+<li><strong>Enlace mágico por correo (secundario)</strong> — alternativa para dispositivos o contextos donde no hay soporte para passkeys. Más simple que las contraseñas, sin credenciales que recordar ni que robar.</li>
+<li><strong>Teléfono + código OTP por SMS (terciario)</strong> — alternativa para quienes no tienen correo. Es accesible, pero tiene costo por inicio de sesión y riesgo de secuestro de SIM. Debe acompañarse de una invitación a configurar un passkey.</li>
+<li><strong>Correo + contraseña (alternativa heredada)</strong> — disponible, pero no promovida. Para usuarios o contextos donde los métodos anteriores no son viables.</li>
+</ol>
+<p><strong>Excluido explícitamente:</strong> Inicio de sesión con redes sociales (Google, Facebook, etc.). Atar la actividad política a una identidad comercial crea riesgo de vigilancia y dependencia de plataforma. No es apropiado en este contexto.</p>
+<p><strong>Nota de seguridad:</strong> Para los roles de personal y administración, el passkey debe recomendarse con fuerza o exigirse. Para voluntarios y simpatizantes, el sistema debe proponer el passkey por defecto durante la incorporación, pero permitir los métodos alternativos sin pasos extra.</p>
+<h3 id="manejo-de-sesiones" tabindex="-1"><a class="heading-anchor" href="#manejo-de-sesiones" aria-hidden="true">#</a> Manejo de sesiones</h3>
+<p><strong>DECIDIDO:</strong> Duración de sesión según el rol, con revocación remota y ciclo de vida ligado al turno.</p>
+<p><strong>Duración de la sesión por rol:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Rol</th>
+<th>Duración de la sesión</th>
+<th>Justificación</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Administrador de la organización</td>
+<td>Corta (horas)</td>
+<td>Es el acceso de mayor privilegio, con datos sensibles</td>
+</tr>
+<tr>
+<td>Personal</td>
+<td>Media (jornada laboral)</td>
+<td>Acceso operativo, uso habitual</td>
+</tr>
+<tr>
+<td>Voluntario (general)</td>
+<td>Media (jornada laboral)</td>
+<td>Acceso general a la plataforma</td>
+</tr>
+<tr>
+<td>Voluntario (modo de campo)</td>
+<td>Lo que dure el turno</td>
+<td>Se mantiene mientras dure el turno asignado y luego termina</td>
+</tr>
+<tr>
+<td>Simpatizante</td>
+<td>Larga (semanas)</td>
+<td>Poco privilegio; la comodidad importa para que participe</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Revocación remota de sesiones:</strong> Los roles de personal (Coordinador de voluntarios, Director de campo, Administrador de la organización) pueden revocar cualquier sesión activa de las personas que manejan. Esto es crítico si un dispositivo se pierde o lo roban durante una operación de campo. La revocación debe ser inmediata y forzar una nueva autenticación.</p>
+<p><strong>El ciclo del turno como frontera de evento:</strong> Cerrar un turno de trabajo de campo o de llamadas es un evento de primera clase en la plataforma, y dispara:</p>
+<ul>
+<li>La sincronización de todos los datos pendientes al servidor</li>
+<li>El cierre de la sesión de modo de campo</li>
+<li>El registro de las horas de voluntariado del turno</li>
+<li>Una solicitud de balance del turno (notas, problemas encontrados)</li>
+<li>La liberación de las asignaciones de territorio o de lista de llamadas</li>
+<li>El aviso de finalización al Coordinador de voluntarios o al Líder de equipo</li>
+</ul>
+<!-- REVISIT: El modelo de eventos del ciclo del turno debería ampliarse en la especificación de flujos de trabajo. Es un gancho natural para analítica, gamificación (si se quisiera) y control de calidad (marcar rutas de campo incompletas). -->
+<hr>
+<h2 id="modelo-de-permisos" tabindex="-1"><a class="heading-anchor" href="#modelo-de-permisos" aria-hidden="true">#</a> Modelo de permisos</h2>
+<p><strong>DECIDIDO:</strong> Híbrido — base RBAC con ámbitos por atributos geográficos y de equipo.</p>
+<p><strong>Cómo funciona:</strong></p>
+<ul>
+<li>Las <strong>plantillas de rol</strong> determinan <em>qué acciones</em> puede hacer una persona (crear eventos, enviar correos, manejar voluntarios, ver finanzas)</li>
+<li>Las <strong>asignaciones de ámbito</strong> determinan <em>sobre qué datos</em> aplican esas acciones</li>
+</ul>
+<p><strong>Tipos de ámbito:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Ámbito</th>
+<th>Descripción</th>
+<th>Ejemplo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Geográfico</td>
+<td>Limita el acceso a una región, distrito, precinto o territorio</td>
+<td>Un Director de campo asignado a la zona norte solo ve los datos de la zona norte</td>
+</tr>
+<tr>
+<td>Equipo</td>
+<td>Limita el acceso a un equipo o grupo específico</td>
+<td>Un Líder de equipo solo ve la lista y el avance de su propio equipo</td>
+</tr>
+<tr>
+<td>Campaña</td>
+<td>Limita el acceso a una campaña específica dentro de la organización</td>
+<td>Alguien del personal que trabaja solo en la contienda municipal, no en la gubernatorial</td>
+</tr>
+<tr>
+<td>Sin ámbito</td>
+<td>Acceso completo dentro de la organización (el valor por defecto del Administrador de la organización)</td>
+<td>El Administrador de la organización lo ve todo</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Reglas de ámbito:</strong></p>
+<ul>
+<li>Los ámbitos se <strong>asignan por persona</strong>, no por plantilla de rol. Dos Directores de campo pueden tener ámbitos geográficos distintos.</li>
+<li>Los ámbitos <strong>se suman</strong>: alguien asignado al Distrito 5 y al Distrito 6 ve los dos.</li>
+<li><strong>El Administrador de la organización no tiene ámbito por defecto</strong>: ve todo lo de su organización. Se le puede acotar si conviene (por ejemplo, un partido grande donde los administradores regionales manejan su propia zona).</li>
+<li>Los ámbitos actúan como <strong>filtro sobre el acceso a los datos</strong>, no sobre el acceso a las funcionalidades. Un Director de campo acotado tiene las mismas herramientas que uno sin ámbito; simplemente ve otra porción de los datos.</li>
+<li>Los ámbitos <strong>se componen con el modelo de federación</strong>: los límites entre organizaciones son el ámbito más externo, y dentro de una organización el ámbito geográfico, de equipo o de campaña estrecha aún más.</li>
+</ul>
+<!-- REVISIT: El ámbito geográfico depende del modelo de datos geográficos (cómo se estructuran y anidan precintos, distritos, territorios y regiones). Eso debería definirse en la especificación de arquitectura. -->
+<hr>
+<h2 id="preguntas-abiertas" tabindex="-1"><a class="heading-anchor" href="#preguntas-abiertas" aria-hidden="true">#</a> Preguntas abiertas</h2>
+<ol>
+<li>
+<p><s><strong>Pertenencia a varias organizaciones</strong></s> — <strong>RESUELTO.</strong> Perfiles federados. Ver la sección Pertenencia a varias organizaciones más arriba.</p>
+</li>
+<li>
+<p><s><strong>Jerarquía organizativa</strong></s> — <strong>RESUELTO.</strong> Federación multinivel de entidades soberanas. Ver la sección Jerarquía organizativa más arriba.</p>
+</li>
+<li>
+<p><s><strong>Cambios de rol</strong></s> — <strong>RESUELTO.</strong> Las plantillas se suman. Pasar de simpatizante a voluntario y de ahí a personal significa agregar plantillas, no reemplazarlas. Todo el historial de actividad previo viaja con la identidad de plataforma. Las autorizaciones son proporcionales al rol: un simpatizante puede pasar solo a voluntario (apuntándose a un turno), pero los roles de personal los tiene que conceder el Administrador de la organización.</p>
+</li>
+<li>
+<p><s><strong>Visibilidad de datos entre roles</strong></s> — <strong>RESUELTO.</strong> Configuración por organización, privado por defecto. Cada organización decide sus propias reglas de visibilidad (por ejemplo, si los voluntarios ven a sus compañeros de turno, o si los nombres de los donantes se muestran públicamente). La plataforma arranca con la visibilidad mínima: para abrir más, la organización tiene que activarlo. Esto responde a la variedad de contextos de seguridad política entre despliegues.</p>
+</li>
+<li>
+<p><s><strong>Delegación</strong></s> — <strong>RESUELTO.</strong> Dos mecanismos:</p>
+<ul>
+<li><strong>Delegación con fecha de vencimiento:</strong> El Administrador de la organización puede conceder acceso elevado temporal a otra persona con una fecha de expiración explícita. El acceso se revoca solo cuando termina el periodo. Cubre licencias, viajes y emergencias.</li>
+<li><strong>Plantilla Adjunto:</strong> Una plantilla de rol permanente con acceso casi de administrador (manejar personal, dirigir operaciones, ver todos los datos) pero sin las capacidades más sensibles (manejo de facturación, revocar a otros administradores, eliminar la organización). Cubre la necesidad continua de un segundo al mando.</li>
+</ul>
+</li>
+<li>
+<p><s><strong>Registro de auditoría</strong></s> — <strong>RESUELTO.</strong> Auditoría completa. Todo cambio de datos queda registrado: quién, qué, cuándo y desde dónde. Esto incluye ediciones del CRM, transacciones financieras, cambios de permisos, inicios de sesión, exportaciones de datos, fusiones de registros, operaciones masivas y eventos de sesión. La integridad electoral y la confianza son el corazón de la plataforma; un registro de auditoría completo no es negociable.</p>
+<!-- REVISIT: Las políticas de retención y la estrategia de almacenamiento (almacenamiento por niveles, archivo, infraestructura de auditoría compartida o por organización) deberían abordarse en la especificación de arquitectura. Los requisitos de cumplimiento sobre retención de auditoría varían según la jurisdicción. -->
+</li>
+<li>
+<p><s><strong>Recuperación de cuentas</strong></s> — <strong>RESUELTO.</strong> Recuperación por contacto de confianza, dentro de la app.</p>
+<ul>
+<li>Durante la incorporación, la persona designa uno o más contactos de confianza dentro de su organización (su líder de equipo, el coordinador de voluntarios o alguien del personal).</li>
+<li>Si queda fuera de su cuenta, inicia una solicitud de recuperación desde la app (en un dispositivo nuevo o desde una pantalla de acceso web).</li>
+<li>El contacto de confianza recibe la solicitud en la app, verifica la identidad de la persona (en persona, por teléfono, como le convenza) y aprueba la recuperación.</li>
+<li>El sistema abre un flujo para crear una credencial nueva (un passkey nuevo en el dispositivo nuevo).</li>
+<li>Todo el proceso de recuperación queda en el registro de auditoría: quién lo pidió, quién lo aprobó, cuándo y desde qué dispositivo.</li>
+<li><strong>Salvaguarda:</strong> Un contacto de confianza solo puede aprobar la recuperación de las personas para las que fue designado explícitamente, no de cuentas cualesquiera. Los Administradores de la organización pueden intervenir como último recurso, también con registro completo.</li>
+</ul>
+</li>
+<li>
+<p><s><strong>Administración a nivel de plataforma</strong></s> — <strong>RESUELTO.</strong> Rol de Administrador de la plataforma, sin suplantación de usuarios.</p>
+<p>El <strong>Administrador de la plataforma</strong> existe fuera del modelo de organizaciones. Es el rol operativo del equipo de GreenGrass para manejar la plataforma misma.</p>
+<p><strong>Lo que puede hacer:</strong></p>
+<ul>
+<li>Aprovisionar organizaciones y manejar su ciclo de vida (crear, suspender, dar de baja)</li>
+<li>Manejar la facturación y las suscripciones de todas las organizaciones</li>
+<li>Monitorear el sistema, ver paneles de salud y manejar la infraestructura</li>
+<li>Manejar despliegues (empujar actualizaciones a todas las organizaciones en la arquitectura de organización única)</li>
+<li>Ver en modo lectura todos los datos de una organización, para soporte y depuración</li>
+<li>Manejar las afiliaciones de alianza a nivel de plataforma</li>
+</ul>
+<p><strong>Excluido explícitamente:</strong> La suplantación de usuarios. Un Administrador de la plataforma no puede iniciar sesión ni actuar como usuario de una organización. El soporte y la depuración se hacen con visibilidad de solo lectura, no asumiendo la identidad de otra persona. Así se preservan la confianza de las organizaciones y la integridad del registro de auditoría.</p>
+</li>
+</ol>
+
+    </article>
+  </main>
+  <div class="toc-rail"><nav class="toc" aria-label="En esta página"><div class="toc-label">En esta página</div><ul><li class="toc-2"><a href="#resumen"># Resumen</a></li><li class="toc-2"><a href="#organizaciones"># Organizaciones</a></li><li class="toc-3"><a href="#jerarquía-organizativa"># Jerarquía organizativa</a></li><li class="toc-3"><a href="#intercambio-entre-organizaciones-dentro-de-una-alianza"># Intercambio entre organizaciones dentro de una alianza</a></li><li class="toc-3"><a href="#pertenencia-a-varias-organizaciones"># Pertenencia a varias organizaciones</a></li><li class="toc-2"><a href="#roles-de-la-plataforma"># Roles de la plataforma</a></li><li class="toc-3"><a href="#administrador-de-la-organización"># Administrador de la organización</a></li><li class="toc-3"><a href="#personal"># Personal</a></li><li class="toc-3"><a href="#voluntario"># Voluntario</a></li><li class="toc-3"><a href="#simpatizante"># Simpatizante</a></li><li class="toc-3"><a href="#candidato"># Candidato</a></li><li class="toc-2"><a href="#tipos-de-registro-del-crm-sin-cuenta"># Tipos de registro del CRM (sin cuenta)</a></li><li class="toc-3"><a href="#votante-constituyente"># Votante / constituyente</a></li><li class="toc-3"><a href="#donante"># Donante</a></li><li class="toc-3"><a href="#contacto"># Contacto</a></li><li class="toc-2"><a href="#la-lista-única-y-la-deduplicación"># La lista única y la deduplicación</a></li><li class="toc-3"><a href="#estrategia-de-deduplicación"># Estrategia de deduplicación</a></li><li class="toc-3"><a href="#comportamiento-de-la-fusión"># Comportamiento de la fusión</a></li><li class="toc-2"><a href="#autenticación-y-acceso"># Autenticación y acceso</a></li><li class="toc-3"><a href="#métodos-de-autenticación"># Métodos de autenticación</a></li><li class="toc-3"><a href="#manejo-de-sesiones"># Manejo de sesiones</a></li><li class="toc-2"><a href="#modelo-de-permisos"># Modelo de permisos</a></li><li class="toc-2"><a href="#preguntas-abiertas"># Preguntas abiertas</a></li></ul></nav></div>
+</div>
+<script src="../../assets/search.js" defer></script>
+<script src="../../assets/app.js" defer></script>
+</body>
+</html>

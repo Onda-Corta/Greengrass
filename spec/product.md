@@ -6,7 +6,7 @@
 
 # Executive Summary
 
-Progressive/left-wing movements often struggle with limited resources, outdated tools, and fragmented technology solutions, especially in the global south. **GreenGrass** is a comprehensive, integrated technology platform designed specifically to empower grassroots political campaigns in the Global South, providing the tools needed for effective organizing, digital engagement, and data-driven decision-making. Built with a focus on affordability, accessibility, and local needs, GreenGrass aims to revolutionize political campaigning by streamlining operations and enhancing community engagement.
+Progressive/left-wing movements run on limited money, aging tools, and a scatter of disconnected services that don't talk to each other — a problem everywhere, and sharper in the global south. **GreenGrass** puts what a grassroots campaign in the Global South actually has to do into one platform: organize people, reach them on the channels they use, and keep enough data to decide where the next week of effort goes. It is priced for campaigns with very little money, built for the phones and connections they already have, and translated into the languages they organize in. The point is to cut the number of tools a campaign has to hold together and give it more time in contact with the people it is trying to reach.
 
 ---
 
@@ -15,7 +15,7 @@ Progressive political campaigns in Global South countries face unique challenges
 * **Limited Access to Digital Tools:** Most political technology platforms are designed for developed markets, with high costs and steep learning curves that make them inaccessible to grassroots campaigns.   
 * **Fragmented Communication Channels:** Campaigns often rely on a mix of disparate tools for email, social media, and SMS, leading to inconsistent messaging, inefficient use of resources, and burgeoning costs.  
 * **Inefficient Voter Engagement:** Many campaigns lack the ability to track and segment voter data effectively, resulting in generic outreach that fails to resonate with their constituencies.  
-* **Resource Constraints:** Campaigns often operate on tight budgets, limiting their ability to invest in high-quality software solutions.
+* **Resource Constraints:** Campaigns often operate on tight budgets, limiting what they can spend on good software.
 
 While platforms like NationBuilder, Action Network, and Mobilize exist, they are designed for developed markets and often priced out of reach for progressive campaigns in the Global South.
 
@@ -23,7 +23,7 @@ While platforms like NationBuilder, Action Network, and Mobilize exist, they are
 
 **Project: GreenGrass** is an all-in-one campaign technology platform tailored specifically for the needs of grassroots campaigns in countries in the Global South. It’s intended to be a one-stop-shop—with one set fee—so that campaigns and organizations can use the service without having to depend on additional services or costs (with the exception of unavoidable variable costs such as SMS sends, which are usually billed by volume by the supplier).
 
-The product combines a Constituent Relationship Manager (CRM), a voter database, fundraising tools, communication tools, and data analytics into a single, affordable solution, designed to maximize impact and streamline operations. 
+The product combines a Constituent Relationship Manager (CRM), a voter database, fundraising tools, communication tools, and data analytics into a single package a small campaign can afford, so the whole operation runs out of one system instead of five stitched together. 
 
 GreenGrass is web- and mobile-first. The application is progressively enhanced and optimized for low-bandwidth and mobile-first environments. 
 
@@ -74,9 +74,9 @@ GreenGrass is web- and mobile-first. The application is progressively enhanced a
 ## Table-stakes features
 
 * Accessibility and Affordability: GreenGrass offers a tiered pricing model, including a freemium plan and a no-credit-card-necessary trial period for smaller campaigns, making it accessible even for campaigns with minimal budgets.  
-* Local Language Support: The platform supports multiple languages and local dialects, ensuring accessibility for diverse communities.  
+* Local Language Support: The platform supports multiple languages and local dialects, so people can use it in the language they actually speak.  
 * Offline Functionality: Designed for areas with unreliable internet access, key features of GreenGrass can function offline and sync data when connectivity is restored.  
-* Mobile-First Design: Recognizing the worldwide prevalence of mobile internet usage, the platform is optimized for mobile devices.
+* Mobile-First Design: Most people worldwide get online on a phone, so the platform is optimized for mobile devices.
 
 ## High-level Architecture notes
 

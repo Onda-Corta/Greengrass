@@ -1,10 +1,13 @@
 <!DOCTYPE html>
-<html lang="en" data-base="../">
+<html lang="en" data-base="../" data-no-results="No results for">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Tenant Support &amp; Onboarding · GreenGrass</title>
 <meta name="description" content="Tenant Support &amp; Onboarding — GreenGrass spec &amp; design documentation.">
+<link rel="alternate" hreflang="en" href="./support.html">
+<link rel="alternate" hreflang="es" href="../es/spec/support.html">
+<link rel="alternate" hreflang="x-default" href="./support.html">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%232563eb'/%3E%3Cstop offset='1' stop-color='%2316a34a'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='32' height='32' rx='7' fill='url(%23g)'/%3E%3C/svg%3E">
 <link rel="stylesheet" href="../assets/styles.css">
 </head>
@@ -16,12 +19,13 @@
   </button>
   <a class="brand" href="../index.html">
     <span class="brand-mark" aria-hidden="true"></span>
-    <span class="brand-text"><strong>GreenGrass</strong><small>Spec & Design</small></span>
+    <span class="brand-text"><strong>GreenGrass</strong><small>Spec &amp; Design</small></span>
   </a>
   <div class="search">
     <input type="search" id="search-input" placeholder="Search docs…" autocomplete="off" aria-label="Search documentation">
     <div id="search-results" class="search-results" hidden></div>
   </div>
+  <nav class="lang-switch" aria-label="Language"><span class="lang-opt active" aria-current="true">EN</span><a class="lang-opt" href="../es/spec/support.html" hreflang="es" lang="es" title="Ver esta página en español">ES</a></nav>
   <button type="button" class="theme-toggle" aria-label="Toggle dark mode" title="Toggle dark mode">
     <span class="theme-icon" aria-hidden="true"></span>
   </button>
@@ -35,7 +39,7 @@
 <div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">Architecture<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../design/architecture/system.html">System Architecture</a></li></ul></div>
 <div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">UX Design<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../design/ux/00-overview.html">UX Design Overview</a></li><li><a href="../design/ux/01-information-architecture/navigation-model.html">Navigation Model</a></li><li><a href="../design/ux/01-information-architecture/screen-inventory.html">Screen Inventory</a></li><li><a href="../design/ux/01-information-architecture/persona-views.html">Persona Views</a></li><li><a href="../design/ux/01-information-architecture/url-structure.html">URL Structure</a></li><li><a href="../design/ux/02-global-patterns/pattern-catalog.html">Pattern Catalog</a></li><li><a href="../design/ux/02-global-patterns/offline-sync-patterns.html">Offline &amp; Sync Patterns</a></li><li><a href="../design/ux/02-global-patterns/notification-patterns.html">Notification Patterns</a></li><li><a href="../design/ux/02-global-patterns/search-patterns.html">Search Patterns</a></li><li><a href="../design/ux/02-global-patterns/settings-help-patterns.html">Settings &amp; Help Patterns</a></li><li><a href="../design/ux/02-global-patterns/security-ux-patterns.html">Security UX Patterns</a></li><li><a href="../design/ux/03-design-system/foundations.html">Design System Foundations</a></li><li><a href="../design/ux/03-design-system/theming-strategy.html">Theming Strategy</a></li><li><a href="../design/ux/03-design-system/component-inventory.html">Component Inventory</a></li><li><a href="../design/ux/03-design-system/responsive-strategy.html">Responsive Strategy</a></li><li><a href="../design/ux/04-wireframes/index.html">Wireframes</a></li><li><a href="../design/ux/04-wireframes/navigation-shell/navigation-shell.html">Navigation Shell Wireframes</a></li><li><a href="../design/ux/04-wireframes/dashboards/dashboards.html">Dashboard Wireframes</a></li><li><a href="../design/ux/04-wireframes/field-mode/field-mode.html">Field Mode Wireframes</a></li><li><a href="../design/ux/04-wireframes/onboarding/onboarding.html">Onboarding Wireframes</a></li><li><a href="../design/ux/04-wireframes/messaging/messaging.html">Messaging Wireframes</a></li><li><a href="../design/ux/04-wireframes/supporter/supporter-portal.html">Supporter Portal Wireframes</a></li><li><a href="../design/ux/04-wireframes/alliance/alliance.html">Alliance Wireframes</a></li><li><a href="../design/ux/04-wireframes/crm/crm.html">CRM / People Wireframes</a></li><li><a href="../design/ux/04-wireframes/field-ops/field-ops.html">Field Operations (Admin) Wireframes</a></li><li><a href="../design/ux/04-wireframes/fundraising/fundraising.html">Fundraising Wireframes</a></li><li><a href="../design/ux/04-wireframes/communications/communications.html">Communications Wireframes</a></li><li><a href="../design/ux/04-wireframes/social-media/social-media.html">Social Media Wireframes</a></li><li><a href="../design/ux/04-wireframes/events/events.html">Events Wireframes</a></li><li><a href="../design/ux/04-wireframes/press/press.html">Press &amp; Media Wireframes</a></li><li><a href="../design/ux/04-wireframes/activism/activism.html">Activism &amp; Engagement Campaign Wireframes</a></li><li><a href="../design/ux/04-wireframes/gotv/gotv.html">GOTV Admin Wireframes</a></li><li><a href="../design/ux/04-wireframes/settings/settings.html">Settings &amp; Admin Wireframes</a></li><li><a href="../design/ux/04-wireframes/auth/auth.html">Authentication Wireframes</a></li><li><a href="../design/ux/04-wireframes/profile/profile.html">User Profile Wireframes</a></li><li><a href="../design/ux/04-wireframes/help/help.html">Support &amp; Help Wireframes</a></li><li><a href="../design/ux/04-wireframes/public/public.html">Public Pages Wireframes</a></li><li><a href="../design/ux/04-wireframes/audit.html">Wireframe Audit Report</a></li></ul></div>
 <div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">Decisions<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../decisions/001-platform-architecture.html">ADR-001: Platform Architecture &amp; Deployment</a></li><li><a href="../decisions/002-security-threat-model.html">ADR-002: Security &amp; Threat Model</a></li><li><a href="../decisions/003-identity-access-organization.html">ADR-003: Identity, Access &amp; Organization</a></li><li><a href="../decisions/004-data-model-integrity.html">ADR-004: Data Model &amp; Integrity</a></li><li><a href="../decisions/005-offline-first-sync.html">ADR-005: Offline-First &amp; Sync</a></li><li><a href="../decisions/006-field-operations-gotv.html">ADR-006: Field Operations &amp; GOTV</a></li><li><a href="../decisions/007-fundraising-payments.html">ADR-007: Fundraising &amp; Payments</a></li><li><a href="../decisions/008-communications-messaging.html">ADR-008: Communications &amp; Messaging</a></li><li><a href="../decisions/009-compliance-legal.html">ADR-009: Compliance &amp; Legal Framework</a></li><li><a href="../decisions/010-internationalization-localization.html">ADR-010: Internationalization &amp; Localization</a></li><li><a href="../decisions/011-design-system-ux.html">ADR-011: Design System &amp; UX Foundations</a></li><li><a href="../decisions/012-external-integrations.html">ADR-012: External Integrations</a></li><li><a href="../decisions/013-analytics-ai.html">ADR-013: Analytics &amp; AI</a></li><li><a href="../decisions/014-volunteer-onboarding.html">ADR-014: Volunteer &amp; Onboarding</a></li><li><a href="../decisions/015-product-scope.html">ADR-015: Product Scope Boundaries</a></li><li><a href="../decisions/016-cross-cutting-resolutions.html">ADR-016: Cross-Cutting Resolutions</a></li><li><a href="../decisions/017-sharing-contract-trust-model.html">ADR-017: The Sharing Contract as Universal Trust Primitive</a></li><li><a href="../decisions/ux-decisions.html">UX Decisions — Wireframe Phase</a></li></ul></div>
-<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">Diary<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../diary/index.html">Project Diary</a></li><li><a href="../diary/01-from-description-to-specification.html">Entry 1: From Description to Specification</a></li><li><a href="../diary/02-the-architecture-session.html">Entry 2: The Architecture Session</a></li><li><a href="../diary/03-information-architecture.html">Entry 3: Information Architecture</a></li><li><a href="../diary/04-design-system-and-wireframes.html">Entry 4: The Design System and Wireframes</a></li><li><a href="../diary/05-the-wireframe-audit.html">Entry 5: The Wireframe Audit</a></li><li><a href="../diary/06-resolving-the-open-questions.html">Entry 6: Resolving the Open Questions</a></li><li><a href="../diary/07-reconciling-the-architecture.html">Entry 7: Reconciling the Architecture</a></li><li><a href="../diary/08-housekeeping.html">Diary Entry 8: Housekeeping</a></li><li><a href="../diary/09-the-documentation-website.html">Diary Entry 9: The Documentation Website</a></li></ul></div>
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">Diary<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../diary/index.html">Project Diary</a></li><li><a href="../diary/01-from-description-to-specification.html">Entry 1: From Description to Specification</a></li><li><a href="../diary/02-the-architecture-session.html">Entry 2: The Architecture Session</a></li><li><a href="../diary/03-information-architecture.html">Entry 3: Information Architecture</a></li><li><a href="../diary/04-design-system-and-wireframes.html">Entry 4: The Design System and Wireframes</a></li><li><a href="../diary/05-the-wireframe-audit.html">Entry 5: The Wireframe Audit</a></li><li><a href="../diary/06-resolving-the-open-questions.html">Entry 6: Resolving the Open Questions</a></li><li><a href="../diary/07-reconciling-the-architecture.html">Entry 7: Reconciling the Architecture</a></li><li><a href="../diary/08-housekeeping.html">Diary Entry 8: Housekeeping</a></li><li><a href="../diary/09-the-documentation-website.html">Diary Entry 9: The Documentation Website</a></li><li><a href="../diary/10-the-spanish-edition.html">Diary Entry 10: The Spanish Edition</a></li></ul></div>
 <div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">Project &amp; Internal<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../claude/MEMORY.html">Memory</a></li><li><a href="../claude/SKILLS.html">Skills</a></li><li><a href="../CLAUDE.html">GreenGrass</a></li></ul></div>
     </nav>
   </aside>
@@ -71,49 +75,49 @@
 <td><strong>Org setup</strong></td>
 <td>New tenant provisioning</td>
 <td>Passkey setup → org profile (name, branding, languages) → invite staff → configure jurisdiction</td>
-<td>workflows.md:36-39</td>
+<td><a href="./workflows.html#1-tenant-onboarding">workflows.md § 1. Tenant Onboarding</a></td>
 </tr>
 <tr>
 <td><strong>Payment processor</strong></td>
 <td>First visit to fundraising settings</td>
 <td>Select jurisdiction → choose processor(s) from supported list → enter credentials → test donation → verify</td>
-<td>fundraising.md:36-39</td>
+<td><a href="./fundraising.html#processor-onboarding">fundraising.md § Processor Onboarding</a></td>
 </tr>
 <tr>
 <td><strong>BYOK key generation</strong></td>
 <td>Tenant choosing BYOK during setup</td>
 <td>Explain implications → generate key → secure backup (Shamir's option) → confirm recovery plan → acknowledge key-loss consequences</td>
-<td>security.md:270-272, <a href="http://system.md:483" target="_blank" rel="noopener noreferrer">system.md:483</a></td>
+<td><a href="./security.html#secrets-management">security.md § Secrets Management</a>, <a href="../design/architecture/system.html#destructive-operation-approval">system.md § Destructive operation approval</a></td>
 </tr>
 <tr>
 <td><strong>Compliance configuration</strong></td>
 <td>After jurisdiction selection</td>
 <td>Pre-load jurisdiction templates → configure contribution limits → set campaign period dates → configure disclaimer text → set retention policy</td>
-<td>compliance.md:375-380</td>
+<td><a href="./compliance.html#compliance-configuration-per-tenant">compliance.md § Compliance Configuration per Tenant</a></td>
 </tr>
 <tr>
 <td><strong>WhatsApp Business setup</strong></td>
 <td>Enabling WhatsApp channel</td>
 <td>Meta verification walkthrough → business account setup → phone number registration → first template submission → test message</td>
-<td><a href="http://integrations.md:154" target="_blank" rel="noopener noreferrer">integrations.md:154</a></td>
+<td><a href="./integrations.html#whatsapp-business-api">integrations.md § WhatsApp Business API</a></td>
 </tr>
 <tr>
 <td><strong>SMS number setup</strong></td>
 <td>Enabling SMS channel</td>
 <td>Country-specific guide → recommended number type → provider account setup → number acquisition → DLT/10DLC registration (if applicable) → test message</td>
-<td><a href="http://integrations.md:160" target="_blank" rel="noopener noreferrer">integrations.md:160</a></td>
+<td><a href="./integrations.html#number-provisioning">integrations.md § Number Provisioning</a></td>
 </tr>
 <tr>
 <td><strong>Voter file import</strong></td>
 <td>First data import</td>
 <td>Upload file → format detection → column mapping with suggestions → preview → dedup preview → confirm → post-import report</td>
-<td>integrations.md:215-225</td>
+<td><a href="./integrations.html#import-formats">integrations.md § Import Formats</a></td>
 </tr>
 <tr>
 <td><strong>Volunteer onboarding</strong></td>
 <td>Volunteer first login</td>
 <td>Passkey/fallback setup → trusted contact designation → platform tour → org-specific training → knowledge checks → certification (if configured)</td>
-<td>workflows.md:83-86, 106-113</td>
+<td><a href="./workflows.html#2-volunteer-onboarding">workflows.md § 2. Volunteer Onboarding</a></td>
 </tr>
 </tbody>
 </table>
@@ -139,37 +143,37 @@
 <tr>
 <td><strong>Jurisdiction compliance templates</strong></td>
 <td>Pre-loaded contribution limits, disclosure thresholds, campaign period rules, communication restrictions, disclaimer text</td>
-<td>compliance.md:375-376</td>
+<td><a href="./compliance.html#compliance-configuration-per-tenant">compliance.md § Compliance Configuration per Tenant</a></td>
 </tr>
 <tr>
 <td><strong>Voter registration form templates</strong></td>
 <td>Per-jurisdiction eligibility requirements, required fields, documentation rules, submission procedures</td>
-<td>workflows.md:330-332</td>
+<td><a href="./workflows.html#compliance-considerations">workflows.md § Compliance considerations</a></td>
 </tr>
 <tr>
 <td><strong>Data Processing Agreement (DPA)</strong></td>
 <td>Standard DPA template covering data categories, purposes, sub-processors, security measures, breach notification, audit rights</td>
-<td><a href="http://compliance.md:242" target="_blank" rel="noopener noreferrer">compliance.md:242</a></td>
+<td><a href="./compliance.html#data-processing-agreements">compliance.md § Data Processing Agreements</a></td>
 </tr>
 <tr>
 <td><strong>Data Protection Impact Assessment (DPIA)</strong></td>
 <td>Template DPIA for tenants processing sensitive political data at scale (required under LGPD, PDPA)</td>
-<td><a href="http://compliance.md:244" target="_blank" rel="noopener noreferrer">compliance.md:244</a></td>
+<td><a href="./compliance.html#data-processing-agreements">compliance.md § Data Processing Agreements</a></td>
 </tr>
 <tr>
 <td><strong>Role templates</strong></td>
 <td>Pre-built role configurations (Org Admin, Campaign Manager, Finance Director, Communications Director, Field Director, Volunteer Coordinator, Data Manager, Volunteer, Team Lead, Candidate, Deputy)</td>
-<td>users.md:167-176</td>
+<td><a href="./users.html#volunteer-coordinator">users.md § Volunteer Coordinator</a></td>
 </tr>
 <tr>
 <td><strong>Email templates</strong></td>
 <td>Visual, mobile-first email template builder with pre-built layouts</td>
-<td><a href="http://workflows.md:434" target="_blank" rel="noopener noreferrer">workflows.md:434</a></td>
+<td><a href="./workflows.html#email-campaign-flow">workflows.md § Email campaign flow</a></td>
 </tr>
 <tr>
 <td><strong>Canvassing scripts</strong></td>
 <td>Script builder with branching logic based on responses</td>
-<td><a href="http://workflows.md:211" target="_blank" rel="noopener noreferrer">workflows.md:211</a></td>
+<td><a href="./workflows.html#offline-requirements">workflows.md § Offline requirements</a></td>
 </tr>
 </tbody>
 </table>

@@ -2,7 +2,7 @@
 
 ## Purpose
 
-Public pages are the campaign's outward face — the pages shared via social media, printed on flyers, and texted to supporters. No authentication required. Every public page is a conversion opportunity: turning a curious visitor into a donor, volunteer, petition signer, or informed voter.
+Public pages are the campaign's outward face — the pages shared via social media, printed on flyers, and texted to supporters. No authentication required. Every public page has one job: turning a curious visitor into a donor, volunteer, petition signer, or informed voter.
 
 The core UX challenge: public pages serve an audience with zero context. A visitor landing from a WhatsApp share on a low-end phone must understand who the campaign is, what they're being asked to do, and how to do it — all within 10 seconds. Every page is tenant-branded, mobile-first, fast-loading, and compliant (with auto-inserted disclaimers).
 

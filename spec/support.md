@@ -23,14 +23,14 @@ These are guidance touchpoints built directly into the platform UI. No human int
 
 | Wizard | Triggered by | Steps | Spec reference |
 |--------|-------------|-------|---------------|
-| **Org setup** | New tenant provisioning | Passkey setup → org profile (name, branding, languages) → invite staff → configure jurisdiction | workflows.md:36-39 |
-| **Payment processor** | First visit to fundraising settings | Select jurisdiction → choose processor(s) from supported list → enter credentials → test donation → verify | fundraising.md:36-39 |
-| **BYOK key generation** | Tenant choosing BYOK during setup | Explain implications → generate key → secure backup (Shamir's option) → confirm recovery plan → acknowledge key-loss consequences | security.md:270-272, system.md:483 |
-| **Compliance configuration** | After jurisdiction selection | Pre-load jurisdiction templates → configure contribution limits → set campaign period dates → configure disclaimer text → set retention policy | compliance.md:375-380 |
-| **WhatsApp Business setup** | Enabling WhatsApp channel | Meta verification walkthrough → business account setup → phone number registration → first template submission → test message | integrations.md:154 |
-| **SMS number setup** | Enabling SMS channel | Country-specific guide → recommended number type → provider account setup → number acquisition → DLT/10DLC registration (if applicable) → test message | integrations.md:160 |
-| **Voter file import** | First data import | Upload file → format detection → column mapping with suggestions → preview → dedup preview → confirm → post-import report | integrations.md:215-225 |
-| **Volunteer onboarding** | Volunteer first login | Passkey/fallback setup → trusted contact designation → platform tour → org-specific training → knowledge checks → certification (if configured) | workflows.md:83-86, 106-113 |
+| **Org setup** | New tenant provisioning | Passkey setup → org profile (name, branding, languages) → invite staff → configure jurisdiction | [workflows.md § 1. Tenant Onboarding](workflows.md#1-tenant-onboarding) |
+| **Payment processor** | First visit to fundraising settings | Select jurisdiction → choose processor(s) from supported list → enter credentials → test donation → verify | [fundraising.md § Processor Onboarding](fundraising.md#processor-onboarding) |
+| **BYOK key generation** | Tenant choosing BYOK during setup | Explain implications → generate key → secure backup (Shamir's option) → confirm recovery plan → acknowledge key-loss consequences | [security.md § Secrets Management](security.md#secrets-management), [system.md § Destructive operation approval](../design/architecture/system.md#destructive-operation-approval) |
+| **Compliance configuration** | After jurisdiction selection | Pre-load jurisdiction templates → configure contribution limits → set campaign period dates → configure disclaimer text → set retention policy | [compliance.md § Compliance Configuration per Tenant](compliance.md#compliance-configuration-per-tenant) |
+| **WhatsApp Business setup** | Enabling WhatsApp channel | Meta verification walkthrough → business account setup → phone number registration → first template submission → test message | [integrations.md § WhatsApp Business API](integrations.md#whatsapp-business-api) |
+| **SMS number setup** | Enabling SMS channel | Country-specific guide → recommended number type → provider account setup → number acquisition → DLT/10DLC registration (if applicable) → test message | [integrations.md § Number Provisioning](integrations.md#number-provisioning) |
+| **Voter file import** | First data import | Upload file → format detection → column mapping with suggestions → preview → dedup preview → confirm → post-import report | [integrations.md § Import Formats](integrations.md#import-formats) |
+| **Volunteer onboarding** | Volunteer first login | Passkey/fallback setup → trusted contact designation → platform tour → org-specific training → knowledge checks → certification (if configured) | [workflows.md § 2. Volunteer Onboarding](workflows.md#2-volunteer-onboarding) |
 
 #### Contextual Help
 
@@ -46,13 +46,13 @@ In-context guidance that appears where the user needs it:
 
 | Template type | What it provides | Spec reference |
 |--------------|-----------------|---------------|
-| **Jurisdiction compliance templates** | Pre-loaded contribution limits, disclosure thresholds, campaign period rules, communication restrictions, disclaimer text | compliance.md:375-376 |
-| **Voter registration form templates** | Per-jurisdiction eligibility requirements, required fields, documentation rules, submission procedures | workflows.md:330-332 |
-| **Data Processing Agreement (DPA)** | Standard DPA template covering data categories, purposes, sub-processors, security measures, breach notification, audit rights | compliance.md:242 |
-| **Data Protection Impact Assessment (DPIA)** | Template DPIA for tenants processing sensitive political data at scale (required under LGPD, PDPA) | compliance.md:244 |
-| **Role templates** | Pre-built role configurations (Org Admin, Campaign Manager, Finance Director, Communications Director, Field Director, Volunteer Coordinator, Data Manager, Volunteer, Team Lead, Candidate, Deputy) | users.md:167-176 |
-| **Email templates** | Visual, mobile-first email template builder with pre-built layouts | workflows.md:434 |
-| **Canvassing scripts** | Script builder with branching logic based on responses | workflows.md:211 |
+| **Jurisdiction compliance templates** | Pre-loaded contribution limits, disclosure thresholds, campaign period rules, communication restrictions, disclaimer text | [compliance.md § Compliance Configuration per Tenant](compliance.md#compliance-configuration-per-tenant) |
+| **Voter registration form templates** | Per-jurisdiction eligibility requirements, required fields, documentation rules, submission procedures | [workflows.md § Compliance considerations](workflows.md#compliance-considerations) |
+| **Data Processing Agreement (DPA)** | Standard DPA template covering data categories, purposes, sub-processors, security measures, breach notification, audit rights | [compliance.md § Data Processing Agreements](compliance.md#data-processing-agreements) |
+| **Data Protection Impact Assessment (DPIA)** | Template DPIA for tenants processing sensitive political data at scale (required under LGPD, PDPA) | [compliance.md § Data Processing Agreements](compliance.md#data-processing-agreements) |
+| **Role templates** | Pre-built role configurations (Org Admin, Campaign Manager, Finance Director, Communications Director, Field Director, Volunteer Coordinator, Data Manager, Volunteer, Team Lead, Candidate, Deputy) | [users.md § Volunteer Coordinator](users.md#volunteer-coordinator) |
+| **Email templates** | Visual, mobile-first email template builder with pre-built layouts | [workflows.md § Email campaign flow](workflows.md#email-campaign-flow) |
+| **Canvassing scripts** | Script builder with branching logic based on responses | [workflows.md § Offline requirements](workflows.md#offline-requirements) |
 
 #### Automated Compliance Checks
 

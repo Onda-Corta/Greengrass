@@ -2,7 +2,7 @@
 
 ## Purpose
 
-Alliance features enable federated coordination between sovereign organizations — sharing resources, running joint campaigns, and reporting aggregate metrics without any org losing control of its data. This document wireframes the 8 alliance screens (ALLY-001 through ALLY-008).
+Alliance features let sovereign organizations coordinate — sharing resources, running joint campaigns, and reporting aggregate metrics without any org losing control of its data. This document wireframes the 8 alliance screens (ALLY-001 through ALLY-008).
 
 The central UX challenge: alliance operations span organizational boundaries, but each org admin must always understand what they're sharing, with whom, and under what terms. The UI must make the cross-org nature visible without making it feel foreign.
 
@@ -926,7 +926,7 @@ Cross-org analytics with aggregate metrics and per-org breakdowns. The "how are 
 ### Design Notes
 - Multi-line chart with per-org series + bold alliance total line
 - Breakdown table uses abbreviated org names to fit in columns
-- "Shared Universe Health" card makes the dedup value proposition concrete
+- "Shared Universe Health" card makes the payoff from dedup concrete — overlap percentage and don't-re-knock count
 - Joint campaign progress shows per-org contribution inline
 - Desktop only (per screen inventory)
 - All charts are clickable — drill into the underlying data

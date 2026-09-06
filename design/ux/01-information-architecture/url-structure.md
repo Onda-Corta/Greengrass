@@ -8,7 +8,7 @@ SvelteKit uses file-based routing in `src/routes/`. Route groups `(group)` affec
 
 ## Route Architecture
 
-The app uses four SvelteKit layout groups, each with a distinct navigation shell:
+The app uses six SvelteKit layout groups, each with a distinct navigation shell:
 
 | Group | Shell | Purpose |
 |-------|-------|---------|

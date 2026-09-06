@@ -18,8 +18,67 @@ const ROOT = path.resolve(__dirname, '..');
 const OUT = path.join(ROOT, 'docs');
 const ASSETS_SRC = path.join(ROOT, 'site-assets');
 
-const SITE_TITLE = 'GreenGrass';
-const SITE_SUBTITLE = 'Spec & Design';
+const SITE_TITLE = 'GreenGrass';   // proper noun - never translated
+
+// ---------------------------------------------------------------------------
+// Languages. English sources live at the repo root; every other language
+// mirrors the English tree under `i18n/<code>/`. `outPrefix` is the ONLY thing
+// that moves output: it is '' for English, so English URLs never change.
+// ---------------------------------------------------------------------------
+const DEFAULT_LANG = 'en';
+
+const LANGS = [
+  {
+    code: 'en', htmlLang: 'en', label: 'EN', srcPrefix: '', outPrefix: '',
+    ui: {
+      subtitle: 'Spec & Design',
+      descSuffix: 'GreenGrass spec & design documentation.',
+      skip: 'Skip to content',
+      navToggle: 'Toggle navigation',
+      searchPlaceholder: 'Search docs\u2026',
+      searchLabel: 'Search documentation',
+      themeToggle: 'Toggle dark mode',
+      sidebarLabel: 'Documentation navigation',
+      breadcrumbLabel: 'Breadcrumb',
+      onThisPage: 'On this page',
+      noResults: 'No results for',
+      langNavLabel: 'Language',
+      // Shown on a page in THIS language, pointing at the other one - so it is
+      // written in the *target* language: the reader who needs it reads that.
+      toOther: 'Ver esta p\u00e1gina en espa\u00f1ol',
+      toOtherFallback: 'Esta p\u00e1gina no est\u00e1 traducida. Ir a la documentaci\u00f3n en espa\u00f1ol.',
+      sections: {
+        home: 'Home', spec: 'Specifications', arch: 'Architecture',
+        ux: 'UX Design', adr: 'Decisions', diary: 'Diary',
+        internal: 'Project & Internal',
+      },
+    },
+  },
+  {
+    code: 'es', htmlLang: 'es', label: 'ES', srcPrefix: 'i18n/es/', outPrefix: 'es/',
+    ui: {
+      subtitle: 'Especificaci\u00f3n y dise\u00f1o',
+      descSuffix: 'Documentaci\u00f3n de especificaci\u00f3n y dise\u00f1o de GreenGrass.',
+      skip: 'Saltar al contenido',
+      navToggle: 'Alternar navegaci\u00f3n',
+      searchPlaceholder: 'Buscar en la documentaci\u00f3n\u2026',
+      searchLabel: 'Buscar en la documentaci\u00f3n',
+      themeToggle: 'Alternar modo oscuro',
+      sidebarLabel: 'Navegaci\u00f3n de la documentaci\u00f3n',
+      breadcrumbLabel: 'Ruta de navegaci\u00f3n',
+      onThisPage: 'En esta p\u00e1gina',
+      noResults: 'No hay resultados para',
+      langNavLabel: 'Idioma',
+      toOther: 'View this page in English',
+      toOtherFallback: 'This page is not translated. Go to the English documentation.',
+      sections: {
+        home: 'Inicio', spec: 'Especificaciones', arch: 'Arquitectura',
+        ux: 'Dise\u00f1o UX', adr: 'Decisiones', diary: 'Diario',
+        internal: 'Proyecto e interno',
+      },
+    },
+  },
+];
 
 // Directories/files never scanned for content.
 const EXCLUDE_DIRS = new Set([
@@ -28,6 +87,10 @@ const EXCLUDE_DIRS = new Set([
 ]);
 const EXCLUDE_FILES = new Set(['package.json', 'package-lock.json']);
 
+// Translation sources live here and are collected per-language, not swept into
+// the English set. Matched root-relative so a nested `foo/i18n/` is unaffected.
+const I18N_ROOT = 'i18n';
+
 // ---------------------------------------------------------------------------
 // GitHub-compatible heading slugify (matches anchors authored in the source).
 // ---------------------------------------------------------------------------
@@ -35,7 +98,10 @@ function slugify(str) {
   return String(str)
     .trim()
     .toLowerCase()
-    .replace(/[^\w\s-]/g, '')   // drop punctuation, keep word chars / space / hyphen
+    // Keep Unicode letters/numbers so accented headings survive (a plain \w is
+    // ASCII-only and would delete a/e/i/o/u accents and n-tilde outright).
+    // '_' must be listed explicitly since \w had included it.
+    .replace(/[^\p{L}\p{N}\s_-]/gu, '')  // drop punctuation, keep letters / space / hyphen
     .replace(/\s+/g, '-');      // spaces -> hyphens
 }
 
@@ -52,13 +118,17 @@ const md = new MarkdownIt({ html: true, linkify: true, typographer: false }).use
 // ---------------------------------------------------------------------------
 // File discovery
 // ---------------------------------------------------------------------------
-async function walk(dir, acc = []) {
+async function walk(dir, acc = [], root = dir) {
   const entries = await fs.readdir(dir, { withFileTypes: true });
   for (const entry of entries) {
     const full = path.join(dir, entry.name);
     if (entry.isDirectory()) {
       if (EXCLUDE_DIRS.has(entry.name)) continue;
-      await walk(full, acc);
+      // Skip i18n only at the scan root. When walking i18n/es itself, that dir
+      // IS the root, so this guard cannot fire and the tree is collected.
+      const rel = path.relative(root, full).split(path.sep).join('/');
+      if (rel === I18N_ROOT) continue;
+      await walk(full, acc, root);
     } else if (entry.isFile() && entry.name.toLowerCase().endsWith('.md')) {
       if (EXCLUDE_FILES.has(entry.name)) continue;
       acc.push(full);
@@ -140,21 +210,25 @@ function numericPrefix(relMd) {
 
 const SECTIONS = [
   {
+    id: 'home',
     title: 'Home',
     match: (r) => r === 'README.md',
     sort: () => 0,
   },
   {
+    id: 'spec',
     title: 'Specifications',
     match: (r) => r.startsWith('spec/'),
     sort: (r) => indexIn(SPEC_ORDER, baseName(r)),
   },
   {
+    id: 'arch',
     title: 'Architecture',
     match: (r) => r.startsWith('design/architecture/'),
     sort: (r) => baseName(r),
   },
   {
+    id: 'ux',
     title: 'UX Design',
     match: (r) => r.startsWith('design/ux/'),
     sort: (r) => {
@@ -180,17 +254,20 @@ const SECTIONS = [
     },
   },
   {
+    id: 'adr',
     title: 'Decisions',
     match: (r) => r.startsWith('decisions/'),
     // ADRs 001-016 numeric first, ux-decisions.md last
     sort: (r) => (baseName(r) === 'ux-decisions' ? [1, 0] : [0, numericPrefix(r)]),
   },
   {
+    id: 'diary',
     title: 'Diary',
     match: (r) => r.startsWith('diary/'),
     sort: (r) => (baseName(r).toLowerCase() === 'readme' ? -1 : numericPrefix(r)),
   },
   {
+    id: 'internal',
     title: 'Project & Internal',
     match: () => true, // catch-all (CLAUDE.md, .claude/*, etc.)
     sort: (r) => r,
@@ -242,67 +319,128 @@ function baseFor(outputPath) {
 }
 
 // ---------------------------------------------------------------------------
-// Main
+// Per-language collection (Pass A)
+//
+// Each language gets its own doc set, link maps and sidebar. Classification runs
+// on `logical` -- the repo-relative path with the language's source prefix
+// stripped -- so every existing English-shaped matcher/sorter works unchanged.
+// For English `logical === relMd` and `outPrefix === ''`, so English output
+// paths are byte-identical to a single-language build.
 // ---------------------------------------------------------------------------
-async function main() {
-  const files = await walk(ROOT);
+async function collect(lang) {
+  const srcRoot = lang.srcPrefix ? path.join(ROOT, lang.srcPrefix) : ROOT;
+  if (lang.srcPrefix) {
+    try {
+      await fs.access(srcRoot);
+    } catch {
+      console.log(`  skip (no sources): ${lang.code}`);
+      return null;   // language not translated yet -- not an error
+    }
+  }
+  const files = await walk(srcRoot);
 
-  // Pass A: build doc records + maps.
   const docs = [];
   for (const full of files) {
     const relMd = path.relative(ROOT, full).split(path.sep).join('/');
+    const logical = lang.srcPrefix ? relMd.slice(lang.srcPrefix.length) : relMd;
     const source = await fs.readFile(full, 'utf8');
     if (source.trim() === '') {
       console.log(`  skip (empty): ${relMd}`);
       continue;
     }
-    const outputPath = toOutputPath(relMd);
-    const baseNm = relMd.split('/').pop();
-    const title = extractTitle(source, baseNm);
-    const sectionIdx = sectionFor(relMd);
-    const sortKey = SECTIONS[sectionIdx].sort(relMd);
-    docs.push({ relMd, full, source, outputPath, title, sectionIdx, sortKey });
+    const outputPath = lang.outPrefix + toOutputPath(logical);
+    const title = extractTitle(source, logical.split('/').pop());
+    const sectionIdx = sectionFor(logical);
+    const sortKey = SECTIONS[sectionIdx].sort(logical);
+    docs.push({ lang, relMd, logical, full, source, outputPath, title, sectionIdx, sortKey });
   }
 
-  // Map: repo-relative .md path -> output path (for link rewriting).
+  // Map: language-local .md path -> output path (for link rewriting).
   const mdToOut = new Map();
-  for (const d of docs) mdToOut.set(d.relMd, d.outputPath);
+  for (const d of docs) mdToOut.set(d.logical, d.outputPath);
 
   // Map: filename -> output path(s). Used as a fallback when a source link uses
   // an incorrect relative path (some source docs do). Only trusted when unique.
   const byBasename = new Map();
   for (const d of docs) {
-    const bn = d.relMd.split('/').pop().toLowerCase();
+    const bn = d.logical.split('/').pop().toLowerCase();
     if (!byBasename.has(bn)) byBasename.set(bn, []);
     byBasename.get(bn).push(d.outputPath);
   }
 
-  // Map: directory (repo-relative, no trailing slash) -> landing output path.
+  // Map: directory (language-local, no trailing slash) -> landing output path.
   const dirLanding = new Map();
   {
     const byDir = new Map();
     for (const d of docs) {
-      const dir = d.relMd.includes('/') ? d.relMd.slice(0, d.relMd.lastIndexOf('/')) : '';
+      const dir = d.logical.includes('/') ? d.logical.slice(0, d.logical.lastIndexOf('/')) : '';
       if (!byDir.has(dir)) byDir.set(dir, []);
       byDir.get(dir).push(d);
     }
     for (const [dir, list] of byDir) {
       list.sort((a, b) => compareKeys(a.sortKey, b.sortKey));
-      const readme = list.find((d) => /readme\.md$/i.test(d.relMd));
-      const overview = list.find((d) => /00-/.test(d.relMd.split('/').pop()));
+      const readme = list.find((d) => /readme\.md$/i.test(d.logical));
+      const overview = list.find((d) => /00-/.test(d.logical.split('/').pop()));
       const landing = readme || overview || list[0];
       if (dir) dirLanding.set(dir, landing.outputPath);
     }
   }
 
-  // Build sidebar nav structure (sections -> ordered items).
-  const sections = SECTIONS.map((s) => ({ title: s.title, items: [] }));
+  // Sidebar nav structure (sections -> ordered items) for this language.
+  const sections = SECTIONS.map((sec) => ({ id: sec.id, items: [] }));
   for (const d of docs) sections[d.sectionIdx].items.push(d);
-  for (const s of sections) s.items.sort((a, b) => compareKeys(a.sortKey, b.sortKey));
-  const navSections = sections.filter((s) => s.items.length > 0);
+  for (const sec of sections) sec.items.sort((a, b) => compareKeys(a.sortKey, b.sortKey));
+  const navSections = sections.filter((sec) => sec.items.length > 0);
+
+  if (docs.length === 0) {
+    console.log(`  skip (no documents): ${lang.code}`);
+    return null;
+  }
+
+  return { lang, docs, mdToOut, byBasename, dirLanding, navSections };
+}
+
+// Resolve a language-local link target within one language context.
+function resolveIn(ctx, absRel) {
+  if (/\.md$/i.test(absRel) && ctx.mdToOut.has(absRel)) return ctx.mdToOut.get(absRel);
+  const dirKey = absRel.replace(/\/$/, '');
+  if (ctx.dirLanding.has(dirKey)) return ctx.dirLanding.get(dirKey);
+  if (ctx.mdToOut.has(absRel + '.md')) return ctx.mdToOut.get(absRel + '.md');
+  return null;
+}
+
+// The same page in another language: exact counterpart if it exists, else that
+// language's home page (flagged so the UI can present it as a fallback).
+function counterpart(d, otherLang, outputSet) {
+  const stem = d.lang.outPrefix ? d.outputPath.slice(d.lang.outPrefix.length) : d.outputPath;
+  const want = otherLang.outPrefix + stem;
+  if (outputSet.has(want)) return { href: want, exact: true };
+  const home = otherLang.outPrefix + 'index.html';
+  if (outputSet.has(home)) return { href: home, exact: false };
+  return null;
+}
+
+// ---------------------------------------------------------------------------
+// Main
+// ---------------------------------------------------------------------------
+async function main() {
+  // Wipe the output tree so renamed/deleted sources cannot leave stale pages
+  // behind (docs/ is committed and deployed, so stale files would ship).
+  await fs.rm(OUT, { recursive: true, force: true });
+
+  const ctxs = [];
+  for (const lang of LANGS) {
+    const ctx = await collect(lang);
+    if (ctx) ctxs.push(ctx);
+  }
+  const enCtx = ctxs.find((c) => c.lang.code === DEFAULT_LANG);
+
+  const allDocs = ctxs.flatMap((c) => c.docs);
+  const docsByOutput = new Map(allDocs.map((d) => [d.outputPath, d]));
+  const outputSet = new Set(docsByOutput.keys());
 
   // Pass B: render markdown, collect heading slugs + TOC + plain text.
-  for (const d of docs) {
+  for (const d of allDocs) {
     const env = {};
     const html = md.render(d.source, env);
     d.renderedHtml = html;
@@ -331,92 +469,118 @@ async function main() {
   let unresolved = 0;
   const searchIndex = [];
 
-  for (const d of docs) {
-    const fromOut = d.outputPath;
-    const fromDir = d.relMd.includes('/') ? d.relMd.slice(0, d.relMd.lastIndexOf('/')) : '';
+  for (const ctx of ctxs) {
+    // A translated page may link to a document that has no translation yet;
+    // fall back to the English page rather than emitting a dead link.
+    const chain = ctx === enCtx ? [ctx] : [ctx, enCtx];
 
-    const rewritten = d.renderedHtml.replace(/href="([^"]*)"/g, (full, href) => {
-      // External / anchors / special schemes: leave as-is.
-      if (/^(https?:|mailto:|tel:|\/\/)/i.test(href)) return full;
-      if (href.startsWith('#')) return full;
+    for (const d of ctx.docs) {
+      const fromOut = d.outputPath;
+      const fromDir = d.logical.includes('/') ? d.logical.slice(0, d.logical.lastIndexOf('/')) : '';
 
-      // Split off anchor.
-      const hashIdx = href.indexOf('#');
-      let pathPart = hashIdx === -1 ? href : href.slice(0, hashIdx);
-      let anchorPart = hashIdx === -1 ? '' : href.slice(hashIdx); // includes '#'
-
-      pathPart = decodeURI(pathPart);
-
-      // Resolve relative to the source file's directory.
-      const absRel = pathPart === ''
-        ? d.relMd
-        : path.posix.normalize(path.posix.join(fromDir, pathPart));
-
-      let targetOut = null;
-
-      if (pathPart === '') {
-        targetOut = fromOut; // pure anchor written as path
-      } else if (/\.md$/i.test(absRel) && mdToOut.has(absRel)) {
-        targetOut = mdToOut.get(absRel);
-      } else {
-        // Maybe a directory link.
-        const dirKey = absRel.replace(/\/$/, '');
-        if (dirLanding.has(dirKey)) {
-          targetOut = dirLanding.get(dirKey);
-        } else if (mdToOut.has(absRel + '.md')) {
-          targetOut = mdToOut.get(absRel + '.md');
+      const rewritten = d.renderedHtml.replace(/href="([^"]*)"/g, (full, href) => {
+        // External / special schemes: leave as-is.
+        if (/^(https?:|mailto:|tel:|\/\/)/i.test(href)) return full;
+        // Same-page anchor: nothing to rewrite, but still worth checking -- a
+        // hand-written in-page link is just as easy to get wrong as a cross-doc one.
+        if (href.startsWith('#')) {
+          let slug = href.slice(1);
+          try { slug = decodeURIComponent(slug); } catch { /* keep raw */ }
+          if (slug && !d.slugSet.has(slug)) {
+            console.warn(`  ! anchor not found: ${d.relMd} -> ${href}`);
+            unresolved++;
+          }
+          return full;
         }
-      }
 
-      // Fallback: source link's relative path is wrong, but the target filename
-      // is unique across the repo — resolve by basename and note the fix.
-      if (!targetOut && /\.md$/i.test(pathPart)) {
-        const bn = pathPart.split('/').pop().toLowerCase();
-        const candidates = byBasename.get(bn);
-        if (candidates && candidates.length === 1) {
-          targetOut = candidates[0];
-          console.warn(`  ~ rerouted broken link in ${d.relMd}: "${pathPart}" -> ${targetOut}`);
+        // Split off anchor.
+        const hashIdx = href.indexOf('#');
+        let pathPart = hashIdx === -1 ? href : href.slice(0, hashIdx);
+        let anchorPart = hashIdx === -1 ? '' : href.slice(hashIdx); // includes '#'
+
+        pathPart = decodeURI(pathPart);
+
+        // Resolve relative to the source file's directory.
+        const absRel = pathPart === ''
+          ? d.logical
+          : path.posix.normalize(path.posix.join(fromDir, pathPart));
+
+        let targetOut = null;
+        let viaLang = null;
+
+        if (pathPart === '') {
+          targetOut = fromOut; // pure anchor written as path
+        } else {
+          for (const c of chain) {
+            targetOut = resolveIn(c, absRel);
+            if (targetOut) { viaLang = c; break; }
+          }
         }
-      }
 
-      if (!targetOut) {
-        console.warn(`  ! unresolved link in ${d.relMd}: "${href}"`);
-        unresolved++;
-        return full;
-      }
+        // Fallback: source link's relative path is wrong, but the target filename
+        // is unique across the repo -- resolve by basename and note the fix.
+        if (!targetOut && /\.md$/i.test(pathPart)) {
+          const bn = pathPart.split('/').pop().toLowerCase();
+          for (const c of chain) {
+            const candidates = c.byBasename.get(bn);
+            if (candidates && candidates.length === 1) {
+              targetOut = candidates[0];
+              viaLang = c;
+              console.warn(`  ~ rerouted broken link in ${d.relMd}: "${pathPart}" -> ${targetOut}`);
+              break;
+            }
+          }
+        }
 
-      // Validate cross-doc anchor against target's heading slugs.
-      if (anchorPart) {
-        const targetDoc = docs.find((x) => x.outputPath === targetOut);
-        const slug = anchorPart.slice(1);
-        if (targetDoc && slug && !targetDoc.slugSet.has(slug)) {
-          console.warn(`  ! anchor not found: ${d.relMd} -> ${href}`);
+        if (!targetOut) {
+          console.warn(`  ! unresolved link in ${d.relMd}: "${href}"`);
           unresolved++;
+          return full;
         }
-      }
 
-      const relPath = relHref(fromOut, targetOut);
-      return `href="${relPath}${anchorPart}"`;
-    });
+        // Make an untranslated cross-language link visible rather than silent.
+        if (viaLang && viaLang !== ctx) {
+          console.log(`  > ${ctx.lang.code} link falls back to ${viaLang.lang.code}: ${d.relMd}: "${pathPart}"`);
+        }
 
-    // External links get target/rel.
-    const finalContent = rewritten.replace(
-      /<a href="(https?:[^"]+)"/g,
-      '<a href="$1" target="_blank" rel="noopener noreferrer"'
-    );
+        // Validate cross-doc anchor against target's heading slugs.
+        if (anchorPart) {
+          const targetDoc = docsByOutput.get(targetOut);
+          const raw = anchorPart.slice(1);
+          // markdown-it percent-encodes non-ASCII fragments (#...%C3%B1o) while
+          // heading ids stay literal (#...ño). Browsers decode before matching.
+          let slug = raw;
+          try { slug = decodeURIComponent(raw); } catch { /* keep raw */ }
+          if (targetDoc && slug && !targetDoc.slugSet.has(slug)) {
+            console.warn(`  ! anchor not found: ${d.relMd} -> ${href}`);
+            unresolved++;
+          }
+        }
 
-    const page = renderPage(d, finalContent, navSections);
-    const outFull = path.join(OUT, d.outputPath);
-    await fs.mkdir(path.dirname(outFull), { recursive: true });
-    await fs.writeFile(outFull, page, 'utf8');
+        const relPath = relHref(fromOut, targetOut);
+        return `href="${relPath}${anchorPart}"`;
+      });
 
-    searchIndex.push({
-      title: d.title,
-      url: d.outputPath,
-      section: SECTIONS[d.sectionIdx].title,
-      headings: d.toc.map((t) => t.text),
-      text: d.plainText.slice(0, 1400),
-    });
+      // External links get target/rel.
+      const finalContent = rewritten.replace(
+        /<a href="(https?:[^"]+)"/g,
+        '<a href="$1" target="_blank" rel="noopener noreferrer"'
+      );
+
+      const page = renderPage(d, finalContent, ctx, outputSet);
+      const outFull = path.join(OUT, d.outputPath);
+      await fs.mkdir(path.dirname(outFull), { recursive: true });
+      await fs.writeFile(outFull, page, 'utf8');
+
+      searchIndex.push({
+        title: d.title,
+        url: d.outputPath,
+        lang: d.lang.code,
+        section: d.lang.ui.sections[SECTIONS[d.sectionIdx].id],
+        headings: d.toc.map((t) => t.text),
+        text: d.plainText.slice(0, 1400),
+      });
+    }
   }
 
   // Assets + search index + .nojekyll.
@@ -431,8 +595,14 @@ async function main() {
   );
   await fs.writeFile(path.join(OUT, '.nojekyll'), '', 'utf8');
 
-  console.log(`\nBuilt ${docs.length} pages into docs/`);
-  console.log(`Sections: ${navSections.map((s) => `${s.title} (${s.items.length})`).join(', ')}`);
+  console.log(`\nBuilt ${allDocs.length} pages into docs/`);
+  for (const ctx of ctxs) {
+    const t = ctx.lang.ui.sections;
+    console.log(
+      `  [${ctx.lang.code}] ${ctx.docs.length} pages: ` +
+      ctx.navSections.map((sec) => `${t[sec.id]} (${sec.items.length})`).join(', ')
+    );
+  }
   if (unresolved > 0) {
     console.log(`\n${unresolved} unresolved link/anchor warning(s) above.`);
   } else {
@@ -443,7 +613,7 @@ async function main() {
 // ---------------------------------------------------------------------------
 // Page template
 // ---------------------------------------------------------------------------
-function renderSidebar(active, navSections) {
+function renderSidebar(active, navSections, t) {
   const fromOut = active.outputPath;
   const parts = [];
   for (const section of navSections) {
@@ -457,7 +627,7 @@ function renderSidebar(active, navSections) {
       .join('');
     parts.push(
       `<div class="nav-section${sectionActive ? ' open' : ''}">` +
-        `<button type="button" class="nav-section-title" aria-expanded="${sectionActive}">${escapeHtml(section.title)}<span class="chev" aria-hidden="true"></span></button>` +
+        `<button type="button" class="nav-section-title" aria-expanded="${sectionActive}">${escapeHtml(t.sections[section.id])}<span class="chev" aria-hidden="true"></span></button>` +
         `<ul>${items}</ul>` +
       `</div>`
     );
@@ -465,57 +635,101 @@ function renderSidebar(active, navSections) {
   return parts.join('\n');
 }
 
-function renderToc(d) {
+function renderToc(d, t) {
   if (d.toc.length < 2) return '';
   const items = d.toc
-    .map((t) => `<li class="toc-${t.level}"><a href="#${t.id}">${escapeHtml(t.text)}</a></li>`)
+    .map((x) => `<li class="toc-${x.level}"><a href="#${x.id}">${escapeHtml(x.text)}</a></li>`)
     .join('');
-  return `<nav class="toc" aria-label="On this page"><div class="toc-label">On this page</div><ul>${items}</ul></nav>`;
+  return `<nav class="toc" aria-label="${escapeHtml(t.onThisPage)}"><div class="toc-label">${escapeHtml(t.onThisPage)}</div><ul>${items}</ul></nav>`;
 }
 
-function renderPage(d, content, navSections) {
+// EN | ES switch. Server-rendered per page, so it needs no JavaScript. The
+// current language is inert text; the other is a link. When this page has no
+// counterpart in the other language the link points at that language's home and
+// is marked as a fallback rather than hidden -- a control that disappears on
+// most pages is never discoverable.
+function renderLangSwitch(d, outputSet) {
+  const opts = LANGS.map((l) => {
+    if (l.code === d.lang.code) {
+      return `<span class="lang-opt active" aria-current="true">${escapeHtml(l.label)}</span>`;
+    }
+    const cp = counterpart(d, l, outputSet);
+    if (!cp) return '';
+    const href = relHref(d.outputPath, cp.href);
+    // Authored on the CURRENT page's strings, but written in the target language
+    // -- the reader who needs this prompt is the one who reads that language.
+    const title = cp.exact ? d.lang.ui.toOther : d.lang.ui.toOtherFallback;
+    const cls = cp.exact ? 'lang-opt' : 'lang-opt lang-opt--fallback';
+    return `<a class="${cls}" href="${href}" hreflang="${l.htmlLang}" lang="${l.htmlLang}" title="${escapeHtml(title)}">${escapeHtml(l.label)}</a>`;
+  }).filter(Boolean);
+  // Only the current language available -> nothing to switch to, render nothing
+  // rather than a lone inert button.
+  if (opts.length < 2) return '';
+  return `\n  <nav class="lang-switch" aria-label="${escapeHtml(d.lang.ui.langNavLabel)}">${opts.join('')}</nav>`;
+}
+
+// hreflang alternates -- only for pages that genuinely exist in both languages.
+function renderAlternates(d, outputSet) {
+  const links = [];
+  for (const l of LANGS) {
+    const cp = l.code === d.lang.code
+      ? { href: d.outputPath, exact: true }
+      : counterpart(d, l, outputSet);
+    if (!cp || !cp.exact) return '';   // incomplete pair -> declare nothing
+    links.push({ lang: l, href: cp.href });
+  }
+  const en = links.find((x) => x.lang.code === DEFAULT_LANG);
+  const tags = links.map(
+    (x) => `<link rel="alternate" hreflang="${x.lang.htmlLang}" href="${relHref(d.outputPath, x.href)}">`
+  );
+  if (en) tags.push(`<link rel="alternate" hreflang="x-default" href="${relHref(d.outputPath, en.href)}">`);
+  return '\n' + tags.join('\n');
+}
+
+function renderPage(d, content, ctx, outputSet) {
+  const t = d.lang.ui;
   const base = baseFor(d.outputPath);
-  const sidebar = renderSidebar(d, navSections);
-  const toc = renderToc(d);
-  const sectionName = navSections.find((s) => s.items.includes(d))?.title || '';
+  const sidebar = renderSidebar(d, ctx.navSections, t);
+  const toc = renderToc(d, t);
+  const sectionName = t.sections[SECTIONS[d.sectionIdx].id] || '';
   const pageTitle = `${d.title} · ${SITE_TITLE}`;
   return `<!DOCTYPE html>
-<html lang="en" data-base="${base}">
+<html lang="${d.lang.htmlLang}" data-base="${base}" data-no-results="${escapeHtml(t.noResults)}">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>${escapeHtml(pageTitle)}</title>
-<meta name="description" content="${escapeHtml(d.title)} — GreenGrass spec &amp; design documentation.">
+<meta name="description" content="${escapeHtml(d.title)} — ${escapeHtml(t.descSuffix)}">${renderAlternates(d, outputSet)}
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%232563eb'/%3E%3Cstop offset='1' stop-color='%2316a34a'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='32' height='32' rx='7' fill='url(%23g)'/%3E%3C/svg%3E">
 <link rel="stylesheet" href="${base}assets/styles.css">
 </head>
 <body>
-<a class="skip-link" href="#content">Skip to content</a>
+<a class="skip-link" href="#content">${escapeHtml(t.skip)}</a>
 <header class="site-header">
-  <button type="button" class="menu-toggle" aria-label="Toggle navigation" aria-expanded="false">
+  <button type="button" class="menu-toggle" aria-label="${escapeHtml(t.navToggle)}" aria-expanded="false">
     <span></span><span></span><span></span>
   </button>
-  <a class="brand" href="${base}index.html">
+  <a class="brand" href="${base}${d.lang.outPrefix}index.html">
     <span class="brand-mark" aria-hidden="true"></span>
-    <span class="brand-text"><strong>${SITE_TITLE}</strong><small>${SITE_SUBTITLE}</small></span>
+    <span class="brand-text"><strong>${SITE_TITLE}</strong><small>${escapeHtml(t.subtitle)}</small></span>
   </a>
   <div class="search">
-    <input type="search" id="search-input" placeholder="Search docs…" autocomplete="off" aria-label="Search documentation">
+    <input type="search" id="search-input" placeholder="${escapeHtml(t.searchPlaceholder)}" autocomplete="off" aria-label="${escapeHtml(t.searchLabel)}">
     <div id="search-results" class="search-results" hidden></div>
-  </div>
-  <button type="button" class="theme-toggle" aria-label="Toggle dark mode" title="Toggle dark mode">
+  </div>${renderLangSwitch(d, outputSet)}
+  <button type="button" class="theme-toggle" aria-label="${escapeHtml(t.themeToggle)}" title="${escapeHtml(t.themeToggle)}">
     <span class="theme-icon" aria-hidden="true"></span>
   </button>
 </header>
 <div class="layout">
   <div class="sidebar-backdrop" hidden></div>
-  <aside class="sidebar" aria-label="Documentation navigation">
+  <aside class="sidebar" aria-label="${escapeHtml(t.sidebarLabel)}">
     <nav class="nav">
 ${sidebar}
     </nav>
   </aside>
   <main id="content" class="content">
-    <nav class="breadcrumb" aria-label="Breadcrumb">${escapeHtml(sectionName)}</nav>
+    <nav class="breadcrumb" aria-label="${escapeHtml(t.breadcrumbLabel)}">${escapeHtml(sectionName)}</nav>
     <article class="prose">
 ${content}
     </article>

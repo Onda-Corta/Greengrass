@@ -13,8 +13,8 @@ Field mode is a **full-screen takeover** — no sidebar, no tabs, no notificatio
 | CANV-007 | Shift Start | V, TL | Yes | Primary | [Shift Start Flow](#shift-start-flow) |
 | CANV-008 | Walk List View | V, TL | Yes | Primary | [Walk List View](#walk-list-view) |
 | CANV-009 | Map View | V, TL | Yes | Primary | [Map View](#map-view) |
-| CANV-010 | Door Card | V, TL | Yes | Primary | [Door Card — Canvassing](#door-card--canvassing) |
-| CANV-011 | Interaction Form | V, TL | Yes | Primary | [Door Card — Canvassing](#door-card--canvassing) |
+| CANV-010 | Door Card | V, TL | Yes | Primary | [Door Card — Canvassing](#door-card-canvassing) |
+| CANV-011 | Interaction Form | V, TL | Yes | Primary | [Door Card — Canvassing](#door-card-canvassing) |
 | CANV-012 | Shift End / Debrief | V, TL | Yes | Primary | [Shift End Flow](#shift-end-flow) |
 | PHONE-004 | Call Interface BYOP | V, TL | Yes | Primary | [Phone Banking Variant](#phone-banking-variant) |
 | PHONE-005 | Call Interface Integrated | V, TL | Yes | Primary | [Phone Banking Variant](#phone-banking-variant) |

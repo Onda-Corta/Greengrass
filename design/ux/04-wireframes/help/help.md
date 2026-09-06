@@ -2,7 +2,7 @@
 
 ## Purpose
 
-Help screens provide self-service support — searchable knowledge base, AI-powered concierge, and structured training for volunteers. These screens exist to reduce support burden while ensuring every user (from tech-savvy Org Admins to first-time volunteers) can learn the platform independently.
+Help screens provide self-service support — searchable knowledge base, AI concierge, and structured training for volunteers. These screens exist to reduce support burden while ensuring every user (from tech-savvy Org Admins to first-time volunteers) can learn the platform independently.
 
 The core UX challenge: help content must be role-filtered (a volunteer doesn't need articles about compliance configuration), multilingual (matching the tenant's configured languages), and partially offline (volunteers in low-connectivity areas need cached training materials). The AI concierge adds a conversational interface but must know its limits and escalate when appropriate.
 
@@ -753,7 +753,7 @@ Rich text editor with: headings, bold/italic, lists, images (upload), video embe
 | AI concierge as side panel (desktop) | Overlays current screen, not a separate page | User can reference the current screen while asking questions. Context preservation is key |
 | Training modules with offline caching | Text/images cached, video online-only | Volunteers may take training in low-connectivity areas. Video is too large to cache reliably, but text content must be available |
 | Quiz as separate step (not inline) | Dedicated quiz screen after completing lessons | Clear separation between learning and assessment. Prevents users from just scrolling to the quiz without reading content |
-| Certification expiration | Configurable per module (optional) | Safety training should be renewed periodically. Platform basics don't need renewal. Org-configurable flexibility |
+| Certification expiration | Configurable per module (optional) | Safety training should be renewed periodically. Platform basics don't need renewal. Each org decides which is which |
 | Feedback on articles | Simple thumbs up/down | Low-friction feedback signal. Detailed feedback would require too much effort from users who are already stuck |
 
 ## Open Questions

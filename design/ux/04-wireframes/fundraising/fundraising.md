@@ -466,7 +466,7 @@ Full-page preview of a donation form as donors will see it. Accessed from the bu
 
 ## FUND-005: Donation Form — Public (Hosted)
 
-The public-facing donation page. This is the donor's first touchpoint for web-based donations.
+The public-facing donation page. For web donations, this is where the donor starts.
 
 > **Cross-reference:** The full wireframe for this screen is in `supporter/supporter-portal.md` — "Public Donation Page (Pre-Auth)". It covers the tenant-branded donation form, amount selection, donor fields, payment method selection, and the confirmation/receipt flow.
 
