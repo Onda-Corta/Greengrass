@@ -10,7 +10,7 @@ This spec builds on: workflows.md (social media integration, activism delivery e
 
 ## Press & Media Philosophy
 
-1. **Earned media is a force multiplier.** For campaigns with limited budgets, press coverage is the highest-ROI communication channel. The platform should make press operations as streamlined as canvassing or fundraising.
+1. **Earned media is the cheapest reach a campaign has.** For campaigns with limited budgets, press coverage buys more attention per dollar than any other channel. Press operations deserve the same support in the platform as canvassing or fundraising.
 2. **Relationships, not blasts.** Effective press work is about relationships with specific journalists, not mass emails. The CRM's contact management should support media relationships as a first-class concern.
 3. **Compliance-aware public communications.** Every public-facing piece of content — press releases, social media posts, public statements — must carry appropriate disclaimers per jurisdiction (compliance.md). The platform enforces this automatically.
 4. **Candidate-controlled public voice.** Nothing goes public without the candidate's awareness. The approval workflow (messaging.md) ensures the candidate reviews public-facing content before distribution.
@@ -19,7 +19,7 @@ This spec builds on: workflows.md (social media integration, activism delivery e
 
 ### Media Contacts as CRM Records
 
-Media contacts use the existing Contact record type (users.md:291-294) with media-specific fields:
+Media contacts use the existing Contact record type ([users.md § Contact](users.md#contact)) with media-specific fields:
 
 - **Outlet** — the publication, station, or platform the journalist works for
 - **Beat** — what the journalist covers (politics, local government, education, labor, etc.)
@@ -57,7 +57,7 @@ This creates a complete picture of the campaign's media relationships and helps 
 
 - **Press release builder** — structured template with: headline, subhead, dateline, body, quote blocks (attributed to named individuals), boilerplate (org description), contact information
 - **Compliance integration** — disclaimer text automatically appended based on jurisdiction (compliance.md). Press releases for political campaigns typically require "paid for by" or equivalent attribution.
-- **Approval workflow** — press releases route through the candidate approval flow (messaging.md:124). Candidate can approve, reject, or comment. Approval tracked for audit.
+- **Approval workflow** — press releases route through the candidate approval flow ([messaging.md § Alliance Communication](messaging.md#alliance-communication)). Candidate can approve, reject, or comment. Approval tracked for audit.
 - **Distribution** — send the approved release to selected media lists via email. Personalization supported (journalist's name, outlet-specific notes).
 - **Embargo support** — mark a release as embargoed until a specific date/time. Embargo notice included in the distribution. Platform tracks who received the embargoed release.
 - **Versioning** — press releases maintain version history. If a release is updated after distribution (correction, update), the platform can send an updated version noting changes.
@@ -86,7 +86,7 @@ A persistent collection of campaign materials for journalist reference:
 - **Hosting** — media kit hosted on the campaign's public-facing page (see Public Profiles below). Downloadable as a ZIP or browsable online.
 - **Access tracking** — optionally track which journalists access the media kit (requires the journalist to provide their email or click a tracked link).
 
-**DECIDED: Configurable per asset.** Campaign controls access at the individual asset level. Candidate bio and boilerplate can be fully public, while high-resolution photos or internal fact sheets can be gated (journalist provides email to access). Gated access auto-creates media contact records in the CRM. Maximizes flexibility — campaigns balance accessibility with intelligence-gathering based on their needs.
+**DECIDED: Configurable per asset.** Campaign controls access at the individual asset level. Candidate bio and boilerplate can be fully public, while high-resolution photos or internal fact sheets can be gated (journalist provides email to access). Gated access auto-creates media contact records in the CRM. Each campaign decides for itself where the line between reach and intelligence-gathering falls.
 
 ## Media Coverage Tracking
 
@@ -155,7 +155,7 @@ Per system.md, a modular adapter architecture supports per-platform integration:
 
 #### Post Approval Workflow
 
-- **Draft → Review → Approve → Schedule/Publish** — social media posts follow the same candidate approval workflow as press releases (messaging.md:124).
+- **Draft → Review → Approve → Schedule/Publish** — social media posts follow the same candidate approval workflow as press releases ([messaging.md § Alliance Communication](messaging.md#alliance-communication)).
 - **Batch approval** — candidate can review and approve multiple scheduled posts in one session.
 - **Emergency bypass** — Org Admin or Communications Director can publish without candidate approval for time-sensitive responses (logged for audit, candidate notified after the fact).
 
@@ -168,10 +168,10 @@ Per system.md, a modular adapter architecture supports per-platform integration:
 
 ### Endorsement Management
 
-Endorsements are a significant public communications asset for campaigns.
+An endorsement is someone else vouching for the candidate, in their own words. For most campaigns it is the most valuable public communications asset they have.
 
 - **Endorsement records** — track endorsements with: endorser name, title/position, organization (if applicable), date received, public/private status, endorsement text (quote), photo
-- **Endorser as Contact** — endorsers are tracked as Contact records in the CRM (users.md:291-294), linking the endorsement to the broader relationship
+- **Endorser as Contact** — endorsers are tracked as Contact records in the CRM ([users.md § Contact](users.md#contact)), linking the endorsement to the broader relationship
 - **Public display** — approved endorsements can be displayed on the candidate's public profile, organized by category (elected officials, organizations, community leaders, individuals)
 - **Endorsement announcement** — when a new endorsement is received, the platform can generate a press release from a template (endorser quote, candidate response quote, boilerplate) and a social media post
 
@@ -190,7 +190,7 @@ Endorsements are a significant public communications asset for campaigns.
 - **Talking points library** — a managed collection of approved talking points organized by topic. Staff and the candidate can reference these when preparing for interviews or writing content.
 - **Version control** — talking points are versioned. When a position evolves, the old version is archived and the new version is published. Staff always see the current approved language.
 - **Distribution** — talking points can be pushed to designated staff via the internal messaging system (messaging.md) when updated.
-- **Candidate briefing integration** — talking points feed into the candidate briefing messages (messaging.md:123). Before an interview or press event, the candidate receives relevant talking points.
+- **Candidate briefing integration** — talking points feed into the candidate briefing messages ([messaging.md § Alliance Communication](messaging.md#alliance-communication)). Before an interview or press event, the candidate receives relevant talking points.
 
 ## Press Events
 
@@ -255,7 +255,7 @@ Tenant App → Post Scheduler → Platform Adapter → Social Media API
 
 ### Media Asset Management
 
-- **Image storage** — high-resolution images stored in object storage (system.md:81). Multiple resolutions generated for different use cases (thumbnail, web, print-quality).
+- **Image storage** — high-resolution images stored in object storage ([system.md § What's inside a tenant](../design/architecture/system.md#whats-inside-a-tenant)). Multiple resolutions generated for different use cases (thumbnail, web, print-quality).
 - **Brand assets** — logo, color palette, fonts stored as org-level assets. Available across all content creation tools (press releases, social media posts, public profiles, email templates).
 - **Asset library** — searchable library of approved media assets (photos, graphics, video clips). Staff can browse and use approved assets when creating content.
 - **Usage rights tracking** — optional field to track usage rights for media assets (photographer credit, license type, expiration date).

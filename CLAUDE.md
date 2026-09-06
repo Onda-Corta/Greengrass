@@ -22,6 +22,11 @@ GreenGrass/
 ├── CLAUDE.md                      # Project instructions (this file)
 ├── .claude/
 │   └── SKILLS.md                  # Project-specific skills
+├── i18n/                          # Translations
+│   ├── GLOSSARY.md                # Canonical ES terminology (not published)
+│   └── es/                        # Spanish mirror of the English tree
+│       ├── README.md              # Spanish home page
+│       └── spec/                  # The 14 specs, in Spanish
 ├── spec/                          # Product specifications (14 docs)
 │   ├── product.md                 # High-level product description
 │   ├── mvp.md                     # MVP product plan and pilot design
@@ -57,6 +62,25 @@ GreenGrass/
 The Markdown sources are canonical. `docs/` is generated from them by `npm run build`
 (see the README's "Documentation Website" section) and published to GitHub Pages.
 
+## Translations
+
+The site is bilingual. English sources live at the repo root; Spanish lives under
+`i18n/es/`, mirroring the English path exactly (`spec/product.md` ->
+`i18n/es/spec/product.md`) and building to `docs/es/`. An EN/ES switch in the site
+header moves between them. Only `spec/` is translated so far — the switch on an
+untranslated page is styled as a fallback and goes to the Spanish home page.
+
+- **`i18n/GLOSSARY.md` is binding.** It is the terminology contract for Spanish. Any
+  recurring term should be there before it is used; add to it rather than improvising.
+- Adding a language means adding one entry to `LANGS` in `scripts/build.mjs` (its
+  `srcPrefix`/`outPrefix` and UI strings) and creating `i18n/<code>/`. A language
+  directory with no documents is skipped, so partial translations are safe to commit.
+- Spanish files must each start with an `# H1`; the generator's title fallback
+  title-cases every word, which is wrong in Spanish.
+- Cross-references between translated specs point at Spanish anchors. After adding or
+  retranslating a file, run `node scripts/fix-es-anchors.mjs`, then `npm run build` —
+  the build validates every anchor and fails loudly on a bad one.
+
 ## Conventions
 
 - All spec documents are Markdown
@@ -65,6 +89,7 @@ The Markdown sources are canonical. `docs/` is generated from them by `npm run b
 - Decisions are recorded as ADRs in `decisions/`
 - Each spec document should be self-contained but cross-reference related docs
 - The `docs/` website is generated — edit the Markdown sources, then run `npm run build` to regenerate it; never hand-edit files in `docs/`
+- Cross-document references use heading anchors (`[users.md § Staff](users.md#staff)`), never line numbers — line numbers break silently on the next edit, anchors are checked by the build
 
 ## Notes
 

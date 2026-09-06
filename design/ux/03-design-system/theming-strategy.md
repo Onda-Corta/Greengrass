@@ -2,7 +2,7 @@
 
 ## Purpose
 
-This document defines how GreenGrass supports per-tenant visual branding, RTL layouts, dark mode, and accessibility themes. Every tenant runs the same application code — theming is achieved entirely through design token overrides, not code changes.
+This document defines how GreenGrass supports per-tenant visual branding, RTL layouts, dark mode, and accessibility themes. Every tenant runs the same application code — theming happens entirely through design token overrides, not code changes.
 
 ## Per-Tenant Branding
 
@@ -322,4 +322,4 @@ Each layer only overrides what it needs. A tenant's dark mode high-contrast them
 
 3. **White-label depth.** Some tenants (particularly self-hosted) may want deeper white-labeling (custom app name, custom login screen, custom email templates). How deep does theming go? Currently limited to color + logo. Full white-label would require a different architecture.
 
-<!-- REVISIT: The auto-generation of derivative colors (hover, active, subtle, on-primary) needs a robust algorithm that works across the full color gamut. HSL manipulation is simple but produces poor results for some hues. Consider using OKLCH or a perceptual color space for better results. -->
+<!-- REVISIT: The auto-generation of derivative colors (hover, active, subtle, on-primary) needs an algorithm that works across the full color gamut. HSL manipulation is simple but produces poor results for some hues. Consider using OKLCH or a perceptual color space for better results. -->

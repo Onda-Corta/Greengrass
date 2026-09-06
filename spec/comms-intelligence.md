@@ -15,7 +15,7 @@ media monitoring · fact check · talking points · media map · analyst profile
 
 The binding qualifier is *"todo de forma sistemática, con acceso controlado"* — systematic, with controlled access. Those two words carry more weight than any of the seven features, and much of this document is about them.
 
-**This is not an alternate MVP.** `spec/mvp.md` tests the one question in the project that is not a normal engineering problem — whether sovereign political organizations will pool data under the right rules — and `spec/mvp.md:22` is right that it should be tested first and cheaply, before the expensive build. Nothing here displaces that. The pilot stays as specified: MVC and PIP, ingest-only, mutual suppression, the phases at `spec/mvp.md:216-223`.
+**This is not an alternate MVP.** `spec/mvp.md` tests the one question in the project that is not a normal engineering problem — whether sovereign political organizations will pool data under the right rules — and [mvp.md § 1. Context](mvp.md#1-context) is right that it should be tested first and cheaply, before the expensive build. Nothing here displaces that. The pilot stays as specified: MVC and PIP, ingest-only, mutual suppression, the phases at [mvp.md § 7. Phases](mvp.md#7-phases).
 
 This document is what gets built **after** that question is answered: the first iterations of real product, ordered by dependency, each with the gate that releases it.
 
@@ -27,7 +27,7 @@ Two things follow from the sequencing. §2 is why this domain goes first among t
 
 The full platform is large: fundraising, field operations, GOTV, events, activism, the supporter portal. Any of them could follow the pilot. Four reasons this one leads.
 
-**The spec already scheduled it.** `spec/press.md:101` defers automated media monitoring in unusually forward language:
+**The spec already scheduled it.** [press.md § Coverage Logging](press.md#coverage-logging) defers automated media monitoring in unusually forward language:
 
 > Automated media monitoring is deferred not because it's unimportant, but because it deserves serious investment rather than a bolt-on integration. Existing media monitoring services (Meltwater, Cision, etc.) are expensive, Western-focused, and poorly cover regional and local media in the global south. This is a significant market gap. […] Revisit as a dedicated product initiative, not an afterthought.
 
@@ -47,10 +47,10 @@ The pilot is not only a validation. It builds four things this roadmap depends o
 
 | Built by the MVP | Why this roadmap needs it |
 |---|---|
-| **BYOK from day one** (`spec/mvp.md:123`) | The dossier store's central claim is that the platform cannot read the material. BYOK makes that true rather than contractual |
-| **Immutable audit trail from day one** (`spec/mvp.md:124`) | Chain of custody on research findings is the same machinery |
-| **Event sourcing for provenance** (`spec/mvp.md:125`) | The claims ledger *is* a provenance structure — same shape, different subject |
-| **The sharing contract, ALLY-005** (`spec/mvp.md:97`) | Field-level, default-deny, per-member. See below |
+| **BYOK from day one** ([mvp.md § 4.4 Kept despite looking cuttable](mvp.md#44-kept-despite-looking-cuttable)) | The dossier store's central claim is that the platform cannot read the material. BYOK makes that true rather than contractual |
+| **Immutable audit trail from day one** ([mvp.md § 4.4 Kept despite looking cuttable](mvp.md#44-kept-despite-looking-cuttable)) | Chain of custody on research findings is the same machinery |
+| **Event sourcing for provenance** ([mvp.md § 4.4 Kept despite looking cuttable](mvp.md#44-kept-despite-looking-cuttable)) | The claims ledger *is* a provenance structure — same shape, different subject |
+| **The sharing contract, ALLY-005** ([mvp.md § 4.1 What gets built](mvp.md#41-what-gets-built)) | Field-level, default-deny, per-member. See below |
 | **A validated answer on whether the rules are what made it possible** (A7) | Determines whether anything below can be coalition-shared at all |
 
 ### 3.1 The sharing contract turns out to be the media map's answer
@@ -61,9 +61,9 @@ An open question that would otherwise be hard: who owns the actor graph — the 
 
 If the MVP passes, there is a third answer: **coalition-shared, under the same default-deny field-level contract the pilot already built.** Members contribute what they know about the media landscape, see the union, and withhold what they choose — the identical primitive, pointed at institutional knowledge instead of supporter records.
 
-And it is a *safer* second use of that machinery than the first. A media map contains no personal data of supporters, no consent question, and no `support_level` field that a party guards as its core asset (`spec/mvp.md:58`). If the sharing contract works anywhere, it works here. That makes this domain a natural place to extend the trust arrangement rather than to test it.
+And it is a *safer* second use of that machinery than the first. A media map contains no personal data of supporters, no consent question, and no `support_level` field that a party guards as its core asset ([mvp.md § MVC — Movimiento Victoria Ciudadana](mvp.md#mvc-movimiento-victoria-ciudadana)). If the sharing contract works anywhere, it works here. That makes this domain a natural place to extend the trust arrangement rather than to test it.
 
-**This only becomes available if the MVP passes.** If A7 fails and the parties turn out to have trusted each other rather than the rules (`spec/mvp.md:144`), the actor graph falls back to per-tenant and the coalition-shared version is dropped.
+**This only becomes available if the MVP passes.** If A7 fails and the parties turn out to have trusted each other rather than the rules ([mvp.md § 5. The assumption, decomposed](mvp.md#5-the-assumption-decomposed)), the actor graph falls back to per-tenant and the coalition-shared version is dropped.
 
 ---
 
@@ -73,13 +73,13 @@ The spec suite is partly ahead of the request and partly absent.
 
 | Capability | Status | Evidence |
 |---|---|---|
-| **Media monitoring** | Deferred **as a named strategic opportunity** | `spec/press.md:101`, `decisions/015-product-scope.md` |
-| **Talking points** | **Exists** — versioned, topic-organized, team-shared | `spec/press.md:188-193`; PRESS-014 in `design/ux/04-wireframes/press/press.md:1007` |
-| **Media map** | Partial — contacts carry outlet, beat, coverage area; the landscape itself is prose | `spec/press.md:22-31`, `spec/press.md:223-229` |
-| **Analyst profiles** | Partial — journalists are Contact records with relationship state; analysts are a different object | `spec/press.md:20-31`, `spec/users.md:291-294` |
+| **Media monitoring** | Deferred **as a named strategic opportunity** | [press.md § Coverage Logging](press.md#coverage-logging), `decisions/015-product-scope.md` |
+| **Talking points** | **Exists** — versioned, topic-organized, team-shared | [press.md § Talking Points](press.md#talking-points); PRESS-014 in [press.md § PRESS-014: Talking Points Library](../design/ux/04-wireframes/press/press.md#press-014-talking-points-library) |
+| **Media map** | Partial — contacts carry outlet, beat, coverage area; the landscape itself is prose | [press.md § Media Contacts as CRM Records](press.md#media-contacts-as-crm-records), [press.md § Media Landscape Differences](press.md#media-landscape-differences) |
+| **Analyst profiles** | Partial — journalists are Contact records with relationship state; analysts are a different object | [press.md § Media Contacts as CRM Records](press.md#media-contacts-as-crm-records), [users.md § Contact](users.md#contact) |
 | **Fact check** | Absent | — |
 | **Candidate vetting** | Absent. Nearest neighbor is configurable volunteer approval for infiltration risk, ADR-003 | — |
-| **Opposition research** | Absent — appears only in the threat model, as something done *to* the campaign | `spec/security.md:17`, `spec/security.md:49` |
+| **Opposition research** | Absent — appears only in the threat model, as something done *to* the campaign | [security.md § Tier 1: State Actors](security.md#tier-1-state-actors), [security.md § Tier 3: Political Opponents](security.md#tier-3-political-opponents) |
 
 ### What the talking-points reference adds
 
@@ -101,7 +101,7 @@ Treating the request as seven features produces seven half-built tools. It is th
 
 Outlets, journalists, analysts, and monitoring targets are one structure, not four. The unit missing today is the **outlet as a first-class record**: ownership, financing, political or confessional alignment, reach, editorial line, sister properties, and who at it writes what.
 
-`spec/press.md:223-229` describes exactly this — Lebanon's *"confessional media landscape (outlets aligned with political/religious groups),"* India's regional-language fragmentation, Puerto Rico's bilingual split — as prose, in a section titled "Media Landscape Differences," and never models any of it. Every outlet in the platform today exists only as a text field on a journalist's contact record (`spec/press.md:24`).
+[press.md § Media Landscape Differences](press.md#media-landscape-differences) describes exactly this — Lebanon's *"confessional media landscape (outlets aligned with political/religious groups),"* India's regional-language fragmentation, Puerto Rico's bilingual split — as prose, in a section titled "Media Landscape Differences," and never models any of it. Every outlet in the platform today exists only as a text field on a journalist's contact record ([press.md § Media Contacts as CRM Records](press.md#media-contacts-as-crm-records)).
 
 Analyst profiles fall out of the same graph. A journalist is someone you pitch. An analyst or commentator is someone you *predict* — their prior positions, their alignment, what they said last time this issue came up. Same graph, different edge.
 
@@ -127,7 +127,7 @@ This is the part of the request the platform cannot currently satisfy, and it is
 
 ADR-003 gives hybrid RBAC — stackable role templates with per-user overrides — plus attribute scoping by geography, team, and campaign. It answers *"what can a Communications Director do, and over which region."* It has no answer for *"only these four named people may open this file, and the Org Admin is not one of them."*
 
-The press wireframes make the gap concrete: every screen from PRESS-001 to PRESS-015 is marked visible to **OA, CD** — Org Admin and Communications Director (`design/ux/04-wireframes/press/press.md:15-30`). Role-level, org-wide, no finer grain anywhere in the domain.
+The press wireframes make the gap concrete: every screen from PRESS-001 to PRESS-015 is marked visible to **OA, CD** — Org Admin and Communications Director ([press.md § Scope](../design/ux/04-wireframes/press/press.md#scope)). Role-level, org-wide, no finer grain anywhere in the domain.
 
 A compartmented dossier store needs four things the platform does not have:
 
@@ -140,11 +140,11 @@ A compartmented dossier store needs four things the platform does not have:
 
 Two of those are not gaps but active contradictions, and they should be resolved rather than papered over:
 
-- **`decisions/004-data-model-integrity.md:13`** commits to a full audit trail *"for all data mutations."* Reads are not logged. For a dossier store, the read *is* the event worth logging — exfiltration by an insider leaves no mutation behind.
-- **`spec/security.md:404`** goes further and makes non-logging a *defense*: *"Avoid logging unnecessary metadata (don't record which specific records a user viewed if you only need to know they logged in)."* That is correct metadata-minimization reasoning for a canvassing app under state surveillance, and it is precisely inverted for a research compartment.
-- **`spec/security.md:330`** grants Platform Admin *"silent access… to read tenant data for support and debugging without tenant notification."* Defensible for a CRM. Not defensible for a file on a sitting official.
+- **[004-data-model-integrity.md § Full audit trail for all data mutations](../decisions/004-data-model-integrity.md#full-audit-trail-for-all-data-mutations)** commits to a full audit trail *"for all data mutations."* Reads are not logged. For a dossier store, the read *is* the event worth logging — exfiltration by an insider leaves no mutation behind.
+- **[security.md § Metadata Protection](security.md#metadata-protection)** goes further and makes non-logging a *defense*: *"Avoid logging unnecessary metadata (don't record which specific records a user viewed if you only need to know they logged in)."* That is correct metadata-minimization reasoning for a canvassing app under state surveillance, and it is precisely inverted for a research compartment.
+- **[security.md § GreenGrass Team Access](security.md#greengrass-team-access)** grants Platform Admin *"silent access… to read tenant data for support and debugging without tenant notification."* Defensible for a CRM. Not defensible for a file on a sitting official.
 
-There is also a knock-on to the duress design. `spec/security.md:435` specifies a decoy passkey that opens a sanitized view. That feature is currently a nice-to-have for the highest tier. Add a dossier store and it becomes load-bearing — there is now something specific that a coerced login must not reveal.
+There is also a knock-on to the duress design. [security.md § Physical Security Considerations](security.md#physical-security-considerations) specifies a decoy passkey that opens a sanitized view. That feature is currently a nice-to-have for the highest tier. Add a dossier store and it becomes load-bearing — there is now something specific that a coerced login must not reveal.
 
 **Compartmentation is its own ADR and its own engineering effort, not a configuration of ADR-003.** It is Iteration 4.
 
@@ -156,7 +156,7 @@ The monitoring pillar rests on an assumption nobody has tested, and it is testab
 
 ### 7.1 "Won't" or "can't"?
 
-Meltwater and Cision do not cover these markets. `spec/press.md:101` reads that as a market gap. It is equally consistent with a market *impossibility*, and the two imply completely different products:
+Meltwater and Cision do not cover these markets. [press.md § Coverage Logging](press.md#coverage-logging) reads that as a market gap. It is equally consistent with a market *impossibility*, and the two imply completely different products:
 
 - **Won't** — the markets are real but too small and too fragmented to be worth a Western vendor's integration cost. Then GreenGrass's lower cost base and local-language focus are a genuine moat.
 - **Can't** — the coverage is not digitally reachable at any reasonable cost. Then no amount of focus helps, and the product is monitoring the sliver of media that happens to be scrapeable while missing the part that decides elections.
@@ -167,21 +167,21 @@ Nothing in the spec suite answers this. §7.4 answers it in three weeks.
 
 In three of five target markets, the spec says the dominant news channel is a closed messaging network:
 
-- **Brazil** — *"WhatsApp is the dominant communication channel (including for news sharing)"* (`spec/press.md:226`)
-- **India** — *"WhatsApp and YouTube are dominant digital channels. Regional language media is critical"* (`spec/press.md:228`)
-- **Lebanon** — *"WhatsApp is dominant for messaging"* (`spec/press.md:229`)
+- **Brazil** — *"WhatsApp is the dominant communication channel (including for news sharing)"* ([press.md § Media Landscape Differences](press.md#media-landscape-differences))
+- **India** — *"WhatsApp and YouTube are dominant digital channels. Regional language media is critical"* ([press.md § Media Landscape Differences](press.md#media-landscape-differences))
+- **Lebanon** — *"WhatsApp is dominant for messaging"* ([press.md § Media Landscape Differences](press.md#media-landscape-differences))
 
 Monitoring closed messaging networks means surveilling private groups. **The line, stated as a commitment alongside §8: this product does not do that.** Not as a technical limitation. A political intelligence tool that ingests private group chat is a surveillance product, and building one for grassroots organizations in exactly the countries where that capability would be turned against them is not a thing GreenGrass should ship.
 
 That commitment has a cost, and it is the honest cost of the whole idea: in the markets where the platform is most needed, a principled monitoring product sees a minority of what actually circulates.
 
-Radio and television compound it. `spec/press.md:225` puts *"strong local TV and radio"* at the center of Puerto Rico's market and `spec/press.md:226` notes Brazil's mandated *horário eleitoral*. None of that is text-searchable without transcription infrastructure — buildable, a real cost line, and in nobody's estimate today.
+Radio and television compound it. [press.md § Media Landscape Differences](press.md#media-landscape-differences) puts *"strong local TV and radio"* at the center of Puerto Rico's market and [press.md § Media Landscape Differences](press.md#media-landscape-differences) notes Brazil's mandated *horário eleitoral*. None of that is text-searchable without transcription infrastructure — buildable, a real cost line, and in nobody's estimate today.
 
 ### 7.3 Puerto Rico will flatter the result
 
 The pilot parties are in Puerto Rico: a small, bilingual, well-digitized market with a manageable number of outlets and a US-adjacent web presence. Plausibly the *easiest* media environment in the entire target set.
 
-Monitoring that works in San Juan tells you close to nothing about Recife or Chennai. This is the mirror image of the situation `spec/mvp.md:82` describes for the data trust — for that experiment, PR is a clean test; for monitoring feasibility, it is the friendliest possible case and will overstate what generalizes.
+Monitoring that works in San Juan tells you close to nothing about Recife or Chennai. This is the mirror image of the situation [mvp.md § Starting position](mvp.md#starting-position) describes for the data trust — for that experiment, PR is a clean test; for monitoring feasibility, it is the friendliest possible case and will overstate what generalizes.
 
 **Mitigation:** the corpus probe runs on Brazil and one other market even though the first deployment is in Puerto Rico. Feasibility and adoption get measured in different places on purpose.
 
@@ -224,34 +224,34 @@ Excluded by default: family members, minors, private medical and sexual matters.
 
 The largest unresolved question in this document.
 
-`spec/compliance.md:212` commits GreenGrass to *"LGPD/GDPR-level sensitive-data protections applied globally regardless of local law,"* on the reasoning that all data on a political platform is political by nature. `spec/compliance.md:223-236` then enumerates access, correction, deletion, portability, and objection rights.
+[compliance.md § Data Protection Framework](compliance.md#data-protection-framework) commits GreenGrass to *"LGPD/GDPR-level sensitive-data protections applied globally regardless of local law,"* on the reasoning that all data on a political platform is political by nature. [compliance.md § Data Subject Rights](compliance.md#data-subject-rights) then enumerates access, correction, deletion, portability, and objection rights.
 
 **An opponent is a data subject.** Under LGPD, PDPA, and DPDPA they hold rights over a dossier held about them — including access and deletion. A subject-access request against an oppo file is not an edge case; it is an obvious and cheap tactic, and the first campaign to use it against a GreenGrass tenant sets the precedent for the product.
 
 Three partial answers, none sufficient alone:
 
 1. **Journalistic and legitimate-interest exemptions.** Real, but narrow, jurisdiction-specific, and generally written for press rather than for political operations.
-2. **Tenant-as-controller with a genuinely blind platform.** GreenGrass is a processor (`spec/compliance.md:240`); the request goes to the tenant. BYOK — which the MVP already ships (`spec/mvp.md:123`) — makes platform blindness *true* rather than merely contractual, and directly conflicts with the silent Platform Admin read path at `spec/security.md:330`.
+2. **Tenant-as-controller with a genuinely blind platform.** GreenGrass is a processor ([compliance.md § Data Processing Agreements](compliance.md#data-processing-agreements)); the request goes to the tenant. BYOK — which the MVP already ships ([mvp.md § 4.4 Kept despite looking cuttable](mvp.md#44-kept-despite-looking-cuttable)) — makes platform blindness *true* rather than merely contractual, and directly conflicts with the silent Platform Admin read path at [security.md § GreenGrass Team Access](security.md#greengrass-team-access).
 3. **Public-record-only scope.** Where the underlying facts are already public, the subject's position is weakest. The cleanest answer and also the narrowest product.
 
-**This goes to counsel per jurisdiction before a line of dossier code is written**, and it belongs on the list at `spec/compliance.md:481`. It is a plausible reason for the dossier module to ship in some markets and not others.
+**This goes to counsel per jurisdiction before a line of dossier code is written**, and it belongs on the list at [compliance.md § Open Questions for Legal Counsel](compliance.md#open-questions-for-legal-counsel). It is a plausible reason for the dossier module to ship in some markets and not others.
 
 ### 8.5 Access and retention
 
 - **Compartmented by default.** Sealed to a named access list, never to a role. Adding a person is an event, logged and visible to the compartment owner.
-- **Reads are logged and the log is visible to the compartment owner.** Reverses `spec/security.md:404` for this data class only, and the reversal must be scoped precisely so it does not leak back into field operations, where the original reasoning still holds.
-- **No superuser read path.** Org Admin can grant access; Org Admin cannot read. Platform Admin cannot read at all — the silent-access decision at `spec/security.md:330` is overridden for this data class, with no exception for support or debugging.
+- **Reads are logged and the log is visible to the compartment owner.** Reverses [security.md § Metadata Protection](security.md#metadata-protection) for this data class only, and the reversal must be scoped precisely so it does not leak back into field operations, where the original reasoning still holds.
+- **No superuser read path.** Org Admin can grant access; Org Admin cannot read. Platform Admin cannot read at all — the silent-access decision at [security.md § GreenGrass Team Access](security.md#greengrass-team-access) is overridden for this data class, with no exception for support or debugging.
 - **Forced expiry.** Dossiers expire at the end of the electoral cycle unless renewed with written justification.
 
 ### 8.6 The threat model inverts
 
-`spec/security.md` is built on the premise that the campaign is the target of surveillance. A dossier store makes the campaign a high-value target for an entirely different reason — and a leak is not a compliance incident but an inter-party scandal with named victims. `spec/mvp.md:276` already makes precisely this argument about the data trust; it applies with more force here, because a dossier is *about* someone rather than merely containing them.
+`spec/security.md` is built on the premise that the campaign is the target of surveillance. A dossier store makes the campaign a high-value target for an entirely different reason — and a leak is not a compliance incident but an inter-party scandal with named victims. [mvp.md § 9. Risks](mvp.md#9-risks) already makes precisely this argument about the data trust; it applies with more force here, because a dossier is *about* someone rather than merely containing them.
 
 Consequences to design for: separate encryption scope, and a serious argument for offering the dossier module **self-host-only**, so that GreenGrass never holds the material at all.
 
 ### 8.7 The authoritarian-context position
 
-`spec/geography.md:65-69` rates Thailand and India *"Enhanced to Aggressive"* and Lebanon *"Aggressive"* — for state surveillance capability and political pressure on opposition.
+[geography.md § Security Tier Relevance by Country](geography.md#security-tier-relevance-by-country) rates Thailand and India *"Enhanced to Aggressive"* and Lebanon *"Aggressive"* — for state surveillance capability and political pressure on opposition.
 
 A compartmented research store is precisely what a hostile state most wants to seize, and seizure endangers **sources**, not just the campaign. Someone who spoke to a researcher on condition of discretion is exposed by a store built to protect the researcher.
 
@@ -266,7 +266,7 @@ Ordered by dependency, not by appeal. Each releases only when its gate passes.
 | # | Iteration | Contains | Gate to start | Rough cost |
 |---|---|---|---|---|
 | **0** | **Corpus probe** | §7.4. Two markets, one week of coverage, measure reachability | None — runs alongside the MVP's Phase 0/1 | 1 person, 3 weeks |
-| **1** | **Talking points + claims ledger** | PRESS-014 extended with the three additions from §4; claim records with sources, status, approved response | MVP decision gate passed (`spec/mvp.md:223`) | 2 eng + 1 designer, ~6 weeks |
+| **1** | **Talking points + claims ledger** | PRESS-014 extended with the three additions from §4; claim records with sources, status, approved response | MVP decision gate passed ([mvp.md § 7. Phases](mvp.md#7-phases)) | 2 eng + 1 designer, ~6 weeks |
 | **2** | **The actor graph** | Outlet as first-class record; journalist and analyst profiles; media map views | Iteration 1 in real use | ~8 weeks |
 | **3** | **Monitoring ingestion** | Source configuration, monitoring inbox, hit → coverage promotion feeding PRESS-010/011 | **Iteration 0 result** — see kill criteria | ~12 weeks, plus ongoing corpus operations |
 | **4** | **Compartmentation primitive** | The ADR from §6, plus per-record access lists, read logging, key scoping | Iterations 1–3 shipped; no dossier work starts before this | ~8 weeks, cross-cutting |
@@ -300,11 +300,11 @@ Decided in advance, so the calls are not made under sunk-cost pressure.
 
 | Signal | Reading | Action |
 |---|---|---|
-| MVP decision gate says stop or reposition (`spec/mvp.md:223`) | The premise this roadmap sits on changed | **Re-derive.** Iterations 1–3 may still stand alone as a single-tenant product; the coalition-shared actor graph (§3.1) does not |
+| MVP decision gate says stop or reposition ([mvp.md § 7. Phases](mvp.md#7-phases)) | The premise this roadmap sits on changed | **Re-derive.** Iterations 1–3 may still stand alone as a single-tenant product; the coalition-shared actor graph (§3.1) does not |
 | A7 fails — they trusted each other, not the rules | The sharing contract is not the asset it appeared to be | **Actor graph goes per-tenant.** Everything else proceeds |
 | Corpus probe returns <30% reachable coverage in Brazil | The gap is "can't," not "won't" | **Drop Iteration 3.** Roadmap shortens to ledger, graph, dossiers — and that is known years early |
 | Iteration 1 ships and nobody authors a talking point in 6 weeks | Consumption without authorship; it is a document, not a system | **Stop before Iteration 2.** Investigate whether the org has anyone whose job this is |
-| Only one person ever logs in | One staffer's habit, not an org capability | **Investigate.** Single-user tools churn when that user leaves, and campaign turnover is high (`spec/press.md:52`) |
+| Only one person ever logs in | One staffer's habit, not an org capability | **Investigate.** Single-user tools churn when that user leaves, and campaign turnover is high ([press.md § Media Interaction Tracking](press.md#media-interaction-tracking)) |
 | Legal review says dossiers are impermissible in 3+ target markets | The research pillar is regionally bounded | **Ship Iterations 1–4 and stop.** Do not build a module sellable in two countries |
 | Any pressure to ship Iteration 5 before Iteration 4 | The failure mode that gets someone hurt | **Refuse.** This is the one line in the document with no override |
 
@@ -314,7 +314,7 @@ Decided in advance, so the calls are not made under sunk-cost pressure.
 
 Nothing in §9 begins before the MVP gate, with one exception.
 
-**Run the corpus probe (Iteration 0) during the pilot.** It costs one person three weeks, needs no engineering, needs no pilot party, and does not compete with the data trust's own Phase 1 — which `spec/mvp.md:239` prices at one person for three weeks and which stays exactly as specified. Running both is roughly six person-weeks total and answers two independent questions years before either build is funded.
+**Run the corpus probe (Iteration 0) during the pilot.** It costs one person three weeks, needs no engineering, needs no pilot party, and does not compete with the data trust's own Phase 1 — which [mvp.md § Team and cost](mvp.md#team-and-cost) prices at one person for three weeks and which stays exactly as specified. Running both is roughly six person-weeks total and answers two independent questions years before either build is funded.
 
 The corpus probe is also the only item here whose answer could restructure the roadmap rather than merely schedule it. If monitoring turns out to be intractable in Brazil, that changes what GreenGrass is selling — and it is much better to learn it in 2027 than in 2029.
 
@@ -332,7 +332,7 @@ Everything else waits for March 2028.
 
 ### For product
 
-4. If the coalition-shared actor graph (§3.1) is viable, does contributing to it create the same free-rider legibility problem as the contribution ledger at `spec/mvp.md:316` — and does H8's mitigation transfer?
+4. If the coalition-shared actor graph (§3.1) is viable, does contributing to it create the same free-rider legibility problem as the contribution ledger at [mvp.md § Appendix — Hypotheses beyond the core assumption](mvp.md#appendix-hypotheses-beyond-the-core-assumption) — and does H8's mitigation transfer?
 5. Does the claims ledger connect to the AI activism message generation at ADR-013, which already draws on talking points? If a claim's approved response can seed a generated message, the two systems are closer than this document assumes.
 6. Does self-vetting sell on its own, without opposition research attached? Same machinery, far lower exposure, possibly the more honest product.
 

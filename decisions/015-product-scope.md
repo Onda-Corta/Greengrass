@@ -26,13 +26,13 @@ Internal messaging (staff-to-staff, candidate-to-staff, war room coordination) w
 
 Press contact management, media lists, press release distribution, media advisory creation, statement distribution, media coverage tracking, endorsement pipeline management, spokesperson management, talking points library, social media scheduling and analytics, and public profile hosting.
 
-**Rationale:** Earned media is a force multiplier for resource-constrained campaigns. Making press operations accessible to campaigns without dedicated press secretaries is a significant product value.
+**Rationale:** Earned media does work a resource-constrained campaign cannot pay for. Making press operations workable for campaigns that have no dedicated press secretary is worth the build.
 
 ### Out of scope: volunteer gamification
 
 No leaderboards, badges, achievement systems, or point-based volunteer incentives.
 
-**Rationale:** There are better ways to optimize for meaningful engagement than cheap gamification. Leaderboards can create perverse incentives (speed over quality in canvassing), badges trivialize important work, and achievement systems distract from the actual mission. Volunteer motivation in political campaigns comes from the cause, not from game mechanics. The platform tracks volunteer activity for recognition purposes (hours, shifts completed, contacts made) but doesn't gamify it.
+**Rationale:** There are better ways to keep volunteers coming back than cheap gamification. Leaderboards can create perverse incentives (speed over quality in canvassing), badges trivialize important work, and achievement systems distract from the actual mission. Volunteer motivation in political campaigns comes from the cause, not from game mechanics. The platform tracks volunteer activity for recognition purposes (hours, shifts completed, contacts made) but doesn't gamify it.
 
 ### Deferred: cryptocurrency donations
 
@@ -69,7 +69,7 @@ Media coverage tracking is manual logging only. Automated media monitoring (scan
 **Costs:**
 - Not supporting crypto donations may exclude some potential donors in jurisdictions where it's becoming mainstream
 - Manual media monitoring creates work for press staff that could be automated
-- No peer-to-peer fundraising means campaigns can't leverage supporter networks for distributed fundraising
+- No peer-to-peer fundraising means campaigns can't ask supporters to raise money from their own networks
 
 **Constraints:**
 - Deferred items must have their data model implications considered now to avoid migration pain when they're eventually built

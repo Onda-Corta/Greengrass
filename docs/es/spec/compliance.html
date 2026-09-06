@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="es" data-base="../../" data-no-results="No hay resultados para">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cumplimiento y marco legal · GreenGrass</title>
+<meta name="description" content="Cumplimiento y marco legal — Documentación de especificación y diseño de GreenGrass.">
+<link rel="alternate" hreflang="en" href="../../spec/compliance.html">
+<link rel="alternate" hreflang="es" href="./compliance.html">
+<link rel="alternate" hreflang="x-default" href="../../spec/compliance.html">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%232563eb'/%3E%3Cstop offset='1' stop-color='%2316a34a'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='32' height='32' rx='7' fill='url(%23g)'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="../../assets/styles.css">
+</head>
+<body>
+<a class="skip-link" href="#content">Saltar al contenido</a>
+<header class="site-header">
+  <button type="button" class="menu-toggle" aria-label="Alternar navegación" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+  <a class="brand" href="../../es/index.html">
+    <span class="brand-mark" aria-hidden="true"></span>
+    <span class="brand-text"><strong>GreenGrass</strong><small>Especificación y diseño</small></span>
+  </a>
+  <div class="search">
+    <input type="search" id="search-input" placeholder="Buscar en la documentación…" autocomplete="off" aria-label="Buscar en la documentación">
+    <div id="search-results" class="search-results" hidden></div>
+  </div>
+  <nav class="lang-switch" aria-label="Idioma"><a class="lang-opt" href="../../spec/compliance.html" hreflang="en" lang="en" title="View this page in English">EN</a><span class="lang-opt active" aria-current="true">ES</span></nav>
+  <button type="button" class="theme-toggle" aria-label="Alternar modo oscuro" title="Alternar modo oscuro">
+    <span class="theme-icon" aria-hidden="true"></span>
+  </button>
+</header>
+<div class="layout">
+  <div class="sidebar-backdrop" hidden></div>
+  <aside class="sidebar" aria-label="Navegación de la documentación">
+    <nav class="nav">
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">Inicio<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../index.html">GreenGrass</a></li></ul></div>
+<div class="nav-section open"><button type="button" class="nav-section-title" aria-expanded="true">Especificaciones<span class="chev" aria-hidden="true"></span></button><ul><li><a href="./product.html">Proyecto: GreenGrass</a></li><li><a href="./mvp.html">MVP de GreenGrass — plan de producto</a></li><li><a href="./users.html">Usuarios y roles</a></li><li><a href="./workflows.html">Flujos de trabajo principales</a></li><li><a href="./geography.html">Geografía objetivo</a></li><li><a href="./security.html">Seguridad y modelo de amenazas</a></li><li><a href="./compliance.html" aria-current="page" class="active">Cumplimiento y marco legal</a></li><li><a href="./fundraising.html">Recaudación de fondos e infraestructura de pagos</a></li><li><a href="./integrations.html">Integraciones externas</a></li><li><a href="./support.html">Soporte y puesta en marcha de organizaciones</a></li><li><a href="./gotv.html">GOTV y operaciones del día de elecciones</a></li><li><a href="./messaging.html">Comunicaciones internas y notificaciones</a></li><li><a href="./press.html">Prensa, medios y comunicaciones públicas</a></li><li><a href="./comms-intelligence.html">Inteligencia de comunicaciones — hoja de ruta post-MVP</a></li></ul></div>
+    </nav>
+  </aside>
+  <main id="content" class="content">
+    <nav class="breadcrumb" aria-label="Ruta de navegación">Especificaciones</nav>
+    <article class="prose">
+<h1 id="cumplimiento-y-marco-legal" tabindex="-1"><a class="heading-anchor" href="#cumplimiento-y-marco-legal" aria-hidden="true">#</a> Cumplimiento y marco legal</h1>
+<h2 id="propósito" tabindex="-1"><a class="heading-anchor" href="#propósito" aria-hidden="true">#</a> Propósito</h2>
+<p>Este documento define la estrategia de cumplimiento de GreenGrass en todas las jurisdicciones objetivo. Consolida las decisiones de cumplimiento tomadas en otras especificaciones (<a href="http://security.md" target="_blank" rel="noopener noreferrer">security.md</a>, <a href="http://geography.md" target="_blank" rel="noopener noreferrer">geography.md</a>, <a href="http://workflows.md" target="_blank" rel="noopener noreferrer">workflows.md</a>, <a href="http://users.md" target="_blank" rel="noopener noreferrer">users.md</a>) y cubre los vacíos en materia de derecho electoral, protección de datos, financiamiento de campañas, restricciones al cifrado y cumplimiento operativo.</p>
+<p>GreenGrass opera en el cruce de la organización política, el tratamiento de datos personales y las transacciones financieras: los tres dominios más regulados de cualquier jurisdicción que nos interese. El cumplimiento no es una capa que se atornilla al final. Es estructural.</p>
+<h2 id="filosofía-de-cumplimiento" tabindex="-1"><a class="heading-anchor" href="#filosofía-de-cumplimiento" aria-hidden="true">#</a> Filosofía de cumplimiento</h2>
+<p><strong>Cumplimiento por principio, no cumplimiento mínimo.</strong></p>
+<p>El enfoque de GreenGrass:</p>
+<ol>
+<li><strong>Diseñar primero para la jurisdicción más estricta.</strong> Construir para el estándar más alto de nuestros países objetivo y relajarlo donde la ley local lo permita, en vez de construir para el estándar más débil y luego parcharlo.</li>
+<li><strong>Cumplimiento arquitectónico.</strong> Donde se pueda, hacer que incumplir sea técnicamente imposible (BYOK —<em>Bring Your Own Key</em>: la organización controla su propia llave de cifrado— significa que <em>no podemos</em> entregar sus datos), en vez de depender de promesas de política interna.</li>
+<li><strong>Transparencia por defecto.</strong> Warrant canary, informes anuales de transparencia, código de aplicación abierto, registros de consentimiento auditables.</li>
+<li><strong>La asesoría legal local no es negociable.</strong> Cada lanzamiento de país exige trabajar con expertos legales locales. Este documento aporta el marco; la asesoría local lo valida.</li>
+<li><strong>El cumplimiento como funcionalidad para las organizaciones.</strong> Reportes de financiamiento de campaña, gestión del consentimiento, declaración de donantes: son cosas que las campañas <em>necesitan</em>. Constrúyelas bien y el cumplimiento se vuelve una ventaja de producto.</li>
+</ol>
+<h2 id="panorama-regulatorio-por-país" tabindex="-1"><a class="heading-anchor" href="#panorama-regulatorio-por-país" aria-hidden="true">#</a> Panorama regulatorio por país</h2>
+<h3 id="puerto-rico-alfa" tabindex="-1"><a class="heading-anchor" href="#puerto-rico-alfa" aria-hidden="true">#</a> Puerto Rico (Alfa)</h3>
+<p><strong>Marco normativo:</strong> ley federal de EE. UU. + ley local de Puerto Rico.</p>
+<p><strong>Derecho electoral:</strong></p>
+<ul>
+<li>Regulación de la Comisión Federal Electoral (FEC) para las contiendas federales</li>
+<li>Comisión Estatal de Elecciones de Puerto Rico (CEE) para las contiendas locales y territoriales</li>
+<li>Restricciones del Bipartisan Campaign Reform Act (BCRA) sobre recaudación de fondos y publicidad</li>
+<li>Prohibición de contribuciones de personas extranjeras (52 USC §30121): prohibición estricta de aportaciones de personas que no sean estadounidenses</li>
+<li>Obligación de declarar las contribuciones que superen ciertos umbrales (actualmente $200 acumulados por ciclo electoral a nivel federal)</li>
+<li>Requisitos de aviso legal en la publicidad política (&quot;Paid for by…&quot;)</li>
+</ul>
+<p><strong>Protección de datos:</strong></p>
+<ul>
+<li>No hay ley federal integral de privacidad en EE. UU. (a 2025)</li>
+<li>Puerto Rico tiene disposiciones locales limitadas de protección de datos</li>
+<li>La sección 5 de la FTC Act (prácticas desleales o engañosas) funciona como piso de facto de protección de datos</li>
+<li>Aplican las leyes estatales de notificación de brechas (Ley 111-2005 de Puerto Rico)</li>
+<li>Children's Online Privacy Protection Act (COPPA) si la plataforma llega a usuarios menores de 13 años</li>
+<li>CAN-SPAM Act para el correo comercial; Telephone Consumer Protection Act (TCPA) para llamadas y SMS</li>
+</ul>
+<p><strong>Financiamiento de campañas:</strong></p>
+<ul>
+<li>Reportes a la FEC para las contiendas federales (informes trimestrales y preelectorales)</li>
+<li>Reportes a la CEE de Puerto Rico para las contiendas locales</li>
+<li>Límites de contribución (a nivel federal: límites por elección, indexados a la inflación)</li>
+<li>Reglas de PAC y Super PAC si las alianzas coordinan gastos</li>
+<li>Declaración de empleador y ocupación obligatoria para contribuciones superiores a $200 (federal)</li>
+</ul>
+<p><strong>Riesgos clave:</strong></p>
+<ul>
+<li>El régimen regulatorio doble (federal y territorial) genera complejidad</li>
+<li>La fiscalización de la FEC ha sido irregular, pero sobre el papel las reglas son estrictas</li>
+<li>Las infracciones a la TCPA acarrean daños legales tasados ($500-$1,500 por infracción): el consentimiento para SMS y llamadas es crítico</li>
+</ul>
+<h3 id="brasil-piloto-1" tabindex="-1"><a class="heading-anchor" href="#brasil-piloto-1" aria-hidden="true">#</a> Brasil (Piloto 1)</h3>
+<p><strong>Marco normativo:</strong> Constitución brasileña + Lei das Eleições (Ley 9.504/1997) + LGPD + regulación del TSE.</p>
+<p><strong>Derecho electoral:</strong></p>
+<ul>
+<li>El Tribunal Superior Eleitoral (TSE) regula todas las elecciones</li>
+<li>Restricciones estrictas al periodo de campaña: solo se puede hacer campaña dentro de una ventana definida</li>
+<li>Restricciones a la mensajería masiva (el TSE prohíbe los envíos masivos por WhatsApp desde 2018)</li>
+<li>Los candidatos deben registrarse ante el TSE; las cuentas de campaña son entidades jurídicas separadas</li>
+<li>Restricciones a la publicidad política en determinadas plataformas y medios</li>
+<li>Prohibición de la publicidad política pagada en plataformas de internet (solo contenido orgánico e impulso dirigido a los seguidores de la página del propio candidato)</li>
+</ul>
+<p><strong>Protección de datos:</strong></p>
+<ul>
+<li>Lei Geral de Proteção de Dados (LGPD): ley integral de protección de datos, modelada sobre el GDPR</li>
+<li>La Autoridade Nacional de Proteção de Dados (ANPD) es la autoridad de fiscalización</li>
+<li>Se requiere una base jurídica para el tratamiento: consentimiento, interés legítimo, obligación legal, etc.</li>
+<li>Derechos del interesado: acceso, corrección, eliminación, portabilidad e información sobre con quién se comparten sus datos</li>
+<li>Es probable que se exija una evaluación de impacto en la protección de datos (DPIA), dada la sensibilidad de los datos políticos</li>
+<li>Localización de datos: la LGPD expresa preferencias, pero no impone requisitos estrictos; la transferencia transfronteriza se permite con salvaguardas adecuadas</li>
+<li>La opinión política es dato sensible bajo la LGPD: requiere consentimiento explícito u otra base jurídica específica</li>
+</ul>
+<p><strong>Financiamiento de campañas:</strong></p>
+<ul>
+<li>El TSE da seguimiento a todas las finanzas de campaña</li>
+<li>Todas las donaciones pasan por cuentas bancarias de campaña reguladas</li>
+<li>Límites individuales de contribución (un porcentaje del ingreso bruto del año anterior)</li>
+<li>Donaciones de empresas prohibidas (desde 2015)</li>
+<li>Divulgación en tiempo real a través del sistema DivulgaCandContas del TSE</li>
+<li>Requisitos estrictos de contabilidad y comprobantes</li>
+<li>Topes de gasto de campaña fijados por el TSE para cada contienda</li>
+</ul>
+<p><strong>Riesgos clave:</strong></p>
+<ul>
+<li>El TSE es activo y técnicamente sofisticado: hace cumplir las reglas de campaña digital con dureza</li>
+<li>WhatsApp es el canal de comunicación dominante, pero el TSE ha restringido la mensajería política masiva</li>
+<li>Que la LGPD clasifique la opinión política como dato sensible eleva las obligaciones</li>
+<li>Las infracciones de financiamiento de campaña pueden llevar a la anulación de la candidatura</li>
+</ul>
+<p><strong>DECIDIDO: gestión de canales según las reglas del TSE.</strong> La plataforma aplica las reglas del TSE durante los periodos de campaña —límites de volumen de mensajes, restricciones de contenido, sin envíos masivos— pero permite un uso más amplio fuera de esas ventanas. WhatsApp es demasiado importante en Brasil como para deshabilitarlo por completo, y las restricciones del TSE son específicas del periodo de campaña. La plataforma codifica las reglas del TSE y las aplica según el contexto, a partir de las fechas de campaña configuradas.</p>
+<h3 id="tailandia-piloto-2" tabindex="-1"><a class="heading-anchor" href="#tailandia-piloto-2" aria-hidden="true">#</a> Tailandia (Piloto 2)</h3>
+<p><strong>Marco normativo:</strong> Constitución de Tailandia + Ley Orgánica sobre la Elección de los Miembros de la Cámara de Representantes + PDPA + Computer Crime Act.</p>
+<p><strong>Derecho electoral:</strong></p>
+<ul>
+<li>La Comisión Electoral de Tailandia (ECT) supervisa las elecciones</li>
+<li>La Ley Orgánica de Partidos Políticos regula la formación y el financiamiento de los partidos</li>
+<li>Prohibiciones estrictas de compra de votos (definida en términos amplios)</li>
+<li>Restricciones al periodo de campaña y topes de gasto</li>
+<li>Restricciones a la publicidad política: en algunos contextos se exige aprobación previa</li>
+<li>Ley de lesa majestad (sección 112 del Código Penal): difamar a la monarquía es delito; afecta a todo el contenido de la plataforma</li>
+<li>Computer Crime Act: disposiciones amplias sobre retirada de contenido y responsabilidad de las plataformas</li>
+</ul>
+<p><strong>Protección de datos:</strong></p>
+<ul>
+<li>Personal Data Protection Act (PDPA) B.E. 2562: la ley integral de protección de datos de Tailandia (vigente desde junio de 2022)</li>
+<li>Inspirada de manera general en el GDPR</li>
+<li>Se requiere consentimiento para tratar datos sensibles (la opinión política es dato sensible bajo la PDPA)</li>
+<li>Derechos del interesado similares a los de la LGPD y el GDPR</li>
+<li>Restricciones a la transferencia transfronteriza: se exigen salvaguardas adecuadas o consentimiento</li>
+<li>Se exige un delegado de protección de datos (DPO) para el tratamiento a gran escala de datos sensibles</li>
+</ul>
+<p><strong>Financiamiento de campañas:</strong></p>
+<ul>
+<li>El financiamiento de los partidos políticos está regulado por la Ley Orgánica</li>
+<li>Límites de contribución y obligaciones de declaración</li>
+<li>Hay financiamiento estatal disponible para los partidos que califiquen</li>
+<li>Topes de gasto por elección</li>
+<li>La ECT audita las finanzas de los partidos</li>
+</ul>
+<p><strong>Riesgos clave:</strong></p>
+<ul>
+<li>La ley de lesa majestad castiga un delito grave: la plataforma debe evitar contenido que pueda interpretarse como una infracción, pero su aplicación es políticamente selectiva</li>
+<li>Historial de intervención militar: los datos de la plataforma podrían ser incautados durante un golpe de Estado; el nivel agresivo de seguridad es indispensable</li>
+<li>El Computer Crime Act le da a las autoridades amplios poderes de retirada de contenido</li>
+<li>La disolución de partidos políticos se usa como herramienta política: los datos de los partidos deben conservarse de forma independiente</li>
+</ul>
+<p><strong>DECIDIDO: advertencias visibles al usuario + responsabilidad de la organización.</strong> La plataforma muestra advertencias claras y visibles sobre las restricciones de lesa majestad cuando se crea contenido dentro de organizaciones tailandesas. Sin filtrado automático de contenido: técnicamente no es confiable y genera un efecto inhibidor. La organización y sus usuarios son responsables de su propio contenido. Esto respeta la autonomía de los usuarios y evita poner a GreenGrass en la posición de censurar discurso político.</p>
+<h3 id="india-piloto-3" tabindex="-1"><a class="heading-anchor" href="#india-piloto-3" aria-hidden="true">#</a> India (Piloto 3)</h3>
+<p><strong>Marco normativo:</strong> Constitución de India + Representation of the People Act (1950, 1951) + IT Act 2000 + Digital Personal Data Protection Act (DPDPA) 2023.</p>
+<p><strong>Derecho electoral:</strong></p>
+<ul>
+<li>Comisión Electoral de India (ECI): un organismo independiente y poderoso</li>
+<li>Código Modelo de Conducta (MCC) durante los periodos electorales: restricciones extensas sobre lo que los partidos y candidatos pueden decir y hacer</li>
+<li>Código Voluntario de Ética para plataformas de redes sociales durante las elecciones (podría aplicarle a GreenGrass)</li>
+<li>Sistema de registro de votantes de la ECI (EPIC): puede que haga falta integrarse con él</li>
+<li>Certificación previa obligatoria para la publicidad política en redes sociales (desde 2019)</li>
+<li>La publicidad política pagada debe llevar avisos legales del tipo &quot;Paid for by&quot; con un formato específico</li>
+</ul>
+<p><strong>Protección de datos:</strong></p>
+<ul>
+<li>Digital Personal Data Protection Act (DPDPA) 2023: la ley integral de protección de datos de India</li>
+<li>Tratamiento de datos personales basado en el consentimiento</li>
+<li>Obligaciones del fiduciario de datos</li>
+<li>Requisitos de localización de datos para los &quot;fiduciarios de datos significativos&quot;: el gobierno puede exigir almacenamiento local</li>
+<li>Derecho de supresión, de corrección y a la reparación de reclamaciones</li>
+<li>La Data Protection Board of India es la autoridad de fiscalización</li>
+<li>Exenciones para el gobierno: excepciones amplias por seguridad nacional</li>
+<li>Los datos políticos no están clasificados explícitamente como sensibles (a diferencia de la LGPD y la PDPA), pero su tratamiento está por definirse en el reglamento que viene</li>
+</ul>
+<p><strong>Financiamiento de campañas:</strong></p>
+<ul>
+<li>El sistema de bonos electorales fue anulado por la Corte Suprema (2024): el nuevo marco está en construcción</li>
+<li>Las empresas pueden donar a los partidos; existen límites para las personas</li>
+<li>Los partidos deben presentar estados financieros anuales ante la ECI</li>
+<li>Límite a las donaciones en efectivo (actualmente ₹2,000 por persona sin declarar su identidad)</li>
+<li>Las contribuciones extranjeras a partidos políticos están prohibidas por la Foreign Contribution (Regulation) Act (FCRA)</li>
+<li>La FCRA también restringe el financiamiento extranjero de ONG con actividad política: el modelo operativo de GreenGrass podría quedar bajo escrutinio</li>
+</ul>
+<p><strong>Riesgos clave:</strong></p>
+<ul>
+<li>Escala: más de 900 millones de votantes habilitados, volúmenes de datos enormes, retos de rendimiento y almacenamiento</li>
+<li>El MCC de la ECI impone restricciones extensas de contenido y de conducta durante los periodos electorales</li>
+<li>La FCRA podría usarse para escrutar a GreenGrass como entidad extranjera que presta servicios a organizaciones políticas indias</li>
+<li>Las variaciones estatales en las reglas electorales añaden complejidad</li>
+<li>Las directrices para intermediarios del IT Act exigen cumplir las órdenes gubernamentales de retirada de contenido en plazos muy cortos</li>
+<li>Es probable que se exija localización de datos, dada la escala y la sensibilidad</li>
+</ul>
+<p><strong>DECIDIDO: posicionamiento exclusivamente tecnológico.</strong> GreenGrass se posiciona como proveedor de tecnología (una herramienta SaaS) que vende a precio de mercado, no como proveedor de servicios políticos. Ese argumento sostiene que la FCRA no aplica, porque se trata de una transacción comercial y no de una contribución extranjera. <strong>Requiere una opinión legal formal de asesoría india antes de lanzar el piloto</strong>: esta interpretación no se ha puesto a prueba y el riesgo bajo la FCRA es serio.</p>
+<h3 id="líbano-piloto-4" tabindex="-1"><a class="heading-anchor" href="#líbano-piloto-4" aria-hidden="true">#</a> Líbano (Piloto 4)</h3>
+<p><strong>Marco normativo:</strong> Constitución libanesa + Ley Electoral de 2017 (Ley 44) + un panorama regulatorio fragmentado.</p>
+<p><strong>Derecho electoral:</strong></p>
+<ul>
+<li>La Comisión de Supervisión Electoral (SCE) supervisa las elecciones</li>
+<li>Sistema confesional de reparto de escaños (Acuerdo de Taif): los escaños se distribuyen entre comunidades religiosas</li>
+<li>La Ley Electoral de 2017 introdujo la representación proporcional</li>
+<li>Topes de gasto de campaña por candidato</li>
+<li>Restricciones a la publicidad política durante el periodo oficial de campaña</li>
+<li>Prohibido el financiamiento extranjero de campañas</li>
+<li>Las listas electorales (coaliciones) son una figura jurídica formal, con requisitos de registro específicos</li>
+</ul>
+<p><strong>Protección de datos:</strong></p>
+<ul>
+<li>No hay ley integral de protección de datos (a 2025)</li>
+<li>Se ha propuesto un anteproyecto de ley de protección de datos, pero no se ha aprobado</li>
+<li>La Ley de Transacciones Electrónicas y Datos Personales (Ley 81/2018) ofrece protecciones digitales limitadas</li>
+<li>Leyes de secreto bancario (Ley del 3 de septiembre de 1956): históricamente fuertes, pero debilitadas por la crisis bancaria</li>
+<li>No existe una autoridad formal de protección de datos</li>
+</ul>
+<p><strong>Financiamiento de campañas:</strong></p>
+<ul>
+<li>Topes de gasto de campaña definidos por la Ley Electoral de 2017</li>
+<li>Los candidatos deben abrir cuentas bancarias dedicadas a la campaña</li>
+<li>Declaración financiera obligatoria después de la elección (dentro de 60 días)</li>
+<li>La SCE puede auditar las finanzas de campaña</li>
+<li>La crisis del sistema bancario complica gravemente el cumplimiento financiero: muchas transacciones son en efectivo</li>
+<li>OMT y otros servicios de transferencia de dinero funcionan como salida al colapso bancario</li>
+</ul>
+<p><strong>Riesgos clave:</strong></p>
+<ul>
+<li>El entorno de seguridad más complejo de todos los países objetivo</li>
+<li>Múltiples servicios de inteligencia (estatales y no estatales) con capacidad de vigilancia</li>
+<li>Las estructuras de gobierno paralelo de Hezbolá: hay organizaciones a ambos lados del espectro político</li>
+<li>Que no haya ley de protección de datos significa que no hay piso legal, pero tampoco puerto seguro</li>
+<li>El colapso del sistema bancario hace que los flujos de trabajo con mucho efectivo sean la norma, no la excepción</li>
+<li>La inestabilidad de la infraestructura (electricidad, internet) afecta el monitoreo continuo del cumplimiento</li>
+<li>Con un sistema político sectario, el dato mismo es políticamente sensible (saber la confesión o el distrito de alguien revela su afiliación política)</li>
+</ul>
+<p><strong>DECIDIDO: aplicar el GDPR como línea base.</strong> Todos los datos de usuarios libaneses se tratan como si el GDPR aplicara. El GDPR es el estándar de oro global, es bien conocido, y como ya estamos construyendo para la LGPD y la PDPA (ambas influidas por el GDPR), el costo adicional de implementación es marginal. Esto se documenta como un compromiso contractual con las organizaciones libanesas.</p>
+<h2 id="requisitos-transversales-de-cumplimiento" tabindex="-1"><a class="heading-anchor" href="#requisitos-transversales-de-cumplimiento" aria-hidden="true">#</a> Requisitos transversales de cumplimiento</h2>
+<h3 id="marco-de-protección-de-datos" tabindex="-1"><a class="heading-anchor" href="#marco-de-protección-de-datos" aria-hidden="true">#</a> Marco de protección de datos</h3>
+<p><strong>DECIDIDO: tratar todos los datos políticos como sensibles, en todas partes.</strong> Se aplican en todo el mundo las protecciones de datos sensibles del nivel LGPD/GDPR, sin importar lo que diga la ley local. GreenGrass es una plataforma de organización política: todos los datos que contiene son políticos por naturaleza. Un solo nivel de protección, sin ambigüedad y sin lógica de clasificación por jurisdicción que haya que mantener.</p>
+<p><strong>Ya decidido (en <a href="http://security.md" target="_blank" rel="noopener noreferrer">security.md</a> y <a href="http://system.md" target="_blank" rel="noopener noreferrer">system.md</a>):</strong></p>
+<ul>
+<li>Cifrado BYOK por defecto: la organización custodia la llave maestra</li>
+<li>Residencia de datos por país</li>
+<li>Cifrado a nivel de aplicación para los campos sensibles</li>
+<li>Registro de auditoría completo de todo acceso y toda modificación de datos</li>
+<li>Identidad federada, con la propiedad de los datos en cada organización</li>
+</ul>
+<p><strong>Falta especificar:</strong></p>
+<h4 id="derechos-del-interesado" tabindex="-1"><a class="heading-anchor" href="#derechos-del-interesado" aria-hidden="true">#</a> Derechos del interesado</h4>
+<p>Todas las jurisdicciones objetivo (excepto Líbano) le otorgan a las personas derechos sobre sus datos personales. GreenGrass debe dar soporte a:</p>
+<table>
+<thead>
+<tr>
+<th>Derecho</th>
+<th>LGPD</th>
+<th>PDPA</th>
+<th>DPDPA</th>
+<th>FTC/estados</th>
+<th>Implementación en la plataforma</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Acceso</td>
+<td>Sí</td>
+<td>Sí</td>
+<td>Sí</td>
+<td>Limitado</td>
+<td>Exportación autogestionada de datos desde el perfil del simpatizante</td>
+</tr>
+<tr>
+<td>Corrección</td>
+<td>Sí</td>
+<td>Sí</td>
+<td>Sí</td>
+<td>Limitado</td>
+<td>Edición autogestionada + solicitud a la organización</td>
+</tr>
+<tr>
+<td>Eliminación</td>
+<td>Sí</td>
+<td>Sí</td>
+<td>Sí</td>
+<td>Limitado</td>
+<td>Flujo de solicitud de eliminación con retenciones por obligaciones de conservación</td>
+</tr>
+<tr>
+<td>Portabilidad</td>
+<td>Sí</td>
+<td>Sí</td>
+<td>Sí</td>
+<td>No</td>
+<td>Exportación en formato estándar (JSON/CSV)</td>
+</tr>
+<tr>
+<td>Oposición al tratamiento</td>
+<td>Sí</td>
+<td>Sí</td>
+<td>No</td>
+<td>No</td>
+<td>Mecanismos de baja por cada finalidad de tratamiento</td>
+</tr>
+<tr>
+<td>Retiro del consentimiento</td>
+<td>Sí</td>
+<td>Sí</td>
+<td>Sí</td>
+<td>No</td>
+<td>Retiro en un clic, con efecto inmediato</td>
+</tr>
+</tbody>
+</table>
+<p><strong>DECIDIDO: decide la organización.</strong> Las solicitudes de eliminación se le pasan al administrador de la organización, junto con orientación específica de su jurisdicción sobre sus obligaciones legales de conservación. La organización toma la decisión: GreenGrass aporta las herramientas y la orientación, pero no interpreta obligaciones legales en su nombre. El panel de cumplimiento muestra las solicitudes de eliminación pendientes, con temporizadores de SLA y notas de orientación sobre conservación.</p>
+<h4 id="acuerdos-de-tratamiento-de-datos" tabindex="-1"><a class="heading-anchor" href="#acuerdos-de-tratamiento-de-datos" aria-hidden="true">#</a> Acuerdos de tratamiento de datos</h4>
+<p>GreenGrass actúa como encargado del tratamiento por cuenta de las organizaciones, que son las responsables del tratamiento. Cada relación con una organización exige:</p>
+<ul>
+<li><strong>Acuerdo de tratamiento de datos (DPA):</strong> plantilla estándar que cubra categorías de datos tratados, finalidades del tratamiento, lista de subencargados, medidas de seguridad, obligaciones de notificación de brechas y derechos de auditoría</li>
+<li><strong>Divulgación de subencargados:</strong> GreenGrass debe mantener y publicar la lista de todos sus subencargados (proveedores de alojamiento, infraestructura de correo, procesadores de pago, proveedores de servicios de IA)</li>
+<li><strong>Evaluación de impacto en la protección de datos (DPIA):</strong> obligatoria bajo la LGPD y la PDPA para el tratamiento a gran escala de datos sensibles. GreenGrass debería ofrecer una plantilla de DPIA que las organizaciones puedan adaptar.</li>
+</ul>
+<p><strong>DECIDIDO: la organización se encarga de todo.</strong> Los simpatizantes contactan directamente a la campaña u organización. Los administradores de la organización procesan las solicitudes con las herramientas autogestionadas de la plataforma. Es una separación limpia entre responsable y encargado del tratamiento: la relación es entre el simpatizante y la organización con la que interactuó. GreenGrass construye las herramientas (exportación de datos, flujos de eliminación, formularios de corrección, seguimiento de SLA), pero la interacción es de la organización.</p>
+<h4 id="transferencias-transfronterizas-de-datos" tabindex="-1"><a class="heading-anchor" href="#transferencias-transfronterizas-de-datos" aria-hidden="true">#</a> Transferencias transfronterizas de datos</h4>
+<p>La residencia de datos por país (ya decidida) reduce al mínimo los problemas de transferencia transfronteriza. Aun así, hay transferencias:</p>
+<ul>
+<li><strong>Los datos de identidad de la plataforma</strong> viven en la jurisdicción de constitución → réplicas de lectura en cada país</li>
+<li><strong>Los datos de cada organización</strong> se quedan en su país por defecto</li>
+<li><strong>El intercambio de datos dentro de una alianza</strong> puede cruzar fronteras cuando los miembros están en países distintos</li>
+</ul>
+<p>Salvaguardas necesarias:</p>
+<ul>
+<li>Cláusulas contractuales tipo (SCC) o equivalentes para cualquier transferencia transfronteriza</li>
+<li>Evaluaciones de impacto de la transferencia donde se exijan (LGPD, PDPA)</li>
+<li>Consentimiento explícito del usuario para compartir datos a través de fronteras en el contexto de una alianza</li>
+</ul>
+<h3 id="cumplimiento-del-derecho-electoral" tabindex="-1"><a class="heading-anchor" href="#cumplimiento-del-derecho-electoral" aria-hidden="true">#</a> Cumplimiento del derecho electoral</h3>
+<h4 id="aplicación-del-periodo-de-campaña" tabindex="-1"><a class="heading-anchor" href="#aplicación-del-periodo-de-campaña" aria-hidden="true">#</a> Aplicación del periodo de campaña</h4>
+<p>Varias jurisdicciones limitan la actividad de campaña a periodos definidos. La plataforma debe permitir:</p>
+<ul>
+<li><strong>Configuración del periodo de campaña:</strong> un ajuste por organización que defina las fechas oficiales de inicio y fin</li>
+<li><strong>Restricciones de canal durante el periodo de campaña:</strong> reglas por jurisdicción sobre qué comunicaciones se permiten</li>
+<li><strong>Comportamiento distinto antes y durante la campaña:</strong> puede que haya funcionalidades que deban deshabilitarse o restringirse durante el periodo oficial</li>
+</ul>
+<p><strong>DECIDIDO: configurable, con aplicación estricta por defecto.</strong> Cada organización elige aplicación estricta o flexible por jurisdicción. La estricta es la opción por defecto: la plataforma bloquea las acciones restringidas durante los periodos de campaña configurados. Las organizaciones sofisticadas, con asesoría legal propia, pueden pasar a la aplicación flexible (solo advertencias) si prefieren decidir por su cuenta.</p>
+<h4 id="avisos-legales-en-la-publicidad-política" tabindex="-1"><a class="heading-anchor" href="#avisos-legales-en-la-publicidad-política" aria-hidden="true">#</a> Avisos legales en la publicidad política</h4>
+<p>Todas las jurisdicciones objetivo exigen alguna forma de aviso legal del tipo &quot;Paid for by&quot; en la publicidad política. La plataforma debe:</p>
+<ul>
+<li>Añadir automáticamente el aviso legal que corresponda a cada jurisdicción en las comunicaciones que lo requieran</li>
+<li>Permitir que cada organización configure el texto del aviso por jurisdicción</li>
+<li>Verificar que el aviso esté presente en todo el contenido público que sale (correos, publicaciones en redes sociales, SMS cuando aplique)</li>
+<li>Conservar el registro de todas las comunicaciones políticas a efectos de declaración</li>
+</ul>
+<h4 id="restricciones-a-las-contribuciones-extranjeras" tabindex="-1"><a class="heading-anchor" href="#restricciones-a-las-contribuciones-extranjeras" aria-hidden="true">#</a> Restricciones a las contribuciones extranjeras</h4>
+<p>Todas las jurisdicciones objetivo prohíben o restringen las contribuciones extranjeras a campañas políticas. La plataforma debe:</p>
+<ul>
+<li>Recabar información de nacionalidad y residencia de los donantes</li>
+<li>Bloquear o marcar las contribuciones de donantes no elegibles según las reglas de cada jurisdicción</li>
+<li>Conservar los registros para los reportes regulatorios</li>
+<li>Manejar la complejidad de los donantes de la diáspora (ciudadanos estadounidenses en Puerto Rico, brasileños en el exterior, etc.)</li>
+</ul>
+<p><strong>DECIDIDO: ambas cosas, en un enfoque de dos niveles.</strong> Los donantes claramente no elegibles (no ciudadanos, no residentes, sin vínculo que califique) se bloquean en tiempo real al momento del pago. Los casos límite (diáspora, doble ciudadanía, información incompleta) se aceptan pero quedan retenidos en garantía, marcados para revisión de cumplimiento, y requieren aprobación manual antes de liberar los fondos a la campaña. El panel de cumplimiento muestra las donaciones retenidas y explica por qué se marcaron.</p>
+<h3 id="reportes-de-financiamiento-de-campañas" tabindex="-1"><a class="heading-anchor" href="#reportes-de-financiamiento-de-campañas" aria-hidden="true">#</a> Reportes de financiamiento de campañas</h3>
+<p>Cada jurisdicción tiene requisitos de reporte distintos. La plataforma necesita un motor de reportes capaz de generar informes específicos por jurisdicción.</p>
+<p><strong>Ya decidido (en <a href="http://workflows.md" target="_blank" rel="noopener noreferrer">workflows.md</a>):</strong> registro de auditoría completo, seguimiento configurable de donaciones, reportes de cumplimiento por jurisdicción.</p>
+<p><strong>Capacidades de reporte necesarias:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Jurisdicción</th>
+<th>Organismo receptor</th>
+<th>Tipo de reporte</th>
+<th>Frecuencia</th>
+<th>Campos clave</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>EE. UU. (federal)</td>
+<td>FEC</td>
+<td>Form 3/3X</td>
+<td>Trimestral + preelectoral</td>
+<td>Contribuciones desglosadas &gt;$200, gastos, efectivo disponible</td>
+</tr>
+<tr>
+<td>PR (local)</td>
+<td>CEE</td>
+<td>Por definir según el tipo de contienda</td>
+<td>Por ciclo electoral</td>
+<td>Por definir — requiere asesoría legal local</td>
+</tr>
+<tr>
+<td>Brasil</td>
+<td>TSE</td>
+<td>DivulgaCandContas</td>
+<td>En tiempo real + final</td>
+<td>Todas las donaciones (sin umbral), todos los gastos</td>
+</tr>
+<tr>
+<td>Tailandia</td>
+<td>ECT</td>
+<td>Finanzas anuales del partido</td>
+<td>Anual + por elección</td>
+<td>Ingresos del partido, gastos, declaraciones de bienes</td>
+</tr>
+<tr>
+<td>India</td>
+<td>ECI</td>
+<td>Reporte de contribuciones</td>
+<td>Anual + por elección</td>
+<td>Contribuciones &gt;₹20,000 (desglosadas), gasto total</td>
+</tr>
+<tr>
+<td>Líbano</td>
+<td>SCE</td>
+<td>Declaración posterior a la elección</td>
+<td>Dentro de los 60 días de la elección</td>
+<td>Todos los gastos de campaña, fuentes de financiamiento</td>
+</tr>
+</tbody>
+</table>
+<p><strong>DECIDIDO: híbrido.</strong> Generador de reportes integrado para las jurisdicciones prioritarias (primero EE. UU./FEC, para el alfa), y exportación de datos estructurados en formatos limpios disponible en todas partes desde el primer día como alternativa. Los módulos de reporte por jurisdicción se agregan a medida que arranca cada piloto. Es lo pragmático: construimos lo que necesitamos cuando lo necesitamos.</p>
+<h3 id="consentimiento-y-cumplimiento-en-las-comunicaciones" tabindex="-1"><a class="heading-anchor" href="#consentimiento-y-cumplimiento-en-las-comunicaciones" aria-hidden="true">#</a> Consentimiento y cumplimiento en las comunicaciones</h3>
+<p><strong>Ya decidido (en <a href="http://workflows.md" target="_blank" rel="noopener noreferrer">workflows.md</a>):</strong></p>
+<ul>
+<li>Consentimiento por canal y por finalidad, con valores por defecto sensatos</li>
+<li>Baja en un clic, con efecto inmediato</li>
+<li>Registro de auditoría del consentimiento</li>
+<li>Consentimiento verificado al momento del envío</li>
+</ul>
+<p><strong>Requisitos adicionales de cumplimiento:</strong></p>
+<ul>
+<li><strong>Cumplimiento de la TCPA (EE. UU./PR):</strong> se exige consentimiento previo, expreso y por escrito para llamadas y mensajes automatizados a celulares. El alta debe ser clara y visible. La revocación debe atenderse de inmediato. Aplica al contacto por SMS y a las funcionalidades de jornadas de llamadas.</li>
+<li><strong>Cumplimiento del CAN-SPAM (EE. UU./PR):</strong> los correos comerciales deben incluir dirección física, mecanismo de baja y asuntos veraces. Las bajas se atienden dentro de 10 días hábiles.</li>
+<li><strong>Consentimiento LGPD (Brasil):</strong> el consentimiento debe ser libre, informado e inequívoco. Las casillas premarcadas no son consentimiento válido. Se puede retirar en cualquier momento, con la misma facilidad con que se otorgó.</li>
+<li><strong>Reglas de mensajería del TSE (Brasil):</strong> prohibida la mensajería masiva por WhatsApp. Las campañas por SMS quedan restringidas durante el periodo electoral.</li>
+<li><strong>Consentimiento PDPA (Tailandia):</strong> se exige consentimiento explícito para los datos sensibles (opinión política). El consentimiento debe ir separado del resto de los términos. Los menores requieren consentimiento de sus padres.</li>
+<li><strong>Consentimiento DPDPA (India):</strong> el consentimiento debe ser libre, específico, informado, incondicional e inequívoco. El aviso debe estar en inglés o en cualquiera de los idiomas del Octavo Anexo de la Constitución.</li>
+<li><strong>Requisitos libaneses:</strong> los requisitos formales de consentimiento son mínimos, pero GreenGrass aplica su propio estándar (ver la decisión sobre protección de datos en Líbano, más arriba).</li>
+</ul>
+<h3 id="registro-de-auditoría-y-conservación" tabindex="-1"><a class="heading-anchor" href="#registro-de-auditoría-y-conservación" aria-hidden="true">#</a> Registro de auditoría y conservación</h3>
+<p><strong>Ya decidido (en <a href="http://users.md" target="_blank" rel="noopener noreferrer">users.md</a>):</strong> registro de auditoría completo de todas las modificaciones de datos, cambios de permisos, transacciones financieras, inicios de sesión, exportaciones y fusiones.</p>
+<p><strong>Requisitos de conservación por jurisdicción:</strong></p>
+<p><strong>DECIDIDO: conservación uniforme, 10 años en todo el mundo.</strong> Todos los registros de auditoría se conservan 10 años, sin importar la jurisdicción, siguiendo el requisito de registros mercantiles de Líbano, que es el más largo entre los países objetivo. Una sola regla para todos: es lo más simple de implementar, no hay riesgo de borrar antes de tiempo, y almacenar datos de eventos estructurados es barato frente al riesgo de cumplimiento que implica equivocarse con la conservación específica de cada jurisdicción.</p>
+<table>
+<thead>
+<tr>
+<th>Jurisdicción</th>
+<th>Registros financieros</th>
+<th>Registros electorales</th>
+<th>Registros de auditoría generales</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>EE. UU. (FEC)</td>
+<td>3 años tras la presentación</td>
+<td>Por ciclo electoral + 3 años</td>
+<td>Sin mandato federal</td>
+</tr>
+<tr>
+<td>Brasil (TSE)</td>
+<td>5 años</td>
+<td>Por ciclo electoral + requisitos del TSE</td>
+<td>LGPD: mientras persista la finalidad</td>
+</tr>
+<tr>
+<td>Tailandia</td>
+<td>5 años (fiscal)</td>
+<td>Según los requisitos de la ECT</td>
+<td>PDPA: mientras persista la finalidad</td>
+</tr>
+<tr>
+<td>India</td>
+<td>8 años (fiscal/financiero)</td>
+<td>Según los requisitos de la ECI</td>
+<td>DPDPA: mientras persista la finalidad</td>
+</tr>
+<tr>
+<td>Líbano</td>
+<td>10 años (registros mercantiles)</td>
+<td>Según los requisitos de la SCE (60 días tras la elección para la declaración)</td>
+<td>Sin requisito formal</td>
+</tr>
+</tbody>
+</table>
+<h3 id="cifrado-y-acceso-legal" tabindex="-1"><a class="heading-anchor" href="#cifrado-y-acceso-legal" aria-hidden="true">#</a> Cifrado y acceso legal</h3>
+<p><strong>Ya decidido (en <a href="http://security.md" target="_blank" rel="noopener noreferrer">security.md</a>):</strong></p>
+<ul>
+<li>BYOK por defecto: GreenGrass no puede descifrar los datos de una organización</li>
+<li>Imposibilidad arquitectónica de cumplir con exigencias de datos para las organizaciones con BYOK</li>
+<li>Impugnación de las exigencias excesivas o de motivación política para las organizaciones con llaves gestionadas</li>
+<li>Ninguna cooperación voluntaria con exigencias de gobiernos extranjeros sin un proceso legal válido en la jurisdicción de constitución</li>
+</ul>
+<p><strong>Consideraciones sobre el cifrado por jurisdicción:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Jurisdicción</th>
+<th>Restricciones al cifrado</th>
+<th>Obligaciones de interceptación legal</th>
+<th>Impacto en GreenGrass</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>EE. UU./PR</td>
+<td>Sin restricciones generales. CALEA aplica a las operadoras de telecomunicaciones (GreenGrass no lo es)</td>
+<td>No aplica a las plataformas de software</td>
+<td>Mínimo: son las protecciones legales más fuertes para el cifrado</td>
+</tr>
+<tr>
+<td>Brasil</td>
+<td>El Marco Civil da Internet protege el cifrado. Sin mandato de puertas traseras.</td>
+<td>Una orden judicial puede obligar a los proveedores a entregar los datos que poseen</td>
+<td>Con BYOK no poseemos las llaves. Con llaves gestionadas: cumplir con órdenes judiciales válidas.</td>
+</tr>
+<tr>
+<td>Tailandia</td>
+<td>El Computer Crime Act permite a las autoridades exigir las llaves de descifrado</td>
+<td>Sí: las autoridades pueden obligar a entregar las llaves de cifrado</td>
+<td>El nivel agresivo de seguridad es indispensable. BYOK es crítico para los activistas tailandeses.</td>
+</tr>
+<tr>
+<td>India</td>
+<td>La sección 69 del IT Act permite al gobierno exigir el descifrado</td>
+<td>Sí: no colaborar con el descifrado puede sancionarse</td>
+<td>BYOK es crítico. El gobierno indio ha impulsado el acceso por puerta trasera.</td>
+</tr>
+<tr>
+<td>Líbano</td>
+<td>Sin restricciones formales al cifrado</td>
+<td>Múltiples servicios de inteligencia operan al margen de la ley</td>
+<td>No hay marco legal para obligar, pero la incautación física sí es un riesgo. La opción autoalojada es importante.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>DECIDIDO: declarar la imposibilidad + impugnar.</strong> GreenGrass responde que no posee las llaves de descifrado y no puede cumplir, y remite a la autoridad a la organización. Además, GreenGrass impugna activamente la base legal de la exigencia aunque cumplirla sea técnicamente imposible: para sentar precedente, para dejar clara su postura ante los usuarios y para aportar al ecosistema legal más amplio en torno a los derechos de cifrado. Se le avisa a la organización, salvo que una orden de confidencialidad lo prohíba. Todas las exigencias y las respuestas se incluyen en el informe anual de transparencia.</p>
+<h2 id="infraestructura-de-cumplimiento" tabindex="-1"><a class="heading-anchor" href="#infraestructura-de-cumplimiento" aria-hidden="true">#</a> Infraestructura de cumplimiento</h2>
+<h3 id="configuración-de-cumplimiento-por-organización" tabindex="-1"><a class="heading-anchor" href="#configuración-de-cumplimiento-por-organización" aria-hidden="true">#</a> Configuración de cumplimiento por organización</h3>
+<p>Cada organización debe configurar:</p>
+<ul>
+<li><strong>Jurisdicción:</strong> qué leyes de qué país aplican a su operación</li>
+<li><strong>Tipo de contienda:</strong> federal, estatal/provincial o local (afecta los requisitos de reporte)</li>
+<li><strong>Fechas del periodo de campaña:</strong> inicio y fin oficiales del periodo de campaña</li>
+<li><strong>Reglas de contribución:</strong> límites, fuentes prohibidas, umbrales de declaración (precargadas desde plantillas por jurisdicción, personalizables)</li>
+<li><strong>Reglas de comunicación:</strong> restricciones de canal, requisitos de aviso legal (precargadas desde plantillas por jurisdicción)</li>
+<li><strong>Política de conservación:</strong> cuánto tiempo conservar cada tipo de registro (por defecto, lo que marque la jurisdicción; la organización puede extenderlo, pero no acortarlo)</li>
+</ul>
+<h3 id="panel-de-cumplimiento" tabindex="-1"><a class="heading-anchor" href="#panel-de-cumplimiento" aria-hidden="true">#</a> Panel de cumplimiento</h3>
+<p>Los administradores de cada organización necesitan una vista de cumplimiento que muestre:</p>
+<ul>
+<li><strong>Alertas de contribuciones:</strong> donaciones marcadas (cerca de los límites, con estatus extranjero, con información obligatoria faltante)</li>
+<li><strong>Salud del consentimiento:</strong> porcentaje de contactos con consentimiento válido por canal, consentimientos próximos a vencer</li>
+<li><strong>Fechas límite de reporte:</strong> próximas fechas de presentación con su estado de preparación</li>
+<li><strong>Solicitudes de los interesados:</strong> solicitudes pendientes de acceso, eliminación o corrección, con temporizadores de SLA</li>
+<li><strong>Acceso al registro de auditoría:</strong> registro de auditoría con búsqueda y capacidad de exportación</li>
+</ul>
+<h3 id="verificaciones-automáticas-de-cumplimiento" tabindex="-1"><a class="heading-anchor" href="#verificaciones-automáticas-de-cumplimiento" aria-hidden="true">#</a> Verificaciones automáticas de cumplimiento</h3>
+<p>La plataforma debería correr verificaciones de cumplimiento continuas:</p>
+<ul>
+<li><strong>En tiempo real:</strong> verificación de límites de contribución, filtro de donantes extranjeros, verificación del consentimiento al momento del envío, presencia del aviso legal en las comunicaciones salientes</li>
+<li><strong>Por lotes:</strong> contribuciones que se acercan a los límites (advertencias), alertas de vencimiento de consentimiento, información obligatoria faltante de donantes, aplicación de las restricciones del periodo de campaña</li>
+<li><strong>Antes de reportar:</strong> verificaciones de completitud de los datos antes de las fechas límite de presentación, conciliación de los registros de donaciones contra los datos del procesador de pagos</li>
+</ul>
+<h3 id="motor-de-reportes-de-cumplimiento" tabindex="-1"><a class="heading-anchor" href="#motor-de-reportes-de-cumplimiento" aria-hidden="true">#</a> Motor de reportes de cumplimiento</h3>
+<p><strong>Nota de arquitectura:</strong> el motor de reportes sigue el enfoque híbrido decidido más arriba: generadores integrados que se agregan por jurisdicción a medida que arrancan los pilotos, con la exportación de datos estructurados como alternativa universal. Por dentro, los reportes específicos por jurisdicción se implementan como módulos por jurisdicción que se cargan según la configuración de cada organización, siguiendo el mismo patrón de adaptadores que usa todo el sistema (pagos, SMS, redes sociales).</p>
+<h2 id="estructura-corporativa-y-jurisdicción" tabindex="-1"><a class="heading-anchor" href="#estructura-corporativa-y-jurisdicción" aria-hidden="true">#</a> Estructura corporativa y jurisdicción</h2>
+<p><strong>Ya decidido (en <a href="http://security.md" target="_blank" rel="noopener noreferrer">security.md</a>):</strong> constituirse en una jurisdicción con protección fuerte de la privacidad (Estonia o Suiza como candidatas).</p>
+<p><strong>Consideraciones estructurales:</strong></p>
+<p><strong>DECIDIDO: entidad única con opción de filiales.</strong> Empezar con una sola empresa en la jurisdicción de constitución, operando globalmente mediante contratos con proveedores de servicios locales. Si alguna jurisdicción exige presencia local (el escrutinio de la FCRA en India, los requisitos del TSE en Brasil), se constituyen filiales locales de propiedad total según haga falta. La arquitectura ya lo soporta: con residencia de datos por país e infraestructura modular, montar una filial no exige rearquitecturar nada, solo sumar una entidad legal y contratos locales.</p>
+<p>Factores a considerar:</p>
+<ul>
+<li><strong>FCRA (India):</strong> las entidades extranjeras que prestan servicios a organizaciones políticas quedan bajo escrutinio. Es probable que haga falta una filial local.</li>
+<li><strong>TSE (Brasil):</strong> los proveedores de tecnología de campaña pueden tener que registrarse. Conviene tener presencia local.</li>
+<li><strong>Implicaciones fiscales:</strong> precios de transferencia, impuestos a los servicios digitales, IVA o impuestos equivalentes en cada jurisdicción.</li>
+<li><strong>Banca:</strong> cada país necesita capacidad local de procesamiento de pagos. Las filiales pueden tener cuentas bancarias locales.</li>
+<li><strong>Responsabilidad:</strong> las filiales locales pueden limitar la exposición de la matriz a acciones legales locales.</li>
+</ul>
+<h2 id="hoja-de-ruta-de-cumplimiento" tabindex="-1"><a class="heading-anchor" href="#hoja-de-ruta-de-cumplimiento" aria-hidden="true">#</a> Hoja de ruta de cumplimiento</h2>
+<h3 id="alfa-puerto-rico" tabindex="-1"><a class="heading-anchor" href="#alfa-puerto-rico" aria-hidden="true">#</a> Alfa (Puerto Rico)</h3>
+<p><strong>Requisitos previos al lanzamiento:</strong></p>
+<ul>
+<li>Módulo de cumplimiento EE. UU./FEC completamente construido y probado</li>
+<li>Requisitos de la CEE de Puerto Rico validados con asesoría legal local</li>
+<li>Mecanismos de consentimiento TCPA/CAN-SPAM operativos</li>
+<li>Formato de reporte de la FEC validado</li>
+<li>Verificación de límites de contribución operativa</li>
+<li>Generación de avisos legales para las comunicaciones políticas</li>
+<li>Panel de cumplimiento básico</li>
+</ul>
+<h3 id="piloto-1-brasil" tabindex="-1"><a class="heading-anchor" href="#piloto-1-brasil" aria-hidden="true">#</a> Piloto 1 (Brasil)</h3>
+<p><strong>Requisitos previos al lanzamiento:</strong></p>
+<ul>
+<li>Evaluación de cumplimiento de la LGPD completada</li>
+<li>Registro o notificación ante el TSE (si se requiere)</li>
+<li>Registro ante el TSE completado (si se requiere; pendiente de la determinación de la asesoría legal)</li>
+<li>Integración de pagos con PIX, con verificaciones de cumplimiento de las donaciones</li>
+<li>Formato de reporte del TSE implementado</li>
+<li>Restricciones del canal de WhatsApp implementadas según las reglas del TSE</li>
+<li>Mecanismos de consentimiento LGPD (separados del consentimiento general)</li>
+<li>Evaluación de impacto en la protección de datos completada</li>
+<li>Textos legales en portugués revisados por asesoría brasileña</li>
+</ul>
+<h3 id="piloto-2-tailandia" tabindex="-1"><a class="heading-anchor" href="#piloto-2-tailandia" aria-hidden="true">#</a> Piloto 2 (Tailandia)</h3>
+<p><strong>Requisitos previos al lanzamiento:</strong></p>
+<ul>
+<li>Evaluación de cumplimiento de la PDPA completada</li>
+<li>Registro o notificación ante la ECT (si se requiere)</li>
+<li>Marco de riesgo de contenido para lesa majestad implementado</li>
+<li>Filial o alianza tailandesa establecida</li>
+<li>Integración con PromptPay, con verificaciones de cumplimiento de las donaciones</li>
+<li>Formato de reporte de la ECT implementado</li>
+<li>Mecanismos de consentimiento PDPA operativos</li>
+<li>Nivel agresivo de seguridad totalmente operativo (crítico para Tailandia)</li>
+<li>Textos legales en tailandés revisados por asesoría tailandesa</li>
+</ul>
+<h3 id="piloto-3-india" tabindex="-1"><a class="heading-anchor" href="#piloto-3-india" aria-hidden="true">#</a> Piloto 3 (India)</h3>
+<p><strong>Requisitos previos al lanzamiento:</strong></p>
+<ul>
+<li>Evaluación de cumplimiento de la DPDPA completada</li>
+<li>Registro o interlocución con la ECI</li>
+<li>Opinión legal sobre la FCRA obtenida, que valide el posicionamiento como proveedor de tecnología (con filial constituida si la asesoría lo recomienda)</li>
+<li>Integración con UPI, con verificaciones de cumplimiento de las donaciones</li>
+<li>Formato de reporte de la ECI implementado</li>
+<li>Reglas de aplicación del MCC implementadas (periodo de campaña)</li>
+<li>Avisos de consentimiento multilingües (hindi + inglés + lenguas regionales)</li>
+<li>Infraestructura de localización de datos operativa en India</li>
+<li>Textos legales en lenguas indias revisados por asesoría india</li>
+</ul>
+<h3 id="piloto-4-líbano" tabindex="-1"><a class="heading-anchor" href="#piloto-4-líbano" aria-hidden="true">#</a> Piloto 4 (Líbano)</h3>
+<p><strong>Requisitos previos al lanzamiento:</strong></p>
+<ul>
+<li>Línea base de cumplimiento establecida (estándar GDPR / jurisdicción de constitución, según la decisión anterior)</li>
+<li>Registro o notificación ante la SCE (si se requiere)</li>
+<li>Seguimiento de donaciones en efectivo totalmente operativo</li>
+<li>Integración con OMT, con verificaciones de cumplimiento de las donaciones</li>
+<li>Formato de reporte de la SCE implementado</li>
+<li>Sistema confesional de escaños contemplado en las funcionalidades de campaña</li>
+<li>Textos legales en árabe, francés e inglés revisados por asesoría libanesa</li>
+<li>Nivel agresivo de seguridad + opción autoalojada disponibles (crítico para Líbano)</li>
+<li>Plan de resiliencia de infraestructura ante la inestabilidad eléctrica y de internet</li>
+</ul>
+<h2 id="preguntas-abiertas-para-la-asesoría-legal" tabindex="-1"><a class="heading-anchor" href="#preguntas-abiertas-para-la-asesoría-legal" aria-hidden="true">#</a> Preguntas abiertas para la asesoría legal</h2>
+<p>Lo siguiente requiere trabajar con profesionales del derecho antes de implementarlo:</p>
+<ol>
+<li><strong>Selección final de la jurisdicción de constitución:</strong> Estonia, Suiza u otras candidatas. Análisis de tratados de asistencia legal mutua (MLAT), implicaciones fiscales, viabilidad operativa.</li>
+<li><strong>Estructura corporativa:</strong> según la decisión anterior, requiere el aporte de asesores legales y fiscales.</li>
+<li><strong>Evaluación del riesgo bajo la FCRA (India):</strong> ¿puede GreenGrass operar como proveedor de tecnología? ¿Basta con una filial?</li>
+<li><strong>Registro de la plataforma ante el TSE (Brasil):</strong> ¿tiene GreenGrass que registrarse como plataforma tecnológica de campaña?</li>
+<li><strong>Defensa legal del BYOK:</strong> ¿se ha puesto a prueba la &quot;imposibilidad arquitectónica de cumplir&quot; en alguna jurisdicción objetivo? Hace falta una opinión legal.</li>
+<li><strong>Responsabilidad de la plataforma por el contenido de los usuarios:</strong> en especial en materia de lesa majestad (Tailandia), infracciones al MCC (India) y contenido sectario (Líbano).</li>
+<li><strong>Requisitos de delegado de protección de datos:</strong> ¿qué jurisdicciones exigen un DPO, y puede una sola persona cubrir varias jurisdicciones?</li>
+<li><strong>Legalidad del warrant canary:</strong> ¿son legalmente defendibles los warrant canaries en cada jurisdicción objetivo?</li>
+<li><strong>Legalidad del cifrado de extremo a extremo:</strong> ¿es admisible ofrecer mensajería cifrada de extremo a extremo a organizaciones políticas en todas las jurisdicciones objetivo?</li>
+<li><strong>Seguros:</strong> seguro de responsabilidad cibernética, seguro de riesgo político y seguro de directores y funcionarios en cada jurisdicción.</li>
+</ol>
+<!-- REVISIT: Este documento aporta el marco. Cada lanzamiento de país requiere un cuaderno de cumplimiento dedicado, desarrollado con asesoría legal local. Ese cuaderno debe validar cada supuesto que hay aquí e identificar cualquier requisito que se nos haya escapado. -->
+
+    </article>
+  </main>
+  <div class="toc-rail"><nav class="toc" aria-label="En esta página"><div class="toc-label">En esta página</div><ul><li class="toc-2"><a href="#propósito"># Propósito</a></li><li class="toc-2"><a href="#filosofía-de-cumplimiento"># Filosofía de cumplimiento</a></li><li class="toc-2"><a href="#panorama-regulatorio-por-país"># Panorama regulatorio por país</a></li><li class="toc-3"><a href="#puerto-rico-alfa"># Puerto Rico (Alfa)</a></li><li class="toc-3"><a href="#brasil-piloto-1"># Brasil (Piloto 1)</a></li><li class="toc-3"><a href="#tailandia-piloto-2"># Tailandia (Piloto 2)</a></li><li class="toc-3"><a href="#india-piloto-3"># India (Piloto 3)</a></li><li class="toc-3"><a href="#líbano-piloto-4"># Líbano (Piloto 4)</a></li><li class="toc-2"><a href="#requisitos-transversales-de-cumplimiento"># Requisitos transversales de cumplimiento</a></li><li class="toc-3"><a href="#marco-de-protección-de-datos"># Marco de protección de datos</a></li><li class="toc-3"><a href="#cumplimiento-del-derecho-electoral"># Cumplimiento del derecho electoral</a></li><li class="toc-3"><a href="#reportes-de-financiamiento-de-campañas"># Reportes de financiamiento de campañas</a></li><li class="toc-3"><a href="#consentimiento-y-cumplimiento-en-las-comunicaciones"># Consentimiento y cumplimiento en las comunicaciones</a></li><li class="toc-3"><a href="#registro-de-auditoría-y-conservación"># Registro de auditoría y conservación</a></li><li class="toc-3"><a href="#cifrado-y-acceso-legal"># Cifrado y acceso legal</a></li><li class="toc-2"><a href="#infraestructura-de-cumplimiento"># Infraestructura de cumplimiento</a></li><li class="toc-3"><a href="#configuración-de-cumplimiento-por-organización"># Configuración de cumplimiento por organización</a></li><li class="toc-3"><a href="#panel-de-cumplimiento"># Panel de cumplimiento</a></li><li class="toc-3"><a href="#verificaciones-automáticas-de-cumplimiento"># Verificaciones automáticas de cumplimiento</a></li><li class="toc-3"><a href="#motor-de-reportes-de-cumplimiento"># Motor de reportes de cumplimiento</a></li><li class="toc-2"><a href="#estructura-corporativa-y-jurisdicción"># Estructura corporativa y jurisdicción</a></li><li class="toc-2"><a href="#hoja-de-ruta-de-cumplimiento"># Hoja de ruta de cumplimiento</a></li><li class="toc-3"><a href="#alfa-puerto-rico"># Alfa (Puerto Rico)</a></li><li class="toc-3"><a href="#piloto-1-brasil"># Piloto 1 (Brasil)</a></li><li class="toc-3"><a href="#piloto-2-tailandia"># Piloto 2 (Tailandia)</a></li><li class="toc-3"><a href="#piloto-3-india"># Piloto 3 (India)</a></li><li class="toc-3"><a href="#piloto-4-líbano"># Piloto 4 (Líbano)</a></li><li class="toc-2"><a href="#preguntas-abiertas-para-la-asesoría-legal"># Preguntas abiertas para la asesoría legal</a></li></ul></nav></div>
+</div>
+<script src="../../assets/search.js" defer></script>
+<script src="../../assets/app.js" defer></script>
+</body>
+</html>

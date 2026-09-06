@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="es" data-base="../../" data-no-results="No hay resultados para">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Inteligencia de comunicaciones — hoja de ruta post-MVP · GreenGrass</title>
+<meta name="description" content="Inteligencia de comunicaciones — hoja de ruta post-MVP — Documentación de especificación y diseño de GreenGrass.">
+<link rel="alternate" hreflang="en" href="../../spec/comms-intelligence.html">
+<link rel="alternate" hreflang="es" href="./comms-intelligence.html">
+<link rel="alternate" hreflang="x-default" href="../../spec/comms-intelligence.html">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%232563eb'/%3E%3Cstop offset='1' stop-color='%2316a34a'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='32' height='32' rx='7' fill='url(%23g)'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="../../assets/styles.css">
+</head>
+<body>
+<a class="skip-link" href="#content">Saltar al contenido</a>
+<header class="site-header">
+  <button type="button" class="menu-toggle" aria-label="Alternar navegación" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+  <a class="brand" href="../../es/index.html">
+    <span class="brand-mark" aria-hidden="true"></span>
+    <span class="brand-text"><strong>GreenGrass</strong><small>Especificación y diseño</small></span>
+  </a>
+  <div class="search">
+    <input type="search" id="search-input" placeholder="Buscar en la documentación…" autocomplete="off" aria-label="Buscar en la documentación">
+    <div id="search-results" class="search-results" hidden></div>
+  </div>
+  <nav class="lang-switch" aria-label="Idioma"><a class="lang-opt" href="../../spec/comms-intelligence.html" hreflang="en" lang="en" title="View this page in English">EN</a><span class="lang-opt active" aria-current="true">ES</span></nav>
+  <button type="button" class="theme-toggle" aria-label="Alternar modo oscuro" title="Alternar modo oscuro">
+    <span class="theme-icon" aria-hidden="true"></span>
+  </button>
+</header>
+<div class="layout">
+  <div class="sidebar-backdrop" hidden></div>
+  <aside class="sidebar" aria-label="Navegación de la documentación">
+    <nav class="nav">
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">Inicio<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../index.html">GreenGrass</a></li></ul></div>
+<div class="nav-section open"><button type="button" class="nav-section-title" aria-expanded="true">Especificaciones<span class="chev" aria-hidden="true"></span></button><ul><li><a href="./product.html">Proyecto: GreenGrass</a></li><li><a href="./mvp.html">MVP de GreenGrass — plan de producto</a></li><li><a href="./users.html">Usuarios y roles</a></li><li><a href="./workflows.html">Flujos de trabajo principales</a></li><li><a href="./geography.html">Geografía objetivo</a></li><li><a href="./security.html">Seguridad y modelo de amenazas</a></li><li><a href="./compliance.html">Cumplimiento y marco legal</a></li><li><a href="./fundraising.html">Recaudación de fondos e infraestructura de pagos</a></li><li><a href="./integrations.html">Integraciones externas</a></li><li><a href="./support.html">Soporte y puesta en marcha de organizaciones</a></li><li><a href="./gotv.html">GOTV y operaciones del día de elecciones</a></li><li><a href="./messaging.html">Comunicaciones internas y notificaciones</a></li><li><a href="./press.html">Prensa, medios y comunicaciones públicas</a></li><li><a href="./comms-intelligence.html" aria-current="page" class="active">Inteligencia de comunicaciones — hoja de ruta post-MVP</a></li></ul></div>
+    </nav>
+  </aside>
+  <main id="content" class="content">
+    <nav class="breadcrumb" aria-label="Ruta de navegación">Especificaciones</nav>
+    <article class="prose">
+<h1 id="inteligencia-de-comunicaciones-hoja-de-ruta-post-mvp" tabindex="-1"><a class="heading-anchor" href="#inteligencia-de-comunicaciones-hoja-de-ruta-post-mvp" aria-hidden="true">#</a> Inteligencia de comunicaciones — hoja de ruta post-MVP</h1>
+<p><strong>Inteligencia de medios sistemática e investigación con acceso controlado, secuenciadas como las primeras iteraciones después de que se valide el fideicomiso de datos de la coalición</strong></p>
+<p>Redactado: 2026-09-01
+Estado: Hoja de ruta. Depende de que <code>spec/mvp.md</code> pase su punto de decisión de marzo de 2028. No se ha modificado ninguna especificación existente.</p>
+<hr>
+<h2 id="1-qué-es-esto-y-qué-no-es" tabindex="-1"><a class="heading-anchor" href="#1-qué-es-esto-y-qué-no-es" aria-hidden="true">#</a> 1. Qué es esto y qué no es</h2>
+<p>Siete capacidades, pedidas como una sola herramienta:</p>
+<p>monitoreo de medios · verificación de datos · puntos de mensaje · mapa de medios · perfiles de analistas · investigación de antecedentes de candidaturas · investigación de la oposición</p>
+<p>El calificativo que obliga es <em>&quot;todo de forma sistemática, con acceso controlado&quot;</em>. Esas dos palabras —<em>sistemática</em> y <em>controlado</em>— pesan más que cualquiera de las siete funcionalidades, y buena parte de este documento trata sobre ellas.</p>
+<p><strong>Esto no es un MVP alternativo.</strong> <code>spec/mvp.md</code> pone a prueba la única pregunta del proyecto que no es un problema de ingeniería normal —si organizaciones políticas soberanas van a poner sus datos en común bajo las reglas adecuadas— y <a href="./mvp.html#1-contexto">mvp.md § 1. Contexto</a> tiene razón en que hay que probarla primero y barato, antes de la construcción cara. Nada de lo que sigue desplaza eso. El piloto queda como está especificado: MVC y PIP, solo ingesta, supresión mutua, las fases de <a href="./mvp.html#7-fases">mvp.md § 7. Fases</a>.</p>
+<p>Este documento es lo que se construye <strong>después</strong> de que esa pregunta tenga respuesta: las primeras iteraciones de producto real, ordenadas por dependencia, cada una con el punto de decisión que la libera.</p>
+<p>De la secuencia se desprenden dos cosas. El §2 explica por qué este dominio va primero entre todos los que podrían ir. El §3, qué hereda del MVP — que resulta ser más que un supuesto validado.</p>
+<hr>
+<h2 id="2-por-qué-este-dominio-va-primero" tabindex="-1"><a class="heading-anchor" href="#2-por-qué-este-dominio-va-primero" aria-hidden="true">#</a> 2. Por qué este dominio va primero</h2>
+<p>La plataforma completa es grande: recaudación de fondos, operaciones de campo, GOTV (Get Out The Vote — movilización del voto), eventos, activismo, el portal de simpatizantes. Cualquiera de esos dominios podría seguir al piloto. Cuatro razones por las que este va al frente.</p>
+<p><strong>La especificación ya lo había agendado.</strong> <a href="./press.html#registro-de-cobertura">press.md § Registro de cobertura</a> aplaza el monitoreo automatizado de medios con un lenguaje que mira hacia adelante de una manera poco común:</p>
+<blockquote>
+<p>El monitoreo automático de medios se aplaza no por falta de importancia, sino porque merece una inversión seria y no una integración pegada con cinta adhesiva. Los servicios de monitoreo que existen (Meltwater, Cision, etc.) son caros, están centrados en Occidente y cubren mal a los medios regionales y locales del Sur Global. Ahí hay un hueco de mercado grande. […] Retomarlo como iniciativa de producto dedicada, no como añadido.</p>
+</blockquote>
+<p>El ADR-015 lleva la misma decisión al registro de arquitectura. Este pedido no llegó de afuera del proyecto: lo dejó en pausa el propio proyecto, con una nota para volver a él.</p>
+<p><strong>Ya hay evidencia de demanda en la geografía del piloto.</strong> <code>puntos-ds.pages.dev</code> —un sitio de puntos de mensaje hecho a mano por Democracia Socialista en Puerto Rico— existe. Filtro por tema, búsqueda por palabra clave, copiar al portapapeles, marcas de verificación y un pie de página que advierte que el material se desactualiza. Sin plataforma, sin presupuesto, y con suficiente necesidad sostenida como para justificar mantenerlo. Una herramienta interna hecha a mano es la señal de demanda más fuerte que hay después de los ingresos, y esta está en el mercado objetivo, resuelve una séptima parte del pedido y nadie la encargó.</p>
+<p><strong>No les pide nada nuevo a los partidos.</strong> El piloto es solo de ingesta: los partidos entregan archivos y reciben de vuelta una marca de supresión. Cualquier otro dominio de la plataforma les pide migrar operaciones. La inteligencia de comunicaciones no pide importación, ni app de campo, ni cliente sin conexión, ni visto bueno de un custodio, ni una nueva pregunta de consentimiento. Es el paso más corto desde donde el piloto los deja.</p>
+<p><strong>Le da al fideicomiso algo que hacer.</strong> El piloto termina con dos partidos que ya demostraron que ponen datos en común y con una sola funcionalidad operativa estrecha. Si no viene nada rápido detrás, la relación no tiene superficie donde vivir. Una imagen compartida del panorama mediático es la segunda cosa natural que coordinan los socios de una coalición, y tiene mucho menos en juego que juntar listas de simpatizantes — que es justamente lo que la hace un buen segundo pedido y no un buen primero.</p>
+<hr>
+<h2 id="3-qué-hereda-del-mvp" tabindex="-1"><a class="heading-anchor" href="#3-qué-hereda-del-mvp" aria-hidden="true">#</a> 3. Qué hereda del MVP</h2>
+<p>El piloto no es solo una validación. Construye cuatro cosas de las que depende esta hoja de ruta, y una de ellas es una sorpresa genuina.</p>
+<table>
+<thead>
+<tr>
+<th>Lo que construye el MVP</th>
+<th>Por qué esta hoja de ruta lo necesita</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>BYOK (Bring Your Own Key — la organización controla su propia llave de cifrado) desde el primer día</strong> (<a href="./mvp.html#44-lo-que-se-conserva-aunque-parezca-recortable">mvp.md § 4.4 Se mantienen aunque parezcan recortables</a>)</td>
+<td>La afirmación central del almacén de expedientes es que la plataforma no puede leer el material. El BYOK hace que eso sea cierto y no solo contractual</td>
+</tr>
+<tr>
+<td><strong>Registro de auditoría inmutable desde el primer día</strong> (<a href="./mvp.html#44-lo-que-se-conserva-aunque-parezca-recortable">mvp.md § 4.4 Se mantienen aunque parezcan recortables</a>)</td>
+<td>La cadena de custodia sobre los hallazgos de investigación es la misma maquinaria</td>
+</tr>
+<tr>
+<td><strong>Event sourcing (el estado se deriva de un registro inmutable de eventos) para la procedencia</strong> (<a href="./mvp.html#44-lo-que-se-conserva-aunque-parezca-recortable">mvp.md § 4.4 Se mantienen aunque parezcan recortables</a>)</td>
+<td>El libro de afirmaciones <em>es</em> una estructura de procedencia — misma forma, otro tema</td>
+</tr>
+<tr>
+<td><strong>El contrato de intercambio, ALLY-005</strong> (<a href="./mvp.html#41-qu%C3%A9-se-construye">mvp.md § 4.1 Qué se construye</a>)</td>
+<td>A nivel de campo, con denegación por defecto, por miembro. Ver abajo</td>
+</tr>
+<tr>
+<td><strong>Una respuesta validada sobre si fueron las reglas las que lo hicieron posible</strong> (A7)</td>
+<td>Determina si algo de lo que sigue puede compartirse en coalición siquiera</td>
+</tr>
+</tbody>
+</table>
+<h3 id="31-el-contrato-de-intercambio-resulta-ser-la-respuesta-para-el-mapa-de-medios" tabindex="-1"><a class="heading-anchor" href="#31-el-contrato-de-intercambio-resulta-ser-la-respuesta-para-el-mapa-de-medios" aria-hidden="true">#</a> 3.1 El contrato de intercambio resulta ser la respuesta para el mapa de medios</h3>
+<p>Lo más útil que deja el MVP es lo que se construyó para otra cosa.</p>
+<p>Una pregunta abierta que de otro modo sería difícil: ¿de quién es el grafo de actores — el mapa de los medios, su propiedad, su financiamiento y su alineación? Por organización significa que cada campaña lo reconstruye desde cero, un esfuerzo duplicado enorme justo en las organizaciones con menos capacidad. Mantenido por GreenGrass es la ventaja más defendible de toda la propuesta y también un riesgo compartido: una etiqueta de alineación equivocada sobre un medio pasa a ser la etiqueta equivocada de todas las organizaciones.</p>
+<p>Si el MVP pasa, hay una tercera respuesta: <strong>compartido por la coalición, bajo el mismo contrato a nivel de campo y con denegación por defecto que el piloto ya construyó.</strong> Cada miembro aporta lo que sabe del panorama mediático, ve la suma de lo aportado y se guarda lo que decida guardarse — la misma primitiva, apuntada al conocimiento institucional en vez de a los registros de simpatizantes.</p>
+<p>Y es un segundo uso <em>más seguro</em> de esa maquinaria que el primero. Un mapa de medios no contiene datos personales de simpatizantes, ni pregunta de consentimiento, ni un campo <code>support_level</code> que un partido cuide como su activo central (<a href="./mvp.html#mvc-movimiento-victoria-ciudadana">mvp.md § MVC — Movimiento Victoria Ciudadana</a>). Si el contrato de intercambio funciona en algún lado, funciona aquí. Eso convierte a este dominio en un lugar natural para ampliar el fideicomiso, no para ponerlo a prueba.</p>
+<p><strong>Esto solo queda disponible si el MVP pasa.</strong> Si A7 falla y resulta que los partidos confiaban entre ellos y no en las reglas (<a href="./mvp.html#5-el-supuesto-descompuesto">mvp.md § 5. El supuesto, descompuesto</a>), el grafo de actores vuelve a ser por organización y la versión compartida por la coalición se descarta.</p>
+<hr>
+<h2 id="4-lo-que-greengrass-ya-tiene" tabindex="-1"><a class="heading-anchor" href="#4-lo-que-greengrass-ya-tiene" aria-hidden="true">#</a> 4. Lo que GreenGrass ya tiene</h2>
+<p>El conjunto de especificaciones va en parte por delante del pedido y en parte no lo cubre.</p>
+<table>
+<thead>
+<tr>
+<th>Capacidad</th>
+<th>Estado</th>
+<th>Evidencia</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Monitoreo de medios</strong></td>
+<td>Aplazado <strong>como oportunidad estratégica explícita</strong></td>
+<td><a href="./press.html#registro-de-cobertura">press.md § Registro de cobertura</a>, <code>decisions/015-product-scope.md</code></td>
+</tr>
+<tr>
+<td><strong>Puntos de mensaje</strong></td>
+<td><strong>Existen</strong> — versionados, organizados por tema, compartidos con el equipo</td>
+<td><a href="./press.html#puntos-de-mensaje">press.md § Puntos de mensaje</a>; PRESS-014 en <a href="../../design/ux/04-wireframes/press/press.html#press-014-talking-points-library">press.md § PRESS-014: Biblioteca de puntos de mensaje</a></td>
+</tr>
+<tr>
+<td><strong>Mapa de medios</strong></td>
+<td>Parcial — los contactos llevan medio, área temática y zona de cobertura; el panorama en sí es prosa</td>
+<td><a href="./press.html#los-contactos-de-medios-son-registros-del-crm">press.md § Contactos de medios como registros del CRM</a>, <a href="./press.html#diferencias-en-el-panorama-de-medios">press.md § Diferencias del panorama mediático</a></td>
+</tr>
+<tr>
+<td><strong>Perfiles de analistas</strong></td>
+<td>Parcial — los periodistas son registros de Contacto con estado de relación; los analistas son otro objeto</td>
+<td><a href="./press.html#los-contactos-de-medios-son-registros-del-crm">press.md § Contactos de medios como registros del CRM</a>, <a href="./users.html#contacto">users.md § Contacto</a></td>
+</tr>
+<tr>
+<td><strong>Verificación de datos</strong></td>
+<td>Ausente</td>
+<td>—</td>
+</tr>
+<tr>
+<td><strong>Investigación de antecedentes de candidaturas</strong></td>
+<td>Ausente. Lo más cercano es la aprobación configurable de voluntarios por riesgo de infiltración, ADR-003</td>
+<td>—</td>
+</tr>
+<tr>
+<td><strong>Investigación de la oposición</strong></td>
+<td>Ausente — solo aparece en el modelo de amenazas, como algo que se le hace <em>a</em> la campaña</td>
+<td><a href="./security.html#nivel-1-actores-estatales">security.md § Nivel 1: actores estatales</a>, <a href="./security.html#nivel-3-oponentes-pol%C3%ADticos">security.md § Nivel 3: oponentes políticos</a></td>
+</tr>
+</tbody>
+</table>
+<h3 id="qué-aporta-la-referencia-de-puntos-de-mensaje" tabindex="-1"><a class="heading-anchor" href="#qué-aporta-la-referencia-de-puntos-de-mensaje" aria-hidden="true">#</a> Qué aporta la referencia de puntos de mensaje</h3>
+<p><code>puntos-ds.pages.dev</code> tiene tres cosas que PRESS-014 no tiene:</p>
+<ol>
+<li><strong>El par <em>lo que decimos / lo que contestamos</em>.</strong> Ataque y defensa como una sola unidad. PRESS-014 guarda afirmaciones; la referencia guarda afirmaciones <em>y sus réplicas</em>, que es como se usa el material de verdad cuando te están preguntando.</li>
+<li><strong>Copiar al portapapeles, punto por punto.</strong> Un detalle chico que revela el caso de uso real: alguien está redactando una respuesta ahora mismo, en un celular, en medio de una discusión. PRESS-014 está diseñada para revisar, no para usar en vivo.</li>
+<li><strong>Estado de verificación por punto</strong> — <em>&quot;Sin verificar.&quot;</em> El pie de página dice: <em>&quot;Uso interno. Los puntos cambian; verifica la fecha antes de citar públicamente.&quot;</em></li>
+</ol>
+<p>La tercera es la importante, y es la juntura donde dos de las siete funcionalidades pedidas resultan ser una sola. Un punto de mensaje con estado de verificación <em>es</em> un registro de verificación de datos. Ver §5.</p>
+<hr>
+<h2 id="5-siete-funcionalidades-son-tres-primitivas" tabindex="-1"><a class="heading-anchor" href="#5-siete-funcionalidades-son-tres-primitivas" aria-hidden="true">#</a> 5. Siete funcionalidades son tres primitivas</h2>
+<p>Tratar el pedido como siete funcionalidades produce siete herramientas a medio construir. Son tres estructuras de datos, y de ellas se desprende el orden de iteraciones del §9.</p>
+<h3 id="51-el-grafo-de-actores" tabindex="-1"><a class="heading-anchor" href="#51-el-grafo-de-actores" aria-hidden="true">#</a> 5.1 El grafo de actores</h3>
+<p>Medios, periodistas, analistas y objetivos de monitoreo son una sola estructura, no cuatro. La unidad que falta hoy es <strong>el medio como registro de primera clase</strong>: propiedad, financiamiento, alineación política o confesional, alcance, línea editorial, medios hermanos y quién escribe qué dentro de él.</p>
+<p><a href="./press.html#diferencias-en-el-panorama-de-medios">press.md § Diferencias del panorama mediático</a> describe exactamente esto —el <em>&quot;panorama mediático confesional (medios alineados con grupos políticos o religiosos)&quot;</em> del Líbano, la fragmentación por lenguas regionales de India, la división bilingüe de Puerto Rico— en prosa, en una sección titulada &quot;Diferencias del panorama mediático&quot;, y no modela nada de eso. Hoy, cada medio de la plataforma existe únicamente como un campo de texto en el registro de contacto de un periodista (<a href="./press.html#los-contactos-de-medios-son-registros-del-crm">press.md § Contactos de medios como registros del CRM</a>).</p>
+<p>Los perfiles de analistas salen del mismo grafo. A un periodista le ofreces una historia. A un analista o comentarista lo <em>predices</em>: sus posiciones previas, su alineación, qué dijo la última vez que salió este tema. El mismo grafo, otra arista.</p>
+<h3 id="52-el-libro-de-afirmaciones" tabindex="-1"><a class="heading-anchor" href="#52-el-libro-de-afirmaciones" aria-hidden="true">#</a> 5.2 El libro de afirmaciones</h3>
+<p>Una afirmación, sus fuentes, su estado de verificación, su respuesta aprobada, su historial.</p>
+<p>La verificación de datos, la marca de verificación en un punto de mensaje y una coincidencia entrante del monitoreo son tres vistas de un mismo registro. Un ataque aparece en el monitoreo; se convierte en una afirmación; la afirmación recibe fuentes y se dictamina; el dictamen se convierte en una respuesta aprobada; la respuesta aprobada es un punto de mensaje. Hoy esos cuatro pasos viven en cuatro lugares, tres de los cuales no existen.</p>
+<p>Esta es la primitiva que hace que la herramienta sea <em>sistemática</em> y no una carpeta de documentos. Es también la única que no tiene análogo en ninguna parte de la especificación actual — aunque, como señala el §3, estructuralmente es la misma forma de procedencia que ya produce el event sourcing del MVP.</p>
+<h3 id="53-el-expediente-compartimentado" tabindex="-1"><a class="heading-anchor" href="#53-el-expediente-compartimentado" aria-hidden="true">#</a> 5.3 El expediente compartimentado</h3>
+<p>La investigación de antecedentes de candidaturas y la investigación de la oposición son la misma maquinaria apuntada en dos direcciones: un sujeto, un conjunto de hallazgos con fuente, una cadena de custodia, una lista de acceso.</p>
+<p>Investigarse a uno mismo se vende más fácil y es el producto más defendible: encontrar el punto vulnerable de tu propia candidatura antes de que lo encuentre el otro bando. Es el mismo almacén, y es la razón por la que el §9 pone la investigación propia antes que la de la oposición.</p>
+<hr>
+<h2 id="6-el-acceso-controlado-todavía-no-existe" tabindex="-1"><a class="heading-anchor" href="#6-el-acceso-controlado-todavía-no-existe" aria-hidden="true">#</a> 6. El &quot;acceso controlado&quot; todavía no existe</h2>
+<p>Esta es la parte del pedido que la plataforma hoy no puede satisfacer, y no se arregla ajustando permisos. Es la razón por la que las iteraciones de expedientes van últimas en el §9.</p>
+<p>El ADR-003 da un RBAC híbrido —plantillas de rol apilables con excepciones por usuario— más alcance por atributos de geografía, equipo y campaña. Responde <em>&quot;qué puede hacer un Director de comunicaciones, y sobre qué región&quot;</em>. No tiene respuesta para <em>&quot;solo estas cuatro personas, con nombre y apellido, pueden abrir este archivo, y el Administrador de la organización no es una de ellas&quot;</em>.</p>
+<p>Los wireframes de prensa hacen concreta la brecha: todas las pantallas de PRESS-001 a PRESS-015 están marcadas como visibles para <strong>OA, CD</strong> — Administrador de la organización y Director de comunicaciones (<a href="../../design/ux/04-wireframes/press/press.html#scope">press.md § Alcance</a>). A nivel de rol, para toda la organización, sin ningún grano más fino en todo el dominio.</p>
+<p>Un almacén de expedientes compartimentado necesita cuatro cosas que la plataforma no tiene:</p>
+<table>
+<thead>
+<tr>
+<th>Requisito</th>
+<th>Estado actual</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Listas de acceso por registro (personas con nombre, no roles)</td>
+<td>No está modelado</td>
+</tr>
+<tr>
+<td>Registro de lecturas</td>
+<td><strong>Rechazado explícitamente</strong></td>
+</tr>
+<tr>
+<td>Sin vía de lectura de superusuario</td>
+<td><strong>Rechazado explícitamente</strong></td>
+</tr>
+<tr>
+<td>Alcance de llave por compartimento</td>
+<td>El BYOK es por organización (ADR-002)</td>
+</tr>
+</tbody>
+</table>
+<p>Dos de esas no son brechas sino contradicciones activas, y hay que resolverlas en vez de taparlas:</p>
+<ul>
+<li><strong><a href="../../decisions/004-data-model-integrity.html#full-audit-trail-for-all-data-mutations">004-data-model-integrity.md § Registro de auditoría completo para todas las mutaciones de datos</a></strong> se compromete a un registro de auditoría completo <em>&quot;para todas las mutaciones de datos&quot;</em>. Las lecturas no se registran. En un almacén de expedientes, la lectura <em>es</em> el evento que vale la pena registrar: la exfiltración desde adentro no deja ninguna mutación atrás.</li>
+<li><strong><a href="./security.html#protecci%C3%B3n-de-metadatos">security.md § Protección de metadatos</a></strong> va más lejos y convierte el no registrar en una <em>defensa</em>: <em>&quot;Evita registrar metadatos innecesarios (no anotes qué registros específicos vio una persona si solo necesitas saber que inició sesión).&quot;</em> Ese es el razonamiento correcto de minimización de metadatos para una app de trabajo de campo bajo vigilancia estatal, y es exactamente el inverso del que necesita un compartimento de investigación.</li>
+<li><strong><a href="./security.html#acceso-del-equipo-de-greengrass">security.md § Acceso del equipo de GreenGrass</a></strong> le da al Administrador de la plataforma <em>&quot;acceso silencioso… para leer los datos de la organización con fines de soporte y depuración, sin notificar a la organización&quot;</em>. Defendible para un CRM. No defendible para un expediente sobre un funcionario en ejercicio.</li>
+</ul>
+<p>Hay además un efecto colateral sobre el diseño de coacción. <a href="./security.html#consideraciones-de-seguridad-f%C3%ADsica">security.md § Consideraciones de seguridad física</a> especifica un passkey señuelo que abre una vista saneada. Hoy esa funcionalidad es un extra deseable para el nivel más alto. Agrega un almacén de expedientes y pasa a ser estructural: ahora hay algo concreto que un inicio de sesión bajo coacción no debe revelar.</p>
+<p><strong>La compartimentación es su propio ADR y su propio esfuerzo de ingeniería, no una configuración del ADR-003.</strong> Es la Iteración 4.</p>
+<hr>
+<h2 id="7-el-riesgo-de-factibilidad-que-podría-rehacer-todo-el-plan" tabindex="-1"><a class="heading-anchor" href="#7-el-riesgo-de-factibilidad-que-podría-rehacer-todo-el-plan" aria-hidden="true">#</a> 7. El riesgo de factibilidad que podría rehacer todo el plan</h2>
+<p>El pilar de monitoreo se apoya en un supuesto que nadie ha probado, y probarlo es barato y se puede hacer temprano.</p>
+<h3 id="71-no-quieren-o-no-pueden" tabindex="-1"><a class="heading-anchor" href="#71-no-quieren-o-no-pueden" aria-hidden="true">#</a> 7.1 ¿&quot;No quieren&quot; o &quot;no pueden&quot;?</h3>
+<p>Meltwater y Cision no cubren estos mercados. <a href="./press.html#registro-de-cobertura">press.md § Registro de cobertura</a> lee eso como un hueco de mercado. Es igual de compatible con una <em>imposibilidad</em> de mercado, y una cosa y la otra implican productos completamente distintos:</p>
+<ul>
+<li><strong>No quieren</strong> — los mercados son reales, pero demasiado chicos y fragmentados como para que a un proveedor occidental le compense el costo de integrarlos. Entonces la estructura de costos más baja de GreenGrass y su foco en las lenguas locales sí son una ventaja real.</li>
+<li><strong>No pueden</strong> — la cobertura no es alcanzable digitalmente a ningún costo razonable. Entonces ningún grado de foco alcanza, y el producto termina monitoreando la franja de medios que da la casualidad de que se puede extraer automáticamente, y se pierde la parte que decide elecciones.</li>
+</ul>
+<p>Nada en el conjunto de especificaciones responde esto. El §7.4 lo responde en tres semanas.</p>
+<h3 id="72-las-noticias-no-circulan-por-la-web" tabindex="-1"><a class="heading-anchor" href="#72-las-noticias-no-circulan-por-la-web" aria-hidden="true">#</a> 7.2 Las noticias no circulan por la web</h3>
+<p>En tres de los cinco mercados objetivo, la especificación dice que el canal de noticias dominante es una red de mensajería cerrada:</p>
+<ul>
+<li><strong>Brasil</strong> — <em>&quot;WhatsApp es el canal de comunicación dominante (incluso para compartir noticias)&quot;</em> (<a href="./press.html#diferencias-en-el-panorama-de-medios">press.md § Diferencias del panorama mediático</a>)</li>
+<li><strong>India</strong> — <em>&quot;WhatsApp y YouTube son los canales digitales dominantes. Los medios en lenguas regionales son críticos&quot;</em> (<a href="./press.html#diferencias-en-el-panorama-de-medios">press.md § Diferencias del panorama mediático</a>)</li>
+<li><strong>Líbano</strong> — <em>&quot;WhatsApp es dominante para mensajería&quot;</em> (<a href="./press.html#diferencias-en-el-panorama-de-medios">press.md § Diferencias del panorama mediático</a>)</li>
+</ul>
+<p>Monitorear redes de mensajería cerradas significa vigilar grupos privados. <strong>La línea, dicha como compromiso al mismo nivel que el §8: este producto no hace eso.</strong> Y no por una limitación técnica. Una herramienta de inteligencia política que ingiere chats de grupos privados es un producto de vigilancia, y construir uno para organizaciones de base justo en los países donde esa capacidad se volvería contra ellas no es algo que GreenGrass deba sacar.</p>
+<p>Ese compromiso tiene un costo, y es el costo honesto de toda la idea: en los mercados donde la plataforma hace más falta, un producto de monitoreo con principios ve una minoría de lo que de verdad circula.</p>
+<p>La radio y la televisión lo agravan. <a href="./press.html#diferencias-en-el-panorama-de-medios">press.md § Diferencias del panorama mediático</a> pone <em>&quot;TV y radio locales fuertes&quot;</em> en el centro del mercado de Puerto Rico, y <a href="./press.html#diferencias-en-el-panorama-de-medios">press.md § Diferencias del panorama mediático</a> señala el <em>horário eleitoral</em> obligatorio de Brasil. Nada de eso se puede buscar como texto sin infraestructura de transcripción: se puede construir, es una línea de costo real y hoy no está en el estimado de nadie.</p>
+<h3 id="73-puerto-rico-va-a-maquillar-el-resultado" tabindex="-1"><a class="heading-anchor" href="#73-puerto-rico-va-a-maquillar-el-resultado" aria-hidden="true">#</a> 7.3 Puerto Rico va a maquillar el resultado</h3>
+<p>Los partidos del piloto están en Puerto Rico: un mercado chico, bilingüe, bien digitalizado, con un número manejable de medios y una presencia web pegada a la de Estados Unidos. Plausiblemente el entorno mediático <em>más fácil</em> de todo el conjunto objetivo.</p>
+<p>Que el monitoreo funcione en San Juan no te dice casi nada sobre Recife o Chennai. Es la imagen espejo de la situación que <a href="./mvp.html#punto-de-partida">mvp.md § Punto de partida</a> describe para el fideicomiso de datos: para ese experimento, PR es una prueba limpia; para la factibilidad del monitoreo es el caso más amable posible y va a exagerar cuánto de esto se generaliza.</p>
+<p><strong>Mitigación:</strong> el sondeo de corpus se hace sobre Brasil y un mercado más, aunque el primer despliegue sea en Puerto Rico. La factibilidad y la adopción se miden en lugares distintos, a propósito.</p>
+<h3 id="74-el-sondeo-de-corpus-hazlo-temprano-cuesta-tres-semanas" tabindex="-1"><a class="heading-anchor" href="#74-el-sondeo-de-corpus-hazlo-temprano-cuesta-tres-semanas" aria-hidden="true">#</a> 7.4 El sondeo de corpus — hazlo temprano, cuesta tres semanas</h3>
+<p>Una persona, tres semanas, y <strong>no necesita esperar al punto de decisión del MVP</strong>. No requiere ingeniería ni un partido del piloto, así que puede correr en paralelo a la Fase 0 o 1 del propio piloto sin competirle a nadie.</p>
+<ol>
+<li>Elige dos mercados. <strong>Brasil y uno entre India y Líbano</strong> — Puerto Rico no.</li>
+<li>Toma una semana de noticias políticas, definidas como las definiría alguien que conoce el tema.</li>
+<li>Intenta armarla a partir de fuentes alcanzables: RSS, sitemaps, APIs públicas, archivos abiertos, cuentas públicas de redes sociales.</li>
+<li>Mide: qué fracción se puede recuperar sin trabajo a la medida para cada medio; qué fracción queda detrás de muros de pago, distribución solo por app, radio, TV o mensajería cerrada; cuánto cuesta sumar la cola larga de medios en lenguas regionales.</li>
+</ol>
+<p>El resultado es un número por mercado y una curva de costos. Si la cobertura alcanzable en Brasil es escasa, la Iteración 3 se reposiciona o se elimina y la hoja de ruta se acorta al libro, el grafo y el almacén de expedientes: un producto más chico y distinto, sabido años antes de que alguien lo construya. Ese es todo el valor de hacerlo temprano.</p>
+<hr>
+<h2 id="8-la-doctrina" tabindex="-1"><a class="heading-anchor" href="#8-la-doctrina" aria-hidden="true">#</a> 8. La doctrina</h2>
+<p>La investigación de la oposición y la investigación de antecedentes de candidaturas entran en alcance con capacidad completa. Es una posición defendible, y es defendible <strong>solo</strong> con una doctrina explícita adosada. Estos son compromisos, no consideraciones, y tienen que existir por escrito antes de que empiece la Iteración 5.</p>
+<h3 id="81-fuentes" tabindex="-1"><a class="heading-anchor" href="#81-fuentes" aria-hidden="true">#</a> 8.1 Fuentes</h3>
+<p><strong>Solo fuentes lícitas.</strong> Registros públicos, material publicado, declaraciones hechas para ser citadas, documentos judiciales y presentaciones ante reguladores, informes de financiamiento de campaña, datos de proveedores con licencia y procedencia documentada.</p>
+<p><strong>Prohibido, por diseño y no solo por política:</strong> material hackeado o filtrado, hacerse pasar por otra persona o falsear el motivo para conseguir registros, datos personales de origen dudoso, cuentas privadas extraídas automáticamente, y cualquier cosa obtenida de un grupo de mensajería cerrado.</p>
+<h3 id="82-la-procedencia-es-obligatoria" tabindex="-1"><a class="heading-anchor" href="#82-la-procedencia-es-obligatoria" aria-hidden="true">#</a> 8.2 La procedencia es obligatoria</h3>
+<p>Cada hallazgo lleva fuente, fecha, quién lo recogió y con qué método. No hay campo de texto libre para una afirmación sin fuente, porque en el momento en que lo haya, es de eso que se llena el almacén.</p>
+<p>Esto es lo que separa la investigación del rumor. Y es además la protección frente a la responsabilidad legal: un expediente donde cada línea se rastrea hasta un registro público es defendible de una manera en que un documento de afirmaciones nunca lo es.</p>
+<h3 id="83-límite-de-alcance" tabindex="-1"><a class="heading-anchor" href="#83-límite-de-alcance" aria-hidden="true">#</a> 8.3 Límite de alcance</h3>
+<p><strong>Conducta pública de figuras públicas.</strong> Candidaturas, quienes ocupan cargos, y su conducta política y financiera.</p>
+<p>Excluidos por defecto: familiares, menores, asuntos médicos y sexuales privados. La excepción exige justificación escrita, queda registrada y es visible para quien administra el compartimento. El valor por defecto es la posición del producto; la excepción existe porque hay casos reales y pretender lo contrario solo mueve el trabajo fuera de la plataforma.</p>
+<h3 id="84-el-choque-con-los-derechos-del-titular-de-los-datos" tabindex="-1"><a class="heading-anchor" href="#84-el-choque-con-los-derechos-del-titular-de-los-datos" aria-hidden="true">#</a> 8.4 El choque con los derechos del titular de los datos</h3>
+<p>La pregunta sin resolver más grande de este documento.</p>
+<p><a href="./compliance.html#marco-de-protecci%C3%B3n-de-datos">compliance.md § Marco de protección de datos</a> compromete a GreenGrass a <em>&quot;protecciones de datos sensibles al nivel de LGPD/GDPR aplicadas globalmente, sin importar la ley local&quot;</em>, con el razonamiento de que todos los datos de una plataforma política son políticos por naturaleza. <a href="./compliance.html#derechos-del-interesado">compliance.md § Derechos del titular de los datos</a> enumera después los derechos de acceso, rectificación, supresión, portabilidad y oposición.</p>
+<p><strong>Un oponente es un titular de datos.</strong> Bajo la LGPD, la PDPA y la DPDPA tiene derechos sobre un expediente que se guarda sobre él, incluidos el de acceso y el de supresión. Una solicitud de acceso contra un expediente de investigación de la oposición no es un caso extremo: es una táctica obvia y barata, y la primera campaña que la use contra una organización de GreenGrass fija el precedente para el producto.</p>
+<p>Tres respuestas parciales, ninguna suficiente por sí sola:</p>
+<ol>
+<li><strong>Excepciones periodísticas y de interés legítimo.</strong> Existen, pero son estrechas, específicas de cada jurisdicción y en general están escritas para la prensa, no para operaciones políticas.</li>
+<li><strong>La organización como responsable del tratamiento, con una plataforma genuinamente ciega.</strong> GreenGrass es encargada del tratamiento (<a href="./compliance.html#acuerdos-de-tratamiento-de-datos">compliance.md § Acuerdos de tratamiento de datos</a>); la solicitud va a la organización. El BYOK —que el MVP ya entrega (<a href="./mvp.html#44-lo-que-se-conserva-aunque-parezca-recortable">mvp.md § 4.4 Se mantienen aunque parezcan recortables</a>)— hace que la ceguera de la plataforma sea <em>cierta</em> y no meramente contractual, y choca de frente con la vía de lectura silenciosa del Administrador de la plataforma en <a href="./security.html#acceso-del-equipo-de-greengrass">security.md § Acceso del equipo de GreenGrass</a>.</li>
+<li><strong>Alcance limitado a registros públicos.</strong> Donde los hechos de fondo ya son públicos, la posición del titular es la más débil. La respuesta más limpia y también el producto más estrecho.</li>
+</ol>
+<p><strong>Esto va a asesoría legal en cada jurisdicción antes de que se escriba una línea de código de expedientes</strong>, y pertenece a la lista de <a href="./compliance.html#preguntas-abiertas-para-la-asesor%C3%ADa-legal">compliance.md § Preguntas abiertas para la asesoría legal</a>. Es una razón plausible para que el módulo de expedientes salga en algunos mercados y en otros no.</p>
+<h3 id="85-acceso-y-retención" tabindex="-1"><a class="heading-anchor" href="#85-acceso-y-retención" aria-hidden="true">#</a> 8.5 Acceso y retención</h3>
+<ul>
+<li><strong>Compartimentado por defecto.</strong> Sellado a una lista de acceso con personas nombradas, nunca a un rol. Agregar a alguien es un evento, queda registrado y es visible para quien administra el compartimento.</li>
+<li><strong>Las lecturas se registran y el registro es visible para quien administra el compartimento.</strong> Invierte <a href="./security.html#protecci%C3%B3n-de-metadatos">security.md § Protección de metadatos</a> solo para esta clase de datos, y la inversión tiene que quedar acotada con precisión para que no se filtre de vuelta a las operaciones de campo, donde el razonamiento original sigue valiendo.</li>
+<li><strong>Sin vía de lectura de superusuario.</strong> El Administrador de la organización puede dar acceso; no puede leer. El Administrador de la plataforma no puede leer en absoluto — la decisión de acceso silencioso de <a href="./security.html#acceso-del-equipo-de-greengrass">security.md § Acceso del equipo de GreenGrass</a> queda anulada para esta clase de datos, sin excepción por soporte ni por depuración.</li>
+<li><strong>Caducidad forzosa.</strong> Los expedientes caducan al final del ciclo electoral salvo que se renueven con justificación escrita.</li>
+</ul>
+<h3 id="86-el-modelo-de-amenazas-se-invierte" tabindex="-1"><a class="heading-anchor" href="#86-el-modelo-de-amenazas-se-invierte" aria-hidden="true">#</a> 8.6 El modelo de amenazas se invierte</h3>
+<p><code>spec/security.md</code> está construido sobre la premisa de que la campaña es el blanco de la vigilancia. Un almacén de expedientes convierte a la campaña en un blanco de alto valor por una razón completamente distinta — y una filtración no es un incidente de cumplimiento, sino un escándalo entre partidos con víctimas con nombre y apellido. <a href="./mvp.html#9-riesgos">mvp.md § 9. Riesgos</a> ya hace exactamente este argumento sobre el fideicomiso de datos; aquí aplica con más fuerza, porque un expediente es <em>sobre</em> alguien, no simplemente lo contiene.</p>
+<p>Consecuencias que hay que diseñar: alcance de cifrado separado, y un argumento serio para ofrecer el módulo de expedientes <strong>solo autoalojado</strong>, de modo que GreenGrass nunca tenga el material.</p>
+<h3 id="87-la-posición-para-contextos-autoritarios" tabindex="-1"><a class="heading-anchor" href="#87-la-posición-para-contextos-autoritarios" aria-hidden="true">#</a> 8.7 La posición para contextos autoritarios</h3>
+<p><a href="./geography.html#relevancia-del-nivel-de-seguridad-por-pa%C3%ADs">geography.md § Relevancia del nivel de seguridad por país</a> califica a Tailandia e India como <em>&quot;de Reforzado a Agresivo&quot;</em> y al Líbano como <em>&quot;Agresivo&quot;</em> — por capacidad de vigilancia estatal y presión política sobre la oposición.</p>
+<p>Un almacén de investigación compartimentado es exactamente lo que un Estado hostil más quiere incautar, y la incautación pone en peligro a las <strong>fuentes</strong>, no solo a la campaña. A quien habló con un investigador bajo la condición de que hubiera discreción lo expone el mismo almacén construido para proteger al investigador.</p>
+<p><strong>La posición dura, dicha como política de producto: el módulo de expedientes no está disponible, o funciona solo en el dispositivo local, en las jurisdicciones de mayor amenaza.</strong> Negarse a llevar una capacidad a un mercado donde se convierte en una lista de objetivos es la decisión correcta, aunque un competidor tome la contraria.</p>
+<hr>
+<h2 id="9-las-iteraciones" tabindex="-1"><a class="heading-anchor" href="#9-las-iteraciones" aria-hidden="true">#</a> 9. Las iteraciones</h2>
+<p>Ordenadas por dependencia, no por atractivo. Cada una sale solo cuando pasa su punto de decisión.</p>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Iteración</th>
+<th>Contiene</th>
+<th>Requisito para empezar</th>
+<th>Costo aproximado</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>0</strong></td>
+<td><strong>Sondeo de corpus</strong></td>
+<td>§7.4. Dos mercados, una semana de cobertura, medir alcanzabilidad</td>
+<td>Ninguno — corre en paralelo a la Fase 0/1 del MVP</td>
+<td>1 persona, 3 semanas</td>
+</tr>
+<tr>
+<td><strong>1</strong></td>
+<td><strong>Puntos de mensaje + libro de afirmaciones</strong></td>
+<td>PRESS-014 ampliada con los tres agregados del §4; registros de afirmación con fuentes, estado y respuesta aprobada</td>
+<td>Pasó el punto de decisión del MVP (<a href="./mvp.html#7-fases">mvp.md § 7. Fases</a>)</td>
+<td>2 ing. + 1 diseñador, ~6 semanas</td>
+</tr>
+<tr>
+<td><strong>2</strong></td>
+<td><strong>El grafo de actores</strong></td>
+<td>El medio como registro de primera clase; perfiles de periodistas y analistas; vistas del mapa de medios</td>
+<td>La Iteración 1 en uso real</td>
+<td>~8 semanas</td>
+</tr>
+<tr>
+<td><strong>3</strong></td>
+<td><strong>Ingesta de monitoreo</strong></td>
+<td>Configuración de fuentes, bandeja de monitoreo, promoción de coincidencia → cobertura que alimenta PRESS-010/011</td>
+<td><strong>Resultado de la Iteración 0</strong> — ver criterios de cancelación</td>
+<td>~12 semanas, más operación continua del corpus</td>
+</tr>
+<tr>
+<td><strong>4</strong></td>
+<td><strong>Primitiva de compartimentación</strong></td>
+<td>El ADR del §6, más listas de acceso por registro, registro de lecturas y alcance de llaves</td>
+<td>Iteraciones 1–3 entregadas; ningún trabajo de expedientes empieza antes de esto</td>
+<td>~8 semanas, transversal</td>
+</tr>
+<tr>
+<td><strong>5</strong></td>
+<td><strong>Investigación de antecedentes de candidaturas</strong></td>
+<td>Expedientes de investigación propia bajo la doctrina del §8</td>
+<td>Iteración 4 completa; doctrina escrita y adoptada</td>
+<td>~6 semanas</td>
+</tr>
+<tr>
+<td><strong>6</strong></td>
+<td><strong>Investigación de la oposición</strong></td>
+<td>El mismo almacén, sujetos externos</td>
+<td><strong>Revisión legal completa en cada jurisdicción</strong> (§8.4)</td>
+<td>~4 semanas sobre la 5</td>
+</tr>
+</tbody>
+</table>
+<h3 id="91-por-qué-este-orden" tabindex="-1"><a class="heading-anchor" href="#91-por-qué-este-orden" aria-hidden="true">#</a> 9.1 Por qué este orden</h3>
+<p><strong>La Iteración 1 va primero porque no necesita nada.</strong> Los puntos de mensaje y el libro de afirmaciones no requieren ninguna primitiva nueva de control de acceso, ni tubería de ingesta, ni revisión legal. Amplían una pantalla que ya tiene wireframe. Es el camino más rápido desde el punto de decisión del MVP hasta algo que una campaña use a diario.</p>
+<p><strong>La Iteración 3 depende de la Iteración 0 y de nada más.</strong> El monitoreo es el pilar más caro y el único cuya factibilidad es genuinamente desconocida. Hacer el sondeo años antes de la construcción es la reducción de riesgo más barata que hay en todo este plan.</p>
+<p><strong>La Iteración 4 antes que la 5 y la 6, sin excepción.</strong> Sacar un almacén de expedientes montado sobre permisos por rol sería peor que no sacarlo: crearía la apariencia de compartimentación sin la sustancia, que es el modo de fallo con más probabilidad de que alguien salga lastimado.</p>
+<p><strong>La Iteración 5 antes que la 6</strong> porque investigarse a uno mismo es la misma maquinaria con mucha menos exposición legal, y prueba que el compartimento funciona sobre material donde un error se sobrevive.</p>
+<h3 id="92-se-mantienen-desde-el-principio-aunque-parezcan-aplazables" tabindex="-1"><a class="heading-anchor" href="#92-se-mantienen-desde-el-principio-aunque-parezcan-aplazables" aria-hidden="true">#</a> 9.2 Se mantienen desde el principio, aunque parezcan aplazables</h3>
+<ul>
+<li><strong>Procedencia en cada afirmación, desde la Iteración 1.</strong> Agregarle fuentes después a un libro que ya contiene afirmaciones sin fuente no funciona; esas afirmaciones nunca reciben fuentes.</li>
+<li><strong>Estado de verificación en los puntos de mensaje, desde la Iteración 1.</strong> Un solo campo, y es lo que une el libro y la biblioteca en un producto en vez de dos.</li>
+</ul>
+<h3 id="93-reutilización-de-pantallas" tabindex="-1"><a class="heading-anchor" href="#93-reutilización-de-pantallas" aria-hidden="true">#</a> 9.3 Reutilización de pantallas</h3>
+<p>La mayor parte de esto no es dibujo nuevo. La Iteración 1 amplía PRESS-014. La Iteración 2 reutiliza los patrones de CRM-001/002 para el grafo y PRESS-001/002 para las vistas de personas. La Iteración 3 alimenta PRESS-010 y PRESS-011, que ya tienen wireframe como pantallas de captura manual y pasan a llenarse automáticamente. Genuinamente nuevo y sin wireframe: la bandeja de monitoreo, el libro de afirmaciones, el registro del medio y la superficie de administración de compartimentos.</p>
+<hr>
+<h2 id="10-puntos-de-decisión-y-criterios-de-cancelación" tabindex="-1"><a class="heading-anchor" href="#10-puntos-de-decisión-y-criterios-de-cancelación" aria-hidden="true">#</a> 10. Puntos de decisión y criterios de cancelación</h2>
+<p>Decididos por adelantado, para que las decisiones no se tomen bajo la presión de lo ya invertido.</p>
+<table>
+<thead>
+<tr>
+<th>Señal</th>
+<th>Lectura</th>
+<th>Acción</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>El punto de decisión del MVP dice parar o reposicionar (<a href="./mvp.html#7-fases">mvp.md § 7. Fases</a>)</td>
+<td>Cambió la premisa sobre la que se apoya esta hoja de ruta</td>
+<td><strong>Volver a derivar.</strong> Las iteraciones 1–3 todavía pueden sostenerse solas como producto de organización única; el grafo de actores compartido por la coalición (§3.1) no</td>
+</tr>
+<tr>
+<td>A7 falla — se tenían confianza entre ellos, no a las reglas</td>
+<td>El contrato de intercambio no es el activo que parecía</td>
+<td><strong>El grafo de actores pasa a ser por organización.</strong> Todo lo demás sigue</td>
+</tr>
+<tr>
+<td>El sondeo de corpus devuelve &lt;30% de cobertura alcanzable en Brasil</td>
+<td>El hueco es de &quot;no pueden&quot;, no de &quot;no quieren&quot;</td>
+<td><strong>Eliminar la Iteración 3.</strong> La hoja de ruta se acorta a libro, grafo y expedientes — y eso se sabe años antes</td>
+</tr>
+<tr>
+<td>Sale la Iteración 1 y nadie escribe un punto de mensaje en 6 semanas</td>
+<td>Consumo sin autoría: es un documento, no un sistema</td>
+<td><strong>Parar antes de la Iteración 2.</strong> Averiguar si en la organización hay alguien cuyo trabajo sea este</td>
+</tr>
+<tr>
+<td>Nunca inicia sesión más que una sola persona</td>
+<td>La costumbre de alguien del equipo, no una capacidad de la organización</td>
+<td><strong>Investigar.</strong> Las herramientas de un solo usuario se abandonan cuando esa persona se va, y la rotación en campañas es alta (<a href="./press.html#registro-de-interacciones-con-medios">press.md § Seguimiento de interacciones con medios</a>)</td>
+</tr>
+<tr>
+<td>La revisión legal dice que los expedientes son inadmisibles en 3 o más mercados objetivo</td>
+<td>El pilar de investigación queda acotado regionalmente</td>
+<td><strong>Sacar las iteraciones 1–4 y parar.</strong> No construir un módulo que solo se pueda vender en dos países</td>
+</tr>
+<tr>
+<td>Cualquier presión para sacar la Iteración 5 antes que la 4</td>
+<td>El modo de fallo que termina lastimando a alguien</td>
+<td><strong>Negarse.</strong> Es la única línea de este documento que no admite excepción</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="11-qué-empezar-ahora" tabindex="-1"><a class="heading-anchor" href="#11-qué-empezar-ahora" aria-hidden="true">#</a> 11. Qué empezar ahora</h2>
+<p>Nada del §9 empieza antes del punto de decisión del MVP, con una excepción.</p>
+<p><strong>Haz el sondeo de corpus (Iteración 0) durante el piloto.</strong> Cuesta una persona por tres semanas, no necesita ingeniería, no necesita un partido del piloto y no compite con la Fase 1 del propio fideicomiso de datos — que <a href="./mvp.html#equipo-y-costo">mvp.md § Equipo y costo</a> presupuesta en una persona por tres semanas y que queda exactamente como está especificada. Hacer las dos cosas son unas seis semanas-persona en total y responde dos preguntas independientes años antes de que se financie cualquiera de las dos construcciones.</p>
+<p>El sondeo de corpus es además el único punto de esta lista cuya respuesta podría reestructurar la hoja de ruta en vez de solo calendarizarla. Si el monitoreo resulta inviable en Brasil, eso cambia lo que GreenGrass está vendiendo — y es mucho mejor enterarse en 2027 que en 2029.</p>
+<p>Todo lo demás espera a marzo de 2028.</p>
+<hr>
+<h2 id="12-preguntas-abiertas" tabindex="-1"><a class="heading-anchor" href="#12-preguntas-abiertas" aria-hidden="true">#</a> 12. Preguntas abiertas</h2>
+<h3 id="para-la-asesoría-legal-antes-de-la-iteración-5" tabindex="-1"><a class="heading-anchor" href="#para-la-asesoría-legal-antes-de-la-iteración-5" aria-hidden="true">#</a> Para la asesoría legal — antes de la Iteración 5</h3>
+<ol>
+<li>¿Alguna jurisdicción objetivo ofrece una excepción que cubra la investigación de la oposición como base lícita, y qué tan estrecha es? (§8.4.)</li>
+<li>¿La organización como responsable del tratamiento, con ceguera real de la plataforma, satisface una solicitud de acceso del titular bajo la LGPD o la DPDPA, o la obligación de la organización simplemente se traspasa?</li>
+<li>¿La ingesta automatizada de contenido noticioso publicado genera exposición por derechos de autor o por derechos sobre bases de datos en algún mercado objetivo, y cambia la respuesta si se guarda el texto completo en vez de titular más enlace?</li>
+</ol>
+<h3 id="para-producto" tabindex="-1"><a class="heading-anchor" href="#para-producto" aria-hidden="true">#</a> Para producto</h3>
+<ol start="4">
+<li>Si el grafo de actores compartido por la coalición (§3.1) es viable, ¿aportar a él crea el mismo problema de legibilidad del aprovechamiento gratuito que el libro de contribuciones de <a href="./mvp.html#ap%C3%A9ndice-hip%C3%B3tesis-m%C3%A1s-all%C3%A1-del-supuesto-central">mvp.md § Apéndice — Hipótesis más allá del supuesto central</a>? ¿Y se transfiere la mitigación de H8?</li>
+<li>¿El libro de afirmaciones se conecta con la generación de mensajes de activismo con IA del ADR-013, que ya se nutre de los puntos de mensaje? Si la respuesta aprobada de una afirmación puede sembrar un mensaje generado, los dos sistemas están más cerca de lo que este documento supone.</li>
+<li>¿La investigación de antecedentes propios se vende sola, sin la investigación de la oposición adosada? La misma maquinaria, mucha menos exposición, posiblemente el producto más honesto.</li>
+</ol>
+<h3 id="para-los-partidos-del-piloto-una-vez-que-pase-el-punto-de-decisión" tabindex="-1"><a class="heading-anchor" href="#para-los-partidos-del-piloto-una-vez-que-pase-el-punto-de-decisión" aria-hidden="true">#</a> Para los partidos del piloto, una vez que pase el punto de decisión</h3>
+<ol start="7">
+<li>¿Pagarían MVC, PIP o DS por esto, y en qué nivel?</li>
+<li>¿Quién es responsable de este trabajo hoy en una campaña de diez personas, y es el trabajo real de alguien? Si la respuesta es &quot;nadie, pasa en un grupo de WhatsApp&quot;, eso es a la vez la oportunidad y el problema de adopción.</li>
+</ol>
+
+    </article>
+  </main>
+  <div class="toc-rail"><nav class="toc" aria-label="En esta página"><div class="toc-label">En esta página</div><ul><li class="toc-2"><a href="#1-qué-es-esto-y-qué-no-es"># 1. Qué es esto y qué no es</a></li><li class="toc-2"><a href="#2-por-qué-este-dominio-va-primero"># 2. Por qué este dominio va primero</a></li><li class="toc-2"><a href="#3-qué-hereda-del-mvp"># 3. Qué hereda del MVP</a></li><li class="toc-3"><a href="#31-el-contrato-de-intercambio-resulta-ser-la-respuesta-para-el-mapa-de-medios"># 3.1 El contrato de intercambio resulta ser la respuesta para el mapa de medios</a></li><li class="toc-2"><a href="#4-lo-que-greengrass-ya-tiene"># 4. Lo que GreenGrass ya tiene</a></li><li class="toc-3"><a href="#qué-aporta-la-referencia-de-puntos-de-mensaje"># Qué aporta la referencia de puntos de mensaje</a></li><li class="toc-2"><a href="#5-siete-funcionalidades-son-tres-primitivas"># 5. Siete funcionalidades son tres primitivas</a></li><li class="toc-3"><a href="#51-el-grafo-de-actores"># 5.1 El grafo de actores</a></li><li class="toc-3"><a href="#52-el-libro-de-afirmaciones"># 5.2 El libro de afirmaciones</a></li><li class="toc-3"><a href="#53-el-expediente-compartimentado"># 5.3 El expediente compartimentado</a></li><li class="toc-2"><a href="#6-el-acceso-controlado-todavía-no-existe"># 6. El &amp;quot;acceso controlado&amp;quot; todavía no existe</a></li><li class="toc-2"><a href="#7-el-riesgo-de-factibilidad-que-podría-rehacer-todo-el-plan"># 7. El riesgo de factibilidad que podría rehacer todo el plan</a></li><li class="toc-3"><a href="#71-no-quieren-o-no-pueden"># 7.1 ¿&amp;quot;No quieren&amp;quot; o &amp;quot;no pueden&amp;quot;?</a></li><li class="toc-3"><a href="#72-las-noticias-no-circulan-por-la-web"># 7.2 Las noticias no circulan por la web</a></li><li class="toc-3"><a href="#73-puerto-rico-va-a-maquillar-el-resultado"># 7.3 Puerto Rico va a maquillar el resultado</a></li><li class="toc-3"><a href="#74-el-sondeo-de-corpus-hazlo-temprano-cuesta-tres-semanas"># 7.4 El sondeo de corpus — hazlo temprano, cuesta tres semanas</a></li><li class="toc-2"><a href="#8-la-doctrina"># 8. La doctrina</a></li><li class="toc-3"><a href="#81-fuentes"># 8.1 Fuentes</a></li><li class="toc-3"><a href="#82-la-procedencia-es-obligatoria"># 8.2 La procedencia es obligatoria</a></li><li class="toc-3"><a href="#83-límite-de-alcance"># 8.3 Límite de alcance</a></li><li class="toc-3"><a href="#84-el-choque-con-los-derechos-del-titular-de-los-datos"># 8.4 El choque con los derechos del titular de los datos</a></li><li class="toc-3"><a href="#85-acceso-y-retención"># 8.5 Acceso y retención</a></li><li class="toc-3"><a href="#86-el-modelo-de-amenazas-se-invierte"># 8.6 El modelo de amenazas se invierte</a></li><li class="toc-3"><a href="#87-la-posición-para-contextos-autoritarios"># 8.7 La posición para contextos autoritarios</a></li><li class="toc-2"><a href="#9-las-iteraciones"># 9. Las iteraciones</a></li><li class="toc-3"><a href="#91-por-qué-este-orden"># 9.1 Por qué este orden</a></li><li class="toc-3"><a href="#92-se-mantienen-desde-el-principio-aunque-parezcan-aplazables"># 9.2 Se mantienen desde el principio, aunque parezcan aplazables</a></li><li class="toc-3"><a href="#93-reutilización-de-pantallas"># 9.3 Reutilización de pantallas</a></li><li class="toc-2"><a href="#10-puntos-de-decisión-y-criterios-de-cancelación"># 10. Puntos de decisión y criterios de cancelación</a></li><li class="toc-2"><a href="#11-qué-empezar-ahora"># 11. Qué empezar ahora</a></li><li class="toc-2"><a href="#12-preguntas-abiertas"># 12. Preguntas abiertas</a></li><li class="toc-3"><a href="#para-la-asesoría-legal-antes-de-la-iteración-5"># Para la asesoría legal — antes de la Iteración 5</a></li><li class="toc-3"><a href="#para-producto"># Para producto</a></li><li class="toc-3"><a href="#para-los-partidos-del-piloto-una-vez-que-pase-el-punto-de-decisión"># Para los partidos del piloto, una vez que pase el punto de decisión</a></li></ul></nav></div>
+</div>
+<script src="../../assets/search.js" defer></script>
+<script src="../../assets/app.js" defer></script>
+</body>
+</html>

@@ -36,6 +36,19 @@ npm run build    # generate the site into docs/
 npm run serve    # serve docs/ on port 8000
 ```
 
+### Languages
+
+The site is bilingual. The 14 specification documents are available in Spanish, and an
+**EN / ES** switch sits in the top-right of the header on every page. Pages that aren't
+translated still show the switch, dimmed, pointing at the Spanish home page — so the
+Spanish edition is reachable from anywhere rather than appearing only on the pages that
+happen to have it.
+
+Spanish sources live in `i18n/es/`, mirroring the English paths (`spec/product.md` →
+`i18n/es/spec/product.md`) and building to `docs/es/`. `i18n/GLOSSARY.md` holds the
+canonical Spanish terminology and is the reference for any further translation. Search
+is scoped to the language you're reading.
+
 The Markdown files remain the canonical source; `docs/` is the generated rendering. On push to `main`, a GitHub Actions workflow rebuilds the site and deploys it to GitHub Pages (enable once under **Settings → Pages → Source: GitHub Actions**).
 
 ## Working with This Project

@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="es" data-base="../../" data-no-results="No hay resultados para">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Prensa, medios y comunicaciones públicas · GreenGrass</title>
+<meta name="description" content="Prensa, medios y comunicaciones públicas — Documentación de especificación y diseño de GreenGrass.">
+<link rel="alternate" hreflang="en" href="../../spec/press.html">
+<link rel="alternate" hreflang="es" href="./press.html">
+<link rel="alternate" hreflang="x-default" href="../../spec/press.html">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%232563eb'/%3E%3Cstop offset='1' stop-color='%2316a34a'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='32' height='32' rx='7' fill='url(%23g)'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="../../assets/styles.css">
+</head>
+<body>
+<a class="skip-link" href="#content">Saltar al contenido</a>
+<header class="site-header">
+  <button type="button" class="menu-toggle" aria-label="Alternar navegación" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+  <a class="brand" href="../../es/index.html">
+    <span class="brand-mark" aria-hidden="true"></span>
+    <span class="brand-text"><strong>GreenGrass</strong><small>Especificación y diseño</small></span>
+  </a>
+  <div class="search">
+    <input type="search" id="search-input" placeholder="Buscar en la documentación…" autocomplete="off" aria-label="Buscar en la documentación">
+    <div id="search-results" class="search-results" hidden></div>
+  </div>
+  <nav class="lang-switch" aria-label="Idioma"><a class="lang-opt" href="../../spec/press.html" hreflang="en" lang="en" title="View this page in English">EN</a><span class="lang-opt active" aria-current="true">ES</span></nav>
+  <button type="button" class="theme-toggle" aria-label="Alternar modo oscuro" title="Alternar modo oscuro">
+    <span class="theme-icon" aria-hidden="true"></span>
+  </button>
+</header>
+<div class="layout">
+  <div class="sidebar-backdrop" hidden></div>
+  <aside class="sidebar" aria-label="Navegación de la documentación">
+    <nav class="nav">
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">Inicio<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../index.html">GreenGrass</a></li></ul></div>
+<div class="nav-section open"><button type="button" class="nav-section-title" aria-expanded="true">Especificaciones<span class="chev" aria-hidden="true"></span></button><ul><li><a href="./product.html">Proyecto: GreenGrass</a></li><li><a href="./mvp.html">MVP de GreenGrass — plan de producto</a></li><li><a href="./users.html">Usuarios y roles</a></li><li><a href="./workflows.html">Flujos de trabajo principales</a></li><li><a href="./geography.html">Geografía objetivo</a></li><li><a href="./security.html">Seguridad y modelo de amenazas</a></li><li><a href="./compliance.html">Cumplimiento y marco legal</a></li><li><a href="./fundraising.html">Recaudación de fondos e infraestructura de pagos</a></li><li><a href="./integrations.html">Integraciones externas</a></li><li><a href="./support.html">Soporte y puesta en marcha de organizaciones</a></li><li><a href="./gotv.html">GOTV y operaciones del día de elecciones</a></li><li><a href="./messaging.html">Comunicaciones internas y notificaciones</a></li><li><a href="./press.html" aria-current="page" class="active">Prensa, medios y comunicaciones públicas</a></li><li><a href="./comms-intelligence.html">Inteligencia de comunicaciones — hoja de ruta post-MVP</a></li></ul></div>
+    </nav>
+  </aside>
+  <main id="content" class="content">
+    <nav class="breadcrumb" aria-label="Ruta de navegación">Especificaciones</nav>
+    <article class="prose">
+<h1 id="prensa-medios-y-comunicaciones-públicas" tabindex="-1"><a class="heading-anchor" href="#prensa-medios-y-comunicaciones-públicas" aria-hidden="true">#</a> Prensa, medios y comunicaciones públicas</h1>
+<h2 id="propósito" tabindex="-1"><a class="heading-anchor" href="#propósito" aria-hidden="true">#</a> Propósito</h2>
+<p>Este documento especifica las capacidades de prensa y medios de GreenGrass: cómo una campaña maneja sus relaciones con periodistas, distribuye materiales de prensa, da seguimiento a la cobertura, administra el contenido de cara al público y coordina su presencia en redes sociales.</p>
+<p>Las campañas viven y mueren por los medios ganados —la cobertura que no se paga—. Para campañas con recursos limitados en el Sur Global, los medios ganados suelen ser la forma más barata de llegar a los votantes, mucho más que la publicidad pagada. Un comunicado de prensa bien puesto, una publicación viral o una nota favorable pueden pesar más que semanas de puerta a puerta. La plataforma tiene que poner las operaciones de prensa al alcance de campañas que quizá no tengan un secretario de prensa dedicado.</p>
+<p>Esta especificación se apoya en: <a href="http://workflows.md" target="_blank" rel="noopener noreferrer">workflows.md</a> (integración con redes sociales, eventos de entrega de activismo), <a href="http://users.md" target="_blank" rel="noopener noreferrer">users.md</a> (rol de Director de comunicaciones, perfiles públicos, tipo de registro Contacto), <a href="http://messaging.md" target="_blank" rel="noopener noreferrer">messaging.md</a> (solicitudes de aprobación del candidato para contenido de prensa), <a href="http://compliance.md" target="_blank" rel="noopener noreferrer">compliance.md</a> (avisos legales en contenido público) y <a href="http://system.md" target="_blank" rel="noopener noreferrer">system.md</a> (arquitectura de adaptadores de redes sociales).</p>
+<h2 id="filosofía-de-prensa-y-medios" tabindex="-1"><a class="heading-anchor" href="#filosofía-de-prensa-y-medios" aria-hidden="true">#</a> Filosofía de prensa y medios</h2>
+<ol>
+<li><strong>Los medios ganados son el alcance más barato que tiene una campaña.</strong> Con presupuesto limitado, la cobertura de prensa compra más atención por peso que cualquier otro canal. Las operaciones de prensa merecen en la plataforma el mismo soporte que el trabajo de campo o la recaudación de fondos.</li>
+<li><strong>Relaciones, no envíos masivos.</strong> El trabajo de prensa que funciona se basa en relaciones con periodistas concretos, no en correos masivos. El manejo de contactos del CRM tiene que tratar las relaciones con medios como asunto de primer orden.</li>
+<li><strong>Comunicación pública consciente del cumplimiento.</strong> Todo contenido de cara al público — comunicados, publicaciones en redes, declaraciones — tiene que llevar el aviso legal que corresponda a su jurisdicción (<a href="http://compliance.md" target="_blank" rel="noopener noreferrer">compliance.md</a>). La plataforma lo hace cumplir automáticamente.</li>
+<li><strong>La voz pública la controla el candidato.</strong> Nada sale al público sin que el candidato lo sepa. El flujo de aprobación (<a href="http://messaging.md" target="_blank" rel="noopener noreferrer">messaging.md</a>) asegura que revise el contenido público antes de que se distribuya.</li>
+</ol>
+<h2 id="manejo-de-contactos-de-medios" tabindex="-1"><a class="heading-anchor" href="#manejo-de-contactos-de-medios" aria-hidden="true">#</a> Manejo de contactos de medios</h2>
+<h3 id="los-contactos-de-medios-son-registros-del-crm" tabindex="-1"><a class="heading-anchor" href="#los-contactos-de-medios-son-registros-del-crm" aria-hidden="true">#</a> Los contactos de medios son registros del CRM</h3>
+<p>Los contactos de medios usan el tipo de registro Contacto que ya existe (<a href="./users.html#contacto">users.md § Contacto</a>) con campos propios de prensa:</p>
+<ul>
+<li><strong>Medio</strong> — la publicación, emisora o plataforma donde trabaja el periodista</li>
+<li><strong>Fuente</strong> — qué cubre el periodista (política, gobierno local, educación, trabajo, etc.)</li>
+<li><strong>Área de cobertura</strong> — alcance geográfico de su cobertura (nacional, estatal o provincial, ciudad, distrito)</li>
+<li><strong>Preferencias de contacto</strong> — cómo prefiere recibir propuestas (correo, teléfono, WhatsApp, Signal)</li>
+<li><strong>Idioma</strong> — en qué idiomas trabaja</li>
+<li><strong>Estado de la relación</strong> — fría, tibia, establecida, cercana (seguimiento informal para el equipo de prensa)</li>
+<li><strong>Notas</strong> — notas libres sobre la relación (cifradas según el modelo de datos)</li>
+<li><strong>Fecha del último contacto</strong> — se llena sola desde el historial de comunicación</li>
+</ul>
+<h3 id="listas-de-medios" tabindex="-1"><a class="heading-anchor" href="#listas-de-medios" aria-hidden="true">#</a> Listas de medios</h3>
+<p>Listas curadas de periodistas para contacto dirigido:</p>
+<ul>
+<li><strong>Creación de listas</strong> — el equipo crea listas con nombre (por ejemplo, &quot;Reporteros de política — San Juan&quot;, &quot;Fuente nacional de educación&quot;, &quot;Columnistas amigables&quot;)</li>
+<li><strong>Listas dinámicas</strong> — se definen por criterios (fuente + área de cobertura + idioma) y se actualizan solas a medida que se añaden o modifican contactos</li>
+<li><strong>Listas estáticas</strong> — curadas a mano para fines específicos (por ejemplo, &quot;Grupo de prensa de la noche del debate&quot;)</li>
+<li><strong>Compartir listas</strong> — las listas de medios son un recurso de la organización, visible para todo el personal con permisos de prensa</li>
+</ul>
+<h3 id="registro-de-interacciones-con-medios" tabindex="-1"><a class="heading-anchor" href="#registro-de-interacciones-con-medios" aria-hidden="true">#</a> Registro de interacciones con medios</h3>
+<p>Cada interacción con un contacto de medios queda registrada:</p>
+<ul>
+<li><strong>Propuesta enviada</strong> — qué se propuso, cuándo, por qué canal y quién lo hizo</li>
+<li><strong>Respuesta recibida</strong> — qué contestó el periodista (interesado, pasó, necesita más información, sin respuesta)</li>
+<li><strong>Entrevista agendada</strong> — fecha, hora, formato (presencial, teléfono, video), tema, quién da la entrevista (el candidato o un vocero)</li>
+<li><strong>Cobertura obtenida</strong> — enlace al artículo o segmento resultante, tono (positivo, neutral, negativo, mixto)</li>
+<li><strong>Seguimiento pendiente</strong> — recordatorio para volver a hablar con un periodista después de un evento, un anuncio o una propuesta</li>
+</ul>
+<p>Esto arma una foto completa de las relaciones de la campaña con la prensa y le permite a personal nuevo ponerse al día rápido (algo crítico dada la rotación en las campañas).</p>
+<h2 id="contenido-de-prensa" tabindex="-1"><a class="heading-anchor" href="#contenido-de-prensa" aria-hidden="true">#</a> Contenido de prensa</h2>
+<h3 id="comunicados-de-prensa" tabindex="-1"><a class="heading-anchor" href="#comunicados-de-prensa" aria-hidden="true">#</a> Comunicados de prensa</h3>
+<ul>
+<li><strong>Constructor de comunicados</strong> — plantilla estructurada con: titular, subtítulo, lugar y fecha, cuerpo, bloques de cita (atribuidos a personas con nombre), texto institucional (descripción de la organización) e información de contacto</li>
+<li><strong>Integración con cumplimiento</strong> — el aviso legal se añade automáticamente según la jurisdicción (<a href="http://compliance.md" target="_blank" rel="noopener noreferrer">compliance.md</a>). Los comunicados de campañas políticas suelen requerir &quot;pagado por&quot; o su equivalente.</li>
+<li><strong>Flujo de aprobación</strong> — los comunicados pasan por el flujo de aprobación del candidato (<a href="./messaging.html#comunicaci%C3%B3n-en-alianzas">messaging.md § Comunicación en alianzas</a>). El candidato aprueba, rechaza o comenta. La aprobación queda registrada para auditoría.</li>
+<li><strong>Distribución</strong> — envío del comunicado aprobado a las listas de medios seleccionadas por correo. Admite personalización (nombre del periodista, notas específicas por medio).</li>
+<li><strong>Embargo informativo</strong> — se puede marcar un comunicado como embargado hasta una fecha y hora. El aviso de embargo va incluido en la distribución. La plataforma registra quién recibió el material embargado.</li>
+<li><strong>Versionado</strong> — los comunicados guardan historial de versiones. Si uno se actualiza después de distribuirse (corrección, actualización), la plataforma puede enviar la versión nueva señalando los cambios.</li>
+</ul>
+<h3 id="avisos-a-medios" tabindex="-1"><a class="heading-anchor" href="#avisos-a-medios" aria-hidden="true">#</a> Avisos a medios</h3>
+<p>Notificaciones más cortas para alertar a la prensa sobre eventos próximos:</p>
+<ul>
+<li><strong>Plantilla de aviso</strong> — formato de quién, qué, cuándo, dónde y por qué. Más simple que un comunicado completo.</li>
+<li><strong>Integración con eventos</strong> — los avisos se pueden crear directamente desde un evento de la plataforma (<a href="http://workflows.md" target="_blank" rel="noopener noreferrer">workflows.md</a>). Los datos del evento llenan los campos del aviso.</li>
+<li><strong>Distribución</strong> — la misma distribución por listas de medios que los comunicados.</li>
+</ul>
+<h3 id="declaraciones" tabindex="-1"><a class="heading-anchor" href="#declaraciones" aria-hidden="true">#</a> Declaraciones</h3>
+<p>Declaraciones oficiales de la campaña en respuesta a hechos:</p>
+<ul>
+<li><strong>Plantilla de declaración</strong> — atribuida a una persona con nombre (candidato, vocero, liderazgo de la organización). Más corta y más reactiva que un comunicado.</li>
+<li><strong>Aprobación rápida</strong> — las declaraciones suelen tener que salir ya. El flujo de aprobación admite marcar prioridad para contenido urgente.</li>
+<li><strong>Distribución</strong> — a listas de medios, a los perfiles públicos y a redes sociales.</li>
+</ul>
+<h3 id="kit-de-prensa" tabindex="-1"><a class="heading-anchor" href="#kit-de-prensa" aria-hidden="true">#</a> Kit de prensa</h3>
+<p>Una colección permanente de materiales de campaña para consulta de los periodistas:</p>
+<ul>
+<li><strong>Componentes:</strong> biografía del candidato, fotos en alta resolución (retrato, fotos en acción), descripción y texto institucional de la organización, posiciones clave de política pública, hojas informativas, logo y recursos de marca</li>
+<li><strong>Alojamiento</strong> — el kit vive en la página pública de la campaña (ver Perfiles públicos más abajo). Se puede descargar como ZIP o navegar en línea.</li>
+<li><strong>Registro de acceso</strong> — opcionalmente se registra qué periodistas acceden al kit (requiere que el periodista deje su correo o haga clic en un enlace rastreado).</li>
+</ul>
+<p><strong>DECIDIDO: Configurable por recurso.</strong> La campaña controla el acceso recurso por recurso. La biografía y el texto institucional pueden ser completamente públicos, mientras que las fotos en alta resolución o las hojas informativas internas pueden quedar restringidas (el periodista deja su correo para acceder). El acceso restringido crea automáticamente el registro de contacto de medios en el CRM. Cada campaña decide por su cuenta dónde está la línea entre alcance y recolección de información.</p>
+<h2 id="seguimiento-de-cobertura" tabindex="-1"><a class="heading-anchor" href="#seguimiento-de-cobertura" aria-hidden="true">#</a> Seguimiento de cobertura</h2>
+<h3 id="registro-de-cobertura" tabindex="-1"><a class="heading-anchor" href="#registro-de-cobertura" aria-hidden="true">#</a> Registro de cobertura</h3>
+<p>Cuando la interacción con un contacto de medios produce cobertura:</p>
+<ul>
+<li><strong>Entrada de cobertura</strong> — el equipo registra: medio, periodista, fecha de publicación, titular, URL (si es en línea), formato (artículo, segmento de TV, radio, pódcast, mención en redes), tono (positivo, neutral, negativo, mixto), etiquetas de tema, alcance estimado (si se sabe)</li>
+<li><strong>Cobertura ligada a la propuesta</strong> — cada entrada de cobertura enlaza de vuelta a la propuesta o interacción que la generó, cerrando el circuito de propuesta a cobertura</li>
+<li><strong>Cobertura ligada al comunicado</strong> — si la cobertura salió de un comunicado específico, ese vínculo queda registrado</li>
+</ul>
+<p><strong>DECIDIDO: Aplazado, pero marcado como oportunidad estratégica.</strong> Por ahora, solo registro manual. El monitoreo automático de medios se aplaza no por falta de importancia, sino porque merece una inversión seria y no una integración pegada con cinta adhesiva. Los servicios de monitoreo que existen (Meltwater, Cision, etc.) son caros, están centrados en Occidente y cubren mal a los medios regionales y locales del Sur Global. Ahí hay un hueco de mercado grande. Un monitoreo de medios nativo de GreenGrass —especialmente uno que cubra medios en lenguas locales de los países objetivo— podría ser un diferenciador mayor. Retomarlo como iniciativa de producto dedicada, no como añadido.</p>
+<h3 id="analítica-de-cobertura" tabindex="-1"><a class="heading-anchor" href="#analítica-de-cobertura" aria-hidden="true">#</a> Analítica de cobertura</h3>
+<ul>
+<li><strong>Volumen de cobertura</strong> — cobertura total en el tiempo, por medio y por tono</li>
+<li><strong>Tasa de propuesta a cobertura</strong> — porcentaje de propuestas que terminaron en cobertura</li>
+<li><strong>Capacidad de respuesta de periodistas</strong> — qué periodistas responden más a las propuestas de la campaña</li>
+<li><strong>Análisis de temas</strong> — qué temas de la campaña generan más cobertura</li>
+<li><strong>Alcance estimado</strong> — alcance agregado de toda la cobertura (donde haya datos de alcance del medio)</li>
+</ul>
+<h2 id="contenido-de-cara-al-público" tabindex="-1"><a class="heading-anchor" href="#contenido-de-cara-al-público" aria-hidden="true">#</a> Contenido de cara al público</h2>
+<h3 id="perfiles-públicos" tabindex="-1"><a class="heading-anchor" href="#perfiles-públicos" aria-hidden="true">#</a> Perfiles públicos</h3>
+<p>Según <a href="http://product.md" target="_blank" rel="noopener noreferrer">product.md</a>: perfiles públicos para candidatos, organizaciones y, opcionalmente, otros usuarios.</p>
+<h4 id="perfil-del-candidato" tabindex="-1"><a class="heading-anchor" href="#perfil-del-candidato" aria-hidden="true">#</a> Perfil del candidato</h4>
+<ul>
+<li><strong>Contenido:</strong> nombre, foto, biografía, posiciones de política pública, respaldos, información de contacto de la campaña, enlaces a redes sociales</li>
+<li><strong>Multilingüe:</strong> el contenido está disponible en los idiomas configurados por la organización (<a href="http://geography.md" target="_blank" rel="noopener noreferrer">geography.md</a>)</li>
+<li><strong>Aviso legal:</strong> se muestra automáticamente el aviso que exija la jurisdicción</li>
+<li><strong>Integración de donaciones</strong> — formulario de donación embebido o botón de donar prominente que lleva a la página de donaciones de la campaña (<a href="http://fundraising.md" target="_blank" rel="noopener noreferrer">fundraising.md</a>)</li>
+<li><strong>Eventos</strong> — los próximos eventos públicos se muestran en el perfil (desde el sistema de eventos, <a href="http://workflows.md" target="_blank" rel="noopener noreferrer">workflows.md</a>)</li>
+</ul>
+<h4 id="perfil-de-la-organización" tabindex="-1"><a class="heading-anchor" href="#perfil-de-la-organización" aria-hidden="true">#</a> Perfil de la organización</h4>
+<ul>
+<li><strong>Contenido:</strong> nombre, logo, misión, liderazgo, información de contacto, enlaces a redes sociales</li>
+<li><strong>Mostrar la alianza</strong> — si la organización pertenece a una alianza, hay opción de mostrar esa membresía y enlazar a los perfiles de las organizaciones aliadas</li>
+<li><strong>Integración de donaciones</strong> — igual que en el perfil del candidato</li>
+</ul>
+<h4 id="alojamiento-de-los-perfiles" tabindex="-1"><a class="heading-anchor" href="#alojamiento-de-los-perfiles" aria-hidden="true">#</a> Alojamiento de los perfiles</h4>
+<p><strong>DECIDIDO: Las dos cosas — alojamiento en la plataforma por defecto + acceso por API.</strong> Los perfiles alojados en la plataforma funcionan de entrada en el subdominio de la organización o en un dominio propio, con un constructor de perfiles basado en plantillas. El acceso por API queda disponible para campañas que quieran mostrar el contenido en su propio sitio con control total del diseño. La versión alojada siempre está ahí como respaldo, para que toda campaña tenga presencia pública sin importar su capacidad técnica.</p>
+<h3 id="manejo-de-redes-sociales" tabindex="-1"><a class="heading-anchor" href="#manejo-de-redes-sociales" aria-hidden="true">#</a> Manejo de redes sociales</h3>
+<p>Según <a href="http://workflows.md" target="_blank" rel="noopener noreferrer">workflows.md</a> (486-488) y <a href="http://system.md" target="_blank" rel="noopener noreferrer">system.md</a> (632-643), el manejo de redes sociales está dentro de alcance con estas capacidades:</p>
+<h4 id="creación-y-programación-de-publicaciones" tabindex="-1"><a class="heading-anchor" href="#creación-y-programación-de-publicaciones" aria-hidden="true">#</a> Creación y programación de publicaciones</h4>
+<ul>
+<li><strong>Editor multiplataforma</strong> — crear publicaciones para varias plataformas desde una sola interfaz. La vista previa por plataforma muestra cómo se va a ver la publicación en cada una (límites de caracteres, formatos de medios, vistas previas de enlaces).</li>
+<li><strong>Programación</strong> — programar publicaciones a futuro. La vista de calendario muestra todo lo programado y lo publicado.</li>
+<li><strong>Adjuntos</strong> — adjuntar imágenes, video, enlaces. Formato específico por plataforma (por ejemplo, Instagram requiere imágenes; Twitter/X tiene límite de caracteres).</li>
+<li><strong>Integración con cumplimiento</strong> — los requisitos de aviso legal para publicidad política en redes varían según la plataforma y la jurisdicción. La plataforma advierte cuando una publicación puede necesitar aviso legal y ayuda a añadirlo en el formato que corresponde.</li>
+</ul>
+<h4 id="plataformas-admitidas" tabindex="-1"><a class="heading-anchor" href="#plataformas-admitidas" aria-hidden="true">#</a> Plataformas admitidas</h4>
+<p>Según <a href="http://system.md" target="_blank" rel="noopener noreferrer">system.md</a>, una arquitectura modular de adaptadores permite integrar cada plataforma:</p>
+<ul>
+<li><strong>Plataformas de lanzamiento:</strong> Facebook, Instagram, Twitter/X</li>
+<li><strong>Plataformas futuras:</strong> TikTok, LinkedIn, YouTube (se añaden escribiendo adaptadores nuevos)</li>
+<li><strong>Prioridades por país:</strong> WhatsApp Status (Brasil), LINE (Tailandia); las preferencias de plataforma varían según el mercado</li>
+</ul>
+<p><strong>DECIDIDO: Las dos cosas — OAuth + alternativa de copiar y pegar.</strong> Conexión directa por OAuth donde exista y la plataforma la apruebe. Alternativa de copiar y pegar, con descarga del material, para plataformas donde el acceso por API no exista o esté restringido para contenido político. La vía de copiar y pegar es una red de seguridad crítica dada la tendencia de las plataformas a restringir cada vez más el acceso por API al contenido político: la plataforma nunca puede quedar en una posición donde un cambio de política de un tercero le rompa a una campaña su capacidad de publicar.</p>
+<h4 id="flujo-de-aprobación-de-publicaciones" tabindex="-1"><a class="heading-anchor" href="#flujo-de-aprobación-de-publicaciones" aria-hidden="true">#</a> Flujo de aprobación de publicaciones</h4>
+<ul>
+<li><strong>Borrador → Revisión → Aprobación → Programar o publicar</strong> — las publicaciones en redes siguen el mismo flujo de aprobación del candidato que los comunicados de prensa (<a href="./messaging.html#comunicaci%C3%B3n-en-alianzas">messaging.md § Comunicación en alianzas</a>).</li>
+<li><strong>Aprobación por lote</strong> — el candidato puede revisar y aprobar varias publicaciones programadas en una sola sesión.</li>
+<li><strong>Salida de emergencia</strong> — el Administrador de la organización o el Director de comunicaciones puede publicar sin aprobación del candidato cuando la respuesta es urgente (queda registrado para auditoría y se le avisa al candidato después).</li>
+</ul>
+<h4 id="analítica" tabindex="-1"><a class="heading-anchor" href="#analítica" aria-hidden="true">#</a> Analítica</h4>
+<ul>
+<li><strong>Métricas por publicación</strong> — interacción (me gusta, compartidos, comentarios, clics), alcance, impresiones. Se traen de las APIs de cada plataforma donde estén disponibles.</li>
+<li><strong>Panel multiplataforma</strong> — desempeño agregado en redes sociales a través de todas las plataformas.</li>
+<li><strong>Desempeño por tipo de contenido</strong> — qué tipo de contenido (política pública, personal, ataque, promoción de eventos) funciona mejor en cada plataforma.</li>
+<li><strong>Crecimiento de audiencia</strong> — tendencias de seguidores o suscriptores en el tiempo, por plataforma.</li>
+</ul>
+<h3 id="manejo-de-respaldos" tabindex="-1"><a class="heading-anchor" href="#manejo-de-respaldos" aria-hidden="true">#</a> Manejo de respaldos</h3>
+<p>Un respaldo es otra persona diciendo, con sus propias palabras, que apoya al candidato. Para casi toda campaña es el activo de comunicación pública más valioso que tiene.</p>
+<ul>
+<li><strong>Registros de respaldo</strong> — se registra: nombre de quien respalda, cargo, organización (si aplica), fecha en que se recibió, si es público o privado, el texto del respaldo (la cita) y foto</li>
+<li><strong>Quien respalda es un Contacto</strong> — quienes respaldan se llevan como registros de Contacto en el CRM (<a href="./users.html#contacto">users.md § Contacto</a>), lo que liga el respaldo a la relación más amplia</li>
+<li><strong>Despliegue público</strong> — los respaldos aprobados se pueden mostrar en el perfil público del candidato, organizados por categoría (cargos electos, organizaciones, líderes comunitarios, personas individuales)</li>
+<li><strong>Anuncio del respaldo</strong> — cuando llega un respaldo nuevo, la plataforma puede generar un comunicado de prensa a partir de una plantilla (cita de quien respalda, cita de respuesta del candidato, texto institucional) y una publicación para redes</li>
+</ul>
+<p><strong>DECIDIDO: Embudo completo.</strong> Los respaldos se manejan como un embudo: identificado → contactado → considerando → comprometido → público. Le da a la campaña una vista clara de su estrategia de respaldos, de su avance y de sus huecos. Cada etapa puede tener notas, personal asignado y fechas objetivo. Cuando un respaldo pasa a &quot;público&quot;, se dispara el flujo de anuncio (plantilla de comunicado + generación de publicación en redes).</p>
+<h2 id="manejo-de-voceros" tabindex="-1"><a class="heading-anchor" href="#manejo-de-voceros" aria-hidden="true">#</a> Manejo de voceros</h2>
+<h3 id="voceros-designados" tabindex="-1"><a class="heading-anchor" href="#voceros-designados" aria-hidden="true">#</a> Voceros designados</h3>
+<ul>
+<li><strong>Designación de voceros</strong> — el Administrador de la organización designa qué personas del equipo están autorizadas a hablar con la prensa en nombre de la campaña. Es una marca de permiso, no un rol aparte.</li>
+<li><strong>Asignación de temas</strong> — a los voceros se les pueden asignar áreas temáticas (por ejemplo, &quot;preguntas de política pública → Director de política&quot;, &quot;preguntas de recaudación → Director de finanzas&quot;, &quot;todo lo demás → Gerente de campaña&quot;)</li>
+<li><strong>Enrutamiento de contactos</strong> — cuando un periodista contacta a la campaña por la plataforma (formulario del perfil público o kit de prensa), la consulta se enruta al vocero que corresponde según el tema</li>
+</ul>
+<h3 id="puntos-de-mensaje" tabindex="-1"><a class="heading-anchor" href="#puntos-de-mensaje" aria-hidden="true">#</a> Puntos de mensaje</h3>
+<ul>
+<li><strong>Biblioteca de puntos de mensaje</strong> — una colección administrada de puntos de mensaje aprobados, organizada por tema. El equipo y el candidato la consultan al prepararse para entrevistas o al escribir contenido.</li>
+<li><strong>Control de versiones</strong> — los puntos de mensaje se versionan. Cuando una posición evoluciona, la versión vieja se archiva y se publica la nueva. El equipo siempre ve el lenguaje aprobado vigente.</li>
+<li><strong>Distribución</strong> — los puntos de mensaje se pueden empujar al personal designado por el sistema de mensajería interna (<a href="http://messaging.md" target="_blank" rel="noopener noreferrer">messaging.md</a>) cuando se actualizan.</li>
+<li><strong>Integración con los informes al candidato</strong> — los puntos de mensaje alimentan los mensajes de informe al candidato (<a href="./messaging.html#comunicaci%C3%B3n-en-alianzas">messaging.md § Comunicación en alianzas</a>). Antes de una entrevista o un acto de prensa, el candidato recibe los puntos relevantes.</li>
+</ul>
+<h2 id="eventos-de-prensa" tabindex="-1"><a class="heading-anchor" href="#eventos-de-prensa" aria-hidden="true">#</a> Eventos de prensa</h2>
+<h3 id="manejo-de-conferencias-de-prensa-y-actos-con-medios" tabindex="-1"><a class="heading-anchor" href="#manejo-de-conferencias-de-prensa-y-actos-con-medios" aria-hidden="true">#</a> Manejo de conferencias de prensa y actos con medios</h3>
+<ul>
+<li><strong>Creación del evento</strong> — las conferencias de prensa y los actos con medios usan el sistema de eventos que ya existe (<a href="http://workflows.md" target="_blank" rel="noopener noreferrer">workflows.md</a>) con campos propios de prensa: aviso a medios enviado (sí/no/fecha), grupo de prensa invitado (qué lista de medios), formato de cobertura esperado (TV, prensa escrita, foto)</li>
+<li><strong>Confirmaciones de prensa</strong> — registro de qué periodistas confirmaron asistencia</li>
+<li><strong>Después del acto</strong> — registrar la cobertura resultante y enlazarla a las entradas de cobertura</li>
+</ul>
+<h3 id="agendado-de-entrevistas" tabindex="-1"><a class="heading-anchor" href="#agendado-de-entrevistas" aria-hidden="true">#</a> Agendado de entrevistas</h3>
+<ul>
+<li><strong>Solicitudes de entrevista</strong> — se registran las solicitudes que entran con: periodista, medio, tema, formato pedido, fecha y hora pedidas, a quién se quiere entrevistar</li>
+<li><strong>Preparación</strong> — la plataforma trae a la vista los puntos de mensaje relevantes al tema y la cobertura reciente del medio que pide la entrevista</li>
+<li><strong>Seguimiento</strong> — después de la entrevista se registra el resultado (salió al aire o se publicó, se cayó, pendiente) y se enlaza a la cobertura resultante</li>
+</ul>
+<h2 id="consideraciones-por-jurisdicción" tabindex="-1"><a class="heading-anchor" href="#consideraciones-por-jurisdicción" aria-hidden="true">#</a> Consideraciones por jurisdicción</h2>
+<h3 id="avisos-legales-de-publicidad-política-en-redes-sociales" tabindex="-1"><a class="heading-anchor" href="#avisos-legales-de-publicidad-política-en-redes-sociales" aria-hidden="true">#</a> Avisos legales de publicidad política en redes sociales</h3>
+<p>Según <a href="http://compliance.md" target="_blank" rel="noopener noreferrer">compliance.md</a>, el contenido de cara al público requiere avisos legales específicos por jurisdicción:</p>
+<ul>
+<li><strong>EE. UU. y Puerto Rico</strong> — &quot;Pagado por [nombre del comité]&quot; en toda publicidad política, incluidos los anuncios en redes. Las publicaciones orgánicas también pueden necesitar aviso, según la jurisdicción y el contenido.</li>
+<li><strong>Brasil</strong> — el TSE exige identificar la publicidad política. Las publicaciones en redes durante el período de campaña tienen que cumplir las reglas del TSE.</li>
+<li><strong>Tailandia</strong> — regulaciones de la ECT sobre publicidad política. Las restricciones del período de campaña aplican a las redes sociales.</li>
+<li><strong>India</strong> — el Código Modelo de Conducta de la ECI restringe ciertas comunicaciones durante los períodos electorales. Las publicaciones en redes pueden requerir certificación previa si son pagadas.</li>
+<li><strong>Líbano</strong> — requisitos menos formales, pero la ley electoral restringe ciertas comunicaciones de campaña durante el período de veda.</li>
+</ul>
+<p>La plataforma advierte automáticamente cuando una publicación puede necesitar aviso legal y ayuda a aplicarlo en el formato que corresponde (por ejemplo, texto sobrepuesto en imágenes, primera línea del pie en publicaciones de texto).</p>
+<h3 id="diferencias-en-el-panorama-de-medios" tabindex="-1"><a class="heading-anchor" href="#diferencias-en-el-panorama-de-medios" aria-hidden="true">#</a> Diferencias en el panorama de medios</h3>
+<ul>
+<li><strong>Puerto Rico</strong> — mercado de medios bilingüe (español/inglés). TV y radio locales fuertes. Los medios digitales creciendo. Los medios nacionales de EE. UU. cubren las elecciones de PR de vez en cuando.</li>
+<li><strong>Brasil</strong> — mercado de redes sociales enorme. WhatsApp es el canal dominante (incluso para compartir noticias). La TV sigue siendo influyente. El TSE obliga a dar tiempo gratuito de TV y radio a las campañas (<em>horário eleitoral</em>).</li>
+<li><strong>Tailandia</strong> — LINE es una plataforma mayor junto a Facebook. Influencia del gobierno sobre los medios tradicionales. Los medios independientes en línea pesan. Las leyes de lesa majestad afectan lo que se puede decir en público (<a href="http://compliance.md" target="_blank" rel="noopener noreferrer">compliance.md</a>).</li>
+<li><strong>India</strong> — mercado de medios enorme y fragmentado. WhatsApp y YouTube son los canales digitales dominantes. Los medios en lenguas regionales son críticos. La ECI monitorea las redes sociales durante las elecciones.</li>
+<li><strong>Líbano</strong> — panorama de medios confesional (medios alineados con grupos políticos y religiosos). WhatsApp domina la mensajería. Las redes sociales son el canal principal para llegar a los votantes jóvenes. Hay mercados de medios en árabe, francés e inglés.</li>
+</ul>
+<h2 id="requisitos-técnicos" tabindex="-1"><a class="heading-anchor" href="#requisitos-técnicos" aria-hidden="true">#</a> Requisitos técnicos</h2>
+<h3 id="arquitectura-de-adaptadores-de-redes-sociales" tabindex="-1"><a class="heading-anchor" href="#arquitectura-de-adaptadores-de-redes-sociales" aria-hidden="true">#</a> Arquitectura de adaptadores de redes sociales</h3>
+<p>Según <a href="http://system.md" target="_blank" rel="noopener noreferrer">system.md</a> (632-643):</p>
+<pre><code>Tenant App → Post Scheduler → Platform Adapter → Social Media API
+</code></pre>
+<ul>
+<li>Un adaptador por plataforma</li>
+<li>Interfaz común: <code>publish(post)</code>, <code>schedule(post, time)</code>, <code>getAnalytics(post_id)</code>, <code>getAudience()</code></li>
+<li>Los adaptadores absorben las rarezas de cada plataforma (límites de caracteres, formatos de medios, límites de tasa de la API, autenticación)</li>
+<li>Las plataformas nuevas se añaden escribiendo adaptadores nuevos, sin tocar el núcleo</li>
+<li>Límite de tasa según lo que exija la API de cada plataforma</li>
+<li>Manejo de refresco de token y reautenticación</li>
+</ul>
+<h3 id="renderizado-de-los-perfiles-públicos" tabindex="-1"><a class="heading-anchor" href="#renderizado-de-los-perfiles-públicos" aria-hidden="true">#</a> Renderizado de los perfiles públicos</h3>
+<ul>
+<li><strong>Renderizado en el servidor</strong> — los perfiles públicos se renderizan del lado del servidor, por SEO y por velocidad de carga</li>
+<li><strong>Adaptable a dispositivos móviles</strong> — los perfiles se ven bien en cualquier dispositivo</li>
+<li><strong>Multilingüe</strong> — los perfiles sirven el contenido en el idioma preferido de quien visita (con anulación manual, según <a href="http://geography.md" target="_blank" rel="noopener noreferrer">geography.md</a>)</li>
+<li><strong>Rendimiento</strong> — los perfiles públicos tienen que cargar rápido incluso con conexiones lentas (crítico en los mercados objetivo). Optimizar imágenes, minimizar JavaScript.</li>
+<li><strong>Accesibilidad</strong> — los perfiles públicos cumplen con WCAG 2.1 AA</li>
+</ul>
+<h3 id="manejo-de-recursos-de-medios" tabindex="-1"><a class="heading-anchor" href="#manejo-de-recursos-de-medios" aria-hidden="true">#</a> Manejo de recursos de medios</h3>
+<ul>
+<li><strong>Almacenamiento de imágenes</strong> — las imágenes en alta resolución se guardan en almacenamiento de objetos (<a href="../../design/architecture/system.html#whats-inside-a-tenant">system.md § Qué hay dentro de una organización</a>). Se generan varias resoluciones para distintos usos (miniatura, web, calidad de impresión).</li>
+<li><strong>Recursos de marca</strong> — logo, paleta de colores y tipografías se guardan como recursos de la organización. Disponibles en todas las herramientas de creación de contenido (comunicados, publicaciones en redes, perfiles públicos, plantillas de correo).</li>
+<li><strong>Biblioteca de recursos</strong> — biblioteca buscable de recursos aprobados (fotos, gráficas, clips de video). El equipo navega y usa recursos aprobados al crear contenido.</li>
+<li><strong>Control de derechos de uso</strong> — campo opcional para registrar los derechos de uso de cada recurso (crédito del fotógrafo, tipo de licencia, fecha de vencimiento).</li>
+</ul>
+<h2 id="preguntas-abiertas" tabindex="-1"><a class="heading-anchor" href="#preguntas-abiertas" aria-hidden="true">#</a> Preguntas abiertas</h2>
+<ol>
+<li>
+<p><strong>Publicidad pagada en redes sociales</strong> — ¿debería la plataforma permitir crear y manejar anuncios pagados (Facebook Ads, Google Ads, etc.)? Es un área de producto grande, con requisitos de cumplimiento complejos (leyes de transparencia en publicidad política). Quizá se atienda mejor con herramientas especializadas.</p>
+</li>
+<li>
+<p><strong>Integración con servicios de monitoreo de prensa</strong> — ¿debería la plataforma integrarse con servicios de recortes y monitoreo de medios (Meltwater, Cision, etc.)? Son caros y sirven sobre todo a campañas grandes. Puede que no apliquen al mercado objetivo.</p>
+</li>
+<li>
+<p><strong>Comunicación de crisis</strong> — ¿debería haber un flujo dedicado de comunicación de crisis (plantilla de respuesta rápida, modo de centro de mando para comunicaciones, secuencia de notificación a las partes interesadas)? ¿O alcanza con la infraestructura que ya hay de mensajería + comunicados + redes sociales?</p>
+</li>
+<li>
+<p><strong>Valoración de los medios ganados</strong> — ¿debería el seguimiento de cobertura incluir una estimación del valor de los medios ganados (lo que habría costado esa cobertura en publicidad)? Es común en relaciones públicas, pero metodológicamente cuestionable.</p>
+</li>
+<li>
+<p><strong>El <em>horário eleitoral</em> de Brasil</strong> — el tiempo obligatorio y gratuito de TV y radio para las campañas es un requisito de medios único. ¿Debería la plataforma permitir programar y dar seguimiento al contenido de ese formato, o queda fuera de alcance?</p>
+</li>
+</ol>
+<!-- REVISIT: El acceso por API al contenido político está cada vez más restringido en las plataformas de redes sociales (Meta, Twitter/X). La arquitectura de adaptadores tiene que absorber con elegancia los cambios de acceso, las reducciones de límite de tasa y los cambios de política de plataforma. La alternativa de copiar y pegar es una red de seguridad crítica. -->
+<!-- REVISIT: Los requisitos de aviso legal en redes sociales están cambiando rápido en todas las jurisdicciones. La integración de cumplimiento para redes sociales tiene que ser fácil de actualizar a medida que cambian las leyes. -->
+
+    </article>
+  </main>
+  <div class="toc-rail"><nav class="toc" aria-label="En esta página"><div class="toc-label">En esta página</div><ul><li class="toc-2"><a href="#propósito"># Propósito</a></li><li class="toc-2"><a href="#filosofía-de-prensa-y-medios"># Filosofía de prensa y medios</a></li><li class="toc-2"><a href="#manejo-de-contactos-de-medios"># Manejo de contactos de medios</a></li><li class="toc-3"><a href="#los-contactos-de-medios-son-registros-del-crm"># Los contactos de medios son registros del CRM</a></li><li class="toc-3"><a href="#listas-de-medios"># Listas de medios</a></li><li class="toc-3"><a href="#registro-de-interacciones-con-medios"># Registro de interacciones con medios</a></li><li class="toc-2"><a href="#contenido-de-prensa"># Contenido de prensa</a></li><li class="toc-3"><a href="#comunicados-de-prensa"># Comunicados de prensa</a></li><li class="toc-3"><a href="#avisos-a-medios"># Avisos a medios</a></li><li class="toc-3"><a href="#declaraciones"># Declaraciones</a></li><li class="toc-3"><a href="#kit-de-prensa"># Kit de prensa</a></li><li class="toc-2"><a href="#seguimiento-de-cobertura"># Seguimiento de cobertura</a></li><li class="toc-3"><a href="#registro-de-cobertura"># Registro de cobertura</a></li><li class="toc-3"><a href="#analítica-de-cobertura"># Analítica de cobertura</a></li><li class="toc-2"><a href="#contenido-de-cara-al-público"># Contenido de cara al público</a></li><li class="toc-3"><a href="#perfiles-públicos"># Perfiles públicos</a></li><li class="toc-3"><a href="#manejo-de-redes-sociales"># Manejo de redes sociales</a></li><li class="toc-3"><a href="#manejo-de-respaldos"># Manejo de respaldos</a></li><li class="toc-2"><a href="#manejo-de-voceros"># Manejo de voceros</a></li><li class="toc-3"><a href="#voceros-designados"># Voceros designados</a></li><li class="toc-3"><a href="#puntos-de-mensaje"># Puntos de mensaje</a></li><li class="toc-2"><a href="#eventos-de-prensa"># Eventos de prensa</a></li><li class="toc-3"><a href="#manejo-de-conferencias-de-prensa-y-actos-con-medios"># Manejo de conferencias de prensa y actos con medios</a></li><li class="toc-3"><a href="#agendado-de-entrevistas"># Agendado de entrevistas</a></li><li class="toc-2"><a href="#consideraciones-por-jurisdicción"># Consideraciones por jurisdicción</a></li><li class="toc-3"><a href="#avisos-legales-de-publicidad-política-en-redes-sociales"># Avisos legales de publicidad política en redes sociales</a></li><li class="toc-3"><a href="#diferencias-en-el-panorama-de-medios"># Diferencias en el panorama de medios</a></li><li class="toc-2"><a href="#requisitos-técnicos"># Requisitos técnicos</a></li><li class="toc-3"><a href="#arquitectura-de-adaptadores-de-redes-sociales"># Arquitectura de adaptadores de redes sociales</a></li><li class="toc-3"><a href="#renderizado-de-los-perfiles-públicos"># Renderizado de los perfiles públicos</a></li><li class="toc-3"><a href="#manejo-de-recursos-de-medios"># Manejo de recursos de medios</a></li><li class="toc-2"><a href="#preguntas-abiertas"># Preguntas abiertas</a></li></ul></nav></div>
+</div>
+<script src="../../assets/search.js" defer></script>
+<script src="../../assets/app.js" defer></script>
+</body>
+</html>

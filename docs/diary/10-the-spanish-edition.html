@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en" data-base="../" data-no-results="No results for">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Diary Entry 10: The Spanish Edition · GreenGrass</title>
+<meta name="description" content="Diary Entry 10: The Spanish Edition — GreenGrass spec &amp; design documentation.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%232563eb'/%3E%3Cstop offset='1' stop-color='%2316a34a'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='32' height='32' rx='7' fill='url(%23g)'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="../assets/styles.css">
+</head>
+<body>
+<a class="skip-link" href="#content">Skip to content</a>
+<header class="site-header">
+  <button type="button" class="menu-toggle" aria-label="Toggle navigation" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+  <a class="brand" href="../index.html">
+    <span class="brand-mark" aria-hidden="true"></span>
+    <span class="brand-text"><strong>GreenGrass</strong><small>Spec &amp; Design</small></span>
+  </a>
+  <div class="search">
+    <input type="search" id="search-input" placeholder="Search docs…" autocomplete="off" aria-label="Search documentation">
+    <div id="search-results" class="search-results" hidden></div>
+  </div>
+  <nav class="lang-switch" aria-label="Language"><span class="lang-opt active" aria-current="true">EN</span><a class="lang-opt lang-opt--fallback" href="../es/index.html" hreflang="es" lang="es" title="Esta página no está traducida. Ir a la documentación en español.">ES</a></nav>
+  <button type="button" class="theme-toggle" aria-label="Toggle dark mode" title="Toggle dark mode">
+    <span class="theme-icon" aria-hidden="true"></span>
+  </button>
+</header>
+<div class="layout">
+  <div class="sidebar-backdrop" hidden></div>
+  <aside class="sidebar" aria-label="Documentation navigation">
+    <nav class="nav">
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">Home<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../index.html">GreenGrass</a></li></ul></div>
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">Specifications<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../spec/product.html">Project: GreenGrass</a></li><li><a href="../spec/mvp.html">GreenGrass MVP — Product Plan</a></li><li><a href="../spec/users.html">Users &amp; Roles</a></li><li><a href="../spec/workflows.html">Core Workflows</a></li><li><a href="../spec/geography.html">Target Geography</a></li><li><a href="../spec/security.html">Security &amp; Threat Model</a></li><li><a href="../spec/compliance.html">Compliance &amp; Legal Framework</a></li><li><a href="../spec/fundraising.html">Fundraising &amp; Payment Infrastructure</a></li><li><a href="../spec/integrations.html">External Integrations</a></li><li><a href="../spec/support.html">Tenant Support &amp; Onboarding</a></li><li><a href="../spec/gotv.html">Get Out The Vote &amp; Election Day Operations</a></li><li><a href="../spec/messaging.html">Internal Communications &amp; Notifications</a></li><li><a href="../spec/press.html">Press, Media &amp; Public Communications</a></li><li><a href="../spec/comms-intelligence.html">Comms Intelligence — Post-MVP Roadmap</a></li></ul></div>
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">Architecture<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../design/architecture/system.html">System Architecture</a></li></ul></div>
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">UX Design<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../design/ux/00-overview.html">UX Design Overview</a></li><li><a href="../design/ux/01-information-architecture/navigation-model.html">Navigation Model</a></li><li><a href="../design/ux/01-information-architecture/screen-inventory.html">Screen Inventory</a></li><li><a href="../design/ux/01-information-architecture/persona-views.html">Persona Views</a></li><li><a href="../design/ux/01-information-architecture/url-structure.html">URL Structure</a></li><li><a href="../design/ux/02-global-patterns/pattern-catalog.html">Pattern Catalog</a></li><li><a href="../design/ux/02-global-patterns/offline-sync-patterns.html">Offline &amp; Sync Patterns</a></li><li><a href="../design/ux/02-global-patterns/notification-patterns.html">Notification Patterns</a></li><li><a href="../design/ux/02-global-patterns/search-patterns.html">Search Patterns</a></li><li><a href="../design/ux/02-global-patterns/settings-help-patterns.html">Settings &amp; Help Patterns</a></li><li><a href="../design/ux/02-global-patterns/security-ux-patterns.html">Security UX Patterns</a></li><li><a href="../design/ux/03-design-system/foundations.html">Design System Foundations</a></li><li><a href="../design/ux/03-design-system/theming-strategy.html">Theming Strategy</a></li><li><a href="../design/ux/03-design-system/component-inventory.html">Component Inventory</a></li><li><a href="../design/ux/03-design-system/responsive-strategy.html">Responsive Strategy</a></li><li><a href="../design/ux/04-wireframes/index.html">Wireframes</a></li><li><a href="../design/ux/04-wireframes/navigation-shell/navigation-shell.html">Navigation Shell Wireframes</a></li><li><a href="../design/ux/04-wireframes/dashboards/dashboards.html">Dashboard Wireframes</a></li><li><a href="../design/ux/04-wireframes/field-mode/field-mode.html">Field Mode Wireframes</a></li><li><a href="../design/ux/04-wireframes/onboarding/onboarding.html">Onboarding Wireframes</a></li><li><a href="../design/ux/04-wireframes/messaging/messaging.html">Messaging Wireframes</a></li><li><a href="../design/ux/04-wireframes/supporter/supporter-portal.html">Supporter Portal Wireframes</a></li><li><a href="../design/ux/04-wireframes/alliance/alliance.html">Alliance Wireframes</a></li><li><a href="../design/ux/04-wireframes/crm/crm.html">CRM / People Wireframes</a></li><li><a href="../design/ux/04-wireframes/field-ops/field-ops.html">Field Operations (Admin) Wireframes</a></li><li><a href="../design/ux/04-wireframes/fundraising/fundraising.html">Fundraising Wireframes</a></li><li><a href="../design/ux/04-wireframes/communications/communications.html">Communications Wireframes</a></li><li><a href="../design/ux/04-wireframes/social-media/social-media.html">Social Media Wireframes</a></li><li><a href="../design/ux/04-wireframes/events/events.html">Events Wireframes</a></li><li><a href="../design/ux/04-wireframes/press/press.html">Press &amp; Media Wireframes</a></li><li><a href="../design/ux/04-wireframes/activism/activism.html">Activism &amp; Engagement Campaign Wireframes</a></li><li><a href="../design/ux/04-wireframes/gotv/gotv.html">GOTV Admin Wireframes</a></li><li><a href="../design/ux/04-wireframes/settings/settings.html">Settings &amp; Admin Wireframes</a></li><li><a href="../design/ux/04-wireframes/auth/auth.html">Authentication Wireframes</a></li><li><a href="../design/ux/04-wireframes/profile/profile.html">User Profile Wireframes</a></li><li><a href="../design/ux/04-wireframes/help/help.html">Support &amp; Help Wireframes</a></li><li><a href="../design/ux/04-wireframes/public/public.html">Public Pages Wireframes</a></li><li><a href="../design/ux/04-wireframes/audit.html">Wireframe Audit Report</a></li></ul></div>
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">Decisions<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../decisions/001-platform-architecture.html">ADR-001: Platform Architecture &amp; Deployment</a></li><li><a href="../decisions/002-security-threat-model.html">ADR-002: Security &amp; Threat Model</a></li><li><a href="../decisions/003-identity-access-organization.html">ADR-003: Identity, Access &amp; Organization</a></li><li><a href="../decisions/004-data-model-integrity.html">ADR-004: Data Model &amp; Integrity</a></li><li><a href="../decisions/005-offline-first-sync.html">ADR-005: Offline-First &amp; Sync</a></li><li><a href="../decisions/006-field-operations-gotv.html">ADR-006: Field Operations &amp; GOTV</a></li><li><a href="../decisions/007-fundraising-payments.html">ADR-007: Fundraising &amp; Payments</a></li><li><a href="../decisions/008-communications-messaging.html">ADR-008: Communications &amp; Messaging</a></li><li><a href="../decisions/009-compliance-legal.html">ADR-009: Compliance &amp; Legal Framework</a></li><li><a href="../decisions/010-internationalization-localization.html">ADR-010: Internationalization &amp; Localization</a></li><li><a href="../decisions/011-design-system-ux.html">ADR-011: Design System &amp; UX Foundations</a></li><li><a href="../decisions/012-external-integrations.html">ADR-012: External Integrations</a></li><li><a href="../decisions/013-analytics-ai.html">ADR-013: Analytics &amp; AI</a></li><li><a href="../decisions/014-volunteer-onboarding.html">ADR-014: Volunteer &amp; Onboarding</a></li><li><a href="../decisions/015-product-scope.html">ADR-015: Product Scope Boundaries</a></li><li><a href="../decisions/016-cross-cutting-resolutions.html">ADR-016: Cross-Cutting Resolutions</a></li><li><a href="../decisions/017-sharing-contract-trust-model.html">ADR-017: The Sharing Contract as Universal Trust Primitive</a></li><li><a href="../decisions/ux-decisions.html">UX Decisions — Wireframe Phase</a></li></ul></div>
+<div class="nav-section open"><button type="button" class="nav-section-title" aria-expanded="true">Diary<span class="chev" aria-hidden="true"></span></button><ul><li><a href="./index.html">Project Diary</a></li><li><a href="./01-from-description-to-specification.html">Entry 1: From Description to Specification</a></li><li><a href="./02-the-architecture-session.html">Entry 2: The Architecture Session</a></li><li><a href="./03-information-architecture.html">Entry 3: Information Architecture</a></li><li><a href="./04-design-system-and-wireframes.html">Entry 4: The Design System and Wireframes</a></li><li><a href="./05-the-wireframe-audit.html">Entry 5: The Wireframe Audit</a></li><li><a href="./06-resolving-the-open-questions.html">Entry 6: Resolving the Open Questions</a></li><li><a href="./07-reconciling-the-architecture.html">Entry 7: Reconciling the Architecture</a></li><li><a href="./08-housekeeping.html">Diary Entry 8: Housekeeping</a></li><li><a href="./09-the-documentation-website.html">Diary Entry 9: The Documentation Website</a></li><li><a href="./10-the-spanish-edition.html" aria-current="page" class="active">Diary Entry 10: The Spanish Edition</a></li></ul></div>
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">Project &amp; Internal<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../claude/MEMORY.html">Memory</a></li><li><a href="../claude/SKILLS.html">Skills</a></li><li><a href="../CLAUDE.html">GreenGrass</a></li></ul></div>
+    </nav>
+  </aside>
+  <main id="content" class="content">
+    <nav class="breadcrumb" aria-label="Breadcrumb">Diary</nav>
+    <article class="prose">
+<h1 id="diary-entry-10-the-spanish-edition" tabindex="-1"><a class="heading-anchor" href="#diary-entry-10-the-spanish-edition" aria-hidden="true">#</a> Diary Entry 10: The Spanish Edition</h1>
+<p><strong>Date:</strong> 2026-09-06</p>
+<hr>
+<h2 id="the-task" tabindex="-1"><a class="heading-anchor" href="#the-task" aria-hidden="true">#</a> The Task</h2>
+<p>Two things this time, and they turned out to be tangled together.</p>
+<p>First: the documentation is in English only. That's an odd thing to say about a platform whose alpha market is Puerto Rico and whose whole design premise is multilingual populations in the Global South. The spec describes a system built for people organizing in Spanish, and those people can't read the spec. So: a Spanish edition of the 14 spec documents, and an EN/ES switch in the site header.</p>
+<p>Second: a voice pass over the whole corpus. The writing had accumulated across many sessions, and in places it had drifted into vendor register — &quot;revolutionize political campaigning by streamlining operations and enhancing community engagement.&quot; That sentence was sitting in the executive summary of <code>spec/product.md</code>, which is the first thing anyone reads. It sounds like a deck. The project deserves to sound like people who know what they're doing.</p>
+<h2 id="the-thing-that-had-to-happen-first" tabindex="-1"><a class="heading-anchor" href="#the-thing-that-had-to-happen-first" aria-hidden="true">#</a> The Thing That Had to Happen First</h2>
+<p>Before I could touch a single word, there was a problem.</p>
+<p>Six documents carried about a hundred cross-references written as line numbers — <code>spec/users.md:87</code>, <code>workflows.md:36-39</code>, <code>compliance.md:375-380</code>. They pointed into nearly every spec file, plus the architecture document, two wireframes, and three ADRs.</p>
+<p>A voice pass edits those target files. Every added or removed line silently invalidates a citation. Nothing breaks loudly; the reference just quietly starts pointing at the wrong paragraph, and it keeps doing that forever because nobody re-checks a line number.</p>
+<p>The obvious fix is to be careful — edit around them, preserve line counts. That's not a fix, it's a promise, and it only has to fail once. The real fix is to make the references survive editing at all. So the first move was converting all 108 citations to heading anchors: <code>[users.md § Contact Record](users.md#contact-record)</code>. They now survive edits, they're clickable on the site, and — the part that matters — the build validates every one of them and fails loudly when one goes stale.</p>
+<p>That last property paid for itself within the hour. More on that in a moment.</p>
+<h2 id="the-bug-under-the-floorboards" tabindex="-1"><a class="heading-anchor" href="#the-bug-under-the-floorboards" aria-hidden="true">#</a> The Bug Under the Floorboards</h2>
+<p>To build the Spanish site I had to look closely at the function that turns a heading into a URL anchor. It was doing this:</p>
+<pre><code class="language-js">.replace(/[^\w\s-]/g, '')
+</code></pre>
+<p>In JavaScript, <code>\w</code> without the <code>u</code> flag means exactly <code>[A-Za-z0-9_]</code>. So every accented character isn't transliterated — it's <strong>deleted</strong>. <code>Diseño y localización</code> became <code>diseo-y-localizacin</code>. <code>¿Qué es GreenGrass?</code> became <code>qu-es-greengrass</code>.</p>
+<p>Nothing crashed. Heading IDs and the on-page outline both came from the same function, so they agreed with each other and the page worked. It was just quietly producing mangled, unshareable URLs, and it would have done that for every Spanish heading on the site. The comment above the function claimed to be GitHub-compatible, which had been false for accented headings the whole time.</p>
+<p>The fix is one character class: keep Unicode letters and numbers instead of ASCII word characters. The blast radius on the existing English corpus was exactly one heading — <code>PIP — Partido Independentista Puertorriqueño</code>, which had been silently losing its ñ.</p>
+<p>And then the build shouted at me. Two anchors in ADR-017 pointed at the old accent-stripped slug and no longer resolved. That's the payoff from the citation work, arriving immediately: a change to the slug algorithm reached across the corpus and broke two references, and instead of finding out months later, I found out in seconds. Loud beats silent.</p>
+<h2 id="what-the-voice-pass-actually-found" tabindex="-1"><a class="heading-anchor" href="#what-the-voice-pass-actually-found" aria-hidden="true">#</a> What the Voice Pass Actually Found</h2>
+<p>I expected to rewrite a lot. I rewrote very little — about 45 edits across 85 documents.</p>
+<p>The corpus was in better shape than I thought. Most files needed nothing, and the honest answer for a wireframe document full of screen tables and ASCII mockups is usually &quot;no changes.&quot; The register problem was concentrated exactly where you'd expect: the outward-facing marketing surface. <code>spec/product.md</code>'s executive summary was the worst offender by a distance, and a handful of ADRs had drifted into consultant-speak — &quot;force multiplier,&quot; &quot;maximize donation value,&quot; &quot;optimize for meaningful engagement.&quot;</p>
+<p>The rule I worked to was principles, not persona. Strip the corporate register, name the actor instead of hiding behind the passive, anchor abstractions in something concrete, keep the human stakes visible. But don't inject a first-person essay voice into a specification — a screen inventory should not sound like a LinkedIn post. Headings stayed frozen, because 108 anchors now depend on them.</p>
+<p>One useful side effect: a pass over <code>url-structure.md</code> surfaced a sentence claiming the app has four SvelteKit layout groups, directly above a table listing six. Two other documents say six. That's not a voice problem, it's just wrong, and it had been wrong for months.</p>
+<h2 id="six-translators-one-glossary" tabindex="-1"><a class="heading-anchor" href="#six-translators-one-glossary" aria-hidden="true">#</a> Six Translators, One Glossary</h2>
+<p>The translation was the part with the real coordination risk, and it isn't the prose — it's the vocabulary.</p>
+<p>Fourteen documents translated in parallel means fourteen chances to independently invent a word for <em>tenant</em>, and <em>inquilino</em> is a calque from renting an apartment that tells a reader nothing. So the glossary came first, before any translation: one file, binding, settling the terms that appear everywhere. <em>Tenant</em> → <strong>organización</strong>. <em>Voter file</em> → <strong>padrón electoral</strong>. <em>Canvassing</em> → <strong>trabajo de campo</strong>, never <em>canvasear</em>. Latin American vocabulary throughout — <em>computadora</em>, not <em>ordenador</em>; <em>celular</em>, not <em>móvil</em>; <em>vosotros</em> never.</p>
+<p>It wasn't enough, and it was never going to be. Translators hit terms the glossary didn't anticipate and had to coin them, and coining in parallel produces conflicts. <em>War room</em> came out as both <em>centro de mando</em> and <em>sala de operaciones</em>. <em>Decision gate</em> as both <em>punto de decisión</em> and <em>punto de control</em>. The Deputy role as both <em>Adjunto</em> and <em>Suplente</em> — and those aren't stylistic variants, they mean different things: a permanent second-in-command versus an occasional stand-in. Role names came back in Title Case in some files and sentence case in others, and sentence case is the correct Spanish.</p>
+<p>So there's a reconciliation step, and it isn't optional. I picked a winner for each conflict, normalized every file, and then wrote all of it back into the glossary — including the coined terms that didn't conflict — so the contract is stronger for whoever translates the next document than it was for the people who translated this one.</p>
+<p>The other thing worth recording: one document quotes another verbatim in a blockquote. Two different people translated the quote and its source, so the &quot;verbatim&quot; quote didn't match the thing it was quoting. Now it does, and the rule is in the glossary.</p>
+<p>Also: the translations aren't translations of the English <em>sentences</em>. The instruction was to read the paragraph, understand the claim, and write it in Spanish. Word-for-word rendering of English technical prose produces stiff, calque-ridden Spanish that nobody wants to read. The bluntness had to survive the crossing — &quot;Real-time or useless&quot; is <em>En tiempo real o no sirve</em>, not some softened <em>debe ser oportuno</em>.</p>
+<h2 id="the-switch" tabindex="-1"><a class="heading-anchor" href="#the-switch" aria-hidden="true">#</a> The Switch</h2>
+<p>One design decision worth writing down, because I nearly got it wrong.</p>
+<p>Only the specs are translated — 15 Spanish pages against 85 English ones. So on most pages there is no Spanish counterpart, and the obvious move is to hide the switch there. Show it where it works, hide it where it doesn't.</p>
+<p>That's the wrong call. A control that appears and disappears as you move between <code>spec/</code> and <code>design/</code> is a control nobody ever learns exists. Someone reading a wireframe document has no way to discover there's a Spanish edition at all. Disabling it is no better — a dead button answers &quot;is there Spanish?&quot; with silence.</p>
+<p>So the switch is always there. On an untranslated page it's dimmed, its tooltip says so plainly, and it takes you to the Spanish home page — which opens by telling you exactly what is and isn't translated. It always answers the question, and it always goes somewhere real.</p>
+<p>Small detail I got backwards on the first pass and had to fix: the tooltip on the English page should be in <em>Spanish</em>. The person who needs &quot;Ver esta página en español&quot; is, by definition, the person who reads Spanish.</p>
+<h2 id="what-the-crawl-caught" tabindex="-1"><a class="heading-anchor" href="#what-the-crawl-caught" aria-hidden="true">#</a> What the Crawl Caught</h2>
+<p>Entry 9 ended with the build catching 33 broken links. This time I went further and crawled the generated site itself — every page, every link, every fragment: 8,093 internal links and 300 asset references.</p>
+<p>All of them resolved except two, which pointed at <code>#door-card--canvassing</code> with a doubled hyphen against a heading that slugifies to a single one. Broken since long before this session. The build hadn't caught it because it only validated links <em>between</em> documents and skipped same-page anchors entirely — on the reasonable-sounding theory that there's nothing to rewrite in a bare <code>#fragment</code>. But there's still something to <em>check</em>. A hand-written in-page link is exactly as easy to get wrong as a cross-document one.</p>
+<p>So the build checks those now too. Same lesson as last time, and I suspect I'll keep relearning it: the value isn't in the generator, it's in the assertions the generator can make on every build. A build step doesn't get bored.</p>
+<h2 id="current-state" tabindex="-1"><a class="heading-anchor" href="#current-state" aria-hidden="true">#</a> Current State</h2>
+<table>
+<thead>
+<tr>
+<th>Artifact</th>
+<th>Count</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Spec documents (EN)</td>
+<td>14</td>
+<td>Published</td>
+</tr>
+<tr>
+<td>Spec documents (ES)</td>
+<td>14 + home</td>
+<td>Published</td>
+</tr>
+<tr>
+<td>UX documents</td>
+<td>37</td>
+<td>Published</td>
+</tr>
+<tr>
+<td>ADRs</td>
+<td>17 + UX decisions</td>
+<td>Published</td>
+</tr>
+<tr>
+<td>Architecture</td>
+<td>1</td>
+<td>Published</td>
+</tr>
+<tr>
+<td>Diary entries</td>
+<td>10</td>
+<td>Current</td>
+</tr>
+<tr>
+<td>Rendered site pages</td>
+<td>100</td>
+<td>Building cleanly</td>
+</tr>
+<tr>
+<td>Internal links verified</td>
+<td>8,093</td>
+<td>All resolving</td>
+</tr>
+</tbody>
+</table>
+<p>The Markdown is still the source. The site is still the front door. There are just two doors now.</p>
+<h2 id="next" tabindex="-1"><a class="heading-anchor" href="#next" aria-hidden="true">#</a> Next</h2>
+<p>Implementation, same as entries 8 and 9 said. But the pilot is in Puerto Rico, and the conversations that matter there happen in Spanish. Handing someone a URL was the improvement last time. Handing them a URL they can read in their own language is this one.</p>
+<p>The obvious open question is Portuguese, for Brazil. The generator is ready for it — adding a language is one entry in a table and a directory of files. The glossary is the hard part, and now there's a template for how to build one.</p>
+
+    </article>
+  </main>
+  <div class="toc-rail"><nav class="toc" aria-label="On this page"><div class="toc-label">On this page</div><ul><li class="toc-2"><a href="#the-task"># The Task</a></li><li class="toc-2"><a href="#the-thing-that-had-to-happen-first"># The Thing That Had to Happen First</a></li><li class="toc-2"><a href="#the-bug-under-the-floorboards"># The Bug Under the Floorboards</a></li><li class="toc-2"><a href="#what-the-voice-pass-actually-found"># What the Voice Pass Actually Found</a></li><li class="toc-2"><a href="#six-translators-one-glossary"># Six Translators, One Glossary</a></li><li class="toc-2"><a href="#the-switch"># The Switch</a></li><li class="toc-2"><a href="#what-the-crawl-caught"># What the Crawl Caught</a></li><li class="toc-2"><a href="#current-state"># Current State</a></li><li class="toc-2"><a href="#next"># Next</a></li></ul></nav></div>
+</div>
+<script src="../assets/search.js" defer></script>
+<script src="../assets/app.js" defer></script>
+</body>
+</html>

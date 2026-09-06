@@ -2,7 +2,7 @@
 
 ## Purpose
 
-Press operations are a force multiplier for resource-constrained campaigns — earned media is often the highest-ROI communication channel. These wireframes cover media contact management, press content creation (releases, advisories, statements), media kit management, coverage tracking and analytics, endorsement pipeline, talking points, interview scheduling, and spokesperson configuration.
+Resource-constrained campaigns can't buy reach, so they earn it — press coverage is usually the cheapest way to get in front of a lot of people at once. These wireframes cover media contact management, press content creation (releases, advisories, statements), media kit management, coverage tracking and analytics, endorsement pipeline, talking points, interview scheduling, and spokesperson configuration.
 
 The core UX challenge: press work is relationship-driven and time-sensitive. A press release needs to go out in hours, not days. A statement responding to breaking news needs approval in minutes. The tools must be fast, with approval workflows that accelerate rather than block, and relationship context always visible when composing.
 

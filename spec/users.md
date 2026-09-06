@@ -337,14 +337,14 @@ The product description specifies "explicit login access for everyone, with easy
 
 **Auth methods by priority:**
 
-1. **Passkeys / WebAuthn (primary)** — most secure, phishing-resistant, no shared secrets. Well-suited for mobile devices where biometric unlock (fingerprint, face) makes passkey creation and use seamless. No per-login cost. Eliminates SIM-swapping risk.
+1. **Passkeys / WebAuthn (primary)** — most secure, phishing-resistant, no shared secrets. Well-suited for mobile devices where biometric unlock (fingerprint, face) makes creating and using a passkey a single gesture. No per-login cost. Eliminates SIM-swapping risk.
 2. **Email magic link (secondary)** — fallback for devices or contexts where passkeys aren't supported. Simpler than passwords, no credentials to remember or steal.
 3. **Phone + SMS OTP (tertiary)** — fallback for users without email. Accessible but has per-login cost and SIM-swapping risk. Should be paired with a prompt to set up a passkey.
 4. **Email + password (legacy fallback)** — available but not promoted. For users or contexts where the above methods aren't viable.
 
 **Explicitly excluded:** Social login (Google, Facebook, etc.). Tying political activity to a commercial identity creates surveillance risk and platform dependency. Not appropriate for this context.
 
-**Security note:** For staff and admin roles, passkey should be strongly encouraged or required. For volunteers and supporters, the system should default to passkey setup during onboarding but allow fallback methods without friction.
+**Security note:** For staff and admin roles, passkey should be strongly encouraged or required. For volunteers and supporters, the system should default to passkey setup during onboarding but allow fallback methods without extra steps.
 
 ### Session management
 

@@ -8,7 +8,7 @@
 
 GreenGrass users often participate in multiple organizations — a volunteer may work for a candidate, a party, and an alliance simultaneously. The platform must handle this multi-org reality without creating duplicate identities or leaking data between organizations. At the same time, the role and permissions model must accommodate the wide variety of campaign structures — from a three-person candidate campaign where one person does communications and finance, to a national party with hundreds of staff in scoped geographic regions.
 
-Volunteer approval is another tension point: low-threat campaigns need frictionless onboarding, while campaigns facing infiltration threats need to vet every signup.
+Volunteer approval is another tension point: low-threat campaigns want volunteers signing up and working the same day, while campaigns facing infiltration threats need to vet every signup.
 
 ## Decision
 

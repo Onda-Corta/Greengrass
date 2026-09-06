@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="es" data-base="../../" data-no-results="No hay resultados para">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Proyecto: GreenGrass · GreenGrass</title>
+<meta name="description" content="Proyecto: GreenGrass — Documentación de especificación y diseño de GreenGrass.">
+<link rel="alternate" hreflang="en" href="../../spec/product.html">
+<link rel="alternate" hreflang="es" href="./product.html">
+<link rel="alternate" hreflang="x-default" href="../../spec/product.html">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%232563eb'/%3E%3Cstop offset='1' stop-color='%2316a34a'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='32' height='32' rx='7' fill='url(%23g)'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="../../assets/styles.css">
+</head>
+<body>
+<a class="skip-link" href="#content">Saltar al contenido</a>
+<header class="site-header">
+  <button type="button" class="menu-toggle" aria-label="Alternar navegación" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+  <a class="brand" href="../../es/index.html">
+    <span class="brand-mark" aria-hidden="true"></span>
+    <span class="brand-text"><strong>GreenGrass</strong><small>Especificación y diseño</small></span>
+  </a>
+  <div class="search">
+    <input type="search" id="search-input" placeholder="Buscar en la documentación…" autocomplete="off" aria-label="Buscar en la documentación">
+    <div id="search-results" class="search-results" hidden></div>
+  </div>
+  <nav class="lang-switch" aria-label="Idioma"><a class="lang-opt" href="../../spec/product.html" hreflang="en" lang="en" title="View this page in English">EN</a><span class="lang-opt active" aria-current="true">ES</span></nav>
+  <button type="button" class="theme-toggle" aria-label="Alternar modo oscuro" title="Alternar modo oscuro">
+    <span class="theme-icon" aria-hidden="true"></span>
+  </button>
+</header>
+<div class="layout">
+  <div class="sidebar-backdrop" hidden></div>
+  <aside class="sidebar" aria-label="Navegación de la documentación">
+    <nav class="nav">
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">Inicio<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../index.html">GreenGrass</a></li></ul></div>
+<div class="nav-section open"><button type="button" class="nav-section-title" aria-expanded="true">Especificaciones<span class="chev" aria-hidden="true"></span></button><ul><li><a href="./product.html" aria-current="page" class="active">Proyecto: GreenGrass</a></li><li><a href="./mvp.html">MVP de GreenGrass — plan de producto</a></li><li><a href="./users.html">Usuarios y roles</a></li><li><a href="./workflows.html">Flujos de trabajo principales</a></li><li><a href="./geography.html">Geografía objetivo</a></li><li><a href="./security.html">Seguridad y modelo de amenazas</a></li><li><a href="./compliance.html">Cumplimiento y marco legal</a></li><li><a href="./fundraising.html">Recaudación de fondos e infraestructura de pagos</a></li><li><a href="./integrations.html">Integraciones externas</a></li><li><a href="./support.html">Soporte y puesta en marcha de organizaciones</a></li><li><a href="./gotv.html">GOTV y operaciones del día de elecciones</a></li><li><a href="./messaging.html">Comunicaciones internas y notificaciones</a></li><li><a href="./press.html">Prensa, medios y comunicaciones públicas</a></li><li><a href="./comms-intelligence.html">Inteligencia de comunicaciones — hoja de ruta post-MVP</a></li></ul></div>
+    </nav>
+  </aside>
+  <main id="content" class="content">
+    <nav class="breadcrumb" aria-label="Ruta de navegación">Especificaciones</nav>
+    <article class="prose">
+<h1 id="proyecto-greengrass" tabindex="-1"><a class="heading-anchor" href="#proyecto-greengrass" aria-hidden="true">#</a> Proyecto: GreenGrass</h1>
+<h2 id="una-plataforma-tecnológica-integrada-para-campañas-políticas-de-base-en-el-sur-global" tabindex="-1"><a class="heading-anchor" href="#una-plataforma-tecnológica-integrada-para-campañas-políticas-de-base-en-el-sur-global" aria-hidden="true">#</a> <em>Una plataforma tecnológica integrada para campañas políticas de base en el Sur Global</em></h2>
+<h2 id="por-pablo-defendini-y-giovanni-collazo-22-de-noviembre-de-2024" tabindex="-1"><a class="heading-anchor" href="#por-pablo-defendini-y-giovanni-collazo-22-de-noviembre-de-2024" aria-hidden="true">#</a> <em>por Pablo Defendini y Giovanni Collazo — 22 de noviembre de 2024</em></h2>
+<h1 id="resumen-ejecutivo" tabindex="-1"><a class="heading-anchor" href="#resumen-ejecutivo" aria-hidden="true">#</a> Resumen ejecutivo</h1>
+<p>Los movimientos progresistas y de izquierda funcionan con poco dinero, herramientas viejas y un montón de servicios sueltos que no se hablan entre sí — un problema en todas partes, y más agudo en el Sur Global. <strong>GreenGrass</strong> mete en una sola plataforma lo que una campaña de base del Sur Global realmente tiene que hacer: organizar gente, alcanzarla por los canales que usa y guardar suficientes datos para decidir dónde va el esfuerzo de la próxima semana. Tiene un precio pensado para campañas con muy poco dinero, está construida para los celulares y las conexiones que ya tienen, y está traducida a los idiomas en los que organizan. La idea es reducir la cantidad de herramientas que una campaña tiene que mantener a flote y darle más tiempo de contacto con la gente a la que quiere llegar.</p>
+<hr>
+<p>Las campañas políticas progresistas en países del Sur Global enfrentan retos particulares, entre ellos:</p>
+<ul>
+<li><strong>Acceso limitado a herramientas digitales:</strong> La mayoría de las plataformas de tecnología política están diseñadas para mercados desarrollados, con costos altos y curvas de aprendizaje empinadas que las vuelven inaccesibles para las campañas de base.</li>
+<li><strong>Canales de comunicación fragmentados:</strong> Las campañas suelen depender de una mezcla de herramientas dispares para correo electrónico, redes sociales y SMS, lo que produce mensajes inconsistentes, uso ineficiente de los recursos y costos que se disparan.</li>
+<li><strong>Contacto ineficiente con los votantes:</strong> Muchas campañas no pueden rastrear ni segmentar los datos de votantes de forma efectiva, así que su alcance termina siendo genérico y no conecta con sus constituyentes.</li>
+<li><strong>Restricciones de recursos:</strong> Las campañas suelen operar con presupuestos ajustados, lo que limita cuánto pueden gastar en buen software.</li>
+</ul>
+<p>Existen plataformas como NationBuilder, Action Network y Mobilize, pero están diseñadas para mercados desarrollados y sus precios suelen quedar fuera del alcance de las campañas progresistas del Sur Global.</p>
+<h1 id="proyecto-greengrass-1" tabindex="-1"><a class="heading-anchor" href="#proyecto-greengrass-1" aria-hidden="true">#</a> Proyecto: GreenGrass</h1>
+<p><strong>Proyecto: GreenGrass</strong> es una plataforma tecnológica de campaña todo en uno, hecha a la medida de lo que necesitan las campañas de base en países del Sur Global. La intención es que sea una ventanilla única —con una tarifa fija— para que campañas y organizaciones usen el servicio sin depender de servicios ni costos adicionales (con la excepción de costos variables inevitables como los envíos de SMS, que el proveedor normalmente cobra por volumen).</p>
+<p>El producto combina un gestor de relaciones con constituyentes (CRM), una base de datos de votantes, herramientas de recaudación de fondos, herramientas de comunicación y analítica de datos en un solo paquete que una campaña pequeña puede pagar, de modo que toda la operación corra sobre un sistema en lugar de cinco pegados entre sí.</p>
+<p>GreenGrass está pensada primero para la web y el celular. La aplicación usa mejora progresiva y está optimizada para entornos de bajo ancho de banda y de uso móvil.</p>
+<h2 id="funcionalidades-clave" tabindex="-1"><a class="heading-anchor" href="#funcionalidades-clave" aria-hidden="true">#</a> Funcionalidades clave</h2>
+<h3 id="crm-integrado-y-base-de-datos-de-personas" tabindex="-1"><a class="heading-anchor" href="#crm-integrado-y-base-de-datos-de-personas" aria-hidden="true">#</a> CRM integrado y base de datos de personas</h3>
+<ul>
+<li>Un CRM que consolida los datos de candidatos, personal, voluntarios y simpatizantes, además de la información de votantes.</li>
+<li>Perfiles de votante personalizables, para que las campañas segmenten audiencias por demografía, historial de voto y nivel de participación.</li>
+<li>Una lista única y global que deduplica personas.</li>
+<li>Acceso con cuenta propia para <em>todo el mundo</em>, con preferencias de cuenta fáciles de manejar.</li>
+</ul>
+<h3 id="herramientas-de-recaudación-de-fondos" tabindex="-1"><a class="heading-anchor" href="#herramientas-de-recaudación-de-fondos" aria-hidden="true">#</a> Herramientas de recaudación de fondos</h3>
+<ul>
+<li>Formularios de donación que manejan donaciones recurrentes y de una sola vez, permiten que el donante asuma el cargo por procesamiento de la tarjeta de crédito y proponen montos específicos de donación</li>
+<li>Varios procesadores de pago (y proveedores de pago locales —ATH Móvil, Venmo, Zelle, etc.—), que varían según la región.</li>
+<li>Una forma de registrar y rastrear donaciones en efectivo (sobre todo durante eventos presenciales)</li>
+<li>Soporte tanto para formularios de donación dentro del sistema como para formularios incrustables personalizados, para colocar en servicios y sitios de terceros.</li>
+</ul>
+<h3 id="suite-de-comunicación-multicanal" tabindex="-1"><a class="heading-anchor" href="#suite-de-comunicación-multicanal" aria-hidden="true">#</a> Suite de comunicación multicanal</h3>
+<ul>
+<li>Campañas de correo electrónico: herramientas simples para diseñar, enviar y medir el contacto por correo, incluyendo seguimientos automáticos y analítica.</li>
+<li>Integración de SMS y WhatsApp: soporte incorporado para mensajería por SMS y WhatsApp.</li>
+<li>Integración con redes sociales: programa y maneja publicaciones en varias redes desde un solo lugar, con analítica para medir interacción y rendimiento.</li>
+<li>Perfiles públicos de usuarios, candidatos y organizaciones.</li>
+</ul>
+<h3 id="herramientas-de-contacto-con-votantes" tabindex="-1"><a class="heading-anchor" href="#herramientas-de-contacto-con-votantes" aria-hidden="true">#</a> Herramientas de contacto con votantes</h3>
+<ul>
+<li>Inscripción de votantes: una herramienta para que los equipos de campo hagan jornadas de inscripción, con capacidad sin conexión para zonas de conectividad limitada.</li>
+<li>Trabajo de campo: una herramienta para que los voluntarios toquen puertas, recojan datos y sincronicen la información con el CRM central en tiempo real.</li>
+<li>Sistema de jornadas de llamadas: jornadas de llamadas integradas, con guiones y seguimiento, para que el personal maneje a los voluntarios y sus turnos.</li>
+</ul>
+<h3 id="activismo-y-participación" tabindex="-1"><a class="heading-anchor" href="#activismo-y-participación" aria-hidden="true">#</a> Activismo y participación</h3>
+<ul>
+<li>Campañas de envío de cartas por correo electrónico</li>
+</ul>
+<h3 id="manejo-de-eventos-y-coordinación-de-voluntarios" tabindex="-1"><a class="heading-anchor" href="#manejo-de-eventos-y-coordinación-de-voluntarios" aria-hidden="true">#</a> Manejo de eventos y coordinación de voluntarios</h3>
+<ul>
+<li>Eventos: crea y maneja eventos de campaña, con seguimiento de confirmaciones y recordatorios por correo y SMS.</li>
+<li>Portal de voluntarios: un portal central donde los voluntarios se apuntan a turnos, siguen sus actividades y se comunican con el personal de la campaña. Los turnos y demás trabajo con horario deben tener vista de calendario, para que quien coordina voluntarios pueda ver y repartir la carga.</li>
+<li>Manejo de tareas: un sistema simple de asignación y seguimiento de tareas para coordinar actividades entre equipos.</li>
+</ul>
+<h3 id="analítica-e-informes" tabindex="-1"><a class="heading-anchor" href="#analítica-e-informes" aria-hidden="true">#</a> Analítica e informes</h3>
+<ul>
+<li>Paneles de inteligencia electoral: monitorea métricas clave como el comportamiento de los simpatizantes, la actividad de los voluntarios y el rendimiento de la recaudación.</li>
+<li>Análisis de votantes: herramientas para analizar datos de votantes, identificar tendencias, afinar el discurso y priorizar el esfuerzo de contacto.</li>
+</ul>
+<h2 id="funcionalidades-imprescindibles" tabindex="-1"><a class="heading-anchor" href="#funcionalidades-imprescindibles" aria-hidden="true">#</a> Funcionalidades imprescindibles</h2>
+<ul>
+<li>Accesibilidad y precio: GreenGrass ofrece un modelo de precios por niveles, con un plan freemium y un periodo de prueba sin tarjeta de crédito para campañas más pequeñas, de modo que sea accesible incluso con presupuestos mínimos.</li>
+<li>Soporte de idiomas locales: la plataforma soporta varios idiomas y dialectos locales, para que la gente la use en el idioma que realmente habla.</li>
+<li>Funcionamiento sin conexión: diseñada para zonas con internet poco confiable, las funcionalidades clave de GreenGrass operan sin conexión y sincronizan los datos cuando vuelve la conectividad.</li>
+<li>Diseño primero para celular: casi toda la gente en el mundo se conecta desde un celular, así que la plataforma está optimizada para dispositivos móviles.</li>
+</ul>
+<h2 id="notas-de-arquitectura-general" tabindex="-1"><a class="heading-anchor" href="#notas-de-arquitectura-general" aria-hidden="true">#</a> Notas de arquitectura general</h2>
+<p>GreenGrass se construye con un modelo de código abierto, salvo donde razones de seguridad o técnicas vuelvan inviable ese enfoque. Además usa una arquitectura de organización única. Es decir: una sola instancia de la aplicación y su infraestructura de soporte se dedica a atender a cada cliente (u organización). Cada organización opera aislada, con su propia base de datos, su aplicación y sus recursos, lo que garantiza separación completa de las demás. Este enfoque complica el despliegue y el control de versiones a nivel general, pero los sistemas de organización única priorizan la seguridad, el rendimiento y la personalización para cada usuario u organización.</p>
+<h2 id="plan-de-implementación" tabindex="-1"><a class="heading-anchor" href="#plan-de-implementación" aria-hidden="true">#</a> Plan de implementación</h2>
+<h3 id="fase-0-conseguir-respaldo-3-6-meses" tabindex="-1"><a class="heading-anchor" href="#fase-0-conseguir-respaldo-3-6-meses" aria-hidden="true">#</a> Fase 0: conseguir respaldo (3-6 meses)</h3>
+<ul>
+<li>Definir y afinar la propuesta de producto, el conjunto de funcionalidades, la hoja de ruta inicial y los modelos de negocio propuestos</li>
+<li>Identificar e incorporar de tres a cinco clientes alfa interesados en el producto y dispuestos a comprometerse a pagar por un MVP cuando esté listo.</li>
+</ul>
+<h3 id="fase-1-desarrollo-del-producto-10-meses" tabindex="-1"><a class="heading-anchor" href="#fase-1-desarrollo-del-producto-10-meses" aria-hidden="true">#</a> Fase 1: desarrollo del producto (10 meses)</h3>
+<ul>
+<li>Cerrar el conjunto de funcionalidades y arrancar el desarrollo de los componentes centrales.</li>
+<li>Hacer pruebas de usuario con clientes alfa, campañas seleccionadas y partes interesadas, para recoger retroalimentación y afinar el producto.</li>
+</ul>
+<h3 id="fase-2-programa-piloto-10-meses" tabindex="-1"><a class="heading-anchor" href="#fase-2-programa-piloto-10-meses" aria-hidden="true">#</a> Fase 2: programa piloto (10 meses)</h3>
+<ul>
+<li>Lanzar un programa piloto con clientes alfa y campañas aliadas en tres países objetivo, con capacitación y soporte.</li>
+<li>Recoger datos de uso, de rendimiento y retroalimentación de las personas usuarias para seguir mejorando la plataforma.</li>
+</ul>
+<h3 id="fase-3-lanzamiento-completo-y-escalamiento-6-meses-en-adelante" tabindex="-1"><a class="heading-anchor" href="#fase-3-lanzamiento-completo-y-escalamiento-6-meses-en-adelante" aria-hidden="true">#</a> Fase 3: lanzamiento completo y escalamiento (6 meses en adelante)</h3>
+<ul>
+<li>Desplegar la plataforma a un público más amplio, con foco en países de África, América Latina y el sudeste asiático.</li>
+<li>Montar una red de soporte local, con acuerdos que den capacitación y atención al cliente en las regiones clave.</li>
+</ul>
+<h2 id="posibles-modelos-de-ingresos" tabindex="-1"><a class="heading-anchor" href="#posibles-modelos-de-ingresos" aria-hidden="true">#</a> Posibles modelos de ingresos</h2>
+<ul>
+<li>Plan freemium: acceso básico a las funcionalidades centrales, para que las campañas pequeñas arranquen gratis.</li>
+<li>Niveles de suscripción: planes pagos con funcionalidades adicionales, pensados para campañas medianas y grandes. Explícitamente no es un modelo de precio por usuario ni ligado a ninguna otra medida de escala, aunque igual hay que pensar en alguna estructura de ingresos que acompañe la escala para manejar los costos operativos crecientes.</li>
+<li>Asociaciones: ingresos por acuerdos con ONG, organizaciones de formación política y grupos de incidencia que puedan licenciar la plataforma para sus redes.</li>
+<li>Servicios a medida: desarrollo de integraciones, creación y análisis de consultas de datos, enriquecimiento de datos, generación de informes personalizados.</li>
+</ul>
+
+    </article>
+  </main>
+  <div class="toc-rail"><nav class="toc" aria-label="En esta página"><div class="toc-label">En esta página</div><ul><li class="toc-2"><a href="#una-plataforma-tecnológica-integrada-para-campañas-políticas-de-base-en-el-sur-global"># Una plataforma tecnológica integrada para campañas políticas de base en el Sur Global</a></li><li class="toc-2"><a href="#por-pablo-defendini-y-giovanni-collazo-22-de-noviembre-de-2024"># por Pablo Defendini y Giovanni Collazo — 22 de noviembre de 2024</a></li><li class="toc-2"><a href="#funcionalidades-clave"># Funcionalidades clave</a></li><li class="toc-3"><a href="#crm-integrado-y-base-de-datos-de-personas"># CRM integrado y base de datos de personas</a></li><li class="toc-3"><a href="#herramientas-de-recaudación-de-fondos"># Herramientas de recaudación de fondos</a></li><li class="toc-3"><a href="#suite-de-comunicación-multicanal"># Suite de comunicación multicanal</a></li><li class="toc-3"><a href="#herramientas-de-contacto-con-votantes"># Herramientas de contacto con votantes</a></li><li class="toc-3"><a href="#activismo-y-participación"># Activismo y participación</a></li><li class="toc-3"><a href="#manejo-de-eventos-y-coordinación-de-voluntarios"># Manejo de eventos y coordinación de voluntarios</a></li><li class="toc-3"><a href="#analítica-e-informes"># Analítica e informes</a></li><li class="toc-2"><a href="#funcionalidades-imprescindibles"># Funcionalidades imprescindibles</a></li><li class="toc-2"><a href="#notas-de-arquitectura-general"># Notas de arquitectura general</a></li><li class="toc-2"><a href="#plan-de-implementación"># Plan de implementación</a></li><li class="toc-3"><a href="#fase-0-conseguir-respaldo-3-6-meses"># Fase 0: conseguir respaldo (3-6 meses)</a></li><li class="toc-3"><a href="#fase-1-desarrollo-del-producto-10-meses"># Fase 1: desarrollo del producto (10 meses)</a></li><li class="toc-3"><a href="#fase-2-programa-piloto-10-meses"># Fase 2: programa piloto (10 meses)</a></li><li class="toc-3"><a href="#fase-3-lanzamiento-completo-y-escalamiento-6-meses-en-adelante"># Fase 3: lanzamiento completo y escalamiento (6 meses en adelante)</a></li><li class="toc-2"><a href="#posibles-modelos-de-ingresos"># Posibles modelos de ingresos</a></li></ul></nav></div>
+</div>
+<script src="../../assets/search.js" defer></script>
+<script src="../../assets/app.js" defer></script>
+</body>
+</html>

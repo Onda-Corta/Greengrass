@@ -72,7 +72,7 @@ Per the security spec, data residency is per-country. This means GreenGrass need
 
 **DECIDED:** AI-assisted with human review.
 
-AI generates initial translations, local teams review and correct. Balances speed and cost across a wide language surface (Spanish, Portuguese, Thai, Hindi, Arabic, French, English) while maintaining quality through human oversight.
+AI generates initial translations, local teams review and correct. The AI keeps cost and turnaround manageable across a wide language surface (Spanish, Portuguese, Thai, Hindi, Arabic, French, English); the local reviewers are what keep it accurate.
 
 - AI-generated translations are flagged as drafts until a human reviewer approves them.
 - Critical flows (security prompts, legal text, donation forms, consent language) require human sign-off before going live.

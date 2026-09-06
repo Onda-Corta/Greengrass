@@ -8,7 +8,7 @@
 
 Campaign decision-making depends on timely data. A Field Director on canvassing day needs real-time contact rates and turf coverage. An election day war room needs live turnout dashboards that update within seconds. But a Campaign Manager reviewing last quarter's fundraising performance can wait for a batch rollup. Building real-time analytics for everything is expensive and unnecessary; building only batch analytics fails the highest-stakes moments.
 
-The platform also uses AI for specific operational tasks — generating personalized activism messages and assisting with translation — where the AI augments human capability without replacing human judgment.
+The platform also uses AI for specific operational tasks — generating personalized activism messages and assisting with translation — where the AI drafts and a person reviews before anything goes out.
 
 ## Decision
 

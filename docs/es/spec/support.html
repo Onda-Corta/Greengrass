@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="es" data-base="../../" data-no-results="No hay resultados para">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Soporte y puesta en marcha de organizaciones · GreenGrass</title>
+<meta name="description" content="Soporte y puesta en marcha de organizaciones — Documentación de especificación y diseño de GreenGrass.">
+<link rel="alternate" hreflang="en" href="../../spec/support.html">
+<link rel="alternate" hreflang="es" href="./support.html">
+<link rel="alternate" hreflang="x-default" href="../../spec/support.html">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%232563eb'/%3E%3Cstop offset='1' stop-color='%2316a34a'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='32' height='32' rx='7' fill='url(%23g)'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="../../assets/styles.css">
+</head>
+<body>
+<a class="skip-link" href="#content">Saltar al contenido</a>
+<header class="site-header">
+  <button type="button" class="menu-toggle" aria-label="Alternar navegación" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+  <a class="brand" href="../../es/index.html">
+    <span class="brand-mark" aria-hidden="true"></span>
+    <span class="brand-text"><strong>GreenGrass</strong><small>Especificación y diseño</small></span>
+  </a>
+  <div class="search">
+    <input type="search" id="search-input" placeholder="Buscar en la documentación…" autocomplete="off" aria-label="Buscar en la documentación">
+    <div id="search-results" class="search-results" hidden></div>
+  </div>
+  <nav class="lang-switch" aria-label="Idioma"><a class="lang-opt" href="../../spec/support.html" hreflang="en" lang="en" title="View this page in English">EN</a><span class="lang-opt active" aria-current="true">ES</span></nav>
+  <button type="button" class="theme-toggle" aria-label="Alternar modo oscuro" title="Alternar modo oscuro">
+    <span class="theme-icon" aria-hidden="true"></span>
+  </button>
+</header>
+<div class="layout">
+  <div class="sidebar-backdrop" hidden></div>
+  <aside class="sidebar" aria-label="Navegación de la documentación">
+    <nav class="nav">
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">Inicio<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../index.html">GreenGrass</a></li></ul></div>
+<div class="nav-section open"><button type="button" class="nav-section-title" aria-expanded="true">Especificaciones<span class="chev" aria-hidden="true"></span></button><ul><li><a href="./product.html">Proyecto: GreenGrass</a></li><li><a href="./mvp.html">MVP de GreenGrass — plan de producto</a></li><li><a href="./users.html">Usuarios y roles</a></li><li><a href="./workflows.html">Flujos de trabajo principales</a></li><li><a href="./geography.html">Geografía objetivo</a></li><li><a href="./security.html">Seguridad y modelo de amenazas</a></li><li><a href="./compliance.html">Cumplimiento y marco legal</a></li><li><a href="./fundraising.html">Recaudación de fondos e infraestructura de pagos</a></li><li><a href="./integrations.html">Integraciones externas</a></li><li><a href="./support.html" aria-current="page" class="active">Soporte y puesta en marcha de organizaciones</a></li><li><a href="./gotv.html">GOTV y operaciones del día de elecciones</a></li><li><a href="./messaging.html">Comunicaciones internas y notificaciones</a></li><li><a href="./press.html">Prensa, medios y comunicaciones públicas</a></li><li><a href="./comms-intelligence.html">Inteligencia de comunicaciones — hoja de ruta post-MVP</a></li></ul></div>
+    </nav>
+  </aside>
+  <main id="content" class="content">
+    <nav class="breadcrumb" aria-label="Ruta de navegación">Especificaciones</nav>
+    <article class="prose">
+<h1 id="soporte-y-puesta-en-marcha-de-organizaciones" tabindex="-1"><a class="heading-anchor" href="#soporte-y-puesta-en-marcha-de-organizaciones" aria-hidden="true">#</a> Soporte y puesta en marcha de organizaciones</h1>
+<h2 id="propósito" tabindex="-1"><a class="heading-anchor" href="#propósito" aria-hidden="true">#</a> Propósito</h2>
+<p>Este documento cataloga cada lugar donde GreenGrass tiene que enseñar, guiar o acompañar a una organización a través de un proceso. Salió de un patrón que se repite en todas las demás especificaciones: configurar el procesador de pagos, verificar WhatsApp, conseguir números de SMS, configurar el cumplimiento, manejar llaves BYOK (Bring Your Own Key — la organización controla su propia llave de cifrado), importar el padrón electoral, migrar desde otra plataforma. Las organizaciones necesitan ayuda a cada paso.</p>
+<p>Esto no es la especificación de un sistema de tickets de soporte. Es un inventario de la <strong>superficie de soporte</strong> — cada punto de contacto donde GreenGrass tiene que dar orientación — y la estrategia para entregar esa orientación a escala, en cinco países, siete idiomas y niveles de sofisticación técnica que van de un extremo al otro.</p>
+<h2 id="filosofía-de-soporte" tabindex="-1"><a class="heading-anchor" href="#filosofía-de-soporte" aria-hidden="true">#</a> Filosofía de soporte</h2>
+<ol>
+<li><strong>La plataforma es el canal de soporte principal.</strong> Asistentes guiados, ayuda contextual, valores por defecto inteligentes y barandas de cumplimiento deberían resolver el 80% de las necesidades de soporte. Si una organización necesita ayuda humana de forma habitual para algo, la UX falló.</li>
+<li><strong>La orientación de cumplimiento no es opcional.</strong> Reglas de financiamiento de campaña, obligaciones de protección de datos, requisitos de consentimiento — la organización tiene que entender todo eso. GreenGrass hace del cumplimiento el camino de menor resistencia con plantillas, verificaciones automáticas y advertencias claras.</li>
+<li><strong>Soporte localizado.</strong> Todo recurso de soporte tiene que estar disponible en el idioma configurado por la organización. La traducción asistida por IA con revisión humana (según <a href="http://geography.md" target="_blank" rel="noopener noreferrer">geography.md</a>) aplica al contenido de soporte, no solo a la interfaz.</li>
+<li><strong>Modelo de soporte por niveles.</strong> Autoservicio para lo común, acompañamiento para la configuración compleja, soporte humano para los casos límite. Escalar el soporte sin escalar la plantilla en la misma proporción.</li>
+</ol>
+<h2 id="inventario-de-la-superficie-de-soporte" tabindex="-1"><a class="heading-anchor" href="#inventario-de-la-superficie-de-soporte" aria-hidden="true">#</a> Inventario de la superficie de soporte</h2>
+<h3 id="nivel-1-autoservicio-dentro-de-la-plataforma" tabindex="-1"><a class="heading-anchor" href="#nivel-1-autoservicio-dentro-de-la-plataforma" aria-hidden="true">#</a> Nivel 1: autoservicio dentro de la plataforma</h3>
+<p>Son puntos de orientación construidos directamente en la interfaz de la plataforma. No hace falta intervención humana.</p>
+<h4 id="asistentes-de-puesta-en-marcha" tabindex="-1"><a class="heading-anchor" href="#asistentes-de-puesta-en-marcha" aria-hidden="true">#</a> Asistentes de puesta en marcha</h4>
+<table>
+<thead>
+<tr>
+<th>Asistente</th>
+<th>Se dispara con</th>
+<th>Pasos</th>
+<th>Referencia de especificación</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Configuración de la organización</strong></td>
+<td>Aprovisionamiento de una organización nueva</td>
+<td>Configurar passkey → perfil de la organización (nombre, marca, idiomas) → invitar al equipo → configurar jurisdicción</td>
+<td><a href="./workflows.html#1-puesta-en-marcha-de-una-organizaci%C3%B3n">workflows.md § 1. Incorporación de organizaciones</a></td>
+</tr>
+<tr>
+<td><strong>Procesador de pagos</strong></td>
+<td>Primera visita a la configuración de recaudación</td>
+<td>Elegir jurisdicción → elegir procesador o procesadores de la lista soportada → ingresar credenciales → donación de prueba → verificar</td>
+<td><a href="./fundraising.html#puesta-en-marcha-del-procesador">fundraising.md § Puesta en marcha del procesador</a></td>
+</tr>
+<tr>
+<td><strong>Generación de llave BYOK</strong></td>
+<td>La organización elige BYOK durante la configuración</td>
+<td>Explicar las implicaciones → generar la llave → respaldo seguro (opción Shamir) → confirmar el plan de recuperación → reconocer las consecuencias de perder la llave</td>
+<td><a href="./security.html#gesti%C3%B3n-de-secretos">security.md § Manejo de secretos</a>, <a href="../../design/architecture/system.html#destructive-operation-approval">system.md § Aprobación de operaciones destructivas</a></td>
+</tr>
+<tr>
+<td><strong>Configuración de cumplimiento</strong></td>
+<td>Después de elegir la jurisdicción</td>
+<td>Precargar las plantillas de la jurisdicción → configurar los límites de contribución → fijar las fechas del período de campaña → configurar el texto del aviso legal → fijar la política de retención</td>
+<td><a href="./compliance.html#configuraci%C3%B3n-de-cumplimiento-por-organizaci%C3%B3n">compliance.md § Configuración de cumplimiento por organización</a></td>
+</tr>
+<tr>
+<td><strong>Configuración de WhatsApp Business</strong></td>
+<td>Al activar el canal de WhatsApp</td>
+<td>Recorrido por la verificación de Meta → creación de la cuenta de negocio → registro del número de teléfono → primer envío de plantilla → mensaje de prueba</td>
+<td><a href="./integrations.html#whatsapp-business-api">integrations.md § WhatsApp Business API</a></td>
+</tr>
+<tr>
+<td><strong>Configuración del número de SMS</strong></td>
+<td>Al activar el canal de SMS</td>
+<td>Guía específica del país → tipo de número recomendado → creación de la cuenta con el proveedor → adquisición del número → registro DLT/10DLC (si aplica) → mensaje de prueba</td>
+<td><a href="./integrations.html#provisi%C3%B3n-de-n%C3%BAmeros">integrations.md § Provisión de números</a></td>
+</tr>
+<tr>
+<td><strong>Importación del padrón electoral</strong></td>
+<td>Primera importación de datos</td>
+<td>Subir el archivo → detección de formato → mapeo de columnas con sugerencias → vista previa → vista previa de deduplicación → confirmar → reporte posterior</td>
+<td><a href="./integrations.html#formatos-de-importaci%C3%B3n">integrations.md § Formatos de importación</a></td>
+</tr>
+<tr>
+<td><strong>Incorporación de voluntarios</strong></td>
+<td>Primer inicio de sesión del voluntario</td>
+<td>Configurar passkey o respaldo → designar contacto de confianza → recorrido por la plataforma → capacitación propia de la organización → verificaciones de conocimiento → certificación (si se configuró)</td>
+<td><a href="./workflows.html#2-incorporaci%C3%B3n-de-voluntarios">workflows.md § 2. Incorporación de voluntarios</a></td>
+</tr>
+</tbody>
+</table>
+<h4 id="ayuda-contextual" tabindex="-1"><a class="heading-anchor" href="#ayuda-contextual" aria-hidden="true">#</a> Ayuda contextual</h4>
+<p>Orientación en contexto, que aparece justo donde el usuario la necesita:</p>
+<ul>
+<li><strong>Globos de ayuda y paneles informativos</strong> — todo campo de configuración con implicaciones de cumplimiento trae una explicación de por qué importa y qué exige la jurisdicción</li>
+<li><strong>Valores por defecto inteligentes, con explicación</strong> — cuando la plataforma precarga un valor (por ejemplo, los límites de contribución para una contienda federal estadounidense), muestra por qué y deja que la organización lo cambie</li>
+<li><strong>Avisos de advertencia</strong> — cuando una acción puede violar las restricciones del período de campaña, las reglas sobre contribuciones extranjeras o los requisitos de consentimiento, una advertencia clara explica el riesgo antes de que el usuario siga</li>
+<li><strong>Advertencias de lesa majestad</strong> — advertencias prominentes y persistentes para las organizaciones tailandesas al crear contenido (según <a href="http://compliance.md" target="_blank" rel="noopener noreferrer">compliance.md</a>)</li>
+<li><strong>Orientación para solicitudes de titulares de datos</strong> — cuando llega una solicitud de borrado, el panel de cumplimiento muestra las obligaciones de retención de esa jurisdicción junto a la solicitud</li>
+</ul>
+<h4 id="plantillas-y-contenido-preconstruido" tabindex="-1"><a class="heading-anchor" href="#plantillas-y-contenido-preconstruido" aria-hidden="true">#</a> Plantillas y contenido preconstruido</h4>
+<table>
+<thead>
+<tr>
+<th>Tipo de plantilla</th>
+<th>Qué aporta</th>
+<th>Referencia de especificación</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Plantillas de cumplimiento por jurisdicción</strong></td>
+<td>Límites de contribución precargados, umbrales de divulgación, reglas del período de campaña, restricciones de comunicación, texto del aviso legal</td>
+<td><a href="./compliance.html#configuraci%C3%B3n-de-cumplimiento-por-organizaci%C3%B3n">compliance.md § Configuración de cumplimiento por organización</a></td>
+</tr>
+<tr>
+<td><strong>Plantillas de formulario de inscripción de votantes</strong></td>
+<td>Requisitos de elegibilidad por jurisdicción, campos obligatorios, reglas de documentación, procedimientos de presentación</td>
+<td><a href="./workflows.html#consideraciones-de-cumplimiento">workflows.md § Consideraciones de cumplimiento</a></td>
+</tr>
+<tr>
+<td><strong>Acuerdo de procesamiento de datos (DPA)</strong></td>
+<td>Plantilla estándar de DPA que cubre categorías de datos, propósitos, subprocesadores, medidas de seguridad, notificación de brechas y derechos de auditoría</td>
+<td><a href="./compliance.html#acuerdos-de-tratamiento-de-datos">compliance.md § Acuerdos de procesamiento de datos</a></td>
+</tr>
+<tr>
+<td><strong>Evaluación de impacto en protección de datos (DPIA)</strong></td>
+<td>Plantilla de DPIA para organizaciones que procesan datos políticos sensibles a escala (obligatoria bajo LGPD y PDPA)</td>
+<td><a href="./compliance.html#acuerdos-de-tratamiento-de-datos">compliance.md § Acuerdos de procesamiento de datos</a></td>
+</tr>
+<tr>
+<td><strong>Plantillas de rol</strong></td>
+<td>Configuraciones de rol preconstruidas (Administrador de la organización, Gerente de campaña, Director de finanzas, Director de comunicaciones, Director de campo, Coordinador de voluntarios, Gestor de datos, Voluntario, Líder de equipo, Candidato, Adjunto)</td>
+<td><a href="./users.html#coordinador-de-voluntarios">users.md § Coordinador de voluntarios</a></td>
+</tr>
+<tr>
+<td><strong>Plantillas de correo</strong></td>
+<td>Constructor visual de plantillas de correo, con prioridad al celular y diseños preconstruidos</td>
+<td><a href="./workflows.html#flujo-de-campa%C3%B1a-por-correo">workflows.md § Flujo de campaña por correo</a></td>
+</tr>
+<tr>
+<td><strong>Guiones de trabajo de campo</strong></td>
+<td>Constructor de guiones con lógica de ramificación según las respuestas</td>
+<td><a href="./workflows.html#requisitos-sin-conexi%C3%B3n">workflows.md § Requisitos sin conexión</a></td>
+</tr>
+</tbody>
+</table>
+<h4 id="verificaciones-automáticas-de-cumplimiento" tabindex="-1"><a class="heading-anchor" href="#verificaciones-automáticas-de-cumplimiento" aria-hidden="true">#</a> Verificaciones automáticas de cumplimiento</h4>
+<p>La plataforma monitorea y alerta de forma continua:</p>
+<ul>
+<li><strong>En tiempo real:</strong> verificación de límites de contribución, filtrado de donantes extranjeros, verificación del consentimiento al momento del envío, presencia del aviso legal en las comunicaciones salientes</li>
+<li><strong>Por lotes:</strong> límites de contribución próximos a alcanzarse, alertas de vencimiento de consentimiento, datos obligatorios del donante que faltan, aplicación de las restricciones del período de campaña</li>
+<li><strong>Previas al reporte:</strong> verificaciones de completitud de datos antes de las fechas de radicación, conciliación de los registros de donación</li>
+<li><strong>Panel de cumplimiento:</strong> alertas de contribución, salud de los consentimientos, fechas de reporte con su estado de preparación, solicitudes de titulares de datos con temporizadores de SLA, registro de auditoría con búsqueda</li>
+</ul>
+<h3 id="nivel-2-recursos-de-soporte-guiado" tabindex="-1"><a class="heading-anchor" href="#nivel-2-recursos-de-soporte-guiado" aria-hidden="true">#</a> Nivel 2: recursos de soporte guiado</h3>
+<p>Contenido de autoservicio que la organización consume por su cuenta, pero que GreenGrass tiene que crear y mantener.</p>
+<h4 id="base-de-conocimiento" tabindex="-1"><a class="heading-anchor" href="#base-de-conocimiento" aria-hidden="true">#</a> Base de conocimiento</h4>
+<p>Una base de conocimiento multilingüe con búsqueda, que cubre:</p>
+<p><strong>Primeros pasos</strong></p>
+<ul>
+<li>Panorama de la plataforma y conceptos centrales</li>
+<li>Recorrido de configuración de la organización (con capturas de pantalla y video)</li>
+<li>Guía de configuración de roles del equipo</li>
+<li>Guía de configuración de la incorporación de voluntarios</li>
+<li>Guía para crear la primera campaña</li>
+</ul>
+<p><strong>Guías de integración</strong></p>
+<ul>
+<li>Configuración del procesador de pagos — por procesador y por país</li>
+<li>Configuración de la WhatsApp Business API — guía paso a paso de la verificación de Meta</li>
+<li>Configuración del proveedor de SMS — por país (tipos de número, requisitos de registro, listas de verificación de cumplimiento)</li>
+<li>Configuración del proveedor de telefonía para jornadas de llamadas (fase piloto)</li>
+<li>Configuración de la integración con Zoom</li>
+<li>Configuración de Jitsi autoalojado</li>
+<li>Configuración del dominio de envío de correo (SPF, DKIM, DMARC)</li>
+</ul>
+<p><strong>Manejo de datos</strong></p>
+<ul>
+<li>Guía de importación del padrón electoral — por país (formatos esperados, problemas comunes, consejos de mapeo de campos)</li>
+<li>Guías de migración de plataforma — por plataforma de origen (NationBuilder, NGP VAN, Action Network, CiviCRM)</li>
+<li>Guía de exportación de datos</li>
+<li>Guía de deduplicación y fusión</li>
+<li>Guía de importación de datos de demarcación electoral (GeoJSON, Shapefile, KML)</li>
+</ul>
+<p><strong>Guías de cumplimiento</strong></p>
+<ul>
+<li>Reportes de financiamiento de campaña — por jurisdicción (qué radicar, cuándo, cómo generar los reportes)</li>
+<li>Buenas prácticas de manejo del consentimiento — por jurisdicción</li>
+<li>Manejo de los derechos de los titulares de datos — paso a paso para cada derecho (acceso, corrección, borrado)</li>
+<li>Cumplimiento sobre contribuciones extranjeras — cómo funciona el filtrado de dos niveles y qué hacer con las donaciones marcadas</li>
+<li>Restricciones del período de campaña — por jurisdicción, qué cambia durante el período de campaña</li>
+</ul>
+<p><strong>Guías de seguridad</strong></p>
+<ul>
+<li>Manejo de llaves BYOK — generación, respaldo, rotación, recuperación, y qué pasa si pierdes tu llave</li>
+<li>Configuración y manejo de passkeys</li>
+<li>Configuración de la recuperación por contacto de confianza</li>
+<li>Recomendaciones de seguridad del dispositivo</li>
+<li>Guía para elegir el nivel de seguridad (estándar, reforzado, agresivo)</li>
+<li>Guía de despliegue autoalojado — paso a paso, con plantillas de configuración</li>
+</ul>
+<p><strong>Guías de recaudación</strong></p>
+<ul>
+<li>Creación y optimización de formularios de donación</li>
+<li>Guía de pruebas A/B</li>
+<li>Manejo de donaciones recurrentes</li>
+<li>Registro de donaciones en efectivo y cadena de custodia</li>
+<li>Configuración de recaudación en alianza y de los repartos</li>
+<li>Manejo de promesas de donación</li>
+<li>Procesamiento de reembolsos</li>
+</ul>
+<h4 id="videos-tutoriales" tabindex="-1"><a class="heading-anchor" href="#videos-tutoriales" aria-hidden="true">#</a> Videos tutoriales</h4>
+<p>Videos cortos (menos de 5 minutos) sobre tareas específicas, para quienes aprenden viendo:</p>
+<ul>
+<li>Recorrido por la plataforma (el equivalente en video del recorrido interactivo)</li>
+<li>Cómo crear tu primer formulario de donación</li>
+<li>Cómo importar un padrón electoral</li>
+<li>Cómo montar una campaña de trabajo de campo</li>
+<li>Cómo configurar los ajustes de cumplimiento</li>
+<li>Cómo manejar donaciones recurrentes</li>
+<li>Cómo usar el panel de cumplimiento</li>
+</ul>
+<p>Todos los videos se producen primero en inglés, con subtítulos en todos los idiomas soportados, con traducción asistida por IA y revisión humana.</p>
+<h4 id="módulo-de-capacitación-dentro-de-la-plataforma" tabindex="-1"><a class="heading-anchor" href="#módulo-de-capacitación-dentro-de-la-plataforma" aria-hidden="true">#</a> Módulo de capacitación dentro de la plataforma</h4>
+<p>Ya decidido en <a href="http://workflows.md" target="_blank" rel="noopener noreferrer">workflows.md</a>: un módulo de incorporación completo, con:</p>
+<ul>
+<li>Recorrido por la plataforma (tour interactivo)</li>
+<li>Materiales de capacitación que la organización puede personalizar (discurso de campaña, contexto local, protocolos de seguridad)</li>
+<li>Verificaciones de conocimiento y cuestionarios</li>
+<li>Puertas de certificación antes de acceder a las herramientas de campo</li>
+<li>Materiales de capacitación cacheados para verlos sin conexión</li>
+<li>Configurable por organización (qué módulos son obligatorios y cuáles opcionales)</li>
+</ul>
+<h3 id="nivel-3-acompañamiento-y-soporte-directo" tabindex="-1"><a class="heading-anchor" href="#nivel-3-acompañamiento-y-soporte-directo" aria-hidden="true">#</a> Nivel 3: acompañamiento y soporte directo</h3>
+<p>Para tareas de configuración complejas que el autoservicio no alcanza a resolver del todo.</p>
+<h4 id="acompañamiento-en-la-puesta-en-marcha" tabindex="-1"><a class="heading-anchor" href="#acompañamiento-en-la-puesta-en-marcha" aria-hidden="true">#</a> Acompañamiento en la puesta en marcha</h4>
+<p><strong>DECIDIDO: IA primero, con escalamiento a humanos.</strong> Un acompañante de IA (chat dentro de la plataforma) atiende el primer contacto, guía por las tareas comunes de configuración y responde las preguntas estándar. Disponible 24/7 y multilingüe. Cuando la IA no puede resolver, o la organización lo pide, escala a un especialista humano. Las personas se concentran en los casos límite, las preguntas jurisdiccionales complejas y la configuración de alto riesgo (manejo de llaves BYOK, despliegue autoalojado). Escala sin perder calidad en los problemas difíciles.</p>
+<p><strong>Alcance del acompañamiento — tareas complejas que se benefician de soporte guiado:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Tarea</th>
+<th>Por qué es compleja</th>
+<th>Papel del acompañamiento</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Verificación de WhatsApp Business</td>
+<td>El proceso de Meta es opaco y lento</td>
+<td>Guiar la verificación, resolver rechazos, ayudar con la aprobación de plantillas</td>
+</tr>
+<tr>
+<td>Configuración de llaves BYOK</td>
+<td>Mucho en juego — perder la llave significa perder los datos para siempre</td>
+<td>Acompañar la generación, verificar el respaldo, confirmar el plan de recuperación</td>
+</tr>
+<tr>
+<td>Configuración del procesador de pagos</td>
+<td>Varía por país, hay credenciales que manejar</td>
+<td>Ayudar a conectar con el procesador correcto, verificar las transacciones de prueba</td>
+</tr>
+<tr>
+<td>Configuración de cumplimiento en jurisdicciones nuevas</td>
+<td>Complejidad legal, reglas propias de cada jurisdicción</td>
+<td>Revisar la configuración, señalar posibles problemas, recomendar ajustes</td>
+</tr>
+<tr>
+<td>Migración de plataforma</td>
+<td>Complejidad del mapeo de datos, preservar las relaciones</td>
+<td>Revisar los datos de origen, recomendar el mapeo, verificar la calidad de la importación</td>
+</tr>
+<tr>
+<td>Importación de datos de demarcación electoral</td>
+<td>Hace falta experiencia en GIS</td>
+<td>Ayudar con la conversión de formatos, validar las demarcaciones, resolver problemas de renderizado</td>
+</tr>
+<tr>
+<td>Despliegue autoalojado</td>
+<td>Hace falta experiencia en infraestructura</td>
+<td>Guiar el despliegue, verificar la configuración, resolver problemas de conectividad</td>
+</tr>
+</tbody>
+</table>
+<h4 id="alianzas-de-soporte-local" tabindex="-1"><a class="heading-anchor" href="#alianzas-de-soporte-local" aria-hidden="true">#</a> Alianzas de soporte local</h4>
+<p>Según <a href="http://product.md" target="_blank" rel="noopener noreferrer">product.md</a>: el lanzamiento completo incluye una red de soporte local, con alianzas para dar capacitación y servicio al cliente en las regiones clave.</p>
+<ul>
+<li><strong>Socios de soporte por país</strong> — organizaciones o contratistas locales que entienden el contexto político, cultural y regulatorio</li>
+<li><strong>Soporte en el idioma nativo</strong> — soporte en el idioma de la organización, no traducido</li>
+<li><strong>Capacitación en el terreno</strong> — sesiones presenciales para los despliegues de organizaciones grandes, sobre todo en países con baja alfabetización digital o contextos políticos complejos</li>
+<li><strong>Enlace regulatorio</strong> — los socios locales pueden ayudar a navegar los requisitos regulatorios propios de cada país que la orientación automatizada de la plataforma no alcanza a cubrir</li>
+</ul>
+<h4 id="soporte-para-desarrolladores" tabindex="-1"><a class="heading-anchor" href="#soporte-para-desarrolladores" aria-hidden="true">#</a> Soporte para desarrolladores</h4>
+<p>Para las organizaciones que usan la API pública:</p>
+<ul>
+<li><strong>Referencia de la API</strong> — generada automáticamente desde la especificación OpenAPI, interactiva (Swagger UI o similar)</li>
+<li><strong>Documentación de webhooks</strong> — esquemas de eventos, garantías de entrega, comportamiento de reintento</li>
+<li><strong>SDKs</strong> — JavaScript/TypeScript (de primera clase), Python (comunitario o de primera clase, según la demanda)</li>
+<li><strong>Entorno de pruebas</strong> — entorno de prueba por organización, con datos semilla</li>
+<li><strong>Comunidad de desarrollo</strong> — foro o tablero de discusión donde quienes usan la API comparten integraciones, hacen preguntas y contribuyen</li>
+</ul>
+<h2 id="ciclo-de-vida-del-contenido-de-soporte" tabindex="-1"><a class="heading-anchor" href="#ciclo-de-vida-del-contenido-de-soporte" aria-hidden="true">#</a> Ciclo de vida del contenido de soporte</h2>
+<h3 id="creación" tabindex="-1"><a class="heading-anchor" href="#creación" aria-hidden="true">#</a> Creación</h3>
+<ul>
+<li>Todo el contenido de soporte se escribe primero en inglés</li>
+<li>Traducción asistida por IA a todos los idiomas soportados (según <a href="http://geography.md" target="_blank" rel="noopener noreferrer">geography.md</a>)</li>
+<li>Toda traducción de contenido de soporte pasa por revisión humana antes de publicarse</li>
+<li>El contenido crítico (guías de cumplimiento, guías de seguridad, plantillas legales) requiere revisión legal en cada jurisdicción</li>
+</ul>
+<h3 id="mantenimiento" tabindex="-1"><a class="heading-anchor" href="#mantenimiento" aria-hidden="true">#</a> Mantenimiento</h3>
+<ul>
+<li>El contenido de soporte se versiona junto con las entregas de la plataforma</li>
+<li>Cuando cambia una funcionalidad, el contenido de soporte asociado queda marcado para actualizar</li>
+<li>Las guías de cumplimiento por país se revisan antes de cada ciclo electoral de ese país</li>
+<li>Actualizar una plantilla de jurisdicción dispara la actualización de los artículos de la base de conocimiento</li>
+<li>Avisos de obsolescencia cuando el contenido de soporte queda desactualizado</li>
+</ul>
+<h3 id="prioridad-de-localización" tabindex="-1"><a class="heading-anchor" href="#prioridad-de-localización" aria-hidden="true">#</a> Prioridad de localización</h3>
+<table>
+<thead>
+<tr>
+<th>Prioridad</th>
+<th>Tipo de contenido</th>
+<th>Motivo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>P0 — antes del lanzamiento</td>
+<td>Asistentes de puesta en marcha, configuración de cumplimiento, configuración de seguridad</td>
+<td>Sin esto la organización no puede usar la plataforma</td>
+</tr>
+<tr>
+<td>P1 — al lanzar</td>
+<td>Artículos centrales de la base de conocimiento, guías de integración, guías de cumplimiento</td>
+<td>La organización los necesita en la primera semana</td>
+</tr>
+<tr>
+<td>P2 — dentro de 30 días</td>
+<td>Videos tutoriales, guías avanzadas, guías de migración</td>
+<td>Prescindibles al lanzar, necesarios para crecer</td>
+</tr>
+<tr>
+<td>P3 — continuo</td>
+<td>Contenido aportado por la comunidad, documentación de casos límite</td>
+<td>Se va acumulando con el tiempo</td>
+</tr>
+</tbody>
+</table>
+<h2 id="canales-de-soporte" tabindex="-1"><a class="heading-anchor" href="#canales-de-soporte" aria-hidden="true">#</a> Canales de soporte</h2>
+<h3 id="dentro-de-la-plataforma" tabindex="-1"><a class="heading-anchor" href="#dentro-de-la-plataforma" aria-hidden="true">#</a> Dentro de la plataforma</h3>
+<ul>
+<li><strong>Ayuda contextual</strong> — globos de ayuda, paneles informativos, avisos de advertencia (siempre disponibles)</li>
+<li><strong>Búsqueda en la base de conocimiento</strong> — se busca desde dentro de la plataforma</li>
+<li><strong>Acompañante de IA</strong> — chat dentro de la plataforma para configuración guiada y resolución de problemas (según la decisión sobre acompañamiento)</li>
+<li><strong>Módulo de capacitación</strong> — contenido estructurado de incorporación (según <a href="http://workflows.md" target="_blank" rel="noopener noreferrer">workflows.md</a>)</li>
+</ul>
+<h3 id="fuera-de-la-plataforma" tabindex="-1"><a class="heading-anchor" href="#fuera-de-la-plataforma" aria-hidden="true">#</a> Fuera de la plataforma</h3>
+<ul>
+<li><strong>Sitio de documentación</strong> — base de conocimiento pública (alojada aparte de la plataforma)</li>
+<li><strong>Foro comunitario</strong> — para el soporte entre organizaciones, las peticiones de funcionalidades y el intercambio de buenas prácticas</li>
+<li><strong>Soporte por correo</strong> — para lo que no se resuelve por autoservicio</li>
+<li><strong>Página de estado</strong> — autoalojada (según <a href="http://integrations.md" target="_blank" rel="noopener noreferrer">integrations.md</a>), para ver la salud de la plataforma</li>
+</ul>
+<h3 id="lo-que-greengrass-no-ofrece" tabindex="-1"><a class="heading-anchor" href="#lo-que-greengrass-no-ofrece" aria-hidden="true">#</a> Lo que GreenGrass NO ofrece</h3>
+<ul>
+<li><strong>Asesoría legal</strong> — GreenGrass da orientación y plantillas de cumplimiento, no asesoría legal. Toda guía de cumplimiento incluye un descargo que aclara que la organización debe consultar a un abogado local para su situación concreta.</li>
+<li><strong>Estrategia de campaña</strong> — GreenGrass da herramientas, no consultoría política. La plataforma ayuda a la campaña a ejecutar, no a decidir qué ejecutar.</li>
+<li><strong>Creación de contenido</strong> — más allá de la traducción y la generación de mensajes asistidas por IA (según <a href="http://workflows.md" target="_blank" rel="noopener noreferrer">workflows.md</a>), GreenGrass no crea contenido de campaña para las organizaciones.</li>
+<li><strong>Servicios de captura de datos</strong> — la plataforma da herramientas de importación y orientación, pero cada organización maneja sus propios datos.</li>
+</ul>
+<h2 id="métricas-de-soporte" tabindex="-1"><a class="heading-anchor" href="#métricas-de-soporte" aria-hidden="true">#</a> Métricas de soporte</h2>
+<p>Se miden para evaluar la calidad del soporte e identificar dónde falló la UX:</p>
+<ul>
+<li><strong>Tasa de finalización de asistentes</strong> — porcentaje de organizaciones que completan cada asistente de puesta en marcha sin abandonarlo</li>
+<li><strong>Tiempo hasta la primera donación</strong> — cuánto pasa desde la creación de la organización hasta la primera donación exitosa (indicador indirecto de qué tan bien funciona la puesta en marcha)</li>
+<li><strong>Búsqueda en la base de conocimiento → resolución</strong> — porcentaje de búsquedas que no terminan en un ticket de soporte</li>
+<li><strong>Tasa de escalamiento del acompañante</strong> — porcentaje de conversaciones con el acompañante de IA que escalan a un humano</li>
+<li><strong>Volumen de tickets por categoría</strong> — señala qué áreas necesitan mejor autoservicio</li>
+<li><strong>Volumen de soporte por país</strong> — señala qué jurisdicciones necesitan más orientación localizada</li>
+</ul>
+<h2 id="hoja-de-ruta-de-soporte" tabindex="-1"><a class="heading-anchor" href="#hoja-de-ruta-de-soporte" aria-hidden="true">#</a> Hoja de ruta de soporte</h2>
+<h3 id="alfa-puerto-rico" tabindex="-1"><a class="heading-anchor" href="#alfa-puerto-rico" aria-hidden="true">#</a> Alfa (Puerto Rico)</h3>
+<ul>
+<li>Todos los asistentes de puesta en marcha operativos (inglés + español)</li>
+<li>Artículos centrales de la base de conocimiento (inglés + español)</li>
+<li>Guías de cumplimiento para EE. UU./FEC y para la CEE de Puerto Rico</li>
+<li>Acompañante de IA (según la decisión) — inglés y español</li>
+<li>Canal de soporte por correo</li>
+<li>Guía de configuración del procesador de pagos (Stripe + ATH Móvil)</li>
+<li>Guía de reportes a la FEC</li>
+</ul>
+<h3 id="piloto-1-brasil" tabindex="-1"><a class="heading-anchor" href="#piloto-1-brasil" aria-hidden="true">#</a> Piloto 1 (Brasil)</h3>
+<ul>
+<li>Todo el contenido traducido al portugués</li>
+<li>Guías de cumplimiento específicas de Brasil (LGPD, TSE)</li>
+<li>Guía de configuración de PIX</li>
+<li>Acompañamiento para la configuración de WhatsApp Business (en portugués)</li>
+<li>Guía de reportes al TSE</li>
+<li>Vinculación con socios de soporte local (Brasil)</li>
+</ul>
+<h3 id="piloto-2-tailandia" tabindex="-1"><a class="heading-anchor" href="#piloto-2-tailandia" aria-hidden="true">#</a> Piloto 2 (Tailandia)</h3>
+<ul>
+<li>Todo el contenido traducido al tailandés</li>
+<li>Guías de cumplimiento específicas de Tailandia (PDPA, ECT, lesa majestad)</li>
+<li>Guía de configuración de PromptPay</li>
+<li>Advertencias de contenido por lesa majestad completamente localizadas</li>
+<li>Orientación sobre niveles de seguridad (con énfasis en el nivel agresivo)</li>
+<li>Vinculación con socios de soporte local (Tailandia)</li>
+</ul>
+<h3 id="piloto-3-india" tabindex="-1"><a class="heading-anchor" href="#piloto-3-india" aria-hidden="true">#</a> Piloto 3 (India)</h3>
+<ul>
+<li>Todo el contenido traducido al hindi + inglés (idiomas regionales según la demanda)</li>
+<li>Guías de cumplimiento específicas de India (DPDPA, ECI, FCRA, MCC)</li>
+<li>Guía de configuración de UPI</li>
+<li>Guía de registro DLT para SMS</li>
+<li>Guía de configuración de avisos de consentimiento multilingües</li>
+<li>Vinculación con socios de soporte local (India)</li>
+</ul>
+<h3 id="piloto-4-líbano" tabindex="-1"><a class="heading-anchor" href="#piloto-4-líbano" aria-hidden="true">#</a> Piloto 4 (Líbano)</h3>
+<ul>
+<li>Todo el contenido traducido al árabe + francés + inglés</li>
+<li>Guías de cumplimiento específicas de Líbano (GDPR como base, SCE, manejo de efectivo)</li>
+<li>Guía de registro de OMT</li>
+<li>Guía de cadena de custodia del efectivo</li>
+<li>Guía de despliegue autoalojado (crítica dado el contexto de seguridad libanés)</li>
+<li>Guía de configuración del nivel de seguridad agresivo</li>
+<li>Vinculación con socios de soporte local (Líbano)</li>
+</ul>
+<h2 id="preguntas-abiertas" tabindex="-1"><a class="heading-anchor" href="#preguntas-abiertas" aria-hidden="true">#</a> Preguntas abiertas</h2>
+<ol>
+<li>
+<p><strong>Contenido de soporte aportado por la comunidad</strong> — ¿deberían las organizaciones poder aportar artículos o guías a la base de conocimiento? Puede ser valioso para los consejos específicos de cada jurisdicción que traen las campañas con experiencia, pero necesita moderación.</p>
+</li>
+<li>
+<p><strong>SLA de soporte</strong> — ¿los niveles de pago deberían incluir tiempos de respuesta garantizados? ¿Qué SLA son razonables con la dispersión global de husos horarios?</p>
+</li>
+<li>
+<p><strong>Mercado de certificación de capacitación</strong> — ¿podrían las personas u organizaciones certificadas por GreenGrass ofrecer servicios de capacitación pagos a través de la plataforma? ¿Con un modelo de reparto de ingresos?</p>
+</li>
+<li>
+<p><strong>Contenido de soporte sin conexión</strong> — en entornos con conectividad poco confiable (Líbano, la India rural), ¿la base de conocimiento y los materiales de capacitación deberían poder descargarse para consultarlos sin conexión?</p>
+</li>
+</ol>
+<!-- REVISIT: The AI concierge's capabilities, training data, and escalation rules need detailed specification during implementation. This is both a product design challenge (conversation flows, persona, tone) and a technical challenge (which AI model, how to keep it current with platform changes, how to handle jurisdiction-specific questions). -->
+
+    </article>
+  </main>
+  <div class="toc-rail"><nav class="toc" aria-label="En esta página"><div class="toc-label">En esta página</div><ul><li class="toc-2"><a href="#propósito"># Propósito</a></li><li class="toc-2"><a href="#filosofía-de-soporte"># Filosofía de soporte</a></li><li class="toc-2"><a href="#inventario-de-la-superficie-de-soporte"># Inventario de la superficie de soporte</a></li><li class="toc-3"><a href="#nivel-1-autoservicio-dentro-de-la-plataforma"># Nivel 1: autoservicio dentro de la plataforma</a></li><li class="toc-3"><a href="#nivel-2-recursos-de-soporte-guiado"># Nivel 2: recursos de soporte guiado</a></li><li class="toc-3"><a href="#nivel-3-acompañamiento-y-soporte-directo"># Nivel 3: acompañamiento y soporte directo</a></li><li class="toc-2"><a href="#ciclo-de-vida-del-contenido-de-soporte"># Ciclo de vida del contenido de soporte</a></li><li class="toc-3"><a href="#creación"># Creación</a></li><li class="toc-3"><a href="#mantenimiento"># Mantenimiento</a></li><li class="toc-3"><a href="#prioridad-de-localización"># Prioridad de localización</a></li><li class="toc-2"><a href="#canales-de-soporte"># Canales de soporte</a></li><li class="toc-3"><a href="#dentro-de-la-plataforma"># Dentro de la plataforma</a></li><li class="toc-3"><a href="#fuera-de-la-plataforma"># Fuera de la plataforma</a></li><li class="toc-3"><a href="#lo-que-greengrass-no-ofrece"># Lo que GreenGrass NO ofrece</a></li><li class="toc-2"><a href="#métricas-de-soporte"># Métricas de soporte</a></li><li class="toc-2"><a href="#hoja-de-ruta-de-soporte"># Hoja de ruta de soporte</a></li><li class="toc-3"><a href="#alfa-puerto-rico"># Alfa (Puerto Rico)</a></li><li class="toc-3"><a href="#piloto-1-brasil"># Piloto 1 (Brasil)</a></li><li class="toc-3"><a href="#piloto-2-tailandia"># Piloto 2 (Tailandia)</a></li><li class="toc-3"><a href="#piloto-3-india"># Piloto 3 (India)</a></li><li class="toc-3"><a href="#piloto-4-líbano"># Piloto 4 (Líbano)</a></li><li class="toc-2"><a href="#preguntas-abiertas"># Preguntas abiertas</a></li></ul></nav></div>
+</div>
+<script src="../../assets/search.js" defer></script>
+<script src="../../assets/app.js" defer></script>
+</body>
+</html>

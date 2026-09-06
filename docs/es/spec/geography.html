@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="es" data-base="../../" data-no-results="No hay resultados para">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Geografía objetivo · GreenGrass</title>
+<meta name="description" content="Geografía objetivo — Documentación de especificación y diseño de GreenGrass.">
+<link rel="alternate" hreflang="en" href="../../spec/geography.html">
+<link rel="alternate" hreflang="es" href="./geography.html">
+<link rel="alternate" hreflang="x-default" href="../../spec/geography.html">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%232563eb'/%3E%3Cstop offset='1' stop-color='%2316a34a'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='32' height='32' rx='7' fill='url(%23g)'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="../../assets/styles.css">
+</head>
+<body>
+<a class="skip-link" href="#content">Saltar al contenido</a>
+<header class="site-header">
+  <button type="button" class="menu-toggle" aria-label="Alternar navegación" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+  <a class="brand" href="../../es/index.html">
+    <span class="brand-mark" aria-hidden="true"></span>
+    <span class="brand-text"><strong>GreenGrass</strong><small>Especificación y diseño</small></span>
+  </a>
+  <div class="search">
+    <input type="search" id="search-input" placeholder="Buscar en la documentación…" autocomplete="off" aria-label="Buscar en la documentación">
+    <div id="search-results" class="search-results" hidden></div>
+  </div>
+  <nav class="lang-switch" aria-label="Idioma"><a class="lang-opt" href="../../spec/geography.html" hreflang="en" lang="en" title="View this page in English">EN</a><span class="lang-opt active" aria-current="true">ES</span></nav>
+  <button type="button" class="theme-toggle" aria-label="Alternar modo oscuro" title="Alternar modo oscuro">
+    <span class="theme-icon" aria-hidden="true"></span>
+  </button>
+</header>
+<div class="layout">
+  <div class="sidebar-backdrop" hidden></div>
+  <aside class="sidebar" aria-label="Navegación de la documentación">
+    <nav class="nav">
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">Inicio<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../index.html">GreenGrass</a></li></ul></div>
+<div class="nav-section open"><button type="button" class="nav-section-title" aria-expanded="true">Especificaciones<span class="chev" aria-hidden="true"></span></button><ul><li><a href="./product.html">Proyecto: GreenGrass</a></li><li><a href="./mvp.html">MVP de GreenGrass — plan de producto</a></li><li><a href="./users.html">Usuarios y roles</a></li><li><a href="./workflows.html">Flujos de trabajo principales</a></li><li><a href="./geography.html" aria-current="page" class="active">Geografía objetivo</a></li><li><a href="./security.html">Seguridad y modelo de amenazas</a></li><li><a href="./compliance.html">Cumplimiento y marco legal</a></li><li><a href="./fundraising.html">Recaudación de fondos e infraestructura de pagos</a></li><li><a href="./integrations.html">Integraciones externas</a></li><li><a href="./support.html">Soporte y puesta en marcha de organizaciones</a></li><li><a href="./gotv.html">GOTV y operaciones del día de elecciones</a></li><li><a href="./messaging.html">Comunicaciones internas y notificaciones</a></li><li><a href="./press.html">Prensa, medios y comunicaciones públicas</a></li><li><a href="./comms-intelligence.html">Inteligencia de comunicaciones — hoja de ruta post-MVP</a></li></ul></div>
+    </nav>
+  </aside>
+  <main id="content" class="content">
+    <nav class="breadcrumb" aria-label="Ruta de navegación">Especificaciones</nav>
+    <article class="prose">
+<h1 id="geografía-objetivo" tabindex="-1"><a class="heading-anchor" href="#geografía-objetivo" aria-hidden="true">#</a> Geografía objetivo</h1>
+<h2 id="secuencia-de-despliegue" tabindex="-1"><a class="heading-anchor" href="#secuencia-de-despliegue" aria-hidden="true">#</a> Secuencia de despliegue</h2>
+<table>
+<thead>
+<tr>
+<th>Fase</th>
+<th>País</th>
+<th>Idiomas</th>
+<th>Medios de pago</th>
+<th>Consideraciones clave</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Alfa</td>
+<td>Puerto Rico</td>
+<td>Español, inglés</td>
+<td>ATH Móvil, Venmo, Zelle, tarjetas de crédito (sistema financiero de EE. UU.)</td>
+<td>Base de origen de los fundadores. Territorio de EE. UU. — ley electoral estadounidense, cumplimiento con la FEC. Bilingüe. Buena conectividad, con huecos en zonas rurales. El entorno más pequeño y controlado para la validación inicial.</td>
+</tr>
+<tr>
+<td>Piloto 1</td>
+<td>Brasil</td>
+<td>Portugués</td>
+<td>PIX (dominante), Boleto, tarjetas de crédito</td>
+<td>La democracia más grande de América Latina. Movimientos de base activos. PIX es un sistema de pago instantáneo dominante y exige una integración de primera clase. Buena conectividad urbana, variable en zonas rurales.</td>
+</tr>
+<tr>
+<td>Piloto 2</td>
+<td>Tailandia</td>
+<td>Tailandés</td>
+<td>PromptPay, TrueMoney, transferencia bancaria</td>
+<td>Soporte de escritura tailandesa. Buena penetración móvil. Entorno político complejo, con historial de intervención militar — ahí las funcionalidades de nivel de seguridad se vuelven relevantes.</td>
+</tr>
+<tr>
+<td>Piloto 3</td>
+<td>India</td>
+<td>Hindi, inglés + idiomas regionales</td>
+<td>UPI (dominante), Paytm, PhonePe, transferencia bancaria</td>
+<td>La democracia más grande del mundo. Prueba de estrés de escala masiva. Varios idiomas dentro de un mismo despliegue. Padrones electorales enormes. Panorama regulatorio diverso entre estados. La integración con UPI es indispensable.</td>
+</tr>
+<tr>
+<td>Piloto 4</td>
+<td>Líbano</td>
+<td>Árabe, francés, inglés</td>
+<td>Mucho efectivo, OMT, transferencias bancarias (sistema bancario en crisis)</td>
+<td><strong>Soporte RTL obligatorio.</strong> Tres idiomas por despliegue. El contexto de seguridad más exigente — las funcionalidades del nivel agresivo (modo de coacción, resistencia al análisis de tráfico) son necesidades prácticas. La crisis económica afecta la infraestructura de pagos. Sistema político sectario.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="hoja-de-ruta-de-idiomas" tabindex="-1"><a class="heading-anchor" href="#hoja-de-ruta-de-idiomas" aria-hidden="true">#</a> Hoja de ruta de idiomas</h2>
+<table>
+<thead>
+<tr>
+<th>Fase</th>
+<th>Idiomas añadidos</th>
+<th>Requisitos de escritura</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Alfa</td>
+<td>Español, inglés</td>
+<td>Latina (LTR)</td>
+</tr>
+<tr>
+<td>Piloto 1</td>
+<td>Portugués</td>
+<td>Latina (LTR)</td>
+</tr>
+<tr>
+<td>Piloto 2</td>
+<td>Tailandés</td>
+<td>Escritura tailandesa (LTR)</td>
+</tr>
+<tr>
+<td>Piloto 3</td>
+<td>Hindi + idiomas regionales (por definir)</td>
+<td>Devanagari + otras (LTR)</td>
+</tr>
+<tr>
+<td>Piloto 4</td>
+<td>Árabe, francés</td>
+<td>Escritura árabe (<strong>RTL</strong>), latina (LTR)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Implicación de arquitectura:</strong> el soporte RTL tiene que estar diseñado dentro del framework de interfaz desde el principio, aunque el árabe no haga falta hasta el Piloto 4. Meterle RTL a una interfaz LTR ya madura sale bastante más caro que construir soporte bidireccional desde el día uno.</p>
+<h2 id="hoja-de-ruta-de-integración-de-pagos" tabindex="-1"><a class="heading-anchor" href="#hoja-de-ruta-de-integración-de-pagos" aria-hidden="true">#</a> Hoja de ruta de integración de pagos</h2>
+<table>
+<thead>
+<tr>
+<th>Fase</th>
+<th>Sistemas de pago</th>
+<th>Tipo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Alfa</td>
+<td>Tarjetas de crédito, ATH Móvil, Venmo, Zelle</td>
+<td>Sistema financiero de EE. UU. — APIs bien documentadas, cumplimiento conocido</td>
+</tr>
+<tr>
+<td>Piloto 1</td>
+<td>PIX, Boleto</td>
+<td>Pago instantáneo brasileño (regulado por el Banco Central), boleto bancario</td>
+</tr>
+<tr>
+<td>Piloto 2</td>
+<td>PromptPay, TrueMoney</td>
+<td>Pago instantáneo tailandés, billetera electrónica</td>
+</tr>
+<tr>
+<td>Piloto 3</td>
+<td>UPI, Paytm, PhonePe</td>
+<td>Ecosistema de pago instantáneo indio (escala masiva)</td>
+</tr>
+<tr>
+<td>Piloto 4</td>
+<td>OMT, flujos con mucho efectivo</td>
+<td>Servicio de transferencia de dinero, con énfasis en el seguimiento de donaciones en efectivo por la crisis bancaria</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Implicación de arquitectura:</strong> la capa de pagos tiene que ser modular — una interfaz común con adaptadores de pago por país. El panorama de pagos de cada país es fundamentalmente distinto. El seguimiento de donaciones en efectivo del flujo de recaudación (decidido en <a href="http://workflows.md" target="_blank" rel="noopener noreferrer">workflows.md</a>) se vuelve crítico para Líbano.</p>
+<h2 id="hoja-de-ruta-de-cumplimiento" tabindex="-1"><a class="heading-anchor" href="#hoja-de-ruta-de-cumplimiento" aria-hidden="true">#</a> Hoja de ruta de cumplimiento</h2>
+<table>
+<thead>
+<tr>
+<th>Fase</th>
+<th>Áreas clave de cumplimiento</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Alfa</td>
+<td>Ley electoral de EE. UU. y de la FEC, protección de datos en EE. UU., regulaciones propias de Puerto Rico</td>
+</tr>
+<tr>
+<td>Piloto 1</td>
+<td>Ley electoral brasileña (regulaciones del TSE), LGPD (ley de protección de datos de Brasil)</td>
+</tr>
+<tr>
+<td>Piloto 2</td>
+<td>Ley electoral tailandesa, PDPA (ley de protección de datos de Tailandia), restricciones a la actividad política</td>
+</tr>
+<tr>
+<td>Piloto 3</td>
+<td>Ley electoral india (regulaciones de la ECI), IT Act, variaciones a nivel estatal</td>
+</tr>
+<tr>
+<td>Piloto 4</td>
+<td>Ley electoral libanesa (reglas de representación sectaria), sin ley integral de protección de datos (al 2024), sistema legal multiconfesional complejo</td>
+</tr>
+</tbody>
+</table>
+<!-- REVISIT: Cada país necesita una evaluación de cumplimiento dedicada antes de lanzar el piloto. Debería ser una especificación de cumplimiento aparte por país, desarrollada con asesoría legal local. -->
+<h2 id="implicaciones-de-residencia-de-datos" tabindex="-1"><a class="heading-anchor" href="#implicaciones-de-residencia-de-datos" aria-hidden="true">#</a> Implicaciones de residencia de datos</h2>
+<p>Según la especificación de seguridad, la residencia de datos es por país. Eso significa que GreenGrass necesita presencia de alojamiento en o cerca de:</p>
+<table>
+<thead>
+<tr>
+<th>Fase</th>
+<th>Ubicación de alojamiento necesaria</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Alfa</td>
+<td>EE. UU. (Puerto Rico es territorio estadounidense)</td>
+</tr>
+<tr>
+<td>Piloto 1</td>
+<td>Brasil (la LGPD tiene preferencias de localización de datos)</td>
+</tr>
+<tr>
+<td>Piloto 2</td>
+<td>Tailandia o Singapur (centro regional)</td>
+</tr>
+<tr>
+<td>Piloto 3</td>
+<td>India (requisitos de localización de datos en discusión o implementación)</td>
+</tr>
+<tr>
+<td>Piloto 4</td>
+<td>Líbano o una ubicación europea respetuosa de la privacidad (dada la inestabilidad bancaria y de infraestructura)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="relevancia-del-nivel-de-seguridad-por-país" tabindex="-1"><a class="heading-anchor" href="#relevancia-del-nivel-de-seguridad-por-país" aria-hidden="true">#</a> Relevancia del nivel de seguridad por país</h2>
+<table>
+<thead>
+<tr>
+<th>País</th>
+<th>Nivel de seguridad que se espera que demanden</th>
+<th>Notas</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Puerto Rico</td>
+<td>Estándar</td>
+<td>Entorno político estadounidense estable</td>
+</tr>
+<tr>
+<td>Brasil</td>
+<td>De Estándar a Reforzado</td>
+<td>Polarización política, pero instituciones en general estables</td>
+</tr>
+<tr>
+<td>Tailandia</td>
+<td>De Reforzado a Agresivo</td>
+<td>Historial de golpes militares, represión política, leyes de lesa majestad</td>
+</tr>
+<tr>
+<td>India</td>
+<td>De Reforzado a Agresivo</td>
+<td>Capacidad de vigilancia estatal, presión política sobre la oposición, escala de los datos</td>
+</tr>
+<tr>
+<td>Líbano</td>
+<td>Agresivo</td>
+<td>Tensiones sectarias, múltiples servicios de inteligencia, presiones geopolíticas regionales, consideraciones sobre Hezbolá y actores estatales</td>
+</tr>
+</tbody>
+</table>
+<h2 id="estrategia-de-localización" tabindex="-1"><a class="heading-anchor" href="#estrategia-de-localización" aria-hidden="true">#</a> Estrategia de localización</h2>
+<p><strong>DECIDIDO:</strong> traducción asistida por IA con revisión humana.</p>
+<p>La IA genera las traducciones iniciales; los equipos locales revisan y corrigen. La IA mantiene manejables el costo y los tiempos en una superficie de idiomas amplia (español, portugués, tailandés, hindi, árabe, francés, inglés); lo que mantiene la exactitud son los revisores locales.</p>
+<ul>
+<li>Las traducciones generadas por IA quedan marcadas como borradores hasta que una persona revisora las apruebe.</li>
+<li>Los flujos críticos (avisos de seguridad, texto legal, formularios de donación, textos de consentimiento) necesitan visto bueno humano antes de salir en vivo.</li>
+<li>Los equipos de campaña locales pueden aportar correcciones y mejoras desde una interfaz de revisión dentro de la plataforma.</li>
+<li>La memoria de traducción va acumulando las traducciones revisadas para mejorar la consistencia y bajar la carga de revisión con el tiempo.</li>
+</ul>
+<p><strong>DECIDIDO:</strong> se localizan tanto la interfaz como el contenido.</p>
+<p><strong>Localización de la interfaz:</strong> la interfaz de la plataforma (botones, etiquetas, navegación, mensajes del sistema, estados de error) se traduce a todos los idiomas soportados.</p>
+<p><strong>Localización del contenido:</strong> el contenido de campaña —plantillas de correo, guiones de trabajo de campo, textos de formularios de donación, descripciones de eventos, textos de páginas de acción— se puede escribir en varios idiomas dentro de una misma campaña. La versión correcta se sirve según:</p>
+<ul>
+<li>La preferencia de idioma de quien recibe (guardada en su identidad dentro de la plataforma)</li>
+<li>El idioma configurado por el voluntario (para herramientas de campo, como los guiones de trabajo de campo)</li>
+<li>El idioma del navegador o dispositivo de quien visita (para páginas públicas, con opción de cambiarlo a mano)</li>
+</ul>
+<p><strong>Implicación de arquitectura:</strong> toda superficie de creación de contenido en la plataforma necesita soporte multilingüe — no como agregado tardío, sino como capacidad central. Los objetos de contenido guardan varias variantes de idioma, y el proceso de traducción asistida por IA (decidido arriba) puede ayudar al personal a generar traducciones iniciales de su contenido en los idiomas que la organización tenga configurados.</p>
+<!-- REVISIT: El modelo de datos de la localización de contenido (cómo se guardan, versionan y sirven las variantes de idioma) necesita tratamiento en la especificación de arquitectura. Además, la traducción asistida por IA podría ofrecerse como herramienta dentro de la plataforma para el contenido de campaña, no solo para los textos de la interfaz. -->
+
+    </article>
+  </main>
+  <div class="toc-rail"><nav class="toc" aria-label="En esta página"><div class="toc-label">En esta página</div><ul><li class="toc-2"><a href="#secuencia-de-despliegue"># Secuencia de despliegue</a></li><li class="toc-2"><a href="#hoja-de-ruta-de-idiomas"># Hoja de ruta de idiomas</a></li><li class="toc-2"><a href="#hoja-de-ruta-de-integración-de-pagos"># Hoja de ruta de integración de pagos</a></li><li class="toc-2"><a href="#hoja-de-ruta-de-cumplimiento"># Hoja de ruta de cumplimiento</a></li><li class="toc-2"><a href="#implicaciones-de-residencia-de-datos"># Implicaciones de residencia de datos</a></li><li class="toc-2"><a href="#relevancia-del-nivel-de-seguridad-por-país"># Relevancia del nivel de seguridad por país</a></li><li class="toc-2"><a href="#estrategia-de-localización"># Estrategia de localización</a></li></ul></nav></div>
+</div>
+<script src="../../assets/search.js" defer></script>
+<script src="../../assets/app.js" defer></script>
+</body>
+</html>

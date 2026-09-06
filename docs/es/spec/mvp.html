@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="es" data-base="../../" data-no-results="No hay resultados para">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MVP de GreenGrass — plan de producto · GreenGrass</title>
+<meta name="description" content="MVP de GreenGrass — plan de producto — Documentación de especificación y diseño de GreenGrass.">
+<link rel="alternate" hreflang="en" href="../../spec/mvp.html">
+<link rel="alternate" hreflang="es" href="./mvp.html">
+<link rel="alternate" hreflang="x-default" href="../../spec/mvp.html">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%232563eb'/%3E%3Cstop offset='1' stop-color='%2316a34a'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='32' height='32' rx='7' fill='url(%23g)'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="../../assets/styles.css">
+</head>
+<body>
+<a class="skip-link" href="#content">Saltar al contenido</a>
+<header class="site-header">
+  <button type="button" class="menu-toggle" aria-label="Alternar navegación" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+  <a class="brand" href="../../es/index.html">
+    <span class="brand-mark" aria-hidden="true"></span>
+    <span class="brand-text"><strong>GreenGrass</strong><small>Especificación y diseño</small></span>
+  </a>
+  <div class="search">
+    <input type="search" id="search-input" placeholder="Buscar en la documentación…" autocomplete="off" aria-label="Buscar en la documentación">
+    <div id="search-results" class="search-results" hidden></div>
+  </div>
+  <nav class="lang-switch" aria-label="Idioma"><a class="lang-opt" href="../../spec/mvp.html" hreflang="en" lang="en" title="View this page in English">EN</a><span class="lang-opt active" aria-current="true">ES</span></nav>
+  <button type="button" class="theme-toggle" aria-label="Alternar modo oscuro" title="Alternar modo oscuro">
+    <span class="theme-icon" aria-hidden="true"></span>
+  </button>
+</header>
+<div class="layout">
+  <div class="sidebar-backdrop" hidden></div>
+  <aside class="sidebar" aria-label="Navegación de la documentación">
+    <nav class="nav">
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">Inicio<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../index.html">GreenGrass</a></li></ul></div>
+<div class="nav-section open"><button type="button" class="nav-section-title" aria-expanded="true">Especificaciones<span class="chev" aria-hidden="true"></span></button><ul><li><a href="./product.html">Proyecto: GreenGrass</a></li><li><a href="./mvp.html" aria-current="page" class="active">MVP de GreenGrass — plan de producto</a></li><li><a href="./users.html">Usuarios y roles</a></li><li><a href="./workflows.html">Flujos de trabajo principales</a></li><li><a href="./geography.html">Geografía objetivo</a></li><li><a href="./security.html">Seguridad y modelo de amenazas</a></li><li><a href="./compliance.html">Cumplimiento y marco legal</a></li><li><a href="./fundraising.html">Recaudación de fondos e infraestructura de pagos</a></li><li><a href="./integrations.html">Integraciones externas</a></li><li><a href="./support.html">Soporte y puesta en marcha de organizaciones</a></li><li><a href="./gotv.html">GOTV y operaciones del día de elecciones</a></li><li><a href="./messaging.html">Comunicaciones internas y notificaciones</a></li><li><a href="./press.html">Prensa, medios y comunicaciones públicas</a></li><li><a href="./comms-intelligence.html">Inteligencia de comunicaciones — hoja de ruta post-MVP</a></li></ul></div>
+    </nav>
+  </aside>
+  <main id="content" class="content">
+    <nav class="breadcrumb" aria-label="Ruta de navegación">Especificaciones</nav>
+    <article class="prose">
+<h1 id="mvp-de-greengrass-plan-de-producto" tabindex="-1"><a class="heading-anchor" href="#mvp-de-greengrass-plan-de-producto" aria-hidden="true">#</a> MVP de GreenGrass — plan de producto</h1>
+<p><strong>El fideicomiso de datos de la coalición: probar si organizaciones políticas soberanas van a juntar sus datos bajo las reglas correctas</strong></p>
+<p>Par piloto: MVC y PIP (Puerto Rico)
+Redactado: 2026-08-19</p>
+<hr>
+<h2 id="1-contexto" tabindex="-1"><a class="heading-anchor" href="#1-contexto" aria-hidden="true">#</a> 1. Contexto</h2>
+<p>GreenGrass tiene una especificación completa —12 documentos de especificación, 37 documentos de UX, 236 pantallas en wireframe, 16 ADR— y nada de código. La plataforma completa es un sistema operativo de campaña que le pide a un partido político migrar todo lo que hace a una herramienta nueva.</p>
+<p>Debajo de ese plan hay un solo supuesto estructural que nunca se ha puesto a prueba:</p>
+<blockquote>
+<p><strong>Las organizaciones políticas soberanas van a juntar sus datos entre sí si las reglas son las correctas.</strong></p>
+</blockquote>
+<p>De él dependen todas las funcionalidades de alianza de la especificación. La capa de federación, los contratos de intercambio por recurso, la deduplicación entre organizaciones, las campañas conjuntas, el reparto de la recaudación por consentimiento unánime, la rotación de llaves de la alianza — todo eso presume que partidos que cuidan sus listas como su activo institucional central las van a entregar a un arreglo compartido si la gobernanza es lo bastante buena.</p>
+<p>Si ese supuesto es falso, más o menos un tercio del producto especificado es peso muerto y GreenGrass es un CRM de campaña de organización única compitiendo por funcionalidades con NationBuilder, NGP VAN y Action Network. Ese es un negocio mucho peor.</p>
+<p>Todo lo demás en los 16 ADR es un problema normal de ingeniería. Este no. <strong>Hay que probarlo primero, barato, antes de la construcción cara.</strong></p>
+<p>Este plan define el producto más pequeño capaz de probarlo, y especifica cómo se corre la prueba y qué la refutaría.</p>
+<hr>
+<h2 id="2-el-producto-en-una-frase" tabindex="-1"><a class="heading-anchor" href="#2-el-producto-en-una-frase" aria-hidden="true">#</a> 2. El producto, en una frase</h2>
+<p>Dos o más partidos en una campaña conjunta suben cada uno los datos de contacto que ya tienen. La plataforma les dice a quién conocen entre todos y dónde se solapan — sin que ningún miembro vea los registros no solapados de otro, y sin que nadie se vuelva dueño del resultado fusionado.</p>
+<p>Sin migración. Sin app de campo. Sin modo sin conexión. Los partidos siguen organizando exactamente como hoy y entregan exportaciones al ritmo al que realmente trabajan.</p>
+<h3 id="la-primitiva-de-coordinación-central-la-supresión-mutua" tabindex="-1"><a class="heading-anchor" href="#la-primitiva-de-coordinación-central-la-supresión-mutua" aria-hidden="true">#</a> La primitiva de coordinación central: la supresión mutua</h3>
+<p>El piloto lanza exactamente una funcionalidad operativa, y es angosta a propósito.</p>
+<p>Cada partido manda sus propios mensajes, bajo su propio consentimiento, desde sus propias herramientas. Antes de enviar, le pregunta a la capa compartida: <em>¿algún otro miembro contactó a estas personas en los últimos N días?</em> La respuesta vuelve como una marca de sí/no por registro.</p>
+<p>Es la primitiva correcta por cuatro razones:</p>
+<ol>
+<li><strong>Es el mínimo que entrega valor real.</strong> No mandarle dos veces el mismo mensaje a un simpatizante compartido es el dolor concreto e inmediato del trabajo en coalición.</li>
+<li><strong>Es lo que la arquitectura de índice ciego te da gratis.</strong> Sin maquinaria adicional de divulgación.</li>
+<li><strong>Es más limpio legalmente que el envío conjunto.</strong> Los contactos de cada partido dieron su consentimiento a <em>ese partido</em>, no a una entidad de coalición. Supresión significa que ningún dato de contacto sale de ninguno de los dos partidos y que no se manda ningún mensaje bajo consentimiento ambiguo — lo único que vuelve es una señal de «a este sáltatelo». Ver §9.6.</li>
+<li><strong>Es direccional y revocable.</strong> Nunca se revela nada sobre los registros no solapados, en ninguna dirección.</li>
+</ol>
+<p>La cobertura por geografía y la coordinación de «no vuelvas a tocar esta puerta» son objetivos secundarios, sujetos a datos de dirección que puede que ninguno de los dos partidos tenga (§4.3).</p>
+<hr>
+<h2 id="3-los-partidos" tabindex="-1"><a class="heading-anchor" href="#3-los-partidos" aria-hidden="true">#</a> 3. Los partidos</h2>
+<h3 id="mvc-movimiento-victoria-ciudadana" tabindex="-1"><a class="heading-anchor" href="#mvc-movimiento-victoria-ciudadana" aria-hidden="true">#</a> MVC — Movimiento Victoria Ciudadana</h3>
+<ul>
+<li>Fundado en 2019. Más nuevo, y organizativamente más joven.</li>
+<li><strong>Usa NationBuilder.</strong> Eso es un regalo: la exportación de personas en CSV de NationBuilder tiene nombres de campo estables y documentados — <code>nationbuilder_id</code>, <code>first_name</code>, <code>last_name</code>, <code>email</code>, <code>phone_number</code>, <code>mobile_number</code>, <code>primary_address1</code>, <code>city</code>, <code>state</code>, <code>zip</code>, <code>tags</code>, <code>support_level</code>, <code>is_volunteer</code>, <code>do_not_contact</code>, <code>email_opt_in</code>, <code>mobile_opt_in</code>.</li>
+<li>Las marcas de consentimiento viajan con la exportación, y eso importa — el consentimiento a nivel de persona prevalece sobre la configuración de intercambio a nivel de organización (<a href="./users.html#intercambio-entre-organizaciones-dentro-de-una-alianza">users.md § Intercambio entre organizaciones dentro de alianzas</a>).</li>
+<li><strong><code>support_level</code> y <code>tags</code> son justamente los campos que nunca deben entrar en la vista compartida.</strong> La evaluación que el MVC hace de un votante es su activo más sensible. El primer trabajo del contrato de intercambio es hacer que excluirlos sea obvio y venga por defecto.</li>
+</ul>
+<h3 id="pip-partido-independentista-puertorriqueño" tabindex="-1"><a class="heading-anchor" href="#pip-partido-independentista-puertorriqueño" aria-hidden="true">#</a> PIP — Partido Independentista Puertorriqueño</h3>
+<ul>
+<li>Fundado en 1946. Mucho más viejo, con una estructura profunda de comités municipales en los 78 <em>municipios</em> de la isla.</li>
+<li><strong>Herramientas desconocidas.</strong> Esto es una tarea de descubrimiento, no un supuesto que se pueda tapar. Estados plausibles, más o menos en orden de probabilidad: Excel y Google Sheets fragmentados que mantienen voluntarios; una base de datos local heredada; listas de comités municipales repartidas en pedazos entre distintas personas; registros casi en papel.</li>
+<li>Cuenta con fragmentos heterogéneos, formatos inconsistentes y varios custodios que tienen que decir que sí cada uno por su lado.</li>
+</ul>
+<h3 id="la-asimetría-es-el-hecho-más-importante-de-este-plan" tabindex="-1"><a class="heading-anchor" href="#la-asimetría-es-el-hecho-más-importante-de-este-plan" aria-hidden="true">#</a> La asimetría es el hecho más importante de este plan</h3>
+<p>El MVC llega con datos limpios y estructurados desde una herramienta moderna. El PIP probablemente llegue con fragmentos. Esa asimetría trae tres consecuencias, y cada una necesita una respuesta diseñada:</p>
+<table>
+<thead>
+<tr>
+<th>Consecuencia</th>
+<th>Respuesta</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Las tasas de coincidencia van a caer por la calidad de los datos del lado del PIP, no del lado del MVC</td>
+<td>Presupuesta apoyo práctico de limpieza y preparación de datos para el PIP (§7). No se puede permitir que la fricción con las herramientas se disfrace de falta de voluntad — esa es, de lejos, la forma más probable de que este piloto produzca un falso negativo.</td>
+</tr>
+<tr>
+<td>El PIP va a vivir el producto como más trabajo que el MVC</td>
+<td>Adelanta el esfuerzo del PIP a las Fases 0 y 1, donde una persona hace el trabajo por ellos.</td>
+</tr>
+<tr>
+<td>La vista compartida puede quedar dominada por lo que aporta el MVC, y hacer que el PIP parezca que se aprovecha sin aportar aunque no sea así</td>
+<td><strong>El libro de contribuciones puede ser un pasivo cuando los participantes son desiguales.</strong> Ver el Apéndice, H8.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="punto-de-partida" tabindex="-1"><a class="heading-anchor" href="#punto-de-partida" aria-hidden="true">#</a> Punto de partida</h3>
+<p>En lo operativo, los dos partidos parten de cero: no hay infraestructura de datos compartida, no hay listas juntadas, no hay nada que heredar. El piloto se construye sobre una hoja en blanco.</p>
+<p><strong>Los ciclos anteriores quedan fuera de alcance.</strong> Los arreglos pasados entre estos partidos no son objeto de investigación de este proyecto y no se sacan a relucir — ni en entrevistas, ni en materiales, ni en el encuadre del piloto. Todo el descubrimiento es prospectivo: qué haría falta para juntar datos de aquí en adelante (§6.4).</p>
+<p>Una consecuencia de planificación que vale anotar internamente: como no hay una relación heredada de intercambio de datos, no hay que diseñar alrededor de un factor de confusión por cooperación previa. MVC/PIP es una prueba limpia del supuesto.</p>
+<hr>
+<h2 id="4-alcance" tabindex="-1"><a class="heading-anchor" href="#4-alcance" aria-hidden="true">#</a> 4. Alcance</h2>
+<h3 id="41-qué-se-construye" tabindex="-1"><a class="heading-anchor" href="#41-qué-se-construye" aria-hidden="true">#</a> 4.1 Qué se construye</h3>
+<p>Unas 12 pantallas. Esta construcción sirve al experimento, no al mercado — es a propósito más delgada de lo que sería una v1 general del producto de coalición.</p>
+<table>
+<thead>
+<tr>
+<th>Área</th>
+<th>Pantallas</th>
+<th>Reutilización</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Autenticación</td>
+<td>Inicio de sesión con passkey + alternativas</td>
+<td>AUTH-001–007 tal como están dibujadas</td>
+</tr>
+<tr>
+<td>Puesta en marcha</td>
+<td>Configuración de la organización (recortada), ceremonia BYOK (Bring Your Own Key — la organización controla su propia llave de cifrado)</td>
+<td>WIZ-001, WIZ-003</td>
+</tr>
+<tr>
+<td>Importación</td>
+<td>Carga → mapeo de columnas → vista previa → confirmación; historial de importaciones</td>
+<td>CRM-008–012</td>
+</tr>
+<tr>
+<td>Contrato de intercambio</td>
+<td>A nivel de campo, denegación por defecto, por miembro</td>
+<td>ALLY-005, la pieza central</td>
+</tr>
+<tr>
+<td>Miembros</td>
+<td>Lista de miembros, solicitud de afiliación + aprobación</td>
+<td>ALLY-002–004</td>
+</tr>
+<tr>
+<td>Universo compartido</td>
+<td>Resumen de solapamiento, lista de supresión, exportación</td>
+<td>Nuevo</td>
+</tr>
+<tr>
+<td>Auditoría</td>
+<td>Registro de auditoría multilateral, visible para todos los miembros</td>
+<td>SET-018, extendido</td>
+</tr>
+<tr>
+<td>Libro de contribuciones</td>
+<td>Qué puso y qué sacó cada miembro</td>
+<td>Nuevo — y bajo prueba, ver H8</td>
+</tr>
+</tbody>
+</table>
+<p>Genuinamente nuevo y sin wireframe: el flujo de consulta y respuesta de supresión, el libro de contribuciones y el flujo de salida y disolución.</p>
+<h3 id="42-qué-se-recorta" tabindex="-1"><a class="heading-anchor" href="#42-qué-se-recorta" aria-hidden="true">#</a> 4.2 Qué se recorta</h3>
+<p>Toda la recaudación de fondos (20 pantallas), comunicaciones, eventos, prensa, activismo, redes sociales, la centro de mando de GOTV (Get Out The Vote — movilización del voto) (21), el modo de campo y las operaciones de campo (29 pantallas, y de lejos la ingeniería más difícil — SQLite sin conexión, sincronización, resolución de conflictos, teselas de mapa), el portal de simpatizantes, la mensajería, la ayuda y la capacitación, casi todos los paneles, casi todos los ajustes.</p>
+<p>Solo Puerto Rico. Español e inglés. La corrección de RTL se mantiene en el CSS según el ADR-010, pero no se lanza el árabe.</p>
+<h3 id="43-la-bifurcación-según-la-forma-de-los-datos-de-entrada" tabindex="-1"><a class="heading-anchor" href="#43-la-bifurcación-según-la-forma-de-los-datos-de-entrada" aria-hidden="true">#</a> 4.3 La bifurcación según la forma de los datos de entrada</h3>
+<p>El piso esperado de ambos partidos es un CSV de correos y teléfonos. Planifica para las dos ramas, porque producen productos distintos:</p>
+<p><strong>Rama A — solo identificadores (correo + teléfono).</strong> El cruce se vuelve <em>más fácil</em>: coincidencia exacta sobre identificadores normalizados, sin ningún problema de nombres aproximados. Pero la cobertura por geografía es imposible, y el producto se reduce a detección de solapamiento más supresión mutua. <strong>Aun así, esto es el piloto entero</strong> — prueba el supuesto por completo. Construye para esta rama.</p>
+<p><strong>Rama B — identificadores más dirección y geografía.</strong> Habilita mapas de cobertura, análisis de brechas y coordinación de territorios. Trátala como objetivo secundario. Requiere geocodificación al menos a nivel de <em>municipio</em>; a nivel de precinto sería mejor, pero es poco probable que los datos den para eso.</p>
+<p>No dejes que el atractivo de la Rama B retrase la Rama A. El supuesto bajo prueba no necesita un mapa.</p>
+<h3 id="44-lo-que-se-conserva-aunque-parezca-recortable" tabindex="-1"><a class="heading-anchor" href="#44-lo-que-se-conserva-aunque-parezca-recortable" aria-hidden="true">#</a> 4.4 Lo que se conserva aunque parezca recortable</h3>
+<ul>
+<li><strong>BYOK desde el día uno</strong> (ADR-002). No puedes meterle cifrado a un fideicomiso de datos después de que los miembros ya subieron sus archivos, y «la plataforma misma no puede leer tu lista» es la mayor parte de por qué un socio desconfiado dice que sí.</li>
+<li><strong>El registro de auditoría inmutable desde el día uno</strong> (ADR-004). Es el producto, no la plomería.</li>
+<li>Se conserva el event sourcing (el estado se deriva de un registro inmutable de eventos) para procedencia y auditoría, porque de todos modos es la forma correcta para eso. El cliente sin conexión no se construye en absoluto — al ser solo ingesta no hay dispositivo de campo, así que la justificación de sincronización del ADR-005 queda dormida.</li>
+<li><strong>Un esquema general de contrato de intercambio, aunque el piloto solo necesite el caso de la alianza</strong> (ADR-017). El contrato del §4.1 es la primitiva de confianza de la plataforma en cada frontera —alianza, partido, candidatura, campaña y compartimento—, no una funcionalidad de alianza. La Fase 2 es donde esa forma se decide en la práctica. Mantén la referencia a la parte como polimórfica y los términos generales; mantén la interfaz exactamente tan angosta como especifica este plan. Esquema general, interfaz angosta. El mismo argumento que con BYOK arriba: no puedes meterle generalidad a un contrato después de lanzarlo como funcionalidad de alianza.</li>
+</ul>
+<hr>
+<h2 id="5-el-supuesto-descompuesto" tabindex="-1"><a class="heading-anchor" href="#5-el-supuesto-descompuesto" aria-hidden="true">#</a> 5. El supuesto, descompuesto</h2>
+<p>«Van a juntar sus datos bajo las reglas correctas» es demasiado grueso para probarlo. Se descompone en siete afirmaciones falsables, ordenadas de modo que las baratas condicionen a las caras.</p>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Afirmación</th>
+<th>Se mide con</th>
+<th>Umbral de aprobación</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>A1</strong></td>
+<td>Suben algo — en la práctica, no en principio</td>
+<td>Archivo recibido</td>
+<td>Ambos partidos entregan dentro de los 30 días de firmado el acuerdo</td>
+</tr>
+<tr>
+<td><strong>A2</strong></td>
+<td>Suben algo real, no una muestra simbólica</td>
+<td>Cantidad de filas contra el tamaño declarado de la lista</td>
+<td>Cada archivo ≥50% del total declarado</td>
+</tr>
+<tr>
+<td><strong>A3</strong></td>
+<td>Los datos coinciden a una tasa útil</td>
+<td>Coincidencia determinista sobre correo y teléfono normalizados</td>
+<td>Solapamiento en la banda de 5–60%</td>
+</tr>
+<tr>
+<td><strong>A4</strong></td>
+<td>Ver el solapamiento no los espanta</td>
+<td>Retiro o endurecimiento del contrato después del informe</td>
+<td>Ninguno se retira dentro de las 2 semanas</td>
+</tr>
+<tr>
+<td><strong>A5</strong></td>
+<td>Actúan sobre la vista compartida</td>
+<td>Decisiones operativas documentadas que cambiaron</td>
+<td>≥1 por partido, con evidencia</td>
+</tr>
+<tr>
+<td><strong>A6</strong></td>
+<td>Lo vuelven a hacer</td>
+<td>Cargas repetidas voluntarias</td>
+<td>≥2 por partido después de la primera</td>
+</tr>
+<tr>
+<td><strong>A7</strong></td>
+<td><strong>Las reglas son lo que lo hizo posible</strong></td>
+<td>Entrevistas ciegas por separado, antes y después</td>
+<td>Los dos dicen que <em>no</em> le habrían mandado el archivo directamente al otro partido</td>
+</tr>
+</tbody>
+</table>
+<p><strong>A7 es la tesis.</strong> A1–A6 pueden pasar todas mientras A7 falla, y si A7 falla el producto es una utilidad de deduplicación y no infraestructura de confianza. Esa es otra empresa, más chica — no necesariamente fatal, pero hay que saberlo antes de financiar la construcción completa.</p>
+<p>Sobre la banda de A3: por debajo de 5%, la deduplicación no justifica el costo de integración. Por encima de 60%, los dos partidos tienen en la práctica una sola lista, y el problema de coordinación es otro distinto del especificado. Los dos resultados son informativos; ninguno es aprobación.</p>
+<hr>
+<h2 id="6-instrumentación" tabindex="-1"><a class="heading-anchor" href="#6-instrumentación" aria-hidden="true">#</a> 6. Instrumentación</h2>
+<h3 id="61-señales-de-conducta-la-confianza-se-mide-por-lo-que-hacen-no-por-lo-que-dicen-en-una-encuesta" tabindex="-1"><a class="heading-anchor" href="#61-señales-de-conducta-la-confianza-se-mide-por-lo-que-hacen-no-por-lo-que-dicen-en-una-encuesta" aria-hidden="true">#</a> 6.1 Señales de conducta — la confianza se mide por lo que hacen, no por lo que dicen en una encuesta</h3>
+<p>En las entrevistas la gente exagera su disposición a compartir. Registra la conducta en su lugar:</p>
+<ul>
+<li><strong>Tiempo desde el acuerdo hasta la carga.</strong> La vacilación es dato.</li>
+<li><strong>Qué se guardan.</strong> Campos excluidos del contrato de intercambio. Columnas eliminadas antes de subir el archivo — en el caso del MVC eso se mide directamente comparando el esquema del archivo entregado contra el esquema de exportación por defecto de NationBuilder. Las eliminaciones son visibles y significan algo.</li>
+<li><strong>Cantidad de filas contra el tamaño declarado de la lista.</strong></li>
+<li><strong>Si alguien abre alguna vez el registro de auditoría.</strong> Si nadie lo lee, la maquinaria de confianza puede ser decorativa — confiaron en la contraparte, no en el sistema. Se sondea directamente en A7.</li>
+<li><strong>Si el contrato de intercambio cambia después de que llegan los resultados.</strong> Aflojarlo indica confianza ganada. Apretarlo indica un susto, y ese susto hay que perseguirlo en la entrevista.</li>
+<li><strong>Quién obtiene acceso.</strong> ¿Una persona por organización, o un equipo? Delegar el acceso es una conducta de confianza.</li>
+</ul>
+<h3 id="62-entrevistas" tabindex="-1"><a class="heading-anchor" href="#62-entrevistas" aria-hidden="true">#</a> 6.2 Entrevistas</h3>
+<p>Estructuradas, <strong>por separado, nunca en conjunto.</strong> En una sesión conjunta ninguno de los dos partidos va a decir lo incómodo. Tres momentos: antes de que se mueva ningún archivo, después del informe de solapamiento y después de que cierre la ventana del piloto.</p>
+<h3 id="63-el-contrafactual-registrado-antes-de-la-exposición" tabindex="-1"><a class="heading-anchor" href="#63-el-contrafactual-registrado-antes-de-la-exposición" aria-hidden="true">#</a> 6.3 El contrafactual, registrado antes de la exposición</h3>
+<p>Pregúntales a los dos, en la Fase 0, antes de que hayan visto nada: <em>«Si GreenGrass no existiera, ¿cómo coordinarías listas con un socio de coalición?»</em> Registra la respuesta textual. Este es el control de A7 y no sirve de nada si se recoge después de que ya usaron el producto.</p>
+<h3 id="64-la-entrevista-de-preparación-solo-prospectiva" tabindex="-1"><a class="heading-anchor" href="#64-la-entrevista-de-preparación-solo-prospectiva" aria-hidden="true">#</a> 6.4 La entrevista de preparación — solo prospectiva</h3>
+<p>Antes de construir nada, entrevista a los dos partidos por separado sobre qué haría falta para juntar datos <strong>de aquí en adelante</strong>. No preguntes nada sobre ciclos pasados (§3).</p>
+<p>El encuadre hacia adelante no es solo diplomático, es mejor investigación. «¿Qué haría falta?» consigue una respuesta que se puede diseñar; «¿por qué no lo hicieron?» consigue una defensa.</p>
+<p>Seis preguntas, cada una apuntando a una clase distinta de obstáculo:</p>
+<table>
+<thead>
+<tr>
+<th>Pregunta</th>
+<th>Qué saca a la luz</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>¿Qué tendría que ser cierto para que pusieras tu lista de contactos en un arreglo compartido con un socio de coalición?</td>
+<td>La forma general de la objeción</td>
+</tr>
+<tr>
+<td>¿Quién tendría que aprobar eso?</td>
+<td><strong>Autorización</strong> — cuántos sí hacen falta, y a qué nivel</td>
+</tr>
+<tr>
+<td>Si lo decidieras hoy, ¿qué te frenaría la semana que viene?</td>
+<td><strong>Capacidad</strong> — los obstáculos prácticos y poco glamorosos</td>
+</tr>
+<tr>
+<td>¿Sabes si los consentimientos de tus simpatizantes cubrirían el contacto por parte de la coalición?</td>
+<td><strong>Legal</strong> (§9.6) — y si siquiera lo han pensado</td>
+</tr>
+<tr>
+<td>¿Cuánto te tomaría producir una exportación limpia?</td>
+<td><strong>Calidad de datos</strong> — y calibra cuánto apoyo necesita el lado del PIP (§3)</td>
+</tr>
+<tr>
+<td>¿Qué no incluirías bajo ninguna regla, jamás?</td>
+<td><strong>Los requisitos reales del contrato de intercambio</strong></td>
+</tr>
+</tbody>
+</table>
+<p>Esa última pregunta es lo más directamente útil de este plan para la construcción. Define la lista de campos de denegación por defecto de ALLY-005 con las palabras de los propios partidos y no con nuestras suposiciones.</p>
+<p><strong>Por qué esto importa más allá de levantar requisitos:</strong> varios de estos obstáculos no son «confianza» en el sentido que supone la especificación. La capa de federación, los contratos de intercambio por recurso y la gobernanza por consentimiento unánime están todos diseñados contra un modelo de <em>sospecha</em>. Si la restricción real es la capacidad, la legalidad o la autorización, toda esa maquinaria elaborada de consentimiento resuelve un problema que estos partidos no tienen. Ver §9.2.</p>
+<p><strong>Hazla antes de que cierre la Fase 0.</strong> Puede reordenar todo lo que viene después.</p>
+<h3 id="65-el-par-de-contraste" tabindex="-1"><a class="heading-anchor" href="#65-el-par-de-contraste" aria-hidden="true">#</a> 6.5 El par de contraste</h3>
+<p>Un segundo par sin historia de coalición — solo conversación, sin construir nada. Uno que diga «de ninguna manera, bajo ninguna regla» acota el mercado; uno que diga «bajo esas reglas, quizás» es evidencia fuerte a favor de la tesis. Dos reuniones, mucha información por hora.</p>
+<hr>
+<h2 id="7-fases" tabindex="-1"><a class="heading-anchor" href="#7-fases" aria-hidden="true">#</a> 7. Fases</h2>
+<p>Ancladas al calendario electoral de Puerto Rico. La próxima elección general es en noviembre de 2028, con primarias alrededor de mediados de 2028.</p>
+<h3 id="el-problema-de-calendario-puede-que-no-haya-ninguna-campaña-conjunta-en-curso" tabindex="-1"><a class="heading-anchor" href="#el-problema-de-calendario-puede-que-no-haya-ninguna-campaña-conjunta-en-curso" aria-hidden="true">#</a> El problema de calendario: puede que no haya ninguna campaña conjunta en curso</h3>
+<p>El MVP se define como organizar datos <em>en el contexto de una campaña conjunta</em>. Como no hay ninguna coalición operando ahora mismo, <strong>puede que no haya a qué engancharle el piloto durante 2026–2027.</strong> Eso rompe A5 — si no hay ninguna operación compartida en marcha, no hay decisión que la vista compartida pueda cambiar, y A5 es el punto de decisión que separa el intercambio real del teatro.</p>
+<p>Tres opciones, en orden de preferencia:</p>
+<ol>
+<li><strong>Apuntar a la ventana de formación de coalición de 2028 (recomendado).</strong> Si se negocia una coalición para 2028, esa negociación pasa a lo largo de 2027 — antes de las primarias, antes de la campaña propiamente dicha. Ese es el punto dulce: los partidos están decidiendo activamente qué compartir, la motivación es alta y el riesgo electoral es bajo porque todavía no se están persiguiendo votos. El producto aparece justo cuando la pregunta está viva.</li>
+<li><strong>Engancharlo a una actividad conjunta no electoral.</strong> Un empujón de incidencia compartido, una recaudación conjunta, una jornada de inscripción de votantes. Hay menos en juego, pero es una operación real, y con eso alcanza para A5.</li>
+<li><strong>Correrlo como un simulacro explícito.</strong> Encuadrado como construcción de infraestructura de cara a 2028. Lo más barato, pero con el riesgo más alto de que la cosa se disperse y de que A5 quede sin probar — nadie cambia una decisión porque no hay decisión que cambiar.</li>
+</ol>
+<p>No corras el primer piloto durante la campaña de 2028 misma. Convertirse en una variable del resultado de una elección en curso es a la vez un problema ético y una garantía de datos ininterpretables.</p>
+<table>
+<thead>
+<tr>
+<th>Fase</th>
+<th>Ventana</th>
+<th>Qué pasa</th>
+<th>Puntos de control</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>0 — Consentimiento y encuadre</strong></td>
+<td>sep.–oct. 2026</td>
+<td>Ambos firman el acuerdo de participación y el DPA (acuerdo de tratamiento de datos). Se registran las entrevistas de preparación y de contrafactual. Descubrimiento de las herramientas del PIP. Revisión legal del consentimiento entre partidos (§9.6).</td>
+<td>—</td>
+</tr>
+<tr>
+<td><strong>1 — Mago de Oz manual</strong></td>
+<td>nov. 2026 – ene. 2027</td>
+<td>Los dos partidos mandan un archivo. El cruce se corre <strong>a mano</strong>, sin conexión, en una máquina aislada de la red. Se devuelve el informe.</td>
+<td><strong>A1, A2, A3, A4</strong></td>
+</tr>
+<tr>
+<td><strong>2 — Construcción</strong></td>
+<td>feb. – jun. 2027</td>
+<td>Las ~12 pantallas. Solo si se superan los puntos de control de la Fase 1.</td>
+<td>—</td>
+</tr>
+<tr>
+<td><strong>3 — Piloto en vivo</strong></td>
+<td>jul. 2027 – ene. 2028</td>
+<td>Sincronizado con la ventana de formación de coalición. Rebanada acotada — un distrito senatorial o unos pocos municipios, no la isla entera. Los dos partidos operan la supresión mutua contra el libro compartido.</td>
+<td><strong>A5, A6, A7</strong></td>
+</tr>
+<tr>
+<td><strong>4 — Prueba de retiro</strong></td>
+<td>feb. 2028</td>
+<td>Ejercicio programado y consentido de revocación y salida por parte de uno de los partidos.</td>
+<td>Integridad de la salida</td>
+</tr>
+<tr>
+<td><strong>Punto de decisión</strong></td>
+<td>mar. 2028</td>
+<td>Financiar la construcción completa, reposicionar o parar.</td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+<h3 id="sobre-la-fase-1-y-su-limitación-honesta" tabindex="-1"><a class="heading-anchor" href="#sobre-la-fase-1-y-su-limitación-honesta" aria-hidden="true">#</a> Sobre la Fase 1 — y su limitación honesta</h3>
+<p>La primera prueba de A1–A4 no necesita producto alguno. Dos semanas de Python en lugar de cuatro meses de ingeniería.</p>
+<p>Pero hay una trampa que hay que decirles de frente a los dos partidos: <strong>en la versión manual, nosotros vemos los dos archivos.</strong> La afirmación central del producto es que nadie —ni siquiera la plataforma— ve los datos del otro lado. La prueba manual, entonces, valida <em>la disposición a juntar datos a través de un intermediario humano de confianza</em>, que es una afirmación más débil que la que hace el producto.</p>
+<p>Es aceptable, porque es un <strong>punto de decisión necesario pero no suficiente</strong>: si no juntan datos ni siquiera con un intermediario de confianza, con software menos todavía. La Fase 1 prueba el piso. Si no pasan el piso, para antes de gastar el presupuesto de construcción.</p>
+<h3 id="sobre-la-fase-4-la-prueba-que-nadie-hace" tabindex="-1"><a class="heading-anchor" href="#sobre-la-fase-4-la-prueba-que-nadie-hace" aria-hidden="true">#</a> Sobre la Fase 4 — la prueba que nadie hace</h3>
+<p>Ejercer la salida a propósito, en una fecha programada, con todo el mundo tranquilo, es la hora más informativa del plan. Si la revocación es ambigua o la exportación queda incompleta, te enteras ahora y no durante una disputa real, cuando la relación ya se está rompiendo. Ofrecer la prueba es, en sí misma, una señal de confianza.</p>
+<h3 id="equipo-y-costo" tabindex="-1"><a class="heading-anchor" href="#equipo-y-costo" aria-hidden="true">#</a> Equipo y costo</h3>
+<ul>
+<li>Fase 1: una persona, ~3 semanas. Prácticamente gratis.</li>
+<li>Fase 2: 2 personas de ingeniería + 1 de diseño, ~4 meses.</li>
+<li>Fase 3: 1 persona de ingeniería + <strong>1 persona dedicada al soporte de los socios.</strong> Ese rol de soporte no es opcional — es el control contra los falsos negativos que produce la fricción de datos del lado del PIP (§3).</li>
+</ul>
+<hr>
+<h2 id="8-qué-cuesta-lo-igualitario-en-la-arquitectura" tabindex="-1"><a class="heading-anchor" href="#8-qué-cuesta-lo-igualitario-en-la-arquitectura" aria-hidden="true">#</a> 8. Qué cuesta lo «igualitario» en la arquitectura</h2>
+<p>La gobernanza es de N partes con consentimiento unánime. Aquí es donde la especificación existente tiene que doblarse.</p>
+<ul>
+<li><strong>Sin organización líder.</strong> El ADR-016 §80 le da el registro de la campaña conjunta a una organización líder; la unanimidad rompe eso. Hace falta un rol de <strong>Custodio de la alianza</strong> ejercido de forma simétrica, un asiento por miembro — lo que obliga a que la pregunta abierta de <a href="../../design/ux/04-wireframes/alliance/alliance.html#open-questions">alliance.md § Preguntas abiertas</a> se resuelva como <em>sí, un rol dedicado</em>.</li>
+<li><strong>Unánime para ampliar el intercambio; unilateral para reducirlo.</strong> Otorgar necesita a todos los miembros. Revocar es decisión de cualquiera de ellos, con efecto inmediato. Esa asimetría <em>es</em> el modelo de confianza: significa que entrar nunca es una trampa.</li>
+<li><strong>El bloqueo es una funcionalidad.</strong> Con unanimidad no hay mayoría que desempate. El statu quo se mantiene: sin vencimientos, sin aprobación automática. La especificación ya acertó con esto para las solicitudes de afiliación (ADR-016 §82, «el silencio significa no») — generalízalo.</li>
+<li><strong>La plataforma nunca desempata.</strong> Nada de «contacta a soporte para resolver la disputa». Si los miembros no se ponen de acuerdo, no pasa nada. Ese compromiso es lo que hace que el arreglo sea seguro para la parte <em>más débil</em> de una coalición desigual — que, en madurez de datos, es el PIP.</li>
+<li><strong>Vista compartida, no maestro compartido.</strong> Según el ADR-016 §80, no hay deduplicación forzada entre organizaciones. Los registros se quedan en los sistemas de cada miembro; el universo compartido es una vista.</li>
+<li><strong>La salida se ensaya, no es teórica.</strong> Te vas con una exportación completa de tus propios datos, más el registro de auditoría que cubre tu participación; tu aporte sale de la vista en vivo de ahí en adelante.</li>
+</ul>
+<p><strong>El límite honesto:</strong> los derechos iguales no igualan el poder. El partido con más registros aprende más de la intersección que el partido con menos. El libro de contribuciones lo hace visible, y aportar solo identificadores lo mitiga, pero no se puede eliminar por diseño.</p>
+<hr>
+<h2 id="9-riesgos" tabindex="-1"><a class="heading-anchor" href="#9-riesgos" aria-hidden="true">#</a> 9. Riesgos</h2>
+<p><strong>9.1 No hay campaña conjunta en curso contra la cual probar.</strong> <em>Probabilidad: alta. Gravedad: alta — vuelve A5 imposible de probar, y A5 es lo que separa el intercambio real del teatro.</em> Mitigación: apuntar a la ventana de formación de coalición, o engancharlo a una actividad conjunta no electoral (§7).</p>
+<p><strong>9.2 El obstáculo puede no ser la confianza.</strong> <em>Probabilidad: media. Gravedad: estratégica.</em> Si las entrevistas de preparación (§6.4) muestran que la restricción real es la capacidad, la legalidad o la autorización política, y no la sospecha, entonces la maquinaria elaborada de consentimiento de la especificación —la capa de federación, los contratos de intercambio por recurso, la gobernanza por consentimiento unánime— resuelve un problema que estos partidos no tienen. Eso no mata el producto, pero le cambia el alcance de forma sustancial y baja el valor de la superficie de alianzas del ADR-016 §78–82.</p>
+<p><strong>9.3 La madurez desigual de los datos produce un falso negativo.</strong> <em>Probabilidad: alta. Gravedad: alta.</em> La fricción del PIP se lee mal como falta de voluntad del PIP. Mitigación: una persona dedicada al soporte de los socios; hacerles el trabajo de limpieza <em>a ellos</em> en la Fase 1; medir la voluntad por las decisiones tomadas, no por los archivos bien formateados.</p>
+<p><strong>9.4 Calidad de los datos en Puerto Rico.</strong> <em>Probabilidad: certeza. Gravedad: media bajo la Rama A, alta bajo la Rama B.</em></p>
+<ul>
+<li><strong>Dos apellidos.</strong> Con apellido paterno y materno, <code>last_name</code> puede traer uno, los dos, o un revoltijo con guion. Devastador para la coincidencia aproximada de nombres — y un argumento fuerte para quedarse en la Rama A, donde los nombres no se usan para cruzar.</li>
+<li><strong>Formato de teléfono.</strong> +1 787 y +1 939 sirven ambos a PR; el formato local varía. Normalizar a E.164 es obligatorio y resuelve casi todo.</li>
+<li><strong>Direcciones.</strong> Las convenciones de <em>urbanización</em> / <em>barrio</em> / ruta rural rompen los analizadores de direcciones con estándar estadounidense. No asumas que la normalización del USPS funciona.</li>
+<li><strong>Diáspora.</strong> Muchos donantes y votantes vinculados a PR cargan teléfonos y direcciones de Estados Unidos. Es una arruga entre jurisdicciones, tanto para el cruce como para el consentimiento.</li>
+<li><strong>Geografía electoral.</strong> 78 municipios, 8 distritos senatoriales, 40 distritos representativos, precintos y unidades, con la CEE como autoridad. Si ninguno de los dos archivos trae precinto o municipio, la funcionalidad de cobertura se muere — de ahí que la Rama A sea el plan oficial.</li>
+</ul>
+<p><strong>9.5 Sensibilidad política.</strong> <em>Probabilidad: baja. Gravedad: severa.</em> Una filtración acá no es un incidente de cumplimiento, es un escándalo entre partidos con víctimas con nombre y apellido. La postura de BYOK y de que la plataforma no tiene acceso es un seguro sobre la reputación de la propia GreenGrass tanto como sobre la de ellos.</p>
+<p><strong>9.6 El consentimiento entre partidos puede ser legalmente inadmisible.</strong> <em>Probabilidad: media. Gravedad: alta si no se atiende.</em> Puerto Rico es una jurisdicción estadounidense: la TCPA rige los SMS y la CAN-SPAM rige el correo electrónico. Los contactos de cada partido dieron su consentimiento a <em>ese partido</em>, no a una coalición. Si el consentimiento original cubre el contacto conjunto es una pregunta real y <strong>hay que responderla en la Fase 0, no descubrirla en la Fase 3.</strong></p>
+<p>Este riesgo es la razón directa de que la operación del piloto sea la supresión mutua y no el envío conjunto. La supresión no requiere consentimiento nuevo: cada partido contacta solo a su propia gente que dio consentimiento expreso, y lo único que cruza la frontera es una marca de supresión.</p>
+<p><strong>9.7 Esto puede ser una funcionalidad, no una empresa.</strong> <em>Probabilidad: media. Gravedad: estratégica.</em> Una capa de coordinación sin app de campo es fácil de describir y fácil de copiar. Lo defendible vive en la postura de confianza y en los datos de frontera acumulados, no en el cruce en sí.</p>
+<hr>
+<h2 id="10-criterios-para-parar-o-pivotar" tabindex="-1"><a class="heading-anchor" href="#10-criterios-para-parar-o-pivotar" aria-hidden="true">#</a> 10. Criterios para parar o pivotar</h2>
+<p>Decididos por adelantado, para que la decisión no se tome bajo la presión de los costos hundidos.</p>
+<table>
+<thead>
+<tr>
+<th>Señal</th>
+<th>Lectura</th>
+<th>Acción</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Cualquiera de los dos partidos se niega a subir después de firmar</td>
+<td>La tesis es falsa para este par</td>
+<td><strong>Parar.</strong> Diagnostica por qué antes de generalizar — la razón de la negativa es el dato más valioso que el piloto puede producir</td>
+</tr>
+<tr>
+<td>Los dos dicen que simplemente le habrían mandado el archivo al otro por correo (A7 falla)</td>
+<td>No es infraestructura de confianza; es una utilidad de deduplicación</td>
+<td><strong>Reposicionar.</strong> Otro producto, otro precio, una superficie de alianzas mucho más chica en la construcción completa</td>
+</tr>
+<tr>
+<td>Tasa de coincidencia &lt;2% sobre identificadores limpios</td>
+<td>La restricción real es la calidad de los datos, no la confianza</td>
+<td><strong>Pivotar</strong> hacia la calidad y la normalización de datos como producto</td>
+</tr>
+<tr>
+<td>Los dos ponen el intercambio al máximo en el primer intento</td>
+<td>Los controles granulares están sobrediseñados para este segmento</td>
+<td><strong>Simplificar</strong> el contrato de intercambio — un «éxito» que en realidad es un hallazgo en contra del diseño</td>
+</tr>
+<tr>
+<td>Llegan los archivos, se calcula el solapamiento, nadie cambia ninguna decisión (A5 falla)</td>
+<td>Juntar los datos es teatro</td>
+<td><strong>Parar.</strong> Datos que no cambian ninguna conducta no tienen valor que vender</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="11-preguntas-abiertas-para-resolver-con-los-partidos" tabindex="-1"><a class="heading-anchor" href="#11-preguntas-abiertas-para-resolver-con-los-partidos" aria-hidden="true">#</a> 11. Preguntas abiertas para resolver con los partidos</h2>
+<p>Todas prospectivas. Nada de acá pregunta por ciclos anteriores.</p>
+<ol>
+<li>¿Se está contemplando una coalición para 2028, y en qué plazo se decide eso? (Fija la ventana de la Fase 3, §7 — hoy es la incógnita estructural del calendario.)</li>
+<li>¿Qué usa el PIP en realidad, y quiénes son los custodios de cada fragmento?</li>
+<li>¿Quién puede decir que sí en cada partido — y es el mismo nivel de autoridad de los dos lados? (La estructura de comités municipales del PIP puede implicar que hacen falta muchos sí.)</li>
+<li>¿El texto de consentimiento que ya usa alguno de los dos partidos contempla el contacto de coalición? (§9.6)</li>
+<li>¿Qué consideraría cada uno el aporte <em>mínimo</em> útil — solo identificadores, o irían más allá?</li>
+<li>¿Qué no incluiría cada uno bajo ninguna regla? (Define la lista de campos de denegación por defecto de ALLY-005.)</li>
+<li>¿Aceptaría alguno que el libro de contribuciones sea visible para todos los miembros, o tiene que ser privado para cada uno? (Prueba H8 directamente.)</li>
+</ol>
+<hr>
+<h2 id="apéndice-hipótesis-más-allá-del-supuesto-central" tabindex="-1"><a class="heading-anchor" href="#apéndice-hipótesis-más-allá-del-supuesto-central" aria-hidden="true">#</a> Apéndice — Hipótesis más allá del supuesto central</h2>
+<p><strong>H8 — El libro de contribuciones es un pasivo cuando los participantes son desiguales.</strong> Se diseñó para hacer legible quién se aprovecha sin aportar y, con eso, hacer justo el arreglo. Con el MVC aportando volumen limpio y estructurado y el PIP aportando fragmentos, puede en cambio publicitar la debilidad relativa del PIP y dañar la relación. Mitigaciones a probar: normalizar por tamaño de lista; reportar <em>cobertura entregada</em> en vez de conteos crudos de registros; hacer que el libro sea privado para cada miembro por defecto.</p>
+<p><strong>H9 — El registro de auditoría es decorativo.</strong> Si ninguno de los dos partidos lo abre nunca, la confianza estaba en la contraparte y no en el sistema, y la inversión en el registro inmutable no se paga sola para este segmento. Se sondea directamente en A7.</p>
+<p><strong>H10 — La supresión sola justifica la adopción.</strong> Si la supresión mutua alcanza para generar uso repetido sin mapa, sin coordinación de trabajo de campo y sin envío conjunto, el producto construible es mucho más chico que el especificado — y llega al mercado mucho antes.</p>
+
+    </article>
+  </main>
+  <div class="toc-rail"><nav class="toc" aria-label="En esta página"><div class="toc-label">En esta página</div><ul><li class="toc-2"><a href="#1-contexto"># 1. Contexto</a></li><li class="toc-2"><a href="#2-el-producto-en-una-frase"># 2. El producto, en una frase</a></li><li class="toc-3"><a href="#la-primitiva-de-coordinación-central-la-supresión-mutua"># La primitiva de coordinación central: la supresión mutua</a></li><li class="toc-2"><a href="#3-los-partidos"># 3. Los partidos</a></li><li class="toc-3"><a href="#mvc-movimiento-victoria-ciudadana"># MVC — Movimiento Victoria Ciudadana</a></li><li class="toc-3"><a href="#pip-partido-independentista-puertorriqueño"># PIP — Partido Independentista Puertorriqueño</a></li><li class="toc-3"><a href="#la-asimetría-es-el-hecho-más-importante-de-este-plan"># La asimetría es el hecho más importante de este plan</a></li><li class="toc-3"><a href="#punto-de-partida"># Punto de partida</a></li><li class="toc-2"><a href="#4-alcance"># 4. Alcance</a></li><li class="toc-3"><a href="#41-qué-se-construye"># 4.1 Qué se construye</a></li><li class="toc-3"><a href="#42-qué-se-recorta"># 4.2 Qué se recorta</a></li><li class="toc-3"><a href="#43-la-bifurcación-según-la-forma-de-los-datos-de-entrada"># 4.3 La bifurcación según la forma de los datos de entrada</a></li><li class="toc-3"><a href="#44-lo-que-se-conserva-aunque-parezca-recortable"># 4.4 Lo que se conserva aunque parezca recortable</a></li><li class="toc-2"><a href="#5-el-supuesto-descompuesto"># 5. El supuesto, descompuesto</a></li><li class="toc-2"><a href="#6-instrumentación"># 6. Instrumentación</a></li><li class="toc-3"><a href="#61-señales-de-conducta-la-confianza-se-mide-por-lo-que-hacen-no-por-lo-que-dicen-en-una-encuesta"># 6.1 Señales de conducta — la confianza se mide por lo que hacen, no por lo que dicen en una encuesta</a></li><li class="toc-3"><a href="#62-entrevistas"># 6.2 Entrevistas</a></li><li class="toc-3"><a href="#63-el-contrafactual-registrado-antes-de-la-exposición"># 6.3 El contrafactual, registrado antes de la exposición</a></li><li class="toc-3"><a href="#64-la-entrevista-de-preparación-solo-prospectiva"># 6.4 La entrevista de preparación — solo prospectiva</a></li><li class="toc-3"><a href="#65-el-par-de-contraste"># 6.5 El par de contraste</a></li><li class="toc-2"><a href="#7-fases"># 7. Fases</a></li><li class="toc-3"><a href="#el-problema-de-calendario-puede-que-no-haya-ninguna-campaña-conjunta-en-curso"># El problema de calendario: puede que no haya ninguna campaña conjunta en curso</a></li><li class="toc-3"><a href="#sobre-la-fase-1-y-su-limitación-honesta"># Sobre la Fase 1 — y su limitación honesta</a></li><li class="toc-3"><a href="#sobre-la-fase-4-la-prueba-que-nadie-hace"># Sobre la Fase 4 — la prueba que nadie hace</a></li><li class="toc-3"><a href="#equipo-y-costo"># Equipo y costo</a></li><li class="toc-2"><a href="#8-qué-cuesta-lo-igualitario-en-la-arquitectura"># 8. Qué cuesta lo «igualitario» en la arquitectura</a></li><li class="toc-2"><a href="#9-riesgos"># 9. Riesgos</a></li><li class="toc-2"><a href="#10-criterios-para-parar-o-pivotar"># 10. Criterios para parar o pivotar</a></li><li class="toc-2"><a href="#11-preguntas-abiertas-para-resolver-con-los-partidos"># 11. Preguntas abiertas para resolver con los partidos</a></li><li class="toc-2"><a href="#apéndice-hipótesis-más-allá-del-supuesto-central"># Apéndice — Hipótesis más allá del supuesto central</a></li></ul></nav></div>
+</div>
+<script src="../../assets/search.js" defer></script>
+<script src="../../assets/app.js" defer></script>
+</body>
+</html>

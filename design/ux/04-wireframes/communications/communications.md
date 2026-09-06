@@ -155,7 +155,7 @@ Browse and manage email campaigns. A campaign is a single email send (or schedul
 
 ## COMM-002: Email Campaign Builder
 
-Full-featured email campaign editor. Multi-step but presented as a single scrollable page with sections (not a wizard — the user can jump between sections).
+Email campaign editor. Multi-step but presented as a single scrollable page with sections (not a wizard — the user can jump between sections).
 
 ### Desktop
 

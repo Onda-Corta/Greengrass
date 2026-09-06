@@ -40,7 +40,7 @@ Tenants can create form variants (different suggested amounts, copy, layouts), s
 
 ### Zero platform fee on donations
 
-GreenGrass takes no cut of donations. Tenants pay only their payment processor's fees. Revenue comes entirely from platform subscriptions (flat tiers, not usage-based). This ensures the strongest alignment with mission — GreenGrass's financial incentives are tied to platform quality, not donation volume.
+GreenGrass takes no cut of donations. Tenants pay only their payment processor's fees. Revenue comes entirely from platform subscriptions (flat tiers, not usage-based). That keeps the incentives honest: GreenGrass earns from platform quality, not donation volume.
 
 **Alternatives considered:** Percentage fee on donations was rejected because it misaligns incentives and penalizes successful fundraising campaigns. Per-transaction fee was rejected for the same reason.
 
@@ -53,7 +53,7 @@ Alliance-level fundraising supports multiple split types: percentage-based, fixe
 **Benefits:**
 - Every country's dominant payment method gets native integration, not adapter shims
 - Direct merchant model avoids financial intermediary regulation across five countries
-- Zero platform fee maximizes donation value for campaigns and eliminates revenue model conflicts
+- Zero platform fee means everything but the processor's cut reaches the campaign, and removes any incentive to push donation volume
 - Pledge tracking connects field operations to fundraising with structured follow-through
 - A/B testing gives resource-constrained campaigns access to professional fundraising optimization
 

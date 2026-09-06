@@ -1007,4 +1007,4 @@ The "Email Statement" button sends the PDF to the supporter's email address on f
 
 2. **Donor wall / leaderboard.** Should the portal include an optional "Top Donors" or campaign progress page visible to all supporters? Motivates giving but may raise privacy concerns.
 
-3. **Portal as PWA.** Should the supporter portal be installable as a PWA from the browser? Supporters don't need the full Capacitor app, but a home-screen shortcut with push notifications could increase engagement.
+3. **Portal as PWA.** Should the supporter portal be installable as a PWA from the browser? Supporters don't need the full Capacitor app, but a home-screen shortcut with push notifications could bring supporters back more often.
