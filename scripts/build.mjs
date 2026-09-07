@@ -10,8 +10,7 @@
 import { promises as fs } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import MarkdownIt from 'markdown-it';
-import anchor from 'markdown-it-anchor';
+import { createMarkdown, scrapeHeadings } from './lib/headings.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, '..');
@@ -92,28 +91,11 @@ const EXCLUDE_FILES = new Set(['package.json', 'package-lock.json']);
 const I18N_ROOT = 'i18n';
 
 // ---------------------------------------------------------------------------
-// GitHub-compatible heading slugify (matches anchors authored in the source).
+// Markdown rendering. slugify() and the heading scraper live in lib/headings.mjs
+// so scripts/fix-es-anchors.mjs resolves a heading to exactly the id this build
+// will emit for it -- see that module's header for why they must not diverge.
 // ---------------------------------------------------------------------------
-function slugify(str) {
-  return String(str)
-    .trim()
-    .toLowerCase()
-    // Keep Unicode letters/numbers so accented headings survive (a plain \w is
-    // ASCII-only and would delete a/e/i/o/u accents and n-tilde outright).
-    // '_' must be listed explicitly since \w had included it.
-    .replace(/[^\p{L}\p{N}\s_-]/gu, '')  // drop punctuation, keep letters / space / hyphen
-    .replace(/\s+/g, '-');      // spaces -> hyphens
-}
-
-const md = new MarkdownIt({ html: true, linkify: true, typographer: false }).use(anchor, {
-  slugify,
-  permalink: anchor.permalink.linkInsideHeader({
-    symbol: '#',
-    placement: 'before',
-    class: 'heading-anchor',
-    ariaHidden: true,
-  }),
-});
+const md = createMarkdown();
 
 // ---------------------------------------------------------------------------
 // File discovery
@@ -447,12 +429,7 @@ async function main() {
     // Heading ids + TOC (h2/h3) + slug set, scraped from rendered HTML.
     d.slugSet = new Set();
     d.toc = [];
-    const headingRe = /<h([1-6])[^>]*\bid="([^"]+)"[^>]*>([\s\S]*?)<\/h\1>/g;
-    let hm;
-    while ((hm = headingRe.exec(html)) !== null) {
-      const level = parseInt(hm[1], 10);
-      const id = hm[2];
-      const text = hm[3].replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').trim();
+    for (const { level, id, text } of scrapeHeadings(html)) {
       d.slugSet.add(id);
       if (level === 2 || level === 3) d.toc.push({ level, id, text });
     }
@@ -604,7 +581,10 @@ async function main() {
     );
   }
   if (unresolved > 0) {
-    console.log(`\n${unresolved} unresolved link/anchor warning(s) above.`);
+    // Non-zero on purpose: CI builds and deploys unconditionally, so a warning
+    // nobody reads is a broken anchor shipped to production.
+    console.error(`\n${unresolved} unresolved link/anchor warning(s) above.`);
+    process.exitCode = 1;
   } else {
     console.log('All internal links and anchors resolved.');
   }
