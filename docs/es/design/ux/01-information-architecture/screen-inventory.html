@@ -1,0 +1,2418 @@
+<!DOCTYPE html>
+<html lang="es" data-base="../../../../" data-no-results="No hay resultados para">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Inventario de pantallas · GreenGrass</title>
+<meta name="description" content="Inventario de pantallas — Documentación de especificación y diseño de GreenGrass.">
+<link rel="alternate" hreflang="en" href="../../../../design/ux/01-information-architecture/screen-inventory.html">
+<link rel="alternate" hreflang="es" href="./screen-inventory.html">
+<link rel="alternate" hreflang="x-default" href="../../../../design/ux/01-information-architecture/screen-inventory.html">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%232563eb'/%3E%3Cstop offset='1' stop-color='%2316a34a'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='32' height='32' rx='7' fill='url(%23g)'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="../../../../assets/styles.css">
+</head>
+<body>
+<a class="skip-link" href="#content">Saltar al contenido</a>
+<header class="site-header">
+  <button type="button" class="menu-toggle" aria-label="Alternar navegación" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+  <a class="brand" href="../../../../es/index.html">
+    <span class="brand-mark" aria-hidden="true"></span>
+    <span class="brand-text"><strong>GreenGrass</strong><small>Especificación y diseño</small></span>
+  </a>
+  <div class="search">
+    <input type="search" id="search-input" placeholder="Buscar en la documentación…" autocomplete="off" aria-label="Buscar en la documentación">
+    <div id="search-results" class="search-results" hidden></div>
+  </div>
+  <nav class="lang-switch" aria-label="Idioma"><a class="lang-opt" href="../../../../design/ux/01-information-architecture/screen-inventory.html" hreflang="en" lang="en" title="View this page in English">EN</a><span class="lang-opt active" aria-current="true">ES</span></nav>
+  <button type="button" class="theme-toggle" aria-label="Alternar modo oscuro" title="Alternar modo oscuro">
+    <span class="theme-icon" aria-hidden="true"></span>
+  </button>
+</header>
+<div class="layout">
+  <div class="sidebar-backdrop" hidden></div>
+  <aside class="sidebar" aria-label="Navegación de la documentación">
+    <nav class="nav">
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">Inicio<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../../../index.html">GreenGrass</a></li></ul></div>
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">Especificaciones<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../../../spec/product.html">Proyecto: GreenGrass</a></li><li><a href="../../../spec/mvp.html">MVP de GreenGrass — plan de producto</a></li><li><a href="../../../spec/users.html">Usuarios y roles</a></li><li><a href="../../../spec/workflows.html">Flujos de trabajo principales</a></li><li><a href="../../../spec/geography.html">Geografía objetivo</a></li><li><a href="../../../spec/security.html">Seguridad y modelo de amenazas</a></li><li><a href="../../../spec/compliance.html">Cumplimiento y marco legal</a></li><li><a href="../../../spec/fundraising.html">Recaudación de fondos e infraestructura de pagos</a></li><li><a href="../../../spec/integrations.html">Integraciones externas</a></li><li><a href="../../../spec/support.html">Soporte y puesta en marcha de organizaciones</a></li><li><a href="../../../spec/gotv.html">GOTV y operaciones del día de elecciones</a></li><li><a href="../../../spec/messaging.html">Comunicaciones internas y notificaciones</a></li><li><a href="../../../spec/press.html">Prensa, medios y comunicaciones públicas</a></li><li><a href="../../../spec/comms-intelligence.html">Inteligencia de comunicaciones — hoja de ruta post-MVP</a></li></ul></div>
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">Arquitectura<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../../architecture/system.html">Arquitectura del sistema</a></li></ul></div>
+<div class="nav-section open"><button type="button" class="nav-section-title" aria-expanded="true">Diseño UX<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../00-overview.html">Resumen del diseño de UX</a></li><li><a href="./navigation-model.html">Modelo de navegación</a></li><li><a href="./screen-inventory.html" aria-current="page" class="active">Inventario de pantallas</a></li><li><a href="./persona-views.html">Vistas por arquetipo</a></li><li><a href="./url-structure.html">Estructura de URL</a></li><li><a href="../02-global-patterns/pattern-catalog.html">Catálogo de patrones</a></li><li><a href="../02-global-patterns/offline-sync-patterns.html">Patrones sin conexión y de sincronización</a></li><li><a href="../02-global-patterns/notification-patterns.html">Patrones de notificaciones</a></li><li><a href="../02-global-patterns/search-patterns.html">Patrones de búsqueda</a></li><li><a href="../02-global-patterns/settings-help-patterns.html">Patrones de ajustes y ayuda</a></li><li><a href="../02-global-patterns/security-ux-patterns.html">Patrones de UX de seguridad</a></li><li><a href="../03-design-system/foundations.html">Fundamentos del sistema de diseño</a></li><li><a href="../03-design-system/theming-strategy.html">Estrategia de temas</a></li><li><a href="../03-design-system/component-inventory.html">Inventario de componentes</a></li><li><a href="../03-design-system/responsive-strategy.html">Estrategia de diseño adaptable</a></li></ul></div>
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">Decisiones<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../../../decisions/001-platform-architecture.html">ADR-001: Arquitectura y despliegue de la plataforma</a></li><li><a href="../../../decisions/002-security-threat-model.html">ADR-002: Seguridad y modelo de amenazas</a></li><li><a href="../../../decisions/003-identity-access-organization.html">ADR-003: Identidad, acceso y organización</a></li><li><a href="../../../decisions/004-data-model-integrity.html">ADR-004: Modelo de datos e integridad</a></li><li><a href="../../../decisions/005-offline-first-sync.html">ADR-005: Prioridad sin conexión y sincronización</a></li><li><a href="../../../decisions/006-field-operations-gotv.html">ADR-006: Operaciones de campo y GOTV</a></li><li><a href="../../../decisions/007-fundraising-payments.html">ADR-007: Recaudación de fondos y pagos</a></li><li><a href="../../../decisions/008-communications-messaging.html">ADR-008: Comunicaciones y mensajería</a></li><li><a href="../../../decisions/009-compliance-legal.html">ADR-009: Cumplimiento y marco legal</a></li><li><a href="../../../decisions/010-internationalization-localization.html">ADR-010: Internacionalización y localización</a></li><li><a href="../../../decisions/011-design-system-ux.html">ADR-011: Sistema de diseño y fundamentos de UX</a></li><li><a href="../../../decisions/012-external-integrations.html">ADR-012: Integraciones externas</a></li><li><a href="../../../decisions/013-analytics-ai.html">ADR-013: Analítica e IA</a></li><li><a href="../../../decisions/014-volunteer-onboarding.html">ADR-014: Voluntariado e incorporación</a></li><li><a href="../../../decisions/015-product-scope.html">ADR-015: Límites del alcance del producto</a></li><li><a href="../../../decisions/016-cross-cutting-resolutions.html">ADR-016: Resoluciones transversales</a></li><li><a href="../../../decisions/017-sharing-contract-trust-model.html">ADR-017: El contrato de intercambio como primitiva universal de confianza</a></li><li><a href="../../../decisions/ux-decisions.html">Decisiones de UX — fase de wireframes</a></li></ul></div>
+    </nav>
+  </aside>
+  <main id="content" class="content">
+    <nav class="breadcrumb" aria-label="Ruta de navegación">Diseño UX</nav>
+    <article class="prose">
+<h1 id="inventario-de-pantallas" tabindex="-1"><a class="heading-anchor" href="#inventario-de-pantallas" aria-hidden="true">#</a> Inventario de pantallas</h1>
+<h2 id="propósito" tabindex="-1"><a class="heading-anchor" href="#propósito" aria-hidden="true">#</a> Propósito</h2>
+<p>Un catálogo completo de todas las pantallas distintas de la plataforma, organizado por área funcional. Cada entrada identifica qué perfiles pueden acceder a la pantalla, si funciona sin conexión y si está optimizada para móvil.</p>
+<p>Este inventario se deriva de los 12 documentos de especificación y del modelo de navegación. Sirve de referencia maestra para el trabajo de wireframes, la planificación de rutas y la definición del alcance de la implementación.</p>
+<h2 id="cómo-leer-la-tabla" tabindex="-1"><a class="heading-anchor" href="#cómo-leer-la-tabla" aria-hidden="true">#</a> Cómo leer la tabla</h2>
+<ul>
+<li><strong>ID de pantalla</strong> — identificador único para las referencias cruzadas (formato: <code>AREA-NNN</code>)</li>
+<li><strong>Pantalla</strong> — nombre legible de la pantalla</li>
+<li><strong>Arquetipos</strong> — quién puede acceder a esta pantalla (abreviado: OA=Administrador de la organización, CD=Director de comunicaciones, FD=Director de finanzas, FiD=Director de campo, VC=Coordinador de voluntarios, DM=Gestor de datos, V=Voluntario, TL=Líder de equipo, C=Candidato, S=Simpatizante)</li>
+<li><strong>Sin conexión</strong> — si la pantalla funciona sin conectividad (Sí, Parcial, No)</li>
+<li><strong>Móvil</strong> — si la pantalla está diseñada para uso móvil (Principal=prioridad móvil, Sí=funciona en móvil, Escritorio=preferentemente de escritorio)</li>
+<li><strong>Ref. de especificación</strong> — documento de especificación de origen y sección relevante</li>
+</ul>
+<h2 id="1-paneles" tabindex="-1"><a class="heading-anchor" href="#1-paneles" aria-hidden="true">#</a> 1. Paneles</h2>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Pantalla</th>
+<th>Arquetipos</th>
+<th>Sin conexión</th>
+<th>Móvil</th>
+<th>Ref. de especificación</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>DASH-001</td>
+<td>Panel general de la campaña</td>
+<td>OA, C</td>
+<td>No</td>
+<td>Sí</td>
+<td><a href="http://workflows.md" target="_blank" rel="noopener noreferrer">workflows.md</a> — informes</td>
+</tr>
+<tr>
+<td>DASH-002</td>
+<td>Panel de operaciones de campo</td>
+<td>OA, FiD</td>
+<td>No</td>
+<td>Sí</td>
+<td><a href="http://workflows.md" target="_blank" rel="noopener noreferrer">workflows.md</a> — informes</td>
+</tr>
+<tr>
+<td>DASH-003</td>
+<td>Panel de recaudación de fondos</td>
+<td>OA, FD</td>
+<td>No</td>
+<td>Sí</td>
+<td><a href="http://workflows.md" target="_blank" rel="noopener noreferrer">workflows.md</a> — informes</td>
+</tr>
+<tr>
+<td>DASH-004</td>
+<td>Panel de comunicaciones</td>
+<td>OA, CD</td>
+<td>No</td>
+<td>Sí</td>
+<td><a href="http://workflows.md" target="_blank" rel="noopener noreferrer">workflows.md</a> — informes</td>
+</tr>
+<tr>
+<td>DASH-005</td>
+<td>Panel de voluntarios</td>
+<td>OA, VC</td>
+<td>No</td>
+<td>Sí</td>
+<td><a href="http://workflows.md" target="_blank" rel="noopener noreferrer">workflows.md</a> — informes</td>
+</tr>
+<tr>
+<td>DASH-006</td>
+<td>Panel de calidad de datos</td>
+<td>OA, DM</td>
+<td>No</td>
+<td>Escritorio</td>
+<td><a href="http://workflows.md" target="_blank" rel="noopener noreferrer">workflows.md</a> — informes</td>
+</tr>
+<tr>
+<td>DASH-007</td>
+<td>Panel de cumplimiento</td>
+<td>OA, FD</td>
+<td>No</td>
+<td>Escritorio</td>
+<td><a href="http://compliance.md" target="_blank" rel="noopener noreferrer">compliance.md</a> — infraestructura</td>
+</tr>
+<tr>
+<td>DASH-008</td>
+<td>Panel del centro de mando de GOTV</td>
+<td>OA, FiD</td>
+<td>No</td>
+<td>Sí</td>
+<td><a href="http://gotv.md" target="_blank" rel="noopener noreferrer">gotv.md</a> — panel de participación</td>
+</tr>
+<tr>
+<td>DASH-009</td>
+<td>Panel del líder de equipo</td>
+<td>TL</td>
+<td>No</td>
+<td>Principal</td>
+<td><a href="http://workflows.md" target="_blank" rel="noopener noreferrer">workflows.md</a> — trabajo de campo</td>
+</tr>
+<tr>
+<td>DASH-010</td>
+<td>Panel del candidato</td>
+<td>C</td>
+<td>No</td>
+<td>Sí</td>
+<td><a href="http://users.md" target="_blank" rel="noopener noreferrer">users.md</a> — perfil del candidato</td>
+</tr>
+<tr>
+<td>DASH-011</td>
+<td>Panel de la alianza</td>
+<td>OA</td>
+<td>No</td>
+<td>Sí</td>
+<td><a href="http://workflows.md" target="_blank" rel="noopener noreferrer">workflows.md</a> — coordinación de alianzas</td>
+</tr>
+</tbody>
+</table>
+<h2 id="2-crm-personas" tabindex="-1"><a class="heading-anchor" href="#2-crm-personas" aria-hidden="true">#</a> 2. CRM / Personas</h2>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Pantalla</th>
+<th>Arquetipos</th>
+<th>Sin conexión</th>
+<th>Móvil</th>
+<th>Ref. de especificación</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CRM-001</td>
+<td>Lista de contactos</td>
+<td>OA, CD, FD, FiD, VC, DM</td>
+<td>No</td>
+<td>Sí</td>
+<td><a href="http://users.md" target="_blank" rel="noopener noreferrer">users.md</a> — registros del CRM</td>
+</tr>
+<tr>
+<td>CRM-002</td>
+<td>Detalle del contacto</td>
+<td>OA, CD, FD, FiD, VC, DM</td>
+<td>Parcial</td>
+<td>Sí</td>
+<td><a href="http://users.md" target="_blank" rel="noopener noreferrer">users.md</a> — registros del CRM</td>
+</tr>
+<tr>
+<td>CRM-003</td>
+<td>Crear/editar contacto</td>
+<td>OA, CD, FD, FiD, VC, DM</td>
+<td>No</td>
+<td>Sí</td>
+<td><a href="http://users.md" target="_blank" rel="noopener noreferrer">users.md</a> — registros del CRM</td>
+</tr>
+<tr>
+<td>CRM-004</td>
+<td>Constructor de segmentos</td>
+<td>OA, CD, FD, FiD, DM</td>
+<td>No</td>
+<td>Escritorio</td>
+<td><a href="http://workflows.md" target="_blank" rel="noopener noreferrer">workflows.md</a> — comunicaciones</td>
+</tr>
+<tr>
+<td>CRM-005</td>
+<td>Lista de segmentos</td>
+<td>OA, CD, FD, FiD, DM</td>
+<td>No</td>
+<td>Sí</td>
+<td><a href="http://workflows.md" target="_blank" rel="noopener noreferrer">workflows.md</a> — comunicaciones</td>
+</tr>
+<tr>
+<td>CRM-006</td>
+<td>Cola de revisión de deduplicación</td>
+<td>OA, DM</td>
+<td>No</td>
+<td>Escritorio</td>
+<td><a href="http://users.md" target="_blank" rel="noopener noreferrer">users.md</a> — deduplicación</td>
+</tr>
+<tr>
+<td>CRM-007</td>
+<td>Comparación lado a lado de la deduplicación</td>
+<td>OA, DM</td>
+<td>No</td>
+<td>Escritorio</td>
+<td><a href="http://users.md" target="_blank" rel="noopener noreferrer">users.md</a> — deduplicación</td>
+</tr>
+<tr>
+<td>CRM-008</td>
+<td>Asistente de importación de datos — Carga de archivo</td>
+<td>OA, DM</td>
+<td>No</td>
+<td>Escritorio</td>
+<td><a href="http://integrations.md" target="_blank" rel="noopener noreferrer">integrations.md</a> — importación del padrón electoral</td>
+</tr>
+<tr>
+<td>CRM-009</td>
+<td>Asistente de importación de datos — Mapeo de columnas</td>
+<td>OA, DM</td>
+<td>No</td>
+<td>Escritorio</td>
+<td><a href="http://integrations.md" target="_blank" rel="noopener noreferrer">integrations.md</a> — importación del padrón electoral</td>
+</tr>
+<tr>
+<td>CRM-010</td>
+<td>Asistente de importación de datos — Vista previa de la deduplicación</td>
+<td>OA, DM</td>
+<td>No</td>
+<td>Escritorio</td>
+<td><a href="http://integrations.md" target="_blank" rel="noopener noreferrer">integrations.md</a> — importación del padrón electoral</td>
+</tr>
+<tr>
+<td>CRM-011</td>
+<td>Asistente de importación de datos — Confirmación</td>
+<td>OA, DM</td>
+<td>No</td>
+<td>Escritorio</td>
+<td><a href="http://integrations.md" target="_blank" rel="noopener noreferrer">integrations.md</a> — importación del padrón electoral</td>
+</tr>
+<tr>
+<td>CRM-012</td>
+<td>Historial de importaciones de datos</td>
+<td>OA, DM</td>
+<td>No</td>
+<td>Escritorio</td>
+<td><a href="http://integrations.md" target="_blank" rel="noopener noreferrer">integrations.md</a> — importación del padrón electoral</td>
+</tr>
+<tr>
+<td>CRM-013</td>
+<td>Exportación de datos</td>
+<td>OA, DM</td>
+<td>No</td>
+<td>Escritorio</td>
+<td><a href="http://workflows.md" target="_blank" rel="noopener noreferrer">workflows.md</a> — importación/exportación de datos</td>
+</tr>
+<tr>
+<td>CRM-014</td>
+<td>Informe de calidad de datos</td>
+<td>OA, DM</td>
+<td>No</td>
+<td>Escritorio</td>
+<td><a href="http://workflows.md" target="_blank" rel="noopener noreferrer">workflows.md</a> — importación/exportación de datos</td>
+</tr>
+<tr>
+<td>CRM-015</td>
+<td>Gestión de etiquetas</td>
+<td>OA, DM</td>
+<td>No</td>
+<td>Escritorio</td>
+<td><a href="http://users.md" target="_blank" rel="noopener noreferrer">users.md</a> — registros del CRM</td>
+</tr>
+</tbody>
+</table>
+<h2 id="3-trabajo-de-campo" tabindex="-1"><a class="heading-anchor" href="#3-trabajo-de-campo" aria-hidden="true">#</a> 3. Trabajo de campo</h2>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Pantalla</th>
+<th>Arquetipos</th>
+<th>Sin conexión</th>
+<th>Móvil</th>
+<th>Ref. de especificación</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CANV-001</td>
+<td>Lista de campañas de trabajo de campo</td>
+<td>OA, FiD</td>
+<td>No</td>
+<td>Sí</td>
+<td><a href="http://workflows.md" target="_blank" rel="noopener noreferrer">workflows.md</a> — trabajo de campo</td>
+</tr>
+<tr>
+<td>CANV-002</td>
+<td>Crear/editar campaña de trabajo de campo</td>
+<td>OA, FiD</td>
+<td>No</td>
+<td>Escritorio</td>
+<td><a href="http://workflows.md" target="_blank" rel="noopener noreferrer">workflows.md</a> — trabajo de campo</td>
+</tr>
+<tr>
+<td>CANV-003</td>
+<td>Constructor de guiones</td>
+<td>OA, FiD</td>
+<td>No</td>
+<td>Escritorio</td>
+<td><a href="http://workflows.md" target="_blank" rel="noopener noreferrer">workflows.md</a> — trabajo de campo</td>
+</tr>
+<tr>
+<td>CANV-004</td>
+<td>Mapa de gestión de territorios</td>
+<td>OA, FiD</td>
+<td>No</td>
+<td>Escritorio</td>
+<td><a href="http://integrations.md" target="_blank" rel="noopener noreferrer">integrations.md</a> — GIS/mapas</td>
+</tr>
+<tr>
+<td>CANV-005</td>
+<td>Generación automática de territorios</td>
+<td>OA, FiD</td>
+<td>No</td>
+<td>Escritorio</td>
+<td><a href="http://integrations.md" target="_blank" rel="noopener noreferrer">integrations.md</a> — GIS/mapas</td>
+</tr>
+<tr>
+<td>CANV-006</td>
+<td>Gestión de listas de recorrido</td>
+<td>OA, FiD</td>
+<td>No</td>
+<td>Escritorio</td>
+<td><a href="http://workflows.md" target="_blank" rel="noopener noreferrer">workflows.md</a> — trabajo de campo</td>
+</tr>
+<tr>
+<td>CANV-007</td>
+<td>Modo de campo — Inicio del turno</td>
+<td>V, TL</td>
+<td>Sí</td>
+<td>Principal</td>
+<td><a href="http://workflows.md" target="_blank" rel="noopener noreferrer">workflows.md</a> — trabajo de campo</td>
+</tr>
+<tr>
+<td>CANV-008</td>
+<td>Modo de campo — Vista de la lista de recorrido</td>
+<td>V, TL</td>
+<td>Sí</td>
+<td>Principal</td>
+<td><a href="http://workflows.md" target="_blank" rel="noopener noreferrer">workflows.md</a> — trabajo de campo</td>
+</tr>
+<tr>
+<td>CANV-009</td>
+<td>Modo de campo — Vista de mapa</td>
+<td>V, TL</td>
+<td>Sí</td>
+<td>Principal</td>
+<td><a href="http://integrations.md" target="_blank" rel="noopener noreferrer">integrations.md</a> — mapas sin conexión</td>
+</tr>
+<tr>
+<td>CANV-010</td>
+<td>Modo de campo — Ficha de puerta</td>
+<td>V, TL</td>
+<td>Sí</td>
+<td>Principal</td>
+<td><a href="http://workflows.md" target="_blank" rel="noopener noreferrer">workflows.md</a> — trabajo de campo</td>
+</tr>
+<tr>
+<td>CANV-011</td>
+<td>Modo de campo — Formulario de interacción</td>
+<td>V, TL</td>
+<td>Sí</td>
+<td>Principal</td>
+<td><a href="http://workflows.md" target="_blank" rel="noopener noreferrer">workflows.md</a> — trabajo de campo</td>
+</tr>
+<tr>
+<td>CANV-012</td>
+<td>Modo de campo — Fin del turno / balance</td>
+<td>V, TL</td>
+<td>Parcial</td>
+<td>Principal</td>
+<td><a href="http://workflows.md" target="_blank" rel="noopener noreferrer">workflows.md</a> — trabajo de campo</td>
+</tr>
+<tr>
+<td>CANV-013</td>
+<td>Revisión de resultados del trabajo de campo</td>
+<td>OA, FiD</td>
+<td>No</td>
+<td>Sí</td>
+<td><a href="http://workflows.md" target="_blank" rel="noopener noreferrer">workflows.md</a> — trabajo de campo</td>
+</tr>
+<tr>
+<td>CANV-014</td>
+<td>Mapa de avance del trabajo de campo</td>
+<td>OA, FiD</td>
+<td>No</td>
+<td>Escritorio</td>
+<td><a href="http://workflows.md" target="_blank" rel="noopener noreferrer">workflows.md</a> — informes</td>
+</tr>
+</tbody>
+</table>
+<h2 id="4-jornadas-de-llamadas" tabindex="-1"><a class="heading-anchor" href="#4-jornadas-de-llamadas" aria-hidden="true">#</a> 4. Jornadas de llamadas</h2>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Pantalla</th>
+<th>Arquetipos</th>
+<th>Sin conexión</th>
+<th>Móvil</th>
+<th>Ref. de especificación</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>PHONE-001</td>
+<td>Lista de campañas de jornada de llamadas</td>
+<td>OA, FiD</td>
+<td>No</td>
+<td>Sí</td>
+<td><a href="http://workflows.md" target="_blank" rel="noopener noreferrer">workflows.md</a> — jornadas de llamadas</td>
+</tr>
+<tr>
+<td>PHONE-002</td>
+<td>Crear/editar campaña de jornada de llamadas</td>
+<td>OA, FiD</td>
+<td>No</td>
+<td>Escritorio</td>
+<td><a href="http://workflows.md" target="_blank" rel="noopener noreferrer">workflows.md</a> — jornadas de llamadas</td>
+</tr>
+<tr>
+<td>PHONE-003</td>
+<td>Constructor de guiones de jornada de llamadas</td>
+<td>OA, FiD</td>
+<td>No</td>
+<td>Escritorio</td>
+<td><a href="http://workflows.md" target="_blank" rel="noopener noreferrer">workflows.md</a> — jornadas de llamadas</td>
+</tr>
+<tr>
+<td>PHONE-004</td>
+<td>Jornada de llamadas — Interfaz de llamada (BYOP)</td>
+<td>V</td>
+<td>No</td>
+<td>Principal</td>
+<td><a href="http://workflows.md" target="_blank" rel="noopener noreferrer">workflows.md</a> — jornadas de llamadas</td>
+</tr>
+<tr>
+<td>PHONE-005</td>
+<td>Jornada de llamadas — Interfaz de llamada (integrada)</td>
+<td>V</td>
+<td>No</td>
+<td>Principal</td>
+<td><a href="http://integrations.md" target="_blank" rel="noopener noreferrer">integrations.md</a> — telefonía</td>
+</tr>
+<tr>
+<td>PHONE-006</td>
+<td>Jornada de llamadas — Formulario de resultado de la llamada</td>
+<td>V</td>
+<td>No</td>
+<td>Principal</td>
+<td><a href="http://workflows.md" target="_blank" rel="noopener noreferrer">workflows.md</a> — jornadas de llamadas</td>
+</tr>
+<tr>
+<td>PHONE-007</td>
+<td>Panel de avance de la jornada de llamadas</td>
+<td>OA, FiD</td>
+<td>No</td>
+<td>Sí</td>
+<td><a href="http://workflows.md" target="_blank" rel="noopener noreferrer">workflows.md</a> — jornadas de llamadas</td>
+</tr>
+</tbody>
+</table>
+<h2 id="5-inscripción-de-votantes" tabindex="-1"><a class="heading-anchor" href="#5-inscripción-de-votantes" aria-hidden="true">#</a> 5. Inscripción de votantes</h2>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Pantalla</th>
+<th>Arquetipos</th>
+<th>Sin conexión</th>
+<th>Móvil</th>
+<th>Ref. de especificación</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>VREG-001</td>
+<td>Lista de jornadas de inscripción de votantes</td>
+<td>OA, FiD</td>
+<td>No</td>
+<td>Sí</td>
+<td><a href="http://workflows.md" target="_blank" rel="noopener noreferrer">workflows.md</a> — inscripción de votantes</td>
+</tr>
+<tr>
+<td>VREG-002</td>
+<td>Crear/editar jornada de inscripción de votantes</td>
+<td>OA, FiD</td>
+<td>No</td>
+<td>Escritorio</td>
+<td><a href="http://workflows.md" target="_blank" rel="noopener noreferrer">workflows.md</a> — inscripción de votantes</td>
+</tr>
+<tr>
+<td>VREG-003</td>
+<td>Selector de plantilla de jurisdicción para inscripción de votantes</td>
+<td>OA, FiD</td>
+<td>No</td>
+<td>Escritorio</td>
+<td><a href="http://workflows.md" target="_blank" rel="noopener noreferrer">workflows.md</a> — inscripción de votantes</td>
+</tr>
+<tr>
+<td>VREG-004</td>
+<td>Modo de campo — Formulario de inscripción de votantes</td>
+<td>V, TL</td>
+<td>Sí</td>
+<td>Principal</td>
+<td><a href="http://workflows.md" target="_blank" rel="noopener noreferrer">workflows.md</a> — inscripción de votantes</td>
+</tr>
+<tr>
+<td>VREG-005</td>
+<td>Modo de campo — Verificación de elegibilidad</td>
+<td>V, TL</td>
+<td>Sí</td>
+<td>Principal</td>
+<td><a href="http://workflows.md" target="_blank" rel="noopener noreferrer">workflows.md</a> — inscripción de votantes</td>
+</tr>
+<tr>
+<td>VREG-006</td>
+<td>Revisión de resultados de inscripción de votantes</td>
+<td>OA, FiD</td>
+<td>No</td>
+<td>Sí</td>
+<td><a href="http://workflows.md" target="_blank" rel="noopener noreferrer">workflows.md</a> — inscripción de votantes</td>
+</tr>
+</tbody>
+</table>
+<h2 id="6-recaudación-de-fondos" tabindex="-1"><a class="heading-anchor" href="#6-recaudación-de-fondos" aria-hidden="true">#</a> 6. Recaudación de fondos</h2>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Pantalla</th>
+<th>Arquetipos</th>
+<th>Sin conexión</th>
+<th>Móvil</th>
+<th>Ref. de especificación</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>FUND-001</td>
+<td>Lista de donaciones</td>
+<td>OA, FD</td>
+<td>No</td>
+<td>Sí</td>
+<td><a href="http://fundraising.md" target="_blank" rel="noopener noreferrer">fundraising.md</a> — tipos de donación</td>
+</tr>
+<tr>
+<td>FUND-002</td>
+<td>Detalle de la donación</td>
+<td>OA, FD</td>
+<td>No</td>
+<td>Sí</td>
+<td><a href="http://fundraising.md" target="_blank" rel="noopener noreferrer">fundraising.md</a> — tipos de donación</td>
+</tr>
+<tr>
+<td>FUND-003</td>
+<td>Constructor de formularios de donación</td>
+<td>OA, FD</td>
+<td>No</td>
+<td>Escritorio</td>
+<td><a href="http://fundraising.md" target="_blank" rel="noopener noreferrer">fundraising.md</a> — formularios de donación</td>
+</tr>
+<tr>
+<td>FUND-004</td>
+<td>Vista previa del formulario de donación</td>
+<td>OA, FD</td>
+<td>No</td>
+<td>Sí</td>
+<td><a href="http://fundraising.md" target="_blank" rel="noopener noreferrer">fundraising.md</a> — formularios de donación</td>
+</tr>
+<tr>
+<td>FUND-005</td>
+<td>Formulario de donación — Público (alojado)</td>
+<td>S, Público</td>
+<td>No</td>
+<td>Principal</td>
+<td><a href="http://fundraising.md" target="_blank" rel="noopener noreferrer">fundraising.md</a> — formularios de donación</td>
+</tr>
+<tr>
+<td>FUND-006</td>
+<td>Formulario de donación — Configuración de incrustación</td>
+<td>OA, FD</td>
+<td>No</td>
+<td>Escritorio</td>
+<td><a href="http://fundraising.md" target="_blank" rel="noopener noreferrer">fundraising.md</a> — formularios de donación</td>
+</tr>
+<tr>
+<td>FUND-007</td>
+<td>Gestión de donaciones recurrentes</td>
+<td>OA, FD</td>
+<td>No</td>
+<td>Escritorio</td>
+<td><a href="http://fundraising.md" target="_blank" rel="noopener noreferrer">fundraising.md</a> — recurrentes</td>
+</tr>
+<tr>
+<td>FUND-008</td>
+<td>Gestión de promesas de donación</td>
+<td>OA, FD</td>
+<td>No</td>
+<td>Escritorio</td>
+<td><a href="http://fundraising.md" target="_blank" rel="noopener noreferrer">fundraising.md</a> — promesas de donación</td>
+</tr>
+<tr>
+<td>FUND-009</td>
+<td>Procesamiento de reembolsos</td>
+<td>OA, FD</td>
+<td>No</td>
+<td>Escritorio</td>
+<td><a href="http://fundraising.md" target="_blank" rel="noopener noreferrer">fundraising.md</a> — reembolsos</td>
+</tr>
+<tr>
+<td>FUND-010</td>
+<td>Registro de donaciones en efectivo</td>
+<td>OA, FD, V</td>
+<td>Parcial</td>
+<td>Principal</td>
+<td><a href="http://fundraising.md" target="_blank" rel="noopener noreferrer">fundraising.md</a> — manejo de efectivo</td>
+</tr>
+<tr>
+<td>FUND-011</td>
+<td>Conciliación de efectivo</td>
+<td>OA, FD</td>
+<td>No</td>
+<td>Escritorio</td>
+<td><a href="http://fundraising.md" target="_blank" rel="noopener noreferrer">fundraising.md</a> — manejo de efectivo</td>
+</tr>
+<tr>
+<td>FUND-012</td>
+<td>Revisión de marcas de cumplimiento</td>
+<td>OA, FD</td>
+<td>No</td>
+<td>Escritorio</td>
+<td><a href="http://fundraising.md" target="_blank" rel="noopener noreferrer">fundraising.md</a> — prevención de fraude</td>
+</tr>
+<tr>
+<td>FUND-013</td>
+<td>Configuración de la prueba A/B</td>
+<td>OA, FD</td>
+<td>No</td>
+<td>Escritorio</td>
+<td><a href="http://fundraising.md" target="_blank" rel="noopener noreferrer">fundraising.md</a> — pruebas A/B</td>
+</tr>
+<tr>
+<td>FUND-014</td>
+<td>Resultados de la prueba A/B</td>
+<td>OA, FD</td>
+<td>No</td>
+<td>Escritorio</td>
+<td><a href="http://fundraising.md" target="_blank" rel="noopener noreferrer">fundraising.md</a> — pruebas A/B</td>
+</tr>
+<tr>
+<td>FUND-015</td>
+<td>Configuración del reparto de la alianza</td>
+<td>OA, FD</td>
+<td>No</td>
+<td>Escritorio</td>
+<td><a href="http://fundraising.md" target="_blank" rel="noopener noreferrer">fundraising.md</a> — recaudación en alianza</td>
+</tr>
+<tr>
+<td>FUND-016</td>
+<td>Informe de recaudación de la alianza</td>
+<td>OA, FD</td>
+<td>No</td>
+<td>Escritorio</td>
+<td><a href="http://fundraising.md" target="_blank" rel="noopener noreferrer">fundraising.md</a> — recaudación en alianza</td>
+</tr>
+<tr>
+<td>FUND-017</td>
+<td>Configuración del procesador de pagos</td>
+<td>OA</td>
+<td>No</td>
+<td>Escritorio</td>
+<td><a href="http://fundraising.md" target="_blank" rel="noopener noreferrer">fundraising.md</a> — procesadores</td>
+</tr>
+<tr>
+<td>FUND-018</td>
+<td>Lista de campañas de recaudación</td>
+<td>OA, FD</td>
+<td>No</td>
+<td>Sí</td>
+<td><a href="http://fundraising.md" target="_blank" rel="noopener noreferrer">fundraising.md</a> — analítica</td>
+</tr>
+<tr>
+<td>FUND-019</td>
+<td>Crear/editar campaña de recaudación</td>
+<td>OA, FD</td>
+<td>No</td>
+<td>Escritorio</td>
+<td><a href="http://fundraising.md" target="_blank" rel="noopener noreferrer">fundraising.md</a> — analítica</td>
+</tr>
+<tr>
+<td>FUND-020</td>
+<td>Generador de estados de cuenta anuales</td>
+<td>OA, FD</td>
+<td>No</td>
+<td>Escritorio</td>
+<td><a href="http://fundraising.md" target="_blank" rel="noopener noreferrer">fundraising.md</a> — experiencia del donante</td>
+</tr>
+</tbody>
+</table>
+<h2 id="7-comunicaciones" tabindex="-1"><a class="heading-anchor" href="#7-comunicaciones" aria-hidden="true">#</a> 7. Comunicaciones</h2>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Pantalla</th>
+<th>Arquetipos</th>
+<th>Sin conexión</th>
+<th>Móvil</th>
+<th>Ref. de especificación</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>COMM-001</td>
+<td>Lista de campañas de correo</td>
+<td>OA, CD</td>
+<td>No</td>
+<td>Sí</td>
+<td><a href="http://workflows.md" target="_blank" rel="noopener noreferrer">workflows.md</a> — comunicaciones</td>
+</tr>
+<tr>
+<td>COMM-002</td>
+<td>Constructor de campañas de correo</td>
+<td>OA, CD</td>
+<td>No</td>
+<td>Escritorio</td>
+<td><a href="http://workflows.md" target="_blank" rel="noopener noreferrer">workflows.md</a> — comunicaciones</td>
+</tr>
+<tr>
+<td>COMM-003</td>
+<td>Constructor de plantillas de correo</td>
+<td>OA, CD</td>
+<td>No</td>
+<td>Escritorio</td>
+<td><a href="http://workflows.md" target="_blank" rel="noopener noreferrer">workflows.md</a> — comunicaciones</td>
+</tr>
+<tr>
+<td>COMM-004</td>
+<td>Biblioteca de plantillas de correo</td>
+<td>OA, CD</td>
+<td>No</td>
+<td>Sí</td>
+<td><a href="http://workflows.md" target="_blank" rel="noopener noreferrer">workflows.md</a> — comunicaciones</td>
+</tr>
+<tr>
+<td>COMM-005</td>
+<td>Redactor de SMS/WhatsApp</td>
+<td>OA, CD</td>
+<td>No</td>
+<td>Sí</td>
+<td><a href="http://workflows.md" target="_blank" rel="noopener noreferrer">workflows.md</a> — comunicaciones</td>
+</tr>
+<tr>
+<td>COMM-006</td>
+<td>Analítica de comunicaciones</td>
+<td>OA, CD</td>
+<td>No</td>
+<td>Escritorio</td>
+<td><a href="http://workflows.md" target="_blank" rel="noopener noreferrer">workflows.md</a> — informes</td>
+</tr>
+<tr>
+<td>COMM-007</td>
+<td>Gestión del consentimiento</td>
+<td>OA, CD, DM</td>
+<td>No</td>
+<td>Escritorio</td>
+<td><a href="http://compliance.md" target="_blank" rel="noopener noreferrer">compliance.md</a> — consentimiento</td>
+</tr>
+<tr>
+<td>COMM-008</td>
+<td>Preferencias de comunicación (personal)</td>
+<td>OA, CD</td>
+<td>No</td>
+<td>Escritorio</td>
+<td><a href="http://compliance.md" target="_blank" rel="noopener noreferrer">compliance.md</a> — consentimiento</td>
+</tr>
+<tr>
+<td>COMM-009</td>
+<td>Gestión de bajas</td>
+<td>OA, CD</td>
+<td>No</td>
+<td>Escritorio</td>
+<td><a href="http://compliance.md" target="_blank" rel="noopener noreferrer">compliance.md</a> — consentimiento</td>
+</tr>
+<tr>
+<td>COMM-010</td>
+<td>Configuración del dominio de envío de correo</td>
+<td>OA</td>
+<td>No</td>
+<td>Escritorio</td>
+<td><a href="http://integrations.md" target="_blank" rel="noopener noreferrer">integrations.md</a> — correo</td>
+</tr>
+</tbody>
+</table>
+<h2 id="8-redes-sociales" tabindex="-1"><a class="heading-anchor" href="#8-redes-sociales" aria-hidden="true">#</a> 8. Redes sociales</h2>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Pantalla</th>
+<th>Arquetipos</th>
+<th>Sin conexión</th>
+<th>Móvil</th>
+<th>Ref. de especificación</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SOCIAL-001</td>
+<td>Panel de redes sociales</td>
+<td>OA, CD</td>
+<td>No</td>
+<td>Sí</td>
+<td><a href="http://press.md" target="_blank" rel="noopener noreferrer">press.md</a> — redes sociales</td>
+</tr>
+<tr>
+<td>SOCIAL-002</td>
+<td>Redactor de publicaciones (multiplataforma)</td>
+<td>OA, CD</td>
+<td>No</td>
+<td>Escritorio</td>
+<td><a href="http://press.md" target="_blank" rel="noopener noreferrer">press.md</a> — creación de publicaciones</td>
+</tr>
+<tr>
+<td>SOCIAL-003</td>
+<td>Calendario / programación de publicaciones</td>
+<td>OA, CD</td>
+<td>No</td>
+<td>Escritorio</td>
+<td><a href="http://press.md" target="_blank" rel="noopener noreferrer">press.md</a> — programación</td>
+</tr>
+<tr>
+<td>SOCIAL-004</td>
+<td>Analítica de publicaciones</td>
+<td>OA, CD</td>
+<td>No</td>
+<td>Escritorio</td>
+<td><a href="http://press.md" target="_blank" rel="noopener noreferrer">press.md</a> — analítica</td>
+</tr>
+<tr>
+<td>SOCIAL-005</td>
+<td>Conexión de cuentas de redes sociales</td>
+<td>OA</td>
+<td>No</td>
+<td>Escritorio</td>
+<td><a href="http://press.md" target="_blank" rel="noopener noreferrer">press.md</a> — OAuth/alternativa</td>
+</tr>
+<tr>
+<td>SOCIAL-006</td>
+<td>Vista previa por plataforma</td>
+<td>OA, CD</td>
+<td>No</td>
+<td>Escritorio</td>
+<td><a href="http://press.md" target="_blank" rel="noopener noreferrer">press.md</a> — creación de publicaciones</td>
+</tr>
+</tbody>
+</table>
+<h2 id="9-eventos" tabindex="-1"><a class="heading-anchor" href="#9-eventos" aria-hidden="true">#</a> 9. Eventos</h2>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Pantalla</th>
+<th>Arquetipos</th>
+<th>Sin conexión</th>
+<th>Móvil</th>
+<th>Ref. de especificación</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>EVT-001</td>
+<td>Lista de eventos</td>
+<td>OA, VC, V, TL, S</td>
+<td>No</td>
+<td>Sí</td>
+<td><a href="http://workflows.md" target="_blank" rel="noopener noreferrer">workflows.md</a> — eventos</td>
+</tr>
+<tr>
+<td>EVT-002</td>
+<td>Crear/editar evento</td>
+<td>OA, VC</td>
+<td>No</td>
+<td>Escritorio</td>
+<td><a href="http://workflows.md" target="_blank" rel="noopener noreferrer">workflows.md</a> — eventos</td>
+</tr>
+<tr>
+<td>EVT-003</td>
+<td>Detalle del evento</td>
+<td>OA, VC, V, TL, S</td>
+<td>No</td>
+<td>Sí</td>
+<td><a href="http://workflows.md" target="_blank" rel="noopener noreferrer">workflows.md</a> — eventos</td>
+</tr>
+<tr>
+<td>EVT-004</td>
+<td>Gestión de confirmaciones de asistencia</td>
+<td>OA, VC</td>
+<td>No</td>
+<td>Sí</td>
+<td><a href="http://workflows.md" target="_blank" rel="noopener noreferrer">workflows.md</a> — eventos</td>
+</tr>
+<tr>
+<td>EVT-005</td>
+<td>Herramienta de registro de entrada al evento</td>
+<td>OA, VC, TL</td>
+<td>Sí</td>
+<td>Principal</td>
+<td><a href="http://workflows.md" target="_blank" rel="noopener noreferrer">workflows.md</a> — eventos</td>
+</tr>
+<tr>
+<td>EVT-006</td>
+<td>Formulario de confirmación de asistencia (público)</td>
+<td>S, Público</td>
+<td>No</td>
+<td>Principal</td>
+<td><a href="http://workflows.md" target="_blank" rel="noopener noreferrer">workflows.md</a> — eventos</td>
+</tr>
+<tr>
+<td>EVT-007</td>
+<td>Página del evento (pública)</td>
+<td>Público</td>
+<td>No</td>
+<td>Principal</td>
+<td><a href="http://workflows.md" target="_blank" rel="noopener noreferrer">workflows.md</a> — eventos</td>
+</tr>
+<tr>
+<td>EVT-008</td>
+<td>Métricas del evento</td>
+<td>OA, VC</td>
+<td>No</td>
+<td>Escritorio</td>
+<td><a href="http://workflows.md" target="_blank" rel="noopener noreferrer">workflows.md</a> — eventos</td>
+</tr>
+<tr>
+<td>EVT-009</td>
+<td>Configuración de evento virtual</td>
+<td>OA, VC</td>
+<td>No</td>
+<td>Escritorio</td>
+<td><a href="http://workflows.md" target="_blank" rel="noopener noreferrer">workflows.md</a> — eventos</td>
+</tr>
+<tr>
+<td>EVT-010</td>
+<td>Constructor de encuestas posteriores al evento</td>
+<td>OA, VC</td>
+<td>No</td>
+<td>Escritorio</td>
+<td><a href="http://workflows.md" target="_blank" rel="noopener noreferrer">workflows.md</a> — eventos</td>
+</tr>
+</tbody>
+</table>
+<h2 id="10-activismo" tabindex="-1"><a class="heading-anchor" href="#10-activismo" aria-hidden="true">#</a> 10. Activismo</h2>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Pantalla</th>
+<th>Arquetipos</th>
+<th>Sin conexión</th>
+<th>Móvil</th>
+<th>Ref. de especificación</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ACT-001</td>
+<td>Lista de campañas de activismo</td>
+<td>OA, CD</td>
+<td>No</td>
+<td>Sí</td>
+<td><a href="http://workflows.md" target="_blank" rel="noopener noreferrer">workflows.md</a> — activismo</td>
+</tr>
+<tr>
+<td>ACT-002</td>
+<td>Configuración de acción de cartas/correos</td>
+<td>OA, CD</td>
+<td>No</td>
+<td>Escritorio</td>
+<td><a href="http://workflows.md" target="_blank" rel="noopener noreferrer">workflows.md</a> — activismo</td>
+</tr>
+<tr>
+<td>ACT-003</td>
+<td>Configuración de petición</td>
+<td>OA, CD</td>
+<td>No</td>
+<td>Escritorio</td>
+<td><a href="http://workflows.md" target="_blank" rel="noopener noreferrer">workflows.md</a> — activismo</td>
+</tr>
+<tr>
+<td>ACT-004</td>
+<td>Configuración de campaña de comentarios públicos</td>
+<td>OA, CD</td>
+<td>No</td>
+<td>Escritorio</td>
+<td><a href="http://workflows.md" target="_blank" rel="noopener noreferrer">workflows.md</a> — activismo</td>
+</tr>
+<tr>
+<td>ACT-005</td>
+<td>Página de acción (pública)</td>
+<td>S, Público</td>
+<td>No</td>
+<td>Principal</td>
+<td><a href="http://workflows.md" target="_blank" rel="noopener noreferrer">workflows.md</a> — activismo</td>
+</tr>
+<tr>
+<td>ACT-006</td>
+<td>Página de petición (pública)</td>
+<td>S, Público</td>
+<td>No</td>
+<td>Principal</td>
+<td><a href="http://workflows.md" target="_blank" rel="noopener noreferrer">workflows.md</a> — activismo</td>
+</tr>
+<tr>
+<td>ACT-007</td>
+<td>Vista previa de mensajes generados por IA</td>
+<td>S</td>
+<td>No</td>
+<td>Principal</td>
+<td><a href="http://workflows.md" target="_blank" rel="noopener noreferrer">workflows.md</a> — activismo</td>
+</tr>
+<tr>
+<td>ACT-008</td>
+<td>Analítica de campañas de activismo</td>
+<td>OA, CD</td>
+<td>No</td>
+<td>Escritorio</td>
+<td><a href="http://workflows.md" target="_blank" rel="noopener noreferrer">workflows.md</a> — activismo</td>
+</tr>
+<tr>
+<td>ACT-009</td>
+<td>Documentación del acto de entrega</td>
+<td>OA, CD</td>
+<td>No</td>
+<td>Sí</td>
+<td><a href="http://workflows.md" target="_blank" rel="noopener noreferrer">workflows.md</a> — activismo</td>
+</tr>
+</tbody>
+</table>
+<h2 id="11-prensa-y-medios" tabindex="-1"><a class="heading-anchor" href="#11-prensa-y-medios" aria-hidden="true">#</a> 11. Prensa y medios</h2>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Pantalla</th>
+<th>Arquetipos</th>
+<th>Sin conexión</th>
+<th>Móvil</th>
+<th>Ref. de especificación</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>PRESS-001</td>
+<td>Lista de contactos de medios</td>
+<td>OA, CD</td>
+<td>No</td>
+<td>Sí</td>
+<td><a href="http://press.md" target="_blank" rel="noopener noreferrer">press.md</a> — contactos de medios</td>
+</tr>
+<tr>
+<td>PRESS-002</td>
+<td>Detalle del contacto de medios</td>
+<td>OA, CD</td>
+<td>No</td>
+<td>Sí</td>
+<td><a href="http://press.md" target="_blank" rel="noopener noreferrer">press.md</a> — contactos de medios</td>
+</tr>
+<tr>
+<td>PRESS-003</td>
+<td>Gestión de listas de medios</td>
+<td>OA, CD</td>
+<td>No</td>
+<td>Escritorio</td>
+<td><a href="http://press.md" target="_blank" rel="noopener noreferrer">press.md</a> — listas de medios</td>
+</tr>
+<tr>
+<td>PRESS-004</td>
+<td>Constructor de comunicados de prensa</td>
+<td>OA, CD</td>
+<td>No</td>
+<td>Escritorio</td>
+<td><a href="http://press.md" target="_blank" rel="noopener noreferrer">press.md</a> — comunicados de prensa</td>
+</tr>
+<tr>
+<td>PRESS-005</td>
+<td>Vista previa del comunicado de prensa</td>
+<td>OA, CD</td>
+<td>No</td>
+<td>Sí</td>
+<td><a href="http://press.md" target="_blank" rel="noopener noreferrer">press.md</a> — comunicados de prensa</td>
+</tr>
+<tr>
+<td>PRESS-006</td>
+<td>Distribución del comunicado de prensa</td>
+<td>OA, CD</td>
+<td>No</td>
+<td>Escritorio</td>
+<td><a href="http://press.md" target="_blank" rel="noopener noreferrer">press.md</a> — comunicados de prensa</td>
+</tr>
+<tr>
+<td>PRESS-007</td>
+<td>Constructor de avisos a medios</td>
+<td>OA, CD</td>
+<td>No</td>
+<td>Escritorio</td>
+<td><a href="http://press.md" target="_blank" rel="noopener noreferrer">press.md</a> — avisos a medios</td>
+</tr>
+<tr>
+<td>PRESS-008</td>
+<td>Constructor de declaraciones</td>
+<td>OA, CD</td>
+<td>No</td>
+<td>Escritorio</td>
+<td><a href="http://press.md" target="_blank" rel="noopener noreferrer">press.md</a> — declaraciones</td>
+</tr>
+<tr>
+<td>PRESS-009</td>
+<td>Gestión del kit de prensa</td>
+<td>OA, CD</td>
+<td>No</td>
+<td>Escritorio</td>
+<td><a href="http://press.md" target="_blank" rel="noopener noreferrer">press.md</a> — kit de prensa</td>
+</tr>
+<tr>
+<td>PRESS-010</td>
+<td>Registro de cobertura</td>
+<td>OA, CD</td>
+<td>No</td>
+<td>Escritorio</td>
+<td><a href="http://press.md" target="_blank" rel="noopener noreferrer">press.md</a> — seguimiento de cobertura</td>
+</tr>
+<tr>
+<td>PRESS-011</td>
+<td>Analítica de cobertura</td>
+<td>OA, CD</td>
+<td>No</td>
+<td>Escritorio</td>
+<td><a href="http://press.md" target="_blank" rel="noopener noreferrer">press.md</a> — analítica de cobertura</td>
+</tr>
+<tr>
+<td>PRESS-012</td>
+<td>Flujo de respaldos</td>
+<td>OA, CD</td>
+<td>No</td>
+<td>Escritorio</td>
+<td><a href="http://press.md" target="_blank" rel="noopener noreferrer">press.md</a> — respaldos</td>
+</tr>
+<tr>
+<td>PRESS-013</td>
+<td>Detalle del respaldo</td>
+<td>OA, CD</td>
+<td>No</td>
+<td>Sí</td>
+<td><a href="http://press.md" target="_blank" rel="noopener noreferrer">press.md</a> — respaldos</td>
+</tr>
+<tr>
+<td>PRESS-014</td>
+<td>Biblioteca de puntos de mensaje</td>
+<td>OA, CD</td>
+<td>No</td>
+<td>Sí</td>
+<td><a href="http://press.md" target="_blank" rel="noopener noreferrer">press.md</a> — voceros</td>
+</tr>
+<tr>
+<td>PRESS-015</td>
+<td>Agenda de entrevistas</td>
+<td>OA, CD</td>
+<td>No</td>
+<td>Sí</td>
+<td><a href="http://press.md" target="_blank" rel="noopener noreferrer">press.md</a> — actos con medios</td>
+</tr>
+<tr>
+<td>PRESS-016</td>
+<td>Configuración de voceros</td>
+<td>OA</td>
+<td>No</td>
+<td>Escritorio</td>
+<td><a href="http://press.md" target="_blank" rel="noopener noreferrer">press.md</a> — voceros</td>
+</tr>
+</tbody>
+</table>
+<h2 id="12-gotv-y-día-de-elecciones" tabindex="-1"><a class="heading-anchor" href="#12-gotv-y-día-de-elecciones" aria-hidden="true">#</a> 12. GOTV y día de elecciones</h2>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Pantalla</th>
+<th>Arquetipos</th>
+<th>Sin conexión</th>
+<th>Móvil</th>
+<th>Ref. de especificación</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>GOTV-001</td>
+<td>Constructor del universo GOTV</td>
+<td>OA, FiD</td>
+<td>No</td>
+<td>Escritorio</td>
+<td><a href="http://gotv.md" target="_blank" rel="noopener noreferrer">gotv.md</a> — definición del universo</td>
+</tr>
+<tr>
+<td>GOTV-002</td>
+<td>Carga de datos de voto adelantado</td>
+<td>OA, FiD, DM</td>
+<td>No</td>
+<td>Escritorio</td>
+<td><a href="http://gotv.md" target="_blank" rel="noopener noreferrer">gotv.md</a> — voto adelantado</td>
+</tr>
+<tr>
+<td>GOTV-003</td>
+<td>Configuración de los puntos de concentración de voluntarios</td>
+<td>OA, FiD, VC</td>
+<td>No</td>
+<td>Escritorio</td>
+<td><a href="http://gotv.md" target="_blank" rel="noopener noreferrer">gotv.md</a> — concentración</td>
+</tr>
+<tr>
+<td>GOTV-004</td>
+<td>Corte de territorios para GOTV</td>
+<td>OA, FiD</td>
+<td>No</td>
+<td>Escritorio</td>
+<td><a href="http://gotv.md" target="_blank" rel="noopener noreferrer">gotv.md</a> — corte de territorios</td>
+</tr>
+<tr>
+<td>GOTV-005</td>
+<td>Plan de comunicaciones del día de elecciones</td>
+<td>OA, FiD, CD</td>
+<td>No</td>
+<td>Escritorio</td>
+<td><a href="http://gotv.md" target="_blank" rel="noopener noreferrer">gotv.md</a> — plan de comunicaciones</td>
+</tr>
+<tr>
+<td>GOTV-006</td>
+<td>Registro de observadores electorales</td>
+<td>OA, FiD</td>
+<td>No</td>
+<td>Escritorio</td>
+<td><a href="http://gotv.md" target="_blank" rel="noopener noreferrer">gotv.md</a> — preparación de observadores</td>
+</tr>
+<tr>
+<td>GOTV-007</td>
+<td>Seguimiento de credenciales de observadores electorales</td>
+<td>OA, FiD</td>
+<td>No</td>
+<td>Escritorio</td>
+<td><a href="http://gotv.md" target="_blank" rel="noopener noreferrer">gotv.md</a> — preparación de observadores</td>
+</tr>
+<tr>
+<td>GOTV-008</td>
+<td>Modo de campo — Ficha de puerta de GOTV</td>
+<td>V, TL</td>
+<td>Sí</td>
+<td>Principal</td>
+<td><a href="http://gotv.md" target="_blank" rel="noopener noreferrer">gotv.md</a> — trabajo de campo de GOTV</td>
+</tr>
+<tr>
+<td>GOTV-009</td>
+<td>Modo de campo — Lista de recorrido de GOTV</td>
+<td>V, TL</td>
+<td>Sí</td>
+<td>Principal</td>
+<td><a href="http://gotv.md" target="_blank" rel="noopener noreferrer">gotv.md</a> — trabajo de campo de GOTV</td>
+</tr>
+<tr>
+<td>GOTV-010</td>
+<td>Interfaz de llamadas de seguimiento</td>
+<td>V</td>
+<td>No</td>
+<td>Principal</td>
+<td><a href="http://gotv.md" target="_blank" rel="noopener noreferrer">gotv.md</a> — llamadas de seguimiento</td>
+</tr>
+<tr>
+<td>GOTV-011</td>
+<td>Formulario de solicitud de transporte</td>
+<td>V, TL, S</td>
+<td>Parcial</td>
+<td>Principal</td>
+<td><a href="http://gotv.md" target="_blank" rel="noopener noreferrer">gotv.md</a> — transporte a las urnas</td>
+</tr>
+<tr>
+<td>GOTV-012</td>
+<td>Coordinación de transporte — Vista del despachador</td>
+<td>OA, FiD, VC</td>
+<td>No</td>
+<td>Sí</td>
+<td><a href="http://gotv.md" target="_blank" rel="noopener noreferrer">gotv.md</a> — transporte a las urnas</td>
+</tr>
+<tr>
+<td>GOTV-013</td>
+<td>Coordinación de transporte — Vista del conductor</td>
+<td>V</td>
+<td>No</td>
+<td>Principal</td>
+<td><a href="http://gotv.md" target="_blank" rel="noopener noreferrer">gotv.md</a> — transporte a las urnas</td>
+</tr>
+<tr>
+<td>GOTV-014</td>
+<td>Registro de entrada del observador electoral</td>
+<td>V</td>
+<td>No</td>
+<td>Principal</td>
+<td><a href="http://gotv.md" target="_blank" rel="noopener noreferrer">gotv.md</a> — observación electoral</td>
+</tr>
+<tr>
+<td>GOTV-015</td>
+<td>Formulario de reporte de problemas del observador electoral</td>
+<td>V</td>
+<td>Parcial</td>
+<td>Principal</td>
+<td><a href="http://gotv.md" target="_blank" rel="noopener noreferrer">gotv.md</a> — reporte de problemas</td>
+</tr>
+<tr>
+<td>GOTV-016</td>
+<td>Cola de problemas de observadores electorales</td>
+<td>OA, FiD</td>
+<td>No</td>
+<td>Sí</td>
+<td><a href="http://gotv.md" target="_blank" rel="noopener noreferrer">gotv.md</a> — escalamiento de problemas</td>
+</tr>
+<tr>
+<td>GOTV-017</td>
+<td>Panel de participación — Vista de mapa</td>
+<td>OA, FiD</td>
+<td>No</td>
+<td>Sí</td>
+<td><a href="http://gotv.md" target="_blank" rel="noopener noreferrer">gotv.md</a> — seguimiento de participación</td>
+</tr>
+<tr>
+<td>GOTV-018</td>
+<td>Panel de participación — Vista por segmentos</td>
+<td>OA, FiD</td>
+<td>No</td>
+<td>Escritorio</td>
+<td><a href="http://gotv.md" target="_blank" rel="noopener noreferrer">gotv.md</a> — seguimiento de participación</td>
+</tr>
+<tr>
+<td>GOTV-019</td>
+<td>Sugerencias de reasignación</td>
+<td>OA, FiD</td>
+<td>No</td>
+<td>Sí</td>
+<td><a href="http://gotv.md" target="_blank" rel="noopener noreferrer">gotv.md</a> — reasignación dinámica</td>
+</tr>
+<tr>
+<td>GOTV-020</td>
+<td>Ingreso de resultados de la noche electoral</td>
+<td>V</td>
+<td>No</td>
+<td>Principal</td>
+<td><a href="http://gotv.md" target="_blank" rel="noopener noreferrer">gotv.md</a> — seguimiento de resultados</td>
+</tr>
+<tr>
+<td>GOTV-021</td>
+<td>Panel de resultados de la noche electoral</td>
+<td>OA, FiD</td>
+<td>No</td>
+<td>Sí</td>
+<td><a href="http://gotv.md" target="_blank" rel="noopener noreferrer">gotv.md</a> — seguimiento de resultados</td>
+</tr>
+<tr>
+<td>GOTV-022</td>
+<td>Análisis posterior a la elección</td>
+<td>OA, FiD</td>
+<td>No</td>
+<td>Escritorio</td>
+<td><a href="http://gotv.md" target="_blank" rel="noopener noreferrer">gotv.md</a> — posterior a la elección</td>
+</tr>
+<tr>
+<td>GOTV-023</td>
+<td>Registro de entrada en el punto de concentración</td>
+<td>TL</td>
+<td>No</td>
+<td>Principal</td>
+<td><a href="http://gotv.md" target="_blank" rel="noopener noreferrer">gotv.md</a> — concentración de voluntarios</td>
+</tr>
+</tbody>
+</table>
+<h2 id="13-mensajería" tabindex="-1"><a class="heading-anchor" href="#13-mensajería" aria-hidden="true">#</a> 13. Mensajería</h2>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Pantalla</th>
+<th>Arquetipos</th>
+<th>Sin conexión</th>
+<th>Móvil</th>
+<th>Ref. de especificación</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>MSG-001</td>
+<td>Lista de mensajes (bandeja de entrada)</td>
+<td>Toda persona autenticada</td>
+<td>Parcial</td>
+<td>Principal</td>
+<td><a href="http://messaging.md" target="_blank" rel="noopener noreferrer">messaging.md</a> — mensajes directos</td>
+</tr>
+<tr>
+<td>MSG-002</td>
+<td>Vista de conversación (mensaje directo)</td>
+<td>Toda persona autenticada</td>
+<td>Parcial</td>
+<td>Principal</td>
+<td><a href="http://messaging.md" target="_blank" rel="noopener noreferrer">messaging.md</a> — mensajes directos</td>
+</tr>
+<tr>
+<td>MSG-003</td>
+<td>Vista de conversación (grupo)</td>
+<td>Toda persona autenticada</td>
+<td>Parcial</td>
+<td>Principal</td>
+<td><a href="http://messaging.md" target="_blank" rel="noopener noreferrer">messaging.md</a> — grupos</td>
+</tr>
+<tr>
+<td>MSG-004</td>
+<td>Vista de hilo</td>
+<td>Toda persona autenticada</td>
+<td>Parcial</td>
+<td>Principal</td>
+<td><a href="http://messaging.md" target="_blank" rel="noopener noreferrer">messaging.md</a> — hilos</td>
+</tr>
+<tr>
+<td>MSG-005</td>
+<td>Crear/editar grupo</td>
+<td>OA, CD, FD, FiD, VC</td>
+<td>No</td>
+<td>Sí</td>
+<td><a href="http://messaging.md" target="_blank" rel="noopener noreferrer">messaging.md</a> — grupos</td>
+</tr>
+<tr>
+<td>MSG-006</td>
+<td>Redactor de difusiones</td>
+<td>OA, CD, FiD, VC</td>
+<td>No</td>
+<td>Escritorio</td>
+<td><a href="http://messaging.md" target="_blank" rel="noopener noreferrer">messaging.md</a> — difusiones</td>
+</tr>
+<tr>
+<td>MSG-007</td>
+<td>Canal del centro de mando</td>
+<td>OA, FiD, CD, VC</td>
+<td>No</td>
+<td>Sí</td>
+<td><a href="http://messaging.md" target="_blank" rel="noopener noreferrer">messaging.md</a> — centro de mando</td>
+</tr>
+<tr>
+<td>MSG-008</td>
+<td>Hilo contextual (evento)</td>
+<td>OA, VC, TL</td>
+<td>Parcial</td>
+<td>Sí</td>
+<td><a href="http://messaging.md" target="_blank" rel="noopener noreferrer">messaging.md</a> — contextuales</td>
+</tr>
+<tr>
+<td>MSG-009</td>
+<td>Hilo contextual (turno)</td>
+<td>OA, FiD, VC, TL</td>
+<td>Parcial</td>
+<td>Sí</td>
+<td><a href="http://messaging.md" target="_blank" rel="noopener noreferrer">messaging.md</a> — contextuales</td>
+</tr>
+<tr>
+<td>MSG-010</td>
+<td>Hilo contextual (problema)</td>
+<td>OA, FiD</td>
+<td>No</td>
+<td>Sí</td>
+<td><a href="http://messaging.md" target="_blank" rel="noopener noreferrer">messaging.md</a> — contextuales</td>
+</tr>
+<tr>
+<td>MSG-011</td>
+<td>Hilo contextual (donación marcada)</td>
+<td>OA, FD</td>
+<td>No</td>
+<td>Escritorio</td>
+<td><a href="http://messaging.md" target="_blank" rel="noopener noreferrer">messaging.md</a> — contextuales</td>
+</tr>
+<tr>
+<td>MSG-012</td>
+<td>Vista de informes del candidato</td>
+<td>C</td>
+<td>Parcial</td>
+<td>Principal</td>
+<td><a href="http://messaging.md" target="_blank" rel="noopener noreferrer">messaging.md</a> — candidato</td>
+</tr>
+<tr>
+<td>MSG-013</td>
+<td>Cola de aprobaciones del candidato</td>
+<td>C</td>
+<td>No</td>
+<td>Principal</td>
+<td><a href="http://messaging.md" target="_blank" rel="noopener noreferrer">messaging.md</a> — candidato</td>
+</tr>
+<tr>
+<td>MSG-014</td>
+<td>Canal de la alianza</td>
+<td>OA</td>
+<td>No</td>
+<td>Sí</td>
+<td><a href="http://messaging.md" target="_blank" rel="noopener noreferrer">messaging.md</a> — alianza</td>
+</tr>
+</tbody>
+</table>
+<h2 id="14-ajustes-y-administración" tabindex="-1"><a class="heading-anchor" href="#14-ajustes-y-administración" aria-hidden="true">#</a> 14. Ajustes y administración</h2>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Pantalla</th>
+<th>Arquetipos</th>
+<th>Sin conexión</th>
+<th>Móvil</th>
+<th>Ref. de especificación</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SET-001</td>
+<td>Perfil e identidad visual de la organización</td>
+<td>OA</td>
+<td>No</td>
+<td>Escritorio</td>
+<td><a href="http://workflows.md" target="_blank" rel="noopener noreferrer">workflows.md</a> — puesta en marcha</td>
+</tr>
+<tr>
+<td>SET-002</td>
+<td>Editor de plantillas de rol</td>
+<td>OA</td>
+<td>No</td>
+<td>Escritorio</td>
+<td><a href="http://users.md" target="_blank" rel="noopener noreferrer">users.md</a> — permisos</td>
+</tr>
+<tr>
+<td>SET-003</td>
+<td>Panel de ajuste de permisos</td>
+<td>OA</td>
+<td>No</td>
+<td>Escritorio</td>
+<td><a href="http://users.md" target="_blank" rel="noopener noreferrer">users.md</a> — permisos</td>
+</tr>
+<tr>
+<td>SET-004</td>
+<td>Lista de gestión del personal</td>
+<td>OA</td>
+<td>No</td>
+<td>Escritorio</td>
+<td><a href="http://users.md" target="_blank" rel="noopener noreferrer">users.md</a> — personal</td>
+</tr>
+<tr>
+<td>SET-005</td>
+<td>Flujo de invitación del personal</td>
+<td>OA</td>
+<td>No</td>
+<td>Escritorio</td>
+<td><a href="http://workflows.md" target="_blank" rel="noopener noreferrer">workflows.md</a> — puesta en marcha</td>
+</tr>
+<tr>
+<td>SET-006</td>
+<td>Configuración del ámbito geográfico</td>
+<td>OA</td>
+<td>No</td>
+<td>Escritorio</td>
+<td><a href="http://users.md" target="_blank" rel="noopener noreferrer">users.md</a> — ámbitos</td>
+</tr>
+<tr>
+<td>SET-007</td>
+<td>Configuración del período de campaña</td>
+<td>OA</td>
+<td>No</td>
+<td>Escritorio</td>
+<td><a href="http://compliance.md" target="_blank" rel="noopener noreferrer">compliance.md</a> — períodos de campaña</td>
+</tr>
+<tr>
+<td>SET-008</td>
+<td>Configuración de cumplimiento</td>
+<td>OA</td>
+<td>No</td>
+<td>Escritorio</td>
+<td><a href="http://compliance.md" target="_blank" rel="noopener noreferrer">compliance.md</a> — configuración por organización</td>
+</tr>
+<tr>
+<td>SET-009</td>
+<td>Configuración de límites de contribución</td>
+<td>OA</td>
+<td>No</td>
+<td>Escritorio</td>
+<td><a href="http://compliance.md" target="_blank" rel="noopener noreferrer">compliance.md</a> — financiamiento de campañas</td>
+</tr>
+<tr>
+<td>SET-010</td>
+<td>Configuración del texto del aviso legal</td>
+<td>OA</td>
+<td>No</td>
+<td>Escritorio</td>
+<td><a href="http://compliance.md" target="_blank" rel="noopener noreferrer">compliance.md</a> — avisos legales</td>
+</tr>
+<tr>
+<td>SET-011</td>
+<td>Política de conservación de datos</td>
+<td>OA</td>
+<td>No</td>
+<td>Escritorio</td>
+<td><a href="http://compliance.md" target="_blank" rel="noopener noreferrer">compliance.md</a> — conservación</td>
+</tr>
+<tr>
+<td>SET-012</td>
+<td>Centro de ajustes de integraciones</td>
+<td>OA</td>
+<td>No</td>
+<td>Escritorio</td>
+<td><a href="http://integrations.md" target="_blank" rel="noopener noreferrer">integrations.md</a></td>
+</tr>
+<tr>
+<td>SET-013</td>
+<td>Configuración de WhatsApp Business</td>
+<td>OA</td>
+<td>No</td>
+<td>Escritorio</td>
+<td><a href="http://integrations.md" target="_blank" rel="noopener noreferrer">integrations.md</a> — WhatsApp</td>
+</tr>
+<tr>
+<td>SET-014</td>
+<td>Configuración del proveedor de SMS</td>
+<td>OA</td>
+<td>No</td>
+<td>Escritorio</td>
+<td><a href="http://integrations.md" target="_blank" rel="noopener noreferrer">integrations.md</a> — SMS</td>
+</tr>
+<tr>
+<td>SET-015</td>
+<td>Configuración del dominio de correo</td>
+<td>OA</td>
+<td>No</td>
+<td>Escritorio</td>
+<td><a href="http://integrations.md" target="_blank" rel="noopener noreferrer">integrations.md</a> — correo</td>
+</tr>
+<tr>
+<td>SET-016</td>
+<td>Conexiones de cuentas de redes sociales</td>
+<td>OA</td>
+<td>No</td>
+<td>Escritorio</td>
+<td><a href="http://press.md" target="_blank" rel="noopener noreferrer">press.md</a> — redes sociales</td>
+</tr>
+<tr>
+<td>SET-017</td>
+<td>Facturación y suscripción</td>
+<td>OA</td>
+<td>No</td>
+<td>Escritorio</td>
+<td><a href="http://fundraising.md" target="_blank" rel="noopener noreferrer">fundraising.md</a> — precios</td>
+</tr>
+<tr>
+<td>SET-018</td>
+<td>Visor del registro de auditoría</td>
+<td>OA</td>
+<td>No</td>
+<td>Escritorio</td>
+<td><a href="http://security.md" target="_blank" rel="noopener noreferrer">security.md</a> — auditoría</td>
+</tr>
+<tr>
+<td>SET-019</td>
+<td>Ajustes de seguridad</td>
+<td>OA</td>
+<td>No</td>
+<td>Escritorio</td>
+<td><a href="http://security.md" target="_blank" rel="noopener noreferrer">security.md</a> — configuración de niveles</td>
+</tr>
+<tr>
+<td>SET-020</td>
+<td>Gestión de llaves de cifrado</td>
+<td>OA</td>
+<td>No</td>
+<td>Escritorio</td>
+<td><a href="http://security.md" target="_blank" rel="noopener noreferrer">security.md</a> — BYOK</td>
+</tr>
+<tr>
+<td>SET-021</td>
+<td>Gestión de llaves de API</td>
+<td>OA</td>
+<td>No</td>
+<td>Escritorio</td>
+<td><a href="http://integrations.md" target="_blank" rel="noopener noreferrer">integrations.md</a> — API pública</td>
+</tr>
+<tr>
+<td>SET-022</td>
+<td>Configuración de webhooks</td>
+<td>OA</td>
+<td>No</td>
+<td>Escritorio</td>
+<td><a href="http://integrations.md" target="_blank" rel="noopener noreferrer">integrations.md</a> — webhooks</td>
+</tr>
+</tbody>
+</table>
+<h2 id="15-asistentes-de-puesta-en-marcha" tabindex="-1"><a class="heading-anchor" href="#15-asistentes-de-puesta-en-marcha" aria-hidden="true">#</a> 15. Asistentes de puesta en marcha</h2>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Pantalla</th>
+<th>Arquetipos</th>
+<th>Sin conexión</th>
+<th>Móvil</th>
+<th>Ref. de especificación</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>WIZ-001</td>
+<td>Asistente de configuración de la organización</td>
+<td>OA</td>
+<td>No</td>
+<td>Sí</td>
+<td><a href="http://support.md" target="_blank" rel="noopener noreferrer">support.md</a> — asistentes de puesta en marcha</td>
+</tr>
+<tr>
+<td>WIZ-002</td>
+<td>Asistente del procesador de pagos</td>
+<td>OA</td>
+<td>No</td>
+<td>Escritorio</td>
+<td><a href="http://support.md" target="_blank" rel="noopener noreferrer">support.md</a> — asistentes de puesta en marcha</td>
+</tr>
+<tr>
+<td>WIZ-003</td>
+<td>Asistente de generación de llaves BYOK</td>
+<td>OA</td>
+<td>No</td>
+<td>Escritorio</td>
+<td><a href="http://support.md" target="_blank" rel="noopener noreferrer">support.md</a> — asistentes de puesta en marcha</td>
+</tr>
+<tr>
+<td>WIZ-004</td>
+<td>Asistente de configuración de cumplimiento</td>
+<td>OA</td>
+<td>No</td>
+<td>Escritorio</td>
+<td><a href="http://support.md" target="_blank" rel="noopener noreferrer">support.md</a> — asistentes de puesta en marcha</td>
+</tr>
+<tr>
+<td>WIZ-005</td>
+<td>Asistente de configuración de WhatsApp Business</td>
+<td>OA</td>
+<td>No</td>
+<td>Escritorio</td>
+<td><a href="http://support.md" target="_blank" rel="noopener noreferrer">support.md</a> — asistentes de puesta en marcha</td>
+</tr>
+<tr>
+<td>WIZ-006</td>
+<td>Asistente de configuración del número de SMS</td>
+<td>OA</td>
+<td>No</td>
+<td>Escritorio</td>
+<td><a href="http://support.md" target="_blank" rel="noopener noreferrer">support.md</a> — asistentes de puesta en marcha</td>
+</tr>
+<tr>
+<td>WIZ-007</td>
+<td>Asistente de importación del padrón electoral</td>
+<td>OA, DM</td>
+<td>No</td>
+<td>Escritorio</td>
+<td><a href="http://support.md" target="_blank" rel="noopener noreferrer">support.md</a> — asistentes de puesta en marcha</td>
+</tr>
+<tr>
+<td>WIZ-008</td>
+<td>Asistente de incorporación de voluntarios</td>
+<td>V</td>
+<td>No</td>
+<td>Principal</td>
+<td><a href="http://support.md" target="_blank" rel="noopener noreferrer">support.md</a> — asistentes de puesta en marcha</td>
+</tr>
+</tbody>
+</table>
+<h2 id="16-soporte-y-ayuda" tabindex="-1"><a class="heading-anchor" href="#16-soporte-y-ayuda" aria-hidden="true">#</a> 16. Soporte y ayuda</h2>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Pantalla</th>
+<th>Arquetipos</th>
+<th>Sin conexión</th>
+<th>Móvil</th>
+<th>Ref. de especificación</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>HELP-001</td>
+<td>Navegador de la base de conocimiento</td>
+<td>Toda persona autenticada</td>
+<td>No</td>
+<td>Sí</td>
+<td><a href="http://support.md" target="_blank" rel="noopener noreferrer">support.md</a> — base de conocimiento</td>
+</tr>
+<tr>
+<td>HELP-002</td>
+<td>Artículo de la base de conocimiento</td>
+<td>Toda persona autenticada</td>
+<td>Parcial</td>
+<td>Sí</td>
+<td><a href="http://support.md" target="_blank" rel="noopener noreferrer">support.md</a> — base de conocimiento</td>
+</tr>
+<tr>
+<td>HELP-003</td>
+<td>Chat del concierge de IA</td>
+<td>Toda persona autenticada</td>
+<td>No</td>
+<td>Sí</td>
+<td><a href="http://support.md" target="_blank" rel="noopener noreferrer">support.md</a> — concierge</td>
+</tr>
+<tr>
+<td>HELP-004</td>
+<td>Lista de módulos de capacitación</td>
+<td>V, TL</td>
+<td>Parcial</td>
+<td>Principal</td>
+<td><a href="http://support.md" target="_blank" rel="noopener noreferrer">support.md</a> — capacitación</td>
+</tr>
+<tr>
+<td>HELP-005</td>
+<td>Contenido del módulo de capacitación</td>
+<td>V, TL</td>
+<td>Parcial</td>
+<td>Principal</td>
+<td><a href="http://support.md" target="_blank" rel="noopener noreferrer">support.md</a> — capacitación</td>
+</tr>
+<tr>
+<td>HELP-006</td>
+<td>Cuestionario de capacitación</td>
+<td>V, TL</td>
+<td>Parcial</td>
+<td>Principal</td>
+<td><a href="http://support.md" target="_blank" rel="noopener noreferrer">support.md</a> — capacitación</td>
+</tr>
+<tr>
+<td>HELP-007</td>
+<td>Estado de certificación</td>
+<td>V, TL, VC</td>
+<td>No</td>
+<td>Sí</td>
+<td><a href="http://support.md" target="_blank" rel="noopener noreferrer">support.md</a> — capacitación</td>
+</tr>
+<tr>
+<td>HELP-008</td>
+<td>Editor de contenidos de capacitación</td>
+<td>OA, VC</td>
+<td>No</td>
+<td>Escritorio</td>
+<td><a href="http://support.md" target="_blank" rel="noopener noreferrer">support.md</a> — capacitación</td>
+</tr>
+</tbody>
+</table>
+<h2 id="17-portal-de-simpatizantes" tabindex="-1"><a class="heading-anchor" href="#17-portal-de-simpatizantes" aria-hidden="true">#</a> 17. Portal de simpatizantes</h2>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Pantalla</th>
+<th>Arquetipos</th>
+<th>Sin conexión</th>
+<th>Móvil</th>
+<th>Ref. de especificación</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SUP-001</td>
+<td>Inicio del simpatizante</td>
+<td>S</td>
+<td>No</td>
+<td>Principal</td>
+<td><a href="http://fundraising.md" target="_blank" rel="noopener noreferrer">fundraising.md</a> — portal del donante</td>
+</tr>
+<tr>
+<td>SUP-002</td>
+<td>Historial de donaciones</td>
+<td>S</td>
+<td>No</td>
+<td>Principal</td>
+<td><a href="http://fundraising.md" target="_blank" rel="noopener noreferrer">fundraising.md</a> — portal del donante</td>
+</tr>
+<tr>
+<td>SUP-003</td>
+<td>Vista del recibo de donación</td>
+<td>S</td>
+<td>No</td>
+<td>Principal</td>
+<td><a href="http://fundraising.md" target="_blank" rel="noopener noreferrer">fundraising.md</a> — recibos</td>
+</tr>
+<tr>
+<td>SUP-004</td>
+<td>Gestión de donaciones recurrentes</td>
+<td>S</td>
+<td>No</td>
+<td>Principal</td>
+<td><a href="http://fundraising.md" target="_blank" rel="noopener noreferrer">fundraising.md</a> — portal del donante</td>
+</tr>
+<tr>
+<td>SUP-005</td>
+<td>Actualización del método de pago</td>
+<td>S</td>
+<td>No</td>
+<td>Principal</td>
+<td><a href="http://fundraising.md" target="_blank" rel="noopener noreferrer">fundraising.md</a> — portal del donante</td>
+</tr>
+<tr>
+<td>SUP-006</td>
+<td>Perfil del simpatizante</td>
+<td>S</td>
+<td>No</td>
+<td>Principal</td>
+<td><a href="http://users.md" target="_blank" rel="noopener noreferrer">users.md</a> — simpatizantes</td>
+</tr>
+<tr>
+<td>SUP-007</td>
+<td>Preferencias de comunicación</td>
+<td>S</td>
+<td>No</td>
+<td>Principal</td>
+<td><a href="http://compliance.md" target="_blank" rel="noopener noreferrer">compliance.md</a> — consentimiento</td>
+</tr>
+<tr>
+<td>SUP-008</td>
+<td>Mis eventos</td>
+<td>S</td>
+<td>No</td>
+<td>Principal</td>
+<td><a href="http://workflows.md" target="_blank" rel="noopener noreferrer">workflows.md</a> — eventos</td>
+</tr>
+<tr>
+<td>SUP-009</td>
+<td>Descarga del estado de cuenta anual</td>
+<td>S</td>
+<td>No</td>
+<td>Principal</td>
+<td><a href="http://fundraising.md" target="_blank" rel="noopener noreferrer">fundraising.md</a> — estados de cuenta</td>
+</tr>
+</tbody>
+</table>
+<h2 id="18-alianza" tabindex="-1"><a class="heading-anchor" href="#18-alianza" aria-hidden="true">#</a> 18. Alianza</h2>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Pantalla</th>
+<th>Arquetipos</th>
+<th>Sin conexión</th>
+<th>Móvil</th>
+<th>Ref. de especificación</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ALLY-001</td>
+<td>Panel de la alianza</td>
+<td>OA</td>
+<td>No</td>
+<td>Sí</td>
+<td><a href="http://workflows.md" target="_blank" rel="noopener noreferrer">workflows.md</a> — alianza</td>
+</tr>
+<tr>
+<td>ALLY-002</td>
+<td>Lista de miembros de la alianza</td>
+<td>OA</td>
+<td>No</td>
+<td>Escritorio</td>
+<td><a href="http://workflows.md" target="_blank" rel="noopener noreferrer">workflows.md</a> — alianza</td>
+</tr>
+<tr>
+<td>ALLY-003</td>
+<td>Formulario de solicitud de afiliación</td>
+<td>OA</td>
+<td>No</td>
+<td>Escritorio</td>
+<td><a href="http://workflows.md" target="_blank" rel="noopener noreferrer">workflows.md</a> — alianza</td>
+</tr>
+<tr>
+<td>ALLY-004</td>
+<td>Cola de solicitudes de afiliación</td>
+<td>OA</td>
+<td>No</td>
+<td>Escritorio</td>
+<td><a href="http://workflows.md" target="_blank" rel="noopener noreferrer">workflows.md</a> — alianza</td>
+</tr>
+<tr>
+<td>ALLY-005</td>
+<td>Configuración del intercambio</td>
+<td>OA</td>
+<td>No</td>
+<td>Escritorio</td>
+<td><a href="http://workflows.md" target="_blank" rel="noopener noreferrer">workflows.md</a> — alianza</td>
+</tr>
+<tr>
+<td>ALLY-006</td>
+<td>Configuración de campaña conjunta</td>
+<td>OA</td>
+<td>No</td>
+<td>Escritorio</td>
+<td><a href="http://workflows.md" target="_blank" rel="noopener noreferrer">workflows.md</a> — alianza</td>
+</tr>
+<tr>
+<td>ALLY-007</td>
+<td>Analítica compartida</td>
+<td>OA</td>
+<td>No</td>
+<td>Escritorio</td>
+<td><a href="http://workflows.md" target="_blank" rel="noopener noreferrer">workflows.md</a> — alianza</td>
+</tr>
+<tr>
+<td>ALLY-008</td>
+<td>Coordinación de GOTV en la alianza</td>
+<td>OA, FiD</td>
+<td>No</td>
+<td>Escritorio</td>
+<td><a href="http://gotv.md" target="_blank" rel="noopener noreferrer">gotv.md</a> — GOTV en alianza</td>
+</tr>
+</tbody>
+</table>
+<h2 id="19-páginas-públicas-sin-autenticación" tabindex="-1"><a class="heading-anchor" href="#19-páginas-públicas-sin-autenticación" aria-hidden="true">#</a> 19. Páginas públicas (sin autenticación)</h2>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Pantalla</th>
+<th>Arquetipos</th>
+<th>Sin conexión</th>
+<th>Móvil</th>
+<th>Ref. de especificación</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>PUB-001</td>
+<td>Página de perfil del candidato</td>
+<td>Público</td>
+<td>No</td>
+<td>Principal</td>
+<td><a href="http://press.md" target="_blank" rel="noopener noreferrer">press.md</a> — perfiles públicos</td>
+</tr>
+<tr>
+<td>PUB-002</td>
+<td>Página de perfil de la organización</td>
+<td>Público</td>
+<td>No</td>
+<td>Principal</td>
+<td><a href="http://press.md" target="_blank" rel="noopener noreferrer">press.md</a> — perfiles públicos</td>
+</tr>
+<tr>
+<td>PUB-003</td>
+<td>Formulario de donación (alojado)</td>
+<td>Público</td>
+<td>No</td>
+<td>Principal</td>
+<td><a href="http://fundraising.md" target="_blank" rel="noopener noreferrer">fundraising.md</a> — formularios</td>
+</tr>
+<tr>
+<td>PUB-004</td>
+<td>Página del evento</td>
+<td>Público</td>
+<td>No</td>
+<td>Principal</td>
+<td><a href="http://workflows.md" target="_blank" rel="noopener noreferrer">workflows.md</a> — eventos</td>
+</tr>
+<tr>
+<td>PUB-005</td>
+<td>Página de acción (carta/correo)</td>
+<td>Público</td>
+<td>No</td>
+<td>Principal</td>
+<td><a href="http://workflows.md" target="_blank" rel="noopener noreferrer">workflows.md</a> — activismo</td>
+</tr>
+<tr>
+<td>PUB-006</td>
+<td>Página de petición</td>
+<td>Público</td>
+<td>No</td>
+<td>Principal</td>
+<td><a href="http://workflows.md" target="_blank" rel="noopener noreferrer">workflows.md</a> — activismo</td>
+</tr>
+<tr>
+<td>PUB-007</td>
+<td>Página de inscripción de voluntarios</td>
+<td>Público</td>
+<td>No</td>
+<td>Principal</td>
+<td><a href="http://workflows.md" target="_blank" rel="noopener noreferrer">workflows.md</a> — incorporación de voluntarios</td>
+</tr>
+<tr>
+<td>PUB-008</td>
+<td>Página del kit de prensa</td>
+<td>Público</td>
+<td>No</td>
+<td>Principal</td>
+<td><a href="http://press.md" target="_blank" rel="noopener noreferrer">press.md</a> — kit de prensa</td>
+</tr>
+</tbody>
+</table>
+<h2 id="20-autenticación" tabindex="-1"><a class="heading-anchor" href="#20-autenticación" aria-hidden="true">#</a> 20. Autenticación</h2>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Pantalla</th>
+<th>Arquetipos</th>
+<th>Sin conexión</th>
+<th>Móvil</th>
+<th>Ref. de especificación</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>AUTH-001</td>
+<td>Inicio de sesión (passkey)</td>
+<td>Todos</td>
+<td>No</td>
+<td>Principal</td>
+<td><a href="http://security.md" target="_blank" rel="noopener noreferrer">security.md</a> — autenticación</td>
+</tr>
+<tr>
+<td>AUTH-002</td>
+<td>Inicio de sesión alternativo (enlace mágico / OTP por SMS)</td>
+<td>Todos</td>
+<td>No</td>
+<td>Principal</td>
+<td><a href="http://security.md" target="_blank" rel="noopener noreferrer">security.md</a> — autenticación</td>
+</tr>
+<tr>
+<td>AUTH-003</td>
+<td>Recuperación de cuenta (contacto de confianza)</td>
+<td>Todos</td>
+<td>No</td>
+<td>Principal</td>
+<td><a href="http://security.md" target="_blank" rel="noopener noreferrer">security.md</a> — recuperación</td>
+</tr>
+<tr>
+<td>AUTH-004</td>
+<td>Registro de passkey</td>
+<td>Todos</td>
+<td>No</td>
+<td>Principal</td>
+<td><a href="http://security.md" target="_blank" rel="noopener noreferrer">security.md</a> — autenticación</td>
+</tr>
+<tr>
+<td>AUTH-005</td>
+<td>Configuración del contacto de confianza</td>
+<td>Todos</td>
+<td>No</td>
+<td>Sí</td>
+<td><a href="http://security.md" target="_blank" rel="noopener noreferrer">security.md</a> — recuperación</td>
+</tr>
+<tr>
+<td>AUTH-006</td>
+<td>Autorización de dispositivo</td>
+<td>Todos</td>
+<td>No</td>
+<td>Sí</td>
+<td><a href="http://security.md" target="_blank" rel="noopener noreferrer">security.md</a> — varios dispositivos</td>
+</tr>
+<tr>
+<td>AUTH-007</td>
+<td>Sesión expirada / volver a autenticarse</td>
+<td>Todos</td>
+<td>No</td>
+<td>Principal</td>
+<td><a href="http://security.md" target="_blank" rel="noopener noreferrer">security.md</a> — sesiones</td>
+</tr>
+</tbody>
+</table>
+<h2 id="21-perfil-y-preferencias-de-usuario" tabindex="-1"><a class="heading-anchor" href="#21-perfil-y-preferencias-de-usuario" aria-hidden="true">#</a> 21. Perfil y preferencias de usuario</h2>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Pantalla</th>
+<th>Arquetipos</th>
+<th>Sin conexión</th>
+<th>Móvil</th>
+<th>Ref. de especificación</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>PROF-001</td>
+<td>Perfil personal</td>
+<td>Toda persona autenticada</td>
+<td>No</td>
+<td>Sí</td>
+<td><a href="http://users.md" target="_blank" rel="noopener noreferrer">users.md</a> — perfiles</td>
+</tr>
+<tr>
+<td>PROF-002</td>
+<td>Preferencias de notificaciones</td>
+<td>Toda persona autenticada</td>
+<td>No</td>
+<td>Sí</td>
+<td><a href="http://messaging.md" target="_blank" rel="noopener noreferrer">messaging.md</a> — notificaciones</td>
+</tr>
+<tr>
+<td>PROF-003</td>
+<td>Ajustes de seguridad (personales)</td>
+<td>Toda persona autenticada</td>
+<td>No</td>
+<td>Sí</td>
+<td><a href="http://security.md" target="_blank" rel="noopener noreferrer">security.md</a> — passkeys</td>
+</tr>
+<tr>
+<td>PROF-004</td>
+<td>Preferencia de idioma</td>
+<td>Toda persona autenticada</td>
+<td>No</td>
+<td>Sí</td>
+<td><a href="http://geography.md" target="_blank" rel="noopener noreferrer">geography.md</a> — localización</td>
+</tr>
+<tr>
+<td>PROF-005</td>
+<td>Selector de organización</td>
+<td>Usuarios multiorganización</td>
+<td>No</td>
+<td>Sí</td>
+<td><a href="http://users.md" target="_blank" rel="noopener noreferrer">users.md</a> — federación</td>
+</tr>
+</tbody>
+</table>
+<h2 id="resumen" tabindex="-1"><a class="heading-anchor" href="#resumen" aria-hidden="true">#</a> Resumen</h2>
+<table>
+<thead>
+<tr>
+<th>Área funcional</th>
+<th>Cantidad de pantallas</th>
+<th>Pantallas sin conexión</th>
+<th>Pantallas de prioridad móvil</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Paneles</td>
+<td>11</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>CRM / Personas</td>
+<td>15</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr>
+<td>Trabajo de campo</td>
+<td>14</td>
+<td>6</td>
+<td>6</td>
+</tr>
+<tr>
+<td>Jornadas de llamadas</td>
+<td>7</td>
+<td>0</td>
+<td>3</td>
+</tr>
+<tr>
+<td>Inscripción de votantes</td>
+<td>6</td>
+<td>2</td>
+<td>2</td>
+</tr>
+<tr>
+<td>Recaudación de fondos</td>
+<td>20</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr>
+<td>Comunicaciones</td>
+<td>10</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>Redes sociales</td>
+<td>6</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>Eventos</td>
+<td>10</td>
+<td>1</td>
+<td>2</td>
+</tr>
+<tr>
+<td>Activismo</td>
+<td>9</td>
+<td>0</td>
+<td>2</td>
+</tr>
+<tr>
+<td>Prensa y medios</td>
+<td>16</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>GOTV / día de elecciones</td>
+<td>23</td>
+<td>3</td>
+<td>6</td>
+</tr>
+<tr>
+<td>Mensajería</td>
+<td>14</td>
+<td>7</td>
+<td>5</td>
+</tr>
+<tr>
+<td>Ajustes y administración</td>
+<td>22</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>Asistentes de puesta en marcha</td>
+<td>8</td>
+<td>0</td>
+<td>1</td>
+</tr>
+<tr>
+<td>Soporte y ayuda</td>
+<td>8</td>
+<td>3</td>
+<td>3</td>
+</tr>
+<tr>
+<td>Portal de simpatizantes</td>
+<td>9</td>
+<td>0</td>
+<td>9</td>
+</tr>
+<tr>
+<td>Alianza</td>
+<td>8</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>Páginas públicas</td>
+<td>8</td>
+<td>0</td>
+<td>8</td>
+</tr>
+<tr>
+<td>Autenticación</td>
+<td>7</td>
+<td>0</td>
+<td>5</td>
+</tr>
+<tr>
+<td>Perfil de usuario</td>
+<td>5</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td><strong>Total</strong></td>
+<td><strong>236</strong></td>
+<td><strong>24</strong></td>
+<td><strong>53</strong></td>
+</tr>
+</tbody>
+</table>
+<p>La plataforma tiene aproximadamente <strong>236 pantallas distintas</strong>, de las cuales <strong>24 funcionan sin conexión</strong> y <strong>53 son de prioridad móvil</strong> (diseñadas sobre todo para usarse en el celular). Las demás funcionan en móvil, pero están diseñadas con prioridad de escritorio (configuración compleja, tablas de datos, constructores).</p>
+<!-- REVISIT: Este inventario va a crecer a medida que la implementación revele subpantallas y flujos modales que este nivel de análisis no captura. Los ID de pantalla dan un sistema de referencia estable para lo que se añada. -->
+
+    </article>
+  </main>
+  <div class="toc-rail"><nav class="toc" aria-label="En esta página"><div class="toc-label">En esta página</div><ul><li class="toc-2"><a href="#propósito"># Propósito</a></li><li class="toc-2"><a href="#cómo-leer-la-tabla"># Cómo leer la tabla</a></li><li class="toc-2"><a href="#1-paneles"># 1. Paneles</a></li><li class="toc-2"><a href="#2-crm-personas"># 2. CRM / Personas</a></li><li class="toc-2"><a href="#3-trabajo-de-campo"># 3. Trabajo de campo</a></li><li class="toc-2"><a href="#4-jornadas-de-llamadas"># 4. Jornadas de llamadas</a></li><li class="toc-2"><a href="#5-inscripción-de-votantes"># 5. Inscripción de votantes</a></li><li class="toc-2"><a href="#6-recaudación-de-fondos"># 6. Recaudación de fondos</a></li><li class="toc-2"><a href="#7-comunicaciones"># 7. Comunicaciones</a></li><li class="toc-2"><a href="#8-redes-sociales"># 8. Redes sociales</a></li><li class="toc-2"><a href="#9-eventos"># 9. Eventos</a></li><li class="toc-2"><a href="#10-activismo"># 10. Activismo</a></li><li class="toc-2"><a href="#11-prensa-y-medios"># 11. Prensa y medios</a></li><li class="toc-2"><a href="#12-gotv-y-día-de-elecciones"># 12. GOTV y día de elecciones</a></li><li class="toc-2"><a href="#13-mensajería"># 13. Mensajería</a></li><li class="toc-2"><a href="#14-ajustes-y-administración"># 14. Ajustes y administración</a></li><li class="toc-2"><a href="#15-asistentes-de-puesta-en-marcha"># 15. Asistentes de puesta en marcha</a></li><li class="toc-2"><a href="#16-soporte-y-ayuda"># 16. Soporte y ayuda</a></li><li class="toc-2"><a href="#17-portal-de-simpatizantes"># 17. Portal de simpatizantes</a></li><li class="toc-2"><a href="#18-alianza"># 18. Alianza</a></li><li class="toc-2"><a href="#19-páginas-públicas-sin-autenticación"># 19. Páginas públicas (sin autenticación)</a></li><li class="toc-2"><a href="#20-autenticación"># 20. Autenticación</a></li><li class="toc-2"><a href="#21-perfil-y-preferencias-de-usuario"># 21. Perfil y preferencias de usuario</a></li><li class="toc-2"><a href="#resumen"># Resumen</a></li></ul></nav></div>
+</div>
+<script src="../../../../assets/search.js" defer></script>
+<script src="../../../../assets/app.js" defer></script>
+</body>
+</html>

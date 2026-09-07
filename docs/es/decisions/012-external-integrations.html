@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="es" data-base="../../" data-no-results="No hay resultados para">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ADR-012: Integraciones externas · GreenGrass</title>
+<meta name="description" content="ADR-012: Integraciones externas — Documentación de especificación y diseño de GreenGrass.">
+<link rel="alternate" hreflang="en" href="../../decisions/012-external-integrations.html">
+<link rel="alternate" hreflang="es" href="./012-external-integrations.html">
+<link rel="alternate" hreflang="x-default" href="../../decisions/012-external-integrations.html">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%232563eb'/%3E%3Cstop offset='1' stop-color='%2316a34a'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='32' height='32' rx='7' fill='url(%23g)'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="../../assets/styles.css">
+</head>
+<body>
+<a class="skip-link" href="#content">Saltar al contenido</a>
+<header class="site-header">
+  <button type="button" class="menu-toggle" aria-label="Alternar navegación" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+  <a class="brand" href="../../es/index.html">
+    <span class="brand-mark" aria-hidden="true"></span>
+    <span class="brand-text"><strong>GreenGrass</strong><small>Especificación y diseño</small></span>
+  </a>
+  <div class="search">
+    <input type="search" id="search-input" placeholder="Buscar en la documentación…" autocomplete="off" aria-label="Buscar en la documentación">
+    <div id="search-results" class="search-results" hidden></div>
+  </div>
+  <nav class="lang-switch" aria-label="Idioma"><a class="lang-opt" href="../../decisions/012-external-integrations.html" hreflang="en" lang="en" title="View this page in English">EN</a><span class="lang-opt active" aria-current="true">ES</span></nav>
+  <button type="button" class="theme-toggle" aria-label="Alternar modo oscuro" title="Alternar modo oscuro">
+    <span class="theme-icon" aria-hidden="true"></span>
+  </button>
+</header>
+<div class="layout">
+  <div class="sidebar-backdrop" hidden></div>
+  <aside class="sidebar" aria-label="Navegación de la documentación">
+    <nav class="nav">
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">Inicio<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../index.html">GreenGrass</a></li></ul></div>
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">Especificaciones<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../spec/product.html">Proyecto: GreenGrass</a></li><li><a href="../spec/mvp.html">MVP de GreenGrass — plan de producto</a></li><li><a href="../spec/users.html">Usuarios y roles</a></li><li><a href="../spec/workflows.html">Flujos de trabajo principales</a></li><li><a href="../spec/geography.html">Geografía objetivo</a></li><li><a href="../spec/security.html">Seguridad y modelo de amenazas</a></li><li><a href="../spec/compliance.html">Cumplimiento y marco legal</a></li><li><a href="../spec/fundraising.html">Recaudación de fondos e infraestructura de pagos</a></li><li><a href="../spec/integrations.html">Integraciones externas</a></li><li><a href="../spec/support.html">Soporte y puesta en marcha de organizaciones</a></li><li><a href="../spec/gotv.html">GOTV y operaciones del día de elecciones</a></li><li><a href="../spec/messaging.html">Comunicaciones internas y notificaciones</a></li><li><a href="../spec/press.html">Prensa, medios y comunicaciones públicas</a></li><li><a href="../spec/comms-intelligence.html">Inteligencia de comunicaciones — hoja de ruta post-MVP</a></li></ul></div>
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">Arquitectura<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../design/architecture/system.html">Arquitectura del sistema</a></li></ul></div>
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">Diseño UX<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../design/ux/00-overview.html">Resumen del diseño de UX</a></li><li><a href="../design/ux/01-information-architecture/navigation-model.html">Modelo de navegación</a></li><li><a href="../design/ux/01-information-architecture/screen-inventory.html">Inventario de pantallas</a></li><li><a href="../design/ux/01-information-architecture/persona-views.html">Vistas por arquetipo</a></li><li><a href="../design/ux/01-information-architecture/url-structure.html">Estructura de URL</a></li><li><a href="../design/ux/02-global-patterns/pattern-catalog.html">Catálogo de patrones</a></li><li><a href="../design/ux/02-global-patterns/offline-sync-patterns.html">Patrones sin conexión y de sincronización</a></li><li><a href="../design/ux/02-global-patterns/notification-patterns.html">Patrones de notificaciones</a></li><li><a href="../design/ux/02-global-patterns/search-patterns.html">Patrones de búsqueda</a></li><li><a href="../design/ux/02-global-patterns/settings-help-patterns.html">Patrones de ajustes y ayuda</a></li><li><a href="../design/ux/02-global-patterns/security-ux-patterns.html">Patrones de UX de seguridad</a></li><li><a href="../design/ux/03-design-system/foundations.html">Fundamentos del sistema de diseño</a></li><li><a href="../design/ux/03-design-system/theming-strategy.html">Estrategia de temas</a></li><li><a href="../design/ux/03-design-system/component-inventory.html">Inventario de componentes</a></li><li><a href="../design/ux/03-design-system/responsive-strategy.html">Estrategia de diseño adaptable</a></li></ul></div>
+<div class="nav-section open"><button type="button" class="nav-section-title" aria-expanded="true">Decisiones<span class="chev" aria-hidden="true"></span></button><ul><li><a href="./001-platform-architecture.html">ADR-001: Arquitectura y despliegue de la plataforma</a></li><li><a href="./002-security-threat-model.html">ADR-002: Seguridad y modelo de amenazas</a></li><li><a href="./003-identity-access-organization.html">ADR-003: Identidad, acceso y organización</a></li><li><a href="./004-data-model-integrity.html">ADR-004: Modelo de datos e integridad</a></li><li><a href="./005-offline-first-sync.html">ADR-005: Prioridad sin conexión y sincronización</a></li><li><a href="./006-field-operations-gotv.html">ADR-006: Operaciones de campo y GOTV</a></li><li><a href="./007-fundraising-payments.html">ADR-007: Recaudación de fondos y pagos</a></li><li><a href="./008-communications-messaging.html">ADR-008: Comunicaciones y mensajería</a></li><li><a href="./009-compliance-legal.html">ADR-009: Cumplimiento y marco legal</a></li><li><a href="./010-internationalization-localization.html">ADR-010: Internacionalización y localización</a></li><li><a href="./011-design-system-ux.html">ADR-011: Sistema de diseño y fundamentos de UX</a></li><li><a href="./012-external-integrations.html" aria-current="page" class="active">ADR-012: Integraciones externas</a></li><li><a href="./013-analytics-ai.html">ADR-013: Analítica e IA</a></li><li><a href="./014-volunteer-onboarding.html">ADR-014: Voluntariado e incorporación</a></li><li><a href="./015-product-scope.html">ADR-015: Límites del alcance del producto</a></li><li><a href="./016-cross-cutting-resolutions.html">ADR-016: Resoluciones transversales</a></li><li><a href="./017-sharing-contract-trust-model.html">ADR-017: El contrato de intercambio como primitiva universal de confianza</a></li><li><a href="./ux-decisions.html">Decisiones de UX — fase de wireframes</a></li></ul></div>
+    </nav>
+  </aside>
+  <main id="content" class="content">
+    <nav class="breadcrumb" aria-label="Ruta de navegación">Decisiones</nav>
+    <article class="prose">
+<h1 id="adr-012-integraciones-externas" tabindex="-1"><a class="heading-anchor" href="#adr-012-integraciones-externas" aria-hidden="true">#</a> ADR-012: Integraciones externas</h1>
+<p><strong>Estado:</strong> Aceptada
+<strong>Fecha:</strong> 2026-03-03
+<strong>Fuentes:</strong> <code>spec/workflows.md</code>, <code>spec/integrations.md</code></p>
+<h2 id="contexto" tabindex="-1"><a class="heading-anchor" href="#contexto" aria-hidden="true">#</a> Contexto</h2>
+<p>GreenGrass tiene que integrarse con una gran variedad de servicios externos —proveedores de telefonía, plataformas de video, servicios de mapas, pasarelas de SMS, herramientas de monitoreo— en cinco países con proveedores, API e infraestructura de calidad distinta. Ningún proveedor global cubre por sí solo todas las necesidades en todos los mercados. La estrategia de integración tiene que evitar la dependencia del proveedor, permitir elegir proveedor país por país y degradarse de forma controlada donde la infraestructura es escasa.</p>
+<h2 id="decisión" tabindex="-1"><a class="heading-anchor" href="#decisión" aria-hidden="true">#</a> Decisión</h2>
+<h3 id="telefonía-byop-para-el-mvp-híbrido-twiliolocal-para-el-piloto" tabindex="-1"><a class="heading-anchor" href="#telefonía-byop-para-el-mvp-híbrido-twiliolocal-para-el-piloto" aria-hidden="true">#</a> Telefonía BYOP para el MVP, híbrido Twilio/local para el piloto</h3>
+<p>En el MVP, las jornadas de llamadas se hacen con BYOP (Bring Your Own Phone — se usan los celulares personales de los voluntarios): la plataforma muestra el contacto y el guion, y registra el resultado sin necesidad de infraestructura de telefonía. En la fase piloto se integran proveedores de telefonía (Twilio Voice como base global, proveedores locales de VoIP donde salga más barato) para la llamada con un clic, el registro de llamadas, el enmascaramiento de números, el marcador con vista previa y la aplicación de la lista de no llamar.</p>
+<p><strong>Alternativas consideradas:</strong> Se descartó construir la telefonía desde el lanzamiento porque no hace falta para el MVP (BYOP funciona) y retrasaría la entrega. Se descartó usar un único proveedor global porque los proveedores locales ofrecen tarifas mucho mejores para el llamado de alto volumen en los mercados objetivo.</p>
+<h3 id="integración-externa-para-los-eventos-virtuales" tabindex="-1"><a class="heading-anchor" href="#integración-externa-para-los-eventos-virtuales" aria-hidden="true">#</a> Integración externa para los eventos virtuales</h3>
+<p>GreenGrass maneja todo el ciclo de vida del evento (creación, promoción, confirmaciones de asistencia, recordatorios, seguimiento, analítica), pero se integra con proveedores externos de video para el alojamiento del video en sí. Dos adaptadores cubren la mayoría de los casos de uso: Zoom (cuota de mercado dominante) y Jitsi (código abierto, autoalojado, alineado con los valores de soberanía). Los enlaces de acceso únicos por persona inscrita permiten hacer seguimiento de la asistencia desde la propia integración.</p>
+<p><strong>Alternativas consideradas:</strong> Se descartó construir el alojamiento de video: es un problema de producto aparte. Se descartó un proveedor único (solo Zoom) porque las campañas con requisitos de soberanía necesitan una opción de código abierto y autoalojada.</p>
+<h3 id="mapas-híbrido-de-osm-por-defecto-y-alternativa-comercial-de-reserva" tabindex="-1"><a class="heading-anchor" href="#mapas-híbrido-de-osm-por-defecto-y-alternativa-comercial-de-reserva" aria-hidden="true">#</a> Mapas: híbrido de OSM por defecto y alternativa comercial de reserva</h3>
+<p>Las teselas de OpenStreetMap autoalojadas (vía OpenMapTiles o Protomaps) son la opción por defecto para mostrar cualquier mapa. Son gratuitas, soberanas y ningún tercero ve los patrones del trabajo de campo (dónde están tocando puertas los voluntarios). Los servicios comerciales de mapas quedan como alternativa de reserva donde la cobertura o la calidad de OSM no alcanzan para una región concreta. La infraestructura de teselas se autoaloja en el clúster de Kubernetes de cada país.</p>
+<p>La geocodificación autoalojada (Pelias o Nominatim) se encarga de las operaciones masivas (procesamiento del padrón electoral, geocodificación por lotes), donde importa la soberanía de datos. La geocodificación comercial es la alternativa de reserva para la experiencia en tiempo real (autocompletado de direcciones), donde la precisión de lo autoalojado se queda corta. Las rutas de las listas de recorrido se calculan con un motor de cálculo de rutas de código abierto y autoalojado (OSRM, Valhalla o GraphHopper), precalculadas al inicio del turno y guardadas en caché para usarlas sin conexión.</p>
+<p><strong>Alternativas consideradas:</strong> Se descartó usar solo mapas comerciales (Google Maps, Mapbox) porque expone los patrones del trabajo de campo a terceros: dónde están tocando puertas los voluntarios revela la estrategia de campaña. Se descartó usar solo OSM sin alternativa comercial de reserva porque los huecos de cobertura de OSM en algunas regiones objetivo degradarían la experiencia de usuario.</p>
+<h3 id="monitoreo-prometheus-grafana-loki" tabindex="-1"><a class="heading-anchor" href="#monitoreo-prometheus-grafana-loki" aria-hidden="true">#</a> Monitoreo: Prometheus + Grafana + Loki</h3>
+<p>El monitoreo de la infraestructura usa Prometheus (recolección de métricas y alertas) y Grafana (paneles). La agregación de bitácoras usa Grafana Loki. Todo autoalojado, sin dependencia del proveedor, y funciona igual en los despliegues en la nube y en los autoalojados. Las alertas empiezan simples (correo y webhooks de Slack/Matrix) y suben a PagerDuty/Opsgenie cuando crezca el equipo de operaciones. La página de estado es autoalojada (Upptime, Cachet o Gatus).</p>
+<p><strong>Alternativas consideradas:</strong> Se descartó el monitoreo comercial (Datadog, New Relic) porque añade dependencia del proveedor y no sirve para los despliegues autoalojados. La pila de observabilidad tiene que ser la misma en todas partes.</p>
+<h2 id="consecuencias" tabindex="-1"><a class="heading-anchor" href="#consecuencias" aria-hidden="true">#</a> Consecuencias</h2>
+<p><strong>Beneficios:</strong></p>
+<ul>
+<li>La telefonía BYOP elimina el costo y la complejidad de infraestructura en el MVP mientras el producto valida los flujos de trabajo de las jornadas de llamadas</li>
+<li>Los mapas autoalojados aseguran que ningún tercero pueda observar los patrones de trabajo de campo de la campaña</li>
+<li>Prometheus, Grafana y Loki dan una pila de observabilidad unificada que funciona igual en los despliegues en la nube y en los autoalojados</li>
+<li>El patrón de adaptadores en todas las integraciones permite cambiar de proveedor sin rehacer la arquitectura</li>
+</ul>
+<p><strong>Costos:</strong></p>
+<ul>
+<li>Las teselas de mapa, la geocodificación y el cálculo de rutas autoalojados exigen experiencia en infraestructura SIG y mantenimiento continuo</li>
+<li>Cada adaptador de telefonía o de SMS es un miniproyecto de integración, con contratos de API y formatos de webhook propios de cada proveedor</li>
+<li>Con la telefonía BYOP, los números personales de los voluntarios quedan a la vista de quienes reciben la llamada (la integración híbrida lo resuelve con el enmascaramiento de números)</li>
+<li>La calidad de las teselas de OSM varía según la región: configurar la alternativa comercial de reserva añade trabajo operativo país por país</li>
+</ul>
+<p><strong>Restricciones:</strong></p>
+<ul>
+<li>Los mapas sin conexión requieren teselas descargadas de antemano, con un tope de ~200MB por el almacenamiento de los celulares de gama baja</li>
+<li>Todas las credenciales de integración son de la organización y se guardan en el gestor de secretos (HashiCorp Vault)</li>
+<li>Los flujos de datos de las integraciones quedan asentados en el registro de auditoría</li>
+<li>Las integraciones con redes sociales tienen que tener OAuth y una alternativa de reserva de copiar y pegar, dadas las restricciones crecientes de las API para el contenido político</li>
+</ul>
+<p><strong>ADR relacionados:</strong> <a href="./001-platform-architecture.html">ADR-001</a> (infraestructura por país), <a href="./005-offline-first-sync.html">ADR-005</a> (mapas sin conexión, rutas precargadas en caché), <a href="./006-field-operations-gotv.html">ADR-006</a> (jornadas de llamadas, manejo de territorios), <a href="./011-design-system-ux.html">ADR-011</a> (presupuestos de rendimiento para recursos externos)</p>
+
+    </article>
+  </main>
+  <div class="toc-rail"><nav class="toc" aria-label="En esta página"><div class="toc-label">En esta página</div><ul><li class="toc-2"><a href="#contexto"># Contexto</a></li><li class="toc-2"><a href="#decisión"># Decisión</a></li><li class="toc-3"><a href="#telefonía-byop-para-el-mvp-híbrido-twiliolocal-para-el-piloto"># Telefonía BYOP para el MVP, híbrido Twilio/local para el piloto</a></li><li class="toc-3"><a href="#integración-externa-para-los-eventos-virtuales"># Integración externa para los eventos virtuales</a></li><li class="toc-3"><a href="#mapas-híbrido-de-osm-por-defecto-y-alternativa-comercial-de-reserva"># Mapas: híbrido de OSM por defecto y alternativa comercial de reserva</a></li><li class="toc-3"><a href="#monitoreo-prometheus-grafana-loki"># Monitoreo: Prometheus + Grafana + Loki</a></li><li class="toc-2"><a href="#consecuencias"># Consecuencias</a></li></ul></nav></div>
+</div>
+<script src="../../assets/search.js" defer></script>
+<script src="../../assets/app.js" defer></script>
+</body>
+</html>

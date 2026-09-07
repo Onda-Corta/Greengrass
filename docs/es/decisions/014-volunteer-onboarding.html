@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="es" data-base="../../" data-no-results="No hay resultados para">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ADR-014: Voluntariado e incorporación · GreenGrass</title>
+<meta name="description" content="ADR-014: Voluntariado e incorporación — Documentación de especificación y diseño de GreenGrass.">
+<link rel="alternate" hreflang="en" href="../../decisions/014-volunteer-onboarding.html">
+<link rel="alternate" hreflang="es" href="./014-volunteer-onboarding.html">
+<link rel="alternate" hreflang="x-default" href="../../decisions/014-volunteer-onboarding.html">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%232563eb'/%3E%3Cstop offset='1' stop-color='%2316a34a'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='32' height='32' rx='7' fill='url(%23g)'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="../../assets/styles.css">
+</head>
+<body>
+<a class="skip-link" href="#content">Saltar al contenido</a>
+<header class="site-header">
+  <button type="button" class="menu-toggle" aria-label="Alternar navegación" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+  <a class="brand" href="../../es/index.html">
+    <span class="brand-mark" aria-hidden="true"></span>
+    <span class="brand-text"><strong>GreenGrass</strong><small>Especificación y diseño</small></span>
+  </a>
+  <div class="search">
+    <input type="search" id="search-input" placeholder="Buscar en la documentación…" autocomplete="off" aria-label="Buscar en la documentación">
+    <div id="search-results" class="search-results" hidden></div>
+  </div>
+  <nav class="lang-switch" aria-label="Idioma"><a class="lang-opt" href="../../decisions/014-volunteer-onboarding.html" hreflang="en" lang="en" title="View this page in English">EN</a><span class="lang-opt active" aria-current="true">ES</span></nav>
+  <button type="button" class="theme-toggle" aria-label="Alternar modo oscuro" title="Alternar modo oscuro">
+    <span class="theme-icon" aria-hidden="true"></span>
+  </button>
+</header>
+<div class="layout">
+  <div class="sidebar-backdrop" hidden></div>
+  <aside class="sidebar" aria-label="Navegación de la documentación">
+    <nav class="nav">
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">Inicio<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../index.html">GreenGrass</a></li></ul></div>
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">Especificaciones<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../spec/product.html">Proyecto: GreenGrass</a></li><li><a href="../spec/mvp.html">MVP de GreenGrass — plan de producto</a></li><li><a href="../spec/users.html">Usuarios y roles</a></li><li><a href="../spec/workflows.html">Flujos de trabajo principales</a></li><li><a href="../spec/geography.html">Geografía objetivo</a></li><li><a href="../spec/security.html">Seguridad y modelo de amenazas</a></li><li><a href="../spec/compliance.html">Cumplimiento y marco legal</a></li><li><a href="../spec/fundraising.html">Recaudación de fondos e infraestructura de pagos</a></li><li><a href="../spec/integrations.html">Integraciones externas</a></li><li><a href="../spec/support.html">Soporte y puesta en marcha de organizaciones</a></li><li><a href="../spec/gotv.html">GOTV y operaciones del día de elecciones</a></li><li><a href="../spec/messaging.html">Comunicaciones internas y notificaciones</a></li><li><a href="../spec/press.html">Prensa, medios y comunicaciones públicas</a></li><li><a href="../spec/comms-intelligence.html">Inteligencia de comunicaciones — hoja de ruta post-MVP</a></li></ul></div>
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">Arquitectura<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../design/architecture/system.html">Arquitectura del sistema</a></li></ul></div>
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">Diseño UX<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../design/ux/00-overview.html">Resumen del diseño de UX</a></li><li><a href="../design/ux/01-information-architecture/navigation-model.html">Modelo de navegación</a></li><li><a href="../design/ux/01-information-architecture/screen-inventory.html">Inventario de pantallas</a></li><li><a href="../design/ux/01-information-architecture/persona-views.html">Vistas por arquetipo</a></li><li><a href="../design/ux/01-information-architecture/url-structure.html">Estructura de URL</a></li><li><a href="../design/ux/02-global-patterns/pattern-catalog.html">Catálogo de patrones</a></li><li><a href="../design/ux/02-global-patterns/offline-sync-patterns.html">Patrones sin conexión y de sincronización</a></li><li><a href="../design/ux/02-global-patterns/notification-patterns.html">Patrones de notificaciones</a></li><li><a href="../design/ux/02-global-patterns/search-patterns.html">Patrones de búsqueda</a></li><li><a href="../design/ux/02-global-patterns/settings-help-patterns.html">Patrones de ajustes y ayuda</a></li><li><a href="../design/ux/02-global-patterns/security-ux-patterns.html">Patrones de UX de seguridad</a></li><li><a href="../design/ux/03-design-system/foundations.html">Fundamentos del sistema de diseño</a></li><li><a href="../design/ux/03-design-system/theming-strategy.html">Estrategia de temas</a></li><li><a href="../design/ux/03-design-system/component-inventory.html">Inventario de componentes</a></li><li><a href="../design/ux/03-design-system/responsive-strategy.html">Estrategia de diseño adaptable</a></li></ul></div>
+<div class="nav-section open"><button type="button" class="nav-section-title" aria-expanded="true">Decisiones<span class="chev" aria-hidden="true"></span></button><ul><li><a href="./001-platform-architecture.html">ADR-001: Arquitectura y despliegue de la plataforma</a></li><li><a href="./002-security-threat-model.html">ADR-002: Seguridad y modelo de amenazas</a></li><li><a href="./003-identity-access-organization.html">ADR-003: Identidad, acceso y organización</a></li><li><a href="./004-data-model-integrity.html">ADR-004: Modelo de datos e integridad</a></li><li><a href="./005-offline-first-sync.html">ADR-005: Prioridad sin conexión y sincronización</a></li><li><a href="./006-field-operations-gotv.html">ADR-006: Operaciones de campo y GOTV</a></li><li><a href="./007-fundraising-payments.html">ADR-007: Recaudación de fondos y pagos</a></li><li><a href="./008-communications-messaging.html">ADR-008: Comunicaciones y mensajería</a></li><li><a href="./009-compliance-legal.html">ADR-009: Cumplimiento y marco legal</a></li><li><a href="./010-internationalization-localization.html">ADR-010: Internacionalización y localización</a></li><li><a href="./011-design-system-ux.html">ADR-011: Sistema de diseño y fundamentos de UX</a></li><li><a href="./012-external-integrations.html">ADR-012: Integraciones externas</a></li><li><a href="./013-analytics-ai.html">ADR-013: Analítica e IA</a></li><li><a href="./014-volunteer-onboarding.html" aria-current="page" class="active">ADR-014: Voluntariado e incorporación</a></li><li><a href="./015-product-scope.html">ADR-015: Límites del alcance del producto</a></li><li><a href="./016-cross-cutting-resolutions.html">ADR-016: Resoluciones transversales</a></li><li><a href="./017-sharing-contract-trust-model.html">ADR-017: El contrato de intercambio como primitiva universal de confianza</a></li><li><a href="./ux-decisions.html">Decisiones de UX — fase de wireframes</a></li></ul></div>
+    </nav>
+  </aside>
+  <main id="content" class="content">
+    <nav class="breadcrumb" aria-label="Ruta de navegación">Decisiones</nav>
+    <article class="prose">
+<h1 id="adr-014-voluntariado-e-incorporación" tabindex="-1"><a class="heading-anchor" href="#adr-014-voluntariado-e-incorporación" aria-hidden="true">#</a> ADR-014: Voluntariado e incorporación</h1>
+<p><strong>Estado:</strong> Aceptada
+<strong>Fecha:</strong> 2026-03-03
+<strong>Fuentes:</strong> <code>spec/workflows.md</code>, <code>spec/support.md</code></p>
+<h2 id="contexto" tabindex="-1"><a class="heading-anchor" href="#contexto" aria-hidden="true">#</a> Contexto</h2>
+<p>Los voluntarios son el grupo de usuarios más numeroso y el más dispar en alfabetización técnica y en capacidad de sus dispositivos. El camino de «quiero ayudar» a «estoy listo para tocar puertas» tiene que ser lo bastante rápido para no perder el entusiasmo del voluntario y lo bastante completo para que sepa usar las herramientas de forma efectiva y segura. Las campañas en entornos de alta amenaza además necesitan requisitos bloqueantes de capacitación: a un voluntario que no ha terminado la capacitación de trabajo de campo no se le da una lista de recorrido con datos de votantes.</p>
+<p>La superficie de soporte a las organizaciones es amplia: configuración del procesador de pagos, verificación de WhatsApp Business, manejo de llaves BYOK (Bring Your Own Key — la organización controla su propia llave de cifrado), configuración de cumplimiento, importación del padrón electoral. Las organizaciones necesitan ayuda guiada en cada paso, y la plataforma tiene que darla a escala en cinco países y siete idiomas.</p>
+<h2 id="decisión" tabindex="-1"><a class="heading-anchor" href="#decisión" aria-hidden="true">#</a> Decisión</h2>
+<h3 id="módulo-completo-de-incorporación-con-capacitación" tabindex="-1"><a class="heading-anchor" href="#módulo-completo-de-incorporación-con-capacitación" aria-hidden="true">#</a> Módulo completo de incorporación con capacitación</h3>
+<p>La plataforma trae un sistema propio de incorporación y capacitación, no solo globos de ayuda:</p>
+<ul>
+<li><strong>Recorrido guiado por la plataforma</strong> — recorrido interactivo por las herramientas que el voluntario va a usar</li>
+<li><strong>Contenido personalizable por la organización</strong> — la organización añade sus propios materiales de capacitación (discurso de la campaña, contexto local, protocolos de seguridad)</li>
+<li><strong>Cuestionarios y verificaciones de conocimiento</strong> — comprobaciones que confirman que el voluntario entiende las herramientas y lo que se espera de él</li>
+<li><strong>Requisitos bloqueantes de certificación</strong> — la organización puede exigir que se completen módulos de capacitación concretos antes de dar acceso a las herramientas de campo</li>
+<li><strong>Consulta sin conexión</strong> — los materiales de capacitación quedan en caché para consultarlos sin conexión después de la descarga inicial</li>
+</ul>
+<p>La misma infraestructura de incorporación sirve para la puesta en marcha de las organizaciones (asistente de configuración de la organización, configuración del procesador de pagos, generación de la llave BYOK, configuración de cumplimiento), con asistentes guiados paso a paso para cada tarea de configuración compleja.</p>
+<p><strong>Alternativas consideradas:</strong> Se descartó la capacitación externa (solo documentación, o un LMS de terceros) porque fragmenta la experiencia y no se integra con los permisos de la plataforma (no hay requisitos bloqueantes de certificación). Se descartó la incorporación mínima (solo crear la cuenta) porque los voluntarios del Sur Global pueden tener niveles muy distintos de alfabetización digital: la plataforma tiene que enseñar activamente a usarla.</p>
+<h3 id="requisitos-bloqueantes-de-capacitación-antes-del-primer-turno" tabindex="-1"><a class="heading-anchor" href="#requisitos-bloqueantes-de-capacitación-antes-del-primer-turno" aria-hidden="true">#</a> Requisitos bloqueantes de capacitación antes del primer turno</h3>
+<p>Cada organización configura qué módulos de capacitación son obligatorios antes de que un voluntario pueda acceder a las herramientas de campo. A un voluntario que no ha terminado la capacitación de trabajo de campo no se le puede asignar una lista de recorrido. Los requisitos bloqueantes se configuran por organización: las de baja amenaza pueden prescindir de ellos, y las campañas sensibles a la seguridad pueden exigir la capacitación en protocolos de seguridad antes de cualquier trabajo de campo.</p>
+<p><strong>Alternativas consideradas:</strong> Se descartó no poner ningún requisito bloqueante (capacitación opcional) porque, en entornos de alta amenaza, un voluntario sin capacitar con una lista de recorrido llena de datos de votantes es un riesgo de seguridad. Se descartó hacerlos obligatorios para todo el mundo porque las campañas pequeñas e informales necesitan flexibilidad para poner a la gente a trabajar rápido.</p>
+<h3 id="concierge-de-soporte-con-ia-primero-y-escalamiento-a-personas" tabindex="-1"><a class="heading-anchor" href="#concierge-de-soporte-con-ia-primero-y-escalamiento-a-personas" aria-hidden="true">#</a> Concierge de soporte con IA primero y escalamiento a personas</h3>
+<p>El soporte a las organizaciones en las tareas de configuración complejas (verificación de WhatsApp Business, manejo de llaves BYOK, configuración del procesador de pagos, configuración de cumplimiento, mudanza desde otra plataforma) usa un concierge de IA como primer contacto: disponible 24/7, multilingüe, capaz de resolver las preguntas estándar y de guiar la configuración. Cuando la IA no puede resolver, o cuando la organización lo pide, escala a un especialista humano. Las personas se concentran en los casos límite, las preguntas jurisdiccionales complejas y las configuraciones de alto riesgo.</p>
+<p><strong>Alternativas consideradas:</strong> Se descartó el soporte solo humano porque no escala a cinco países y siete idiomas sin una plantilla enorme. Se descartó el soporte solo con IA porque las tareas de alto riesgo (el manejo de llaves BYOK, donde perder la llave significa perder los datos para siempre) exigen verificación humana.</p>
+<h2 id="consecuencias" tabindex="-1"><a class="heading-anchor" href="#consecuencias" aria-hidden="true">#</a> Consecuencias</h2>
+<p><strong>Beneficios:</strong></p>
+<ul>
+<li>La capacitación integrada baja la barrera para participar como voluntario y hace que la incorporación tenga una calidad pareja</li>
+<li>Los requisitos bloqueantes de certificación protegen los datos sensibles al asegurar que los voluntarios estén capacitados antes de acceder a las herramientas de campo</li>
+<li>El contenido de capacitación personalizable por la organización deja que cada campaña añada el contexto de su entorno político y de sus necesidades de seguridad</li>
+<li>El concierge de soporte con IA primero escala a más países e idiomas sin que la plantilla crezca en la misma proporción</li>
+</ul>
+<p><strong>Costos:</strong></p>
+<ul>
+<li>La gestión del contenido de los módulos de capacitación (redactarlo, organizarlo, versionarlo) es un área de producto que necesita inversión continua</li>
+<li>Los requisitos bloqueantes de certificación añaden fricción a la incorporación de voluntarios: hay que justificarlos con claridad o reducirán la conversión</li>
+<li>El concierge de IA necesita datos de entrenamiento y actualizaciones continuas a medida que la plataforma evoluciona</li>
+</ul>
+<p><strong>Restricciones:</strong></p>
+<ul>
+<li>Los materiales de capacitación tienen que estar disponibles en todos los idiomas que cada organización tenga configurados</li>
+<li>El almacenamiento en caché de los materiales de capacitación tiene que caber dentro de los límites de almacenamiento de los dispositivos</li>
+<li>Configurar los requisitos bloqueantes tiene que ser simple para los Administradores de la organización, no una matriz de permisos compleja</li>
+</ul>
+<p><strong>ADR relacionados:</strong> <a href="./003-identity-access-organization.html">ADR-003</a> (política configurable de aprobación de voluntarios), <a href="./002-security-threat-model.html">ADR-002</a> (capacitación en seguridad para entornos de alta amenaza), <a href="./010-internationalization-localization.html">ADR-010</a> (contenido de capacitación multilingüe)</p>
+
+    </article>
+  </main>
+  <div class="toc-rail"><nav class="toc" aria-label="En esta página"><div class="toc-label">En esta página</div><ul><li class="toc-2"><a href="#contexto"># Contexto</a></li><li class="toc-2"><a href="#decisión"># Decisión</a></li><li class="toc-3"><a href="#módulo-completo-de-incorporación-con-capacitación"># Módulo completo de incorporación con capacitación</a></li><li class="toc-3"><a href="#requisitos-bloqueantes-de-capacitación-antes-del-primer-turno"># Requisitos bloqueantes de capacitación antes del primer turno</a></li><li class="toc-3"><a href="#concierge-de-soporte-con-ia-primero-y-escalamiento-a-personas"># Concierge de soporte con IA primero y escalamiento a personas</a></li><li class="toc-2"><a href="#consecuencias"># Consecuencias</a></li></ul></nav></div>
+</div>
+<script src="../../assets/search.js" defer></script>
+<script src="../../assets/app.js" defer></script>
+</body>
+</html>

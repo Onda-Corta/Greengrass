@@ -1,85 +1,169 @@
-// One-shot maintenance pass: repoint Spanish spec cross-references at Spanish anchors.
+// Repoint translated cross-references at translated headings.
 //
-// Translators copy each citation's URL verbatim from the English source, so a link
-// in i18n/es/spec/support.md still reads (workflows.md#1-tenant-onboarding) while the
-// Spanish workflows.md heading is "1. Incorporación de organizaciones". Headings are
-// translated in place, so the Nth heading of the English file corresponds to the Nth
-// heading of the Spanish one; that positional correspondence is what we map through.
+// Translators copy each citation's URL verbatim from the English source, so a
+// link in i18n/es/spec/support.md still reads (workflows.md#1-tenant-onboarding)
+// while the Spanish heading is "1. Incorporación de organizaciones". Headings are
+// translated in place, so the Nth heading of the English file corresponds to the
+// Nth heading of the Spanish one; that positional correspondence is what we map
+// through. Heading ids come from lib/headings.mjs -- the same renderer the site
+// build uses -- so a mapped anchor is the id the build will actually emit.
 //
-// Anything that does not map cleanly is reported and left alone -- `npm run build`
-// validates every anchor afterwards, so a miss is loud, not silent.
+// Structure is load-bearing, so this validates the whole tree before writing
+// anything: a mid-run abort would leave a tree that is half English, half
+// Spanish, and whose already-processed state is ambiguous.
+//
+//   node scripts/fix-es-anchors.mjs                 rewrite
+//   node scripts/fix-es-anchors.mjs --report-only   parity table, no writes
 import { promises as fs } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { headingSlugs } from './lib/headings.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
-const EN_DIR = path.join(ROOT, 'spec');
-const ES_DIR = path.join(ROOT, 'i18n/es/spec');
+const ES_ROOT = path.join(ROOT, 'i18n/es');
+const REPORT_ONLY = process.argv.includes('--report-only');
 
-// Must stay identical to slugify() in build.mjs.
-const slugify = (s) => String(s).trim().toLowerCase()
-  .replace(/[^\p{L}\p{N}\s_-]/gu, '').replace(/\s+/g, '-');
-
-// Headings outside fenced code blocks, in document order, with build.mjs's
-// duplicate-slug suffixing (foo, foo-1, foo-2...) applied.
-function headings(src) {
-  const out = [];
-  const seen = new Map();
-  let fenced = false;
-  for (const line of src.split('\n')) {
-    if (/^\s*```/.test(line)) { fenced = !fenced; continue; }
-    if (fenced) continue;
-    const m = line.match(/^(#{1,6})\s+(.+?)\s*#*\s*$/);
-    if (!m) continue;
-    const text = m[2].replace(/[`*_]/g, '').trim();
-    const base = slugify(text);
-    const n = seen.get(base) ?? 0;
-    seen.set(base, n + 1);
-    out.push({ text, slug: n === 0 ? base : `${base}-${n}` });
-  }
-  return out;
-}
+// The Spanish home page is deliberately NOT a translation of the English repo
+// README -- it is a reader-facing front door that drops the build instructions
+// and says what is and isn't in Spanish. It therefore has no positional heading
+// correspondence, so it is exempt from the parity check and never used as an
+// anchor target. Any citation of `README.md#something` will surface as unmapped,
+// which is the right outcome: there is nothing to map it through.
+const NOT_A_TRANSLATION = new Set(['README.md']);
 
 const read = (f) => fs.readFile(f, 'utf8');
+const posix = (p) => p.split(path.sep).join('/');
 
-const esFiles = (await fs.readdir(ES_DIR)).filter((f) => f.endsWith('.md'));
-const maps = new Map();   // basename -> Map(enSlug -> {slug, text})
+async function walk(dir, acc = []) {
+  for (const e of await fs.readdir(dir, { withFileTypes: true })) {
+    const full = path.join(dir, e.name);
+    if (e.isDirectory()) await walk(full, acc);
+    else if (e.isFile() && e.name.toLowerCase().endsWith('.md')) acc.push(full);
+  }
+  return acc;
+}
 
-const esSlugs = new Map();   // basename -> Set(spanish slugs), for idempotency
+// --- Pass 1: discover -------------------------------------------------------
+// Every ES document is keyed by its logical path -- the repo-relative path of
+// the English original -- because that is what the site generator keys on too.
+const esFiles = (await walk(ES_ROOT)).sort();
+const pairs = new Map();   // logical -> { logical, esPath, en, es, enH, esH }
+const problems = [];
 
-for (const f of esFiles) {
-  const en = headings(await read(path.join(EN_DIR, f)));
-  const es = headings(await read(path.join(ES_DIR, f)));
-  esSlugs.set(f, new Set(es.map((h) => h.slug)));
-  if (en.length !== es.length) {
-    console.warn(`  ! heading count differs for ${f}: en=${en.length} es=${es.length} -- skipping map`);
+for (const esPath of esFiles) {
+  const logical = posix(path.relative(ES_ROOT, esPath));
+  const enPath = path.join(ROOT, logical);
+  let en;
+  try {
+    en = await read(enPath);
+  } catch {
+    // An ES file with no English original can never pair with an English page:
+    // the language switch and the sidebar sort both key on the English name.
+    problems.push(`${logical}: no English original at ${logical} (translated filename?)`);
     continue;
   }
-  maps.set(f, new Map(en.map((h, i) => [h.slug, es[i]])));
+  const es = await read(esPath);
+  pairs.set(logical, {
+    logical, esPath, en, es,
+    enH: headingSlugs(en),
+    esH: headingSlugs(es),
+  });
 }
 
-let fixed = 0, missed = 0, already = 0;
-for (const f of esFiles) {
-  const p = path.join(ES_DIR, f);
-  const before = await read(p);
-  // Only rewrite links whose target is another translated spec file.
-  const after = before.replace(/\]\(([A-Za-z0-9._-]+\.md)#([^)]+)\)/g, (full, target, anchor) => {
-    const map = maps.get(target);
-    if (!map) return full;                       // target not translated -> leave (EN fallback)
-    let raw = anchor;
-    try { raw = decodeURIComponent(anchor); } catch { /* keep */ }
-    // Already pointing at a Spanish heading -> this file has been processed.
-    if (esSlugs.get(target)?.has(raw)) { already++; return full; }
-    const hit = map.get(raw);
-    if (!hit) {
-      console.warn(`  ! no mapping: ${f} -> ${target}#${raw}`);
+// --- Pass 2: validate, write nothing ---------------------------------------
+for (const p of pairs.values()) {
+  const first = p.es.split('\n').find((l) => l.trim() !== '') ?? '';
+  if (!/^#\s+\S/.test(first)) {
+    // Without an H1 the generator falls back to title-casing the filename, which
+    // silently puts an English, wrongly-capitalized title in the Spanish sidebar.
+    problems.push(`${p.logical}: first line is not an "# H1" (got: ${JSON.stringify(first.slice(0, 60))})`);
+  }
+  if (NOT_A_TRANSLATION.has(p.logical)) continue;
+  if (p.enH.length !== p.esH.length) {
+    problems.push(
+      `${p.logical}: heading count differs -- en=${p.enH.length} es=${p.esH.length}. ` +
+      `The Nth-heading mapping is void; the translation must mirror the English structure exactly.`
+    );
+  }
+}
+
+if (REPORT_ONLY) {
+  console.log(`${pairs.size} translated document(s):\n`);
+  for (const p of [...pairs.values()].sort((a, b) => a.logical.localeCompare(b.logical))) {
+    const ok = p.enH.length === p.esH.length;
+    const mark = NOT_A_TRANSLATION.has(p.logical) ? 'n/a ' : ok ? 'ok  ' : 'DIFF';
+    console.log(`  ${mark}  ${String(p.enH.length).padStart(3)}/${String(p.esH.length).padEnd(3)}  ${p.logical}`);
+  }
+  if (problems.length) console.log(`\n${problems.length} problem(s):\n  ${problems.join('\n  ')}`);
+  process.exit(0);
+}
+
+if (problems.length) {
+  console.error(`Refusing to rewrite anything. ${problems.length} problem(s):\n`);
+  for (const m of problems) console.error(`  ! ${m}`);
+  process.exit(1);
+}
+
+// --- Passes 3 & 4: resolve targets, repoint anchors -------------------------
+const maps = new Map();     // logical -> { en: Map(enSlug -> esSlug), es: Set(esSlug) }
+for (const p of pairs.values()) {
+  if (NOT_A_TRANSLATION.has(p.logical)) continue;
+  maps.set(p.logical, {
+    en: new Map(p.enH.map((h, i) => [h.id, p.esH[i].id])),
+    es: new Set(p.esH.map((h) => h.id)),
+  });
+}
+
+const LINK_RE = /\]\(([^)\s#]+\.md)#([^)\s]+)\)/g;
+let fixed = 0, already = 0, missed = 0, external = 0;
+
+for (const p of pairs.values()) {
+  const dir = path.posix.dirname(p.logical);
+  let fenced = false;
+  const out = p.es.split('\n').map((line) => {
+    if (/^\s*```/.test(line)) { fenced = !fenced; return line; }
+    if (fenced) return line;
+    return line.replace(LINK_RE, (full, target, anchor) => {
+      // Resolve against the containing file's directory. This is what makes the
+      // untranslated trees fall out automatically instead of needing allow-lists:
+      // design/ux/00-overview.md + 04-wireframes/README.md resolves to a file
+      // that has no translation, so its English anchor is left alone and the
+      // build validates it through the English fallback chain.
+      const logical = path.posix.normalize(path.posix.join(dir, target));
+      if (logical.startsWith('..')) { external++; return full; }
+      const m = maps.get(logical);
+      if (!m) return full;                       // untranslated target -> EN fallback
+
+      let raw = anchor;
+      try { raw = decodeURIComponent(anchor); } catch { /* keep */ }
+
+      // English first, always. A slug can be valid in BOTH languages (`Color`,
+      // `Grid`, `Dashboards`, ADR-016's `#N:` headings), and preferring the
+      // Spanish reading there would silently point at a real-but-wrong heading
+      // -- the one failure `npm run build` cannot catch. Checking English first
+      // is also inherently idempotent: an untranslated heading maps to itself.
+      if (m.en.has(raw)) {
+        const to = m.en.get(raw);
+        if (to === raw) { already++; return full; }
+        fixed++;
+        return `](${target}#${to})`;
+      }
+      if (m.es.has(raw)) { already++; return full; }
+      console.error(`  ! no mapping: ${p.logical} -> ${target}#${raw}`);
       missed++;
       return full;
-    }
-    fixed++;
-    return `](${target}#${hit.slug})`;
-  });
-  if (after !== before) await fs.writeFile(p, after, 'utf8');
+    });
+  }).join('\n');
+
+  if (out !== p.es) await fs.writeFile(p.esPath, out, 'utf8');
 }
 
-console.log(`\nRepointed ${fixed} anchor(s) to Spanish headings; ${already} already correct; ${missed} unmapped.`);
+console.log(
+  `\n${pairs.size} translated document(s). ` +
+  `Repointed ${fixed} anchor(s); ${already} already correct; ` +
+  `${external} outside the tree; ${missed} unmapped.`
+);
+if (missed > 0) {
+  console.error('An unmapped anchor is a broken link. Fix the citation or the heading.');
+  process.exit(1);
+}

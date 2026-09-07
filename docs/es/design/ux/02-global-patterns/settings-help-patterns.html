@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="es" data-base="../../../../" data-no-results="No hay resultados para">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Patrones de ajustes y ayuda · GreenGrass</title>
+<meta name="description" content="Patrones de ajustes y ayuda — Documentación de especificación y diseño de GreenGrass.">
+<link rel="alternate" hreflang="en" href="../../../../design/ux/02-global-patterns/settings-help-patterns.html">
+<link rel="alternate" hreflang="es" href="./settings-help-patterns.html">
+<link rel="alternate" hreflang="x-default" href="../../../../design/ux/02-global-patterns/settings-help-patterns.html">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%232563eb'/%3E%3Cstop offset='1' stop-color='%2316a34a'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='32' height='32' rx='7' fill='url(%23g)'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="../../../../assets/styles.css">
+</head>
+<body>
+<a class="skip-link" href="#content">Saltar al contenido</a>
+<header class="site-header">
+  <button type="button" class="menu-toggle" aria-label="Alternar navegación" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+  <a class="brand" href="../../../../es/index.html">
+    <span class="brand-mark" aria-hidden="true"></span>
+    <span class="brand-text"><strong>GreenGrass</strong><small>Especificación y diseño</small></span>
+  </a>
+  <div class="search">
+    <input type="search" id="search-input" placeholder="Buscar en la documentación…" autocomplete="off" aria-label="Buscar en la documentación">
+    <div id="search-results" class="search-results" hidden></div>
+  </div>
+  <nav class="lang-switch" aria-label="Idioma"><a class="lang-opt" href="../../../../design/ux/02-global-patterns/settings-help-patterns.html" hreflang="en" lang="en" title="View this page in English">EN</a><span class="lang-opt active" aria-current="true">ES</span></nav>
+  <button type="button" class="theme-toggle" aria-label="Alternar modo oscuro" title="Alternar modo oscuro">
+    <span class="theme-icon" aria-hidden="true"></span>
+  </button>
+</header>
+<div class="layout">
+  <div class="sidebar-backdrop" hidden></div>
+  <aside class="sidebar" aria-label="Navegación de la documentación">
+    <nav class="nav">
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">Inicio<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../../../index.html">GreenGrass</a></li></ul></div>
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">Especificaciones<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../../../spec/product.html">Proyecto: GreenGrass</a></li><li><a href="../../../spec/mvp.html">MVP de GreenGrass — plan de producto</a></li><li><a href="../../../spec/users.html">Usuarios y roles</a></li><li><a href="../../../spec/workflows.html">Flujos de trabajo principales</a></li><li><a href="../../../spec/geography.html">Geografía objetivo</a></li><li><a href="../../../spec/security.html">Seguridad y modelo de amenazas</a></li><li><a href="../../../spec/compliance.html">Cumplimiento y marco legal</a></li><li><a href="../../../spec/fundraising.html">Recaudación de fondos e infraestructura de pagos</a></li><li><a href="../../../spec/integrations.html">Integraciones externas</a></li><li><a href="../../../spec/support.html">Soporte y puesta en marcha de organizaciones</a></li><li><a href="../../../spec/gotv.html">GOTV y operaciones del día de elecciones</a></li><li><a href="../../../spec/messaging.html">Comunicaciones internas y notificaciones</a></li><li><a href="../../../spec/press.html">Prensa, medios y comunicaciones públicas</a></li><li><a href="../../../spec/comms-intelligence.html">Inteligencia de comunicaciones — hoja de ruta post-MVP</a></li></ul></div>
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">Arquitectura<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../../architecture/system.html">Arquitectura del sistema</a></li></ul></div>
+<div class="nav-section open"><button type="button" class="nav-section-title" aria-expanded="true">Diseño UX<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../00-overview.html">Resumen del diseño de UX</a></li><li><a href="../01-information-architecture/navigation-model.html">Modelo de navegación</a></li><li><a href="../01-information-architecture/screen-inventory.html">Inventario de pantallas</a></li><li><a href="../01-information-architecture/persona-views.html">Vistas por arquetipo</a></li><li><a href="../01-information-architecture/url-structure.html">Estructura de URL</a></li><li><a href="./pattern-catalog.html">Catálogo de patrones</a></li><li><a href="./offline-sync-patterns.html">Patrones sin conexión y de sincronización</a></li><li><a href="./notification-patterns.html">Patrones de notificaciones</a></li><li><a href="./search-patterns.html">Patrones de búsqueda</a></li><li><a href="./settings-help-patterns.html" aria-current="page" class="active">Patrones de ajustes y ayuda</a></li><li><a href="./security-ux-patterns.html">Patrones de UX de seguridad</a></li><li><a href="../03-design-system/foundations.html">Fundamentos del sistema de diseño</a></li><li><a href="../03-design-system/theming-strategy.html">Estrategia de temas</a></li><li><a href="../03-design-system/component-inventory.html">Inventario de componentes</a></li><li><a href="../03-design-system/responsive-strategy.html">Estrategia de diseño adaptable</a></li></ul></div>
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">Decisiones<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../../../decisions/001-platform-architecture.html">ADR-001: Arquitectura y despliegue de la plataforma</a></li><li><a href="../../../decisions/002-security-threat-model.html">ADR-002: Seguridad y modelo de amenazas</a></li><li><a href="../../../decisions/003-identity-access-organization.html">ADR-003: Identidad, acceso y organización</a></li><li><a href="../../../decisions/004-data-model-integrity.html">ADR-004: Modelo de datos e integridad</a></li><li><a href="../../../decisions/005-offline-first-sync.html">ADR-005: Prioridad sin conexión y sincronización</a></li><li><a href="../../../decisions/006-field-operations-gotv.html">ADR-006: Operaciones de campo y GOTV</a></li><li><a href="../../../decisions/007-fundraising-payments.html">ADR-007: Recaudación de fondos y pagos</a></li><li><a href="../../../decisions/008-communications-messaging.html">ADR-008: Comunicaciones y mensajería</a></li><li><a href="../../../decisions/009-compliance-legal.html">ADR-009: Cumplimiento y marco legal</a></li><li><a href="../../../decisions/010-internationalization-localization.html">ADR-010: Internacionalización y localización</a></li><li><a href="../../../decisions/011-design-system-ux.html">ADR-011: Sistema de diseño y fundamentos de UX</a></li><li><a href="../../../decisions/012-external-integrations.html">ADR-012: Integraciones externas</a></li><li><a href="../../../decisions/013-analytics-ai.html">ADR-013: Analítica e IA</a></li><li><a href="../../../decisions/014-volunteer-onboarding.html">ADR-014: Voluntariado e incorporación</a></li><li><a href="../../../decisions/015-product-scope.html">ADR-015: Límites del alcance del producto</a></li><li><a href="../../../decisions/016-cross-cutting-resolutions.html">ADR-016: Resoluciones transversales</a></li><li><a href="../../../decisions/017-sharing-contract-trust-model.html">ADR-017: El contrato de intercambio como primitiva universal de confianza</a></li><li><a href="../../../decisions/ux-decisions.html">Decisiones de UX — fase de wireframes</a></li></ul></div>
+    </nav>
+  </aside>
+  <main id="content" class="content">
+    <nav class="breadcrumb" aria-label="Ruta de navegación">Diseño UX</nav>
+    <article class="prose">
+<h1 id="patrones-de-ajustes-y-ayuda" tabindex="-1"><a class="heading-anchor" href="#patrones-de-ajustes-y-ayuda" aria-hidden="true">#</a> Patrones de ajustes y ayuda</h1>
+<h2 id="propósito" tabindex="-1"><a class="heading-anchor" href="#propósito" aria-hidden="true">#</a> Propósito</h2>
+<p>Este documento define los patrones de UX de la configuración de la plataforma, la ayuda contextual, la base de conocimiento, el cambio de idioma y los flujos de incorporación. Son las estructuras de apoyo que ayudan a configurar la plataforma y a encontrar respuestas cuando alguien se atasca.</p>
+<h2 id="arquitectura-de-los-ajustes" tabindex="-1"><a class="heading-anchor" href="#arquitectura-de-los-ajustes" aria-hidden="true">#</a> Arquitectura de los ajustes</h2>
+<h3 id="jerarquía-de-los-ajustes" tabindex="-1"><a class="heading-anchor" href="#jerarquía-de-los-ajustes" aria-hidden="true">#</a> Jerarquía de los ajustes</h3>
+<p>La configuración se organiza en tres niveles:</p>
+<table>
+<thead>
+<tr>
+<th>Nivel</th>
+<th>Alcance</th>
+<th>Quién la configura</th>
+<th>Dónde</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Organización</strong></td>
+<td>Aplica a todos los usuarios de la organización</td>
+<td>Administrador de la organización</td>
+<td><code>/settings/*</code></td>
+</tr>
+<tr>
+<td><strong>Funcionalidad</strong></td>
+<td>Aplica a un área funcional concreta</td>
+<td>Quien es dueño del área funcional</td>
+<td>Dentro del área funcional</td>
+</tr>
+<tr>
+<td><strong>Personal</strong></td>
+<td>Aplica a cada usuario</td>
+<td>Cada usuario</td>
+<td><code>/profile/*</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="ajustes-de-la-organización" tabindex="-1"><a class="heading-anchor" href="#ajustes-de-la-organización" aria-hidden="true">#</a> Ajustes de la organización</h3>
+<p>Se llega por la sección Configuración de la barra lateral (solo Administrador de la organización). Está organizada en grupos plegables:</p>
+<pre><code>Configuración
+├── Perfil e identidad visual  # Nombre, logo, idiomas, identidad visual
+├── Roles y permisos           # Plantillas de rol, ajustes de permisos
+│   ├── Editor de plantillas de rol
+│   └── Gestión del personal
+├── Campaña                    # Período de campaña, ámbito geográfico
+│   ├── Período de campaña
+│   └── Ámbito geográfico
+├── Cumplimiento               # Límites de contribución, avisos legales, conservación
+│   ├── Límites de contribución
+│   ├── Avisos legales
+│   └── Conservación de datos
+├── Integraciones              # Conexiones con terceros
+│   ├── WhatsApp Business
+│   ├── Proveedor de SMS
+│   ├── Dominio de correo
+│   ├── Cuentas de redes sociales
+│   └── Webhooks
+├── Pagos                      # Configuración del procesador de pagos
+├── Seguridad                  # Cifrado, nivel de seguridad, registro de auditoría
+│   ├── Gestión de llaves de cifrado
+│   ├── Ajustes de seguridad
+│   └── Registro de auditoría
+├── Desarrolladores            # Llaves de API, webhooks
+│   ├── Llaves de API
+│   └── Configuración de webhooks
+└── Facturación                # Suscripción, método de pago
+</code></pre>
+<h3 id="ajustes-por-funcionalidad" tabindex="-1"><a class="heading-anchor" href="#ajustes-por-funcionalidad" aria-hidden="true">#</a> Ajustes por funcionalidad</h3>
+<p>Los ajustes acotados a un área funcional concreta se manejan dentro de esa funcionalidad, no en la configuración global:</p>
+<ul>
+<li><strong>Preferencias de comunicación</strong> (gestión de consentimiento, reglas de baja) → dentro de Comunicaciones</li>
+<li><strong>Valores predeterminados de los formularios de recaudación</strong> (montos sugeridos, opciones de recurrencia) → dentro de Recaudación de fondos</li>
+<li><strong>Guiones de campo</strong> (guiones predeterminados, opciones de respuesta) → dentro de Campo</li>
+<li><strong>Cuentas de redes sociales</strong> → dentro de Redes sociales (también accesibles desde Configuración &gt; Integraciones)</li>
+</ul>
+<p>Así se evita una página de configuración monolítica. Los ajustes de una funcionalidad viven donde vive la funcionalidad.</p>
+<h3 id="ajustes-personales" tabindex="-1"><a class="heading-anchor" href="#ajustes-personales" aria-hidden="true">#</a> Ajustes personales</h3>
+<p>Se llega por el menú de perfil de usuario (disponible para todo el mundo):</p>
+<pre><code>Perfil
+├── Perfil personal                 # Nombre, avatar, datos de contacto
+├── Preferencias de notificaciones  # Configuración de notificaciones por fuente
+├── Seguridad                       # Gestión de passkeys, contactos de confianza
+├── Idioma                          # Preferencia de idioma de la interfaz
+└── Selector de organización        # Para quien pertenece a varias organizaciones
+</code></pre>
+<h3 id="patrón-de-ux-de-los-ajustes" tabindex="-1"><a class="heading-anchor" href="#patrón-de-ux-de-los-ajustes" aria-hidden="true">#</a> Patrón de UX de los ajustes</h3>
+<p>Todas las pantallas de configuración comparten la misma disposición:</p>
+<pre><code>┌────────────────────────────────────────────────────────────┐
+│  Configuración &gt; [Nombre de la sección]                    │
+├────────────────────────────────────────────────────────────┤
+│                                                            │
+│  ▾ [Nombre del grupo]                                      │
+│    ┌──────────────────────────────────────────────────┐    │
+│    │ Rótulo del ajuste             [valor / control]  │    │
+│    │ Texto de ayuda que explica qué hace este ajuste  │    │
+│    │                                                  │    │
+│    │ Rótulo del ajuste *           [valor / control]  │    │
+│    │ Texto de ayuda (ajuste obligatorio)              │    │
+│    └──────────────────────────────────────────────────┘    │
+│                                                            │
+│  ▸ [Otro grupo]                                            │
+│                                                            │
+├────────────────────────────────────────────────────────────┤
+│  Última modificación: 15 ene. 2026 por admin@org.org       │
+│  [Cancelar]                                     [Guardar]  │
+└────────────────────────────────────────────────────────────┘
+</code></pre>
+<p><strong>Comportamientos:</strong></p>
+<ul>
+<li>Grupos plegables — uno desplegado a la vez (patrón de acordeón)</li>
+<li>Texto de ayuda en cada ajuste — explicación breve de qué hace y por qué</li>
+<li>Seguimiento de cambios — pie con &quot;Última modificación por X el Y&quot;</li>
+<li>Aviso de cambios sin guardar — diálogo de confirmación al salir con cambios pendientes</li>
+<li>Validación — en línea, campo por campo, con mensajes de error claros</li>
+<li>Valores predeterminados sensatos — precargados donde se puede, señalados claramente como predeterminados</li>
+</ul>
+<hr>
+<h2 id="sistema-de-ayuda-y-soporte" tabindex="-1"><a class="heading-anchor" href="#sistema-de-ayuda-y-soporte" aria-hidden="true">#</a> Sistema de ayuda y soporte</h2>
+<h3 id="puntos-de-acceso-a-la-ayuda" tabindex="-1"><a class="heading-anchor" href="#puntos-de-acceso-a-la-ayuda" aria-hidden="true">#</a> Puntos de acceso a la ayuda</h3>
+<p>Se llega a la ayuda desde varios puntos de entrada, en línea con el patrón de elementos permanentes de la interfaz:</p>
+<ol>
+<li><strong>Pie de la barra lateral</strong> (escritorio) — el enlace &quot;Ayuda&quot; abre el panel de ayuda</li>
+<li><strong>Menú de usuario</strong> (móvil) — el elemento &quot;Ayuda y soporte&quot;</li>
+<li><strong>Icono &quot;?&quot;</strong> — icono de ayuda flotante en las pantallas complejas; abre la ayuda contextual</li>
+<li><strong>Estados vacíos</strong> — enlaces &quot;Más información&quot; en los mensajes de estado vacío</li>
+<li><strong>Texto de ayuda de los ajustes</strong> — ayuda desplegable &quot;¿Por qué es obligatorio?&quot; en los ajustes de cumplimiento</li>
+<li><strong>Pasos del asistente</strong> — ayuda en línea dentro de cada paso del asistente</li>
+</ol>
+<h3 id="ayuda-contextual" tabindex="-1"><a class="heading-anchor" href="#ayuda-contextual" aria-hidden="true">#</a> Ayuda contextual</h3>
+<p>Cuando alguien hace clic en &quot;?&quot; o en el enlace &quot;Ayuda&quot; de una pantalla, el sistema busca contenido de ayuda contextual para esa pantalla:</p>
+<pre><code>┌──────────────────────────────────────────────────────────────┐
+│  Ayuda: Constructor de segmentos                 [✗ Cerrar]  │
+├──────────────────────────────────────────────────────────────┤
+│                                                              │
+│  Los segmentos te permiten definir grupos de                 │
+│  contactos a partir de criterios. Úsalos para                │
+│  dirigir comunicaciones, filtrar reportes y                  │
+│  asignar voluntarios.                                        │
+│                                                              │
+│  Inicio rápido:                                              │
+│  1. Elige un campo de criterio (p. ej., &quot;Puntaje de apoyo&quot;)  │
+│  2. Fija la condición (p. ej., &quot;mayor que 3&quot;)                │
+│  3. Haz clic en &quot;Vista previa&quot; para ver qué contactos cruzan │
+│  4. Guarda tu segmento                                       │
+│                                                              │
+│  [📖 Artículo completo: Crear segmentos →]                   │
+│  [💬 Preguntarle al concierge de IA →]                       │
+│                                                              │
+└──────────────────────────────────────────────────────────────┘
+</code></pre>
+<p><strong>Escritorio:</strong> la ayuda contextual se abre como un panel lateral desde la derecha (no tapa el contenido principal).
+<strong>Móvil:</strong> la ayuda contextual se abre como una hoja inferior (media pantalla) o como un artículo a pantalla completa.</p>
+<h3 id="base-de-conocimiento" tabindex="-1"><a class="heading-anchor" href="#base-de-conocimiento" aria-hidden="true">#</a> Base de conocimiento</h3>
+<p>Se llega en <code>/help</code>. Una biblioteca de artículos de ayuda con búsqueda, organizada por área funcional.</p>
+<pre><code>┌──────────────────────────────────────────────────────┐
+│  Centro de ayuda                                     │
+├──────────────────────────────────────────────────────┤
+│  [Buscar en los artículos de ayuda...]               │
+├──────────────────────────────────────────────────────┤
+│                                                      │
+│  Primeros pasos                                      │
+│  ├── Configurar tu organización                      │
+│  ├── Invitar a integrantes del equipo                │
+│  ├── Configurar los ajustes de cumplimiento          │
+│  └── Tu primer formulario de donación                │
+│                                                      │
+│  Personas y CRM                                      │
+│  ├── Importar padrones electorales                   │
+│  ├── Crear segmentos                                 │
+│  ├── Deduplicación                                   │
+│  └── Calidad de datos                                │
+│                                                      │
+│  Trabajo de campo                                    │
+│  ├── Crear campañas de trabajo de campo              │
+│  ├── Cortar territorios                              │
+│  ├── Crear guiones                                   │
+│  └── Guía del modo de campo para voluntarios         │
+│                                                      │
+│  ... (más categorías)                                │
+│                                                      │
+└──────────────────────────────────────────────────────┘
+</code></pre>
+<p><strong>Comportamientos:</strong></p>
+<ul>
+<li><strong>Búsqueda</strong> — búsqueda de texto completo en todos los artículos de ayuda. Los resultados se ordenan por relevancia.</li>
+<li><strong>Categorizada</strong> — organizada por área funcional, siguiendo la estructura de la barra lateral.</li>
+<li><strong>Filtrada por rol</strong> — los artículos llevan etiquetas de los arquetipos a los que sirven. Un Voluntario ve primero los artículos de voluntarios; un Administrador de la organización ve primero los de administración.</li>
+<li><strong>Multilingüe</strong> — los artículos están disponibles en los idiomas configurados por la organización. Si no existe la traducción, cae al inglés.</li>
+<li><strong>Parcialmente sin conexión</strong> — los artículos vistos antes quedan en caché para leerlos sin conexión.</li>
+</ul>
+<h3 id="concierge-de-ia" tabindex="-1"><a class="heading-anchor" href="#concierge-de-ia" aria-hidden="true">#</a> Concierge de IA</h3>
+<p>Se llega en <code>/help/chat</code> o por el enlace &quot;Preguntarle al concierge de IA&quot; de los paneles de ayuda. Un asistente conversacional de IA que responde preguntas sobre la plataforma.</p>
+<pre><code>┌──────────────────────────────────────────────────────────┐
+│  Concierge de IA                              [✗ Cerrar] │
+├──────────────────────────────────────────────────────────┤
+│                                                          │
+│  ¿En qué te puedo ayudar?                                │
+│                                                          │
+│  ┌────────────────────────────────────────────────────┐  │
+│  │  Tú: ¿Cómo configuro los límites de                │  │
+│  │      contribución para Puerto Rico?                │  │
+│  └────────────────────────────────────────────────────┘  │
+│                                                          │
+│  ┌────────────────────────────────────────────────────┐  │
+│  │  Concierge: los límites de contribución de         │  │
+│  │  Puerto Rico se configuran en Configuración &gt;      │  │
+│  │  Cumplimiento &gt; Límites de contribución. En        │  │
+│  │  Puerto Rico el límite individual es de            │  │
+│  │  $2,900...                                         │  │
+│  │                                                    │  │
+│  │  [Ir a Límites de contribución →]                  │  │
+│  │  [Leer el artículo completo: Cumplimiento en PR →] │  │
+│  └────────────────────────────────────────────────────┘  │
+│                                                          │
+│  [Escribe tu pregunta...]                    [Enviar]    │
+└──────────────────────────────────────────────────────────┘
+</code></pre>
+<p><strong>Comportamientos:</strong></p>
+<ul>
+<li><strong>Consciente del contexto</strong> — el concierge sabe en qué pantalla está la persona y puede dar orientación contextual.</li>
+<li><strong>Enlaces a acciones</strong> — las respuestas incluyen enlaces directos a las pantallas relevantes y a los artículos de la base de conocimiento.</li>
+<li><strong>Escalamiento</strong> — si el concierge no puede resolver la pregunta, ofrece abrir un ticket de soporte (para las organizaciones con soporte premium).</li>
+<li><strong>Requiere conexión</strong> — no está disponible sin conexión (la inferencia de IA necesita servidor).</li>
+<li><strong>Historial de conversaciones</strong> — las conversaciones anteriores se guardan y se consultan desde la interfaz de chat.</li>
+</ul>
+<hr>
+<h2 id="cambio-de-idioma" tabindex="-1"><a class="heading-anchor" href="#cambio-de-idioma" aria-hidden="true">#</a> Cambio de idioma</h2>
+<h3 id="preferencia-de-idioma" tabindex="-1"><a class="heading-anchor" href="#preferencia-de-idioma" aria-hidden="true">#</a> Preferencia de idioma</h3>
+<p>Cada persona fija su idioma preferido para la interfaz. Esto afecta a:</p>
+<ul>
+<li>Todo el texto de la interfaz (rótulos, botones, navegación, textos de ayuda)</li>
+<li>Los mensajes generados por el sistema (notificaciones, mensajes de error)</li>
+<li>La selección de idioma de los artículos de la base de conocimiento</li>
+</ul>
+<p><strong>No</strong> afecta a:</p>
+<ul>
+<li>El contenido escrito por las personas (notas, mensajes y respuestas de trabajo de campo quedan en el idioma en que se escribieron)</li>
+<li>Los datos de los registros (el nombre y la dirección de un contacto se guardan tal como se ingresaron)</li>
+<li>Los avisos legales de cumplimiento (se configuran por jurisdicción, no por idioma del usuario)</li>
+</ul>
+<h3 id="ubicación-del-selector-de-idioma" tabindex="-1"><a class="heading-anchor" href="#ubicación-del-selector-de-idioma" aria-hidden="true">#</a> Ubicación del selector de idioma</h3>
+<ul>
+<li><strong>Escritorio:</strong> desde el pie de la barra lateral y desde el menú de perfil de usuario.</li>
+<li><strong>Móvil:</strong> desde el menú de perfil de usuario.</li>
+</ul>
+<h3 id="comportamiento-del-cambio" tabindex="-1"><a class="heading-anchor" href="#comportamiento-del-cambio" aria-hidden="true">#</a> Comportamiento del cambio</h3>
+<pre><code>┌──────────────────────────────────────┐
+│  Idioma                              │
+│                                      │
+│  ● English                           │
+│  ○ Español                           │
+│  ○ Português                         │
+│  ○ ไทย                               │
+│  ○ हिन्दी                              │
+│  ○ العربية                           │
+│                                      │
+│  Los idiomas disponibles los define  │
+│  tu organización.                    │
+└──────────────────────────────────────┘
+</code></pre>
+<ul>
+<li><strong>Cambio inmediato</strong> — al elegir un idioma la interfaz se actualiza al instante (no hace falta recargar la página — la reactividad de SvelteKit se encarga)</li>
+<li><strong>Persistente</strong> — la preferencia de idioma se guarda en el perfil (del lado del servidor), así que se mantiene entre dispositivos</li>
+<li><strong>Idiomas disponibles</strong> — los determina la configuración de la organización (no todos los idiomas están disponibles para toda organización)</li>
+<li><strong>Manejo de RTL</strong> — al elegir árabe (<code>العربية</code>) toda la maquetación se voltea a RTL (la barra lateral se va a la derecha, la alineación del texto se invierte, los iconos direccionales se reflejan)</li>
+</ul>
+<hr>
+<h2 id="flujos-de-incorporación" tabindex="-1"><a class="heading-anchor" href="#flujos-de-incorporación" aria-hidden="true">#</a> Flujos de incorporación</h2>
+<h3 id="experiencia-del-primer-inicio" tabindex="-1"><a class="heading-anchor" href="#experiencia-del-primer-inicio" aria-hidden="true">#</a> Experiencia del primer inicio</h3>
+<p>La primera vez que alguien inicia sesión ve una bienvenida breve, propia de su rol:</p>
+<pre><code>┌──────────────────────────────────────────────────────┐
+│                                                      │
+│  ¡Te damos la bienvenida a GreenGrass, Maria!        │
+│                                                      │
+│  Estás configurada como Directora de campo.          │
+│  Aquí es donde empezar:                              │
+│                                                      │
+│  1. Configura tu primera campaña de trabajo de campo │
+│  2. Corta territorios para tus voluntarios           │
+│  3. Crea un guion de trabajo de campo                │
+│                                                      │
+│  [Empezar]            [Explorar por mi cuenta]       │
+│                                                      │
+└──────────────────────────────────────────────────────┘
+</code></pre>
+<p><strong>Primeras acciones por arquetipo:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Arquetipo</th>
+<th>Primeras acciones</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Administrador de la organización</td>
+<td>Completar el asistente de configuración de la organización → configurar el cumplimiento → invitar al personal</td>
+</tr>
+<tr>
+<td>Director de comunicaciones</td>
+<td>Conectar el dominio de correo → crear la primera plantilla de correo → construir un segmento</td>
+</tr>
+<tr>
+<td>Director de finanzas</td>
+<td>Configurar el procesador de pagos → configurar los límites de contribución → crear el primer formulario de donación</td>
+</tr>
+<tr>
+<td>Director de campo</td>
+<td>Crear la primera campaña de trabajo de campo → cortar territorios → construir un guion</td>
+</tr>
+<tr>
+<td>Coordinador de voluntarios</td>
+<td>Configurar los módulos de capacitación → crear la incorporación de voluntarios → crear el primer evento</td>
+</tr>
+<tr>
+<td>Gestor de datos</td>
+<td>Importar el padrón electoral → revisar la cola de deduplicación → verificar la calidad de los datos</td>
+</tr>
+<tr>
+<td>Voluntario</td>
+<td>Completar el asistente de incorporación → ver el primer turno → empezar la capacitación</td>
+</tr>
+<tr>
+<td>Líder de equipo</td>
+<td>Lo mismo que el Voluntario, más: ver tu equipo</td>
+</tr>
+<tr>
+<td>Candidato</td>
+<td>Revisar el panel → configurar el perfil público → revisar las aprobaciones pendientes</td>
+</tr>
+<tr>
+<td>Simpatizante</td>
+<td>Revisar el perfil → revisar el historial de donaciones → actualizar las preferencias</td>
+</tr>
+</tbody>
+</table>
+<h3 id="flujos-de-los-asistentes-de-incorporación" tabindex="-1"><a class="heading-anchor" href="#flujos-de-los-asistentes-de-incorporación" aria-hidden="true">#</a> Flujos de los asistentes de incorporación</h3>
+<p>Los flujos detallados de los asistentes están definidos en el inventario de pantallas (WIZ-001 a WIZ-008). Patrones de UX clave:</p>
+<ul>
+<li><strong>El asistente reemplaza la barra lateral</strong> — mientras dura el asistente, la barra lateral muestra los nombres de sus pasos en vez de la navegación normal</li>
+<li><strong>Indicador de progreso</strong> — paso N de M, con lo completado, lo actual y lo que falta a la vista</li>
+<li><strong>Guardar y salir</strong> — se puede salir y retomar después (el avance se guarda del lado del servidor)</li>
+<li><strong>Validación por paso</strong> — cada paso valida antes de dejar avanzar</li>
+<li><strong>Celebración al terminar</strong> — el último paso muestra un mensaje de éxito con acciones siguientes claras</li>
+<li><strong>Lista de verificación posterior</strong> — al terminar un asistente, el panel muestra una lista &quot;Primeros pasos&quot; con las tareas de configuración que quedan</li>
+</ul>
+<h3 id="revelación-progresiva-en-los-ajustes" tabindex="-1"><a class="heading-anchor" href="#revelación-progresiva-en-los-ajustes" aria-hidden="true">#</a> Revelación progresiva en los ajustes</h3>
+<p>Para la configuración inicial, la plataforma usa revelación progresiva:</p>
+<ol>
+<li><strong>Primero lo obligatorio</strong> — los ajustes que exige el cumplimiento (límites de contribución, avisos legales) se presentan dentro del asistente</li>
+<li><strong>Lo recomendado, destacado</strong> — los ajustes opcionales pero recomendados se destacan en el panel de configuración con un distintivo de &quot;Recomendado&quot;</li>
+<li><strong>Lo avanzado, oculto</strong> — los ajustes de uso poco frecuente (llaves de API, webhooks, conservación del registro de auditoría) van en secciones plegadas</li>
+</ol>
+<hr>
+<h2 id="globos-de-ayuda-y-ayuda-en-línea" tabindex="-1"><a class="heading-anchor" href="#globos-de-ayuda-y-ayuda-en-línea" aria-hidden="true">#</a> Globos de ayuda y ayuda en línea</h2>
+<h3 id="patrón-de-globo-de-ayuda" tabindex="-1"><a class="heading-anchor" href="#patrón-de-globo-de-ayuda" aria-hidden="true">#</a> Patrón de globo de ayuda</h3>
+<p>Ayuda contextual breve, pegada a un elemento concreto de la interfaz:</p>
+<pre><code>┌─────────────────────────────────────┐
+│  Puntaje de apoyo [?]   [4 ▾]       │
+│                                     │
+│  ┌─────────────────────────────┐    │
+│  │ Un puntaje del 1 al 5 que   │    │
+│  │ indica qué tan probable es  │    │
+│  │ que este contacto apoye a   │    │
+│  │ tu candidatura o causa.     │    │
+│  │                             │    │
+│  │ 5 = Simpatizante firme      │    │
+│  │ 1 = Opositor firme          │    │
+│  │                             │    │
+│  │ [Más información →]         │    │
+│  └─────────────────────────────┘    │
+│                                     │
+└─────────────────────────────────────┘
+</code></pre>
+<p><strong>Comportamientos:</strong></p>
+<ul>
+<li><strong>Disparador</strong> — pasar el cursor (escritorio) o tocar (móvil) el icono &quot;?&quot;</li>
+<li><strong>Descartar</strong> — hacer clic o tocar afuera, o moverse a otro elemento</li>
+<li><strong>Enlace</strong> — &quot;Más información&quot; lleva al artículo correspondiente de la base de conocimiento</li>
+<li><strong>Posicionamiento</strong> — el globo de ayuda aparece encima o debajo del elemento, nunca tapando el campo que describe</li>
+<li><strong>Sin globos de ayuda en móvil para lo esencial</strong> — si la información es esencial, tiene que verse en línea en móvil, no escondida detrás de un área táctil</li>
+</ul>
+<h3 id="texto-de-ayuda-en-formularios" tabindex="-1"><a class="heading-anchor" href="#texto-de-ayuda-en-formularios" aria-hidden="true">#</a> Texto de ayuda en formularios</h3>
+<p>Texto de ayuda fijo debajo de los campos de formulario complejos:</p>
+<pre><code>│  Límite de contribución *    [$2,900    ]  │
+│  Contribución individual máxima por ciclo  │
+│  electoral en tu jurisdicción.             │
+│  [¿Por qué es obligatorio? →]              │
+</code></pre>
+<ul>
+<li>Siempre visible (no al pasar el cursor)</li>
+<li>Breve — una línea de preferencia, dos como máximo</li>
+<li>Con enlaces a explicaciones detalladas donde haga falta</li>
+</ul>
+<hr>
+<h2 id="atajos-de-teclado" tabindex="-1"><a class="heading-anchor" href="#atajos-de-teclado" aria-hidden="true">#</a> Atajos de teclado</h2>
+<h3 id="atajos-disponibles" tabindex="-1"><a class="heading-anchor" href="#atajos-disponibles" aria-hidden="true">#</a> Atajos disponibles</h3>
+<table>
+<thead>
+<tr>
+<th>Atajo</th>
+<th>Acción</th>
+<th>Contexto</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>/</code> o <code>Cmd+K</code></td>
+<td>Poner el foco en la búsqueda global</td>
+<td>Cualquier pantalla</td>
+</tr>
+<tr>
+<td><code>Esc</code></td>
+<td>Cerrar modal, panel o búsqueda</td>
+<td>Cualquier pantalla</td>
+</tr>
+<tr>
+<td><code>?</code></td>
+<td>Abrir la referencia de atajos de teclado</td>
+<td>Cualquier pantalla</td>
+</tr>
+<tr>
+<td><code>G luego D</code></td>
+<td>Ir al panel</td>
+<td>Marco de la app</td>
+</tr>
+<tr>
+<td><code>G luego M</code></td>
+<td>Ir a Mensajes</td>
+<td>Marco de la app</td>
+</tr>
+<tr>
+<td><code>G luego P</code></td>
+<td>Ir a Personas</td>
+<td>Marco de la app</td>
+</tr>
+<tr>
+<td><code>G luego S</code></td>
+<td>Ir a Configuración</td>
+<td>Marco de la app (Administrador de la organización)</td>
+</tr>
+<tr>
+<td><code>N</code></td>
+<td>Nuevo (según el contexto: contacto nuevo, evento nuevo, etc.)</td>
+<td>Vistas de lista</td>
+</tr>
+<tr>
+<td><code>J</code> / <code>K</code></td>
+<td>Subir y bajar en las listas</td>
+<td>Vistas de lista</td>
+</tr>
+<tr>
+<td><code>Enter</code></td>
+<td>Abrir el elemento seleccionado</td>
+<td>Vistas de lista</td>
+</tr>
+</tbody>
+</table>
+<h3 id="descubrimiento-de-los-atajos" tabindex="-1"><a class="heading-anchor" href="#descubrimiento-de-los-atajos" aria-hidden="true">#</a> Descubrimiento de los atajos</h3>
+<ul>
+<li><strong>Tecla &quot;?&quot;</strong> — abre una superposición con la referencia de atajos</li>
+<li><strong>Pista la primera vez</strong> — en la primera visita aparece una pista discreta: &quot;Presiona ? para ver los atajos de teclado&quot;</li>
+<li><strong>No son críticos</strong> — los atajos son para usuarios avanzados. La plataforma funciona por completo sin ellos.</li>
+</ul>
+<hr>
+<h2 id="preguntas-abiertas" tabindex="-1"><a class="heading-anchor" href="#preguntas-abiertas" aria-hidden="true">#</a> Preguntas abiertas</h2>
+<ol>
+<li>
+<p><strong>Anuncios dentro de la app.</strong> ¿Debería la plataforma tener un mecanismo para anuncios a nivel de plataforma (funcionalidades nuevas, ventanas de mantenimiento, avisos de seguridad)? Aparecerían como un banner o una notificación, distintos de las notificaciones entre usuarios.</p>
+</li>
+<li>
+<p><strong>Recorridos guiados.</strong> Más allá de la bienvenida del primer inicio, ¿debería la plataforma ofrecer recorridos guiados de funcionalidades concretas? (&quot;Nuevo: programación de publicaciones en redes sociales — ¿quieres un recorrido rápido?&quot;) Pueden ayudar, pero también molestar. Considerar que solo se activen a petición.</p>
+</li>
+<li>
+<p><strong>Retroalimentación sobre los artículos de ayuda.</strong> ¿Deberían los artículos de la base de conocimiento tener un mecanismo de &quot;¿Te sirvió esto?&quot;? Es útil para mejorar la documentación, pero añade complejidad a la interfaz.</p>
+</li>
+</ol>
+<!-- REVISIT: El contenido de la base de conocimiento hay que escribirlo a medida que se construyan las funcionalidades. Este documento define los patrones para acceder a la ayuda y mostrarla, no el contenido en sí. -->
+
+    </article>
+  </main>
+  <div class="toc-rail"><nav class="toc" aria-label="En esta página"><div class="toc-label">En esta página</div><ul><li class="toc-2"><a href="#propósito"># Propósito</a></li><li class="toc-2"><a href="#arquitectura-de-los-ajustes"># Arquitectura de los ajustes</a></li><li class="toc-3"><a href="#jerarquía-de-los-ajustes"># Jerarquía de los ajustes</a></li><li class="toc-3"><a href="#ajustes-de-la-organización"># Ajustes de la organización</a></li><li class="toc-3"><a href="#ajustes-por-funcionalidad"># Ajustes por funcionalidad</a></li><li class="toc-3"><a href="#ajustes-personales"># Ajustes personales</a></li><li class="toc-3"><a href="#patrón-de-ux-de-los-ajustes"># Patrón de UX de los ajustes</a></li><li class="toc-2"><a href="#sistema-de-ayuda-y-soporte"># Sistema de ayuda y soporte</a></li><li class="toc-3"><a href="#puntos-de-acceso-a-la-ayuda"># Puntos de acceso a la ayuda</a></li><li class="toc-3"><a href="#ayuda-contextual"># Ayuda contextual</a></li><li class="toc-3"><a href="#base-de-conocimiento"># Base de conocimiento</a></li><li class="toc-3"><a href="#concierge-de-ia"># Concierge de IA</a></li><li class="toc-2"><a href="#cambio-de-idioma"># Cambio de idioma</a></li><li class="toc-3"><a href="#preferencia-de-idioma"># Preferencia de idioma</a></li><li class="toc-3"><a href="#ubicación-del-selector-de-idioma"># Ubicación del selector de idioma</a></li><li class="toc-3"><a href="#comportamiento-del-cambio"># Comportamiento del cambio</a></li><li class="toc-2"><a href="#flujos-de-incorporación"># Flujos de incorporación</a></li><li class="toc-3"><a href="#experiencia-del-primer-inicio"># Experiencia del primer inicio</a></li><li class="toc-3"><a href="#flujos-de-los-asistentes-de-incorporación"># Flujos de los asistentes de incorporación</a></li><li class="toc-3"><a href="#revelación-progresiva-en-los-ajustes"># Revelación progresiva en los ajustes</a></li><li class="toc-2"><a href="#globos-de-ayuda-y-ayuda-en-línea"># Globos de ayuda y ayuda en línea</a></li><li class="toc-3"><a href="#patrón-de-globo-de-ayuda"># Patrón de globo de ayuda</a></li><li class="toc-3"><a href="#texto-de-ayuda-en-formularios"># Texto de ayuda en formularios</a></li><li class="toc-2"><a href="#atajos-de-teclado"># Atajos de teclado</a></li><li class="toc-3"><a href="#atajos-disponibles"># Atajos disponibles</a></li><li class="toc-3"><a href="#descubrimiento-de-los-atajos"># Descubrimiento de los atajos</a></li><li class="toc-2"><a href="#preguntas-abiertas"># Preguntas abiertas</a></li></ul></nav></div>
+</div>
+<script src="../../../../assets/search.js" defer></script>
+<script src="../../../../assets/app.js" defer></script>
+</body>
+</html>

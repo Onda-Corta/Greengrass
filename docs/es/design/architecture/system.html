@@ -1,0 +1,1483 @@
+<!DOCTYPE html>
+<html lang="es" data-base="../../../" data-no-results="No hay resultados para">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Arquitectura del sistema · GreenGrass</title>
+<meta name="description" content="Arquitectura del sistema — Documentación de especificación y diseño de GreenGrass.">
+<link rel="alternate" hreflang="en" href="../../../design/architecture/system.html">
+<link rel="alternate" hreflang="es" href="./system.html">
+<link rel="alternate" hreflang="x-default" href="../../../design/architecture/system.html">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%232563eb'/%3E%3Cstop offset='1' stop-color='%2316a34a'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='32' height='32' rx='7' fill='url(%23g)'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="../../../assets/styles.css">
+</head>
+<body>
+<a class="skip-link" href="#content">Saltar al contenido</a>
+<header class="site-header">
+  <button type="button" class="menu-toggle" aria-label="Alternar navegación" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+  <a class="brand" href="../../../es/index.html">
+    <span class="brand-mark" aria-hidden="true"></span>
+    <span class="brand-text"><strong>GreenGrass</strong><small>Especificación y diseño</small></span>
+  </a>
+  <div class="search">
+    <input type="search" id="search-input" placeholder="Buscar en la documentación…" autocomplete="off" aria-label="Buscar en la documentación">
+    <div id="search-results" class="search-results" hidden></div>
+  </div>
+  <nav class="lang-switch" aria-label="Idioma"><a class="lang-opt" href="../../../design/architecture/system.html" hreflang="en" lang="en" title="View this page in English">EN</a><span class="lang-opt active" aria-current="true">ES</span></nav>
+  <button type="button" class="theme-toggle" aria-label="Alternar modo oscuro" title="Alternar modo oscuro">
+    <span class="theme-icon" aria-hidden="true"></span>
+  </button>
+</header>
+<div class="layout">
+  <div class="sidebar-backdrop" hidden></div>
+  <aside class="sidebar" aria-label="Navegación de la documentación">
+    <nav class="nav">
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">Inicio<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../../index.html">GreenGrass</a></li></ul></div>
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">Especificaciones<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../../spec/product.html">Proyecto: GreenGrass</a></li><li><a href="../../spec/mvp.html">MVP de GreenGrass — plan de producto</a></li><li><a href="../../spec/users.html">Usuarios y roles</a></li><li><a href="../../spec/workflows.html">Flujos de trabajo principales</a></li><li><a href="../../spec/geography.html">Geografía objetivo</a></li><li><a href="../../spec/security.html">Seguridad y modelo de amenazas</a></li><li><a href="../../spec/compliance.html">Cumplimiento y marco legal</a></li><li><a href="../../spec/fundraising.html">Recaudación de fondos e infraestructura de pagos</a></li><li><a href="../../spec/integrations.html">Integraciones externas</a></li><li><a href="../../spec/support.html">Soporte y puesta en marcha de organizaciones</a></li><li><a href="../../spec/gotv.html">GOTV y operaciones del día de elecciones</a></li><li><a href="../../spec/messaging.html">Comunicaciones internas y notificaciones</a></li><li><a href="../../spec/press.html">Prensa, medios y comunicaciones públicas</a></li><li><a href="../../spec/comms-intelligence.html">Inteligencia de comunicaciones — hoja de ruta post-MVP</a></li></ul></div>
+<div class="nav-section open"><button type="button" class="nav-section-title" aria-expanded="true">Arquitectura<span class="chev" aria-hidden="true"></span></button><ul><li><a href="./system.html" aria-current="page" class="active">Arquitectura del sistema</a></li></ul></div>
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">Diseño UX<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../ux/00-overview.html">Resumen del diseño de UX</a></li><li><a href="../ux/01-information-architecture/navigation-model.html">Modelo de navegación</a></li><li><a href="../ux/01-information-architecture/screen-inventory.html">Inventario de pantallas</a></li><li><a href="../ux/01-information-architecture/persona-views.html">Vistas por arquetipo</a></li><li><a href="../ux/01-information-architecture/url-structure.html">Estructura de URL</a></li><li><a href="../ux/02-global-patterns/pattern-catalog.html">Catálogo de patrones</a></li><li><a href="../ux/02-global-patterns/offline-sync-patterns.html">Patrones sin conexión y de sincronización</a></li><li><a href="../ux/02-global-patterns/notification-patterns.html">Patrones de notificaciones</a></li><li><a href="../ux/02-global-patterns/search-patterns.html">Patrones de búsqueda</a></li><li><a href="../ux/02-global-patterns/settings-help-patterns.html">Patrones de ajustes y ayuda</a></li><li><a href="../ux/02-global-patterns/security-ux-patterns.html">Patrones de UX de seguridad</a></li><li><a href="../ux/03-design-system/foundations.html">Fundamentos del sistema de diseño</a></li><li><a href="../ux/03-design-system/theming-strategy.html">Estrategia de temas</a></li><li><a href="../ux/03-design-system/component-inventory.html">Inventario de componentes</a></li><li><a href="../ux/03-design-system/responsive-strategy.html">Estrategia de diseño adaptable</a></li></ul></div>
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">Decisiones<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../../decisions/001-platform-architecture.html">ADR-001: Arquitectura y despliegue de la plataforma</a></li><li><a href="../../decisions/002-security-threat-model.html">ADR-002: Seguridad y modelo de amenazas</a></li><li><a href="../../decisions/003-identity-access-organization.html">ADR-003: Identidad, acceso y organización</a></li><li><a href="../../decisions/004-data-model-integrity.html">ADR-004: Modelo de datos e integridad</a></li><li><a href="../../decisions/005-offline-first-sync.html">ADR-005: Prioridad sin conexión y sincronización</a></li><li><a href="../../decisions/006-field-operations-gotv.html">ADR-006: Operaciones de campo y GOTV</a></li><li><a href="../../decisions/007-fundraising-payments.html">ADR-007: Recaudación de fondos y pagos</a></li><li><a href="../../decisions/008-communications-messaging.html">ADR-008: Comunicaciones y mensajería</a></li><li><a href="../../decisions/009-compliance-legal.html">ADR-009: Cumplimiento y marco legal</a></li><li><a href="../../decisions/010-internationalization-localization.html">ADR-010: Internacionalización y localización</a></li><li><a href="../../decisions/011-design-system-ux.html">ADR-011: Sistema de diseño y fundamentos de UX</a></li><li><a href="../../decisions/012-external-integrations.html">ADR-012: Integraciones externas</a></li><li><a href="../../decisions/013-analytics-ai.html">ADR-013: Analítica e IA</a></li><li><a href="../../decisions/014-volunteer-onboarding.html">ADR-014: Voluntariado e incorporación</a></li><li><a href="../../decisions/015-product-scope.html">ADR-015: Límites del alcance del producto</a></li><li><a href="../../decisions/016-cross-cutting-resolutions.html">ADR-016: Resoluciones transversales</a></li><li><a href="../../decisions/017-sharing-contract-trust-model.html">ADR-017: El contrato de intercambio como primitiva universal de confianza</a></li><li><a href="../../decisions/ux-decisions.html">Decisiones de UX — fase de wireframes</a></li></ul></div>
+    </nav>
+  </aside>
+  <main id="content" class="content">
+    <nav class="breadcrumb" aria-label="Ruta de navegación">Arquitectura</nav>
+    <article class="prose">
+<h1 id="arquitectura-del-sistema" tabindex="-1"><a class="heading-anchor" href="#arquitectura-del-sistema" aria-hidden="true">#</a> Arquitectura del sistema</h1>
+<h2 id="resumen" tabindex="-1"><a class="heading-anchor" href="#resumen" aria-hidden="true">#</a> Resumen</h2>
+<p>GreenGrass es una plataforma federada y de organización única para la gestión de campañas políticas de base. Este documento define la arquitectura del sistema — cómo encajan los componentes, cómo fluyen los datos y cómo la infraestructura sostiene los requisitos de producto definidos en los documentos de especificación.</p>
+<h3 id="impulsores-de-la-arquitectura" tabindex="-1"><a class="heading-anchor" href="#impulsores-de-la-arquitectura" aria-hidden="true">#</a> Impulsores de la arquitectura</h3>
+<p>Estas decisiones de producto (tomadas en las especificaciones) son las que más pesan en la arquitectura:</p>
+<ol>
+<li><strong>Aislamiento de organización única</strong> con niveles de seguridad escalonados (contenedor → clúster → cuenta de proveedor de nube → autoalojado)</li>
+<li><strong>Modelo de federación</strong> — entidades soberanas conectadas por afiliación, no un sistema monolítico multiorganización</li>
+<li><strong>BYOK (Bring Your Own Key — la organización controla su propia llave de cifrado) por defecto</strong> — la plataforma no puede leer los datos de una organización a menos que esta opte por llaves gestionadas</li>
+<li><strong>Residencia de datos por país</strong> — los datos de la organización se quedan en el país que ella elija</li>
+<li><strong>Diseño con prioridad sin conexión (offline-first) para las operaciones de campo</strong> — el trabajo de campo, la inscripción de votantes y el registro de entrada en eventos tienen que funcionar sin conectividad</li>
+<li><strong>Prioridad móvil</strong> — la interfaz principal es un celular, no una computadora de escritorio</li>
+<li><strong>RTL y multilingüe desde el primer día</strong> — la arquitectura tiene que soportar texto bidireccional y localización de contenido</li>
+<li><strong>Registro de auditoría completo</strong> — cada modificación de datos queda registrada</li>
+<li><strong>Identidad federada</strong> — una identidad de plataforma, perfiles por organización</li>
+<li><strong>Analítica en tiempo real para las operaciones activas</strong> — los paneles del día de campo y del día de elecciones se actualizan en vivo</li>
+</ol>
+<hr>
+<h2 id="topología-del-sistema" tabindex="-1"><a class="heading-anchor" href="#topología-del-sistema" aria-hidden="true">#</a> Topología del sistema</h2>
+<pre><code>┌──────────────────────────────────────────────────────────────────┐
+│                        CAPA DE PLATAFORMA                        │
+│                                                                  │
+│  ┌───────────────┐  ┌─────────────────────┐  ┌────────────────┐  │
+│  │  Servicio de  │  │  Servicio de        │  │  Admin. de la  │  │
+│  │  identidad    │  │  aprovisionamiento  │  │  plataforma    │  │
+│  └──────┬────────┘  └──────┬──────────────┘  └────────────────┘  │
+│         │                  │                                     │
+│  ┌──────┴──────────────────┴──────────────────────────────────┐  │
+│  │                Capa de federación / alianza                │  │
+│  │ (coordinación entre organizaciones, reglas de intercambio, │  │
+│  │   deduplicación, no volver a tocar, campañas conjuntas)    │  │
+│  └──────┬──────────────────┬──────────────────────────────────┘  │
+└─────────┼──────────────────┼─────────────────────────────────────┘
+          │                  │
+    ┌─────┴──────────┐   ┌───┴────────────┐
+    │ ORGANIZACIÓN A │   │ ORGANIZACIÓN B │    ... (una por organización o candidatura)
+    │                │   │                │
+    │  ┌──────────┐  │   │  ┌──────────┐  │
+    │  │ Servidor │  │   │  │ Servidor │  │
+    │  │ de app   │  │   │  │ de app   │  │
+    │  ├──────────┤  │   │  ├──────────┤  │
+    │  │    BD    │  │   │  │    BD    │  │
+    │  ├──────────┤  │   │  ├──────────┤  │
+    │  │  Caché   │  │   │  │  Caché   │  │
+    │  ├──────────┤  │   │  ├──────────┤  │
+    │  │   Cola   │  │   │  │   Cola   │  │
+    │  └──────────┘  │   │  └──────────┘  │
+    │                │   │                │
+    └────────────────┘   └────────────────┘
+</code></pre>
+<h3 id="arquitectura-de-tres-capas" tabindex="-1"><a class="heading-anchor" href="#arquitectura-de-tres-capas" aria-hidden="true">#</a> Arquitectura de tres capas:</h3>
+<ol>
+<li>
+<p><strong>Capa de plataforma</strong> — servicios compartidos que existen fuera de cualquier organización: identidad, aprovisionamiento, administración de la plataforma, facturación. Es la única capa que ve a través de las organizaciones.</p>
+</li>
+<li>
+<p><strong>Capa de federación</strong> — media las interacciones entre organizaciones: coordinación de alianzas, gestión de recursos compartidos, deduplicación entre organizaciones, orquestación de campañas conjuntas. Opera sobre reglas de intercambio explícitas y nunca tiene acceso general a los datos de una organización.</p>
+</li>
+<li>
+<p><strong>Capa de organización</strong> — una instancia de aplicación completa y aislada por cada entidad soberana (partido, organización o candidatura). Cada organización tiene su propio servidor de aplicación, base de datos, caché y cola de trabajos. Ninguna organización puede ver los datos de otra salvo a través de las reglas de intercambio de la capa de federación.</p>
+</li>
+</ol>
+<hr>
+<h2 id="arquitectura-de-la-organización" tabindex="-1"><a class="heading-anchor" href="#arquitectura-de-la-organización" aria-hidden="true">#</a> Arquitectura de la organización</h2>
+<h3 id="qué-hay-dentro-de-una-organización" tabindex="-1"><a class="heading-anchor" href="#qué-hay-dentro-de-una-organización" aria-hidden="true">#</a> Qué hay dentro de una organización</h3>
+<p>Cada organización es un despliegue de aplicación autocontenido:</p>
+<table>
+<thead>
+<tr>
+<th>Componente</th>
+<th>Función</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Servidor de aplicación</td>
+<td>API, lógica de negocio, renderizado en el servidor</td>
+</tr>
+<tr>
+<td>Base de datos principal</td>
+<td>CRM, datos de votantes, donaciones, eventos, historial de comunicaciones, registro de auditoría</td>
+</tr>
+<tr>
+<td>Capa de caché</td>
+<td>Gestión de sesiones, datos calientes, limitación de frecuencia</td>
+</tr>
+<tr>
+<td>Cola de trabajos</td>
+<td>Tareas asíncronas: envíos de correo, despacho de SMS, importaciones de datos, procesamiento de sincronización</td>
+</tr>
+<tr>
+<td>Almacenamiento de objetos</td>
+<td>Cargas de archivos, medios, archivos de exportación, instantáneas de copia de seguridad</td>
+</tr>
+<tr>
+<td>Índice de búsqueda</td>
+<td>Búsqueda de texto completo en registros del CRM, comunicaciones y notas</td>
+</tr>
+</tbody>
+</table>
+<h3 id="niveles-de-aislamiento" tabindex="-1"><a class="heading-anchor" href="#niveles-de-aislamiento" aria-hidden="true">#</a> Niveles de aislamiento</h3>
+<p>(Decidido en <a href="http://security.md" target="_blank" rel="noopener noreferrer">security.md</a>)</p>
+<table>
+<thead>
+<tr>
+<th>Nivel</th>
+<th>Implementación</th>
+<th>Límite</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Estándar</td>
+<td>Contenedores dedicados en un clúster de Kubernetes compartido</td>
+<td>Aislamiento por contenedor y espacio de nombres. Una instancia de base de datos separada por organización. Nodos de cómputo compartidos.</td>
+</tr>
+<tr>
+<td>Reforzado</td>
+<td>Grupo de nodos dedicado dentro de un clúster</td>
+<td>Los contenedores de la organización corren en hardware dedicado. Sin cómputo compartido con otras organizaciones. Instancia de base de datos separada.</td>
+</tr>
+<tr>
+<td>Máximo</td>
+<td>Cuenta de proveedor de nube separada</td>
+<td>Toda la pila de infraestructura queda aislada a nivel del proveedor de nube. Ningún recurso compartido.</td>
+</tr>
+<tr>
+<td>Autoalojado</td>
+<td>Infraestructura propia de la organización</td>
+<td>GreenGrass entrega el paquete de la aplicación. La organización lo gestiona todo.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>DECIDIDO:</strong> Kubernetes con herramientas independientes del proveedor de nube. Sin dependencia de Google Cloud.</p>
+<p>K8s es software libre gobernado por la CNCF y corre sobre cualquier infraestructura. GreenGrass usa Kubernetes en todos los países con una capa de gestión independiente del proveedor de nube (Rancher o Crossplane) que abstrae los distintos proveedores de cada país. Donde hay ofertas gestionadas de K8s (EKS, alternativas que no sean de Google, o proveedores locales) se usan para reducir la carga operativa; donde no las hay, K8s autogestionado (k3s o distribuciones ligeras similares). GKE no.</p>
+<h3 id="cadena-de-aprovisionamiento-de-organizaciones" tabindex="-1"><a class="heading-anchor" href="#cadena-de-aprovisionamiento-de-organizaciones" aria-hidden="true">#</a> Cadena de aprovisionamiento de organizaciones</h3>
+<p>(Decidido en <a href="http://workflows.md" target="_blank" rel="noopener noreferrer">workflows.md</a> — totalmente automatizado, de autoservicio)</p>
+<pre><code>Solicitud de registro
+  → Validar los datos de la organización y elegir país y nivel
+  → Generar el ID de organización y las llaves de cifrado (flujo BYOK o gestionado)
+  → Elegir la infraestructura de destino (clúster del país o cuenta de proveedor de nube)
+  → Aprovisionar la base de datos (crear, aplicar el esquema, sembrar los valores por defecto)
+  → Aprovisionar la instancia de aplicación (desplegar el contenedor, configurar la red)
+  → Configurar el DNS (subdominio de la organización o dominio propio)
+  → Configurar el bucket de almacenamiento de objetos
+  → Configurar la cola de trabajos
+  → Ejecutar las verificaciones de estado
+  → Entregar las credenciales de puesta en marcha al Administrador de la organización
+  → La organización está en vivo
+</code></pre>
+<p><strong>DECIDIDO:</strong> Subdominio por defecto, con soporte para dominio propio.</p>
+<ul>
+<li><strong>Por defecto:</strong> <code>nombreorg.greengrass.app</code>. Se aprovisiona automáticamente durante la puesta en marcha. DNS comodín y TLS vía Let's Encrypt.</li>
+<li><strong>Dominio propio:</strong> Las organizaciones pueden configurar su propio dominio (por ejemplo, <code>organizar.campana.org</code>). Requiere que la organización actualice sus registros DNS (CNAME). La plataforma se encarga sola del aprovisionamiento del certificado TLS una vez configurado el DNS. Los certificados SSL se aprovisionan vía Let's Encrypt, con emisión automática disparada por la validación de DNS (<a href="../../decisions/016-cross-cutting-resolutions.html">ADR-016 §68</a>). Los dominios propios son críticos para la credibilidad de la marca — quien hace clic en un enlace de donación necesita ver el dominio de la organización.</li>
+<li><strong>Los dos pueden convivir.</strong> El subdominio siempre funciona como alternativa de reserva aunque haya un dominio propio configurado.</li>
+</ul>
+<h3 id="infraestructura-de-páginas-públicas" tabindex="-1"><a class="heading-anchor" href="#infraestructura-de-páginas-públicas" aria-hidden="true">#</a> Infraestructura de páginas públicas</h3>
+<p><strong>Imágenes de Open Graph</strong> (<a href="../../decisions/016-cross-cutting-resolutions.html">ADR-016 §71</a>): La plataforma genera automáticamente las imágenes OG a partir del título de la página, el logo de la organización y los colores de marca (composición de plantilla en el servidor, no IA). Los OA (Org Admin, el Administrador de la organización) pueden sustituirlas subiendo una imagen manualmente por página. Así todo enlace compartido tiene una imagen de vista previa en redes sociales sin que nadie tenga que diseñarla.</p>
+<p><strong>Analítica liviana integrada</strong> (<a href="../../decisions/016-cross-cutting-resolutions.html">ADR-016 §69</a>): Las páginas públicas registran vistas, visitantes únicos, tasa de conversión y fuente de referencia (parámetros UTM). Nada de analítica de terceros (Google Analytics, Meta Pixel) en la v1 — eso levanta complejidad de privacidad y de consentimiento de cookies. Los OA pueden añadir scripts externos mediante un campo de inyección de código personalizado (ajuste avanzado, desactivado por defecto).</p>
+<p><strong>Referencia anticipada a la v2:</strong> <a href="../../decisions/016-cross-cutting-resolutions.html">Pruebas A/B de páginas públicas</a> (pilar de la v2) extenderá la infraestructura de pruebas A/B de recaudación de fondos a las páginas de registro de voluntarios y a las demás páginas públicas.</p>
+<h3 id="exportación-de-la-configuración" tabindex="-1"><a class="heading-anchor" href="#exportación-de-la-configuración" aria-hidden="true">#</a> Exportación de la configuración</h3>
+<p>(Decidido en <a href="../../decisions/016-cross-cutting-resolutions.html">ADR-016 §54</a>)</p>
+<p>Los OA pueden exportar la configuración de su organización como una instantánea JSON para documentarla, guardar una copia de seguridad o compartirla con consultores. La importación entre organizaciones (aplicar la configuración de la organización A a la organización B) queda aplazada a una versión futura — requiere validar que la organización de destino tenga las mismas integraciones, los mismos procesadores de pago y la misma jurisdicción de cumplimiento.</p>
+<hr>
+<h2 id="modelo-de-datos" tabindex="-1"><a class="heading-anchor" href="#modelo-de-datos" aria-hidden="true">#</a> Modelo de datos</h2>
+<h3 id="entidades-a-nivel-de-plataforma-compartidas-entre-organizaciones" tabindex="-1"><a class="heading-anchor" href="#entidades-a-nivel-de-plataforma-compartidas-entre-organizaciones" aria-hidden="true">#</a> Entidades a nivel de plataforma (compartidas entre organizaciones)</h3>
+<pre><code>PlatformIdentity
+├── id (UUID)
+├── primary_phone (E.164, cifrado)
+├── primary_email (cifrado)
+├── name
+├── language_preference
+├── communication_preferences (consentimiento por canal y por finalidad)
+├── passkey_credentials[]
+├── trusted_contacts[] → PlatformIdentity
+├── tenant_memberships[] → TenantProfile
+├── created_at
+└── updated_at
+
+TenantRegistration
+├── id (UUID)
+├── entity_type (alliance | party_org | candidate)
+├── tenant_type (lightweight | full)
+├── name
+├── country
+├── hosting_tier (standard | enhanced | maximum | self_hosted)
+├── encryption_model (byok | managed)
+├── encryption_key_reference (ruta en Vault o en poder de la organización)
+├── affiliations[] → TenantRegistration (con affiliation_type)
+├── billing_info
+├── status (provisioning | active | suspended | decommissioned)
+├── created_at
+└── updated_at
+
+Affiliation
+├── id (UUID)
+├── parent_tenant → TenantRegistration (alianza o partido)
+├── child_tenant → TenantRegistration (partido, organización o candidatura)
+├── affiliation_type (alliance_member | party_candidate)
+├── sharing_rules (marcas de activación por recurso)
+├── status (pending | active | revoked)
+├── created_at
+└── updated_at
+</code></pre>
+<h3 id="entidades-a-nivel-de-organización-base-de-datos-por-organización" tabindex="-1"><a class="heading-anchor" href="#entidades-a-nivel-de-organización-base-de-datos-por-organización" aria-hidden="true">#</a> Entidades a nivel de organización (base de datos por organización)</h3>
+<pre><code>Person (el registro de la lista única)
+├── id (UUID)
+├── platform_identity_id → PlatformIdentity (nullable — no todo el mundo tiene inicio de sesión)
+├── name, address, phone, email (algunos cifrados a nivel de aplicación)
+├── record_types[] (voter | donor | volunteer | supporter | contact | candidate | staff)
+├── voter_data
+│   ├── precinct / electoral_district
+│   ├── registration_status
+│   ├── voting_history[] (elecciones en las que participó)
+│   ├── support_score
+│   └── demographics (edad, idioma)
+├── donor_data
+│   ├── donation_history[] → Donation
+│   ├── recurring_status
+│   └── compliance_info (empleador, ocupación — cifrado)
+├── volunteer_data
+│   ├── role_templates[] → RoleTemplate
+│   ├── scopes[] → Scope
+│   ├── team_assignment → Team
+│   ├── shift_history[] → Shift
+│   ├── hours_logged
+│   └── training_completion[] (incluye la marca required_before_field por módulo)
+├── tags[]
+├── segments[]
+├── communication_history[] → CommunicationEvent
+├── household → Household
+├── notes[] (cifradas a nivel de aplicación)
+├── created_at
+├── updated_at
+└── merged_from[] (registro de auditoría de las fusiones por deduplicación)
+
+Campaign
+├── id (UUID)
+├── name
+├── type (electoral | advocacy | voter_registration | fundraising | gotv)
+├── status (planning | active | completed | archived)
+├── geographic_scope → GeographicArea
+├── date_range
+└── parent_entity (partido/organización/candidatura/alianza dueña de esta campaña)
+
+GeographicArea (jerárquica)
+├── id (UUID)
+├── name
+├── level (country | region | state | district | precinct | turf)
+├── parent → GeographicArea
+├── boundary_data (GeoJSON)
+└── metadata (población, cantidad de votantes, etc.)
+
+Turf (unidad de asignación del trabajo de campo)
+├── id (UUID)
+├── geographic_area → GeographicArea
+├── walk_list[] → Person (secuencia ordenada de direcciones)
+├── campaign → Campaign
+├── assigned_to → Person (voluntario)
+├── status (unassigned | assigned | in_progress | complete)
+└── stats (doors_total, doors_knocked, contact_rate)
+
+CanvassingInteraction
+├── id (UUID)
+├── person → Person (el votante contactado)
+├── canvasser → Person (el voluntario)
+├── turf → Turf
+├── campaign → Campaign
+├── contact_result (spoke | not_home | refused | moved | etc.)
+├── script_responses[] (question_id, response)
+├── notes (cifradas a nivel de aplicación)
+├── recorded_at (marca de tiempo del dispositivo)
+├── synced_at (marca de tiempo del servidor)
+├── device_id
+└── location (lat/lng, opcional)
+
+CanvassingScript
+├── id (UUID)
+├── campaign → Campaign
+├── name
+├── version (incremental — los turnos activos quedan fijados a una versión)
+├── questions[] (lista ordenada de preguntas del guion con sus opciones de respuesta)
+├── language_variants[] → ContentItem
+├── status (draft | active | archived)
+├── created_by → Person
+├── created_at
+└── updated_at
+
+ScriptTemplate
+├── id (UUID)
+├── name
+├── description
+├── source_script → CanvassingScript (referencia de copia, no un enlace vivo)
+├── questions[] (copiadas del origen al crear la plantilla)
+├── created_by → Person
+└── created_at
+</code></pre>
+<p><strong>Flujo de trabajo de las plantillas de guion</strong> (<a href="../../decisions/016-cross-cutting-resolutions.html">ADR-016 §9–10</a>): &quot;Guardar como plantilla&quot; copia el guion de una campaña a la biblioteca de plantillas de toda la organización. Al crear un guion de campaña nuevo se ofrece &quot;Empezar desde una plantilla&quot; o &quot;Empezar en blanco&quot;. Una vez copiado, el guion de la campaña es independiente — editarlo no afecta a la plantilla ni a otras campañas. El versionado del guion es por campaña: los turnos activos quedan fijados a una versión; las actualizaciones urgentes aparecen en la siguiente ficha de puerta del voluntario, nunca a mitad de una interacción.</p>
+<p><strong>La capacitación incompleta bloquea el trabajo de campo</strong> (<a href="../../decisions/016-cross-cutting-resolutions.html">ADR-016 §65</a>): El OA marca módulos de capacitación específicos como <code>required_before_field</code>. El flujo de asignación de turnos revisa esa marca — los voluntarios que no completaron los módulos requeridos no pueden ser asignados a turnos. La pantalla de asignación muestra &quot;Capacitación incompleta&quot; con un enlace al módulo pendiente. La capacitación que no es requerida se fomenta, pero no bloquea.</p>
+<pre><code>Donation
+├── id (UUID)
+├── donor → Person
+├── campaign → Campaign (opcional)
+├── amount
+├── currency
+├── type (one_time | recurring)
+├── method (card | pix | upi | promptpay | cash | etc.)
+├── payment_processor_reference
+├── covers_fees (boolean)
+├── event_id → Event (nullable — se fija cuando la donación es la compra de una entrada)
+├── ticket_type (nullable — por ejemplo, general, vip, student)
+├── ticket_quantity (nullable — cantidad de entradas en esta transacción)
+├── compliance_data (cifrado)
+├── receipt_sent (boolean)
+├── created_at
+└── audit_trail
+
+Event
+├── id (UUID)
+├── name, description
+├── type (rally | town_hall | fundraiser | training | canvass_launch | phone_bank | virtual)
+├── location (dirección física o referencia de la plataforma virtual)
+├── date_range
+├── capacity
+├── rsvp_settings (open | invite_only | approval_required)
+├── rsvps[] → RSVP
+├── attendance[] → AttendanceRecord
+├── campaign → Campaign (opcional)
+└── follow_up_status
+
+Communication
+├── id (UUID)
+├── channel (email | sms | whatsapp)
+├── purpose (transactional | event | fundraising | gotv | activism | newsletter)
+├── template → MessageTemplate
+├── audience_segment → Segment
+├── status (draft | scheduled | sending | sent | failed)
+├── stats (sent, delivered, opened, clicked, bounced, unsubscribed)
+├── scheduled_at
+├── sent_at
+└── campaign → Campaign (opcional)
+
+AuditEntry
+├── id (UUID)
+├── actor → Person o PlatformAdmin
+├── action (create | update | delete | export | login | permission_change | etc.)
+├── entity_type
+├── entity_id
+├── changes (diferencia antes/después, cifrada)
+├── ip_address
+├── device_info
+├── timestamp
+└── tenant_id
+</code></pre>
+<h3 id="modelo-de-datos-geográficos" tabindex="-1"><a class="heading-anchor" href="#modelo-de-datos-geográficos" aria-hidden="true">#</a> Modelo de datos geográficos</h3>
+<p>(Aplazado desde <a href="http://users.md" target="_blank" rel="noopener noreferrer">users.md</a> — se resuelve aquí)</p>
+<p>El modelo geográfico es jerárquico y lo bastante flexible para representar la geografía política de distintos países:</p>
+<pre><code>País
+└── Región / Estado / Provincia
+    └── Distrito / Municipio
+        └── Precinto / Barrio / Centro de votación
+            └── Territorio (unidad de asignación del trabajo de campo — la define el personal de campaña)
+</code></pre>
+<p><strong>Decisiones de diseño clave:</strong></p>
+<ul>
+<li><strong>Los niveles se configuran por país.</strong> Puerto Rico tiene municipios y precintos. India tiene estados, circunscripciones parlamentarias, circunscripciones de asamblea y centros de votación. La profundidad de la jerarquía y los nombres los configura cada organización.</li>
+<li><strong>Los datos de límites se guardan como GeoJSON.</strong> Permiten cortar territorios sobre el mapa, visualizar el avance del trabajo de campo y asignar ámbito geográfico a los permisos.</li>
+<li><strong>Los territorios los define la campaña, no son administrativos.</strong> Un territorio es una lista de recorrido — un conjunto de direcciones asignado a quien toca puertas. Puede abarcar partes de varios precintos o ser un subconjunto de uno. Los territorios los crean los Directores de campo, no se importan de los datos electorales.</li>
+</ul>
+<p><strong>DECIDIDO:</strong> Las dos cosas — precargados para los países objetivo, con capacidad de importación para todo lo demás.</p>
+<ul>
+<li><strong>Precargados:</strong> GreenGrass incluye los límites electorales oficiales (distritos, precintos, centros de votación) de los países objetivo de la hoja de ruta de despliegue. Una campaña en Puerto Rico elige su municipio y los precintos ya están ahí, listos para cortar territorios.</li>
+<li><strong>Importación:</strong> Las organizaciones en países sin datos precargados pueden importar sus propios límites geográficos (GeoJSON, shapefiles). El proceso de importación valida, muestra una vista previa y confirma antes de aplicar.</li>
+<li><strong>Aporte de la comunidad:</strong> Las organizaciones que importan datos geográficos de una jurisdicción nueva pueden enviarlos de vuelta a GreenGrass como conjunto de datos candidato para otras organizaciones del mismo país.</li>
+<li><strong>Mantenimiento:</strong> Los límites electorales cambian. Los datos precargados están versionados y se actualizan cada ciclo electoral en los países activos.</li>
+<li><strong>Facilidad de uso:</strong> La entrada, importación y exportación de datos en toda la plataforma debe ser lo más fácil posible — vale para los datos geográficos, los padrones electorales y todos los demás tipos de datos.</li>
+</ul>
+<h3 id="política-de-auditoría-de-exportaciones" tabindex="-1"><a class="heading-anchor" href="#política-de-auditoría-de-exportaciones" aria-hidden="true">#</a> Política de auditoría de exportaciones</h3>
+<p>(Decidido en <a href="../../decisions/016-cross-cutting-resolutions.html">ADR-016 §86</a>)</p>
+<p>Exportar más de 100 registros obliga a quien exporta a elegir un motivo de una lista predefinida (Reporte de cumplimiento / Operaciones de campaña / Migración de datos / Intercambio con la alianza / Otro + texto libre). El motivo queda en el registro de auditoría junto con los metadatos de la exportación (quién, cuándo, cuántos registros, qué campos). Las vistas de registros individuales y las exportaciones pequeñas (&lt;100 registros) no requieren motivo.</p>
+<h3 id="motor-de-confianza-de-la-deduplicación" tabindex="-1"><a class="heading-anchor" href="#motor-de-confianza-de-la-deduplicación" aria-hidden="true">#</a> Motor de confianza de la deduplicación</h3>
+<p>(Decidido en <a href="../../decisions/016-cross-cutting-resolutions.html">ADR-016 §83</a>. Refina el enfoque de sugerir y confirmar de la <a href="../../decisions/004-data-model-integrity.html">ADR-004</a>.)</p>
+<p>El motor de deduplicación aplica tres niveles según la confianza del cruce:</p>
+<table>
+<thead>
+<tr>
+<th>Confianza</th>
+<th>Acción</th>
+<th>Ejemplo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>95 % o más (exacto)</td>
+<td>Fusión automática con registro de auditoría</td>
+<td>Misma dirección de correo + mismo número de teléfono</td>
+</tr>
+<tr>
+<td>70–94 % (probable)</td>
+<td>Se muestra en la cola de revisión de duplicados para fusión manual</td>
+<td>Nombre parecido + mismo código postal</td>
+</tr>
+<tr>
+<td>Menos del 70 %</td>
+<td>Se ignora salvo búsqueda manual</td>
+<td>Solo el mismo apellido</td>
+</tr>
+</tbody>
+</table>
+<p>Los umbrales los configura cada organización. Los registros fusionados automáticamente quedan en el registro de auditoría con el motivo del cruce, y la fusión se puede deshacer dentro de la ventana de reversión de importaciones (30 días por defecto). Esto refina la postura de &quot;sin fusión automática&quot; de la ADR-004: los cruces exactos (95 % o más) con varios identificadores que se corroboran entre sí son seguros de fusionar automáticamente; la cola de revisión sigue ahí para los casos ambiguos.</p>
+<h3 id="actualización-de-los-segmentos-dinámicos" tabindex="-1"><a class="heading-anchor" href="#actualización-de-los-segmentos-dinámicos" aria-hidden="true">#</a> Actualización de los segmentos dinámicos</h3>
+<p>(Decidido en <a href="../../decisions/016-cross-cutting-resolutions.html">ADR-016 §85</a>)</p>
+<p>Los segmentos dinámicos se recalculan por dos disparadores: <strong>al acceder</strong> (cuando alguien abre el segmento) y <strong>por un trabajo diario en segundo plano</strong> (para que la segmentación de campaña esté al día). La lista de segmentos muestra &quot;Última actualización: [marca de tiempo]&quot; en cada segmento. Los segmentos grandes (más de 50 000 contactos) muestran un estado de carga mientras se recalculan, en vez de datos desactualizados. La actualización manual está disponible con un botón en la pantalla de detalle del segmento.</p>
+<hr>
+<h2 id="arquitectura-de-identidad-y-autenticación" tabindex="-1"><a class="heading-anchor" href="#arquitectura-de-identidad-y-autenticación" aria-hidden="true">#</a> Arquitectura de identidad y autenticación</h2>
+<h3 id="servicio-de-identidad-de-la-plataforma" tabindex="-1"><a class="heading-anchor" href="#servicio-de-identidad-de-la-plataforma" aria-hidden="true">#</a> Servicio de identidad de la plataforma</h3>
+<p>El servicio de identidad es un componente compartido de la plataforma, separado de cualquier organización:</p>
+<pre><code>┌───────────────────────────────────────────┐
+│           Servicio de identidad           │
+│                                           │
+│  ┌────────────────┐ ┌──────────────────┐  │
+│  │  Almacén de    │ │  Federación de   │  │
+│  │  credenciales  │ │  perfiles        │  │
+│  │  (passkeys,    │ │  (membresías de  │  │
+│  │   OTP, etc.)   │ │   organización)  │  │
+│  └────────────────┘ └──────────────────┘  │
+│  ┌────────────────┐ ┌──────────────────┐  │
+│  │  Gestor de     │ │  Servicio de     │  │
+│  │  sesiones      │ │  recuperación    │  │
+│  └────────────────┘ └──────────────────┘  │
+└───────────────────────────────────────────┘
+</code></pre>
+<p><strong>Almacén de credenciales:</strong> Llaves públicas de los passkeys, hashes de correo y contraseña (argon2id), tokens de enlace mágico, semillas de OTP, secretos TOTP. Nunca guarda credenciales en texto plano. Separado de las bases de datos de las organizaciones.</p>
+<p><strong>Niveles de método de autenticación</strong> (decidido en <a href="../../decisions/016-cross-cutting-resolutions.html">ADR-016 §57–60</a>):</p>
+<table>
+<thead>
+<tr>
+<th>Método</th>
+<th>Disponibilidad</th>
+<th>Notas</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Passkeys sincronizados en la nube (iCloud Keychain, Google Password Manager)</td>
+<td>Por defecto en todos los niveles</td>
+<td>Resistencia al phishing + recuperación práctica. Atados al dispositivo solo en el nivel Máximo.</td>
+</tr>
+<tr>
+<td>TOTP (Google Authenticator, etc.)</td>
+<td>Opcional en los niveles Reforzado y Máximo</td>
+<td>Funciona completamente sin conexión una vez configurado — crítico con conectividad intermitente</td>
+</tr>
+<tr>
+<td>Enlace mágico (por correo)</td>
+<td>Alternativa de reserva para dispositivos anteriores a WebAuthn (por debajo de Android 9 / iOS 16 / Chrome 109)</td>
+<td>Se detecta automáticamente; la pantalla de inicio de sesión muestra el flujo adecuado</td>
+</tr>
+<tr>
+<td>Contraseña (argon2id)</td>
+<td>Disponible, pero no se fomenta</td>
+<td>Reserva heredada</td>
+</tr>
+</tbody>
+</table>
+<p>La pantalla de inicio de sesión detecta automáticamente el soporte de WebAuthn. Los dispositivos por debajo del umbral de passkey reciben autenticación por enlace mágico de forma automática — nadie tiene que decidir nada.</p>
+<p><strong>Federación de perfiles:</strong> Mapea una identidad de plataforma con sus perfiles por organización. Cuando alguien inicia sesión, el servicio de identidad determina a qué organizaciones pertenece y a cuál dirigirla (o presenta un selector de organización si hay varias).</p>
+<p><strong>Gestor de sesiones:</strong> Emite y valida los tokens de sesión. Aplica la duración de sesión según el rol (decidido en <a href="http://users.md" target="_blank" rel="noopener noreferrer">users.md</a>). Maneja la revocación remota — cuando un Coordinador de voluntarios revoca una sesión, el gestor invalida el token de inmediato.</p>
+<p><strong>Servicio de recuperación:</strong> Maneja el flujo de recuperación por contactos de confianza. Enruta las solicitudes de recuperación a los contactos designados. Emite flujos de configuración de credenciales nuevas después de una recuperación aprobada.</p>
+<p><strong>Recuperación del OA — el problema del arranque</strong> (decidido en <a href="../../decisions/016-cross-cutting-resolutions.html">ADR-016 §59</a>): Cuando el primer OA no tiene contactos de confianza que respondan por él, aplica la recuperación asistida por la plataforma. El OA contacta al soporte de GreenGrass, que verifica su identidad por el canal de registro original (correo de alta, método de pago en archivo). Tras la verificación empieza un <strong>período de espera de recuperación de 72 horas</strong> — más largo que las 24 horas de la vía verificada entre pares, porque aquí no hay verificación entre pares. Durante el período de espera, todos los contactos de correo de la organización reciben una notificación. Es deliberadamente lenta y visible — es la vía de recuperación de mayor riesgo.</p>
+<p><strong>DECIDIDO:</strong> Principal centralizado en la jurisdicción de constitución, con réplicas de lectura por país.</p>
+<ul>
+<li><strong>Principal:</strong> Los datos de identidad autoritativos viven en la jurisdicción de constitución (Estonia/Suiza). Todas las escrituras (creación de cuentas, cambios de credenciales, recuperación) van al principal. Protegido por el marco legal más fuerte disponible.</li>
+<li><strong>Réplicas de lectura:</strong> Cada país con infraestructura de organizaciones tiene una réplica local para validar autenticación y sesiones con baja latencia. La replicación es de consistencia eventual con un retraso corto (segundos).</li>
+<li><strong>Conmutación ante fallos:</strong> Si el principal no está accesible, las réplicas de lectura pueden seguir validando las sesiones existentes (tokens en caché). La creación de cuentas y los cambios de credenciales quedan en cola hasta que el principal se recupere.</li>
+</ul>
+<h3 id="flujo-de-autenticación" tabindex="-1"><a class="heading-anchor" href="#flujo-de-autenticación" aria-hidden="true">#</a> Flujo de autenticación</h3>
+<pre><code>1. La persona entra a la app (subdominio de la organización o página de inicio de sesión)
+2. El servicio de identidad presenta las opciones de autenticación (passkey, enlace mágico, OTP, contraseña)
+3. La persona se autentica:
+   a. Passkey: desafío WebAuthn → biometría del dispositivo → respuesta firmada → verificada
+   b. Enlace mágico: se envía el correo → la persona hace clic → token verificado
+   c. OTP: se envía el SMS → la persona escribe el código → verificado
+   d. Contraseña: se envía → se compara el hash argon2id → verificada
+4. El servicio de identidad emite el token de sesión:
+   a. Token de acceso (de corta duración, JWT u opaco)
+   b. Token de refresco (de mayor duración, guardado en el servidor)
+   c. El token incluye: platform_identity_id, tenant_id, role_template_ids, scope_ids
+5. Se dirige a la persona a la aplicación de la organización
+6. La aplicación de la organización valida el token con el servicio de identidad en cada solicitud
+</code></pre>
+<h3 id="autenticación-en-modo-de-campo" tabindex="-1"><a class="heading-anchor" href="#autenticación-en-modo-de-campo" aria-hidden="true">#</a> Autenticación en modo de campo</h3>
+<p>Para el trabajo de campo y las operaciones de campo:</p>
+<pre><code>1. El voluntario entra en modo de campo antes de quedarse sin conexión
+2. El sistema emite un token de sesión de campo de duración extendida (lo que dura el turno)
+3. Los datos de la lista de recorrido se descargan y se cifran en el dispositivo
+4. Sin conexión: el token de sesión de campo se valida localmente (el dispositivo guarda un token firmado)
+5. Cuando vuelve la conectividad: el token se revalida con el servicio de identidad y los datos se sincronizan
+6. Al terminar el turno: el token expira y los datos se borran del dispositivo
+</code></pre>
+<h3 id="aprobación-de-operaciones-destructivas" tabindex="-1"><a class="heading-anchor" href="#aprobación-de-operaciones-destructivas" aria-hidden="true">#</a> Aprobación de operaciones destructivas</h3>
+<p>(Decidido en <a href="../../decisions/016-cross-cutting-resolutions.html">ADR-016 §53</a>)</p>
+<p>Las operaciones destructivas requieren la confirmación de un segundo OA:</p>
+<ul>
+<li>Eliminar la organización</li>
+<li>Revocar todas las llaves de API</li>
+<li>Bajar el nivel de seguridad</li>
+<li>Quitar la última integración de un tipo crítico (procesador de pagos, proveedor de SMS)</li>
+</ul>
+<p>Los cambios de configuración rutinarios no requieren la aprobación de dos OA.</p>
+<p><strong>Alternativa de reserva con un solo OA:</strong> Si la organización tiene un solo OA, las operaciones destructivas requieren en su lugar un período de espera de 48 horas con confirmación por correo. Esto evita cambios catastróficos accidentales o hechos bajo coacción sin bloquear a las organizaciones con un único administrador.</p>
+<p><strong>Referencia anticipada a la v2:</strong> <a href="../../decisions/016-cross-cutting-resolutions.html">Delegación de ajustes</a> (pilar de la v2) introducirá la delegación controlada de ajustes de bajo riesgo a roles que no sean OA. El flujo de aprobación de dos OA garantiza que, incluso con delegación, las operaciones más peligrosas sigan protegidas.</p>
+<hr>
+<h2 id="arquitectura-de-cifrado" tabindex="-1"><a class="heading-anchor" href="#arquitectura-de-cifrado" aria-hidden="true">#</a> Arquitectura de cifrado</h2>
+<h3 id="jerarquía-de-llaves" tabindex="-1"><a class="heading-anchor" href="#jerarquía-de-llaves" aria-hidden="true">#</a> Jerarquía de llaves</h3>
+<pre><code>Llave maestra de la plataforma (en poder de GreenGrass, respaldada por HSM)
+├── Llave de cifrado del servicio de identidad (cifra los datos de identidad de plataforma)
+├── Llave de la capa de federación (cifra los datos de coordinación entre organizaciones)
+└── Llaves por organización
+    ├── BYOK: llave maestra de la organización (generada y en poder de la organización)
+    │   ├── Llaves de cifrado de datos (DEK — por tabla o por campo)
+    │   └── Llaves de mensajería (llaves de cifrado E2E de las comunicaciones internas)
+    └── Gestionada: llave maestra de la organización (en poder de GreenGrass, en Vault)
+        ├── Llaves de cifrado de datos (DEK)
+        └── Llaves de mensajería
+</code></pre>
+<h3 id="cifrado-de-sobre" tabindex="-1"><a class="heading-anchor" href="#cifrado-de-sobre" aria-hidden="true">#</a> Cifrado de sobre</h3>
+<p>Todos los datos de la organización se cifran con cifrado de sobre:</p>
+<ol>
+<li>Los datos se cifran con una <strong>llave de cifrado de datos (DEK)</strong> — una llave simétrica única para una tabla, un campo o una clase de registro.</li>
+<li>La DEK se cifra con la <strong>llave maestra de la organización (TMK)</strong>.</li>
+<li>La DEK cifrada se guarda junto a los datos cifrados.</li>
+<li>Para descifrar: se recupera la TMK (del almacén de llaves de la organización en BYOK, o de Vault en el modo gestionado), se descifra la DEK y se descifran los datos.</li>
+</ol>
+<p><strong>En las organizaciones con BYOK:</strong> La TMK nunca toca la infraestructura de GreenGrass. La tiene la organización, en su propio sistema de gestión de llaves, o generada en el dispositivo de su administrador y con copia de seguridad mediante el reparto de secreto de Shamir entre varios Administradores de la organización.</p>
+<h3 id="cifrado-a-nivel-de-aplicación" tabindex="-1"><a class="heading-anchor" href="#cifrado-a-nivel-de-aplicación" aria-hidden="true">#</a> Cifrado a nivel de aplicación</h3>
+<p>(Decidido en <a href="http://security.md" target="_blank" rel="noopener noreferrer">security.md</a> — los campos de alta sensibilidad llevan cifrado a nivel de aplicación además del de almacenamiento)</p>
+<p><strong>Campos cifrados:</strong> Puntajes de inclinación política, notas del trabajo de campo, identidad y datos de cumplimiento de los donantes, comunicaciones privadas de la candidatura, números de identificación nacional o electoral.</p>
+<p><strong>Implementación:</strong> Estos campos se cifran y se descifran en la capa de aplicación con DEK específicas del campo, antes de escribirse en la base de datos o de leerse de ella. La base de datos solo ve texto cifrado.</p>
+<p><strong>El compromiso con la búsqueda:</strong> Los campos cifrados no se pueden buscar ni indexar directamente. Opciones:</p>
+<ul>
+<li><strong>Índice ciego:</strong> Se hashea el valor del campo con una llave específica de la organización para crear un índice buscable que no revela nada del texto plano. Solo admite coincidencia exacta.</li>
+<li><strong>Cifrado determinista:</strong> El mismo texto plano produce siempre el mismo texto cifrado, lo que permite buscar por igualdad. Seguridad más débil (revela duplicados).</li>
+<li><strong>Descifrado en lectura:</strong> Sin capacidad de búsqueda. Hay que cargar y descifrar para filtrar. Aceptable para campos que casi nunca se buscan, como las notas.</li>
+</ul>
+<p><strong>DECIDIDO:</strong> Cifrado buscable, con un enfoque por campo.</p>
+<table>
+<thead>
+<tr>
+<th>Campo</th>
+<th>Enfoque</th>
+<th>Justificación</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Teléfono, correo, identificación nacional</td>
+<td>Índice ciego</td>
+<td>Hace falta búsqueda exacta para deduplicar. Índice hasheado con una llave específica de la organización.</td>
+</tr>
+<tr>
+<td>Notas del trabajo de campo, datos de cumplimiento</td>
+<td>Descifrado en lectura</td>
+<td>Se buscan pocas veces y la prioridad es la seguridad. Hay que cargar y descifrar para filtrar.</td>
+</tr>
+<tr>
+<td>Puntajes de inclinación política</td>
+<td>Descifrado en lectura</td>
+<td>Se agregan en las cadenas de analítica, no se buscan uno por uno.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="cifrado-de-extremo-a-extremo-en-la-mensajería" tabindex="-1"><a class="heading-anchor" href="#cifrado-de-extremo-a-extremo-en-la-mensajería" aria-hidden="true">#</a> Cifrado de extremo a extremo en la mensajería</h3>
+<p>(Decidido en <a href="http://security.md" target="_blank" rel="noopener noreferrer">security.md</a> — E2E por defecto, con custodia de llaves opcional)</p>
+<pre><code>Dispositivo emisor                                        Dispositivo receptor
+┌────────────────┐                                        ┌────────────────┐
+│ Genera la      │                                        │ Descifra el    │
+│ llave de       │                                        │ mensaje        │
+│ mensaje (MK)   │                                        │ con la MK      │
+│                │      ┌──────────────────────┐          │                │
+│ Cifra el       │─────→│ El servidor guarda:  │─────────→│ Descifra la MK │
+│ mensaje        │      │ - el mensaje cifrado │          │ con su llave   │
+│ con la MK      │      │ - la MK cifrada con  │          │ privada        │
+│                │      │   la llave pública   │          │                │
+│ Cifra la MK    │      │   de cada            │          └────────────────┘
+│ con la llave   │      │   destinatario       │
+│ pública de     │      └──────────────────────┘
+│ cada           │
+│ destinatario   │
+└────────────────┘
+</code></pre>
+<p><strong>Gestión de llaves para E2E:</strong></p>
+<ul>
+<li>Cada persona genera un par de llaves pública y privada en su dispositivo durante la incorporación.</li>
+<li>Las llaves públicas se registran en el servicio de identidad.</li>
+<li>Las llaves privadas nunca salen del dispositivo.</li>
+<li>Varios dispositivos: cuando alguien añade un dispositivo nuevo, el dispositivo existente tiene que autorizarlo (transferir la llave privada cifrada con una llave específica del dispositivo, o volver a cifrar el historial de mensajes para el dispositivo nuevo).</li>
+</ul>
+<p><strong>Modo de custodia de llaves (opcional, por organización):</strong></p>
+<ul>
+<li>Si la organización activa la custodia de llaves, las llaves de cifrado de los mensajes se cifran además con la llave maestra de la organización y se guardan en el servidor.</li>
+<li>El servidor puede descifrar los mensajes si hace falta (búsqueda, cumplimiento, recuperación).</li>
+<li>La interfaz indica claramente cuándo la custodia está activa.</li>
+</ul>
+<h3 id="experiencia-de-uso-de-la-gestión-de-llaves-byok" tabindex="-1"><a class="heading-anchor" href="#experiencia-de-uso-de-la-gestión-de-llaves-byok" aria-hidden="true">#</a> Experiencia de uso de la gestión de llaves BYOK</h3>
+<p>(Aplazado desde <a href="http://security.md" target="_blank" rel="noopener noreferrer">security.md</a> — se resuelve aquí)</p>
+<p><strong>Generación de llaves:</strong></p>
+<ol>
+<li>Durante la puesta en marcha de la organización, el Administrador de la organización genera una llave maestra de la organización en su dispositivo.</li>
+<li>La llave nunca se transmite a los servidores de GreenGrass.</li>
+</ol>
+<p><strong>Copia de seguridad de la llave con el reparto de secreto de Shamir:</strong></p>
+<ol>
+<li>La TMK se divide en N partes con un umbral de K (por ejemplo, 5 partes, 3 necesarias para reconstruirla).</li>
+<li>Las partes se reparten entre los titulares designados (Administrador de la organización, Adjuntos, miembros de confianza de la junta).</li>
+<li>Cada parte se muestra como código QR o como tarjeta de recuperación imprimible.</li>
+<li>Ninguna persona sola tiene partes suficientes para reconstruir la llave.</li>
+<li>Reconstruir la llave requiere que K titulares combinen sus partes, físicamente o de forma digital mediante una ceremonia segura.</li>
+</ol>
+<p><strong>Rotación de llaves:</strong></p>
+<ul>
+<li>La rotación periódica se recomienda, pero no se obliga.</li>
+<li>La rotación vuelve a cifrar todas las DEK con una TMK nueva. Los datos en sí no se vuelven a cifrar (el cifrado de sobre lo permite).</li>
+<li>La rotación requiere acceso a la TMK actual (tienen que participar los titulares actuales).</li>
+</ul>
+<p><strong>DECIDIDO:</strong> Decide la organización, con orientación firme.</p>
+<ul>
+<li>La plataforma no impone un calendario de rotación. La organización elige cuándo rotar.</li>
+<li><strong>Orientación firme:</strong> La plataforma recomienda activamente rotar ante eventos de seguridad — un titular de llave deja la organización, un dispositivo comprometido, después de una brecha, cambios grandes de personal. Aparece como avisos dentro de la aplicación, no solo en la documentación.</li>
+<li><strong>Fácil de ejecutar:</strong> La rotación de llaves es un proceso guiado y de baja fricción en la interfaz de administración. Vuelve a cifrar las DEK con la TMK nueva. El Administrador de la organización la inicia y los titulares de llaves participan.</li>
+<li><strong>Recordatorios:</strong> Si no hay rotación en 12 meses o más, la plataforma muestra un recordatorio no bloqueante al Administrador de la organización.</li>
+</ul>
+<hr>
+<h2 id="arquitectura-sin-conexión" tabindex="-1"><a class="heading-anchor" href="#arquitectura-sin-conexión" aria-hidden="true">#</a> Arquitectura sin conexión</h2>
+<h3 id="motor-de-sincronización" tabindex="-1"><a class="heading-anchor" href="#motor-de-sincronización" aria-hidden="true">#</a> Motor de sincronización</h3>
+<p>El motor de sincronización sin conexión es el componente más complejo de la arquitectura. Tiene que manejar:</p>
+<ul>
+<li><strong>Descarga:</strong> Listas de recorrido, registros de votantes (el subconjunto operativo), guiones de trabajo de campo, listas de equipo — en caché en el dispositivo para usarlos sin conexión.</li>
+<li><strong>Subida:</strong> Interacciones del trabajo de campo, datos de inscripción de votantes, eventos de fin de turno — quedan en cola en el dispositivo y se sincronizan cuando vuelve la conectividad.</li>
+<li><strong>Resolución de conflictos:</strong> Fusionar y marcar (decidido en <a href="http://workflows.md" target="_blank" rel="noopener noreferrer">workflows.md</a>) — los registros en conflicto se conservan y se marcan para revisión humana.</li>
+</ul>
+<pre><code>┌─────────────────┐            ┌───────────────────┐           ┌──────────────┐
+│  Dispositivo    │            │  Servidor de      │           │ BD de la     │
+│                 │            │  sincronización   │           │ organización │
+│ BD local        │◄──────────►│ Cola de sinc.     │──────────►│ BD principal │
+│ (cifrada)       │  sincroniza│ Detección de      │  aplica   │              │
+│                 │  cuando hay│ conflictos        │           │ Registro de  │
+│ Cola de cambios │  conexión  │ Fusionar y marcar │           │ auditoría    │
+│ pendientes      │            │                   │           │              │
+└─────────────────┘            └───────────────────┘           └──────────────┘
+</code></pre>
+<h3 id="almacenamiento-en-el-dispositivo" tabindex="-1"><a class="heading-anchor" href="#almacenamiento-en-el-dispositivo" aria-hidden="true">#</a> Almacenamiento en el dispositivo</h3>
+<ul>
+<li><strong>Base de datos:</strong> SQLite (cifrada con SQLCipher) en el dispositivo. Guarda los datos descargados de la lista de recorrido y las interacciones pendientes.</li>
+<li><strong>Cifrado:</strong> La base de datos del dispositivo se cifra con una llave derivada del token de sesión de campo. Cuando la sesión expira o se revoca, la llave se destruye y los datos quedan ilegibles.</li>
+<li><strong>Alcance de los datos:</strong> Solo datos operativos (decidido en <a href="http://workflows.md" target="_blank" rel="noopener noreferrer">workflows.md</a>) — nombre, dirección, edad, resultado del contacto anterior, guion. Nada de registros completos de votantes.</li>
+<li><strong>Capacidad:</strong> Las listas de recorrido tienen normalmente entre 50 y 200 direcciones. Los requisitos de almacenamiento en el dispositivo son modestos.</li>
+</ul>
+<h3 id="protocolo-de-sincronización" tabindex="-1"><a class="heading-anchor" href="#protocolo-de-sincronización" aria-hidden="true">#</a> Protocolo de sincronización</h3>
+<pre><code>1. ANTES DEL TURNO (con conexión):
+   a. El voluntario entra en modo de campo
+   b. El dispositivo descarga la lista de recorrido asignada + el guion + la lista del equipo
+   c. Los datos se cifran y se guardan localmente
+   d. Se registra el punto de control de sincronización (el servidor sabe qué tiene el dispositivo)
+
+2. DURANTE EL TURNO (sin conexión o intermitente):
+   a. El voluntario registra las interacciones → quedan en la cola local de pendientes
+   b. Cada registro lleva: device_id, local_timestamp, entity_id, change_type, payload
+   c. Cuando se detecta conectividad:
+      - Empujar los cambios pendientes al servidor de sincronización
+      - Traer las actualizaciones (reasignaciones de territorio, direcciones nuevas en la lista de recorrido)
+      - Actualizar el punto de control de sincronización
+
+3. FIN DEL TURNO (con conexión):
+   a. Sincronización final: empujar todos los cambios pendientes que queden
+   b. El servidor de sincronización confirma la recepción
+   c. Se dispara el evento de ciclo de vida del turno
+   d. La base de datos local se borra (se destruye la llave de cifrado)
+
+4. MANEJO DE CONFLICTOS:
+   a. El servidor de sincronización detecta escrituras en conflicto (mismo entity_id, distintos device_id)
+   b. Se guardan las dos versiones con una marca de conflicto
+   c. El Gestor de datos ve los conflictos en la cola de revisión
+   d. Resolución manual: elegir una, fusionar campos o crear registros separados
+</code></pre>
+<p><strong>DECIDIDO:</strong> Event sourcing (el estado se deriva de un registro inmutable de eventos).</p>
+<p>Todas las modificaciones de datos — con y sin conexión — se guardan como un registro de eventos inmutable. El estado se reconstruye reproduciendo los eventos.</p>
+<p><strong>Por qué encaja:</strong></p>
+<ul>
+<li>El requisito de registro de auditoría completo significa que ya estamos guardando cada cambio. Con event sourcing, el registro de auditoría es la fuente de verdad y no una bitácora secundaria.</li>
+<li>Las interacciones sin conexión son eventos por naturaleza (se tocó una puerta, se registró una respuesta, se completó una inscripción), generados en un dispositivo y reproducidos en el servidor cuando vuelve la conectividad.</li>
+<li>Un conflicto son dos flujos de eventos de la misma entidad desde dispositivos distintos. Los dos flujos se conservan; el proceso de fusionar y marcar (decidido en <a href="http://workflows.md" target="_blank" rel="noopener noreferrer">workflows.md</a>) es una persona revisando historiales de eventos que compiten entre sí.</li>
+<li>Permite consultas temporales (&quot;cómo se veían los datos a las 3 de la tarde del día de trabajo de campo&quot;) para depuración, resolución de disputas y cumplimiento.</li>
+</ul>
+<p><strong>Flujo de sincronización:</strong></p>
+<ul>
+<li>El dispositivo genera los eventos localmente con device_id y marcas de tiempo locales.</li>
+<li>Al sincronizar, los eventos se empujan al servidor y se añaden al registro de eventos de la organización.</li>
+<li>El servidor detecta los conflictos (eventos solapados de la misma entidad desde dispositivos distintos) y los marca.</li>
+<li>El estado actual es una vista materializada del registro de eventos, reconstruida por reproducción de eventos o mantenida de forma incremental.</li>
+</ul>
+<hr>
+<h2 id="arquitectura-de-conservación-de-datos" tabindex="-1"><a class="heading-anchor" href="#arquitectura-de-conservación-de-datos" aria-hidden="true">#</a> Arquitectura de conservación de datos</h2>
+<p>(Decidido en <a href="../../decisions/016-cross-cutting-resolutions.html">ADR-016 §4</a>. Deja sin efecto la conservación uniforme de 10 años de la <a href="../../decisions/004-data-model-integrity.html">ADR-004</a> con un modelo escalonado más afinado.)</p>
+<h3 id="modelo-de-conservación-de-cuatro-niveles" tabindex="-1"><a class="heading-anchor" href="#modelo-de-conservación-de-cuatro-niveles" aria-hidden="true">#</a> Modelo de conservación de cuatro niveles</h3>
+<table>
+<thead>
+<tr>
+<th>Nivel</th>
+<th>Qué se guarda</th>
+<th>Conservación por defecto</th>
+<th>Límites</th>
+<th>¿Se puede borrar?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Operativo</strong></td>
+<td>Contenido completo: cuerpos de mensaje, adjuntos, respuestas del trabajo de campo, datos operativos de GOTV (Get Out The Vote — movilización del voto), bitácoras de turno</td>
+<td>2 años</td>
+<td>90 días – 5 años</td>
+<td>Sí, pasado el mínimo</td>
+</tr>
+<tr>
+<td><strong>Cumplimiento</strong></td>
+<td>Registros financieros: detalles de donaciones, recibos, documentos fiscales, declaraciones de cumplimiento</td>
+<td>Según la ley local</td>
+<td>5 – 10 años</td>
+<td>No, hasta que venza el mínimo legal</td>
+</tr>
+<tr>
+<td><strong>Registro de auditoría</strong></td>
+<td>Solo metadatos de la acción (ver abajo)</td>
+<td>Indefinida</td>
+<td>—</td>
+<td>No</td>
+</tr>
+<tr>
+<td><strong>Reversión de importaciones</strong></td>
+<td>Capacidad de deshacer importaciones de datos</td>
+<td>30 días</td>
+<td>7 – 90 días</td>
+<td>Expira sola</td>
+</tr>
+</tbody>
+</table>
+<h3 id="distinción-entre-metadatos-y-contenido" tabindex="-1"><a class="heading-anchor" href="#distinción-entre-metadatos-y-contenido" aria-hidden="true">#</a> Distinción entre metadatos y contenido</h3>
+<p>El registro de auditoría anota <strong>que una acción ocurrió</strong> — quién hizo qué, cuándo y sobre qué entidad. <strong>No</strong> guarda el contenido de la acción.</p>
+<p><strong>Ejemplo — se envía un mensaje y luego se purga al vencer la ventana de conservación operativa:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Qué existe antes de la purga</th>
+<th>Qué existe después de la purga</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Nivel operativo: cuerpo completo del mensaje, adjuntos, contexto del hilo</td>
+<td><strong>Borrado.</strong> El cuerpo del mensaje y los adjuntos ya no están.</td>
+</tr>
+<tr>
+<td>Registro de auditoría: &quot;El miembro del personal A le envió un SMS al contacto B el 2026-03-04 a las 14:32 UTC&quot;</td>
+<td><strong>Conservado.</strong> La entrada de metadatos permanece indefinidamente.</td>
+</tr>
+</tbody>
+</table>
+<p>Esta distinción es crítica por tres razones:</p>
+<ol>
+<li><strong>Cumplimiento de privacidad:</strong> Cuando un simpatizante pide que se borren sus datos, el contenido se purga del nivel operativo. El registro de auditoría conserva solo el registro de metadatos — nada de contenido personal.</li>
+<li><strong>Almacenamiento:</strong> Conservar indefinidamente registros de solo metadatos es viable. Conservar indefinidamente cuerpos de mensaje y adjuntos completos no lo es.</li>
+<li><strong>Exposición legal:</strong> Si se ve obligada por vía legal a entregar registros, la organización entrega metadatos (quién, qué, cuándo) — no el contenido completo de comunicaciones que pudo haberse purgado legítimamente.</li>
+</ol>
+<h3 id="cómo-se-concilia-con-la-adr-004" tabindex="-1"><a class="heading-anchor" href="#cómo-se-concilia-con-la-adr-004" aria-hidden="true">#</a> Cómo se concilia con la ADR-004</h3>
+<p>La ADR-004 estableció una &quot;conservación de 10 años en todo el mundo&quot; para los registros de auditoría, a partir del requisito de registros mercantiles de Líbano. La ADR-016 lo afina: el registro de auditoría (solo metadatos) se conserva <strong>indefinidamente</strong> — más de 10 años — mientras que el contenido operativo (cuerpos de mensaje, respuestas del trabajo de campo) sigue el nivel operativo, más corto. El nivel de cumplimiento (registros financieros) conserva entre 5 y 10 años según la jurisdicción, y abarca la intención original de la ADR-004. El efecto neto es una conservación <em>más fuerte</em> de lo que importa (los metadatos de auditoría) y una conservación <em>adecuada</em> del contenido (acotada por la privacidad y el almacenamiento).</p>
+<h3 id="ciclo-de-vida-de-la-purga" tabindex="-1"><a class="heading-anchor" href="#ciclo-de-vida-de-la-purga" aria-hidden="true">#</a> Ciclo de vida de la purga</h3>
+<pre><code>El contenido entra al nivel operativo → el reloj de conservación arranca al crearlo
+  → El OA configura la conservación dentro de los límites (por defecto: 2 años)
+  → Al vencer: el contenido se purga, los metadatos de auditoría se conservan
+  → Contenido del nivel de cumplimiento: la purga se bloquea hasta que venza el mínimo legal
+  → Reversión de importaciones: expira sola, el OA no tiene que hacer nada
+</code></pre>
+<p>El OA configura los períodos de conservación dentro de los límites. El sistema hace cumplir los mínimos — un OA no puede poner la conservación de mensajes por debajo de 90 días. Los mínimos del nivel de cumplimiento se derivan de las jurisdicciones configuradas de la organización.</p>
+<hr>
+<h2 id="infraestructura-de-comunicaciones" tabindex="-1"><a class="heading-anchor" href="#infraestructura-de-comunicaciones" aria-hidden="true">#</a> Infraestructura de comunicaciones</h2>
+<h3 id="correo-electrónico" tabindex="-1"><a class="heading-anchor" href="#correo-electrónico" aria-hidden="true">#</a> Correo electrónico</h3>
+<pre><code>App de la organización → Cola de mensajes → Renderizador de correo → Servicio de envío → Destinatario
+                                                                             │
+                                                              Bucle de retroalimentación
+                                                                (rebotes, quejas,
+                                                                 aperturas, clics)
+                                                                             │
+                                                                  BD de participación
+                                                                             │
+                                                                Actualización del CRM
+</code></pre>
+<p><strong>Arquitectura de entregabilidad:</strong></p>
+<ul>
+<li><strong>Dominios de envío por organización</strong> — cada organización configura SPF, DKIM y DMARC en su propio dominio (o en un subdominio de GreenGrass). Aísla la reputación de remitente por organización.</li>
+<li><strong>Calentamiento de IP</strong> — las organizaciones nuevas empiezan en grupos de IP compartidas y pasan a IP dedicadas a medida que crecen el volumen y la reputación.</li>
+<li><strong>Procesamiento de rebotes y quejas</strong> — supresión automática de los rebotes duros, bajas a partir de las quejas.</li>
+<li><strong>Limitación de frecuencia</strong> — límites de tasa de envío por organización para proteger la entregabilidad.</li>
+</ul>
+<p><strong>DECIDIDO:</strong> Autoalojado, por país.</p>
+<p>La infraestructura de correo se autoaloja en el despliegue de cada país. El contenido del correo son datos de la organización — no sale del país a través de un servicio de terceros.</p>
+<ul>
+<li><strong>MTA:</strong> Autoalojado (Haraka o Postfix), desplegado dentro del clúster de K8s de cada país.</li>
+<li><strong>Dominios de envío por organización:</strong> Cada organización configura SPF, DKIM y DMARC en su propio dominio. Aísla la reputación de remitente.</li>
+<li><strong>Gestión de IP:</strong> Grupos de IP dedicadas por país. Las organizaciones nuevas se calientan poco a poco.</li>
+<li><strong>Monitoreo de entregabilidad:</strong> Procesamiento automático de rebotes y quejas, seguimiento de reputación, paneles de entregabilidad.</li>
+<li><strong>Costo operativo:</strong> Es significativo — la infraestructura de correo exige atención continua. La experiencia en entregabilidad debe formar parte del equipo de operaciones de GreenGrass.</li>
+</ul>
+<!-- REVISIT: Para la fase alfa en Puerto Rico, un servicio transaccional gestionado (Postmark, SES) puede ser lo pragmático mientras se construye la infraestructura autoalojada. La arquitectura permite cambiar el adaptador de correo por país. -->
+<h3 id="sms-whatsapp" tabindex="-1"><a class="heading-anchor" href="#sms-whatsapp" aria-hidden="true">#</a> SMS / WhatsApp</h3>
+<pre><code>App de la organización → Cola de mensajes → Enrutador de canales → Adaptador de proveedor → Pasarela de SMS / API de WhatsApp
+                                                                              │
+                                                                  Reportes de entrega
+                                                              Enrutamiento de respuestas
+</code></pre>
+<p><strong>Arquitectura de canales:</strong></p>
+<ul>
+<li><strong>Capa de adaptadores independiente del proveedor</strong> — abstrae SMS y WhatsApp tras una interfaz común, con adaptadores por proveedor y por país (Twilio, Vonage, proveedores locales).</li>
+<li><strong>API de WhatsApp Business</strong> — requiere verificación del negocio, tiene reglas de mensajería basadas en plantillas y precio por mensaje. Los mensajes salientes tienen que usar plantillas preaprobadas; la mensajería libre solo dentro de la ventana de respuesta de 24 horas. La plataforma sigue el estado de aprobación de cada plantilla (Aprobada / Pendiente / Rechazada) consultando periódicamente la API de WhatsApp Business. El estado se muestra en línea en el redactor de mensajes, para que nadie intente enviar una plantilla rechazada o pendiente (<a href="../../decisions/016-cross-cutting-resolutions.html">ADR-016 §18</a>).</li>
+<li><strong>Aplicación del consentimiento</strong> — el enrutador de canales revisa el estado de consentimiento (por canal y por finalidad, decidido en <a href="http://workflows.md" target="_blank" rel="noopener noreferrer">workflows.md</a>) antes de despachar cualquier mensaje.</li>
+</ul>
+<h3 id="redes-sociales" tabindex="-1"><a class="heading-anchor" href="#redes-sociales" aria-hidden="true">#</a> Redes sociales</h3>
+<pre><code>App de la organización → Programador de publicaciones → Adaptador de plataforma → API de la red social
+                                                                   │
+                                                    Recolector de analítica → Panel
+</code></pre>
+<p><strong>Patrón de adaptadores modular:</strong></p>
+<ul>
+<li>Un adaptador por plataforma (Facebook, Instagram, Twitter/X, TikTok, etc.)</li>
+<li>Interfaz común: publish(post), schedule(post, time), getAnalytics(post_id)</li>
+<li>Los adaptadores absorben las particularidades de cada plataforma (límites de caracteres, formatos de medios, límites de solicitudes de la API)</li>
+<li>Se añaden plataformas nuevas escribiendo adaptadores nuevos, sin tocar el núcleo</li>
+</ul>
+<h3 id="motor-de-orquestación-entre-canales" tabindex="-1"><a class="heading-anchor" href="#motor-de-orquestación-entre-canales" aria-hidden="true">#</a> Motor de orquestación entre canales</h3>
+<p>(Decidido en <a href="../../decisions/016-cross-cutting-resolutions.html">ADR-016 §2</a>)</p>
+<p>Las comunicaciones se rigen por dos capas complementarias que se aplican al momento de enviar:</p>
+<p><strong>Capa 1 — Topes de frecuencia por canal</strong> (decisión existente): Techos para toda la organización de contactos por canal y por período. Por ejemplo: máximo 2 correos por semana, máximo 1 SMS por día. Los configura el OA en los ajustes de comunicaciones.</p>
+<p><strong>Capa 2 — Ventana de silencio entre canales</strong> (nueva): Después de contactar a una persona por <em>cualquier</em> canal sobre un tema concreto, los mensajes del mismo tema por otros canales se suprimen durante una ventana configurable (por defecto: 24 horas). Se permiten temas distintos por canales distintos, hasta el tope de cada canal.</p>
+<p><strong>Aplicación:</strong> El enrutador de canales revisa las dos capas antes de despachar cualquier mensaje. Un mensaje que pasa el tope de su canal puede quedar aplazado igualmente por la ventana de silencio entre canales. Los mensajes aplazados se vuelven a evaluar en la siguiente ventana de envío.</p>
+<p><strong>Bitácora de contacto por persona:</strong> El historial de contacto reciente de cada persona (canal, tema, marca de tiempo) se mantiene en la capa de caché para consultarlo rápido al momento de enviar.</p>
+<p><strong>Referencia anticipada a la v2:</strong> El <a href="../../decisions/016-cross-cutting-resolutions.html">Constructor visual de flujos</a> (pilar de la v2) orquestará secuencias multicanal dentro de un solo flujo. El modelo de dos capas aporta el sustrato de aplicación por el que enruta el constructor de flujos.</p>
+<hr>
+<h2 id="arquitectura-de-pagos" tabindex="-1"><a class="heading-anchor" href="#arquitectura-de-pagos" aria-hidden="true">#</a> Arquitectura de pagos</h2>
+<p>(Impulsada por <a href="http://geography.md" target="_blank" rel="noopener noreferrer">geography.md</a> — cada país tiene una infraestructura de pagos radicalmente distinta)</p>
+<pre><code>Formulario de donación → Enrutador de pagos → Adaptador de proveedor → Procesador de pagos
+                                 │                                             │
+                           Conversión                        Resultado de la transacción
+                           de moneda                                          │
+                           (si hace falta)                   Registro de la donación
+                                                                              │
+                                                             Actualización del CRM
+                                                             Recibo
+                                                             Bitácora de cumplimiento
+</code></pre>
+<h3 id="patrón-de-adaptadores-de-pago" tabindex="-1"><a class="heading-anchor" href="#patrón-de-adaptadores-de-pago" aria-hidden="true">#</a> Patrón de adaptadores de pago</h3>
+<p>El mismo patrón modular que en comunicaciones — una interfaz común con adaptadores por proveedor:</p>
+<table>
+<thead>
+<tr>
+<th>Adaptador</th>
+<th>Países</th>
+<th>Tipo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Stripe</td>
+<td>Global (alternativa de reserva)</td>
+<td>Tarjetas, algunos métodos locales</td>
+</tr>
+<tr>
+<td>ATH Móvil</td>
+<td>Puerto Rico</td>
+<td>Pago móvil</td>
+</tr>
+<tr>
+<td>PIX</td>
+<td>Brasil</td>
+<td>Pago instantáneo (Banco Central)</td>
+</tr>
+<tr>
+<td>PromptPay</td>
+<td>Tailandia</td>
+<td>Pago instantáneo</td>
+</tr>
+<tr>
+<td>UPI</td>
+<td>India</td>
+<td>Ecosistema de pago instantáneo</td>
+</tr>
+<tr>
+<td>OMT</td>
+<td>Líbano</td>
+<td>Transferencia de dinero</td>
+</tr>
+<tr>
+<td>Efectivo</td>
+<td>Todos</td>
+<td>Registro presencial (sin procesador externo)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Interfaz común:</strong></p>
+<pre><code>PaymentAdapter {
+  createPaymentIntent(amount, currency, donor_info) → PaymentIntent
+  processPayment(payment_intent) → TransactionResult
+  refund(transaction_id, amount) → RefundResult
+  getTransactionStatus(transaction_id) → Status
+  listTransactions(filters) → Transaction[]
+  generateComplianceReport(date_range) → Report
+}
+</code></pre>
+<p><strong>Multidivisa:</strong> Las donaciones se registran en la moneda en que se hicieron. Los reportes pueden mostrarse en la moneda preferida de la organización, con las tasas de cambio registradas al momento de la transacción.</p>
+<p><strong>Reparto de donaciones en la alianza:</strong> Cuando una donación entra por una página de recaudación conjunta, el enrutador de pagos aplica las reglas de reparto (configuradas por campaña, decidido en <a href="http://workflows.md" target="_blank" rel="noopener noreferrer">workflows.md</a>), registra la donación completa y atribuye las porciones repartidas a los registros financieros de cada organización miembro.</p>
+<h3 id="enrutamiento-de-las-entradas-a-eventos" tabindex="-1"><a class="heading-anchor" href="#enrutamiento-de-las-entradas-a-eventos" aria-hidden="true">#</a> Enrutamiento de las entradas a eventos</h3>
+<p>(Decidido en <a href="../../decisions/016-cross-cutting-resolutions.html">ADR-016 §3</a>)</p>
+<p>Las entradas de pago a eventos se procesan por la cadena de recaudación de fondos. La compra de una entrada es un registro Donation con metadatos de evento (<code>event_id</code>, <code>ticket_type</code>, <code>ticket_quantity</code>). No hay una cadena de pagos aparte para los eventos.</p>
+<ul>
+<li>El <strong>sistema de eventos</strong> maneja: inscripción, seguimiento de asistencia, registro de entrada, capacidad</li>
+<li>El <strong>sistema de recaudación de fondos</strong> maneja: procesamiento de pagos, generación de recibos, seguimiento de cumplimiento, reembolsos</li>
+<li>La <strong>política de reembolsos</strong> es unificada: la rige la política del procesador de pagos más una ventana máxima configurable por la organización (por defecto: 90 días)</li>
+</ul>
+<p>Las pantallas de eventos muestran los ingresos por entradas como métrica, pero enlazan al sistema de recaudación para el detalle financiero. En la mayoría de las jurisdicciones, las entradas a actos políticos se tratan legalmente como contribuciones — una sola cadena significa un solo conjunto de reglas de cumplimiento, un solo generador de recibos, un solo flujo de conciliación.</p>
+<hr>
+<h2 id="arquitectura-de-analítica" tabindex="-1"><a class="heading-anchor" href="#arquitectura-de-analítica" aria-hidden="true">#</a> Arquitectura de analítica</h2>
+<p>(Decidido en <a href="http://workflows.md" target="_blank" rel="noopener noreferrer">workflows.md</a> — híbrido de tiempo real y por lotes)</p>
+<pre><code>┌────────────────────────┐     ┌──────────────────┐     ┌──────────────┐
+│ App de la organización │────→│ Flujo de eventos │────→│ Agregador en │
+│ (eventos)              │     │ (Kafka/NATS)     │     │ tiempo real  │──→ Paneles en vivo
+└────────────────────────┘     └──────┬───────────┘     └──────────────┘
+                                      │
+                                      ▼
+                               ┌────────────────────┐     ┌──────────────┐
+                               │ Almacén de eventos │────→│ Procesador   │
+                               │ (de solo adición)  │     │ por lotes    │──→ Reportes históricos
+                               └────────────────────┘     └──────────────┘
+</code></pre>
+<h3 id="cadena-en-tiempo-real-operaciones-activas" tabindex="-1"><a class="heading-anchor" href="#cadena-en-tiempo-real-operaciones-activas" aria-hidden="true">#</a> Cadena en tiempo real (operaciones activas)</h3>
+<ul>
+<li>Los eventos que emite la aplicación de la organización (se tocó una puerta, se hizo una llamada, se recibió una donación, un voluntario registró su entrada) fluyen a un flujo de eventos.</li>
+<li>Un agregador en tiempo real mantiene contadores en marcha y empuja las actualizaciones a los paneles por WebSocket.</li>
+<li>Se usa durante: días de trabajo de campo, jornadas de llamadas, día de elecciones, campañas de recaudación en vivo.</li>
+</ul>
+<h3 id="cadena-por-lotes-análisis-histórico" tabindex="-1"><a class="heading-anchor" href="#cadena-por-lotes-análisis-histórico" aria-hidden="true">#</a> Cadena por lotes (análisis histórico)</h3>
+<ul>
+<li>Los eventos se guardan de forma duradera en un almacén de eventos de solo adición.</li>
+<li>Los procesadores por lotes corren según un calendario (cada hora para los datos recientes, a diario para los más viejos) y calculan agregados, tendencias y reportes.</li>
+<li>Se usa para: tendencias de recaudación, crecimiento de voluntarios, análisis de participación, reportes de cumplimiento.</li>
+</ul>
+<h3 id="infraestructura-de-sondeo-de-los-paneles" tabindex="-1"><a class="heading-anchor" href="#infraestructura-de-sondeo-de-los-paneles" aria-hidden="true">#</a> Infraestructura de sondeo de los paneles</h3>
+<p>(Decidido en <a href="../../decisions/016-cross-cutting-resolutions.html">ADR-016 §5, §88</a>)</p>
+<p>Todos los paneles usan sondeo periódico (no WebSockets) a intervalos escalonados. El sondeo se degrada de forma controlada en conexiones intermitentes; los WebSockets añaden complejidad de gestión de conexiones sin un beneficio proporcional a estas frecuencias de actualización.</p>
+<p><strong>Intervalos de actualización escalonados:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Tipo de panel</th>
+<th>Intervalo</th>
+<th>Justificación</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Operativo (centro de mando de GOTV, operaciones de campo)</td>
+<td>30 segundos</td>
+<td>Crítico en tiempo durante las operaciones activas</td>
+</tr>
+<tr>
+<td>De campaña (recaudación de fondos, comunicaciones, eventos)</td>
+<td>5 minutos</td>
+<td>Cambia a lo largo del día, no segundo a segundo</td>
+</tr>
+<tr>
+<td>Administrativo (cumplimiento, calidad de datos, ajustes)</td>
+<td>15 minutos</td>
+<td>Datos que se mueven despacio</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Máquina de estados de actualidad</strong> — obligatoria en todos los paneles:</p>
+<table>
+<thead>
+<tr>
+<th>Estado</th>
+<th>Indicador</th>
+<th>Disparador</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Actual</strong></td>
+<td>Marca de tiempo discreta: &quot;Actualizado hace 30 s&quot;</td>
+<td>Antigüedad del dato &lt; intervalo de actualización</td>
+</tr>
+<tr>
+<td><strong>Actualizando</strong></td>
+<td>Indicador de carga en lugar de la marca de tiempo</td>
+<td>Sondeo en curso</td>
+</tr>
+<tr>
+<td><strong>Desactualizado</strong></td>
+<td>Aviso ámbar: &quot;Los datos tienen más de 5 minutos&quot;</td>
+<td>Antigüedad del dato &gt; 2× el intervalo de actualización</td>
+</tr>
+<tr>
+<td><strong>Desconectado</strong></td>
+<td>Banner rojo o ámbar permanente: &quot;Sin conexión — mostrando datos en caché de [marca de tiempo]&quot;</td>
+<td>Red inalcanzable; no se puede descartar</td>
+</tr>
+</tbody>
+</table>
+<p>En los <strong>paneles operativos</strong> (centro de mando de GOTV, operaciones de campo), el indicador de actualidad es información ambiental de alta visibilidad — el color, la posición y el tamaño garantizan que se note sin prestarle atención activa. Quien toma decisiones urgentes el día de elecciones no puede confundir jamás datos desactualizados con datos actuales.</p>
+<p><strong>El botón de actualización manual es obligatorio</strong> en todos los paneles. La actualización automática se pausa cuando la pestaña del navegador no está visible (ahorra ancho de banda). Actualización inmediata al reconectar tras un período sin conexión.</p>
+<p><strong>DECIDIDO:</strong> NATS JetStream.</p>
+<p>Transmisión de eventos liviana y duradera. Más simple de operar que Kafka y suficiente para el volumen de eventos por organización (miles de eventos al día, no millones por segundo). Un solo binario, fácil de desplegar por organización o como servicio compartido dentro del clúster de un país. Admite suscripciones duraderas para la cadena de analítica en tiempo real y reproducción de eventos para la arquitectura de event sourcing.</p>
+<hr>
+<h2 id="arquitectura-del-día-de-elecciones" tabindex="-1"><a class="heading-anchor" href="#arquitectura-del-día-de-elecciones" aria-hidden="true">#</a> Arquitectura del día de elecciones</h2>
+<p>(Decidido en <a href="../../decisions/016-cross-cutting-resolutions.html">ADR-016 §47–50</a>)</p>
+<p>El día de elecciones es el momento operativo de mayor riesgo. La arquitectura sostiene tres capacidades distintas: la ingesta de datos electorales, la verificación de la entrada de resultados y el transporte compartido en la alianza.</p>
+<h3 id="esquema-e-ingesta-de-los-datos-electorales" tabindex="-1"><a class="heading-anchor" href="#esquema-e-ingesta-de-los-datos-electorales" aria-hidden="true">#</a> Esquema e ingesta de los datos electorales</h3>
+<p>La plataforma define un <strong>esquema estándar de datos electorales</strong> para centros de votación, listas de candidaturas, límites de distrito y resultados. Dos vías de ingesta alimentan ese esquema:</p>
+<table>
+<thead>
+<tr>
+<th>Vía</th>
+<th>Cuándo</th>
+<th>Cómo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Conector de API</strong></td>
+<td>Jurisdicciones con fuentes legibles por máquina</td>
+<td>Configuración por organización que apunta a la API de la autoridad electoral. Un adaptador por jurisdicción.</td>
+</tr>
+<tr>
+<td><strong>Importación de CSV u hoja de cálculo</strong></td>
+<td>En todos los demás casos (la mayoría de los contextos del Sur Global)</td>
+<td>Carga manual con mapeo de columnas, validación y vista previa antes de confirmar.</td>
+</tr>
+</tbody>
+</table>
+<p>En la v1 no se promete la integración con ninguna autoridad electoral concreta. El valor está en el esquema estándar y en el flujo de importación manual. Los conectores de API se añaden por jurisdicción según la demanda.</p>
+<h3 id="cadena-de-verificación-de-la-entrada-de-resultados" tabindex="-1"><a class="heading-anchor" href="#cadena-de-verificación-de-la-entrada-de-resultados" aria-hidden="true">#</a> Cadena de verificación de la entrada de resultados</h3>
+<p>Los observadores electorales envían los resultados desde la app móvil. Cinco capas de verificación se acumulan sin frenar la velocidad:</p>
+<table>
+<thead>
+<tr>
+<th>Capa</th>
+<th>Mecanismo</th>
+<th>¿Bloquea?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Identidad</strong></td>
+<td>Solo pueden enviar los observadores electorales registrados (vía GOTV-012)</td>
+<td>Sí — el envío exige una identidad de observador autenticada</td>
+</tr>
+<tr>
+<td><strong>Geolocalización</strong></td>
+<td>Sello de GPS opcional (el observador cerca del centro de votación)</td>
+<td>No — el GPS puede no estar disponible bajo techo</td>
+</tr>
+<tr>
+<td><strong>Evidencia fotográfica</strong></td>
+<td>Foto del acta o de la pizarra oficial de resultados</td>
+<td>No — se adjunta para la auditoría, no bloquea</td>
+</tr>
+<tr>
+<td><strong>Contraste cruzado</strong></td>
+<td>Comparación lado a lado cuando varios observadores envían desde el mismo centro</td>
+<td>No — marca las discrepancias para que las revise el centro de mando</td>
+</tr>
+<tr>
+<td><strong>Registro de auditoría</strong></td>
+<td>Todos los envíos son inmutables, con marca de tiempo, ID de quien envía e información del dispositivo</td>
+<td>Siempre activo — no se puede borrar, por la política de conservación</td>
+</tr>
+</tbody>
+</table>
+<p>Ninguna capa bloquea por sí sola (salvo la identidad). Las capas se acumulan: una entrada fraudulenta necesitaría un observador registrado, en el lugar correcto, con una foto convincente y que cuadre con los envíos de los demás observadores. El panel del centro de mando resalta las discrepancias para revisión humana.</p>
+<h3 id="transporte-compartido-en-la-alianza" tabindex="-1"><a class="heading-anchor" href="#transporte-compartido-en-la-alianza" aria-hidden="true">#</a> Transporte compartido en la alianza</h3>
+<p>(Decidido en <a href="../../decisions/016-cross-cutting-resolutions.html">ADR-016 §48</a>)</p>
+<p>Las organizaciones miembro de una alianza pueden aportar conductores a una bolsa compartida para el transporte a las urnas el día de elecciones. Es opcional por alianza y lo activa quien lidera la alianza en los ajustes de GOTV.</p>
+<p><strong>Prioridad de asignación:</strong> Primero los conductores de la propia organización, después la bolsa de la alianza. Cada organización ve en sus reportes solo los traslados que cubrieron sus propios conductores. El panel de la alianza muestra métricas agregadas de traslados.</p>
+<p><strong>Límite de los datos:</strong> Los datos de la solicitud de transporte (nombre del votante, dirección de recogida) se comparten solo con la organización del conductor asignado y solo mientras dura el traslado. Del transporte no queda ningún intercambio de datos permanente entre organizaciones.</p>
+<hr>
+<h2 id="arquitectura-de-localización" tabindex="-1"><a class="heading-anchor" href="#arquitectura-de-localización" aria-hidden="true">#</a> Arquitectura de localización</h2>
+<h3 id="marco-de-internacionalización-i18n" tabindex="-1"><a class="heading-anchor" href="#marco-de-internacionalización-i18n" aria-hidden="true">#</a> Marco de internacionalización (i18n)</h3>
+<ul>
+<li><strong>El soporte de RTL está diseñado desde el primer día.</strong> Toda la maquetación tiene que usar propiedades lógicas (start/end), no físicas (left/right). Nada de RTL como añadido posterior.</li>
+<li><strong>Externalización de cadenas:</strong> Todas las cadenas de la interfaz en archivos de idioma, nunca escritas a mano en el código. ICU MessageFormat para plurales, género y formatos complejos.</li>
+<li><strong>Negociación de idioma:</strong> Preferencia de idioma de la identidad de plataforma → idioma por defecto de la organización → idioma del navegador → inglés como último recurso.</li>
+</ul>
+<h3 id="modelo-de-datos-de-la-localización-de-contenido" tabindex="-1"><a class="heading-anchor" href="#modelo-de-datos-de-la-localización-de-contenido" aria-hidden="true">#</a> Modelo de datos de la localización de contenido</h3>
+<p>(Aplazado desde <a href="http://geography.md" target="_blank" rel="noopener noreferrer">geography.md</a> — se resuelve aquí)</p>
+<p>Los objetos de contenido (plantillas de correo, guiones de trabajo de campo, texto de los formularios de donación, descripciones de eventos, texto de las páginas de acción) guardan varias variantes de idioma:</p>
+<pre><code>ContentItem
+├── id (UUID)
+├── content_type (email_template | script | form_text | event_description | action_page)
+├── variants[]
+│   ├── language (etiqueta BCP 47: es, pt-BR, th, hi, ar, fr, en)
+│   ├── body (el contenido)
+│   ├── status (draft | ai_generated | human_reviewed | published)
+│   ├── reviewed_by → Person (nullable)
+│   └── reviewed_at
+├── source_language (el idioma en que se redactó originalmente)
+├── created_by → Person
+└── created_at
+</code></pre>
+<p><strong>Integración de la traducción con IA:</strong></p>
+<ul>
+<li>Cuando alguien del equipo crea contenido en un idioma, la plataforma puede generar traducciones a los demás idiomas configurados de la organización.</li>
+<li>Las traducciones generadas por IA se marcan como <code>ai_generated</code> y tienen que revisarse antes de publicarse (decidido en <a href="http://geography.md" target="_blank" rel="noopener noreferrer">geography.md</a>).</li>
+<li>Memoria de traducción: las traducciones revisadas se guardan y se usan para mejorar la coherencia de las futuras traducciones con IA.</li>
+</ul>
+<p><strong>Referencia anticipada a la v2:</strong> La <a href="../../decisions/016-cross-cutting-resolutions.html">Biblioteca compartida de contenidos</a> (pilar de la v2) ofrecerá gestión centralizada de activos con etiquetado, búsqueda, seguimiento de uso, gestión de derechos y reutilización entre funcionalidades. La v1 usa carga directa de archivos por campaña o publicación, con una sección de &quot;cargas recientes&quot; para una reutilización ligera.</p>
+<hr>
+<h2 id="integración-de-ia" tabindex="-1"><a class="heading-anchor" href="#integración-de-ia" aria-hidden="true">#</a> Integración de IA</h2>
+<p><strong>DECIDIDO:</strong> BYOM (Bring Your Own Model — la organización configura su propio proveedor de IA) — independiente del proveedor, configurado por la organización. Deja sin efecto el modelo híbrido anterior (llave gestionada frente a BYOK), según la <a href="../../decisions/016-cross-cutting-resolutions.html">ADR-016 §38</a>. Deja sin efecto la decisión de modelo de IA de la <a href="../../decisions/013-analytics-ai.html">ADR-013</a>.</p>
+<h3 id="arquitectura-byom" tabindex="-1"><a class="heading-anchor" href="#arquitectura-byom" aria-hidden="true">#</a> Arquitectura BYOM</h3>
+<pre><code>┌─────────────────────────────────────────────────────────────────┐
+│                    Capa de abstracción de IA                    │
+│                                                                 │
+│  Interfaz común: generate(prompt, context)                      │
+│  Capacidades: generación de texto, traducción,                  │
+│                resumen, preguntas y respuestas ancladas         │
+│                en la base de conocimiento                       │
+│                                                                 │
+│  ┌────────────────┐  ┌────────────────────┐  ┌───────────────┐  │
+│  │  Proveedor     │  │  Predeterminado    │  │  Registro de  │  │
+│  │  propio de la  │  │  de la plataforma  │  │  proveedores  │  │
+│  │  organización  │  │  (reserva)         │  │               │  │
+│  │  (BYOM)        │  │                    │  │               │  │
+│  └───────┬────────┘  └─────────┬──────────┘  └───────────────┘  │
+└──────────┼─────────────────────┼────────────────────────────────┘
+           │                     │
+     API de IA de la       Modelo gestionado
+     organización          por la plataforma
+</code></pre>
+<p><strong>Configuración de BYOM:</strong> El OA configura su proveedor de IA en los ajustes — endpoint de la API, credenciales e identificador del modelo. Las funcionalidades de IA de la plataforma (generación de mensajes, traducción, concierge) pasan por el proveedor que configuró la organización. Sigue el mismo patrón de autosoberanía que BYOK para el cifrado.</p>
+<p><strong>Predeterminado de la plataforma:</strong> Las organizaciones sin infraestructura de IA propia reciben un modelo gestionado por la plataforma. Todas las funcionalidades de IA funcionan de entrada para las organizaciones más chicas.</p>
+<p><strong>Interfaz independiente del proveedor:</strong> La plataforma define lo que necesita (generación de texto con soporte de idiomas, salida estructurada, anclaje en fuentes), no qué modelo concreto. Una capa de abstracción absorbe las diferencias de API entre proveedores — el mismo patrón de adaptadores que se usa en pagos y comunicaciones.</p>
+<p><strong>Interacción entre BYOK y BYOM:</strong> Cuando una organización con BYOK configura un proveedor BYOM externo, los datos que se envían al proveedor de IA salen del perímetro de cifrado de la organización. Es una decisión informada de la organización — la plataforma muestra una advertencia clara durante la configuración de BYOM: <em>&quot;Tu proveedor de IA recibirá los datos del prompt sin cifrar. Estos datos salen de tu límite de cifrado.&quot;</em> El OA tiene que aceptar ese compromiso. Las organizaciones en el nivel de seguridad Máximo que necesiten que los datos no salgan de su perímetro tienen que autoalojar su modelo de IA.</p>
+<h3 id="generación-de-mensajes-de-activismo" tabindex="-1"><a class="heading-anchor" href="#generación-de-mensajes-de-activismo" aria-hidden="true">#</a> Generación de mensajes de activismo</h3>
+<p>(Decidido en <a href="http://workflows.md" target="_blank" rel="noopener noreferrer">workflows.md</a> — la IA genera un mensaje único por simpatizante, aprobado antes de enviarse)</p>
+<pre><code>Puntos de mensaje de la campaña + contexto del simpatizante
+              │
+              ▼
+┌────────────────────────────┐
+│  Servicio de               │
+│  generación de             │
+│  mensajes                  │
+│                            │
+│  - Puntos de mensaje       │
+│  - Datos del simpatizante  │
+│  - Datos del destinatario  │
+│  - Tono y estilo           │
+│  - Salvaguardas            │
+└─────────────┬──────────────┘
+              │
+              ▼
+  Mensaje generado
+  (se le presenta al simpatizante para revisar, editar y aprobar)
+</code></pre>
+<p><strong>Salvaguardas:</strong></p>
+<ul>
+<li>El mensaje tiene que ceñirse a los puntos de mensaje de la campaña.</li>
+<li>Nada de hechos, estadísticas o afirmaciones inventadas que no estén en el material de origen.</li>
+<li>Idioma y tono apropiados para el destinatario (cargo electo, ente regulador).</li>
+<li>La información personal identificable se usa solo tal como la aporta el simpatizante.</li>
+</ul>
+<p><strong>Formatos de salida:</strong> Los mensajes se pueden enviar por correo o descargar como PDF con formato, para imprimirlos y enviarlos por correo postal (<a href="../../decisions/016-cross-cutting-resolutions.html">ADR-016 §39</a>). El PDF incluye la dirección postal del destinatario, el cuerpo de la carta con formato y el nombre del simpatizante. El PDF se genera con el mismo contenido — solo cambia el formato de salida — así que es una cadena liviana de renderizado en el servidor, no una vía de generación aparte.</p>
+<h3 id="servicio-de-traducción" tabindex="-1"><a class="heading-anchor" href="#servicio-de-traducción" aria-hidden="true">#</a> Servicio de traducción</h3>
+<pre><code>Contenido de origen → Servicio de traducción → Borrador generado por IA
+                                                          │
+                                               Cola de revisión humana
+                                                          │
+                                               Traducción publicada
+</code></pre>
+<p>La traducción usa la misma capa de abstracción BYOM. Las organizaciones con capacidades de IA multilingüe en su propio proveedor ganan continuidad de tono y terminología entre GreenGrass y sus otras herramientas.</p>
+<h3 id="concierge-de-ia" tabindex="-1"><a class="heading-anchor" href="#concierge-de-ia" aria-hidden="true">#</a> Concierge de IA</h3>
+<p>El concierge de ayuda dentro de la aplicación está anclado estrictamente en la base de conocimiento de la organización y en la documentación de la plataforma GreenGrass. Sin razonamiento más amplio ni conocimiento externo — una respuesta inventada sobre ley electoral o cumplimiento tiene consecuencias reales. Si una pregunta no se puede responder desde fuentes ancladas, el concierge dice &quot;No tengo información sobre eso&quot; y ofrece poner a la persona en contacto con soporte.</p>
+<p>Detección de idioma: responde en el idioma en que se le escribe. Si la confianza de la detección es baja, recurre al idioma configurado en el perfil.</p>
+<p><strong>Referencia anticipada a la v2:</strong> La infraestructura BYOM permite que las organizaciones usen sus propios modelos ajustados para el concierge — modelos que entienden su terminología específica, su contexto organizativo y sus patrones de operación. Es aditivo; la restricción de anclaje (solo la base de conocimiento) se mantiene sea cual sea el modelo de fondo.</p>
+<hr>
+<h2 id="arquitectura-de-integraciones" tabindex="-1"><a class="heading-anchor" href="#arquitectura-de-integraciones" aria-hidden="true">#</a> Arquitectura de integraciones</h2>
+<h3 id="integraciones-con-sistemas-externos" tabindex="-1"><a class="heading-anchor" href="#integraciones-con-sistemas-externos" aria-hidden="true">#</a> Integraciones con sistemas externos</h3>
+<pre><code>┌──────────────┐     ┌──────────────────┐     ┌───────────────────┐
+│ App de la    │◄───►│ Centro de        │◄───►│ Sistemas          │
+│ organización │     │ integraciones    │     │ externos          │
+│              │     │ ┌──────────────┐ │     │                   │
+│              │     │ │ Adaptador:   │ │     │ - Comisión        │
+│              │     │ │ comisión     │ │     │   electoral       │
+│              │     │ │ electoral    │ │     │ - Pasarela de SMS │
+│              │     │ ├──────────────┤ │     │ - Procesador      │
+│              │     │ │ Adaptador:   │ │     │   de pagos        │
+│              │     │ │ mapas y SIG  │ │     │ - Datos de mapas  │
+│              │     │ ├──────────────┤ │     │ - Plataforma      │
+│              │     │ │ Adaptador:   │ │     │   de video        │
+│              │     │ │ plataforma   │ │     │ - API de redes    │
+│              │     │ │ de video     │ │     │   sociales        │
+│              │     │ └──────────────┘ │     └───────────────────┘
+│              │     └──────────────────┘
+└──────────────┘
+</code></pre>
+<p><strong>Patrón del centro de integraciones:</strong></p>
+<ul>
+<li>Todas las integraciones externas pasan por una capa común de adaptadores.</li>
+<li>Cada adaptador maneja la autenticación, la limitación de frecuencia, el manejo de errores y el mapeo de datos de un sistema externo.</li>
+<li>Los adaptadores son por organización (cada organización configura sus propias llaves de API, cuentas, etc.).</li>
+<li>Los datos que pasan por las integraciones quedan en el registro de auditoría.</li>
+</ul>
+<p><strong>Monitoreo del estado de las integraciones</strong> (decidido en <a href="../../decisions/016-cross-cutting-resolutions.html">ADR-016 §56</a>):</p>
+<p>El centro de integraciones ejecuta verificaciones de estado periódicas por integración (ping a la API, validez del token, marca de tiempo de la última sincronización correcta). El estado se muestra en la pantalla de ajustes de integraciones: Conectada (verde), Degradada (ámbar), Fallida (roja).</p>
+<p>Escalamiento de las alertas:</p>
+<ol>
+<li>Notificación en la aplicación al OA tras el primer fallo</li>
+<li>Alerta por correo tras 3 fallos consecutivos</li>
+<li>Banner de advertencia en el panel si una integración crítica (procesador de pagos, proveedor de SMS) está caída</li>
+</ol>
+<p>La pantalla de detalle de la integración muestra una línea de tiempo de estado (últimos 30 días) para que el OA distinga los problemas intermitentes de los fallos sostenidos.</p>
+<h3 id="api-pública" tabindex="-1"><a class="heading-anchor" href="#api-pública" aria-hidden="true">#</a> API pública</h3>
+<p><strong>DECIDIDO:</strong> REST + webhooks. API pública desde el primer día.</p>
+<ul>
+<li><strong>API REST:</strong> Documentada, versionada, autenticada con OAuth2. CRUD completo sobre los recursos de la organización (contactos, donaciones, eventos, campañas, etc.), acotado por el rol y los permisos de quien llama.</li>
+<li><strong>Webhooks:</strong> Notificaciones de eventos en tiempo real — donación recibida, alta de un voluntario, interacción de trabajo de campo registrada, confirmación de asistencia a un evento, etc. Las organizaciones configuran sus endpoints de webhook y eligen a qué eventos suscribirse.</li>
+<li><strong>Límite de solicitudes:</strong> Por organización y por llave de API. Cada plan de precios define los límites por defecto. Los OA pueden ajustar los límites de cada llave de API dentro del techo de su plan (<a href="../../decisions/016-cross-cutting-resolutions.html">ADR-016 §55</a>). Encabezados estándar en todas las respuestas: <code>X-RateLimit-Limit</code>, <code>X-RateLimit-Remaining</code>, <code>X-RateLimit-Reset</code>.</li>
+<li><strong>No es un añadido posterior:</strong> La API pública es la misma API que consume el frontend de GreenGrass. No hay puertas traseras privadas fuera del alcance de la API pública. Una organización puede construir sobre GreenGrass cualquier cosa que GreenGrass pueda construir.</li>
+</ul>
+<p>Es un compromiso central con el modelo de soberanía — quien puede construir sobre la plataforma no queda atrapado en ella.</p>
+<hr>
+<h2 id="stack-tecnológico" tabindex="-1"><a class="heading-anchor" href="#stack-tecnológico" aria-hidden="true">#</a> Stack tecnológico</h2>
+<!-- DECISION NEEDED: Decisiones de tecnología del núcleo.
+
+Son las decisiones de mayor impacto en la velocidad de desarrollo, la contratación y el mantenimiento a largo plazo.
+
+### Backend
+Opciones:
+- Node.js (TypeScript) — ecosistema grande, la E/S asíncrona encaja con las aplicaciones web, TypeScript aporta seguridad de tipos. La mayoría de quienes se contratan saben JS.
+- Go — concurrencia excelente, compila a un solo binario (bueno para el autoalojamiento), rápido. Ecosistema más chico para aplicaciones web.
+- Rust — máximo rendimiento y seguridad, curva de aprendizaje empinada, desarrollo más lento.
+- Python (Django/FastAPI) — desarrollo rápido, ecosistema enorme, bueno para datos e integración con IA. Límites de rendimiento a escala.
+- Elixir (Phoenix) — modelo de concurrencia excelente, funcionalidades en tiempo real de fábrica (LiveView), bolsa de talento más chica.
+
+### Frontend
+Opciones:
+- React / Next.js — ecosistema dominante, comunidad enorme, soporte de SSR. Preocupa el tamaño del paquete con prioridad móvil.
+- SvelteKit — paquetes más chicos, mejor rendimiento en dispositivos de gama baja, menos ecosistema.
+- Progressive Web App (PWA) — basada en web, instalable, funciona sin conexión. Evita el control de acceso de las tiendas de apps.
+- React Native / Flutter — apps móviles nativas. Mejor rendimiento, pero dos bases de código (o el sobrecosto de un framework multiplataforma).
+
+### Database
+Opciones:
+- PostgreSQL — rica en funcionalidades, excelente para datos estructurados, soporte de JSON, PostGIS para datos geográficos. Estándar de la industria.
+- SQLite (base de datos por organización) + PostgreSQL (plataforma) — SQLite por organización es liviana y basada en archivos, natural para el aislamiento de organización única. Pero con concurrencia limitada.
+- CockroachDB — distribuida y compatible con PostgreSQL, con replicación integrada. Más compleja, puede ser excesiva por organización.
+
+### Mobile / Offline
+Opciones:
+- PWA con service workers + IndexedDB — funcionamiento sin conexión basado en web, sin tienda de apps. Acceso limitado a las API nativas.
+- PWA con SQLite (vía WASM o Capacitor) — basada en web con una base de datos sin conexión robusta.
+- App nativa (React Native / Flutter) con SQLite — la mejor experiencia sin conexión, exige distribución por tienda de apps.
+- Capacitor (envoltorio de web a nativo) — se escribe código web y se empaqueta como app nativa. Acceso a las API nativas, una sola base de código.
+
+Estas decisiones están profundamente entrelazadas. La sección de recomendación de abajo propone un stack coherente. -->
+<h3 id="stack-decidido" tabindex="-1"><a class="heading-anchor" href="#stack-decidido" aria-hidden="true">#</a> Stack decidido</h3>
+<table>
+<thead>
+<tr>
+<th>Capa</th>
+<th>Tecnología</th>
+<th>Justificación</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Backend</td>
+<td>TypeScript (Node.js) con un framework por definir</td>
+<td>Bolsa de talento grande, mismo lenguaje que el frontend, tipado fuerte, buena E/S asíncrona. Adecuado para una carga de trabajo cargada de integraciones.</td>
+</tr>
+<tr>
+<td>Frontend</td>
+<td>SvelteKit</td>
+<td>Paquetes más chicos, algo crítico en dispositivos de gama baja y con bajo ancho de banda. SSR para la mejora progresiva. Menos ecosistema que React, pero mejor perfil de rendimiento para el contexto objetivo.</td>
+</tr>
+<tr>
+<td>Móvil</td>
+<td>Capacitor (SvelteKit → envoltorio nativo)</td>
+<td>Una sola base de código para el lanzamiento. Web primero, con acceso a las API nativas cuando hace falta (cámara para el registro de entrada por QR, biometría para los passkeys, almacenamiento sin conexión).</td>
+</tr>
+<tr>
+<td>Base de datos</td>
+<td>PostgreSQL (por organización)</td>
+<td>Rica en funcionalidades, PostGIS para datos geográficos, excelente soporte de JSON, probada a escala. Una instancia por organización.</td>
+</tr>
+<tr>
+<td>Base de datos sin conexión</td>
+<td>SQLite (SQLCipher) vía Capacitor</td>
+<td>Almacenamiento cifrado sin conexión en el dispositivo. Liviana, probada, sin dependencia del servidor.</td>
+</tr>
+<tr>
+<td>Caché</td>
+<td>Redis</td>
+<td>Gestión de sesiones, limitación de frecuencia, contadores en tiempo real. Una instancia o un espacio de nombres por organización.</td>
+</tr>
+<tr>
+<td>Cola de trabajos</td>
+<td>BullMQ (sobre Redis) o basada en PostgreSQL (Graphile Worker)</td>
+<td>Procesamiento de tareas asíncronas: envíos de correo, despacho de SMS, importaciones de datos, sincronización.</td>
+</tr>
+<tr>
+<td>Flujo de eventos</td>
+<td>NATS JetStream</td>
+<td>Transmisión de eventos liviana y duradera para la analítica en tiempo real. Más simple de operar por organización que Kafka.</td>
+</tr>
+<tr>
+<td>Búsqueda</td>
+<td>Meilisearch o texto completo de PostgreSQL</td>
+<td>Meilisearch para búsqueda rápida y tolerante a erratas. El FTS de PostgreSQL como alternativa más simple que evita un servicio extra.</td>
+</tr>
+<tr>
+<td>Almacenamiento de objetos</td>
+<td>Compatible con S3 (MinIO para el autoalojamiento)</td>
+<td>Cargas de archivos, medios, exportaciones, copias de seguridad. MinIO da API de S3 sobre cualquier infraestructura.</td>
+</tr>
+<tr>
+<td>Gestión de secretos</td>
+<td>HashiCorp Vault</td>
+<td>Llaves de cifrado por organización, credenciales de API, rotación de secretos.</td>
+</tr>
+<tr>
+<td>Orquestación de contenedores</td>
+<td>Kubernetes (independiente del proveedor de nube)</td>
+<td>Despliegue de contenedores por organización en todos los países. K8s gestionado donde lo haya, autogestionado donde haga falta. GKE no.</td>
+</tr>
+<tr>
+<td>IaC</td>
+<td>Terraform / OpenTofu</td>
+<td>Infraestructura como código para aprovisionar la infraestructura de las organizaciones en distintos proveedores y países.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="hoja-de-ruta-de-ios-nativo" tabindex="-1"><a class="heading-anchor" href="#hoja-de-ruta-de-ios-nativo" aria-hidden="true">#</a> Hoja de ruta de iOS nativo</h3>
+<p>La app de SvelteKit envuelta en Capacitor es la estrategia de lanzamiento, pero la arquitectura tiene que permitir una futura app nativa de iOS en Swift sin exigir cambios en el backend.</p>
+<p><strong>Restricciones de diseño que preservan esa opción:</strong></p>
+<ul>
+<li><strong>Arquitectura con la API primero:</strong> El backend expone toda su funcionalidad por la API REST pública + webhooks. El frontend de SvelteKit y la app de Capacitor son consumidores de la API, no clientes privilegiados. Una futura app en Swift es un consumidor más.</li>
+<li><strong>Nada de lógica de negocio en el frontend:</strong> Toda la autorización, la validación y el procesamiento de datos ocurren en el servidor. El frontend es una capa de presentación. Una app nativa puede replicar la experiencia sin reimplementar reglas de negocio.</li>
+<li><strong>El protocolo de sincronización sin conexión es independiente del cliente:</strong> El protocolo de sincronización por event sourcing (empuje y traída de eventos, detección de conflictos) está definido a nivel de API, no acoplado a una implementación de cliente concreta. Una app en Swift implementa el mismo protocolo contra los mismos endpoints.</li>
+<li><strong>SQLCipher está disponible de forma nativa en iOS:</strong> La base de datos sin conexión elegida (SQLite + SQLCipher) tiene soporte de pleno derecho en Swift, así que la arquitectura sin conexión se traslada directamente a una app nativa.</li>
+<li><strong>WebAuthn y los passkeys son nativos de la plataforma en iOS:</strong> El flujo de autenticación con passkey funciona de forma nativa en los dispositivos de Apple — una app en Swift no necesita el puente de Capacitor.</li>
+</ul>
+<hr>
+<h2 id="arquitectura-de-despliegue" tabindex="-1"><a class="heading-anchor" href="#arquitectura-de-despliegue" aria-hidden="true">#</a> Arquitectura de despliegue</h2>
+<h3 id="despliegue-por-país" tabindex="-1"><a class="heading-anchor" href="#despliegue-por-país" aria-hidden="true">#</a> Despliegue por país</h3>
+<pre><code>País A (p. ej., EE. UU./Puerto Rico)      País B (p. ej., Brasil)
+┌───────────────────────────────────┐     ┌───────────────────────────────────┐
+│  Clúster de K8s                   │     │  Clúster de K8s                   │
+│  ┌────────┐ ┌────────┐            │     │  ┌────────┐ ┌────────┐            │
+│  │ Org. 1 │ │ Org. 2 │            │     │  │ Org. 5 │ │ Org. 6 │            │
+│  └────────┘ └────────┘            │     │  └────────┘ └────────┘            │
+│  ┌────────┐                       │     │  ┌────────┐                       │
+│  │ Org. 3 │                       │     │  │ Org. 7 │                       │
+│  └────────┘                       │     │  └────────┘                       │
+│                                   │     │                                   │
+│  Servicios de plataforma (locales)│     │  Servicios de plataforma (locales)│
+│  - Réplica de identidad           │     │  - Réplica de identidad           │
+│  - Agente de aprovisionamiento    │     │  - Agente de aprovisionamiento    │
+│  - Monitoreo                      │     │  - Monitoreo                      │
+└───────────────────────────────────┘     └───────────────────────────────────┘
+                  │                                         │
+                  └────────────────────┬────────────────────┘
+                                       │
+                        ┌─────────────────────────────┐
+                        │  Plataforma central         │
+                        │  (jurisdicción de           │
+                        │   constitución)             │
+                        │                             │
+                        │  - Identidad principal      │
+                        │  - Capa de federación       │
+                        │  - Admin. de la plataforma  │
+                        │  - Facturación              │
+                        │  - Orquestador de           │
+                        │    aprovisionamiento        │
+                        └─────────────────────────────┘
+</code></pre>
+<h3 id="despliegue-autoalojado" tabindex="-1"><a class="heading-anchor" href="#despliegue-autoalojado" aria-hidden="true">#</a> Despliegue autoalojado</h3>
+<p>Para las organizaciones autoalojadas, GreenGrass entrega:</p>
+<ul>
+<li><strong>Paquete de la aplicación:</strong> Imágenes de contenedor, charts de Helm, plantillas de configuración.</li>
+<li><strong>Documentación de instalación:</strong> Guía de despliegue paso a paso.</li>
+<li><strong>Mecanismo de actualización:</strong> Versiones publicadas, scripts de migración, proceso de actualización con un solo comando.</li>
+<li><strong>Endpoint de verificación de estado:</strong> Las instalaciones autoalojadas pueden, si quieren, reportarse para recibir avisos de actualización y monitoreo de estado (opcional, no obligatorio).</li>
+<li><strong>Sin telemetría por defecto.</strong> Las organizaciones autoalojadas no comparten nada con GreenGrass a menos que lo elijan.</li>
+</ul>
+<p><strong>DECIDIDO:</strong> Actualización automática con reversión y notificaciones prominentes.</p>
+<ul>
+<li><strong>Actualización automática por defecto:</strong> Las instalaciones autoalojadas buscan actualizaciones y las aplican solas durante una ventana de mantenimiento configurable. Reversión automática si falla — si las verificaciones de estado no pasan después de actualizar, el sistema vuelve a la versión anterior.</li>
+<li><strong>Notificaciones prominentes:</strong> Antes, durante y después de cada actualización, el Administrador de la organización recibe notificaciones claras y prominentes — qué se actualiza, cuándo, qué cambió y si la actualización funcionó o se revirtió. Nada de actualizaciones silenciosas.</li>
+<li><strong>Las actualizaciones de seguridad son inmediatas:</strong> Los parches críticos de seguridad se saltan la ventana de mantenimiento y se aplican lo antes posible, con notificación.</li>
+<li><strong>Opción de aplazar:</strong> El Administrador de la organización puede aplazar las actualizaciones que no sean de seguridad por un tiempo limitado (por ejemplo, hasta 2 semanas) si el momento es malo (a mitad de una elección). Los parches de seguridad no se pueden aplazar.</li>
+<li><strong>Transparencia del changelog:</strong> Cada actualización incluye un registro de cambios legible. Que el código de la aplicación sea abierto significa que la organización puede inspeccionar cada cambio antes o después de aplicarlo.</li>
+</ul>
+<hr>
+<h2 id="preguntas-abiertas-todas-resueltas" tabindex="-1"><a class="heading-anchor" href="#preguntas-abiertas-todas-resueltas" aria-hidden="true">#</a> Preguntas abiertas — todas resueltas</h2>
+<ol>
+<li><s>Orquestación de contenedores</s> → Kubernetes, independiente del proveedor de nube, sin GKE</li>
+<li><s>Ubicación del servicio de identidad</s> → Principal centralizado + réplicas de lectura por país</li>
+<li><s>Datos geográficos</s> → Precargados + importación + aporte de la comunidad</li>
+<li><s>Cifrado buscable</s> → Índice ciego para los identificadores, descifrado en lectura para notas y puntajes</li>
+<li><s>Rotación de llaves</s> → Decide la organización, con orientación firme</li>
+<li><s>Protocolo de sincronización</s> → Event sourcing</li>
+<li><s>Transmisión de eventos</s> → NATS JetStream</li>
+<li><s>Infraestructura de correo</s> → Autoalojada, por país</li>
+<li><s>Modelos de IA</s> → <s>Híbrido (API externa con llave gestionada, autoalojado para BYOK)</s> → <strong>BYOM</strong> (Bring Your Own Model) — las organizaciones configuran su propio proveedor de IA; la plataforma ofrece un modelo por defecto como alternativa de reserva. Deja sin efecto el modelo híbrido, según la <a href="../../decisions/016-cross-cutting-resolutions.html">ADR-016 §38</a>.</li>
+<li><s>API pública</s> → REST + webhooks, desde el primer día</li>
+<li><s>Stack tecnológico</s> → Validado (TypeScript/SvelteKit/Capacitor/PostgreSQL), con la vía a iOS nativo preservada</li>
+<li><s>Actualizaciones de las instalaciones autoalojadas</s> → Actualización automática con reversión + notificaciones prominentes</li>
+<li><s>URL de las organizaciones</s> → Subdominio por defecto + soporte de dominio propio</li>
+<li><s>Conservación de datos</s> → Escalonada (operativa / cumplimiento / auditoría / reversión de importaciones), según la <a href="../../decisions/016-cross-cutting-resolutions.html">ADR-016 §4</a>. Deja sin efecto la política uniforme de 10 años de la ADR-004.</li>
+<li><s>89 preguntas abiertas de los wireframes</s> → Todas resueltas, según la <a href="../../decisions/016-cross-cutting-resolutions.html">ADR-016</a></li>
+</ol>
+
+    </article>
+  </main>
+  <div class="toc-rail"><nav class="toc" aria-label="En esta página"><div class="toc-label">En esta página</div><ul><li class="toc-2"><a href="#resumen"># Resumen</a></li><li class="toc-3"><a href="#impulsores-de-la-arquitectura"># Impulsores de la arquitectura</a></li><li class="toc-2"><a href="#topología-del-sistema"># Topología del sistema</a></li><li class="toc-3"><a href="#arquitectura-de-tres-capas"># Arquitectura de tres capas:</a></li><li class="toc-2"><a href="#arquitectura-de-la-organización"># Arquitectura de la organización</a></li><li class="toc-3"><a href="#qué-hay-dentro-de-una-organización"># Qué hay dentro de una organización</a></li><li class="toc-3"><a href="#niveles-de-aislamiento"># Niveles de aislamiento</a></li><li class="toc-3"><a href="#cadena-de-aprovisionamiento-de-organizaciones"># Cadena de aprovisionamiento de organizaciones</a></li><li class="toc-3"><a href="#infraestructura-de-páginas-públicas"># Infraestructura de páginas públicas</a></li><li class="toc-3"><a href="#exportación-de-la-configuración"># Exportación de la configuración</a></li><li class="toc-2"><a href="#modelo-de-datos"># Modelo de datos</a></li><li class="toc-3"><a href="#entidades-a-nivel-de-plataforma-compartidas-entre-organizaciones"># Entidades a nivel de plataforma (compartidas entre organizaciones)</a></li><li class="toc-3"><a href="#entidades-a-nivel-de-organización-base-de-datos-por-organización"># Entidades a nivel de organización (base de datos por organización)</a></li><li class="toc-3"><a href="#modelo-de-datos-geográficos"># Modelo de datos geográficos</a></li><li class="toc-3"><a href="#política-de-auditoría-de-exportaciones"># Política de auditoría de exportaciones</a></li><li class="toc-3"><a href="#motor-de-confianza-de-la-deduplicación"># Motor de confianza de la deduplicación</a></li><li class="toc-3"><a href="#actualización-de-los-segmentos-dinámicos"># Actualización de los segmentos dinámicos</a></li><li class="toc-2"><a href="#arquitectura-de-identidad-y-autenticación"># Arquitectura de identidad y autenticación</a></li><li class="toc-3"><a href="#servicio-de-identidad-de-la-plataforma"># Servicio de identidad de la plataforma</a></li><li class="toc-3"><a href="#flujo-de-autenticación"># Flujo de autenticación</a></li><li class="toc-3"><a href="#autenticación-en-modo-de-campo"># Autenticación en modo de campo</a></li><li class="toc-3"><a href="#aprobación-de-operaciones-destructivas"># Aprobación de operaciones destructivas</a></li><li class="toc-2"><a href="#arquitectura-de-cifrado"># Arquitectura de cifrado</a></li><li class="toc-3"><a href="#jerarquía-de-llaves"># Jerarquía de llaves</a></li><li class="toc-3"><a href="#cifrado-de-sobre"># Cifrado de sobre</a></li><li class="toc-3"><a href="#cifrado-a-nivel-de-aplicación"># Cifrado a nivel de aplicación</a></li><li class="toc-3"><a href="#cifrado-de-extremo-a-extremo-en-la-mensajería"># Cifrado de extremo a extremo en la mensajería</a></li><li class="toc-3"><a href="#experiencia-de-uso-de-la-gestión-de-llaves-byok"># Experiencia de uso de la gestión de llaves BYOK</a></li><li class="toc-2"><a href="#arquitectura-sin-conexión"># Arquitectura sin conexión</a></li><li class="toc-3"><a href="#motor-de-sincronización"># Motor de sincronización</a></li><li class="toc-3"><a href="#almacenamiento-en-el-dispositivo"># Almacenamiento en el dispositivo</a></li><li class="toc-3"><a href="#protocolo-de-sincronización"># Protocolo de sincronización</a></li><li class="toc-2"><a href="#arquitectura-de-conservación-de-datos"># Arquitectura de conservación de datos</a></li><li class="toc-3"><a href="#modelo-de-conservación-de-cuatro-niveles"># Modelo de conservación de cuatro niveles</a></li><li class="toc-3"><a href="#distinción-entre-metadatos-y-contenido"># Distinción entre metadatos y contenido</a></li><li class="toc-3"><a href="#cómo-se-concilia-con-la-adr-004"># Cómo se concilia con la ADR-004</a></li><li class="toc-3"><a href="#ciclo-de-vida-de-la-purga"># Ciclo de vida de la purga</a></li><li class="toc-2"><a href="#infraestructura-de-comunicaciones"># Infraestructura de comunicaciones</a></li><li class="toc-3"><a href="#correo-electrónico"># Correo electrónico</a></li><li class="toc-3"><a href="#sms-whatsapp"># SMS / WhatsApp</a></li><li class="toc-3"><a href="#redes-sociales"># Redes sociales</a></li><li class="toc-3"><a href="#motor-de-orquestación-entre-canales"># Motor de orquestación entre canales</a></li><li class="toc-2"><a href="#arquitectura-de-pagos"># Arquitectura de pagos</a></li><li class="toc-3"><a href="#patrón-de-adaptadores-de-pago"># Patrón de adaptadores de pago</a></li><li class="toc-3"><a href="#enrutamiento-de-las-entradas-a-eventos"># Enrutamiento de las entradas a eventos</a></li><li class="toc-2"><a href="#arquitectura-de-analítica"># Arquitectura de analítica</a></li><li class="toc-3"><a href="#cadena-en-tiempo-real-operaciones-activas"># Cadena en tiempo real (operaciones activas)</a></li><li class="toc-3"><a href="#cadena-por-lotes-análisis-histórico"># Cadena por lotes (análisis histórico)</a></li><li class="toc-3"><a href="#infraestructura-de-sondeo-de-los-paneles"># Infraestructura de sondeo de los paneles</a></li><li class="toc-2"><a href="#arquitectura-del-día-de-elecciones"># Arquitectura del día de elecciones</a></li><li class="toc-3"><a href="#esquema-e-ingesta-de-los-datos-electorales"># Esquema e ingesta de los datos electorales</a></li><li class="toc-3"><a href="#cadena-de-verificación-de-la-entrada-de-resultados"># Cadena de verificación de la entrada de resultados</a></li><li class="toc-3"><a href="#transporte-compartido-en-la-alianza"># Transporte compartido en la alianza</a></li><li class="toc-2"><a href="#arquitectura-de-localización"># Arquitectura de localización</a></li><li class="toc-3"><a href="#marco-de-internacionalización-i18n"># Marco de internacionalización (i18n)</a></li><li class="toc-3"><a href="#modelo-de-datos-de-la-localización-de-contenido"># Modelo de datos de la localización de contenido</a></li><li class="toc-2"><a href="#integración-de-ia"># Integración de IA</a></li><li class="toc-3"><a href="#arquitectura-byom"># Arquitectura BYOM</a></li><li class="toc-3"><a href="#generación-de-mensajes-de-activismo"># Generación de mensajes de activismo</a></li><li class="toc-3"><a href="#servicio-de-traducción"># Servicio de traducción</a></li><li class="toc-3"><a href="#concierge-de-ia"># Concierge de IA</a></li><li class="toc-2"><a href="#arquitectura-de-integraciones"># Arquitectura de integraciones</a></li><li class="toc-3"><a href="#integraciones-con-sistemas-externos"># Integraciones con sistemas externos</a></li><li class="toc-3"><a href="#api-pública"># API pública</a></li><li class="toc-2"><a href="#stack-tecnológico"># Stack tecnológico</a></li><li class="toc-3"><a href="#stack-decidido"># Stack decidido</a></li><li class="toc-3"><a href="#hoja-de-ruta-de-ios-nativo"># Hoja de ruta de iOS nativo</a></li><li class="toc-2"><a href="#arquitectura-de-despliegue"># Arquitectura de despliegue</a></li><li class="toc-3"><a href="#despliegue-por-país"># Despliegue por país</a></li><li class="toc-3"><a href="#despliegue-autoalojado"># Despliegue autoalojado</a></li><li class="toc-2"><a href="#preguntas-abiertas-todas-resueltas"># Preguntas abiertas — todas resueltas</a></li></ul></nav></div>
+</div>
+<script src="../../../assets/search.js" defer></script>
+<script src="../../../assets/app.js" defer></script>
+</body>
+</html>

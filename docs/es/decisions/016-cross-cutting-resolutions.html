@@ -1,0 +1,820 @@
+<!DOCTYPE html>
+<html lang="es" data-base="../../" data-no-results="No hay resultados para">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ADR-016: Resoluciones transversales · GreenGrass</title>
+<meta name="description" content="ADR-016: Resoluciones transversales — Documentación de especificación y diseño de GreenGrass.">
+<link rel="alternate" hreflang="en" href="../../decisions/016-cross-cutting-resolutions.html">
+<link rel="alternate" hreflang="es" href="./016-cross-cutting-resolutions.html">
+<link rel="alternate" hreflang="x-default" href="../../decisions/016-cross-cutting-resolutions.html">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%232563eb'/%3E%3Cstop offset='1' stop-color='%2316a34a'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='32' height='32' rx='7' fill='url(%23g)'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="../../assets/styles.css">
+</head>
+<body>
+<a class="skip-link" href="#content">Saltar al contenido</a>
+<header class="site-header">
+  <button type="button" class="menu-toggle" aria-label="Alternar navegación" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+  <a class="brand" href="../../es/index.html">
+    <span class="brand-mark" aria-hidden="true"></span>
+    <span class="brand-text"><strong>GreenGrass</strong><small>Especificación y diseño</small></span>
+  </a>
+  <div class="search">
+    <input type="search" id="search-input" placeholder="Buscar en la documentación…" autocomplete="off" aria-label="Buscar en la documentación">
+    <div id="search-results" class="search-results" hidden></div>
+  </div>
+  <nav class="lang-switch" aria-label="Idioma"><a class="lang-opt" href="../../decisions/016-cross-cutting-resolutions.html" hreflang="en" lang="en" title="View this page in English">EN</a><span class="lang-opt active" aria-current="true">ES</span></nav>
+  <button type="button" class="theme-toggle" aria-label="Alternar modo oscuro" title="Alternar modo oscuro">
+    <span class="theme-icon" aria-hidden="true"></span>
+  </button>
+</header>
+<div class="layout">
+  <div class="sidebar-backdrop" hidden></div>
+  <aside class="sidebar" aria-label="Navegación de la documentación">
+    <nav class="nav">
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">Inicio<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../index.html">GreenGrass</a></li></ul></div>
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">Especificaciones<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../spec/product.html">Proyecto: GreenGrass</a></li><li><a href="../spec/mvp.html">MVP de GreenGrass — plan de producto</a></li><li><a href="../spec/users.html">Usuarios y roles</a></li><li><a href="../spec/workflows.html">Flujos de trabajo principales</a></li><li><a href="../spec/geography.html">Geografía objetivo</a></li><li><a href="../spec/security.html">Seguridad y modelo de amenazas</a></li><li><a href="../spec/compliance.html">Cumplimiento y marco legal</a></li><li><a href="../spec/fundraising.html">Recaudación de fondos e infraestructura de pagos</a></li><li><a href="../spec/integrations.html">Integraciones externas</a></li><li><a href="../spec/support.html">Soporte y puesta en marcha de organizaciones</a></li><li><a href="../spec/gotv.html">GOTV y operaciones del día de elecciones</a></li><li><a href="../spec/messaging.html">Comunicaciones internas y notificaciones</a></li><li><a href="../spec/press.html">Prensa, medios y comunicaciones públicas</a></li><li><a href="../spec/comms-intelligence.html">Inteligencia de comunicaciones — hoja de ruta post-MVP</a></li></ul></div>
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">Arquitectura<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../design/architecture/system.html">Arquitectura del sistema</a></li></ul></div>
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">Diseño UX<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../design/ux/00-overview.html">Resumen del diseño de UX</a></li><li><a href="../design/ux/01-information-architecture/navigation-model.html">Modelo de navegación</a></li><li><a href="../design/ux/01-information-architecture/screen-inventory.html">Inventario de pantallas</a></li><li><a href="../design/ux/01-information-architecture/persona-views.html">Vistas por arquetipo</a></li><li><a href="../design/ux/01-information-architecture/url-structure.html">Estructura de URL</a></li><li><a href="../design/ux/02-global-patterns/pattern-catalog.html">Catálogo de patrones</a></li><li><a href="../design/ux/02-global-patterns/offline-sync-patterns.html">Patrones sin conexión y de sincronización</a></li><li><a href="../design/ux/02-global-patterns/notification-patterns.html">Patrones de notificaciones</a></li><li><a href="../design/ux/02-global-patterns/search-patterns.html">Patrones de búsqueda</a></li><li><a href="../design/ux/02-global-patterns/settings-help-patterns.html">Patrones de ajustes y ayuda</a></li><li><a href="../design/ux/02-global-patterns/security-ux-patterns.html">Patrones de UX de seguridad</a></li><li><a href="../design/ux/03-design-system/foundations.html">Fundamentos del sistema de diseño</a></li><li><a href="../design/ux/03-design-system/theming-strategy.html">Estrategia de temas</a></li><li><a href="../design/ux/03-design-system/component-inventory.html">Inventario de componentes</a></li><li><a href="../design/ux/03-design-system/responsive-strategy.html">Estrategia de diseño adaptable</a></li></ul></div>
+<div class="nav-section open"><button type="button" class="nav-section-title" aria-expanded="true">Decisiones<span class="chev" aria-hidden="true"></span></button><ul><li><a href="./001-platform-architecture.html">ADR-001: Arquitectura y despliegue de la plataforma</a></li><li><a href="./002-security-threat-model.html">ADR-002: Seguridad y modelo de amenazas</a></li><li><a href="./003-identity-access-organization.html">ADR-003: Identidad, acceso y organización</a></li><li><a href="./004-data-model-integrity.html">ADR-004: Modelo de datos e integridad</a></li><li><a href="./005-offline-first-sync.html">ADR-005: Prioridad sin conexión y sincronización</a></li><li><a href="./006-field-operations-gotv.html">ADR-006: Operaciones de campo y GOTV</a></li><li><a href="./007-fundraising-payments.html">ADR-007: Recaudación de fondos y pagos</a></li><li><a href="./008-communications-messaging.html">ADR-008: Comunicaciones y mensajería</a></li><li><a href="./009-compliance-legal.html">ADR-009: Cumplimiento y marco legal</a></li><li><a href="./010-internationalization-localization.html">ADR-010: Internacionalización y localización</a></li><li><a href="./011-design-system-ux.html">ADR-011: Sistema de diseño y fundamentos de UX</a></li><li><a href="./012-external-integrations.html">ADR-012: Integraciones externas</a></li><li><a href="./013-analytics-ai.html">ADR-013: Analítica e IA</a></li><li><a href="./014-volunteer-onboarding.html">ADR-014: Voluntariado e incorporación</a></li><li><a href="./015-product-scope.html">ADR-015: Límites del alcance del producto</a></li><li><a href="./016-cross-cutting-resolutions.html" aria-current="page" class="active">ADR-016: Resoluciones transversales</a></li><li><a href="./017-sharing-contract-trust-model.html">ADR-017: El contrato de intercambio como primitiva universal de confianza</a></li><li><a href="./ux-decisions.html">Decisiones de UX — fase de wireframes</a></li></ul></div>
+    </nav>
+  </aside>
+  <main id="content" class="content">
+    <nav class="breadcrumb" aria-label="Ruta de navegación">Decisiones</nav>
+    <article class="prose">
+<h1 id="adr-016-resoluciones-transversales" tabindex="-1"><a class="heading-anchor" href="#adr-016-resoluciones-transversales" aria-hidden="true">#</a> ADR-016: Resoluciones transversales</h1>
+<p><strong>Estado:</strong> Aceptada
+<strong>Fecha:</strong> 2026-03-04
+<strong>Fuentes:</strong> <code>design/ux/04-wireframes/audit.md</code> (Apéndice A: preguntas abiertas consolidadas)</p>
+<h2 id="contexto" tabindex="-1"><a class="heading-anchor" href="#contexto" aria-hidden="true">#</a> Contexto</h2>
+<p>La auditoría de wireframes identificó 89 preguntas abiertas en 21 documentos. De ellas, 2 contradicciones y 3 grupos de solapamiento abarcan varias áreas funcionales y no se pueden resolver dentro de un solo documento. Esta ADR resuelve primero los asuntos transversales y establece las políticas sobre las que se apoyan las resoluciones de cada área.</p>
+<h3 id="contradicciones" tabindex="-1"><a class="heading-anchor" href="#contradicciones" aria-hidden="true">#</a> Contradicciones</h3>
+<ol>
+<li><strong>Delegación de ajustes:</strong> la ADR-011 y <code>settings.md</code> establecieron &quot;Toda la configuración es solo del OA (Org Admin, el Administrador de la organización), sin delegación&quot;. La pregunta abierta #52 plantea si ciertas categorías se pueden delegar a roles que no sean OA.</li>
+<li><strong>Topes de frecuencia frente a la orquestación entre canales:</strong> <code>communications.md</code> decidió aplicar topes de frecuencia por canal para toda la organización. La pregunta abierta #21 plantea cómo evitar que el mismo tema llegue por canales distintos el mismo día.</li>
+</ol>
+<h3 id="grupos-de-solapamiento" tabindex="-1"><a class="heading-anchor" href="#grupos-de-solapamiento" aria-hidden="true">#</a> Grupos de solapamiento</h3>
+<ol>
+<li><strong>Entradas de pago a eventos (#27) + reembolsos de recaudación (#31):</strong> los eventos de pago se solapan con la cadena de recaudación de fondos. Los ingresos por entradas necesitan un lugar claro.</li>
+<li><strong>Conservación de datos (#14, #51, #84):</strong> la conservación de mensajes, la conservación de datos de GOTV (Get Out The Vote — movilización del voto) y las ventanas de reversión de importación se preguntaron por separado, pero comparten la misma pregunta de política de fondo.</li>
+<li><strong>Coordinación entre canales (#21) + canales de recordatorio de promesas de donación (#32):</strong> las dos requieren un modelo de orquestación entre canales.</li>
+</ol>
+<hr>
+<h2 id="decisión" tabindex="-1"><a class="heading-anchor" href="#decisión" aria-hidden="true">#</a> Decisión</h2>
+<h3 id="1-delegación-de-ajustes-solo-el-oa-en-la-v1" tabindex="-1"><a class="heading-anchor" href="#1-delegación-de-ajustes-solo-el-oa-en-la-v1" aria-hidden="true">#</a> 1. Delegación de ajustes — solo el OA en la v1</h3>
+<p>La configuración sigue siendo exclusiva del OA en la v1. No hay mecanismo de delegación.</p>
+<p><strong>Fundamento:</strong> un contexto sensible en materia de seguridad exige un único punto de responsabilidad. El patrón existente de sobrescrituras solo aditivas (ADR-011) sienta la base para delegar en una versión futura. Las organizaciones de la v1 serán lo bastante pequeñas como para que el cuello de botella del OA sea manejable. Añadir la delegación después es aditivo; quitarla después rompería flujos de trabajo.</p>
+<p><strong>Cierra:</strong> la pregunta abierta #52.</p>
+<hr>
+<h3 id="2-orquestación-de-canales-en-dos-capas" tabindex="-1"><a class="heading-anchor" href="#2-orquestación-de-canales-en-dos-capas" aria-hidden="true">#</a> 2. Orquestación de canales en dos capas</h3>
+<p>Las comunicaciones se rigen por dos mecanismos complementarios:</p>
+<p><strong>Capa 1 — Topes de frecuencia por canal (decisión existente)</strong>
+Techos para toda la organización sobre la cantidad de contactos por canal y por período. Ejemplo: máximo 2 correos por semana, máximo 1 SMS por día. Lo configura el OA en la configuración de comunicaciones.</p>
+<p><strong>Capa 2 — Ventana de silencio entre canales (nueva)</strong>
+Después de contactar a una persona por <em>cualquier</em> canal sobre un tema específico, los mensajes sobre ese mismo tema en otros canales quedan suprimidos durante una ventana configurable (por defecto: 24 horas). Temas distintos en canales distintos sí se permiten, hasta el tope de cada canal.</p>
+<p>El sistema hace cumplir las dos capas en el momento del envío. Un mensaje que pasa el tope por canal todavía puede quedar aplazado por la ventana de silencio entre canales.</p>
+<p><strong>Fundamento:</strong> los topes por canal y la orquestación entre canales resuelven problemas distintos. Los topes evitan el exceso de mensajes en un solo canal. La ventana de silencio evita que a la misma persona la contacten por lo mismo por correo, luego por SMS y luego por WhatsApp el mismo día. Hacen falta las dos; ninguna sustituye a la otra.</p>
+<p><strong>Cierra:</strong> las preguntas abiertas #21 y #32.</p>
+<hr>
+<h3 id="3-los-ingresos-por-entradas-pasan-por-la-cadena-de-recaudación-de-fondos" tabindex="-1"><a class="heading-anchor" href="#3-los-ingresos-por-entradas-pasan-por-la-cadena-de-recaudación-de-fondos" aria-hidden="true">#</a> 3. Los ingresos por entradas pasan por la cadena de recaudación de fondos</h3>
+<p>Las entradas de pago a eventos se procesan por la cadena de recaudación de fondos. La compra de una entrada es un registro de donación con metadatos del evento (ID del evento, tipo de entrada, cantidad).</p>
+<ul>
+<li><strong>El sistema de eventos</strong> maneja: inscripción, seguimiento de asistencia, registro de entrada, aforo</li>
+<li><strong>El sistema de recaudación</strong> maneja: procesamiento de pagos, generación de recibos, seguimiento de cumplimiento, reembolsos</li>
+<li><strong>La política de reembolsos</strong> es única: se rige por la política del procesador de pagos más una ventana máxima configurable por la organización (por defecto: 90 días)</li>
+</ul>
+<p>Las pantallas de eventos muestran los ingresos por entradas como métrica, pero enlazan al sistema de recaudación para el detalle financiero. No hay una cadena de pagos aparte para los eventos.</p>
+<p><strong>Fundamento:</strong> en la mayoría de las jurisdicciones, las entradas a eventos políticos se tratan legalmente como contribuciones. Tener cadenas de pago separadas multiplica la complejidad de integración, la superficie de cumplimiento y el trabajo de conciliación. Una sola cadena significa un solo conjunto de reglas de cumplimiento, un solo generador de recibos y un solo flujo de conciliación.</p>
+<p><strong>Cierra:</strong> las preguntas abiertas #27 y #31.</p>
+<hr>
+<h3 id="4-política-de-conservación-de-datos-por-niveles" tabindex="-1"><a class="heading-anchor" href="#4-política-de-conservación-de-datos-por-niveles" aria-hidden="true">#</a> 4. Política de conservación de datos por niveles</h3>
+<p>La conservación de datos se rige por una política única con cuatro niveles. Cada nivel define qué se guarda, cuánto tiempo se conserva y si se puede borrar.</p>
+<h4 id="definición-de-los-niveles" tabindex="-1"><a class="heading-anchor" href="#definición-de-los-niveles" aria-hidden="true">#</a> Definición de los niveles</h4>
+<table>
+<thead>
+<tr>
+<th>Nivel</th>
+<th>Qué se guarda</th>
+<th>Conservación por defecto</th>
+<th>Mínimo</th>
+<th>Máximo</th>
+<th>¿Se puede borrar?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Operativo</strong></td>
+<td>Contenido completo: cuerpos de los mensajes, adjuntos, respuestas de trabajo de campo, datos operativos de GOTV, bitácoras de turno</td>
+<td>2 años</td>
+<td>90 días</td>
+<td>5 años</td>
+<td>Sí, pasado el período mínimo</td>
+</tr>
+<tr>
+<td><strong>Cumplimiento</strong></td>
+<td>Registros financieros: detalle de donaciones, recibos, documentos fiscales, presentaciones de cumplimiento</td>
+<td>Según la ley local</td>
+<td>5 años</td>
+<td>10 años</td>
+<td>No, hasta que venza el mínimo legal</td>
+</tr>
+<tr>
+<td><strong>Registro de auditoría</strong></td>
+<td>Solo metadatos de la acción (ver abajo)</td>
+<td>Indefinida</td>
+<td>—</td>
+<td>—</td>
+<td>No</td>
+</tr>
+<tr>
+<td><strong>Reversión de importación</strong></td>
+<td>Capacidad de deshacer importaciones de datos</td>
+<td>30 días</td>
+<td>7 días</td>
+<td>90 días</td>
+<td>Vence automáticamente</td>
+</tr>
+</tbody>
+</table>
+<h4 id="distinción-crítica-el-registro-de-auditoría-guarda-metadatos-no-contenido" tabindex="-1"><a class="heading-anchor" href="#distinción-crítica-el-registro-de-auditoría-guarda-metadatos-no-contenido" aria-hidden="true">#</a> Distinción crítica: el registro de auditoría guarda metadatos, no contenido</h4>
+<p>El registro de auditoría deja constancia de <strong>que una acción ocurrió</strong> — quién hizo qué, cuándo y sobre qué entidad. <strong>No</strong> guarda el contenido de la acción.</p>
+<p><strong>Ejemplo — se envía un mensaje y después se purga al cerrarse la ventana de conservación:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Nivel</th>
+<th>Qué existe antes de la purga</th>
+<th>Qué existe después de la purga</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Operativo</td>
+<td>El mensaje completo: cuerpo, adjuntos, contexto del hilo</td>
+<td><strong>Borrado.</strong> El cuerpo del mensaje y los adjuntos ya no están.</td>
+</tr>
+<tr>
+<td>Registro de auditoría</td>
+<td>Entrada de registro: &quot;El miembro del personal A envió un SMS al contacto B el 2026-03-04 a las 14:32 UTC&quot;</td>
+<td><strong>Conservada.</strong> La entrada permanece indefinidamente.</td>
+</tr>
+</tbody>
+</table>
+<p>El registro de auditoría es un <strong>esqueleto</strong>: prueba que las acciones ocurrieron, pero no conserva su contenido. Esta distinción es crítica por tres razones:</p>
+<ol>
+<li><strong>Cumplimiento en materia de privacidad:</strong> cuando un simpatizante solicita el borrado de sus datos, el contenido de sus mensajes se purga del nivel operativo. El registro de auditoría conserva solo el metadato de que hubo comunicación — ningún contenido personal.</li>
+<li><strong>Almacenamiento:</strong> conservar indefinidamente registros que son solo metadatos es viable. Conservar indefinidamente cuerpos de mensajes completos, adjuntos y grabaciones de audio de trabajo de campo no lo es.</li>
+<li><strong>Exposición legal:</strong> si se ve obligada por vía legal a entregar registros, la organización entrega metadatos (quién, qué, cuándo) — no el contenido completo de comunicaciones que puede haberse purgado legítimamente.</li>
+</ol>
+<h4 id="configuración" tabindex="-1"><a class="heading-anchor" href="#configuración" aria-hidden="true">#</a> Configuración</h4>
+<ul>
+<li>El OA configura los períodos de conservación dentro de los límites definidos arriba</li>
+<li>El sistema hace cumplir los mínimos — un OA no puede fijar la conservación de mensajes por debajo de 90 días</li>
+<li>Los mínimos del nivel de cumplimiento se derivan de la jurisdicción o jurisdicciones configuradas por la organización</li>
+<li>Las ventanas de reversión de importación vencen automáticamente — no hace falta limpieza manual</li>
+</ul>
+<p><strong>Cierra:</strong> las preguntas abiertas #14, #51 y #84.</p>
+<hr>
+<hr>
+<h2 id="resoluciones-por-categoría" tabindex="-1"><a class="heading-anchor" href="#resoluciones-por-categoría" aria-hidden="true">#</a> Resoluciones por categoría</h2>
+<p>Las secciones siguientes resuelven las preguntas abiertas propias de cada funcionalidad, agrupadas por categoría.</p>
+<h3 id="navegación-y-disposición-5-preguntas-15" tabindex="-1"><a class="heading-anchor" href="#navegación-y-disposición-5-preguntas-15" aria-hidden="true">#</a> Navegación y disposición (5 preguntas: #1–#5)</h3>
+<h4 id="1-persistencia-del-plegado-de-las-secciones-de-la-barra-lateral-se-conserva-entre-sesiones" tabindex="-1"><a class="heading-anchor" href="#1-persistencia-del-plegado-de-las-secciones-de-la-barra-lateral-se-conserva-entre-sesiones" aria-hidden="true">#</a> #1: Persistencia del plegado de las secciones de la barra lateral → Se conserva entre sesiones</h4>
+<p>El estado plegado o desplegado de las secciones de la barra lateral se conserva entre sesiones. Se guarda en localStorage (funciona sin conexión) y se sincroniza al servidor cuando hay conectividad, para que el estado siga a la persona de un dispositivo a otro.</p>
+<p>La gente desarrolla memoria muscular con la disposición de su barra lateral. Reiniciarla en cada inicio de sesión obliga a reconfigurar sin motivo. localStorage no supone ninguna carga en dispositivos de gama baja.</p>
+<h4 id="2-memoria-del-panel-de-detalle-se-reinicia-al-navegar-se-restaura-con-atrásadelante-del-navegador" tabindex="-1"><a class="heading-anchor" href="#2-memoria-del-panel-de-detalle-se-reinicia-al-navegar-se-restaura-con-atrásadelante-del-navegador" aria-hidden="true">#</a> #2: Memoria del panel de detalle → Se reinicia al navegar, se restaura con atrás/adelante del navegador</h4>
+<p>Cuando alguien navega a otra área funcional y vuelve, el panel de detalle regresa a cerrado. El contexto anterior del panel está desactualizado — los datos pueden haber cambiado y la tarea ya es otra. Cerrado es el valor por defecto predecible.</p>
+<p>Los botones de atrás y adelante del navegador restauran el estado del panel mediante la History API. Esa es una acción explícita de &quot;vuélveme a donde estaba&quot; y debe respetar la intención de la persona.</p>
+<h4 id="3-tope-del-contador-de-notificaciones-se-topa-en-99" tabindex="-1"><a class="heading-anchor" href="#3-tope-del-contador-de-notificaciones-se-topa-en-99" aria-hidden="true">#</a> #3: Tope del contador de notificaciones → Se topa en 99+</h4>
+<p>El contador de notificaciones se topa en &quot;99+&quot;. La cantidad exacta de mensajes sin leer se ve dentro de la bandeja de notificaciones.</p>
+<p>Los números por encima de 99 no cambian el comportamiento — de todos modos van a abrir la bandeja. Los números grandes no caben bien en un contador, sobre todo en pantallas de gama baja. Esto sigue la convención establecida (iOS, Android, WhatsApp).</p>
+<h4 id="4-personalización-de-los-paneles-no-en-la-v1" tabindex="-1"><a class="heading-anchor" href="#4-personalización-de-los-paneles-no-en-la-v1" aria-hidden="true">#</a> #4: Personalización de los paneles → No en la v1</h4>
+<p>Los paneles usan disposiciones fijas, filtradas por rol. En la v1 no se pueden reordenar ni ocultar secciones.</p>
+<p>Los paneles ya vienen curados por rol (el candidato recibe una vista simplificada; el gerente de campaña recibe el detalle operativo). La personalización añade gestión de estado de arrastrar y soltar, sincronización por persona y una complejidad de soporte donde el panel de cada quien se ve distinto. Se reevalúa en la v2 si la gente lo pide.</p>
+<h4 id="5-intervalo-de-actualización-de-los-paneles-por-niveles-según-la-urgencia-con-indicador-de-actualidad-obligatorio" tabindex="-1"><a class="heading-anchor" href="#5-intervalo-de-actualización-de-los-paneles-por-niveles-según-la-urgencia-con-indicador-de-actualidad-obligatorio" aria-hidden="true">#</a> #5: Intervalo de actualización de los paneles → Por niveles según la urgencia, con indicador de actualidad obligatorio</h4>
+<p><strong>Intervalos de actualización:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Tipo de panel</th>
+<th>Intervalo de actualización automática</th>
+<th>Fundamento</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Operativo (centro de mando de GOTV, operaciones de campo)</td>
+<td>30 segundos</td>
+<td>Crítico en el tiempo durante operaciones activas</td>
+</tr>
+<tr>
+<td>De campaña (recaudación de fondos, comunicaciones, eventos)</td>
+<td>5 minutos</td>
+<td>Los datos cambian a lo largo del día, no segundo a segundo</td>
+</tr>
+<tr>
+<td>Administrativo (cumplimiento, calidad de datos, configuración)</td>
+<td>15 minutos</td>
+<td>Datos que cambian despacio</td>
+</tr>
+<tr>
+<td>Candidato</td>
+<td>15 minutos</td>
+<td>Resumen curado, no operativo</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Comportamiento de la actualización:</strong></p>
+<ul>
+<li><strong>El botón de actualización manual es obligatorio</strong> en todos los paneles. Siempre visible, siempre accesible. Nadie debe tener que adivinar si está viendo datos actuales ni esperar al siguiente ciclo de actualización automática.</li>
+<li>La actualización automática se pausa cuando la pestaña del navegador no está visible (ahorra ancho de banda en redes de baja conectividad).</li>
+<li>Actualización inmediata al reconectarse tras un período sin conexión.</li>
+<li>Usa sondeo periódico, no WebSockets — más simple y con degradación controlada en conexiones intermitentes.</li>
+</ul>
+<p><strong>El indicador de actualidad de los datos es obligatorio</strong> en todos los paneles. El panel siempre debe comunicar el estado de sus datos:</p>
+<table>
+<thead>
+<tr>
+<th>Estado</th>
+<th>Indicador</th>
+<th>Comportamiento</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Actual</strong></td>
+<td>Marca de tiempo discreta: &quot;Actualizado hace 30 s&quot;</td>
+<td>Discreto; no reclama atención</td>
+</tr>
+<tr>
+<td><strong>Actualizando</strong></td>
+<td>Indicador de carga o barra de progreso en lugar de la marca de tiempo</td>
+<td>Confirmación visible de que se están cargando datos nuevos</td>
+</tr>
+<tr>
+<td><strong>Desactualizado</strong></td>
+<td>Distintivo de advertencia: &quot;Los datos tienen más de 5 minutos&quot;, en ámbar</td>
+<td>Aparece cuando la antigüedad de los datos supera 2× el intervalo de actualización del panel</td>
+</tr>
+<tr>
+<td><strong>Desconectado</strong></td>
+<td>Banner persistente: &quot;Sin conexión — se muestran datos en caché de [marca de tiempo]&quot;, en rojo o ámbar</td>
+<td>No se puede descartar mientras no haya conexión</td>
+</tr>
+</tbody>
+</table>
+<p>En los <strong>paneles operativos</strong> (centro de mando de GOTV, operaciones de campo), el indicador de actualidad es información ambiental de alta visibilidad — siempre prominente, no escondido en una esquina. Quien toma decisiones urgentes durante las operaciones del día de elecciones nunca debe confundir datos desactualizados con datos actuales. El indicador debe usar color, posición y tamaño para que se note sin atención activa.</p>
+<p>En <strong>todos los demás paneles</strong>, el indicador de actualidad sigue el mismo modelo de estados, pero puede usar una presentación más compacta (por ejemplo, una marca de tiempo junto al encabezado de la página que pasa a estado de advertencia cuando los datos están desactualizados o no hay conexión).</p>
+<h3 id="operaciones-de-campo-8-preguntas-613" tabindex="-1"><a class="heading-anchor" href="#operaciones-de-campo-8-preguntas-613" aria-hidden="true">#</a> Operaciones de campo (8 preguntas: #6–#13)</h3>
+<h4 id="6-orden-de-la-lista-de-recorrido-optimizada-por-ruta-por-defecto-el-director-de-campo-puede-sobrescribirla" tabindex="-1"><a class="heading-anchor" href="#6-orden-de-la-lista-de-recorrido-optimizada-por-ruta-por-defecto-el-director-de-campo-puede-sobrescribirla" aria-hidden="true">#</a> #6: Orden de la lista de recorrido → Optimizada por ruta por defecto; el Director de campo puede sobrescribirla</h4>
+<p>Las listas de recorrido se ordenan por ruta a pie optimizada de manera predeterminada (ya está especificado en el wireframe <a href="http://field-mode.md" target="_blank" rel="noopener noreferrer">field-mode.md</a>). Optimizar la ruta significa más puertas por hora — la restricción principal para el voluntariado a pie. El puntaje de prioridad se maneja mejor a nivel de asignación de territorios (dale los territorios de alta prioridad a tus mejores voluntarios) que dentro del orden de la lista de recorrido.</p>
+<p><strong>Sobrescritura:</strong> el Director de campo puede cambiar una lista de recorrido concreta a orden por prioridad. Es útil para las listas de seguimiento de GOTV, donde llegar a personas específicas importa más que la eficiencia del recorrido.</p>
+<h4 id="7-motivos-de-omisión-en-la-ficha-de-puerta-3-not-home-baja-de-prioridad-refused-alto-inmediato" tabindex="-1"><a class="heading-anchor" href="#7-motivos-de-omisión-en-la-ficha-de-puerta-3-not-home-baja-de-prioridad-refused-alto-inmediato" aria-hidden="true">#</a> #7: Motivos de omisión en la ficha de puerta → 3× Not Home = baja de prioridad; Refused = alto inmediato</h4>
+<table>
+<thead>
+<tr>
+<th>Resultado</th>
+<th style="text-align:center">¿Cuenta para el límite?</th>
+<th>Efecto</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Not Home</td>
+<td style="text-align:center">Sí</td>
+<td>Tras 3×, el contacto pasa a la cola de intentos por teléfono o SMS y sale de las listas de recorrido futuras</td>
+</tr>
+<tr>
+<td>Refused</td>
+<td style="text-align:center">Inmediato</td>
+<td>1× = el contacto queda marcado como rechazado y sale de todo el trabajo de campo futuro de esta campaña</td>
+</tr>
+<tr>
+<td>Come Back Later</td>
+<td style="text-align:center">No</td>
+<td>Vuelve a la cola dentro del mismo turno o del siguiente; aplazamiento intencional</td>
+</tr>
+</tbody>
+</table>
+<p>El umbral (por defecto: 3) lo configura el Director de campo por campaña. El sistema muestra los contactos que se acercan al límite en la revisión de resultados (CANV-013) para que el Director de campo decida el escalamiento.</p>
+<h4 id="8-tamaño-de-las-teselas-de-mapa-sin-conexión-territorio-asignado-margen-de-500-m-con-zoom-a-nivel-de-calle" tabindex="-1"><a class="heading-anchor" href="#8-tamaño-de-las-teselas-de-mapa-sin-conexión-territorio-asignado-margen-de-500-m-con-zoom-a-nivel-de-calle" aria-hidden="true">#</a> #8: Tamaño de las teselas de mapa sin conexión → Territorio asignado + margen de 500 m con zoom a nivel de calle</h4>
+<p>El sistema guarda en caché por adelantado las teselas de mapa del territorio asignado al voluntario más un margen de 500 m alrededor del límite del territorio, con zoom a nivel de calle (normalmente zoom 16–17 en los esquemas de teselas estándar).</p>
+<p>El wireframe ya usa una vista esquemática simplificada (no imágenes de satélite), lo que reduce mucho las teselas necesarias. La pantalla de verificación previa al turno valida &quot;Teselas de mapa en caché ✓&quot; — el voluntariado sabe antes de salir si sus mapas están listos. Si se hace zoom más allá del área en caché: marcador de posición gris con &quot;Mapa no disponible sin conexión&quot; (ya está especificado en el wireframe).</p>
+<p>El tamaño exacto en MB depende del proveedor de teselas y de la densidad de la región — eso es un detalle de implementación. El contrato de UX es: tu territorio asignado siempre está disponible sin conexión.</p>
+<h4 id="9-versionado-del-guion-en-campo-los-turnos-activos-quedan-fijados-a-una-versión-las-actualizaciones-urgentes-llegan-en-la-próxima-puerta" tabindex="-1"><a class="heading-anchor" href="#9-versionado-del-guion-en-campo-los-turnos-activos-quedan-fijados-a-una-versión-las-actualizaciones-urgentes-llegan-en-la-próxima-puerta" aria-hidden="true">#</a> #9: Versionado del guion en campo → Los turnos activos quedan fijados a una versión; las actualizaciones urgentes llegan en la próxima puerta</h4>
+<p>Cuando empieza un turno, se carga la versión actual del guion y queda fijada para ese turno. A quien está en medio del trabajo de campo no le cambia el guion bajo los pies.</p>
+<p>Si el Director de campo actualiza un guion a mitad del día, el voluntariado que ya está en campo mantiene su versión hasta que termine el turno.</p>
+<p><strong>Sobrescritura por actualización urgente:</strong> el Director de campo puede empujar una actualización marcada como &quot;urgente&quot;. Aparece como notificación en la próxima ficha de puerta del voluntario — nunca durante la interacción en curso. El voluntario ve: &quot;Guion actualizado — toca para revisar los cambios antes de seguir&quot;. Al empezar un turno nuevo siempre se carga la última versión del guion.</p>
+<p>El historial de versiones del guion es visible para el Director de campo en el constructor de guiones.</p>
+<h4 id="10-reutilización-de-guiones-entre-campañas-copia-como-plantilla-no-enlace" tabindex="-1"><a class="heading-anchor" href="#10-reutilización-de-guiones-entre-campañas-copia-como-plantilla-no-enlace" aria-hidden="true">#</a> #10: Reutilización de guiones entre campañas → Copia como plantilla, no enlace</h4>
+<p>&quot;Guardar como plantilla&quot; copia un guion en una biblioteca compartida de plantillas. Al crear un guion de campaña nuevo se ofrece &quot;Empezar desde una plantilla&quot; o &quot;Empezar en blanco&quot;.</p>
+<p>Una vez copiado, el guion de campaña es independiente — editarlo no afecta a la plantilla ni a otras campañas. Las plantillas son de toda la organización; cualquier Director de campo puede usarlas.</p>
+<p>Es el patrón estándar de copiar en vez de enlazar: evita la contaminación accidental entre campañas y a la vez permite reutilizar.</p>
+<h4 id="11-restricciones-de-la-generación-automática-de-territorios-valores-por-defecto-configurables-con-vista-previa-obligatoria" tabindex="-1"><a class="heading-anchor" href="#11-restricciones-de-la-generación-automática-de-territorios-valores-por-defecto-configurables-con-vista-previa-obligatoria" aria-hidden="true">#</a> #11: Restricciones de la generación automática de territorios → Valores por defecto configurables con vista previa obligatoria</h4>
+<table>
+<thead>
+<tr>
+<th>Restricción</th>
+<th>Por defecto</th>
+<th>Mín.</th>
+<th>Máx.</th>
+<th>Fundamento</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Contactos por territorio</td>
+<td>50</td>
+<td>10</td>
+<td>150</td>
+<td>50 ≈ un turno de trabajo de campo de 2 horas a ~2.5 min por puerta</td>
+</tr>
+<tr>
+<td>Tiempo de recorrido estimado</td>
+<td>2 horas</td>
+<td>30 min</td>
+<td>4 horas</td>
+<td>Fatiga del voluntariado; duración del turno</td>
+</tr>
+<tr>
+<td>Margen entre territorios</td>
+<td>0 (sin solapamiento)</td>
+<td>—</td>
+<td>—</td>
+<td>Evita tocar dos veces la misma puerta</td>
+</tr>
+</tbody>
+</table>
+<p>Restricciones geográficas: no dividir territorios cruzando vías principales, ríos o vías férreas. Respetar los límites administrativos (barrios, precintos) cuando estén disponibles. Por debajo de 10 contactos, fusionar con el territorio adyacente.</p>
+<p>La generación automática siempre produce una <strong>vista previa</strong> — el Director de campo revisa los territorios propuestos en el mapa y ajusta los límites antes de confirmar. Ningún resultado de la generación automática entra en producción sin aprobación humana.</p>
+<h4 id="12-reasignación-de-la-lista-de-recorrido-a-mitad-de-turno-sí-las-puertas-completadas-se-quedan-quien-recibe-la-lista-continúa" tabindex="-1"><a class="heading-anchor" href="#12-reasignación-de-la-lista-de-recorrido-a-mitad-de-turno-sí-las-puertas-completadas-se-quedan-quien-recibe-la-lista-continúa" aria-hidden="true">#</a> #12: Reasignación de la lista de recorrido a mitad de turno → Sí; las puertas completadas se quedan, quien recibe la lista continúa</h4>
+<p>Las listas de recorrido se pueden reasignar a mitad de turno (voluntarios que no llegan, fatiga del voluntariado, prioridades que cambian).</p>
+<ul>
+<li>Las puertas completadas siguen completadas, sin importar la reasignación</li>
+<li>La lista de recorrido de quien recibe la asignación empieza en la primera puerta sin completar</li>
+<li>Si el voluntario original tiene datos sin sincronizar cuando ocurre la reasignación, se fusionan en la próxima sincronización — no se pierde nada</li>
+<li><strong>Resolución de conflictos:</strong> si el voluntario anterior y el nuevo tocaron la misma puerta (condición de carrera durante la reasignación), el sistema conserva la interacción cronológicamente más reciente y marca el conflicto para que el Director de campo lo revise en CANV-013</li>
+</ul>
+<h4 id="13-conservación-de-los-datos-de-resultados-de-trabajo-de-campo-ya-resuelto-adr-016-4" tabindex="-1"><a class="heading-anchor" href="#13-conservación-de-los-datos-de-resultados-de-trabajo-de-campo-ya-resuelto-adr-016-4" aria-hidden="true">#</a> #13: Conservación de los datos de resultados de trabajo de campo → Ya resuelto (ADR-016 §4)</h4>
+<p>Los registros individuales de interacción de campo (respuestas en la puerta, marcas de tiempo, notas del voluntariado) caen en el nivel operativo de la política de conservación de datos por niveles: 2 años por defecto, configurable entre 90 días y 5 años.</p>
+<h3 id="mensajería-y-comunicaciones-8-preguntas-1520-2223" tabindex="-1"><a class="heading-anchor" href="#mensajería-y-comunicaciones-8-preguntas-1520-2223" aria-hidden="true">#</a> Mensajería y comunicaciones (8 preguntas: #15–#20, #22–#23)</h3>
+<p><em>Las preguntas #14 y #21 se resolvieron en la sección transversal de arriba.</em></p>
+<h4 id="15-búsqueda-de-mensajes-frente-al-cifrado-e2e-la-búsqueda-solo-está-disponible-con-custodia-de-llaves" tabindex="-1"><a class="heading-anchor" href="#15-búsqueda-de-mensajes-frente-al-cifrado-e2e-la-búsqueda-solo-está-disponible-con-custodia-de-llaves" aria-hidden="true">#</a> #15: Búsqueda de mensajes frente al cifrado E2E → La búsqueda solo está disponible con custodia de llaves</h4>
+<p>La ADR-008 estableció que las organizaciones pueden activar la custodia de llaves en el servidor (lo que desactiva el cifrado E2E). El comportamiento de la búsqueda de mensajes se desprende directamente:</p>
+<table>
+<thead>
+<tr>
+<th>Modo de cifrado</th>
+<th>Capacidad de búsqueda</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Cifrado E2E (por defecto)</td>
+<td>Solo metadatos: emisor, fecha y hora, nombre de la conversación. El servidor no puede leer el contenido.</td>
+</tr>
+<tr>
+<td>Custodia de llaves activada</td>
+<td>Búsqueda de texto completo en el contenido de los mensajes. El servidor tiene acceso mediante la llave de custodia.</td>
+</tr>
+<tr>
+<td>Ambos modos</td>
+<td>Búsqueda local en el cliente de los mensajes ya guardados en caché en el dispositivo.</td>
+</tr>
+</tbody>
+</table>
+<p>La interfaz hace explícito el compromiso. Las conversaciones E2E muestran &quot;Búsqueda limitada a los metadatos del mensaje&quot; con una explicación breve del porqué. No es una limitación que haya que arreglar — es consecuencia directa del modelo de seguridad que eligió la organización.</p>
+<h4 id="16-confirmaciones-de-lectura-cada-persona-puede-desactivarlas-visibles-por-defecto" tabindex="-1"><a class="heading-anchor" href="#16-confirmaciones-de-lectura-cada-persona-puede-desactivarlas-visibles-por-defecto" aria-hidden="true">#</a> #16: Confirmaciones de lectura → Cada persona puede desactivarlas; visibles por defecto</h4>
+<p>Las confirmaciones de lectura están activadas por defecto (convención estándar de mensajería). Cualquier persona puede desactivarlas en la configuración de su perfil. La desactivación es simétrica: oculta su estado de lectura a quien envía <em>y</em> le oculta a esa persona el estado de lectura de las demás.</p>
+<p>En conversaciones de grupo, las confirmaciones de lectura se muestran como un conteo discreto (&quot;Leído por 4&quot;) en vez de listar nombres, para evitar dinámicas de presión social.</p>
+<p><strong>Consideración de seguridad:</strong> en modo de coacción, las confirmaciones de lectura se desactivan automáticamente para impedir el rastreo de actividad.</p>
+<h4 id="17-contenido-condicional-en-el-constructor-de-correos-no-en-la-v1-solo-campos-de-combinación" tabindex="-1"><a class="heading-anchor" href="#17-contenido-condicional-en-el-constructor-de-correos-no-en-la-v1-solo-campos-de-combinación" aria-hidden="true">#</a> #17: Contenido condicional en el constructor de correos → No en la v1; solo campos de combinación</h4>
+<p>Los bloques de contenido condicional (mostrar el párrafo A si es donante, el B si es voluntario) requieren una interfaz de lógica condicional, vista previa por variante y una matriz de pruebas. Es una complejidad considerable para el constructor.</p>
+<p>La v1 admite: campos de combinación (<code>{{first_name}}</code>, <code>{{org_name}}</code>) y envíos por segmento (enviar campañas distintas a segmentos distintos). Eso cubre la gran mayoría de las necesidades de personalización sin lógica condicional dentro de la plantilla. Los bloques de contenido condicional se pueden añadir al constructor de correos en una versión futura.</p>
+<h4 id="18-estado-de-aprobación-de-las-plantillas-de-whatsapp-sí-visible-en-el-redactor" tabindex="-1"><a class="heading-anchor" href="#18-estado-de-aprobación-de-las-plantillas-de-whatsapp-sí-visible-en-el-redactor" aria-hidden="true">#</a> #18: Estado de aprobación de las plantillas de WhatsApp → Sí, visible en el redactor</h4>
+<p>La API de WhatsApp Business exige plantillas de mensaje aprobadas de antemano. El redactor muestra el estado de aprobación de la plantilla en línea:</p>
+<table>
+<thead>
+<tr>
+<th>Estado</th>
+<th>Presentación</th>
+<th>Comportamiento</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Aprobada</td>
+<td>Distintivo verde</td>
+<td>Lista para enviar</td>
+</tr>
+<tr>
+<td>Pendiente</td>
+<td>Distintivo ámbar</td>
+<td>No se puede enviar; muestra el tiempo estimado de revisión</td>
+</tr>
+<tr>
+<td>Rechazada</td>
+<td>Distintivo rojo con el motivo</td>
+<td>No se puede enviar; muestra el motivo de rechazo de Meta y un enlace para editar</td>
+</tr>
+</tbody>
+</table>
+<p>Esto evita el flujo frustrante de redactar un mensaje, darle a enviar y descubrir que Meta lo rechazó.</p>
+<h4 id="19-pruebas-ab-por-sms-se-aplaza-a-la-v2" tabindex="-1"><a class="heading-anchor" href="#19-pruebas-ab-por-sms-se-aplaza-a-la-v2" aria-hidden="true">#</a> #19: Pruebas A/B por SMS → Se aplaza a la v2</h4>
+<p>Los SMS son más cortos y más caros que el correo electrónico. Las listas de SMS de campaña en el contexto objetivo (organización de base del Sur Global) suelen ser más pequeñas que las de correo. Las pruebas A/B requieren significancia estadística — con públicos más pequeños y un costo por mensaje más alto, la matemática casi nunca cuadra.</p>
+<p>Las pruebas A/B se concentran en el correo (COMM-008), donde los volúmenes lo permiten. Se pueden reevaluar para SMS si los volúmenes de SMS de las organizaciones crecen lo suficiente.</p>
+<h4 id="20-constructor-de-secuencias-escalonadas-reglas-lineales-simples-en-la-v1-el-constructor-visual-de-flujos-es-un-pilar-de-la-v2" tabindex="-1"><a class="heading-anchor" href="#20-constructor-de-secuencias-escalonadas-reglas-lineales-simples-en-la-v1-el-constructor-visual-de-flujos-es-un-pilar-de-la-v2" aria-hidden="true">#</a> #20: Constructor de secuencias escalonadas → Reglas lineales simples en la v1; el constructor visual de flujos es un pilar de la v2</h4>
+<p>Las secuencias escalonadas de la v1 usan un formato de reglas lineal:</p>
+<pre><code>Evento disparador → esperar N días → enviar mensaje → esperar N días → enviar mensaje
+</code></pre>
+<p>Sin lógica de ramificación. Las secuencias lineales cubren los casos de uso principales: series de bienvenida, recordatorios de promesas de donación, seguimiento posterior a eventos.</p>
+<p><strong>Funcionalidad pilar de la v2: Constructor visual de flujos.</strong> Un constructor de flujos en grafo de nodos con lógica de ramificación (si lo abre → camino A, si no → camino B), arrastrar y soltar visual y orquestación entre canales dentro de un mismo flujo. Es una capacidad insignia de la v2 — lleva al sistema de comunicaciones de enviar un mensaje a la vez a ejecutar secuencias ramificadas y multicanal. Debe diseñarse y dimensionarse como una funcionalidad mayor, no añadirse a pedazos.</p>
+<h4 id="22-flujo-de-aprobación-de-publicaciones-en-redes-sociales-configurable-por-defecto-todas-las-publicaciones" tabindex="-1"><a class="heading-anchor" href="#22-flujo-de-aprobación-de-publicaciones-en-redes-sociales-configurable-por-defecto-todas-las-publicaciones" aria-hidden="true">#</a> #22: Flujo de aprobación de publicaciones en redes sociales → Configurable; por defecto, todas las publicaciones</h4>
+<p>En el contexto de una campaña política, cualquier publicación en redes sociales puede convertirse en una crisis. Por defecto: todas las publicaciones requieren aprobación antes de publicarse. El OA puede relajarlo a &quot;solo las publicaciones marcadas&quot; si la organización ya confía en su equipo de redes sociales.</p>
+<p>La pantalla de aprobación muestra la publicación tal como se verá en cada plataforma (vista previa lado a lado, ya diseñada en SOCIAL-003).</p>
+<h4 id="23-biblioteca-de-contenidos-carga-de-archivos-en-la-v1-la-biblioteca-compartida-de-recursos-es-un-pilar-de-la-v2" tabindex="-1"><a class="heading-anchor" href="#23-biblioteca-de-contenidos-carga-de-archivos-en-la-v1-la-biblioteca-compartida-de-recursos-es-un-pilar-de-la-v2" aria-hidden="true">#</a> #23: Biblioteca de contenidos → Carga de archivos en la v1; la biblioteca compartida de recursos es un pilar de la v2</h4>
+<p>v1: cada campaña o publicación tiene carga directa de archivos. Una sección de &quot;cargas recientes&quot; muestra los últimos 20 archivos subidos en toda la organización, lo que permite una reutilización ligera sin gestión dedicada de recursos.</p>
+<p><strong>Funcionalidad pilar de la v2: Biblioteca compartida de contenidos.</strong> Un sistema centralizado de gestión de recursos con etiquetado, búsqueda, seguimiento de uso, gestión de derechos, colecciones de recursos aprobados por marca y reutilización entre funcionalidades (una imagen subida para una publicación en redes se encuentra al armar una campaña de correo o una página de evento). Igual que el constructor visual de flujos, es una capacidad insignia de la v2 que debe diseñarse como un solo sistema, no como un añadido tardío.</p>
+<h3 id="redes-sociales-2-preguntas-2425" tabindex="-1"><a class="heading-anchor" href="#redes-sociales-2-preguntas-2425" aria-hidden="true">#</a> Redes sociales (2 preguntas: #24–#25)</h3>
+<h4 id="24-analítica-de-la-publicación-cruzada-1-publicación-con-desglose-por-plataforma" tabindex="-1"><a class="heading-anchor" href="#24-analítica-de-la-publicación-cruzada-1-publicación-con-desglose-por-plataforma" aria-hidden="true">#</a> #24: Analítica de la publicación cruzada → 1 publicación con desglose por plataforma</h4>
+<p>El modelo mental que establece SOCIAL-001 es &quot;un mensaje, varios canales&quot;. La analítica lo refleja: una publicación cruzada muestra el alcance y la interacción agregados arriba, con un desglose por plataforma debajo (impresiones, clics, interacción por plataforma). Refuerza el modelo unificado del redactor y permite al equipo de comunicaciones comparar el rendimiento de cada plataforma con el mismo contenido.</p>
+<h4 id="25-creación-de-video-para-tiktok-solo-externa-se-suben-videos-terminados" tabindex="-1"><a class="heading-anchor" href="#25-creación-de-video-para-tiktok-solo-externa-se-suben-videos-terminados" aria-hidden="true">#</a> #25: Creación de video para TikTok → Solo externa; se suben videos terminados</h4>
+<p>Editar video dentro de la plataforma es un alcance enorme — editores de línea de tiempo, efectos, transiciones, licencias de música. El contenido de TikTok se crea mejor en las herramientas del propio TikTok o en apps de video dedicadas. GreenGrass se encarga de: la carga, la programación, la redacción del texto, el flujo de aprobación y la analítica. El redactor acepta la carga de archivos de video y muestra una miniatura de vista previa.</p>
+<h3 id="eventos-4-preguntas-26-2830" tabindex="-1"><a class="heading-anchor" href="#eventos-4-preguntas-26-2830" aria-hidden="true">#</a> Eventos (4 preguntas: #26, #28–#30)</h3>
+<p><em>La pregunta #27 se resolvió en la sección transversal de arriba.</em></p>
+<h4 id="26-eventos-de-varios-días-un-solo-evento-con-varias-franjas-de-fecha" tabindex="-1"><a class="heading-anchor" href="#26-eventos-de-varios-días-un-solo-evento-con-varias-franjas-de-fecha" aria-hidden="true">#</a> #26: Eventos de varios días → Un solo evento con varias franjas de fecha</h4>
+<p>Una conferencia o capacitación de varios días es conceptualmente un solo evento — una inscripción, una lista de asistentes, una encuesta posterior. La pantalla de detalle del evento (EVT-002) admite varias franjas de fecha y hora dentro de un mismo registro de evento. Cada franja puede tener su propia ubicación, su propio aforo y su propia lista de registro de entrada. Así se evita fragmentar los datos de asistencia entre eventos enlazados y coincide con la forma en que quienes organizan piensan los encuentros de varios días.</p>
+<h4 id="28-eventos-recurrentes-se-crean-instancias-automáticamente-con-editar-o-cancelar-una-o-todas" tabindex="-1"><a class="heading-anchor" href="#28-eventos-recurrentes-se-crean-instancias-automáticamente-con-editar-o-cancelar-una-o-todas" aria-hidden="true">#</a> #28: Eventos recurrentes → Se crean instancias automáticamente, con editar o cancelar una o todas</h4>
+<p>Al crear un evento recurrente (capacitación semanal de trabajo de campo, asamblea comunitaria mensual), el sistema genera automáticamente las instancias según la regla de recurrencia. Cada instancia tiene su propia lista de asistentes y sus propios datos de registro de entrada.</p>
+<p><strong>Editar</strong> una instancia ofrece: &quot;Editar solo este evento&quot; o &quot;Editar este y todos los eventos futuros&quot; — el patrón estándar de calendario.</p>
+<p><strong>Cancelar</strong> una instancia ofrece el mismo patrón: &quot;Cancelar solo este evento&quot; o &quot;Cancelar este y todos los eventos futuros&quot;. Cancelar una instancia no afecta a las demás. Las instancias canceladas siguen visibles en el calendario (atenuadas, marcadas como &quot;Cancelado&quot;) para que el equipo vea lo que estaba planificado. Quienes habían confirmado asistencia a una instancia cancelada reciben una notificación de cancelación.</p>
+<h4 id="29-difusión-durante-el-evento-al-personal-por-la-app-a-las-personas-asistentes-por-sms" tabindex="-1"><a class="heading-anchor" href="#29-difusión-durante-el-evento-al-personal-por-la-app-a-las-personas-asistentes-por-sms" aria-hidden="true">#</a> #29: Difusión durante el evento → Al personal por la app; a las personas asistentes por SMS</h4>
+<p>Las difusiones durante el evento sirven a dos públicos distintos por canales distintos:</p>
+<p><strong>Difusión al personal (en la app):</strong> durante un evento, los Gerentes de eventos pueden enviar una notificación push a todo el personal del evento (p. ej., &quot;Mover el registro de entrada a la puerta 2&quot;, &quot;El ponente lleva 15 min de retraso&quot;). Usa el sistema de notificaciones existente — un anuncio unidireccional, no una conversación. Solo disponible para el personal con el rol de Gerente de eventos.</p>
+<p><strong>Difusión a las personas asistentes (SMS):</strong> la mayoría de las personas asistentes no va a tener la app instalada. Para los anuncios dirigidos a ellas (p. ej., &quot;La sesión 2 se movió al salón B&quot;), los Gerentes de eventos pueden enviar un SMS a todas las que ya registraron su entrada y dieron un número de teléfono al inscribirse o al confirmar asistencia. Usa la capacidad de SMS del sistema de comunicaciones, sujeta al modelo de consentimiento de SMS de la organización. Se limita a quienes registraron su entrada para no enviar mensajes a quienes no llegaron.</p>
+<p>La pantalla de detalle del evento ofrece dos acciones de difusión distintas: &quot;Notificar al personal&quot; (en la app) y &quot;Enviar mensaje a asistentes&quot; (SMS), lo que deja explícitos el público y el canal.</p>
+<!-- REVISIT: el encabezado dice "gana la última escritura" y el cuerpo dice que gana la
+marca de tiempo más temprana. Son reglas opuestas. La incoherencia viene del original. -->
+<h4 id="30-registro-de-entrada-sin-conexión-con-varias-personas-del-equipo-gana-la-última-escritura-con-detección-de-duplicados" tabindex="-1"><a class="heading-anchor" href="#30-registro-de-entrada-sin-conexión-con-varias-personas-del-equipo-gana-la-última-escritura-con-detección-de-duplicados" aria-hidden="true">#</a> #30: Registro de entrada sin conexión con varias personas del equipo → Gana la última escritura, con detección de duplicados</h4>
+<p>Cuando varias personas del equipo registran entradas sin conexión al mismo tiempo (sede grande, varios puntos de acceso), cada dispositivo mantiene su propia lista de registro de entrada. Al sincronizar, el sistema fusiona: si dos dispositivos registraron a la misma persona, gana la marca de tiempo más temprana y el duplicado queda anotado. Nadie aparece con la entrada registrada dos veces.</p>
+<p>La pantalla de registro de entrada muestra un indicador de estado de sincronización (siguiendo el patrón de actualidad de los paneles de #5) para que el equipo sepa si está viendo el cuadro completo o trabajando con una vista solo local.</p>
+<h3 id="recaudación-de-fondos-4-preguntas-3336" tabindex="-1"><a class="heading-anchor" href="#recaudación-de-fondos-4-preguntas-3336" aria-hidden="true">#</a> Recaudación de fondos (4 preguntas: #33–#36)</h3>
+<p><em>Las preguntas #31 y #32 se resolvieron en la sección transversal de arriba.</em></p>
+<h4 id="33-requisito-de-foto-para-donaciones-en-efectivo-obligatoria-por-encima-de-un-umbral-configurable-por-defecto-el-equivalente-de-100-usd" tabindex="-1"><a class="heading-anchor" href="#33-requisito-de-foto-para-donaciones-en-efectivo-obligatoria-por-encima-de-un-umbral-configurable-por-defecto-el-equivalente-de-100-usd" aria-hidden="true">#</a> #33: Requisito de foto para donaciones en efectivo → Obligatoria por encima de un umbral configurable (por defecto, el equivalente de $100 USD)</h4>
+<p>Por debajo del umbral: la foto es opcional pero recomendada. Por encima del umbral: la captura con la cámara es obligatoria antes de poder guardar el registro de la donación en efectivo. La foto se adjunta al registro de la donación para efectos del registro de auditoría.</p>
+<p>El umbral lo configura la organización (por defecto: el equivalente de $100 USD en moneda local). Esto equilibra el rigor de auditoría con la fricción en campo — las donaciones pequeñas (colectas en puestos de mercado, puerta a puerta) no deberían obligar a pelearse con la cámara, pero las cantidades de efectivo más grandes necesitan documentación.</p>
+<h4 id="34-cantidad-de-variantes-en-las-pruebas-ab-2-variantes-en-la-v1" tabindex="-1"><a class="heading-anchor" href="#34-cantidad-de-variantes-en-las-pruebas-ab-2-variantes-en-la-v1" aria-hidden="true">#</a> #34: Cantidad de variantes en las pruebas A/B → 2 variantes en la v1</h4>
+<p>Solo A/B (no A/B/C/D). Dos variantes bastan para la mayoría de las pruebas de páginas de recaudación (titulares distintos, montos solicitados distintos, imágenes distintas). Más variantes exigen públicos más grandes para alcanzar significancia estadística — el mismo problema matemático que las pruebas A/B por SMS (#19). La pantalla de resultados de la prueba (ya diseñada aparte de la de configuración, según decisión de diseño) muestra una comparación limpia cara a cara. Se puede añadir soporte para más variantes después sin cambiar el modelo de datos.</p>
+<h4 id="35-resolución-de-disputas-sobre-el-reparto-en-una-alianza-escalamiento-al-líder-de-la-alianza-plazo-configurable" tabindex="-1"><a class="heading-anchor" href="#35-resolución-de-disputas-sobre-el-reparto-en-una-alianza-escalamiento-al-líder-de-la-alianza-plazo-configurable" aria-hidden="true">#</a> #35: Resolución de disputas sobre el reparto en una alianza → Escalamiento al líder de la alianza + plazo configurable</h4>
+<p>Si una organización miembro rechaza un reparto de recaudación propuesto, el rechazo incluye un motivo obligatorio. El líder de la alianza (o el comité, según el modelo de gobernanza de <a href="http://alliance.md" target="_blank" rel="noopener noreferrer">alliance.md</a>) recibe el rechazo y media.</p>
+<p>Si no hay resolución dentro de un plazo configurable (por defecto: 14 días), el reparto vuelve a la proporción por defecto de la alianza. No hay sistema formal de arbitraje — eso es gobernanza organizativa, no software.</p>
+<h4 id="36-actualidad-de-los-datos-del-panel-de-recaudación-cubierto-por-5" tabindex="-1"><a class="heading-anchor" href="#36-actualidad-de-los-datos-del-panel-de-recaudación-cubierto-por-5" aria-hidden="true">#</a> #36: Actualidad de los datos del panel de recaudación → Cubierto por #5</h4>
+<p>Los paneles de recaudación caen en el nivel &quot;De campaña&quot; de #5: actualización automática cada 5 minutos, indicador de actualidad obligatorio y botón de actualización manual. Durante los empujones activos de recaudación (p. ej., el cierre de trimestre), el Gerente de campaña usa el botón de actualización manual para ver totales al momento.</p>
+<h3 id="activismo-5-preguntas-3741" tabindex="-1"><a class="heading-anchor" href="#activismo-5-preguntas-3741" aria-hidden="true">#</a> Activismo (5 preguntas: #37–#41)</h3>
+<h4 id="37-campañas-con-varios-destinatarios-sí-una-campaña-varios-destinatarios-una-carta-por-destinatario" tabindex="-1"><a class="heading-anchor" href="#37-campañas-con-varios-destinatarios-sí-una-campaña-varios-destinatarios-una-carta-por-destinatario" aria-hidden="true">#</a> #37: Campañas con varios destinatarios → Sí; una campaña, varios destinatarios, una carta por destinatario</h4>
+<p>Una campaña como &quot;Dile a tus representantes que voten por X&quot; puede dirigirse a varios legisladores. El simpatizante ve una sola página de acción. El sistema genera un mensaje de IA único para cada destinatario (con el modelo de generación ya diseñado en ACT-005). El simpatizante revisa y aprueba cada carta antes de enviarla.</p>
+<p>El panel de la campaña muestra las tasas de respuesta por destinatario para que el equipo vea qué destinatarios están recibiendo más presión de sus constituyentes.</p>
+<h4 id="38-elección-del-modelo-de-ia-bring-your-own-model-byom-independiente-del-proveedor" tabindex="-1"><a class="heading-anchor" href="#38-elección-del-modelo-de-ia-bring-your-own-model-byom-independiente-del-proveedor" aria-hidden="true">#</a> #38: Elección del modelo de IA → Bring Your Own Model (BYOM), independiente del proveedor</h4>
+<p>Cada vez más organizaciones tienen su propio entorno de IA — acuerdos empresariales, restricciones de cumplimiento sobre residencia de datos, modelos ajustados a su discurso y su tono, contexto de sus demás flujos de trabajo. La plataforma debe conectarse a esa infraestructura existente, no reemplazarla.</p>
+<ul>
+<li><strong>Configuración de BYOM:</strong> BYOM es <em>Bring Your Own Model</em> — la organización configura su propio proveedor de IA. El OA lo configura en los ajustes, siguiendo el mismo patrón que BYOK (Bring Your Own Key — la organización controla su propia llave de cifrado) para el cifrado. La organización aporta un endpoint de API y credenciales. Las funcionalidades de IA de la plataforma (generación de mensajes, concierge, etc.) pasan por el proveedor que la organización configuró.</li>
+<li><strong>Valor por defecto de la plataforma:</strong> las organizaciones sin infraestructura de IA propia reciben un modelo gestionado por la plataforma. Así todas las funcionalidades de IA funcionan de entrada para las organizaciones más pequeñas.</li>
+<li><strong>Interfaz independiente del proveedor:</strong> la plataforma define qué necesita del modelo (generación de texto con soporte de idiomas), no qué modelo concreto es. Una capa de abstracción absorbe las diferencias de API de cada proveedor.</li>
+<li><strong>Continuidad del contexto:</strong> usar el entorno de IA propio de la organización significa que los modelos que su equipo usa en el resto de su trabajo — con su tono, su terminología y su contexto institucional — son los mismos que mueven las funcionalidades de GreenGrass.</li>
+</ul>
+<p>Esto conecta con el patrón BYOK existente: las organizaciones a las que les importa controlar su infraestructura pueden hacerlo; las que no, reciben valores por defecto sensatos.</p>
+<h4 id="39-cartas-imprimibles-sí-descargar-como-pdf-en-la-página-de-acción-del-simpatizante" tabindex="-1"><a class="heading-anchor" href="#39-cartas-imprimibles-sí-descargar-como-pdf-en-la-página-de-acción-del-simpatizante" aria-hidden="true">#</a> #39: Cartas imprimibles → Sí; &quot;Descargar como PDF&quot; en la página de acción del simpatizante</h4>
+<p>Algunos destinatarios (oficinas de gobierno local, organismos reguladores) aceptan cartas físicas. Después de que el simpatizante aprueba su mensaje generado por IA, puede enviarlo por correo electrónico o descargar un PDF con formato para imprimirlo y enviarlo por correo postal. El PDF incluye la dirección postal del destinatario, el cuerpo de la carta con formato y el nombre del simpatizante.</p>
+<p>Es un añadido de bajo costo — es el mismo contenido renderizado en otro formato de salida.</p>
+<h4 id="40-verificación-del-envío-de-comentarios-verificación-manual-por-el-equipo-seguimiento-de-la-entrega" tabindex="-1"><a class="heading-anchor" href="#40-verificación-del-envío-de-comentarios-verificación-manual-por-el-equipo-seguimiento-de-la-entrega" aria-hidden="true">#</a> #40: Verificación del envío de comentarios → Verificación manual por el equipo + seguimiento de la entrega</h4>
+<p>Antes de lanzar una campaña de comentarios ante un regulador, el equipo tiene que verificar el punto de envío (dirección de correo o URL de un formulario web) y marcarlo como verificado en la configuración de la campaña. El sistema no verifica solo — los procesos de envío regulatorio varían demasiado de una jurisdicción a otra.</p>
+<p>Después de que los simpatizantes envían, la campaña hace seguimiento del estado de entrega: Enviado, Entregado (confirmación de entrega del correo), Rebotado. Los envíos rebotados se marcan para revisión del equipo. No hay garantía de aceptación por parte del organismo regulador — eso queda fuera del control de la plataforma.</p>
+<h4 id="41-verificación-de-identidad-del-simpatizante-opcional-por-campaña-por-defecto-autodeclarada" tabindex="-1"><a class="heading-anchor" href="#41-verificación-de-identidad-del-simpatizante-opcional-por-campaña-por-defecto-autodeclarada" aria-hidden="true">#</a> #41: Verificación de identidad del simpatizante → Opcional por campaña; por defecto, autodeclarada</h4>
+<p>Algunas campañas requieren validar la circunscripción (solo los constituyentes del Distrito 5 deberían escribirle al representante del Distrito 5). Quien crea la campaña puede activar la verificación de circunscripción, que añade un campo de dirección o de código postal a la página de acción y lo valida contra los límites de la circunscripción del destinatario.</p>
+<p>Por defecto: desactivada (solo nombre y correo autodeclarados), porque cada campo adicional reduce la participación. Cuando se activa, el sistema es transparente: &quot;Verificamos tu dirección para asegurar que tu mensaje llegue al representante correcto&quot;.</p>
+<hr>
+<h2 id="funcionalidades-pilares-de-la-v2" tabindex="-1"><a class="heading-anchor" href="#funcionalidades-pilares-de-la-v2" aria-hidden="true">#</a> Funcionalidades pilares de la v2</h2>
+<p>Funcionalidades explícitamente aplazadas de la v1 y designadas como capacidades mayores de la v2:</p>
+<table>
+<thead>
+<tr>
+<th>Funcionalidad</th>
+<th>Origen</th>
+<th>Descripción</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Constructor visual de flujos</strong></td>
+<td>#20</td>
+<td>Constructor de secuencias escalonadas en grafo de nodos, con lógica de ramificación, orquestación entre canales y arrastrar y soltar</td>
+</tr>
+<tr>
+<td><strong>Biblioteca compartida de contenidos</strong></td>
+<td>#23</td>
+<td>Gestión centralizada de recursos con etiquetado, búsqueda, seguimiento de uso, gestión de derechos y reutilización entre funcionalidades</td>
+</tr>
+<tr>
+<td><strong>Delegación de ajustes</strong></td>
+<td>#52</td>
+<td>Delegación controlada de categorías de configuración de bajo riesgo a roles que no son OA</td>
+</tr>
+</tbody>
+</table>
+<!-- REVISIT: esta tabla lista tres funcionalidades pilares de la v2 y la línea correspondiente de las Consecuencias lista cuatro (añade las pruebas A/B de páginas públicas). La incoherencia viene del original en inglés y se conserva a propósito; no se arregla aquí. -->
+<h3 id="prensa-y-medios-5-preguntas-4246" tabindex="-1"><a class="heading-anchor" href="#prensa-y-medios-5-preguntas-4246" aria-hidden="true">#</a> Prensa y medios (5 preguntas: #42–#46)</h3>
+<h4 id="42-aplicación-del-embargo-informativo-seguimiento-basado-en-la-confianza-con-registro-de-auditoría" tabindex="-1"><a class="heading-anchor" href="#42-aplicación-del-embargo-informativo-seguimiento-basado-en-la-confianza-con-registro-de-auditoría" aria-hidden="true">#</a> #42: Aplicación del embargo informativo → Seguimiento basado en la confianza, con registro de auditoría</h4>
+<p>La aplicación técnica (bloquear el acceso antes de la hora del embargo) es frágil — el contenido ya se compartió con los periodistas por correo. La plataforma registra: qué periodistas recibieron material embargado, cuándo y si se respetó el embargo.</p>
+<p>La pantalla del comunicado de prensa muestra el estado del embargo (Activo / Levantado / Roto) y una línea de tiempo periodista por periodista. Si alguien rompe un embargo, el equipo puede marcarlo en su registro de contacto — eso informa decisiones futuras sobre quién recibe acceso anticipado. El sistema es una herramienta de seguimiento, no un sistema de DRM.</p>
+<h4 id="43-comunicación-de-crisis-marca-de-urgente-con-flujo-simplificado-no-un-modo-aparte" tabindex="-1"><a class="heading-anchor" href="#43-comunicación-de-crisis-marca-de-urgente-con-flujo-simplificado-no-un-modo-aparte" aria-hidden="true">#</a> #43: Comunicación de crisis → Marca de urgente con flujo simplificado, no un modo aparte</h4>
+<p>Un &quot;modo de crisis&quot; dedicado implica un estado binario en el que hay que entrar y del que hay que salir — ceremonia justo cuando más importa la velocidad. En cambio: cualquier comunicado o declaración se puede marcar como &quot;Urgente&quot;, lo que:</p>
+<ul>
+<li>Dispara un flujo de aprobación simplificado (menos personas aprobadoras requeridas, plazos más cortos)</li>
+<li>Lo pone al principio de la cola del equipo de comunicaciones</li>
+<li>Envía notificación inmediata a los contactos de crisis designados</li>
+</ul>
+<p>El constructor de declaraciones (ya diseñado como simplificado, según decisión de diseño) es la herramienta de crisis. No necesita un modo aparte.</p>
+<h4 id="44-tono-de-la-cobertura-solo-manual-en-la-v1" tabindex="-1"><a class="heading-anchor" href="#44-tono-de-la-cobertura-solo-manual-en-la-v1" aria-hidden="true">#</a> #44: Tono de la cobertura → Solo manual en la v1</h4>
+<p>El análisis automático del tono de los titulares requiere procesamiento de lenguaje natural (PLN) que rinde mal con medios multilingües del Sur Global (pocos datos de entrenamiento, contexto cultural, sarcasmo). El etiquetado manual del tono (Positivo / Neutral / Negativo / Mixto) por parte del equipo de prensa que sí lee la cobertura es más preciso.</p>
+<p>La pantalla del registro de cobertura muestra un gráfico de distribución del tono. La sugerencia automática se puede explorar en una versión futura si la infraestructura de IA con BYOM (#38) hace viable el tono multilingüe.</p>
+<h4 id="45-presentación-pública-de-los-respaldos-tres-ubicaciones" tabindex="-1"><a class="heading-anchor" href="#45-presentación-pública-de-los-respaldos-tres-ubicaciones" aria-hidden="true">#</a> #45: Presentación pública de los respaldos → Tres ubicaciones</h4>
+<ol>
+<li><strong>Endorsement pipeline Kanban (PRESS-011)</strong> — la vista de gestión para que el equipo de prensa haga seguimiento del estado de los respaldos</li>
+<li><strong>Candidate dashboard (DASH-002)</strong> — un conteo resumen y una tarjeta de respaldos recientes, porque los respaldos son métricas de alto impacto para las candidaturas</li>
+<li><strong>Public endorsement page (PUB-004 o sección dedicada)</strong> — una lista de cara al público, que el OA puede restringir, para kits de prensa y comunicaciones dirigidas a simpatizantes</li>
+</ol>
+<h4 id="46-comunicados-de-prensa-en-varios-idiomas-un-solo-comunicado-con-variantes-por-idioma" tabindex="-1"><a class="heading-anchor" href="#46-comunicados-de-prensa-en-varios-idiomas-un-solo-comunicado-con-variantes-por-idioma" aria-hidden="true">#</a> #46: Comunicados de prensa en varios idiomas → Un solo comunicado con variantes por idioma</h4>
+<p>Un solo registro de comunicado de prensa con varias versiones de idioma, gestionadas como pestañas dentro del editor de comunicados (PRESS-003). Todas las variantes de idioma comparten el mismo embargo, la misma lista de distribución y los mismos metadatos. Cada variante puede tener su propia sublista de distribución a periodistas (los periodistas francófonos reciben la versión en francés).</p>
+<p>Así el comunicado sigue siendo una sola entidad lógica y a la vez admite distribución multilingüe.</p>
+<h3 id="gotv-y-día-de-elecciones-4-preguntas-4750" tabindex="-1"><a class="heading-anchor" href="#gotv-y-día-de-elecciones-4-preguntas-4750" aria-hidden="true">#</a> GOTV y día de elecciones (4 preguntas: #47–#50)</h3>
+<p><em>La pregunta #51 se resolvió en la sección transversal de arriba.</em></p>
+<h4 id="47-flujos-oficiales-de-datos-electorales-capa-de-abstracción-con-alternativa-manual-de-reserva" tabindex="-1"><a class="heading-anchor" href="#47-flujos-oficiales-de-datos-electorales-capa-de-abstracción-con-alternativa-manual-de-reserva" aria-hidden="true">#</a> #47: Flujos oficiales de datos electorales → Capa de abstracción con alternativa manual de reserva</h4>
+<p>Las API de las autoridades electorales varían enormemente de un país a otro y muchas veces no existen en el Sur Global. La plataforma define un esquema estándar de datos electorales (centros de votación, listas de candidaturas, límites de distrito, resultados) y ofrece dos vías de ingesta:</p>
+<ol>
+<li><strong>Conector de API</strong> para las jurisdicciones que ofrecen flujos legibles por máquina, configurado por organización</li>
+<li><strong>Importación manual</strong> por CSV u hoja de cálculo para todo lo demás</li>
+</ol>
+<p>En la v1 no se promete la integración con ninguna autoridad electoral concreta. El valor está en el esquema estándar y en el flujo de importación manual. Los conectores de API se pueden añadir por jurisdicción según la demanda lo justifique.</p>
+<h4 id="48-transporte-compartido-en-la-alianza-sí-opcional-lo-activa-el-líder-de-la-alianza" tabindex="-1"><a class="heading-anchor" href="#48-transporte-compartido-en-la-alianza-sí-opcional-lo-activa-el-líder-de-la-alianza" aria-hidden="true">#</a> #48: Transporte compartido en la alianza → Sí, opcional; lo activa el líder de la alianza</h4>
+<p>Los miembros de la alianza pueden aportar conductores a una bolsa compartida para el transporte a las urnas del día de elecciones. El líder de la alianza lo activa en la configuración de GOTV.</p>
+<ul>
+<li>Los conductores de cada organización miembro siguen siendo visibles para esa organización</li>
+<li>Las solicitudes de transporte se pueden enrutar a cualquier conductor disponible de la bolsa compartida</li>
+<li><strong>Prioridad de asignación de conductores:</strong> primero la misma organización, después la bolsa de la alianza</li>
+<li>Cada organización solo ve en sus propios informes los viajes que cubrieron sus propios conductores</li>
+<li>El panel de la alianza muestra métricas agregadas</li>
+</ul>
+<h4 id="49-algoritmo-de-reasignación-basado-en-reglas-en-la-v1" tabindex="-1"><a class="heading-anchor" href="#49-algoritmo-de-reasignación-basado-en-reglas-en-la-v1" aria-hidden="true">#</a> #49: Algoritmo de reasignación → Basado en reglas en la v1</h4>
+<p>Las sugerencias de reasignación (ya sujetas a intervención humana, según decisión de diseño) usan reglas simples: si la cobertura de voluntariado de un centro de votación baja de un umbral configurable, se sugiere reasignar desde centros con exceso de personal.</p>
+<p>Las reglas son transparentes y auditables — el equipo puede ver exactamente por qué se hizo una sugerencia. Los modelos predictivos (predicción de participación electoral con aprendizaje automático, asignación óptima) requieren datos de entrenamiento que no existen para la mayoría de las elecciones del Sur Global. Basarse en reglas es lo correcto para la v1; lo predictivo se puede explorar a través de la infraestructura de BYOM (#38) en versiones futuras.</p>
+<h4 id="50-seguridad-en-la-captura-de-resultados-verificación-en-varias-capas-sin-frenar-la-velocidad" tabindex="-1"><a class="heading-anchor" href="#50-seguridad-en-la-captura-de-resultados-verificación-en-varias-capas-sin-frenar-la-velocidad" aria-hidden="true">#</a> #50: Seguridad en la captura de resultados → Verificación en varias capas sin frenar la velocidad</h4>
+<table>
+<thead>
+<tr>
+<th>Capa</th>
+<th>Mecanismo</th>
+<th>Propósito</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Identidad</td>
+<td>Solo los observadores electorales registrados (GOTV-012) pueden enviar resultados</td>
+<td>Impide envíos anónimos</td>
+</tr>
+<tr>
+<td>Geolocalización</td>
+<td>Sello GPS opcional en el envío (quien observa debe estar cerca del centro de votación)</td>
+<td>Disuade la fabricación a distancia; opcional porque el GPS puede no funcionar bajo techo</td>
+</tr>
+<tr>
+<td>Evidencia fotográfica</td>
+<td>Foto de la pizarra o el acta oficial de resultados adjunta al envío</td>
+<td>Artefacto principal de verificación</td>
+</tr>
+<tr>
+<td>Cotejo cruzado</td>
+<td>Comparación lado a lado cuando varias personas observadoras envían desde el mismo centro</td>
+<td>Marca las discrepancias para revisión en el centro de mando</td>
+</tr>
+<tr>
+<td>Registro de auditoría</td>
+<td>Todos los envíos son inmutables, con fecha y hora, ID de quien envía e información del dispositivo</td>
+<td>No se puede borrar, según la política de conservación</td>
+</tr>
+</tbody>
+</table>
+<p>Ninguna capa por sí sola bloquea — un observador electoral sin señal de GPS igual puede enviar. Pero las capas se acumulan: una captura fraudulenta necesitaría un observador registrado, en el centro correcto, con una foto convincente y que además cuadre con los envíos de otros observadores. El panel del centro de mando destaca las discrepancias para revisión humana.</p>
+<h3 id="configuración-y-administración-4-preguntas-5356" tabindex="-1"><a class="heading-anchor" href="#configuración-y-administración-4-preguntas-5356" aria-hidden="true">#</a> Configuración y administración (4 preguntas: #53–#56)</h3>
+<p><em>La pregunta #52 se resolvió en la sección transversal de arriba.</em></p>
+<h4 id="53-aprobación-de-dos-oa-sí-solo-para-operaciones-destructivas" tabindex="-1"><a class="heading-anchor" href="#53-aprobación-de-dos-oa-sí-solo-para-operaciones-destructivas" aria-hidden="true">#</a> #53: Aprobación de dos OA → Sí, solo para operaciones destructivas</h4>
+<p>Las operaciones destructivas requieren la confirmación de un segundo OA:</p>
+<ul>
+<li>Borrar la organización</li>
+<li>Revocar todas las llaves de API</li>
+<li>Bajar el nivel de seguridad</li>
+<li>Quitar la última integración de un tipo crítico (procesador de pagos, proveedor de SMS)</li>
+</ul>
+<p>Los cambios rutinarios de configuración (actualizar el nombre de la organización, ajustar los topes de frecuencia, editar plantillas de rol) no requieren aprobación de dos OA.</p>
+<p><strong>Alternativa de reserva con un solo OA:</strong> si la organización tiene un único OA, las operaciones destructivas exigen en su lugar un período de espera de 48 horas con confirmación por correo. Esto evita cambios catastróficos accidentales o forzados sin añadir fricción a la administración diaria.</p>
+<h4 id="54-importación-y-exportación-de-la-configuración-solo-exportación-en-la-v1" tabindex="-1"><a class="heading-anchor" href="#54-importación-y-exportación-de-la-configuración-solo-exportación-en-la-v1" aria-hidden="true">#</a> #54: Importación y exportación de la configuración → Solo exportación en la v1</h4>
+<p>Los OA pueden exportar su configuración como una instantánea JSON para documentación, copia de seguridad o para compartirla con consultores.</p>
+<p>La importación entre organizaciones (aplicar la configuración de la organización A a la B) queda aplazada — exige validar que la organización de destino tenga las mismas integraciones, los mismos procesadores de pago y la misma jurisdicción de cumplimiento. Una instantánea de la configuración es útil como referencia aunque no haya importación automática.</p>
+<h4 id="55-límites-de-solicitudes-de-la-api-valores-por-defecto-por-plan-con-sobrescritura-por-llave" tabindex="-1"><a class="heading-anchor" href="#55-límites-de-solicitudes-de-la-api-valores-por-defecto-por-plan-con-sobrescritura-por-llave" aria-hidden="true">#</a> #55: Límites de solicitudes de la API → Valores por defecto por plan, con sobrescritura por llave</h4>
+<p>Cada plan de precios define límites de solicitudes por defecto. Los OA pueden ajustar los límites por llave de API dentro del techo del plan — p. ej., darle a la llave de sincronización del padrón electoral un límite más alto que a la llave de informes.</p>
+<p>La pantalla de configuración de la API (SET-017) muestra el uso actual frente a los límites de cada llave. Todas las respuestas de la API incluyen encabezados de límite de solicitudes según la convención estándar (<code>X-RateLimit-Limit</code>, <code>X-RateLimit-Remaining</code>, <code>X-RateLimit-Reset</code>).</p>
+<h4 id="56-monitoreo-del-estado-de-las-integraciones-verificaciones-de-estado-proactivas-con-escalamiento-de-alertas" tabindex="-1"><a class="heading-anchor" href="#56-monitoreo-del-estado-de-las-integraciones-verificaciones-de-estado-proactivas-con-escalamiento-de-alertas" aria-hidden="true">#</a> #56: Monitoreo del estado de las integraciones → Verificaciones de estado proactivas con escalamiento de alertas</h4>
+<p>El centro de integraciones (SET-012) muestra el estado en tiempo real de cada integración: Conectada (verde), Degradada (ámbar), Fallida (rojo). El sistema ejecuta verificaciones de estado periódicas (ping a la API, validez del token, marca de tiempo de la última sincronización exitosa).</p>
+<p><strong>Escalamiento de alertas:</strong></p>
+<ol>
+<li>Notificación en la app al OA tras el primer fallo</li>
+<li>Alerta por correo tras 3 fallos consecutivos</li>
+<li>Banner de advertencia en el panel si una integración crítica (procesador de pagos, proveedor de SMS) está caída</li>
+</ol>
+<p>La pantalla de detalle de la integración muestra una línea de tiempo del estado (últimos 30 días) para que el OA distinga los problemas intermitentes de los fallos sostenidos.</p>
+<h3 id="autenticación-y-seguridad-4-preguntas-5760" tabindex="-1"><a class="heading-anchor" href="#autenticación-y-seguridad-4-preguntas-5760" aria-hidden="true">#</a> Autenticación y seguridad (4 preguntas: #57–#60)</h3>
+<h4 id="57-sincronización-de-passkeys-se-permiten-los-passkeys-sincronizados-en-la-nube" tabindex="-1"><a class="heading-anchor" href="#57-sincronización-de-passkeys-se-permiten-los-passkeys-sincronizados-en-la-nube" aria-hidden="true">#</a> #57: Sincronización de passkeys → Se permiten los passkeys sincronizados en la nube</h4>
+<p>Los passkeys atados solo al dispositivo (llaves de seguridad de hardware) son más seguros, pero crean un problema grave de usabilidad: si pierdes el celular, pierdes el acceso. En el contexto objetivo (Sur Global, dispositivos de gama baja, dispositivos compartidos en familia), perder y reemplazar el dispositivo es común.</p>
+<p>Los passkeys sincronizados en la nube (iCloud Keychain, Google Password Manager) dan la resistencia al phishing de WebAuthn con una recuperación práctica. La configuración del nivel de seguridad puede restringirlos a los atados al dispositivo para las organizaciones en el nivel Máximo.</p>
+<h4 id="58-totp-como-alternativa-de-reserva-sí-opcional-en-los-niveles-de-seguridad-reforzado-y-máximo" tabindex="-1"><a class="heading-anchor" href="#58-totp-como-alternativa-de-reserva-sí-opcional-en-los-niveles-de-seguridad-reforzado-y-máximo" aria-hidden="true">#</a> #58: TOTP como alternativa de reserva → Sí, opcional en los niveles de seguridad Reforzado y Máximo</h4>
+<p>La autenticación con passkey requiere un viaje breve de ida y vuelta por la red. En zonas con conectividad intermitente, eso puede fallar. TOTP (Google Authenticator, etc.) funciona completamente sin conexión después de la configuración inicial.</p>
+<p>Los OA en el nivel de seguridad Reforzado o Máximo pueden activar TOTP como método de autenticación de reserva. El nivel Estándar se apoya solo en el passkey más la recuperación por contacto de confianza (configuración más simple para organizaciones pequeñas).</p>
+<h4 id="59-recuperación-del-oa-sin-contactos-de-confianza-asistida-por-la-plataforma-con-verificación-de-identidad" tabindex="-1"><a class="heading-anchor" href="#59-recuperación-del-oa-sin-contactos-de-confianza-asistida-por-la-plataforma-con-verificación-de-identidad" aria-hidden="true">#</a> #59: Recuperación del OA sin contactos de confianza → Asistida por la plataforma, con verificación de identidad</h4>
+<p>Este es el &quot;problema de arranque&quot; — el primer OA no tiene pares que respondan por él.</p>
+<p><strong>Resolución:</strong> el OA contacta al soporte de GreenGrass, que verifica su identidad por el canal original de registro de la organización (el correo usado al inscribirse, el método de pago en archivo). Tras la verificación, el soporte inicia una <strong>recuperación con período de espera de 72 horas</strong> (más largo que las 24 horas estándar porque no hay verificación por pares). Durante el período de espera, todos los contactos de correo de la organización reciben una notificación.</p>
+<p>Es lento y visible a propósito — es la vía de recuperación de mayor riesgo.</p>
+<h4 id="60-compatibilidad-de-passkeys-en-dispositivos-de-gama-baja-android-9-ios-16-chrome-109" tabindex="-1"><a class="heading-anchor" href="#60-compatibilidad-de-passkeys-en-dispositivos-de-gama-baja-android-9-ios-16-chrome-109" aria-hidden="true">#</a> #60: Compatibilidad de passkeys en dispositivos de gama baja → Android 9+ / iOS 16+ / Chrome 109+</h4>
+<p>Esto cubre la gran mayoría de los dispositivos en uso activo en el Sur Global (Android 9 es de 2018). Los dispositivos por debajo de ese umbral recurren a la autenticación por enlace mágico (basada en correo, sin WebAuthn).</p>
+<p>La pantalla de inicio de sesión detecta automáticamente el soporte de WebAuthn y muestra el flujo adecuado — nadie tiene que decidir nada.</p>
+<h3 id="perfil-de-usuario-3-preguntas-6163" tabindex="-1"><a class="heading-anchor" href="#perfil-de-usuario-3-preguntas-6163" aria-hidden="true">#</a> Perfil de usuario (3 preguntas: #61–#63)</h3>
+<h4 id="61-privacidad-de-la-foto-de-perfil-solo-interna-por-defecto" tabindex="-1"><a class="heading-anchor" href="#61-privacidad-de-la-foto-de-perfil-solo-interna-por-defecto" aria-hidden="true">#</a> #61: Privacidad de la foto de perfil → Solo interna por defecto</h4>
+<p>Las fotos de perfil aparecen en la mensajería interna, en los directorios del personal y en las pantallas de asignación. No se muestran en contextos de cara a los simpatizantes (portal, correos, páginas públicas) salvo que la persona active explícitamente &quot;Mostrar mi foto a los simpatizantes&quot; en la configuración de su perfil.</p>
+<p>Por defecto: desactivado. Esto protege la identidad del personal en contextos sensibles en materia de seguridad.</p>
+<h4 id="62-sonidos-de-notificación-solo-el-predeterminado-del-sistema-operativo" tabindex="-1"><a class="heading-anchor" href="#62-sonidos-de-notificación-solo-el-predeterminado-del-sistema-operativo" aria-hidden="true">#</a> #62: Sonidos de notificación → Solo el predeterminado del sistema operativo</h4>
+<p>Los sonidos de notificación personalizados requieren gestión de archivos de audio y sincronización por dispositivo, y no aportan valor real. La plataforma usa el sonido de notificación predeterminado del dispositivo. Quien quiera sonidos personalizados puede configurarlos a nivel del sistema operativo para la app de GreenGrass.</p>
+<p>La configuración del perfil ofrece: sonidos activados o desactivados, vibración activada o desactivada.</p>
+<h4 id="63-notificaciones-de-varias-organizaciones-sí-con-distintivo-de-organización-configurable-por-organización" tabindex="-1"><a class="heading-anchor" href="#63-notificaciones-de-varias-organizaciones-sí-con-distintivo-de-organización-configurable-por-organización" aria-hidden="true">#</a> #63: Notificaciones de varias organizaciones → Sí, con distintivo de organización; configurable por organización</h4>
+<p>Quienes trabajan con varias organizaciones (consultores, coordinadores de alianzas) necesitan ver las notificaciones de las organizaciones que no están activas — si no, se perderían mensajes urgentes.</p>
+<p>Cada notificación muestra un distintivo de organización (avatar y nombre). Se pueden silenciar las notificaciones por organización en la configuración del perfil. Las notificaciones de la organización activa siempre se muestran; las de las organizaciones no activas se agrupan en una sección aparte de la bandeja de notificaciones.</p>
+<h3 id="soporte-y-ayuda-4-preguntas-6467" tabindex="-1"><a class="heading-anchor" href="#soporte-y-ayuda-4-preguntas-6467" aria-hidden="true">#</a> Soporte y ayuda (4 preguntas: #64–#67)</h3>
+<h4 id="64-idioma-del-concierge-de-ia-se-detecta-a-partir-de-la-pregunta-por-defecto-el-configurado" tabindex="-1"><a class="heading-anchor" href="#64-idioma-del-concierge-de-ia-se-detecta-a-partir-de-la-pregunta-por-defecto-el-configurado" aria-hidden="true">#</a> #64: Idioma del concierge de IA → Se detecta a partir de la pregunta; por defecto, el configurado</h4>
+<p>Si alguien escribe en francés, se le responde en francés — aunque el idioma de su perfil sea el inglés. La detección de idioma da una experiencia más natural a las personas multilingües que cambian de idioma.</p>
+<p>Si la confianza de la detección es baja (consulta muy corta, idiomas mezclados), se recurre al idioma configurado en el perfil. El concierge siempre ofrece &quot;Cambiar a [idioma configurado]&quot; como acción rápida.</p>
+<h4 id="65-la-capacitación-completada-como-requisito-bloqueante-sí-solo-para-la-capacitación-crítica-de-seguridad" tabindex="-1"><a class="heading-anchor" href="#65-la-capacitación-completada-como-requisito-bloqueante-sí-solo-para-la-capacitación-crítica-de-seguridad" aria-hidden="true">#</a> #65: La capacitación completada como requisito bloqueante → Sí, solo para la capacitación crítica de seguridad</h4>
+<p>El OA marca ciertos módulos de capacitación como &quot;obligatorios antes de salir a campo&quot; (p. ej., protocolos de seguridad, desescalada, pautas de interacción con votantes). Los voluntarios que no completaron los módulos obligatorios no se pueden asignar a turnos — la pantalla de asignación muestra &quot;Capacitación incompleta&quot; con un enlace al módulo pendiente.</p>
+<p>La capacitación no obligatoria (tutoriales de la plataforma, buenas prácticas) se recomienda, pero no bloquea nada.</p>
+<h4 id="66-contenido-externo-en-la-base-de-conocimiento-sí-con-distinción-visual-clara" tabindex="-1"><a class="heading-anchor" href="#66-contenido-externo-en-la-base-de-conocimiento-sí-con-distinción-visual-clara" aria-hidden="true">#</a> #66: Contenido externo en la base de conocimiento → Sí, con distinción visual clara</h4>
+<p>Los artículos de la base de conocimiento pueden enlazar a recursos externos (guías de organizaciones aliadas, páginas de autoridades electorales de gobierno, videos de capacitación de terceros). Los enlaces externos se distinguen visualmente (icono + rótulo &quot;Enlace externo&quot;) y se abren en una pestaña nueva.</p>
+<p>El sistema de ayuda no incrusta ni guarda en caché contenido externo — es un enlace, no un espejo. Así se evitan copias en caché desactualizadas y a la vez las organizaciones pueden curar recursos más allá de lo que hay en la base de conocimiento de la plataforma.</p>
+<h4 id="67-prevención-de-respuestas-inventadas-de-la-ia-anclado-en-la-base-de-conocimiento-con-un-no-sé-explícito" tabindex="-1"><a class="heading-anchor" href="#67-prevención-de-respuestas-inventadas-de-la-ia-anclado-en-la-base-de-conocimiento-con-un-no-sé-explícito" aria-hidden="true">#</a> #67: Prevención de respuestas inventadas de la IA → Anclado en la base de conocimiento, con un &quot;no sé&quot; explícito</h4>
+<p>El concierge de IA está anclado estrictamente en la base de conocimiento de la organización y en la documentación de la plataforma GreenGrass. Si una pregunta no se puede responder desde esas fuentes, el concierge dice &quot;No tengo información sobre eso&quot; y ofrece conectar a la persona con soporte o buscar en la base de conocimiento.</p>
+<p>Sin razonamiento más amplio ni conocimiento externo. Esta es una plataforma política — una respuesta inventada sobre ley electoral o cumplimiento puede tener consecuencias reales.</p>
+<h3 id="páginas-públicas-4-preguntas-6871" tabindex="-1"><a class="heading-anchor" href="#páginas-públicas-4-preguntas-6871" aria-hidden="true">#</a> Páginas públicas (4 preguntas: #68–#71)</h3>
+<h4 id="68-dominios-personalizados-sí-en-la-v1" tabindex="-1"><a class="heading-anchor" href="#68-dominios-personalizados-sí-en-la-v1" aria-hidden="true">#</a> #68: Dominios personalizados → Sí, en la v1</h4>
+<p>Las organizaciones pueden apuntar un dominio personalizado (p. ej., <code>join.partyname.org</code>) a sus páginas públicas. La plataforma se encarga del aprovisionamiento del certificado SSL (Let's Encrypt). Se configura en SET-012 (integraciones). Por defecto: las páginas se sirven bajo un subdominio de GreenGrass (<code>partyname.greengrass.app</code>).</p>
+<p>Los dominios personalizados son críticos para la credibilidad de la marca — quien hace clic en un enlace de donación necesita ver el dominio de la organización, no el de la plataforma.</p>
+<h4 id="69-analítica-de-páginas-analítica-ligera-integrada-sin-rastreo-de-terceros" tabindex="-1"><a class="heading-anchor" href="#69-analítica-de-páginas-analítica-ligera-integrada-sin-rastreo-de-terceros" aria-hidden="true">#</a> #69: Analítica de páginas → Analítica ligera integrada; sin rastreo de terceros</h4>
+<p>Las páginas públicas registran: vistas, visitantes únicos, tasa de conversión (envíos de formulario / vistas) y origen de referencia (parámetros UTM). Se muestra en el panel de páginas públicas.</p>
+<p>Sin analítica de terceros (Google Analytics, Meta Pixel) en la v1 — plantean problemas de privacidad y añaden complejidad de consentimiento de cookies en las jurisdicciones de GDPR y LGPD. Los OA que necesiten analítica más profunda pueden añadir scripts externos mediante un campo de inyección de código personalizado (ajuste avanzado, desactivado por defecto).</p>
+<h4 id="70-pruebas-ab-en-el-registro-de-voluntarios-se-aplaza-a-la-v2" tabindex="-1"><a class="heading-anchor" href="#70-pruebas-ab-en-el-registro-de-voluntarios-se-aplaza-a-la-v2" aria-hidden="true">#</a> #70: Pruebas A/B en el registro de voluntarios → Se aplaza a la v2</h4>
+<p>Las pruebas A/B en páginas públicas requieren repartir el tráfico, servir variantes y hacer análisis estadístico. La infraestructura de pruebas A/B de recaudación (#34) está acotada a las páginas de donación. Extenderla a las páginas de registro de voluntarios es trabajo adicional. En la v1, las organizaciones iteran a mano el texto de su página de registro. Cuando la infraestructura de pruebas A/B madure, extenderla a las páginas públicas es sencillo.</p>
+<h4 id="71-imágenes-de-open-graph-generadas-automáticamente-con-sobrescritura-manual" tabindex="-1"><a class="heading-anchor" href="#71-imágenes-de-open-graph-generadas-automáticamente-con-sobrescritura-manual" aria-hidden="true">#</a> #71: Imágenes de Open Graph → Generadas automáticamente, con sobrescritura manual</h4>
+<p>La plataforma genera automáticamente las imágenes OG a partir del título de la página + el logo de la organización + los colores de marca (composición simple de plantilla, no IA). Los OA pueden sobrescribirla subiendo a mano una imagen por página.</p>
+<p>La generación automática asegura que todo enlace compartido tenga imagen de vista previa (crítico para compartir en redes sociales) sin exigir trabajo de diseño en cada página.</p>
+<h3 id="puesta-en-marcha-3-preguntas-7274" tabindex="-1"><a class="heading-anchor" href="#puesta-en-marcha-3-preguntas-7274" aria-hidden="true">#</a> Puesta en marcha (3 preguntas: #72–#74)</h3>
+<h4 id="72-comportamiento-al-omitir-pasos-del-asistente-núcleo-obligatorio-3-pasos-extensiones-opcionales" tabindex="-1"><a class="heading-anchor" href="#72-comportamiento-al-omitir-pasos-del-asistente-núcleo-obligatorio-3-pasos-extensiones-opcionales" aria-hidden="true">#</a> #72: Comportamiento al omitir pasos del asistente → Núcleo obligatorio (3 pasos), extensiones opcionales</h4>
+<p>Tres pasos no se pueden omitir: nombre de la organización + cuenta de administrador + selección del nivel de seguridad. La plataforma no puede funcionar sin ellos.</p>
+<p>Todos los demás pasos del asistente (procesador de pagos, configuración de cumplimiento, WhatsApp, SMS, importación del padrón electoral) muestran una opción de &quot;Omitir por ahora&quot; que los añade a la lista de verificación posterior al asistente.</p>
+<p><strong>Camino mínimo viable:</strong> 3 pasos hasta una organización funcionando con funcionalidades básicas, y después configuración progresiva por lista de verificación.</p>
+<h4 id="73-reanudar-el-asistente-sí-con-guardado-automático-tras-cada-paso-completado" tabindex="-1"><a class="heading-anchor" href="#73-reanudar-el-asistente-sí-con-guardado-automático-tras-cada-paso-completado" aria-hidden="true">#</a> #73: Reanudar el asistente → Sí, con guardado automático tras cada paso completado</h4>
+<p>Si se abandona el asistente (se cierra el navegador, expira la sesión), el siguiente inicio de sesión retoma desde el último paso completado. Los pasos completados aparecen como hechos con una marca de cotejo; el paso actual viene prellenado con lo que ya se había escrito. No se pierden datos al abandonarlo. El estado del asistente persiste hasta que el asistente se completa o el OA lo reinicia explícitamente.</p>
+<h4 id="74-lista-de-verificación-posterior-al-asistente-persiste-hasta-completar-los-elementos-obligatorios-después-se-puede-descartar" tabindex="-1"><a class="heading-anchor" href="#74-lista-de-verificación-posterior-al-asistente-persiste-hasta-completar-los-elementos-obligatorios-después-se-puede-descartar" aria-hidden="true">#</a> #74: Lista de verificación posterior al asistente → Persiste hasta completar los elementos obligatorios; después se puede descartar</h4>
+<p>La lista de verificación aparece en el panel después del asistente. Los elementos obligatorios (los que se omitieron durante el asistente) no se pueden descartar uno a uno — la lista se queda hasta que estén hechos. Los elementos opcionales (&quot;Invita a la primera persona de tu equipo&quot;, &quot;Crea tu primer evento&quot;) sí se pueden descartar uno a uno.</p>
+<p>Una vez completados todos los elementos obligatorios, toda la lista se puede descartar con la acción &quot;Entendido, ocultar la lista&quot;.</p>
+<h3 id="portal-de-simpatizantes-3-preguntas-7577" tabindex="-1"><a class="heading-anchor" href="#portal-de-simpatizantes-3-preguntas-7577" aria-hidden="true">#</a> Portal de simpatizantes (3 preguntas: #75–#77)</h3>
+<h4 id="75-niveles-de-autenticación-ya-decidido-enlace-mágico-cuenta-completa" tabindex="-1"><a class="heading-anchor" href="#75-niveles-de-autenticación-ya-decidido-enlace-mágico-cuenta-completa" aria-hidden="true">#</a> #75: Niveles de autenticación → Ya decidido (enlace mágico + cuenta completa)</h4>
+<p>Magic link para el acceso básico (ver el historial de donaciones, descargar recibos). Cuenta completa (con passkey) para las acciones de gestión (actualizar el método de pago, cambiar las preferencias de comunicación). Esto quedó registrado en la tabla de decisiones de diseño de <a href="http://supporter-portal.md" target="_blank" rel="noopener noreferrer">supporter-portal.md</a>. Aquí se confirma como canónico.</p>
+<h4 id="76-identidad-visual-del-portal-logo-colores-y-contenido-no-la-disposición" tabindex="-1"><a class="heading-anchor" href="#76-identidad-visual-del-portal-logo-colores-y-contenido-no-la-disposición" aria-hidden="true">#</a> #76: Identidad visual del portal → Logo, colores y contenido; no la disposición</h4>
+<p>El portal de simpatizantes usa el logo de la organización, sus colores de marca principal y secundario y un texto de bienvenida propio. La disposición, la estructura de navegación y el diseño de los componentes son fijos (los controla la plataforma).</p>
+<p>Así se asegura una UX consistente entre organizaciones y a la vez cada una conserva su identidad visual. No se admite personalización a nivel de CSS (fuentes propias, sobrescrituras de la maquetación) — genera carga de soporte y rompe las garantías de accesibilidad.</p>
+<h4 id="77-portal-en-móvil-web-adaptable-no-una-app-aparte" tabindex="-1"><a class="heading-anchor" href="#77-portal-en-móvil-web-adaptable-no-una-app-aparte" aria-hidden="true">#</a> #77: Portal en móvil → Web adaptable, no una app aparte</h4>
+<p>El portal de simpatizantes es una aplicación web adaptable que funciona en los navegadores de los celulares. No hay app nativa para simpatizantes — la barrera de instalación mataría la adopción. El portal ya está diseñado con prioridad móvil (según la decisión de diseño de las páginas públicas).</p>
+<p>Las capacidades de PWA (añadir a la pantalla de inicio, ver recibos sin conexión) se pueden añadir de forma incremental sin necesidad de estar en una tienda de apps.</p>
+<h3 id="alianza-5-preguntas-7882" tabindex="-1"><a class="heading-anchor" href="#alianza-5-preguntas-7882" aria-hidden="true">#</a> Alianza (5 preguntas: #78–#82)</h3>
+<h4 id="78-visibilidad-de-datos-entre-organizaciones-de-la-alianza-se-comparte-la-existencia-del-contacto-los-detalles-de-interacción-son-privados" tabindex="-1"><a class="heading-anchor" href="#78-visibilidad-de-datos-entre-organizaciones-de-la-alianza-se-comparte-la-existencia-del-contacto-los-detalles-de-interacción-son-privados" aria-hidden="true">#</a> #78: Visibilidad de datos entre organizaciones de la alianza → Se comparte la existencia del contacto; los detalles de interacción son privados</h4>
+<p><strong>Compartido por defecto:</strong> la existencia del contacto (evita el contacto duplicado) y las métricas agregadas de campaña (total de puertas tocadas, total recaudado).</p>
+<p><strong>Privado por defecto:</strong> los registros individuales de interacción, las notas internas y el historial de comunicación con el simpatizante.</p>
+<p>La pantalla de configuración de intercambio de la alianza (ya diseñada con vistas por categoría y por organización) controla estos límites. Los OA pueden aflojar el intercambio por categoría.</p>
+<h4 id="79-jerarquía-de-la-alianza-plana-en-la-v1" tabindex="-1"><a class="heading-anchor" href="#79-jerarquía-de-la-alianza-plana-en-la-v1" aria-hidden="true">#</a> #79: Jerarquía de la alianza → Plana en la v1</h4>
+<p>Una alianza es un grupo de un solo nivel de organizaciones miembro. Sin subalianzas, sin jerarquías anidadas. Las alianzas jerárquicas añaden bastante complejidad a la gobernanza, a las reglas de intercambio de datos y a la agregación en los paneles.</p>
+<p>Las alianzas planas cubren el caso de uso principal: socios de una coalición que se coordinan para una elección. Si hacen falta subalianzas, se pueden modelar como alianzas separadas con membresía solapada.</p>
+<h4 id="80-propiedad-de-los-datos-de-una-campaña-conjunta-la-organización-líder-los-conserva-cada-miembro-conserva-los-suyos" tabindex="-1"><a class="heading-anchor" href="#80-propiedad-de-los-datos-de-una-campaña-conjunta-la-organización-líder-los-conserva-cada-miembro-conserva-los-suyos" aria-hidden="true">#</a> #80: Propiedad de los datos de una campaña conjunta → La organización líder los conserva; cada miembro conserva los suyos</h4>
+<p>Cuando termina una campaña conjunta:</p>
+<ul>
+<li>La <strong>organización líder</strong> (o el comité, según el modelo de gobernanza) conserva el registro de la campaña conjunta, los resultados agregados y los recursos compartidos</li>
+<li>Cada <strong>organización miembro</strong> conserva acceso completo a las interacciones que hicieron sus propios voluntarios y a los contactos que aportó a la campaña</li>
+<li>Los <strong>contactos compartidos</strong> (contactados por varias organizaciones) permanecen en el CRM de cada una de forma independiente — no hay deduplicación forzada entre organizaciones</li>
+</ul>
+<p>Ninguna organización miembro pierde acceso a los datos que generó su gente.</p>
+<h4 id="81-permisos-del-panel-de-la-alianza-solo-datos-agregados-por-miembro-con-su-consentimiento" tabindex="-1"><a class="heading-anchor" href="#81-permisos-del-panel-de-la-alianza-solo-datos-agregados-por-miembro-con-su-consentimiento" aria-hidden="true">#</a> #81: Permisos del panel de la alianza → Solo datos agregados; por miembro, con su consentimiento</h4>
+<p>El panel de la alianza muestra métricas agregadas (total de puertas, total recaudado, total de eventos) de todos los miembros. El rendimiento de cada miembro solo lo ve el líder de la alianza, y cada miembro el suyo propio.</p>
+<p>El líder de la alianza puede activar la visibilidad por miembro si todos consienten (se configura en los ajustes de la alianza y requiere el consentimiento expreso del OA de cada miembro).</p>
+<h4 id="82-sla-de-las-solicitudes-de-afiliación-plazo-de-30-días-con-recordatorios" tabindex="-1"><a class="heading-anchor" href="#82-sla-de-las-solicitudes-de-afiliación-plazo-de-30-días-con-recordatorios" aria-hidden="true">#</a> #82: SLA de las solicitudes de afiliación → Plazo de 30 días con recordatorios</h4>
+<p>Una solicitud de afiliación que queda sin respuesta durante 30 días vence sola. El sistema envía recordatorios a los 7, 14 y 21 días al OA de la organización destinataria. Después del vencimiento, la organización solicitante puede volver a enviarla. No hay aprobación automática — el silencio significa no.</p>
+<p>La organización solicitante ve el estado de la solicitud (Pendiente / Aceptada / Rechazada / Vencida) en su pantalla de alianza.</p>
+<h3 id="crm-y-datos-4-preguntas-83-8587" tabindex="-1"><a class="heading-anchor" href="#crm-y-datos-4-preguntas-83-8587" aria-hidden="true">#</a> CRM y datos (4 preguntas: #83, #85–#87)</h3>
+<p><em>La pregunta #84 se resolvió en la sección transversal de arriba.</em></p>
+<h4 id="83-umbral-de-confianza-de-la-deduplicación-tres-niveles-según-la-confianza-del-cruce" tabindex="-1"><a class="heading-anchor" href="#83-umbral-de-confianza-de-la-deduplicación-tres-niveles-según-la-confianza-del-cruce" aria-hidden="true">#</a> #83: Umbral de confianza de la deduplicación → Tres niveles según la confianza del cruce</h4>
+<table>
+<thead>
+<tr>
+<th>Confianza</th>
+<th>Acción</th>
+<th>Ejemplo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>95%+ (exacto)</td>
+<td>Fusión automática con anotación en el registro de auditoría</td>
+<td>Mismo correo electrónico, mismo número de teléfono</td>
+</tr>
+<tr>
+<td>70–94% (probable)</td>
+<td>Se muestra en la cola de revisión de duplicados para fusión manual</td>
+<td>Nombre parecido + mismo código postal</td>
+</tr>
+<tr>
+<td>Menos de 70%</td>
+<td>Se ignora salvo búsqueda manual</td>
+<td>Solo el mismo apellido</td>
+</tr>
+</tbody>
+</table>
+<p>Los umbrales los configura la organización. La pantalla de revisión de duplicados (ya diseñada como comparación lado a lado) atiende el nivel de revisión manual. Los registros fusionados automáticamente quedan anotados en el registro de auditoría con el motivo del cruce, y se puede deshacer la fusión dentro de la ventana de reversión de importación.</p>
+<h4 id="85-actualización-de-segmentos-al-acceder-actualización-diaria-en-segundo-plano" tabindex="-1"><a class="heading-anchor" href="#85-actualización-de-segmentos-al-acceder-actualización-diaria-en-segundo-plano" aria-hidden="true">#</a> #85: Actualización de segmentos → Al acceder + actualización diaria en segundo plano</h4>
+<p>Los segmentos dinámicos se recalculan cuando alguien abre el segmento (para asegurar datos actuales) y una vez al día en un proceso en segundo plano (para que la segmentación de las campañas esté al día).</p>
+<p>La lista de segmentos muestra &quot;Última actualización: [marca de tiempo]&quot; en cada uno. Los segmentos grandes (más de 50 000 contactos) pueden tardar segundos en recalcularse — la interfaz muestra un estado de carga en vez de datos desactualizados. La actualización manual está disponible con un botón en la pantalla de detalle del segmento.</p>
+<h4 id="86-auditoría-de-las-exportaciones-de-datos-se-exige-un-motivo-en-las-exportaciones-masivas-más-de-100-registros" tabindex="-1"><a class="heading-anchor" href="#86-auditoría-de-las-exportaciones-de-datos-se-exige-un-motivo-en-las-exportaciones-masivas-más-de-100-registros" aria-hidden="true">#</a> #86: Auditoría de las exportaciones de datos → Se exige un motivo en las exportaciones masivas (más de 100 registros)</h4>
+<p>Exportar más de 100 registros obliga a elegir un motivo de una lista predefinida: Informe de cumplimiento / Operaciones de campaña / Migración de datos / Intercambio con la alianza / Otro + texto libre. El motivo queda anotado en el registro de auditoría junto con los metadatos de la exportación (quién, cuándo, cuántos registros, qué campos).</p>
+<p>Ver registros individuales y las exportaciones pequeñas (menos de 100 registros) no requieren motivo — eso añadiría fricción al uso normal del CRM.</p>
+<h4 id="87-taxonomía-de-etiquetas-plana-con-convención-de-prefijos-opcional" tabindex="-1"><a class="heading-anchor" href="#87-taxonomía-de-etiquetas-plana-con-convención-de-prefijos-opcional" aria-hidden="true">#</a> #87: Taxonomía de etiquetas → Plana, con convención de prefijos opcional</h4>
+<p>Las etiquetas son cadenas planas. No se impone jerarquía ni relaciones de padre e hijo. Las organizaciones que quieren jerarquía usan una convención de nombres: <code>region:north</code>, <code>region:south</code>, <code>issue:education</code>, <code>issue:healthcare</code>.</p>
+<p>El selector de etiquetas admite el filtrado por prefijo (escribe &quot;region:&quot; para ver todas las etiquetas de región). Da la flexibilidad de la jerarquía sin la complejidad de una estructura de árbol.</p>
+<h3 id="transversales-2-preguntas-8889" tabindex="-1"><a class="heading-anchor" href="#transversales-2-preguntas-8889" aria-hidden="true">#</a> Transversales (2 preguntas: #88–#89)</h3>
+<h4 id="88-paneles-en-tiempo-real-frente-a-sondeo-periódico-sondeo-periódico-en-la-v1-cubierto-por-5" tabindex="-1"><a class="heading-anchor" href="#88-paneles-en-tiempo-real-frente-a-sondeo-periódico-sondeo-periódico-en-la-v1-cubierto-por-5" aria-hidden="true">#</a> #88: Paneles en tiempo real frente a sondeo periódico → Sondeo periódico en la v1 (cubierto por #5)</h4>
+<p>Todos los paneles usan sondeo periódico a intervalos por niveles (de 30 s a 15 min según el tipo de panel). Los WebSockets añaden complejidad de infraestructura (gestión de conexiones, lógica de reconexión, configuración del balanceador de carga) sin un beneficio proporcional de UX, dados esos intervalos de actualización.</p>
+<p>El indicador de actualidad obligatorio (#5) hace transparente el modelo de sondeo para quien lo usa. Los WebSockets se pueden evaluar para la v2 si los paneles operativos necesitan actualizaciones de menos de un segundo.</p>
+<h4 id="89-biblioteca-de-widgets-del-panel-vocabulario-fijo-de-widgets-en-la-v1" tabindex="-1"><a class="heading-anchor" href="#89-biblioteca-de-widgets-del-panel-vocabulario-fijo-de-widgets-en-la-v1" aria-hidden="true">#</a> #89: Biblioteca de widgets del panel → Vocabulario fijo de widgets en la v1</h4>
+<p>Todos los paneles se arman con un conjunto estándar de tipos de widget:</p>
+<ul>
+<li>Tarjeta de métrica (un solo número + tendencia)</li>
+<li>Gráfico de barras</li>
+<li>Gráfico de líneas</li>
+<li>Tabla</li>
+<li>Mapa</li>
+<li>Lista de estado</li>
+<li>Barra de progreso</li>
+<li>Banner de alerta</li>
+</ul>
+<p>Sin constructor de widgets personalizados ni visualizaciones definidas por quien usa la plataforma. Esto asegura consistencia visual, simplifica la implementación y mantiene los paneles predecibles. El conjunto de widgets se puede ampliar a medida que maduren las necesidades de los paneles.</p>
+<hr>
+<h2 id="consecuencias" tabindex="-1"><a class="heading-anchor" href="#consecuencias" aria-hidden="true">#</a> Consecuencias</h2>
+<ul>
+<li><strong>Las 89 preguntas abiertas quedan resueltas</strong></li>
+<li><strong>Las dos contradicciones quedan resueltas:</strong> la delegación de la configuración se aplaza; los topes de frecuencia y la orquestación entre canales se vuelven complementarios</li>
+<li><strong>Nuevas capacidades del sistema que hacen falta:</strong>
+<ul>
+<li>Ventana de silencio entre canales (orquestación de capa 2)</li>
+<li>Componente de indicador de actualidad para los paneles</li>
+<li>Biblioteca de plantillas de guiones</li>
+<li>Presentación del estado de aprobación de las plantillas de WhatsApp en el redactor</li>
+<li>Capa de abstracción de proveedores de IA con BYOM (Bring Your Own Model) y su pantalla de configuración</li>
+<li>Generación de cartas en PDF para las campañas de activismo</li>
+<li>Esquema estándar de datos electorales con vías de conector de API e importación por CSV</li>
+<li>Verificación en varias capas de la captura de resultados (identidad, geolocalización, foto, cotejo cruzado)</li>
+<li>Flujo de aprobación de dos OA para las operaciones destructivas de configuración</li>
+<li>Monitoreo del estado de las integraciones con escalamiento de alertas</li>
+<li>Vía de recuperación del OA asistida por la plataforma (período de espera de 72 horas)</li>
+<li>La capacitación completada como requisito bloqueante para la asignación de turnos</li>
+<li>Soporte de dominios personalizados con aprovisionamiento de SSL</li>
+<li>Imágenes de Open Graph generadas automáticamente</li>
+<li>Motor de confianza de deduplicación de tres niveles (fusión automática / cola de revisión / ignorar)</li>
+</ul>
+</li>
+<li><strong>Funcionalidades pilares de la v2 identificadas:</strong> Constructor visual de flujos, Biblioteca compartida de contenidos, Delegación de ajustes, Pruebas A/B de páginas públicas</li>
+<li><strong>La integración entre eventos y recaudación se aprieta:</strong> la implementación debe admitir registros de donación con metadatos del evento</li>
+<li><strong>La conservación de datos es un asunto de nivel de plataforma:</strong> debe implementarse como infraestructura, no funcionalidad por funcionalidad</li>
+<li><strong>No quedan preguntas abiertas.</strong> El Apéndice A de la auditoría de wireframes queda totalmente resuelto. Todas las resoluciones están registradas en esta ADR con referencias de sección rastreables.</li>
+</ul>
+
+    </article>
+  </main>
+  <div class="toc-rail"><nav class="toc" aria-label="En esta página"><div class="toc-label">En esta página</div><ul><li class="toc-2"><a href="#contexto"># Contexto</a></li><li class="toc-3"><a href="#contradicciones"># Contradicciones</a></li><li class="toc-3"><a href="#grupos-de-solapamiento"># Grupos de solapamiento</a></li><li class="toc-2"><a href="#decisión"># Decisión</a></li><li class="toc-3"><a href="#1-delegación-de-ajustes-solo-el-oa-en-la-v1"># 1. Delegación de ajustes — solo el OA en la v1</a></li><li class="toc-3"><a href="#2-orquestación-de-canales-en-dos-capas"># 2. Orquestación de canales en dos capas</a></li><li class="toc-3"><a href="#3-los-ingresos-por-entradas-pasan-por-la-cadena-de-recaudación-de-fondos"># 3. Los ingresos por entradas pasan por la cadena de recaudación de fondos</a></li><li class="toc-3"><a href="#4-política-de-conservación-de-datos-por-niveles"># 4. Política de conservación de datos por niveles</a></li><li class="toc-2"><a href="#resoluciones-por-categoría"># Resoluciones por categoría</a></li><li class="toc-3"><a href="#navegación-y-disposición-5-preguntas-15"># Navegación y disposición (5 preguntas: #1–#5)</a></li><li class="toc-3"><a href="#operaciones-de-campo-8-preguntas-613"># Operaciones de campo (8 preguntas: #6–#13)</a></li><li class="toc-3"><a href="#mensajería-y-comunicaciones-8-preguntas-1520-2223"># Mensajería y comunicaciones (8 preguntas: #15–#20, #22–#23)</a></li><li class="toc-3"><a href="#redes-sociales-2-preguntas-2425"># Redes sociales (2 preguntas: #24–#25)</a></li><li class="toc-3"><a href="#eventos-4-preguntas-26-2830"># Eventos (4 preguntas: #26, #28–#30)</a></li><li class="toc-3"><a href="#recaudación-de-fondos-4-preguntas-3336"># Recaudación de fondos (4 preguntas: #33–#36)</a></li><li class="toc-3"><a href="#activismo-5-preguntas-3741"># Activismo (5 preguntas: #37–#41)</a></li><li class="toc-2"><a href="#funcionalidades-pilares-de-la-v2"># Funcionalidades pilares de la v2</a></li><li class="toc-3"><a href="#prensa-y-medios-5-preguntas-4246"># Prensa y medios (5 preguntas: #42–#46)</a></li><li class="toc-3"><a href="#gotv-y-día-de-elecciones-4-preguntas-4750"># GOTV y día de elecciones (4 preguntas: #47–#50)</a></li><li class="toc-3"><a href="#configuración-y-administración-4-preguntas-5356"># Configuración y administración (4 preguntas: #53–#56)</a></li><li class="toc-3"><a href="#autenticación-y-seguridad-4-preguntas-5760"># Autenticación y seguridad (4 preguntas: #57–#60)</a></li><li class="toc-3"><a href="#perfil-de-usuario-3-preguntas-6163"># Perfil de usuario (3 preguntas: #61–#63)</a></li><li class="toc-3"><a href="#soporte-y-ayuda-4-preguntas-6467"># Soporte y ayuda (4 preguntas: #64–#67)</a></li><li class="toc-3"><a href="#páginas-públicas-4-preguntas-6871"># Páginas públicas (4 preguntas: #68–#71)</a></li><li class="toc-3"><a href="#puesta-en-marcha-3-preguntas-7274"># Puesta en marcha (3 preguntas: #72–#74)</a></li><li class="toc-3"><a href="#portal-de-simpatizantes-3-preguntas-7577"># Portal de simpatizantes (3 preguntas: #75–#77)</a></li><li class="toc-3"><a href="#alianza-5-preguntas-7882"># Alianza (5 preguntas: #78–#82)</a></li><li class="toc-3"><a href="#crm-y-datos-4-preguntas-83-8587"># CRM y datos (4 preguntas: #83, #85–#87)</a></li><li class="toc-3"><a href="#transversales-2-preguntas-8889"># Transversales (2 preguntas: #88–#89)</a></li><li class="toc-2"><a href="#consecuencias"># Consecuencias</a></li></ul></nav></div>
+</div>
+<script src="../../assets/search.js" defer></script>
+<script src="../../assets/app.js" defer></script>
+</body>
+</html>

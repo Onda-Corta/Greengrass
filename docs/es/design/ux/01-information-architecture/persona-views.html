@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="es" data-base="../../../../" data-no-results="No hay resultados para">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vistas por arquetipo · GreenGrass</title>
+<meta name="description" content="Vistas por arquetipo — Documentación de especificación y diseño de GreenGrass.">
+<link rel="alternate" hreflang="en" href="../../../../design/ux/01-information-architecture/persona-views.html">
+<link rel="alternate" hreflang="es" href="./persona-views.html">
+<link rel="alternate" hreflang="x-default" href="../../../../design/ux/01-information-architecture/persona-views.html">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%232563eb'/%3E%3Cstop offset='1' stop-color='%2316a34a'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='32' height='32' rx='7' fill='url(%23g)'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="../../../../assets/styles.css">
+</head>
+<body>
+<a class="skip-link" href="#content">Saltar al contenido</a>
+<header class="site-header">
+  <button type="button" class="menu-toggle" aria-label="Alternar navegación" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+  <a class="brand" href="../../../../es/index.html">
+    <span class="brand-mark" aria-hidden="true"></span>
+    <span class="brand-text"><strong>GreenGrass</strong><small>Especificación y diseño</small></span>
+  </a>
+  <div class="search">
+    <input type="search" id="search-input" placeholder="Buscar en la documentación…" autocomplete="off" aria-label="Buscar en la documentación">
+    <div id="search-results" class="search-results" hidden></div>
+  </div>
+  <nav class="lang-switch" aria-label="Idioma"><a class="lang-opt" href="../../../../design/ux/01-information-architecture/persona-views.html" hreflang="en" lang="en" title="View this page in English">EN</a><span class="lang-opt active" aria-current="true">ES</span></nav>
+  <button type="button" class="theme-toggle" aria-label="Alternar modo oscuro" title="Alternar modo oscuro">
+    <span class="theme-icon" aria-hidden="true"></span>
+  </button>
+</header>
+<div class="layout">
+  <div class="sidebar-backdrop" hidden></div>
+  <aside class="sidebar" aria-label="Navegación de la documentación">
+    <nav class="nav">
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">Inicio<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../../../index.html">GreenGrass</a></li></ul></div>
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">Especificaciones<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../../../spec/product.html">Proyecto: GreenGrass</a></li><li><a href="../../../spec/mvp.html">MVP de GreenGrass — plan de producto</a></li><li><a href="../../../spec/users.html">Usuarios y roles</a></li><li><a href="../../../spec/workflows.html">Flujos de trabajo principales</a></li><li><a href="../../../spec/geography.html">Geografía objetivo</a></li><li><a href="../../../spec/security.html">Seguridad y modelo de amenazas</a></li><li><a href="../../../spec/compliance.html">Cumplimiento y marco legal</a></li><li><a href="../../../spec/fundraising.html">Recaudación de fondos e infraestructura de pagos</a></li><li><a href="../../../spec/integrations.html">Integraciones externas</a></li><li><a href="../../../spec/support.html">Soporte y puesta en marcha de organizaciones</a></li><li><a href="../../../spec/gotv.html">GOTV y operaciones del día de elecciones</a></li><li><a href="../../../spec/messaging.html">Comunicaciones internas y notificaciones</a></li><li><a href="../../../spec/press.html">Prensa, medios y comunicaciones públicas</a></li><li><a href="../../../spec/comms-intelligence.html">Inteligencia de comunicaciones — hoja de ruta post-MVP</a></li></ul></div>
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">Arquitectura<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../../architecture/system.html">Arquitectura del sistema</a></li></ul></div>
+<div class="nav-section open"><button type="button" class="nav-section-title" aria-expanded="true">Diseño UX<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../00-overview.html">Resumen del diseño de UX</a></li><li><a href="./navigation-model.html">Modelo de navegación</a></li><li><a href="./screen-inventory.html">Inventario de pantallas</a></li><li><a href="./persona-views.html" aria-current="page" class="active">Vistas por arquetipo</a></li><li><a href="./url-structure.html">Estructura de URL</a></li><li><a href="../02-global-patterns/pattern-catalog.html">Catálogo de patrones</a></li><li><a href="../02-global-patterns/offline-sync-patterns.html">Patrones sin conexión y de sincronización</a></li><li><a href="../02-global-patterns/notification-patterns.html">Patrones de notificaciones</a></li><li><a href="../02-global-patterns/search-patterns.html">Patrones de búsqueda</a></li><li><a href="../02-global-patterns/settings-help-patterns.html">Patrones de ajustes y ayuda</a></li><li><a href="../02-global-patterns/security-ux-patterns.html">Patrones de UX de seguridad</a></li><li><a href="../03-design-system/foundations.html">Fundamentos del sistema de diseño</a></li><li><a href="../03-design-system/theming-strategy.html">Estrategia de temas</a></li><li><a href="../03-design-system/component-inventory.html">Inventario de componentes</a></li><li><a href="../03-design-system/responsive-strategy.html">Estrategia de diseño adaptable</a></li></ul></div>
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">Decisiones<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../../../decisions/001-platform-architecture.html">ADR-001: Arquitectura y despliegue de la plataforma</a></li><li><a href="../../../decisions/002-security-threat-model.html">ADR-002: Seguridad y modelo de amenazas</a></li><li><a href="../../../decisions/003-identity-access-organization.html">ADR-003: Identidad, acceso y organización</a></li><li><a href="../../../decisions/004-data-model-integrity.html">ADR-004: Modelo de datos e integridad</a></li><li><a href="../../../decisions/005-offline-first-sync.html">ADR-005: Prioridad sin conexión y sincronización</a></li><li><a href="../../../decisions/006-field-operations-gotv.html">ADR-006: Operaciones de campo y GOTV</a></li><li><a href="../../../decisions/007-fundraising-payments.html">ADR-007: Recaudación de fondos y pagos</a></li><li><a href="../../../decisions/008-communications-messaging.html">ADR-008: Comunicaciones y mensajería</a></li><li><a href="../../../decisions/009-compliance-legal.html">ADR-009: Cumplimiento y marco legal</a></li><li><a href="../../../decisions/010-internationalization-localization.html">ADR-010: Internacionalización y localización</a></li><li><a href="../../../decisions/011-design-system-ux.html">ADR-011: Sistema de diseño y fundamentos de UX</a></li><li><a href="../../../decisions/012-external-integrations.html">ADR-012: Integraciones externas</a></li><li><a href="../../../decisions/013-analytics-ai.html">ADR-013: Analítica e IA</a></li><li><a href="../../../decisions/014-volunteer-onboarding.html">ADR-014: Voluntariado e incorporación</a></li><li><a href="../../../decisions/015-product-scope.html">ADR-015: Límites del alcance del producto</a></li><li><a href="../../../decisions/016-cross-cutting-resolutions.html">ADR-016: Resoluciones transversales</a></li><li><a href="../../../decisions/017-sharing-contract-trust-model.html">ADR-017: El contrato de intercambio como primitiva universal de confianza</a></li><li><a href="../../../decisions/ux-decisions.html">Decisiones de UX — fase de wireframes</a></li></ul></div>
+    </nav>
+  </aside>
+  <main id="content" class="content">
+    <nav class="breadcrumb" aria-label="Ruta de navegación">Diseño UX</nav>
+    <article class="prose">
+<h1 id="vistas-por-arquetipo" tabindex="-1"><a class="heading-anchor" href="#vistas-por-arquetipo" aria-hidden="true">#</a> Vistas por arquetipo</h1>
+<h2 id="propósito" tabindex="-1"><a class="heading-anchor" href="#propósito" aria-hidden="true">#</a> Propósito</h2>
+<p>Este documento define cómo se ve la misma plataforma según el perfil de cada persona. Cada perfil ve una vista adaptada a su rol: distinta pantalla de inicio, distintos elementos de navegación, distinto conjunto de funcionalidades. Las funcionalidades fuera de su acceso no aparecen en absoluto en su vista (no atenuadas: invisibles).</p>
+<p>Esta es la especificación de la UX adaptable al rol. Se apoya en el modelo de navegación (<a href="http://navigation-model.md" target="_blank" rel="noopener noreferrer">navigation-model.md</a>) y referencia pantallas concretas del inventario de pantallas (<a href="http://screen-inventory.md" target="_blank" rel="noopener noreferrer">screen-inventory.md</a>).</p>
+<h2 id="resumen-de-arquetipos" tabindex="-1"><a class="heading-anchor" href="#resumen-de-arquetipos" aria-hidden="true">#</a> Resumen de arquetipos</h2>
+<table>
+<thead>
+<tr>
+<th>Perfil</th>
+<th>Dispositivo principal</th>
+<th>Duración de la sesión</th>
+<th>Necesidades sin conexión</th>
+<th>Funcionalidades disponibles</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Administrador de la organización</td>
+<td>Escritorio</td>
+<td>Corta (horas)</td>
+<td>Ninguna</td>
+<td>Todo</td>
+</tr>
+<tr>
+<td>Director de comunicaciones</td>
+<td>Escritorio</td>
+<td>Jornada laboral</td>
+<td>Ninguna</td>
+<td>Comunicaciones, prensa, redes sociales, personas</td>
+</tr>
+<tr>
+<td>Director de finanzas</td>
+<td>Escritorio</td>
+<td>Jornada laboral</td>
+<td>Ninguna</td>
+<td>Recaudación, cumplimiento, personas</td>
+</tr>
+<tr>
+<td>Director de campo</td>
+<td>Escritorio + móvil</td>
+<td>Jornada laboral</td>
+<td>Ninguna (como personal); modo de campo si además toca puertas</td>
+<td>Operaciones de campo, GOTV (Get Out The Vote — movilización del voto), personas</td>
+</tr>
+<tr>
+<td>Coordinador de voluntarios</td>
+<td>Escritorio + móvil</td>
+<td>Jornada laboral</td>
+<td>Registro de entrada en eventos</td>
+<td>Voluntarios, eventos, turnos</td>
+</tr>
+<tr>
+<td>Gestor de datos</td>
+<td>Escritorio</td>
+<td>Jornada laboral</td>
+<td>Ninguna</td>
+<td>CRM, importación/exportación, calidad de datos</td>
+</tr>
+<tr>
+<td>Voluntario</td>
+<td>Móvil</td>
+<td>Duración del turno (campo) / jornada laboral (general)</td>
+<td>Modo de campo completo</td>
+<td>Turnos, eventos, modo de campo, mensajes</td>
+</tr>
+<tr>
+<td>Líder de equipo</td>
+<td>Móvil</td>
+<td>Duración del turno (campo) / jornada laboral (general)</td>
+<td>Modo de campo completo + gestión del equipo</td>
+<td>Todo lo que ve el voluntario + equipo</td>
+</tr>
+<tr>
+<td>Candidato</td>
+<td>Móvil + escritorio</td>
+<td>Media (jornada laboral)</td>
+<td>Leer mensajes</td>
+<td>Panel curado, aprobaciones, mensajes</td>
+</tr>
+<tr>
+<td>Simpatizante</td>
+<td>Móvil</td>
+<td>Larga (semanas)</td>
+<td>Ninguna</td>
+<td>Historial de donaciones, preferencias, eventos</td>
+</tr>
+</tbody>
+</table>
+<h2 id="administrador-de-la-organización" tabindex="-1"><a class="heading-anchor" href="#administrador-de-la-organización" aria-hidden="true">#</a> Administrador de la organización</h2>
+<h3 id="pantalla-de-inicio" tabindex="-1"><a class="heading-anchor" href="#pantalla-de-inicio" aria-hidden="true">#</a> Pantalla de inicio</h3>
+<p><strong>Panel general de la campaña</strong> (DASH-001): el centro de la operación. Muestra:</p>
+<ul>
+<li>Recaudación: total recaudado, avance hacia la meta, número de donantes, donación promedio</li>
+<li>Campo: puertas tocadas, contactos con votantes, tasa de contacto, puntajes de apoyo agregados</li>
+<li>Comunicaciones: correos enviados, tasa de apertura, SMS entregados, interacción en redes</li>
+<li>Voluntarios: número de activos, horas registradas, turnos cubiertos frente a disponibles</li>
+<li>Eventos: eventos próximos, asistencia reciente</li>
+<li>Alertas: marcas de cumplimiento, problemas de sincronización, notificaciones del sistema</li>
+</ul>
+<h3 id="secciones-de-la-barra-lateral" tabindex="-1"><a class="heading-anchor" href="#secciones-de-la-barra-lateral" aria-hidden="true">#</a> Secciones de la barra lateral</h3>
+<p>Todas las secciones visibles. La barra lateral del Administrador de la organización es la unión de todas las áreas funcionales, organizada en grupos plegables:</p>
+<ul>
+<li>Resumen, Personas, Campo, Recaudación de fondos, Comunicaciones, Eventos, Activismo, Prensa, GOTV, Mensajería, Alianza, Configuración</li>
+</ul>
+<h3 id="experiencia-en-móvil" tabindex="-1"><a class="heading-anchor" href="#experiencia-en-móvil" aria-hidden="true">#</a> Experiencia en móvil</h3>
+<p>El Administrador de la organización trabaja sobre todo en escritorio. El móvil es para revisar paneles, leer mensajes y atender notificaciones urgentes sobre la marcha. Pestañas en móvil: Panel, Contactos, Donaciones, Mensajes, Más.</p>
+<h3 id="comportamientos-especiales" tabindex="-1"><a class="heading-anchor" href="#comportamientos-especiales" aria-hidden="true">#</a> Comportamientos especiales</h3>
+<ul>
+<li>Ve el registro de auditoría completo</li>
+<li>Puede suplantar otros roles (para probar la configuración de las plantillas de rol), y la interfaz lo indica claramente</li>
+<li>Recibe todas las notificaciones a nivel de sistema (facturación, seguridad, estado de las integraciones)</li>
+<li>Puede activar el modo de día de elecciones</li>
+<li>Puede alternar entre la vista de su organización y la vista de la alianza (si pertenece a una)</li>
+</ul>
+<hr>
+<h2 id="director-de-comunicaciones" tabindex="-1"><a class="heading-anchor" href="#director-de-comunicaciones" aria-hidden="true">#</a> Director de comunicaciones</h2>
+<h3 id="pantalla-de-inicio-1" tabindex="-1"><a class="heading-anchor" href="#pantalla-de-inicio-1" aria-hidden="true">#</a> Pantalla de inicio</h3>
+<p><strong>Panel de comunicaciones</strong> (DASH-004): centrado en el rendimiento del alcance.</p>
+<ul>
+<li>Rendimiento de las campañas de correo (envíos recientes, tasas de apertura, tasas de clic)</li>
+<li>Estadísticas de entrega de SMS/WhatsApp</li>
+<li>Resumen de interacción en redes sociales (en todas las plataformas)</li>
+<li>Envíos programados próximos</li>
+<li>Cobertura reciente (si también lleva prensa)</li>
+</ul>
+<h3 id="secciones-de-la-barra-lateral-1" tabindex="-1"><a class="heading-anchor" href="#secciones-de-la-barra-lateral-1" aria-hidden="true">#</a> Secciones de la barra lateral</h3>
+<ul>
+<li><strong>Resumen:</strong> Panel de comunicaciones</li>
+<li><strong>Comunicaciones:</strong> Campañas de correo, SMS/WhatsApp, Plantillas</li>
+<li><strong>Redes sociales:</strong> Panel, Redactor de publicaciones, Calendario, Analítica, Conexiones de cuentas</li>
+<li><strong>Prensa:</strong> Contactos de medios, Comunicados, Avisos a medios, Declaraciones, Cobertura, Respaldos, Puntos de mensaje, Entrevistas</li>
+<li><strong>Personas:</strong> Contactos, Segmentos (para segmentar las comunicaciones)</li>
+<li><strong>Mensajería:</strong> Mensajes</li>
+</ul>
+<h3 id="experiencia-en-móvil-1" tabindex="-1"><a class="heading-anchor" href="#experiencia-en-móvil-1" aria-hidden="true">#</a> Experiencia en móvil</h3>
+<p>Escritorio como dispositivo principal para crear contenido (constructor de correos, redacción de comunicados). Móvil para revisar analítica, responder mensajes y aprobar envíos urgentes. Pestañas en móvil: Panel, Correo, Redes, Mensajes, Más.</p>
+<h3 id="lo-que-no-ven" tabindex="-1"><a class="heading-anchor" href="#lo-que-no-ven" aria-hidden="true">#</a> Lo que no ven</h3>
+<p>Sin acceso a: detalles de recaudación (donaciones, formularios, cumplimiento), operaciones de campo (trabajo de campo, territorios, jornadas de llamadas), gestión de voluntarios (lista del equipo, turnos, capacitación), ajustes (facturación, roles, integraciones), gestión de datos (importación/exportación, deduplicación), operaciones de GOTV (salvo que se les concedan plantillas adicionales).</p>
+<hr>
+<h2 id="director-de-finanzas" tabindex="-1"><a class="heading-anchor" href="#director-de-finanzas" aria-hidden="true">#</a> Director de finanzas</h2>
+<h3 id="pantalla-de-inicio-2" tabindex="-1"><a class="heading-anchor" href="#pantalla-de-inicio-2" aria-hidden="true">#</a> Pantalla de inicio</h3>
+<p><strong>Panel de recaudación de fondos</strong> (DASH-003): centrado en el dinero.</p>
+<ul>
+<li>Ingresos: hoy, esta semana, este mes, total (con líneas de tendencia)</li>
+<li>Termómetro de avance hacia la meta</li>
+<li>Datos de donantes: nuevos frente a recurrentes, donación promedio, salud de las recurrentes</li>
+<li>Estado del procesador de pagos (última sincronización, tasa de éxito)</li>
+<li>Alertas de cumplimiento: límites de contribución cerca de alcanzarse, donaciones marcadas que necesitan revisión</li>
+<li>Fechas límite de reporte próximas</li>
+</ul>
+<h3 id="secciones-de-la-barra-lateral-2" tabindex="-1"><a class="heading-anchor" href="#secciones-de-la-barra-lateral-2" aria-hidden="true">#</a> Secciones de la barra lateral</h3>
+<ul>
+<li><strong>Resumen:</strong> Panel de recaudación</li>
+<li><strong>Recaudación de fondos:</strong> Donaciones, Formularios, Campañas, Recurrentes, Promesas de donación, Reembolsos, Efectivo, Marcas de cumplimiento, Pruebas A/B, Repartos de la alianza, Procesadores de pagos, Estados de cuenta</li>
+<li><strong>Personas:</strong> Donantes, Segmentos</li>
+<li><strong>Mensajería:</strong> Mensajes</li>
+</ul>
+<h3 id="experiencia-en-móvil-2" tabindex="-1"><a class="heading-anchor" href="#experiencia-en-móvil-2" aria-hidden="true">#</a> Experiencia en móvil</h3>
+<p>Escritorio como dispositivo principal para la gestión financiera, la construcción de formularios y la revisión de cumplimiento. Móvil para consultar totales y atender marcas de cumplimiento urgentes. Pestañas en móvil: Panel, Donaciones, Cumplimiento, Mensajes, Más.</p>
+<h3 id="lo-que-no-ven-1" tabindex="-1"><a class="heading-anchor" href="#lo-que-no-ven-1" aria-hidden="true">#</a> Lo que no ven</h3>
+<p>Sin acceso a: comunicaciones (correo, SMS, redes), operaciones de campo, gestión de voluntarios, prensa, GOTV, ajustes (salvo la configuración del procesador de pagos, a la que llegan desde Recaudación de fondos), gestión de datos.</p>
+<hr>
+<h2 id="director-de-campo" tabindex="-1"><a class="heading-anchor" href="#director-de-campo" aria-hidden="true">#</a> Director de campo</h2>
+<h3 id="pantalla-de-inicio-3" tabindex="-1"><a class="heading-anchor" href="#pantalla-de-inicio-3" aria-hidden="true">#</a> Pantalla de inicio</h3>
+<p><strong>Panel de operaciones de campo</strong> (DASH-002): centrado en el trabajo en terreno.</p>
+<ul>
+<li>Mapa de avance del trabajo de campo (territorios completos frente a pendientes)</li>
+<li>Tasa de contacto por territorio, equipo y voluntario</li>
+<li>Distribución de los puntajes de apoyo</li>
+<li>Métricas de las jornadas de llamadas (llamadas hechas, tasa de contacto, resultados)</li>
+<li>Estadísticas de las jornadas de inscripción de votantes</li>
+<li>Turnos activos y despliegue de voluntarios</li>
+<li>Campañas de trabajo de campo próximas</li>
+</ul>
+<h3 id="secciones-de-la-barra-lateral-3" tabindex="-1"><a class="heading-anchor" href="#secciones-de-la-barra-lateral-3" aria-hidden="true">#</a> Secciones de la barra lateral</h3>
+<ul>
+<li><strong>Resumen:</strong> Panel de campo</li>
+<li><strong>Campo:</strong> Campañas de trabajo de campo, Jornadas de llamadas, Inscripción de votantes, Territorios, Listas de recorrido, Guiones</li>
+<li><strong>GOTV:</strong> Constructor del universo, Concentración, Corte de territorios, Centro de mando, Transporte, Observadores, Resultados, Posterior a la elección</li>
+<li><strong>Personas:</strong> Contactos, Segmentos</li>
+<li><strong>Mensajería:</strong> Mensajes</li>
+</ul>
+<h3 id="experiencia-en-móvil-3" tabindex="-1"><a class="heading-anchor" href="#experiencia-en-móvil-3" aria-hidden="true">#</a> Experiencia en móvil</h3>
+<p>Escritorio para planificar (corte de territorios, configuración de campañas, construcción de guiones). Móvil para monitorear las operaciones activas en el terreno y consultar paneles. Pestañas en móvil: Panel, Trabajo de campo, Territorios, Mensajes, Más.</p>
+<h3 id="día-de-elecciones" tabindex="-1"><a class="heading-anchor" href="#día-de-elecciones" aria-hidden="true">#</a> Día de elecciones</h3>
+<p>Durante el modo de día de elecciones, la pantalla de inicio del Director de campo cambia al Panel del centro de mando (DASH-008). Los elementos de GOTV suben al principio de su barra lateral.</p>
+<h3 id="lo-que-no-ven-2" tabindex="-1"><a class="heading-anchor" href="#lo-que-no-ven-2" aria-hidden="true">#</a> Lo que no ven</h3>
+<p>Sin acceso a: recaudación (donaciones, formularios, cumplimiento), comunicaciones (correo, SMS, redes), gestión de voluntarios (lista del equipo, incorporación, capacitación: ven a los voluntarios desde la óptica del campo, no desde la de la gestión), prensa, ajustes, gestión de datos.</p>
+<hr>
+<h2 id="coordinador-de-voluntarios" tabindex="-1"><a class="heading-anchor" href="#coordinador-de-voluntarios" aria-hidden="true">#</a> Coordinador de voluntarios</h2>
+<h3 id="pantalla-de-inicio-4" tabindex="-1"><a class="heading-anchor" href="#pantalla-de-inicio-4" aria-hidden="true">#</a> Pantalla de inicio</h3>
+<p><strong>Panel de voluntarios</strong> (DASH-005): centrado en las personas.</p>
+<ul>
+<li>Número de voluntarios activos e inscripciones recientes</li>
+<li>Tasas de cobertura de turnos (hoy, esta semana)</li>
+<li>Horas de voluntariado (esta semana, total)</li>
+<li>Aprobaciones pendientes (inscripciones nuevas a la espera de revisión)</li>
+<li>Tasas de finalización de la capacitación</li>
+<li>Eventos próximos con su estado de confirmaciones de asistencia</li>
+<li>Panorama del estado de los equipos</li>
+</ul>
+<h3 id="secciones-de-la-barra-lateral-4" tabindex="-1"><a class="heading-anchor" href="#secciones-de-la-barra-lateral-4" aria-hidden="true">#</a> Secciones de la barra lateral</h3>
+<ul>
+<li><strong>Resumen:</strong> Panel de voluntarios</li>
+<li><strong>Voluntarios:</strong> Lista de voluntarios, Configuración de la incorporación, Módulos de capacitación, Editor de contenidos de capacitación, Turnos, Equipos, Certificaciones</li>
+<li><strong>Eventos:</strong> Eventos, Registro de entrada, Posterior al evento</li>
+<li><strong>Mensajería:</strong> Mensajes</li>
+</ul>
+<h3 id="experiencia-en-móvil-4" tabindex="-1"><a class="heading-anchor" href="#experiencia-en-móvil-4" aria-hidden="true">#</a> Experiencia en móvil</h3>
+<p>Escritorio para la configuración (contenidos de capacitación, programación de turnos, gestión de equipos). Móvil para registrar la entrada de voluntarios en los eventos, vigilar la cobertura de turnos y mensajear. Pestañas en móvil: Panel, Lista de voluntarios, Turnos, Mensajes, Más.</p>
+<h3 id="lo-que-no-ven-3" tabindex="-1"><a class="heading-anchor" href="#lo-que-no-ven-3" aria-hidden="true">#</a> Lo que no ven</h3>
+<p>Sin acceso a: recaudación, comunicaciones, operaciones de campo (gestionan a los voluntarios, pero no la estrategia de campo: de las campañas de trabajo de campo y los territorios se encarga el Director de campo), prensa, GOTV (salvo que se les conceda), ajustes, gestión de datos.</p>
+<hr>
+<h2 id="gestor-de-datos" tabindex="-1"><a class="heading-anchor" href="#gestor-de-datos" aria-hidden="true">#</a> Gestor de datos</h2>
+<h3 id="pantalla-de-inicio-5" tabindex="-1"><a class="heading-anchor" href="#pantalla-de-inicio-5" aria-hidden="true">#</a> Pantalla de inicio</h3>
+<p><strong>Panel de calidad de datos</strong> (DASH-006): centrado en la salud de los datos.</p>
+<ul>
+<li>Registros por tipo y estado</li>
+<li>Importaciones recientes y sus puntajes de calidad</li>
+<li>Tamaño de la cola de deduplicación (revisiones pendientes)</li>
+<li>Marcas de calidad de datos (registros incompletos, duplicados potenciales, registros desactualizados)</li>
+<li>Historial de exportaciones</li>
+<li>Actividad reciente de fusiones</li>
+</ul>
+<h3 id="secciones-de-la-barra-lateral-5" tabindex="-1"><a class="heading-anchor" href="#secciones-de-la-barra-lateral-5" aria-hidden="true">#</a> Secciones de la barra lateral</h3>
+<ul>
+<li><strong>Resumen:</strong> Panel de datos</li>
+<li><strong>Personas:</strong> Contactos, Segmentos, Importación, Exportación, Cola de deduplicación, Calidad de datos, Etiquetas</li>
+<li><strong>Mensajería:</strong> Mensajes</li>
+</ul>
+<h3 id="experiencia-en-móvil-5" tabindex="-1"><a class="heading-anchor" href="#experiencia-en-móvil-5" aria-hidden="true">#</a> Experiencia en móvil</h3>
+<p>Solo escritorio para prácticamente todo el trabajo (importación de datos, revisión de deduplicación, exportación). Móvil solo para mensajes. Pestañas en móvil: Contactos, Importación, Deduplicación, Mensajes, Más.</p>
+<h3 id="lo-que-no-ven-4" tabindex="-1"><a class="heading-anchor" href="#lo-que-no-ven-4" aria-hidden="true">#</a> Lo que no ven</h3>
+<p>Sin acceso a: recaudación, comunicaciones, operaciones de campo, gestión de voluntarios, prensa, GOTV, ajustes (salvo los ajustes relacionados con datos, a los que llegan desde Personas). El Gestor de datos trabaja con la capa de datos, no con la capa operativa.</p>
+<hr>
+<h2 id="voluntario" tabindex="-1"><a class="heading-anchor" href="#voluntario" aria-hidden="true">#</a> Voluntario</h2>
+<h3 id="pantalla-de-inicio-6" tabindex="-1"><a class="heading-anchor" href="#pantalla-de-inicio-6" aria-hidden="true">#</a> Pantalla de inicio</h3>
+<p><strong>Mis turnos</strong>: un inicio sencillo y orientado a la acción.</p>
+<ul>
+<li>Turnos de hoy (con lugar, hora y rol)</li>
+<li>Turnos próximos (siguientes 7 días)</li>
+<li>Botón de acción «Iniciar turno» (destacado, si hay un turno activo)</li>
+<li>Número de mensajes sin leer</li>
+<li>Eventos próximos a los que confirmó asistencia</li>
+<li>Avance en la capacitación (si tiene módulos asignados)</li>
+</ul>
+<h3 id="secciones-de-la-barra-lateral-6" tabindex="-1"><a class="heading-anchor" href="#secciones-de-la-barra-lateral-6" aria-hidden="true">#</a> Secciones de la barra lateral</h3>
+<ul>
+<li><strong>Lo mío:</strong> Mis turnos, Mis tareas, Mi equipo</li>
+<li><strong>Eventos:</strong> Eventos</li>
+<li><strong>Mensajería:</strong> Mensajes</li>
+<li><strong>Capacitación:</strong> Módulos, Certificaciones</li>
+<li><strong>Campo:</strong> Iniciar turno (botón de acción)</li>
+</ul>
+<h3 id="experiencia-en-móvil-6" tabindex="-1"><a class="heading-anchor" href="#experiencia-en-móvil-6" aria-hidden="true">#</a> Experiencia en móvil</h3>
+<p><strong>El móvil es el dispositivo principal.</strong> Toda la experiencia del voluntario está diseñada para el celular. El escritorio es una opción secundaria (para quienes prefieren revisar sus turnos desde una computadora).</p>
+<p>Pestañas en móvil: Turnos, Eventos, Mensajes, Iniciar turno</p>
+<p>La pestaña «Iniciar turno» se distingue visualmente: es un botón relleno o de color, no un icono de pestaña estándar. Es la acción principal del voluntario.</p>
+<h3 id="modo-de-campo" tabindex="-1"><a class="heading-anchor" href="#modo-de-campo" aria-hidden="true">#</a> Modo de campo</h3>
+<p>Cuando el voluntario toca «Iniciar turno», la aplicación entra al modo de campo (ver <a href="http://navigation-model.md" target="_blank" rel="noopener noreferrer">navigation-model.md</a>). El marco de navegación normal desaparece por completo. El mundo del voluntario pasa a ser:</p>
+<ol>
+<li>Lista de recorrido / lista de llamadas / cola de inscripciones</li>
+<li>Ficha de puerta / ficha de llamada / formulario de inscripción (de a uno)</li>
+<li>Captura de la respuesta</li>
+<li>Siguiente elemento</li>
+<li>Terminar el turno → balance del turno → volver al marco normal</li>
+</ol>
+<h3 id="funcionalidades-sin-conexión" tabindex="-1"><a class="heading-anchor" href="#funcionalidades-sin-conexión" aria-hidden="true">#</a> Funcionalidades sin conexión</h3>
+<p>En el modo de campo, todo funciona sin conexión:</p>
+<ul>
+<li>Lista de recorrido con la información de los votantes</li>
+<li>Teselas de mapa (precacheadas)</li>
+<li>Ficha de puerta y formulario de interacción</li>
+<li>Todos los datos se guardan localmente y se sincronizan al haber conexión</li>
+<li>El indicador de estado de sincronización se muestra bien visible</li>
+</ul>
+<p>Fuera del modo de campo, hay menos disponible sin conexión:</p>
+<ul>
+<li>Leer los mensajes sincronizados</li>
+<li>Redactar mensajes (quedan en cola)</li>
+<li>Ver la información de turnos y eventos que está en caché</li>
+</ul>
+<h3 id="lo-que-no-ven-5" tabindex="-1"><a class="heading-anchor" href="#lo-que-no-ven-5" aria-hidden="true">#</a> Lo que no ven</h3>
+<p>Sin acceso a: ninguna funcionalidad del personal. Ni paneles (más allá de su vista personal de turnos), ni gestión del CRM, ni ajustes, ni datos financieros, ni configuración de campañas. El voluntario ve solo sus propios turnos, eventos, mensajes y capacitación.</p>
+<hr>
+<h2 id="líder-de-equipo" tabindex="-1"><a class="heading-anchor" href="#líder-de-equipo" aria-hidden="true">#</a> Líder de equipo</h2>
+<h3 id="pantalla-de-inicio-7" tabindex="-1"><a class="heading-anchor" href="#pantalla-de-inicio-7" aria-hidden="true">#</a> Pantalla de inicio</h3>
+<p>Igual que la del Voluntario, pero con una sección de <strong>Equipo</strong> adicional:</p>
+<ul>
+<li>Lista del equipo (quién registró su entrada, quién falta)</li>
+<li>Avance del equipo (puertas tocadas, llamadas hechas: en agregado)</li>
+<li>Registros de entrada pendientes</li>
+<li>Problemas a nivel de equipo</li>
+</ul>
+<h3 id="secciones-de-la-barra-lateral-7" tabindex="-1"><a class="heading-anchor" href="#secciones-de-la-barra-lateral-7" aria-hidden="true">#</a> Secciones de la barra lateral</h3>
+<p>Todo lo que ve un Voluntario, más:</p>
+<ul>
+<li><strong>Mi equipo:</strong> Lista del equipo, Avance del equipo, Registro de entrada</li>
+</ul>
+<h3 id="experiencia-en-móvil-7" tabindex="-1"><a class="heading-anchor" href="#experiencia-en-móvil-7" aria-hidden="true">#</a> Experiencia en móvil</h3>
+<p>Igual que la del Voluntario: prioridad móvil. La pestaña «Turnos» muestra por defecto la vista de equipo (con los turnos de todos los integrantes) en vez de solo la vista personal.</p>
+<h3 id="modo-de-campo-1" tabindex="-1"><a class="heading-anchor" href="#modo-de-campo-1" aria-hidden="true">#</a> Modo de campo</h3>
+<p>El mismo modo de campo que el del Voluntario, pero el Líder de equipo además puede:</p>
+<ul>
+<li>Ver el avance general de su equipo</li>
+<li>Reasignar puertas o llamadas dentro de su equipo</li>
+<li>Registrar la entrada de los integrantes del equipo en los puntos de concentración</li>
+<li>Escalar problemas al centro de mando (durante el GOTV)</li>
+</ul>
+<h3 id="lo-que-no-ven-6" tabindex="-1"><a class="heading-anchor" href="#lo-que-no-ven-6" aria-hidden="true">#</a> Lo que no ven</h3>
+<p>Las mismas restricciones que el Voluntario. Los líderes de equipo son voluntarios con un liderazgo de equipo acotado: no ganan acceso a ninguna funcionalidad del personal. Ven a su equipo, no a la organización.</p>
+<hr>
+<h2 id="candidato" tabindex="-1"><a class="heading-anchor" href="#candidato" aria-hidden="true">#</a> Candidato</h2>
+<h3 id="pantalla-de-inicio-8" tabindex="-1"><a class="heading-anchor" href="#pantalla-de-inicio-8" aria-hidden="true">#</a> Pantalla de inicio</h3>
+<p><strong>Panel del candidato</strong> (DASH-010): deliberadamente curado y simplificado.</p>
+<ul>
+<li>Termómetro de recaudación (total recaudado frente a la meta, sin desglosar hasta las donaciones individuales)</li>
+<li>Número de voluntarios (voluntarios activos, sin acceso a la lista del equipo)</li>
+<li>Asistencia a eventos (eventos próximos, participación reciente, sin gestión de eventos)</li>
+<li>Avance en campo (a alto nivel: «X % de los votantes objetivo contactados», sin detalle por territorio)</li>
+<li>Mensajes sin leer (destacados: la mensajería es una actividad central del candidato)</li>
+<li>Aprobaciones pendientes (comunicados de prensa y publicaciones en redes a la espera de su revisión)</li>
+</ul>
+<h3 id="secciones-de-la-barra-lateral-8" tabindex="-1"><a class="heading-anchor" href="#secciones-de-la-barra-lateral-8" aria-hidden="true">#</a> Secciones de la barra lateral</h3>
+<ul>
+<li><strong>Resumen:</strong> Panel de la campaña</li>
+<li><strong>Perfil:</strong> Mi perfil público</li>
+<li><strong>Aprobaciones:</strong> Aprobaciones pendientes</li>
+<li><strong>Mensajería:</strong> Mensajes</li>
+</ul>
+<h3 id="experiencia-en-móvil-8" tabindex="-1"><a class="heading-anchor" href="#experiencia-en-móvil-8" aria-hidden="true">#</a> Experiencia en móvil</h3>
+<p>Para el Candidato, móvil y escritorio importan por igual. Revisa el panel y los mensajes desde el celular, y revisa y aprueba contenido desde donde esté.</p>
+<p>Pestañas en móvil: Panel, Perfil, Aprobaciones, Mensajes</p>
+<h3 id="patrones-de-mensajería" tabindex="-1"><a class="heading-anchor" href="#patrones-de-mensajería" aria-hidden="true">#</a> Patrones de mensajería</h3>
+<p>La experiencia de mensajería del Candidato pone el énfasis en:</p>
+<ul>
+<li>Los <strong>mensajes informativos</strong> se ven distintos de la conversación casual (con formato y estructura)</li>
+<li>Las <strong>solicitudes de aprobación</strong> aparecen tanto en la sección de Aprobaciones como en los mensajes, con acciones de aprobar, rechazar y comentar</li>
+<li>Las conversaciones con el personal clave (Gerente de campaña, Director de comunicaciones) van fijadas arriba</li>
+<li>Las conversaciones de grupo de las que forma parte (por ejemplo, «Equipo de liderazgo») son fáciles de alcanzar</li>
+</ul>
+<h3 id="lo-que-no-ven-7" tabindex="-1"><a class="heading-anchor" href="#lo-que-no-ven-7" aria-hidden="true">#</a> Lo que no ven</h3>
+<p>La vista del Candidato está limitada a propósito a información de alto nivel. Sin acceso a: paneles operativos, detalles del CRM, lista del equipo de voluntarios, detalles financieros (donaciones individuales, cumplimiento), ajustes, gestión de datos, detalles del trabajo de campo, jornadas de llamadas, operaciones de GOTV. Ven resúmenes, no los datos de origen.</p>
+<p><strong>Excepción:</strong> como el rol de Candidato es una plantilla, el Administrador de la organización puede concederle permisos adicionales a los candidatos que quieran meterse más a fondo. Pero lo predeterminado es la vista curada.</p>
+<hr>
+<h2 id="simpatizante" tabindex="-1"><a class="heading-anchor" href="#simpatizante" aria-hidden="true">#</a> Simpatizante</h2>
+<h3 id="pantalla-de-inicio-9" tabindex="-1"><a class="heading-anchor" href="#pantalla-de-inicio-9" aria-hidden="true">#</a> Pantalla de inicio</h3>
+<p><strong>Inicio del simpatizante</strong> (SUP-001): un portal personal mínimo.</p>
+<ul>
+<li>Actividad reciente (última donación, último evento al que asistió)</li>
+<li>Acciones rápidas: Donar, Ver eventos, Actualizar preferencias</li>
+<li>Estado de sus preferencias de comunicación (a qué está suscrito)</li>
+</ul>
+<h3 id="secciones-de-la-barra-lateral-9" tabindex="-1"><a class="heading-anchor" href="#secciones-de-la-barra-lateral-9" aria-hidden="true">#</a> Secciones de la barra lateral</h3>
+<ul>
+<li><strong>Mi perfil:</strong> Perfil, Preferencias, Preferencias de comunicación</li>
+<li><strong>Donaciones:</strong> Historial de donaciones, Recurrentes, Recibos</li>
+<li><strong>Eventos:</strong> Mis eventos</li>
+</ul>
+<h3 id="experiencia-en-móvil-9" tabindex="-1"><a class="heading-anchor" href="#experiencia-en-móvil-9" aria-hidden="true">#</a> Experiencia en móvil</h3>
+<p><strong>Prioridad móvil.</strong> Los simpatizantes interactúan con la plataforma sobre todo desde el celular: los formularios de donación, las confirmaciones de asistencia y la gestión del perfil están todos pensados con prioridad móvil.</p>
+<p>Pestañas en móvil: Perfil, Donaciones, Eventos</p>
+<h3 id="autenticación" tabindex="-1"><a class="heading-anchor" href="#autenticación" aria-hidden="true">#</a> Autenticación</h3>
+<p>Los simpatizantes tienen acceso por niveles:</p>
+<ul>
+<li><strong>Enlace mágico</strong> (poca fricción): tocar un enlace en un correo para entrar al historial de donaciones y a los recibos</li>
+<li><strong>Cuenta completa</strong> (passkey o inicio de sesión por correo): obligatoria para las acciones de gestión (modificar donaciones recurrentes, actualizar el método de pago, cambiar datos personales)</li>
+</ul>
+<h3 id="lo-que-no-ven-8" tabindex="-1"><a class="heading-anchor" href="#lo-que-no-ven-8" aria-hidden="true">#</a> Lo que no ven</h3>
+<p>Los simpatizantes ven solo sus propios datos y el contenido público. Sin acceso a ninguna funcionalidad interna de la plataforma: ni CRM, ni campañas, ni herramientas del personal, ni funcionalidades de voluntariado. Su vista es un portal personal, no una herramienta de gestión de campaña.</p>
+<hr>
+<h2 id="patrones-comunes-a-todos-los-perfiles" tabindex="-1"><a class="heading-anchor" href="#patrones-comunes-a-todos-los-perfiles" aria-hidden="true">#</a> Patrones comunes a todos los perfiles</h2>
+<h3 id="comportamiento-de-las-notificaciones-por-arquetipo" tabindex="-1"><a class="heading-anchor" href="#comportamiento-de-las-notificaciones-por-arquetipo" aria-hidden="true">#</a> Comportamiento de las notificaciones por arquetipo</h3>
+<table>
+<thead>
+<tr>
+<th>Perfil</th>
+<th>Notificaciones de alta prioridad</th>
+<th>Canales de entrega</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Administrador de la organización</td>
+<td>Alertas de seguridad, fechas límite de cumplimiento, problemas del sistema, facturación</td>
+<td>En la aplicación, push, correo, SMS (solo lo crítico)</td>
+</tr>
+<tr>
+<td>Director de comunicaciones</td>
+<td>Fallos de entrega de campañas, respuestas a aprobaciones</td>
+<td>En la aplicación, push, correo</td>
+</tr>
+<tr>
+<td>Director de finanzas</td>
+<td>Marcas de cumplimiento, pagos fallidos, problemas con donaciones recurrentes</td>
+<td>En la aplicación, push, correo</td>
+</tr>
+<tr>
+<td>Director de campo</td>
+<td>Alertas de operaciones activas, escalamientos de GOTV</td>
+<td>En la aplicación, push, correo</td>
+</tr>
+<tr>
+<td>Coordinador de voluntarios</td>
+<td>Inscripciones nuevas de voluntarios, cancelaciones de turno, ausencias</td>
+<td>En la aplicación, push, correo</td>
+</tr>
+<tr>
+<td>Gestor de datos</td>
+<td>Importaciones completadas, cambios en la cola de deduplicación, alertas de calidad de datos</td>
+<td>En la aplicación, correo</td>
+</tr>
+<tr>
+<td>Voluntario</td>
+<td>Recordatorios de turno, cambios de asignación, mensajes del Líder de equipo</td>
+<td>En la aplicación, push</td>
+</tr>
+<tr>
+<td>Líder de equipo</td>
+<td>Problemas de los integrantes del equipo, recordatorios de turno, escalamientos al centro de mando (GOTV)</td>
+<td>En la aplicación, push</td>
+</tr>
+<tr>
+<td>Candidato</td>
+<td>Solicitudes de aprobación, informes, mensajes del personal clave</td>
+<td>En la aplicación, push</td>
+</tr>
+<tr>
+<td>Simpatizante</td>
+<td>Recibos de donación, recordatorios de eventos, estado de las donaciones recurrentes</td>
+<td>Correo, push (si dio consentimiento expreso)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="gestión-de-sesiones-por-arquetipo" tabindex="-1"><a class="heading-anchor" href="#gestión-de-sesiones-por-arquetipo" aria-hidden="true">#</a> Gestión de sesiones por arquetipo</h3>
+<table>
+<thead>
+<tr>
+<th>Perfil</th>
+<th>Duración de la sesión</th>
+<th>Requisito de reautenticación</th>
+<th>Modo de campo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Administrador de la organización</td>
+<td>Corta (horas)</td>
+<td>Reautenticación para acciones sensibles</td>
+<td>No</td>
+</tr>
+<tr>
+<td>Personal (todo)</td>
+<td>Media (jornada laboral)</td>
+<td>Reautenticación para acciones sensibles</td>
+<td>No (salvo que además sea voluntario)</td>
+</tr>
+<tr>
+<td>Voluntario</td>
+<td>Media (jornada laboral) / duración del turno (campo)</td>
+<td>Reautenticación al terminar el turno</td>
+<td>Sí</td>
+</tr>
+<tr>
+<td>Líder de equipo</td>
+<td>Media (jornada laboral) / duración del turno (campo)</td>
+<td>Reautenticación al terminar el turno</td>
+<td>Sí</td>
+</tr>
+<tr>
+<td>Candidato</td>
+<td>Media (jornada laboral)</td>
+<td>Estándar</td>
+<td>No</td>
+</tr>
+<tr>
+<td>Simpatizante</td>
+<td>Larga (semanas)</td>
+<td>Reautenticación para cambios de pago</td>
+<td>No</td>
+</tr>
+</tbody>
+</table>
+<h3 id="cambios-de-vista-en-el-día-de-elecciones" tabindex="-1"><a class="heading-anchor" href="#cambios-de-vista-en-el-día-de-elecciones" aria-hidden="true">#</a> Cambios de vista en el día de elecciones</h3>
+<p>Cuando se activa el modo de día de elecciones:</p>
+<table>
+<thead>
+<tr>
+<th>Perfil</th>
+<th>Cambio de vista</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Administrador de la organización</td>
+<td>El Panel del centro de mando sube al principio de la barra lateral. Banner de «Día de elecciones activo».</td>
+</tr>
+<tr>
+<td>Director de campo</td>
+<td>La pantalla de inicio cambia al Panel del centro de mando. La sección de GOTV sube de posición.</td>
+</tr>
+<tr>
+<td>Coordinador de voluntarios</td>
+<td>Suben de posición las herramientas de registro de entrada en los puntos de concentración. Se enfatiza la gestión de turnos.</td>
+</tr>
+<tr>
+<td>Director de comunicaciones</td>
+<td>El plan de comunicaciones del día de elecciones queda activo. Se ven los controles de envío de cada oleada.</td>
+</tr>
+<tr>
+<td>Voluntario</td>
+<td>Modo de campo específico de GOTV (fichas de puerta de GOTV, guion simplificado).</td>
+</tr>
+<tr>
+<td>Líder de equipo</td>
+<td>Se ve el avance de GOTV del equipo. Está disponible el botón de escalamiento al centro de mando.</td>
+</tr>
+<tr>
+<td>Todos los demás</td>
+<td>Sin cambios (Candidato, Simpatizante, Gestor de datos, Director de finanzas).</td>
+</tr>
+</tbody>
+</table>
+<h2 id="preguntas-abiertas" tabindex="-1"><a class="heading-anchor" href="#preguntas-abiertas" aria-hidden="true">#</a> Preguntas abiertas</h2>
+<ol>
+<li>
+<p><strong>Vista previa de la plantilla de rol.</strong> Cuando un Administrador de la organización configura una plantilla de rol, ¿puede previsualizar cómo se ve la vista de ese rol? Un modo de «previsualizar como este rol» ayudaría a los Administradores de la organización a entender el impacto de las decisiones de permisos que toman.</p>
+</li>
+<li>
+<p><strong>Experiencia de primer uso por arquetipo.</strong> ¿Debería cada arquetipo ver un recorrido guiado breve, propio de su rol, la primera vez que inicia sesión? («Bienvenido, Director de campo: aquí es donde configuras las campañas de trabajo de campo…»)</p>
+</li>
+<li>
+<p><strong>Estados vacíos por arquetipo.</strong> Cuando la pantalla de inicio de un perfil todavía no tiene datos (sin turnos creados, sin campañas activas), el estado vacío debería guiar a la persona hacia su primera acción. Tienen que ser propios de cada arquetipo: el estado vacío de un Director de finanzas dice «Configura tu primer formulario de donación», mientras que el de un Director de campo dice «Crea tu primera campaña de trabajo de campo».</p>
+</li>
+</ol>
+<!-- REVISIT: La selección de pestañas de móvil por arquetipo son estimaciones basadas en el análisis de las specs. Los datos de uso real de las pruebas alfa deberían servir para ajustarlas. -->
+
+    </article>
+  </main>
+  <div class="toc-rail"><nav class="toc" aria-label="En esta página"><div class="toc-label">En esta página</div><ul><li class="toc-2"><a href="#propósito"># Propósito</a></li><li class="toc-2"><a href="#resumen-de-arquetipos"># Resumen de arquetipos</a></li><li class="toc-2"><a href="#administrador-de-la-organización"># Administrador de la organización</a></li><li class="toc-3"><a href="#pantalla-de-inicio"># Pantalla de inicio</a></li><li class="toc-3"><a href="#secciones-de-la-barra-lateral"># Secciones de la barra lateral</a></li><li class="toc-3"><a href="#experiencia-en-móvil"># Experiencia en móvil</a></li><li class="toc-3"><a href="#comportamientos-especiales"># Comportamientos especiales</a></li><li class="toc-2"><a href="#director-de-comunicaciones"># Director de comunicaciones</a></li><li class="toc-3"><a href="#pantalla-de-inicio-1"># Pantalla de inicio</a></li><li class="toc-3"><a href="#secciones-de-la-barra-lateral-1"># Secciones de la barra lateral</a></li><li class="toc-3"><a href="#experiencia-en-móvil-1"># Experiencia en móvil</a></li><li class="toc-3"><a href="#lo-que-no-ven"># Lo que no ven</a></li><li class="toc-2"><a href="#director-de-finanzas"># Director de finanzas</a></li><li class="toc-3"><a href="#pantalla-de-inicio-2"># Pantalla de inicio</a></li><li class="toc-3"><a href="#secciones-de-la-barra-lateral-2"># Secciones de la barra lateral</a></li><li class="toc-3"><a href="#experiencia-en-móvil-2"># Experiencia en móvil</a></li><li class="toc-3"><a href="#lo-que-no-ven-1"># Lo que no ven</a></li><li class="toc-2"><a href="#director-de-campo"># Director de campo</a></li><li class="toc-3"><a href="#pantalla-de-inicio-3"># Pantalla de inicio</a></li><li class="toc-3"><a href="#secciones-de-la-barra-lateral-3"># Secciones de la barra lateral</a></li><li class="toc-3"><a href="#experiencia-en-móvil-3"># Experiencia en móvil</a></li><li class="toc-3"><a href="#día-de-elecciones"># Día de elecciones</a></li><li class="toc-3"><a href="#lo-que-no-ven-2"># Lo que no ven</a></li><li class="toc-2"><a href="#coordinador-de-voluntarios"># Coordinador de voluntarios</a></li><li class="toc-3"><a href="#pantalla-de-inicio-4"># Pantalla de inicio</a></li><li class="toc-3"><a href="#secciones-de-la-barra-lateral-4"># Secciones de la barra lateral</a></li><li class="toc-3"><a href="#experiencia-en-móvil-4"># Experiencia en móvil</a></li><li class="toc-3"><a href="#lo-que-no-ven-3"># Lo que no ven</a></li><li class="toc-2"><a href="#gestor-de-datos"># Gestor de datos</a></li><li class="toc-3"><a href="#pantalla-de-inicio-5"># Pantalla de inicio</a></li><li class="toc-3"><a href="#secciones-de-la-barra-lateral-5"># Secciones de la barra lateral</a></li><li class="toc-3"><a href="#experiencia-en-móvil-5"># Experiencia en móvil</a></li><li class="toc-3"><a href="#lo-que-no-ven-4"># Lo que no ven</a></li><li class="toc-2"><a href="#voluntario"># Voluntario</a></li><li class="toc-3"><a href="#pantalla-de-inicio-6"># Pantalla de inicio</a></li><li class="toc-3"><a href="#secciones-de-la-barra-lateral-6"># Secciones de la barra lateral</a></li><li class="toc-3"><a href="#experiencia-en-móvil-6"># Experiencia en móvil</a></li><li class="toc-3"><a href="#modo-de-campo"># Modo de campo</a></li><li class="toc-3"><a href="#funcionalidades-sin-conexión"># Funcionalidades sin conexión</a></li><li class="toc-3"><a href="#lo-que-no-ven-5"># Lo que no ven</a></li><li class="toc-2"><a href="#líder-de-equipo"># Líder de equipo</a></li><li class="toc-3"><a href="#pantalla-de-inicio-7"># Pantalla de inicio</a></li><li class="toc-3"><a href="#secciones-de-la-barra-lateral-7"># Secciones de la barra lateral</a></li><li class="toc-3"><a href="#experiencia-en-móvil-7"># Experiencia en móvil</a></li><li class="toc-3"><a href="#modo-de-campo-1"># Modo de campo</a></li><li class="toc-3"><a href="#lo-que-no-ven-6"># Lo que no ven</a></li><li class="toc-2"><a href="#candidato"># Candidato</a></li><li class="toc-3"><a href="#pantalla-de-inicio-8"># Pantalla de inicio</a></li><li class="toc-3"><a href="#secciones-de-la-barra-lateral-8"># Secciones de la barra lateral</a></li><li class="toc-3"><a href="#experiencia-en-móvil-8"># Experiencia en móvil</a></li><li class="toc-3"><a href="#patrones-de-mensajería"># Patrones de mensajería</a></li><li class="toc-3"><a href="#lo-que-no-ven-7"># Lo que no ven</a></li><li class="toc-2"><a href="#simpatizante"># Simpatizante</a></li><li class="toc-3"><a href="#pantalla-de-inicio-9"># Pantalla de inicio</a></li><li class="toc-3"><a href="#secciones-de-la-barra-lateral-9"># Secciones de la barra lateral</a></li><li class="toc-3"><a href="#experiencia-en-móvil-9"># Experiencia en móvil</a></li><li class="toc-3"><a href="#autenticación"># Autenticación</a></li><li class="toc-3"><a href="#lo-que-no-ven-8"># Lo que no ven</a></li><li class="toc-2"><a href="#patrones-comunes-a-todos-los-perfiles"># Patrones comunes a todos los perfiles</a></li><li class="toc-3"><a href="#comportamiento-de-las-notificaciones-por-arquetipo"># Comportamiento de las notificaciones por arquetipo</a></li><li class="toc-3"><a href="#gestión-de-sesiones-por-arquetipo"># Gestión de sesiones por arquetipo</a></li><li class="toc-3"><a href="#cambios-de-vista-en-el-día-de-elecciones"># Cambios de vista en el día de elecciones</a></li><li class="toc-2"><a href="#preguntas-abiertas"># Preguntas abiertas</a></li></ul></nav></div>
+</div>
+<script src="../../../../assets/search.js" defer></script>
+<script src="../../../../assets/app.js" defer></script>
+</body>
+</html>

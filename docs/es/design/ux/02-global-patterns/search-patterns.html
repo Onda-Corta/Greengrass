@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="es" data-base="../../../../" data-no-results="No hay resultados para">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Patrones de búsqueda · GreenGrass</title>
+<meta name="description" content="Patrones de búsqueda — Documentación de especificación y diseño de GreenGrass.">
+<link rel="alternate" hreflang="en" href="../../../../design/ux/02-global-patterns/search-patterns.html">
+<link rel="alternate" hreflang="es" href="./search-patterns.html">
+<link rel="alternate" hreflang="x-default" href="../../../../design/ux/02-global-patterns/search-patterns.html">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%232563eb'/%3E%3Cstop offset='1' stop-color='%2316a34a'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='32' height='32' rx='7' fill='url(%23g)'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="../../../../assets/styles.css">
+</head>
+<body>
+<a class="skip-link" href="#content">Saltar al contenido</a>
+<header class="site-header">
+  <button type="button" class="menu-toggle" aria-label="Alternar navegación" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+  <a class="brand" href="../../../../es/index.html">
+    <span class="brand-mark" aria-hidden="true"></span>
+    <span class="brand-text"><strong>GreenGrass</strong><small>Especificación y diseño</small></span>
+  </a>
+  <div class="search">
+    <input type="search" id="search-input" placeholder="Buscar en la documentación…" autocomplete="off" aria-label="Buscar en la documentación">
+    <div id="search-results" class="search-results" hidden></div>
+  </div>
+  <nav class="lang-switch" aria-label="Idioma"><a class="lang-opt" href="../../../../design/ux/02-global-patterns/search-patterns.html" hreflang="en" lang="en" title="View this page in English">EN</a><span class="lang-opt active" aria-current="true">ES</span></nav>
+  <button type="button" class="theme-toggle" aria-label="Alternar modo oscuro" title="Alternar modo oscuro">
+    <span class="theme-icon" aria-hidden="true"></span>
+  </button>
+</header>
+<div class="layout">
+  <div class="sidebar-backdrop" hidden></div>
+  <aside class="sidebar" aria-label="Navegación de la documentación">
+    <nav class="nav">
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">Inicio<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../../../index.html">GreenGrass</a></li></ul></div>
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">Especificaciones<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../../../spec/product.html">Proyecto: GreenGrass</a></li><li><a href="../../../spec/mvp.html">MVP de GreenGrass — plan de producto</a></li><li><a href="../../../spec/users.html">Usuarios y roles</a></li><li><a href="../../../spec/workflows.html">Flujos de trabajo principales</a></li><li><a href="../../../spec/geography.html">Geografía objetivo</a></li><li><a href="../../../spec/security.html">Seguridad y modelo de amenazas</a></li><li><a href="../../../spec/compliance.html">Cumplimiento y marco legal</a></li><li><a href="../../../spec/fundraising.html">Recaudación de fondos e infraestructura de pagos</a></li><li><a href="../../../spec/integrations.html">Integraciones externas</a></li><li><a href="../../../spec/support.html">Soporte y puesta en marcha de organizaciones</a></li><li><a href="../../../spec/gotv.html">GOTV y operaciones del día de elecciones</a></li><li><a href="../../../spec/messaging.html">Comunicaciones internas y notificaciones</a></li><li><a href="../../../spec/press.html">Prensa, medios y comunicaciones públicas</a></li><li><a href="../../../spec/comms-intelligence.html">Inteligencia de comunicaciones — hoja de ruta post-MVP</a></li></ul></div>
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">Arquitectura<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../../architecture/system.html">Arquitectura del sistema</a></li></ul></div>
+<div class="nav-section open"><button type="button" class="nav-section-title" aria-expanded="true">Diseño UX<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../00-overview.html">Resumen del diseño de UX</a></li><li><a href="../01-information-architecture/navigation-model.html">Modelo de navegación</a></li><li><a href="../01-information-architecture/screen-inventory.html">Inventario de pantallas</a></li><li><a href="../01-information-architecture/persona-views.html">Vistas por arquetipo</a></li><li><a href="../01-information-architecture/url-structure.html">Estructura de URL</a></li><li><a href="./pattern-catalog.html">Catálogo de patrones</a></li><li><a href="./offline-sync-patterns.html">Patrones sin conexión y de sincronización</a></li><li><a href="./notification-patterns.html">Patrones de notificaciones</a></li><li><a href="./search-patterns.html" aria-current="page" class="active">Patrones de búsqueda</a></li><li><a href="./settings-help-patterns.html">Patrones de ajustes y ayuda</a></li><li><a href="./security-ux-patterns.html">Patrones de UX de seguridad</a></li><li><a href="../03-design-system/foundations.html">Fundamentos del sistema de diseño</a></li><li><a href="../03-design-system/theming-strategy.html">Estrategia de temas</a></li><li><a href="../03-design-system/component-inventory.html">Inventario de componentes</a></li><li><a href="../03-design-system/responsive-strategy.html">Estrategia de diseño adaptable</a></li></ul></div>
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">Decisiones<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../../../decisions/001-platform-architecture.html">ADR-001: Arquitectura y despliegue de la plataforma</a></li><li><a href="../../../decisions/002-security-threat-model.html">ADR-002: Seguridad y modelo de amenazas</a></li><li><a href="../../../decisions/003-identity-access-organization.html">ADR-003: Identidad, acceso y organización</a></li><li><a href="../../../decisions/004-data-model-integrity.html">ADR-004: Modelo de datos e integridad</a></li><li><a href="../../../decisions/005-offline-first-sync.html">ADR-005: Prioridad sin conexión y sincronización</a></li><li><a href="../../../decisions/006-field-operations-gotv.html">ADR-006: Operaciones de campo y GOTV</a></li><li><a href="../../../decisions/007-fundraising-payments.html">ADR-007: Recaudación de fondos y pagos</a></li><li><a href="../../../decisions/008-communications-messaging.html">ADR-008: Comunicaciones y mensajería</a></li><li><a href="../../../decisions/009-compliance-legal.html">ADR-009: Cumplimiento y marco legal</a></li><li><a href="../../../decisions/010-internationalization-localization.html">ADR-010: Internacionalización y localización</a></li><li><a href="../../../decisions/011-design-system-ux.html">ADR-011: Sistema de diseño y fundamentos de UX</a></li><li><a href="../../../decisions/012-external-integrations.html">ADR-012: Integraciones externas</a></li><li><a href="../../../decisions/013-analytics-ai.html">ADR-013: Analítica e IA</a></li><li><a href="../../../decisions/014-volunteer-onboarding.html">ADR-014: Voluntariado e incorporación</a></li><li><a href="../../../decisions/015-product-scope.html">ADR-015: Límites del alcance del producto</a></li><li><a href="../../../decisions/016-cross-cutting-resolutions.html">ADR-016: Resoluciones transversales</a></li><li><a href="../../../decisions/017-sharing-contract-trust-model.html">ADR-017: El contrato de intercambio como primitiva universal de confianza</a></li><li><a href="../../../decisions/ux-decisions.html">Decisiones de UX — fase de wireframes</a></li></ul></div>
+    </nav>
+  </aside>
+  <main id="content" class="content">
+    <nav class="breadcrumb" aria-label="Ruta de navegación">Diseño UX</nav>
+    <article class="prose">
+<h1 id="patrones-de-búsqueda" tabindex="-1"><a class="heading-anchor" href="#patrones-de-búsqueda" aria-hidden="true">#</a> Patrones de búsqueda</h1>
+<h2 id="propósito" tabindex="-1"><a class="heading-anchor" href="#propósito" aria-hidden="true">#</a> Propósito</h2>
+<p>Este documento define cómo funciona la búsqueda en toda la plataforma: la búsqueda global, la búsqueda contextual dentro de cada área funcional, el filtrado y las búsquedas guardadas. La búsqueda es la forma en que las personas usuarias encuentran cosas en una plataforma con 236 pantallas y potencialmente millones de registros.</p>
+<h2 id="búsqueda-global" tabindex="-1"><a class="heading-anchor" href="#búsqueda-global" aria-hidden="true">#</a> Búsqueda global</h2>
+<h3 id="acceso" tabindex="-1"><a class="heading-anchor" href="#acceso" aria-hidden="true">#</a> Acceso</h3>
+<ul>
+<li><strong>Escritorio:</strong> barra de búsqueda siempre visible en la barra superior. Atajo de teclado: <code>/</code> o <code>Cmd+K</code> para enfocarla.</li>
+<li><strong>Móvil:</strong> icono de búsqueda en la barra superior. Al tocarlo se abre una interfaz de búsqueda a pantalla completa, con el campo enfocado automáticamente.</li>
+</ul>
+<h3 id="alcance-de-la-búsqueda" tabindex="-1"><a class="heading-anchor" href="#alcance-de-la-búsqueda" aria-hidden="true">#</a> Alcance de la búsqueda</h3>
+<p>La búsqueda global consulta todos los tipos de registro a los que la persona usuaria tiene acceso:</p>
+<table>
+<thead>
+<tr>
+<th>Tipo de registro</th>
+<th>Campos consultables</th>
+<th>Disponible para</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Contactos</td>
+<td>Nombre, correo, teléfono, dirección, etiquetas</td>
+<td>OA, CD, FD, FiD, VC, DM</td>
+</tr>
+<tr>
+<td>Donaciones</td>
+<td>Nombre del donante, monto, ID de transacción</td>
+<td>OA, FD</td>
+</tr>
+<tr>
+<td>Eventos</td>
+<td>Nombre del evento, lugar, descripción</td>
+<td>OA, VC, V, TL, S</td>
+</tr>
+<tr>
+<td>Campañas de correo</td>
+<td>Línea de asunto, nombre de la campaña</td>
+<td>OA, CD</td>
+</tr>
+<tr>
+<td>Voluntarios</td>
+<td>Nombre, correo, teléfono, equipo, destrezas</td>
+<td>OA, VC, FiD</td>
+</tr>
+<tr>
+<td>Contactos de medios</td>
+<td>Nombre, medio, fuente</td>
+<td>OA, CD</td>
+</tr>
+<tr>
+<td>Comunicados de prensa</td>
+<td>Título, contenido</td>
+<td>OA, CD</td>
+</tr>
+<tr>
+<td>Mensajes</td>
+<td>Contenido del mensaje, nombres de participantes</td>
+<td>Toda persona autenticada</td>
+</tr>
+<tr>
+<td>Respaldos</td>
+<td>Nombre de quien respalda, organización</td>
+<td>OA, CD</td>
+</tr>
+<tr>
+<td>Base de conocimiento</td>
+<td>Título del artículo, contenido</td>
+<td>Toda persona autenticada</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Filtrado por rol:</strong> los resultados solo incluyen los registros a los que la persona usuaria tiene acceso. Un voluntario que busca &quot;María&quot; ve solo los contactos con los que ha interactuado, no el CRM completo. Un Director de finanzas ve los registros de donaciones, pero no el detalle de las campañas de trabajo de campo.</p>
+<h3 id="resultados-de-búsqueda" tabindex="-1"><a class="heading-anchor" href="#resultados-de-búsqueda" aria-hidden="true">#</a> Resultados de búsqueda</h3>
+<p>Los resultados se agrupan por tipo de registro y se ordenan por relevancia:</p>
+<pre><code>┌───────────────────────────────────────────────────────────┐
+│  Búsqueda: &quot;martinez&quot;                               [✗]   │
+├───────────────────────────────────────────────────────────┤
+│                                                           │
+│  CONTACTOS (3)                                            │
+│  ┌────────────────────────────────────────────────────┐   │
+│  │  Ana Martínez · (787) 555-0123 · San Juan          │   │
+│  │  Carlos Martínez · Voluntario · Equipo A           │   │
+│  │  Sofía Martínez-Rivera · Donante · Recurrente      │   │
+│  └────────────────────────────────────────────────────┘   │
+│                                                           │
+│  DONACIONES (1)                                           │
+│  ┌────────────────────────────────────────────────────┐   │
+│  │  $250 de Ana Martínez · 15 de ene. de 2026         │   │
+│  └────────────────────────────────────────────────────┘   │
+│                                                           │
+│  MENSAJES (2)                                             │
+│  ┌────────────────────────────────────────────────────┐   │
+│  │  Conversación con Ana Martínez · hace 3 días       │   │
+│  │  Grupo &quot;Equipo A&quot; · menciona a Martínez · 1 semana │   │
+│  └────────────────────────────────────────────────────┘   │
+│                                                           │
+│  [Mostrar todos los resultados →]                         │
+└───────────────────────────────────────────────────────────┘
+</code></pre>
+<h3 id="comportamientos" tabindex="-1"><a class="heading-anchor" href="#comportamientos" aria-hidden="true">#</a> Comportamientos</h3>
+<ul>
+<li><strong>Búsqueda predictiva</strong> — los resultados aparecen mientras se escribe (con un retardo de 300 ms). Mínimo 2 caracteres.</li>
+<li><strong>Búsquedas recientes</strong> — cuando la barra de búsqueda está enfocada pero vacía, muestra las 5 búsquedas más recientes.</li>
+<li><strong>Sin resultados</strong> — &quot;No hay resultados para 'xyz'. Prueba con otro término o revisa la ortografía&quot;. Nunca una pantalla en blanco.</li>
+<li><strong>Clic en un resultado</strong> — lleva directamente a la vista de detalle del registro. La búsqueda se cierra.</li>
+<li><strong>&quot;Mostrar todos los resultados&quot;</strong> — abre una página completa de resultados con filtrado avanzado.</li>
+<li><strong>Navegación con el teclado</strong> — flechas para recorrer los resultados, Enter para seleccionar, Esc para cerrar.</li>
+<li><strong>La búsqueda ocurre en el servidor</strong> — necesita conexión. Sin conexión, la barra de búsqueda muestra: &quot;Requiere conexión. Puedes navegar por los registros en caché&quot;.</li>
+</ul>
+<h3 id="búsqueda-sin-conexión" tabindex="-1"><a class="heading-anchor" href="#búsqueda-sin-conexión" aria-hidden="true">#</a> Búsqueda sin conexión</h3>
+<p>Sin conexión, la búsqueda global no está disponible (ocurre en el servidor). Aun así:</p>
+<ul>
+<li><strong>Búsqueda local</strong> en el modo de campo: los voluntarios pueden buscar en su lista de recorrido por nombre o dirección. Usa los datos de la lista de recorrido guardados en la caché local.</li>
+<li><strong>Búsqueda en los mensajes en caché:</strong> se puede buscar entre los mensajes ya sincronizados.</li>
+<li><strong>La barra de búsqueda no se oculta</strong> sin conexión. Las funcionalidades que necesitan conexión aparecen atenuadas, con un distintivo de sin conexión, y la búsqueda no es la excepción: sigue el mismo patrón de degradación sin conexión.</li>
+</ul>
+<hr>
+<h2 id="búsqueda-contextual" tabindex="-1"><a class="heading-anchor" href="#búsqueda-contextual" aria-hidden="true">#</a> Búsqueda contextual</h2>
+<p>Dentro de cada área funcional, la búsqueda va acotada a ese contexto y trae filtros propios del dominio.</p>
+<h3 id="búsqueda-en-la-lista-de-contactos" tabindex="-1"><a class="heading-anchor" href="#búsqueda-en-la-lista-de-contactos" aria-hidden="true">#</a> Búsqueda en la lista de contactos</h3>
+<pre><code>┌────────────────────────────────────────────────────────┐
+│  [Buscar contactos...]                                 │
+│                                                        │
+│  Filtros:                                              │
+│  [Etiqueta ▾]  [Segmento ▾]  [Estado ▾]  [Ubicación ▾] │
+│  [Puntaje de apoyo ▾]  [Último contacto ▾]  [+ Más]    │
+└────────────────────────────────────────────────────────┘
+</code></pre>
+<h3 id="búsqueda-en-la-lista-de-donaciones" tabindex="-1"><a class="heading-anchor" href="#búsqueda-en-la-lista-de-donaciones" aria-hidden="true">#</a> Búsqueda en la lista de donaciones</h3>
+<pre><code>┌─────────────────────────────────────────────────────────┐
+│  [Buscar por nombre del donante o ID de transacción...] │
+│                                                         │
+│  Filtros:                                               │
+│  [Monto ▾]  [Rango de fechas ▾]  [Tipo ▾]  [Estado ▾]   │
+│  [Campaña ▾]  [Método de pago ▾]  [+ Más]               │
+└─────────────────────────────────────────────────────────┘
+</code></pre>
+<h3 id="búsqueda-de-eventos" tabindex="-1"><a class="heading-anchor" href="#búsqueda-de-eventos" aria-hidden="true">#</a> Búsqueda de eventos</h3>
+<pre><code>┌───────────────────────────────────────────────────────────┐
+│  [Buscar eventos...]                                      │
+│                                                           │
+│  Filtros:                                                 │
+│  [Rango de fechas ▾]  [Tipo ▾]  [Estado ▾]  [Ubicación ▾] │
+└───────────────────────────────────────────────────────────┘
+</code></pre>
+<h3 id="búsqueda-de-mensajes" tabindex="-1"><a class="heading-anchor" href="#búsqueda-de-mensajes" aria-hidden="true">#</a> Búsqueda de mensajes</h3>
+<pre><code>┌──────────────────────────────────────────────────────┐
+│  [Buscar mensajes...]                                │
+│                                                      │
+│  Filtros:                                            │
+│  [De ▾]  [Rango de fechas ▾]  [En la conversación ▾] │
+│  [Tiene adjuntos ☐]                                  │
+└──────────────────────────────────────────────────────┘
+</code></pre>
+<p><strong>Nota:</strong> la búsqueda de mensajes en conversaciones cifradas de extremo a extremo es limitada. Solo se pueden buscar los mensajes que ya se descifraron en el cliente. Buscar mensajes cifrados en el servidor es imposible por diseño.</p>
+<h3 id="comportamientos-comunes-de-la-búsqueda-contextual" tabindex="-1"><a class="heading-anchor" href="#comportamientos-comunes-de-la-búsqueda-contextual" aria-hidden="true">#</a> Comportamientos comunes de la búsqueda contextual</h3>
+<ul>
+<li><strong>Chips de filtro</strong> — los filtros activos se muestran como chips descartables encima de los resultados. &quot;Limpiar todo&quot; para restablecer.</li>
+<li><strong>Persistencia de los filtros</strong> — los filtros se mantienen dentro de una sesión (salir y volver los conserva). No se conservan entre sesiones.</li>
+<li><strong>Filtros guardados</strong> — se puede guardar una combinación de filtros para reutilizarla (por ejemplo, &quot;Donantes de alto valor en San Juan&quot; = Monto &gt; $500 + Ubicación = San Juan).</li>
+<li><strong>Resultados vacíos</strong> — mensaje contextual con sugerencias. &quot;Ningún contacto coincide con estos filtros. Prueba a quitar el filtro 'Etiqueta: Voluntario'&quot;.</li>
+</ul>
+<hr>
+<h2 id="patrones-de-filtrado" tabindex="-1"><a class="heading-anchor" href="#patrones-de-filtrado" aria-hidden="true">#</a> Patrones de filtrado</h2>
+<h3 id="tipos-de-filtro" tabindex="-1"><a class="heading-anchor" href="#tipos-de-filtro" aria-hidden="true">#</a> Tipos de filtro</h3>
+<table>
+<thead>
+<tr>
+<th>Tipo</th>
+<th>Elemento de interfaz</th>
+<th>Ejemplo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Texto</strong></td>
+<td>Campo de búsqueda</td>
+<td>Nombre, correo, dirección</td>
+</tr>
+<tr>
+<td><strong>Selección</strong></td>
+<td>Menú desplegable</td>
+<td>Estado (Activo/Inactivo/Todos), Tipo</td>
+</tr>
+<tr>
+<td><strong>Selección múltiple</strong></td>
+<td>Desplegable con casillas</td>
+<td>Etiquetas, segmentos, equipos</td>
+</tr>
+<tr>
+<td><strong>Rango</strong></td>
+<td>Dos campos o control deslizante</td>
+<td>Monto ($50-$500), rango de fechas</td>
+</tr>
+<tr>
+<td><strong>Fecha</strong></td>
+<td>Selector de fecha</td>
+<td>Creado después de, Último contacto antes de</td>
+</tr>
+<tr>
+<td><strong>Booleano</strong></td>
+<td>Interruptor o casilla</td>
+<td>Tiene correo, Es recurrente, Ha donado</td>
+</tr>
+<tr>
+<td><strong>Geoespacial</strong></td>
+<td>Selección en el mapa o campo de ubicación</td>
+<td>Dentro del territorio, Dentro de un radio</td>
+</tr>
+</tbody>
+</table>
+<h3 id="patrones-de-interfaz-de-los-filtros" tabindex="-1"><a class="heading-anchor" href="#patrones-de-interfaz-de-los-filtros" aria-hidden="true">#</a> Patrones de interfaz de los filtros</h3>
+<p><strong>Escritorio:</strong> los filtros se muestran como una barra horizontal encima de la lista. Los filtros complejos se despliegan en un panel. Los filtros activos se muestran como chips.</p>
+<pre><code>┌─────────────────────────────────────────────────────────┐
+│  [Buscar...]  [Etiqueta: Voluntario ✗]  [Monto: $50+ ✗] │
+│  [Limpiar todos los filtros]           [Guardar filtro] │
+└─────────────────────────────────────────────────────────┘
+</code></pre>
+<p><strong>Móvil:</strong> se accede a los filtros con un botón &quot;Filtro&quot; que abre un panel de filtros a pantalla completa. El botón muestra el número de filtros activos (&quot;Filtro (2)&quot;).</p>
+<pre><code>┌─────────────────────────────────────┐
+│  [Buscar...]           [Filtro (2)] │
+└─────────────────────────────────────┘
+
+Panel de filtros (a pantalla completa en móvil):
+┌──────────────────────────────────────────┐
+│  ← Filtros                  [Restablecer]│
+├──────────────────────────────────────────┤
+│  Etiqueta                                │
+│  [✓ Voluntario] [☐ Donante] [☐ Personal] │
+│                                          │
+│  Monto                                   │
+│  [Mín: $50    ] — [Máx:          ]       │
+│                                          │
+│  Rango de fechas                         │
+│  [1 de ene. de 2026] — [Hoy            ] │
+│                                          │
+├──────────────────────────────────────────┤
+│  [Aplicar filtros]                       │
+└──────────────────────────────────────────┘
+</code></pre>
+<hr>
+<h2 id="búsquedas-y-filtros-guardados" tabindex="-1"><a class="heading-anchor" href="#búsquedas-y-filtros-guardados" aria-hidden="true">#</a> Búsquedas y filtros guardados</h2>
+<h3 id="guardar" tabindex="-1"><a class="heading-anchor" href="#guardar" aria-hidden="true">#</a> Guardar</h3>
+<p>Se puede guardar una consulta de búsqueda junto con su combinación de filtros para reutilizarla:</p>
+<pre><code>┌─────────────────────────────────────────────┐
+│  Guardar este filtro                        │
+│                                             │
+│  Nombre: [Donantes de alto valor, San Juan] │
+│                                             │
+│  Filtros:                                   │
+│  • Monto &gt; $500                             │
+│  • Ubicación = San Juan                     │
+│  • Estado = Activo                          │
+│                                             │
+│  [Cancelar]                      [Guardar]  │
+└─────────────────────────────────────────────┘
+</code></pre>
+<h3 id="acceso-a-los-filtros-guardados" tabindex="-1"><a class="heading-anchor" href="#acceso-a-los-filtros-guardados" aria-hidden="true">#</a> Acceso a los filtros guardados</h3>
+<p>Los filtros guardados aparecen en un desplegable en la parte superior de la lista correspondiente:</p>
+<pre><code>┌───────────────────────────────────────────────────────────────┐
+│  Filtros guardados: [Donantes de alto valor ▾]  [Buscar...]   │
+└───────────────────────────────────────────────────────────────┘
+</code></pre>
+<p>Los filtros guardados son personales (no se comparten entre personas usuarias) salvo que el Administrador de la organización los comparta explícitamente.</p>
+<hr>
+<h2 id="rendimiento-de-la-búsqueda" tabindex="-1"><a class="heading-anchor" href="#rendimiento-de-la-búsqueda" aria-hidden="true">#</a> Rendimiento de la búsqueda</h2>
+<h3 id="objetivos-de-tiempo-de-respuesta" tabindex="-1"><a class="heading-anchor" href="#objetivos-de-tiempo-de-respuesta" aria-hidden="true">#</a> Objetivos de tiempo de respuesta</h3>
+<table>
+<thead>
+<tr>
+<th>Tipo de búsqueda</th>
+<th>Objetivo</th>
+<th>Notas</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Búsqueda predictiva (global)</td>
+<td>&lt;500 ms</td>
+<td>Con retardo, en el servidor</td>
+</tr>
+<tr>
+<td>Filtro de lista contextual</td>
+<td>&lt;300 ms</td>
+<td>Puede ser en el cliente para listas pequeñas</td>
+</tr>
+<tr>
+<td>Página completa de resultados</td>
+<td>&lt;1 s</td>
+<td>En el servidor, con paginación</td>
+</tr>
+<tr>
+<td>Búsqueda sin conexión en la lista de recorrido</td>
+<td>&lt;100 ms</td>
+<td>Consulta SQLite local</td>
+</tr>
+</tbody>
+</table>
+<h3 id="conjuntos-de-resultados-grandes" tabindex="-1"><a class="heading-anchor" href="#conjuntos-de-resultados-grandes" aria-hidden="true">#</a> Conjuntos de resultados grandes</h3>
+<ul>
+<li><strong>Paginación</strong> — los resultados se paginan (25 por página). &quot;Cargar más&quot; para el desplazamiento infinito en móvil.</li>
+<li><strong>Número de resultados</strong> — siempre se muestra el total de coincidencias (&quot;Mostrando 1-25 de 1,247 resultados&quot;).</li>
+<li><strong>Sin recorridos completos de tabla</strong> — las consultas de búsqueda usan índices. La búsqueda se implementa con el índice de búsqueda (<a href="http://system.md" target="_blank" rel="noopener noreferrer">system.md</a>), no con consultas directas a la base de datos.</li>
+</ul>
+<hr>
+<h2 id="restricciones-del-cifrado" tabindex="-1"><a class="heading-anchor" href="#restricciones-del-cifrado" aria-hidden="true">#</a> Restricciones del cifrado</h2>
+<p>Para las organizaciones con cifrado BYOK (Bring Your Own Key — la organización controla su propia llave de cifrado):</p>
+<ul>
+<li><strong>Búsqueda por índice ciego</strong> — los contactos se pueden encontrar por identificador (correo, teléfono) mediante índices ciegos, pero la consulta y los resultados viajan cifrados. El índice de búsqueda contiene hashes ciegos, no texto plano.</li>
+<li><strong>Límites de la búsqueda de texto completo</strong> — la búsqueda de texto completo en notas, historial de interacciones y campos libres solo es posible en el cliente (después de descifrar). El servidor no admite la búsqueda de texto completo sobre contenido cifrado.</li>
+<li><strong>Implicación para la interfaz</strong> — la búsqueda global puede devolver menos resultados en las organizaciones con BYOK. La barra de búsqueda no debe prometer de más. Texto de ayuda: &quot;Busca en nombres, correos e identificadores. El contenido de las notas se puede buscar dentro de cada registro&quot;.</li>
+</ul>
+<hr>
+<h2 id="preguntas-abiertas" tabindex="-1"><a class="heading-anchor" href="#preguntas-abiertas" aria-hidden="true">#</a> Preguntas abiertas</h2>
+<ol>
+<li>
+<p><strong>Analítica de búsqueda.</strong> ¿La plataforma debería registrar lo que buscan las personas usuarias (para mejorar la relevancia de los resultados y detectar necesidades no cubiertas)? Es útil para el desarrollo del producto, pero tiene implicaciones de privacidad: las consultas pueden revelar intereses políticos.</p>
+</li>
+<li>
+<p><strong>Cruce aproximado.</strong> ¿La búsqueda debería admitir el cruce aproximado (encontrar &quot;Martínez&quot; cuando se escribe &quot;Martines&quot;)? Importa en contextos multilingües, donde la escritura de los nombres varía. La complejidad de implementación es moderada.</p>
+</li>
+<li>
+<p><strong>Búsqueda entre organizaciones en el contexto de una alianza.</strong> Cuando un Administrador de la organización tiene acceso a la alianza, ¿la búsqueda global debería incluir los registros compartidos por los miembros de la alianza? Y si es así, ¿cómo se distinguen visualmente los resultados (registros propios frente a registros de la alianza)?</p>
+</li>
+</ol>
+<!-- REVISIT: Hay que decidir durante la implementación la tecnología del índice de búsqueda (ElasticSearch, Meilisearch o el texto completo de PostgreSQL). Los patrones de interfaz son los mismos sea cual sea el backend, pero las características de rendimiento cambian. -->
+
+    </article>
+  </main>
+  <div class="toc-rail"><nav class="toc" aria-label="En esta página"><div class="toc-label">En esta página</div><ul><li class="toc-2"><a href="#propósito"># Propósito</a></li><li class="toc-2"><a href="#búsqueda-global"># Búsqueda global</a></li><li class="toc-3"><a href="#acceso"># Acceso</a></li><li class="toc-3"><a href="#alcance-de-la-búsqueda"># Alcance de la búsqueda</a></li><li class="toc-3"><a href="#resultados-de-búsqueda"># Resultados de búsqueda</a></li><li class="toc-3"><a href="#comportamientos"># Comportamientos</a></li><li class="toc-3"><a href="#búsqueda-sin-conexión"># Búsqueda sin conexión</a></li><li class="toc-2"><a href="#búsqueda-contextual"># Búsqueda contextual</a></li><li class="toc-3"><a href="#búsqueda-en-la-lista-de-contactos"># Búsqueda en la lista de contactos</a></li><li class="toc-3"><a href="#búsqueda-en-la-lista-de-donaciones"># Búsqueda en la lista de donaciones</a></li><li class="toc-3"><a href="#búsqueda-de-eventos"># Búsqueda de eventos</a></li><li class="toc-3"><a href="#búsqueda-de-mensajes"># Búsqueda de mensajes</a></li><li class="toc-3"><a href="#comportamientos-comunes-de-la-búsqueda-contextual"># Comportamientos comunes de la búsqueda contextual</a></li><li class="toc-2"><a href="#patrones-de-filtrado"># Patrones de filtrado</a></li><li class="toc-3"><a href="#tipos-de-filtro"># Tipos de filtro</a></li><li class="toc-3"><a href="#patrones-de-interfaz-de-los-filtros"># Patrones de interfaz de los filtros</a></li><li class="toc-2"><a href="#búsquedas-y-filtros-guardados"># Búsquedas y filtros guardados</a></li><li class="toc-3"><a href="#guardar"># Guardar</a></li><li class="toc-3"><a href="#acceso-a-los-filtros-guardados"># Acceso a los filtros guardados</a></li><li class="toc-2"><a href="#rendimiento-de-la-búsqueda"># Rendimiento de la búsqueda</a></li><li class="toc-3"><a href="#objetivos-de-tiempo-de-respuesta"># Objetivos de tiempo de respuesta</a></li><li class="toc-3"><a href="#conjuntos-de-resultados-grandes"># Conjuntos de resultados grandes</a></li><li class="toc-2"><a href="#restricciones-del-cifrado"># Restricciones del cifrado</a></li><li class="toc-2"><a href="#preguntas-abiertas"># Preguntas abiertas</a></li></ul></nav></div>
+</div>
+<script src="../../../../assets/search.js" defer></script>
+<script src="../../../../assets/app.js" defer></script>
+</body>
+</html>

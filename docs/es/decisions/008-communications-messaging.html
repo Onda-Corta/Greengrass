@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="es" data-base="../../" data-no-results="No hay resultados para">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ADR-008: Comunicaciones y mensajería · GreenGrass</title>
+<meta name="description" content="ADR-008: Comunicaciones y mensajería — Documentación de especificación y diseño de GreenGrass.">
+<link rel="alternate" hreflang="en" href="../../decisions/008-communications-messaging.html">
+<link rel="alternate" hreflang="es" href="./008-communications-messaging.html">
+<link rel="alternate" hreflang="x-default" href="../../decisions/008-communications-messaging.html">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%232563eb'/%3E%3Cstop offset='1' stop-color='%2316a34a'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='32' height='32' rx='7' fill='url(%23g)'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="../../assets/styles.css">
+</head>
+<body>
+<a class="skip-link" href="#content">Saltar al contenido</a>
+<header class="site-header">
+  <button type="button" class="menu-toggle" aria-label="Alternar navegación" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+  <a class="brand" href="../../es/index.html">
+    <span class="brand-mark" aria-hidden="true"></span>
+    <span class="brand-text"><strong>GreenGrass</strong><small>Especificación y diseño</small></span>
+  </a>
+  <div class="search">
+    <input type="search" id="search-input" placeholder="Buscar en la documentación…" autocomplete="off" aria-label="Buscar en la documentación">
+    <div id="search-results" class="search-results" hidden></div>
+  </div>
+  <nav class="lang-switch" aria-label="Idioma"><a class="lang-opt" href="../../decisions/008-communications-messaging.html" hreflang="en" lang="en" title="View this page in English">EN</a><span class="lang-opt active" aria-current="true">ES</span></nav>
+  <button type="button" class="theme-toggle" aria-label="Alternar modo oscuro" title="Alternar modo oscuro">
+    <span class="theme-icon" aria-hidden="true"></span>
+  </button>
+</header>
+<div class="layout">
+  <div class="sidebar-backdrop" hidden></div>
+  <aside class="sidebar" aria-label="Navegación de la documentación">
+    <nav class="nav">
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">Inicio<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../index.html">GreenGrass</a></li></ul></div>
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">Especificaciones<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../spec/product.html">Proyecto: GreenGrass</a></li><li><a href="../spec/mvp.html">MVP de GreenGrass — plan de producto</a></li><li><a href="../spec/users.html">Usuarios y roles</a></li><li><a href="../spec/workflows.html">Flujos de trabajo principales</a></li><li><a href="../spec/geography.html">Geografía objetivo</a></li><li><a href="../spec/security.html">Seguridad y modelo de amenazas</a></li><li><a href="../spec/compliance.html">Cumplimiento y marco legal</a></li><li><a href="../spec/fundraising.html">Recaudación de fondos e infraestructura de pagos</a></li><li><a href="../spec/integrations.html">Integraciones externas</a></li><li><a href="../spec/support.html">Soporte y puesta en marcha de organizaciones</a></li><li><a href="../spec/gotv.html">GOTV y operaciones del día de elecciones</a></li><li><a href="../spec/messaging.html">Comunicaciones internas y notificaciones</a></li><li><a href="../spec/press.html">Prensa, medios y comunicaciones públicas</a></li><li><a href="../spec/comms-intelligence.html">Inteligencia de comunicaciones — hoja de ruta post-MVP</a></li></ul></div>
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">Arquitectura<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../design/architecture/system.html">Arquitectura del sistema</a></li></ul></div>
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">Diseño UX<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../design/ux/00-overview.html">Resumen del diseño de UX</a></li><li><a href="../design/ux/01-information-architecture/navigation-model.html">Modelo de navegación</a></li><li><a href="../design/ux/01-information-architecture/screen-inventory.html">Inventario de pantallas</a></li><li><a href="../design/ux/01-information-architecture/persona-views.html">Vistas por arquetipo</a></li><li><a href="../design/ux/01-information-architecture/url-structure.html">Estructura de URL</a></li><li><a href="../design/ux/02-global-patterns/pattern-catalog.html">Catálogo de patrones</a></li><li><a href="../design/ux/02-global-patterns/offline-sync-patterns.html">Patrones sin conexión y de sincronización</a></li><li><a href="../design/ux/02-global-patterns/notification-patterns.html">Patrones de notificaciones</a></li><li><a href="../design/ux/02-global-patterns/search-patterns.html">Patrones de búsqueda</a></li><li><a href="../design/ux/02-global-patterns/settings-help-patterns.html">Patrones de ajustes y ayuda</a></li><li><a href="../design/ux/02-global-patterns/security-ux-patterns.html">Patrones de UX de seguridad</a></li><li><a href="../design/ux/03-design-system/foundations.html">Fundamentos del sistema de diseño</a></li><li><a href="../design/ux/03-design-system/theming-strategy.html">Estrategia de temas</a></li><li><a href="../design/ux/03-design-system/component-inventory.html">Inventario de componentes</a></li><li><a href="../design/ux/03-design-system/responsive-strategy.html">Estrategia de diseño adaptable</a></li></ul></div>
+<div class="nav-section open"><button type="button" class="nav-section-title" aria-expanded="true">Decisiones<span class="chev" aria-hidden="true"></span></button><ul><li><a href="./001-platform-architecture.html">ADR-001: Arquitectura y despliegue de la plataforma</a></li><li><a href="./002-security-threat-model.html">ADR-002: Seguridad y modelo de amenazas</a></li><li><a href="./003-identity-access-organization.html">ADR-003: Identidad, acceso y organización</a></li><li><a href="./004-data-model-integrity.html">ADR-004: Modelo de datos e integridad</a></li><li><a href="./005-offline-first-sync.html">ADR-005: Prioridad sin conexión y sincronización</a></li><li><a href="./006-field-operations-gotv.html">ADR-006: Operaciones de campo y GOTV</a></li><li><a href="./007-fundraising-payments.html">ADR-007: Recaudación de fondos y pagos</a></li><li><a href="./008-communications-messaging.html" aria-current="page" class="active">ADR-008: Comunicaciones y mensajería</a></li><li><a href="./009-compliance-legal.html">ADR-009: Cumplimiento y marco legal</a></li><li><a href="./010-internationalization-localization.html">ADR-010: Internacionalización y localización</a></li><li><a href="./011-design-system-ux.html">ADR-011: Sistema de diseño y fundamentos de UX</a></li><li><a href="./012-external-integrations.html">ADR-012: Integraciones externas</a></li><li><a href="./013-analytics-ai.html">ADR-013: Analítica e IA</a></li><li><a href="./014-volunteer-onboarding.html">ADR-014: Voluntariado e incorporación</a></li><li><a href="./015-product-scope.html">ADR-015: Límites del alcance del producto</a></li><li><a href="./016-cross-cutting-resolutions.html">ADR-016: Resoluciones transversales</a></li><li><a href="./017-sharing-contract-trust-model.html">ADR-017: El contrato de intercambio como primitiva universal de confianza</a></li><li><a href="./ux-decisions.html">Decisiones de UX — fase de wireframes</a></li></ul></div>
+    </nav>
+  </aside>
+  <main id="content" class="content">
+    <nav class="breadcrumb" aria-label="Ruta de navegación">Decisiones</nav>
+    <article class="prose">
+<h1 id="adr-008-comunicaciones-y-mensajería" tabindex="-1"><a class="heading-anchor" href="#adr-008-comunicaciones-y-mensajería" aria-hidden="true">#</a> ADR-008: Comunicaciones y mensajería</h1>
+<p><strong>Estado:</strong> Aceptada
+<strong>Fecha:</strong> 2026-03-03
+<strong>Fuentes:</strong> <code>spec/messaging.md</code>, <code>spec/workflows.md</code></p>
+<h2 id="contexto" tabindex="-1"><a class="heading-anchor" href="#contexto" aria-hidden="true">#</a> Contexto</h2>
+<p>La mensajería interna de una campaña política lleva información estratégica delicada —planes de campaña, inteligencia sobre votantes, comunicaciones del candidato— que puede causar daño real si se filtra. Al mismo tiempo, las campañas necesitan una comunicación rápida, plana y contextual, que se sienta más como Signal que como Outlook. El sistema de mensajería tiene que cumplir tanto los requisitos de seguridad (cifrado de extremo a extremo, sin acceso de la plataforma al contenido de los mensajes) como los operativos (mensajes contextuales asociados a votantes, eventos y turnos; difusiones a cientos de voluntarios de campo; coordinación del centro de mando el día de elecciones).</p>
+<p>Las comunicaciones externas (campañas de correo, SMS, contacto por WhatsApp con votantes) requieren un modelo de consentimiento distinto: seguimiento por canal y por finalidad para cumplir las leyes de protección de datos de todas las jurisdicciones objetivo.</p>
+<h2 id="decisión" tabindex="-1"><a class="heading-anchor" href="#decisión" aria-hidden="true">#</a> Decisión</h2>
+<h3 id="cifrado-de-extremo-a-extremo-por-defecto-en-los-mensajes-internos" tabindex="-1"><a class="heading-anchor" href="#cifrado-de-extremo-a-extremo-por-defecto-en-los-mensajes-internos" aria-hidden="true">#</a> Cifrado de extremo a extremo por defecto en los mensajes internos</h3>
+<p>Toda la mensajería interna (mensajes directos, conversaciones de grupo) va cifrada de extremo a extremo (E2E) con el Signal Protocol (Double Ratchet) o equivalente. GreenGrass no puede leer el contenido de los mensajes y no tiene nada que entregar si se ve obligada por vía legal. La custodia de llaves del lado del servidor es opcional y la activa la organización, no cada usuario: habilita la búsqueda del lado del servidor y facilita la recuperación de dispositivos, a cambio de que GreenGrass pueda acceder al contenido mediante un proceso legal válido.</p>
+<p>La decisión se muestra con claridad: si la custodia está activada, la interfaz de mensajería indica que los mensajes no van cifrados de extremo a extremo. La custodia de llaves es una decisión de la organización que toma el Administrador de la organización, no una elección de cada usuario.</p>
+<p><strong>Alternativas consideradas:</strong> Cifrar solo del lado del servidor se descartó porque convierte a GreenGrass en blanco de requerimientos legales de datos. Solo E2E, sin opción de custodia, se descartó porque algunas organizaciones prefieren poder buscar y recuperar dispositivos con facilidad antes que la seguridad máxima.</p>
+<h3 id="seguimiento-del-consentimiento-por-canal-y-por-finalidad" tabindex="-1"><a class="heading-anchor" href="#seguimiento-del-consentimiento-por-canal-y-por-finalidad" aria-hidden="true">#</a> Seguimiento del consentimiento por canal y por finalidad</h3>
+<p>El consentimiento para las comunicaciones externas se registra por cada combinación de canal (correo, SMS, WhatsApp) y finalidad (transaccional, relacionada con eventos, recaudación de fondos, GOTV (Get Out The Vote — movilización del voto), activismo e incidencia, boletín). Unos valores predeterminados inteligentes infieren un consentimiento inicial razonable a partir del contexto en que se dio el consentimiento expreso: dar un número de celular para confirmar asistencia a un evento implica consentimiento de SMS transaccional y de eventos, pero no de recaudación de fondos.</p>
+<p>El consentimiento es revocable (baja con un clic y efecto inmediato), auditable (se registran las marcas de tiempo de otorgamiento y revocación), accesible (los simpatizantes manejan sus preferencias desde su perfil) y se hace cumplir (el sistema de comunicaciones verifica el consentimiento al momento de enviar: ningún mensaje sale sin consentimiento válido para ese canal y esa finalidad).</p>
+<p><strong>Alternativas consideradas:</strong> Un consentimiento expreso o una baja globales y simples se descartaron porque no cumplen con la LGPD, la PDPA ni la TCPA, que exigen consentimiento granular. El consentimiento por mensaje se descartó por ser tan granular que resulta impracticable, tanto para las personas como para el sistema.</p>
+<h3 id="hilos-opcionales" tabindex="-1"><a class="heading-anchor" href="#hilos-opcionales" aria-hidden="true">#</a> Hilos opcionales</h3>
+<p>Por defecto los mensajes aparecen en un flujo cronológico plano, pero a cualquier mensaje se le puede responder en un hilo. Eso equilibra la velocidad de la campaña (chat plano para equipos pequeños) con la escala (hilos cuando los grupos crecen durante el GOTV). Los hilos evitan que las conversaciones paralelas atiborren el flujo principal.</p>
+<h3 id="las-difusiones-usan-cifrado-del-lado-del-servidor" tabindex="-1"><a class="heading-anchor" href="#las-difusiones-usan-cifrado-del-lado-del-servidor" aria-hidden="true">#</a> Las difusiones usan cifrado del lado del servidor</h3>
+<p>Las difusiones (de uno a muchos, del personal a grupos grandes: toda la organización, por rol, por geografía, por turno) usan cifrado del lado del servidor con la llave de sobre de la organización, no E2E. Intercambiar llaves individuales con cada destinatario de una difusión es impracticable a escala. La interfaz revela el modo de cifrado de la difusión. Quien recibe no puede responder a una difusión: puede abrir un mensaje directo con quien la envió.</p>
+<h3 id="los-mensajes-contextuales-heredan-la-configuración-de-cifrado-de-la-organización" tabindex="-1"><a class="heading-anchor" href="#los-mensajes-contextuales-heredan-la-configuración-de-cifrado-de-la-organización" aria-hidden="true">#</a> Los mensajes contextuales heredan la configuración de cifrado de la organización</h3>
+<p>Los mensajes asociados a objetos de la plataforma (comentarios de eventos, hilos de turno, discusiones sobre donaciones marcadas, hilos de problemas reportados por observadores electorales) siguen el modo de cifrado de la organización. Las organizaciones en modo E2E tienen mensajes contextuales E2E (con la contrapartida de que no hay búsqueda del lado del servidor). Las organizaciones con custodia los tienen buscables. Así se evita un modelo de cifrado mixto y confuso dentro de una misma organización.</p>
+<p>Los mensajes de la alianza usan una llave de grupo generada de forma independiente para la alianza, distribuida a cada organización miembro cifrada con la llave pública de esa organización. Las llaves rotan cada vez que cambia la membresía de la alianza, lo que asegura el secreto hacia adelante (forward secrecy) y la seguridad tras compromiso.</p>
+<h2 id="consecuencias" tabindex="-1"><a class="heading-anchor" href="#consecuencias" aria-hidden="true">#</a> Consecuencias</h2>
+<p><strong>Beneficios:</strong></p>
+<ul>
+<li>Con el cifrado de extremo a extremo por defecto, GreenGrass no tiene nada que revelar ante un requerimiento legal para la mayoría de las organizaciones</li>
+<li>El seguimiento del consentimiento por canal y por finalidad satisface los requisitos de protección de datos más estrictos (LGPD, PDPA, TCPA)</li>
+<li>Los hilos opcionales llevan la comunicación desde equipos de campaña pequeños hasta cientos de voluntarios de GOTV sin imponerles complejidad a los grupos chicos</li>
+<li>Los mensajes contextuales mantienen la conversación pegada a los datos de los que trata, y así se cambia menos de contexto</li>
+<li>La rotación de llaves de la alianza garantiza que quien se va no pueda leer los mensajes futuros</li>
+</ul>
+<p><strong>Costos:</strong></p>
+<ul>
+<li>El cifrado de extremo a extremo elimina la búsqueda del lado del servidor: una pérdida real de experiencia de uso para las organizaciones que dependen de buscar en los mensajes</li>
+<li>Implementar el Signal Protocol exige una auditoría de seguridad cuidadosa (recomendación: usar la biblioteca establecida libsignal, no una implementación propia)</li>
+<li>Los archivos cifrados de extremo a extremo no se pueden deduplicar del lado del servidor, lo que encarece el almacenamiento</li>
+<li>Rotar las llaves de la alianza en cada cambio de membresía añade la sobrecarga de una ceremonia criptográfica</li>
+</ul>
+<p><strong>Restricciones:</strong></p>
+<ul>
+<li>Sin confirmaciones de lectura: solo confirmaciones de entrega (enviado al servidor, entregado al dispositivo), en línea con una filosofía de privacidad ante todo</li>
+<li>Sin mensajes que desaparecen: todos persisten hasta que se borran a mano o vence la política de conservación, lo que evita problemas de cumplimiento</li>
+<li>Los mensajes de voz están acotados a las conversaciones de campo (canales de líder de equipo, hilos de turno, centro de mando de GOTV), donde escribir no es práctico</li>
+<li>Las alertas de seguridad y las notificaciones de brecha no se pueden silenciar: siempre se entregan con prioridad crítica</li>
+</ul>
+<p><strong>ADR relacionados:</strong> <a href="./002-security-threat-model.html">ADR-002</a> (arquitectura de cifrado, E2E como control de seguridad), <a href="./003-identity-access-organization.html">ADR-003</a> (comunicación en la alianza, mensajería entre organizaciones), <a href="./009-compliance-legal.html">ADR-009</a> (aplicación del consentimiento, restricciones del TSE a la mensajería)</p>
+
+    </article>
+  </main>
+  <div class="toc-rail"><nav class="toc" aria-label="En esta página"><div class="toc-label">En esta página</div><ul><li class="toc-2"><a href="#contexto"># Contexto</a></li><li class="toc-2"><a href="#decisión"># Decisión</a></li><li class="toc-3"><a href="#cifrado-de-extremo-a-extremo-por-defecto-en-los-mensajes-internos"># Cifrado de extremo a extremo por defecto en los mensajes internos</a></li><li class="toc-3"><a href="#seguimiento-del-consentimiento-por-canal-y-por-finalidad"># Seguimiento del consentimiento por canal y por finalidad</a></li><li class="toc-3"><a href="#hilos-opcionales"># Hilos opcionales</a></li><li class="toc-3"><a href="#las-difusiones-usan-cifrado-del-lado-del-servidor"># Las difusiones usan cifrado del lado del servidor</a></li><li class="toc-3"><a href="#los-mensajes-contextuales-heredan-la-configuración-de-cifrado-de-la-organización"># Los mensajes contextuales heredan la configuración de cifrado de la organización</a></li><li class="toc-2"><a href="#consecuencias"># Consecuencias</a></li></ul></nav></div>
+</div>
+<script src="../../assets/search.js" defer></script>
+<script src="../../assets/app.js" defer></script>
+</body>
+</html>

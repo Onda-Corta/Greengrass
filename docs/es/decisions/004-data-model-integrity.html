@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="es" data-base="../../" data-no-results="No hay resultados para">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ADR-004: Modelo de datos e integridad · GreenGrass</title>
+<meta name="description" content="ADR-004: Modelo de datos e integridad — Documentación de especificación y diseño de GreenGrass.">
+<link rel="alternate" hreflang="en" href="../../decisions/004-data-model-integrity.html">
+<link rel="alternate" hreflang="es" href="./004-data-model-integrity.html">
+<link rel="alternate" hreflang="x-default" href="../../decisions/004-data-model-integrity.html">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%232563eb'/%3E%3Cstop offset='1' stop-color='%2316a34a'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='32' height='32' rx='7' fill='url(%23g)'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="../../assets/styles.css">
+</head>
+<body>
+<a class="skip-link" href="#content">Saltar al contenido</a>
+<header class="site-header">
+  <button type="button" class="menu-toggle" aria-label="Alternar navegación" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+  <a class="brand" href="../../es/index.html">
+    <span class="brand-mark" aria-hidden="true"></span>
+    <span class="brand-text"><strong>GreenGrass</strong><small>Especificación y diseño</small></span>
+  </a>
+  <div class="search">
+    <input type="search" id="search-input" placeholder="Buscar en la documentación…" autocomplete="off" aria-label="Buscar en la documentación">
+    <div id="search-results" class="search-results" hidden></div>
+  </div>
+  <nav class="lang-switch" aria-label="Idioma"><a class="lang-opt" href="../../decisions/004-data-model-integrity.html" hreflang="en" lang="en" title="View this page in English">EN</a><span class="lang-opt active" aria-current="true">ES</span></nav>
+  <button type="button" class="theme-toggle" aria-label="Alternar modo oscuro" title="Alternar modo oscuro">
+    <span class="theme-icon" aria-hidden="true"></span>
+  </button>
+</header>
+<div class="layout">
+  <div class="sidebar-backdrop" hidden></div>
+  <aside class="sidebar" aria-label="Navegación de la documentación">
+    <nav class="nav">
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">Inicio<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../index.html">GreenGrass</a></li></ul></div>
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">Especificaciones<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../spec/product.html">Proyecto: GreenGrass</a></li><li><a href="../spec/mvp.html">MVP de GreenGrass — plan de producto</a></li><li><a href="../spec/users.html">Usuarios y roles</a></li><li><a href="../spec/workflows.html">Flujos de trabajo principales</a></li><li><a href="../spec/geography.html">Geografía objetivo</a></li><li><a href="../spec/security.html">Seguridad y modelo de amenazas</a></li><li><a href="../spec/compliance.html">Cumplimiento y marco legal</a></li><li><a href="../spec/fundraising.html">Recaudación de fondos e infraestructura de pagos</a></li><li><a href="../spec/integrations.html">Integraciones externas</a></li><li><a href="../spec/support.html">Soporte y puesta en marcha de organizaciones</a></li><li><a href="../spec/gotv.html">GOTV y operaciones del día de elecciones</a></li><li><a href="../spec/messaging.html">Comunicaciones internas y notificaciones</a></li><li><a href="../spec/press.html">Prensa, medios y comunicaciones públicas</a></li><li><a href="../spec/comms-intelligence.html">Inteligencia de comunicaciones — hoja de ruta post-MVP</a></li></ul></div>
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">Arquitectura<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../design/architecture/system.html">Arquitectura del sistema</a></li></ul></div>
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">Diseño UX<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../design/ux/00-overview.html">Resumen del diseño de UX</a></li><li><a href="../design/ux/01-information-architecture/navigation-model.html">Modelo de navegación</a></li><li><a href="../design/ux/01-information-architecture/screen-inventory.html">Inventario de pantallas</a></li><li><a href="../design/ux/01-information-architecture/persona-views.html">Vistas por arquetipo</a></li><li><a href="../design/ux/01-information-architecture/url-structure.html">Estructura de URL</a></li><li><a href="../design/ux/02-global-patterns/pattern-catalog.html">Catálogo de patrones</a></li><li><a href="../design/ux/02-global-patterns/offline-sync-patterns.html">Patrones sin conexión y de sincronización</a></li><li><a href="../design/ux/02-global-patterns/notification-patterns.html">Patrones de notificaciones</a></li><li><a href="../design/ux/02-global-patterns/search-patterns.html">Patrones de búsqueda</a></li><li><a href="../design/ux/02-global-patterns/settings-help-patterns.html">Patrones de ajustes y ayuda</a></li><li><a href="../design/ux/02-global-patterns/security-ux-patterns.html">Patrones de UX de seguridad</a></li><li><a href="../design/ux/03-design-system/foundations.html">Fundamentos del sistema de diseño</a></li><li><a href="../design/ux/03-design-system/theming-strategy.html">Estrategia de temas</a></li><li><a href="../design/ux/03-design-system/component-inventory.html">Inventario de componentes</a></li><li><a href="../design/ux/03-design-system/responsive-strategy.html">Estrategia de diseño adaptable</a></li></ul></div>
+<div class="nav-section open"><button type="button" class="nav-section-title" aria-expanded="true">Decisiones<span class="chev" aria-hidden="true"></span></button><ul><li><a href="./001-platform-architecture.html">ADR-001: Arquitectura y despliegue de la plataforma</a></li><li><a href="./002-security-threat-model.html">ADR-002: Seguridad y modelo de amenazas</a></li><li><a href="./003-identity-access-organization.html">ADR-003: Identidad, acceso y organización</a></li><li><a href="./004-data-model-integrity.html" aria-current="page" class="active">ADR-004: Modelo de datos e integridad</a></li><li><a href="./005-offline-first-sync.html">ADR-005: Prioridad sin conexión y sincronización</a></li><li><a href="./006-field-operations-gotv.html">ADR-006: Operaciones de campo y GOTV</a></li><li><a href="./007-fundraising-payments.html">ADR-007: Recaudación de fondos y pagos</a></li><li><a href="./008-communications-messaging.html">ADR-008: Comunicaciones y mensajería</a></li><li><a href="./009-compliance-legal.html">ADR-009: Cumplimiento y marco legal</a></li><li><a href="./010-internationalization-localization.html">ADR-010: Internacionalización y localización</a></li><li><a href="./011-design-system-ux.html">ADR-011: Sistema de diseño y fundamentos de UX</a></li><li><a href="./012-external-integrations.html">ADR-012: Integraciones externas</a></li><li><a href="./013-analytics-ai.html">ADR-013: Analítica e IA</a></li><li><a href="./014-volunteer-onboarding.html">ADR-014: Voluntariado e incorporación</a></li><li><a href="./015-product-scope.html">ADR-015: Límites del alcance del producto</a></li><li><a href="./016-cross-cutting-resolutions.html">ADR-016: Resoluciones transversales</a></li><li><a href="./017-sharing-contract-trust-model.html">ADR-017: El contrato de intercambio como primitiva universal de confianza</a></li><li><a href="./ux-decisions.html">Decisiones de UX — fase de wireframes</a></li></ul></div>
+    </nav>
+  </aside>
+  <main id="content" class="content">
+    <nav class="breadcrumb" aria-label="Ruta de navegación">Decisiones</nav>
+    <article class="prose">
+<h1 id="adr-004-modelo-de-datos-e-integridad" tabindex="-1"><a class="heading-anchor" href="#adr-004-modelo-de-datos-e-integridad" aria-hidden="true">#</a> ADR-004: Modelo de datos e integridad</h1>
+<p><strong>Estado:</strong> Aceptada
+<strong>Fecha:</strong> 2026-03-03
+<strong>Fuentes:</strong> <code>spec/security.md</code>, <code>spec/compliance.md</code>, <code>spec/workflows.md</code>, <code>spec/users.md</code>, <code>design/architecture/system.md</code></p>
+<h2 id="contexto" tabindex="-1"><a class="heading-anchor" href="#contexto" aria-hidden="true">#</a> Contexto</h2>
+<p>GreenGrass maneja datos políticamente sensibles —registros de contacto con votantes que incluyen puntuaciones de inclinación política, identidad de los donantes, notas de trabajo de campo, comunicaciones de los candidatos— en entornos donde la integridad de los datos tiene consecuencias para la seguridad de las personas. Los registros en conflicto que llegan del trabajo de campo sin conexión hay que resolverlos sin perder datos en silencio. La deduplicación tiene que lidiar con datos del mundo real, desordenados (números de teléfono compartidos, nombres inconsistentes), sin atribuir mal una donación ni un historial de trabajo de campo. Y toda mutación de datos tiene que ser rastreable, por integridad electoral, por reporte de cumplimiento y por auditoría de seguridad.</p>
+<h2 id="decisión" tabindex="-1"><a class="heading-anchor" href="#decisión" aria-hidden="true">#</a> Decisión</h2>
+<h3 id="registro-de-auditoría-completo-para-todas-las-mutaciones-de-datos" tabindex="-1"><a class="heading-anchor" href="#registro-de-auditoría-completo-para-todas-las-mutaciones-de-datos" aria-hidden="true">#</a> Registro de auditoría completo para todas las mutaciones de datos</h3>
+<p>Todo cambio de datos queda registrado: quién, qué, cuándo y desde dónde. Esto incluye ediciones en el CRM, transacciones financieras, cambios de permisos, inicios de sesión, exportaciones de datos, fusiones de registros, acciones masivas y eventos de sesión. El registro de auditoría es inmutable: ningún usuario puede modificar ni borrar una entrada, ni siquiera el Administrador de la plataforma. Un registro de auditoría aparte, el del Administrador de la plataforma, recoge todas las acciones del equipo de GreenGrass.</p>
+<p>La conservación del registro de auditoría es de 10 años en todos lados, igualando el requisito libanés para registros comerciales, el más largo entre los países objetivo. Una sola regla en todas partes elimina el riesgo de borrado prematuro por una lógica de conservación específica por jurisdicción mal implementada.</p>
+<p><strong>Alternativas consideradas:</strong> Se descartaron los períodos de conservación por jurisdicción porque almacenar datos de eventos estructurados es barato frente al riesgo de cumplimiento que supone equivocarse con la conservación de cada jurisdicción.</p>
+<h3 id="resolución-de-conflictos-con-fusionar-y-marcar" tabindex="-1"><a class="heading-anchor" href="#resolución-de-conflictos-con-fusionar-y-marcar" aria-hidden="true">#</a> Resolución de conflictos con fusionar y marcar</h3>
+<p>Cuando se sincronizan registros en conflicto desde varios dispositivos (algo común en el trabajo de campo sin conexión), se conservan los dos registros y se marcan para revisión humana. El Gestor de datos ve los dos registros lado a lado —quién anotó qué, cuándo y desde qué dispositivo— y decide cómo resolverlos. Ningún dato se descarta en silencio. Esto es coherente con el enfoque de deduplicación de sugerir y confirmar.</p>
+<p>En los campos no conflictivos, el protocolo de sincronización aplica reglas de resolución automática: gana la última escritura en los campos simples, fusión aditiva en las interacciones, gana el servidor en las asignaciones y gana el cliente en el trabajo de campo en curso. Los conflictos que llegan al usuario son raros y se presentan con la opción segura por defecto de conservar las dos versiones.</p>
+<p><strong>Alternativas consideradas:</strong> Se descartó aplicar <em>gana la última escritura</em> en todo, porque descartar en silencio datos de trabajo de campo o registros de donaciones es inaceptable en un contexto político. Se descartó la resolución totalmente manual porque generaría una acumulación inmanejable durante las jornadas de campo de alto volumen.</p>
+<h3 id="los-datos-políticos-se-tratan-como-sensibles-en-todas-partes" tabindex="-1"><a class="heading-anchor" href="#los-datos-políticos-se-tratan-como-sensibles-en-todas-partes" aria-hidden="true">#</a> Los datos políticos se tratan como sensibles en todas partes</h3>
+<p>Todos los datos de la plataforma se tratan como sensibles sin importar la ley local: protecciones al nivel de LGPD y GDPR aplicadas en todo el mundo. GreenGrass es una plataforma de organización política; todo dato que vive en ella es político por naturaleza. Un solo nivel de protección, sin ambigüedad y sin lógica de clasificación por jurisdicción que mantener. El cifrado a nivel de aplicación protege los campos de mayor sensibilidad por encima del cifrado a nivel de almacenamiento.</p>
+<h3 id="deduplicación-con-sugerir-y-confirmar" tabindex="-1"><a class="heading-anchor" href="#deduplicación-con-sugerir-y-confirmar" aria-hidden="true">#</a> Deduplicación con sugerir y confirmar</h3>
+<p>El motor de deduplicación usa un cruce compuesto: el número de celular como identificador principal (el de mayor peso en contextos de prioridad móvil), el correo electrónico como secundario, la identificación nacional o electoral como dato definitivo cuando está disponible, y el nombre más la dirección como señal de apoyo, con cruce aproximado. Los pesos del cruce se configuran en cada despliegue para tener en cuenta la calidad de los datos de cada país.</p>
+<p>El sistema marca los posibles duplicados y los muestra en una cola de revisión. Una persona con los permisos adecuados revisa y decide si fusionar, descartar o aplazar. No hay fusión automática: el riesgo de atribuir mal una donación o de perder historial de trabajo de campo es demasiado alto.</p>
+<p><strong>Alternativas consideradas:</strong> Se descartó la fusión automática por encima de un umbral de confianza porque un falso positivo en un CRM político tiene consecuencias desproporcionadas (donaciones mal atribuidas, registros fusionados de dos personas distintas que comparten un teléfono). Se descartó la detección solo manual porque el volumen de registros en campañas con padrones electorales grandes la vuelve impracticable.</p>
+<h3 id="exportación-completa-con-los-datos-de-relación-en-formatos-abiertos" tabindex="-1"><a class="heading-anchor" href="#exportación-completa-con-los-datos-de-relación-en-formatos-abiertos" aria-hidden="true">#</a> Exportación completa con los datos de relación en formatos abiertos</h3>
+<p>Cada organización puede exportar todo lo que le pertenece: contactos, registros de donantes, historial de donaciones, historial de comunicaciones, datos de trabajo de campo, registros y horas de voluntariado, datos de eventos, analítica, etiquetas, segmentos, notas y registros de auditoría. Se conservan las referencias cruzadas (qué donantes asistieron a qué eventos, qué voluntarios trabajaron qué territorios). La exportación usa formatos estándar abiertos (CSV, JSON) con esquema documentado. La portabilidad de los datos es una garantía contractual en los términos de servicio: no es solo una funcionalidad, es un derecho exigible.</p>
+<p><strong>Alternativas consideradas:</strong> Se descartó la exportación en tablas planas porque despoja a los datos de su valor relacional. Los formatos propietarios nunca se consideraron: la dependencia del proveedor es contraria a los principios de soberanía de la plataforma.</p>
+<h2 id="consecuencias" tabindex="-1"><a class="heading-anchor" href="#consecuencias" aria-hidden="true">#</a> Consecuencias</h2>
+<p><strong>Beneficios:</strong></p>
+<ul>
+<li>Un registro de auditoría completo da garantías de integridad electoral y evidencia de cumplimiento</li>
+<li>Fusionar y marcar evita la pérdida silenciosa de datos en las operaciones de mayor riesgo (jornadas de campo, día de elecciones)</li>
+<li>Tratar todos los datos como sensibles elimina el riesgo de clasificarlos mal entre jurisdicciones</li>
+<li>La deduplicación de sugerir y confirmar evita fusiones erróneas costosas y mantiene manejable la carga de revisión</li>
+<li>La exportación completa con los datos de relación garantiza que no haya dependencia del proveedor</li>
+</ul>
+<p><strong>Costos:</strong></p>
+<ul>
+<li>Registrar todo en auditoría genera un volumen de almacenamiento considerable, aunque los eventos estructurados se comprimen bien</li>
+<li>La conservación de 10 años implica que el almacenamiento de auditoría crece indefinidamente (se mitiga con almacenamiento por niveles y archivado)</li>
+<li>La revisión humana de conflictos y de candidatos a duplicado exige capacidad del Gestor de datos durante las operaciones de alto volumen</li>
+<li>La exportación relacional completa es más compleja de implementar que un volcado de tablas planas</li>
+</ul>
+<p><strong>Restricciones:</strong></p>
+<ul>
+<li>La inmutabilidad del registro de auditoría tiene que hacerse cumplir a nivel de infraestructura, no solo a nivel de aplicación</li>
+<li>Los pesos de cruce de la deduplicación tienen que validarse país por país antes del despliegue</li>
+<li>La exportación tiene que estar disponible cuando se pida, sin colas de aprobación: la organización no tiene que explicar por qué</li>
+</ul>
+<p><strong>ADR relacionados:</strong> <a href="./002-security-threat-model.html">ADR-002</a> (cifrado a nivel de aplicación para los campos sensibles), <a href="./003-identity-access-organization.html">ADR-003</a> (la identidad federada complica la deduplicación), <a href="./005-offline-first-sync.html">ADR-005</a> (resolución de conflictos en la sincronización sin conexión), <a href="./009-compliance-legal.html">ADR-009</a> (requisitos de conservación por jurisdicción)</p>
+
+    </article>
+  </main>
+  <div class="toc-rail"><nav class="toc" aria-label="En esta página"><div class="toc-label">En esta página</div><ul><li class="toc-2"><a href="#contexto"># Contexto</a></li><li class="toc-2"><a href="#decisión"># Decisión</a></li><li class="toc-3"><a href="#registro-de-auditoría-completo-para-todas-las-mutaciones-de-datos"># Registro de auditoría completo para todas las mutaciones de datos</a></li><li class="toc-3"><a href="#resolución-de-conflictos-con-fusionar-y-marcar"># Resolución de conflictos con fusionar y marcar</a></li><li class="toc-3"><a href="#los-datos-políticos-se-tratan-como-sensibles-en-todas-partes"># Los datos políticos se tratan como sensibles en todas partes</a></li><li class="toc-3"><a href="#deduplicación-con-sugerir-y-confirmar"># Deduplicación con sugerir y confirmar</a></li><li class="toc-3"><a href="#exportación-completa-con-los-datos-de-relación-en-formatos-abiertos"># Exportación completa con los datos de relación en formatos abiertos</a></li><li class="toc-2"><a href="#consecuencias"># Consecuencias</a></li></ul></nav></div>
+</div>
+<script src="../../assets/search.js" defer></script>
+<script src="../../assets/app.js" defer></script>
+</body>
+</html>

@@ -255,7 +255,7 @@ Tenant App → Post Scheduler → Platform Adapter → Social Media API
 
 ### Manejo de recursos de medios
 
-- **Almacenamiento de imágenes** — las imágenes en alta resolución se guardan en almacenamiento de objetos ([system.md § Qué hay dentro de una organización](../design/architecture/system.md#whats-inside-a-tenant)). Se generan varias resoluciones para distintos usos (miniatura, web, calidad de impresión).
+- **Almacenamiento de imágenes** — las imágenes en alta resolución se guardan en almacenamiento de objetos ([system.md § Qué hay dentro de una organización](../design/architecture/system.md#qué-hay-dentro-de-una-organización)). Se generan varias resoluciones para distintos usos (miniatura, web, calidad de impresión).
 - **Recursos de marca** — logo, paleta de colores y tipografías se guardan como recursos de la organización. Disponibles en todas las herramientas de creación de contenido (comunicados, publicaciones en redes, perfiles públicos, plantillas de correo).
 - **Biblioteca de recursos** — biblioteca buscable de recursos aprobados (fotos, gráficas, clips de video). El equipo navega y usa recursos aprobados al crear contenido.
 - **Control de derechos de uso** — campo opcional para registrar los derechos de uso de cada recurso (crédito del fotógrafo, tipo de licencia, fecha de vencimiento).

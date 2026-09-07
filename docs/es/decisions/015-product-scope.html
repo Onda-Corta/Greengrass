@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="es" data-base="../../" data-no-results="No hay resultados para">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ADR-015: Límites del alcance del producto · GreenGrass</title>
+<meta name="description" content="ADR-015: Límites del alcance del producto — Documentación de especificación y diseño de GreenGrass.">
+<link rel="alternate" hreflang="en" href="../../decisions/015-product-scope.html">
+<link rel="alternate" hreflang="es" href="./015-product-scope.html">
+<link rel="alternate" hreflang="x-default" href="../../decisions/015-product-scope.html">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%232563eb'/%3E%3Cstop offset='1' stop-color='%2316a34a'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='32' height='32' rx='7' fill='url(%23g)'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="../../assets/styles.css">
+</head>
+<body>
+<a class="skip-link" href="#content">Saltar al contenido</a>
+<header class="site-header">
+  <button type="button" class="menu-toggle" aria-label="Alternar navegación" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+  <a class="brand" href="../../es/index.html">
+    <span class="brand-mark" aria-hidden="true"></span>
+    <span class="brand-text"><strong>GreenGrass</strong><small>Especificación y diseño</small></span>
+  </a>
+  <div class="search">
+    <input type="search" id="search-input" placeholder="Buscar en la documentación…" autocomplete="off" aria-label="Buscar en la documentación">
+    <div id="search-results" class="search-results" hidden></div>
+  </div>
+  <nav class="lang-switch" aria-label="Idioma"><a class="lang-opt" href="../../decisions/015-product-scope.html" hreflang="en" lang="en" title="View this page in English">EN</a><span class="lang-opt active" aria-current="true">ES</span></nav>
+  <button type="button" class="theme-toggle" aria-label="Alternar modo oscuro" title="Alternar modo oscuro">
+    <span class="theme-icon" aria-hidden="true"></span>
+  </button>
+</header>
+<div class="layout">
+  <div class="sidebar-backdrop" hidden></div>
+  <aside class="sidebar" aria-label="Navegación de la documentación">
+    <nav class="nav">
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">Inicio<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../index.html">GreenGrass</a></li></ul></div>
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">Especificaciones<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../spec/product.html">Proyecto: GreenGrass</a></li><li><a href="../spec/mvp.html">MVP de GreenGrass — plan de producto</a></li><li><a href="../spec/users.html">Usuarios y roles</a></li><li><a href="../spec/workflows.html">Flujos de trabajo principales</a></li><li><a href="../spec/geography.html">Geografía objetivo</a></li><li><a href="../spec/security.html">Seguridad y modelo de amenazas</a></li><li><a href="../spec/compliance.html">Cumplimiento y marco legal</a></li><li><a href="../spec/fundraising.html">Recaudación de fondos e infraestructura de pagos</a></li><li><a href="../spec/integrations.html">Integraciones externas</a></li><li><a href="../spec/support.html">Soporte y puesta en marcha de organizaciones</a></li><li><a href="../spec/gotv.html">GOTV y operaciones del día de elecciones</a></li><li><a href="../spec/messaging.html">Comunicaciones internas y notificaciones</a></li><li><a href="../spec/press.html">Prensa, medios y comunicaciones públicas</a></li><li><a href="../spec/comms-intelligence.html">Inteligencia de comunicaciones — hoja de ruta post-MVP</a></li></ul></div>
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">Arquitectura<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../design/architecture/system.html">Arquitectura del sistema</a></li></ul></div>
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">Diseño UX<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../design/ux/00-overview.html">Resumen del diseño de UX</a></li><li><a href="../design/ux/01-information-architecture/navigation-model.html">Modelo de navegación</a></li><li><a href="../design/ux/01-information-architecture/screen-inventory.html">Inventario de pantallas</a></li><li><a href="../design/ux/01-information-architecture/persona-views.html">Vistas por arquetipo</a></li><li><a href="../design/ux/01-information-architecture/url-structure.html">Estructura de URL</a></li><li><a href="../design/ux/02-global-patterns/pattern-catalog.html">Catálogo de patrones</a></li><li><a href="../design/ux/02-global-patterns/offline-sync-patterns.html">Patrones sin conexión y de sincronización</a></li><li><a href="../design/ux/02-global-patterns/notification-patterns.html">Patrones de notificaciones</a></li><li><a href="../design/ux/02-global-patterns/search-patterns.html">Patrones de búsqueda</a></li><li><a href="../design/ux/02-global-patterns/settings-help-patterns.html">Patrones de ajustes y ayuda</a></li><li><a href="../design/ux/02-global-patterns/security-ux-patterns.html">Patrones de UX de seguridad</a></li><li><a href="../design/ux/03-design-system/foundations.html">Fundamentos del sistema de diseño</a></li><li><a href="../design/ux/03-design-system/theming-strategy.html">Estrategia de temas</a></li><li><a href="../design/ux/03-design-system/component-inventory.html">Inventario de componentes</a></li><li><a href="../design/ux/03-design-system/responsive-strategy.html">Estrategia de diseño adaptable</a></li></ul></div>
+<div class="nav-section open"><button type="button" class="nav-section-title" aria-expanded="true">Decisiones<span class="chev" aria-hidden="true"></span></button><ul><li><a href="./001-platform-architecture.html">ADR-001: Arquitectura y despliegue de la plataforma</a></li><li><a href="./002-security-threat-model.html">ADR-002: Seguridad y modelo de amenazas</a></li><li><a href="./003-identity-access-organization.html">ADR-003: Identidad, acceso y organización</a></li><li><a href="./004-data-model-integrity.html">ADR-004: Modelo de datos e integridad</a></li><li><a href="./005-offline-first-sync.html">ADR-005: Prioridad sin conexión y sincronización</a></li><li><a href="./006-field-operations-gotv.html">ADR-006: Operaciones de campo y GOTV</a></li><li><a href="./007-fundraising-payments.html">ADR-007: Recaudación de fondos y pagos</a></li><li><a href="./008-communications-messaging.html">ADR-008: Comunicaciones y mensajería</a></li><li><a href="./009-compliance-legal.html">ADR-009: Cumplimiento y marco legal</a></li><li><a href="./010-internationalization-localization.html">ADR-010: Internacionalización y localización</a></li><li><a href="./011-design-system-ux.html">ADR-011: Sistema de diseño y fundamentos de UX</a></li><li><a href="./012-external-integrations.html">ADR-012: Integraciones externas</a></li><li><a href="./013-analytics-ai.html">ADR-013: Analítica e IA</a></li><li><a href="./014-volunteer-onboarding.html">ADR-014: Voluntariado e incorporación</a></li><li><a href="./015-product-scope.html" aria-current="page" class="active">ADR-015: Límites del alcance del producto</a></li><li><a href="./016-cross-cutting-resolutions.html">ADR-016: Resoluciones transversales</a></li><li><a href="./017-sharing-contract-trust-model.html">ADR-017: El contrato de intercambio como primitiva universal de confianza</a></li><li><a href="./ux-decisions.html">Decisiones de UX — fase de wireframes</a></li></ul></div>
+    </nav>
+  </aside>
+  <main id="content" class="content">
+    <nav class="breadcrumb" aria-label="Ruta de navegación">Decisiones</nav>
+    <article class="prose">
+<h1 id="adr-015-límites-del-alcance-del-producto" tabindex="-1"><a class="heading-anchor" href="#adr-015-límites-del-alcance-del-producto" aria-hidden="true">#</a> ADR-015: Límites del alcance del producto</h1>
+<p><strong>Estado:</strong> Aceptada
+<strong>Fecha:</strong> 2026-03-03
+<strong>Fuentes:</strong> <code>spec/workflows.md</code>, <code>spec/fundraising.md</code>, <code>spec/gotv.md</code>, <code>spec/messaging.md</code>, <code>spec/press.md</code></p>
+<h2 id="contexto" tabindex="-1"><a class="heading-anchor" href="#contexto" aria-hidden="true">#</a> Contexto</h2>
+<p>A medida que avanzó la definición del producto, varias áreas de capacidad exigieron decidir su alcance de forma explícita: ¿esto va en la plataforma, se aplaza o queda fuera del alcance para siempre? Estas decisiones definen el límite del producto y evitan la expansión descontrolada del alcance sin dejar fuera capacidades críticas. Cada decisión se tomó según el mercado objetivo (campañas de base del Sur Global), los recursos de ingeniería disponibles y si la capacidad es central para la misión de la plataforma o tangencial.</p>
+<h2 id="decisión" tabindex="-1"><a class="heading-anchor" href="#decisión" aria-hidden="true">#</a> Decisión</h2>
+<h3 id="dentro-del-alcance-operaciones-de-gotv-especificación-aparte" tabindex="-1"><a class="heading-anchor" href="#dentro-del-alcance-operaciones-de-gotv-especificación-aparte" aria-hidden="true">#</a> Dentro del alcance: operaciones de GOTV (especificación aparte)</h3>
+<p>Las operaciones del día de elecciones / GOTV (Get Out The Vote — movilización del voto) son una capacidad de pleno derecho de la plataforma, con su propia especificación detallada. El GOTV incluye: construcción automatizada del universo, seguimiento del voto adelantado y del voto ausente, puerta a puerta con listas de recorrido dinámicas, llamadas de seguimiento, transporte a las urnas, observación electoral con reporte de problemas, seguimiento de la participación electoral en tiempo real, reasignación dinámica de recursos, coordinación del centro de mando y análisis poselectoral.</p>
+<p><strong>Fundamento:</strong> El día de elecciones es el día operativamente más intenso de cualquier campaña: el momento en que converge todo el resto del trabajo. Una plataforma para campañas políticas de base que no aguanta el día de elecciones está incompleta.</p>
+<h3 id="dentro-del-alcance-mensajería-interna-con-cifrado-e2e-especificación-aparte" tabindex="-1"><a class="heading-anchor" href="#dentro-del-alcance-mensajería-interna-con-cifrado-e2e-especificación-aparte" aria-hidden="true">#</a> Dentro del alcance: mensajería interna con cifrado E2E (especificación aparte)</h3>
+<p>Mensajería interna (entre miembros del personal, entre el candidato y el personal, coordinación del centro de mando) con cifrado E2E por defecto, hilos opcionales, difusiones, mensajes contextuales adjuntos a objetos de la plataforma y comunicación entre las organizaciones de una alianza.</p>
+<p><strong>Fundamento:</strong> Las campañas generan comunicaciones estratégicas sensibles que hay que proteger de la vigilancia. Obligarlas a usar herramientas externas (Signal, WhatsApp) para su comunicación interna fragmenta el flujo de trabajo y hace perder la posibilidad de adjuntar los mensajes al contexto operativo (votantes, eventos, turnos).</p>
+<h3 id="dentro-del-alcance-gestión-de-prensa-y-medios-especificación-aparte" tabindex="-1"><a class="heading-anchor" href="#dentro-del-alcance-gestión-de-prensa-y-medios-especificación-aparte" aria-hidden="true">#</a> Dentro del alcance: gestión de prensa y medios (especificación aparte)</h3>
+<p>Manejo de contactos de prensa, listas de medios, distribución de comunicados de prensa, creación de avisos a medios, distribución de declaraciones, seguimiento de la cobertura mediática, gestión del flujo de respaldos, gestión de voceros, biblioteca de puntos de mensaje, programación y analítica de redes sociales, y alojamiento del perfil público.</p>
+<p><strong>Fundamento:</strong> Los medios ganados —la cobertura que no se paga— hacen un trabajo que una campaña con pocos recursos no puede pagar. Que las operaciones de prensa funcionen para campañas sin secretario de prensa dedicado vale lo que cuesta construirlas.</p>
+<h3 id="fuera-del-alcance-gamificación-del-voluntariado" tabindex="-1"><a class="heading-anchor" href="#fuera-del-alcance-gamificación-del-voluntariado" aria-hidden="true">#</a> Fuera del alcance: gamificación del voluntariado</h3>
+<p>Nada de tablas de posiciones, insignias, sistemas de logros ni incentivos por puntos para los voluntarios.</p>
+<p><strong>Fundamento:</strong> Hay mejores maneras de lograr que los voluntarios vuelvan que la gamificación barata. Las tablas de posiciones pueden crear incentivos perversos (velocidad antes que calidad en el trabajo de campo), las insignias trivializan un trabajo importante y los sistemas de logros distraen de la misión de verdad. En las campañas políticas, la motivación del voluntariado viene de la causa, no de las mecánicas de juego. La plataforma registra la actividad de los voluntarios para reconocerla (horas, turnos completados, contactos hechos), pero no la gamifica.</p>
+<h3 id="aplazado-donaciones-en-criptomonedas" tabindex="-1"><a class="heading-anchor" href="#aplazado-donaciones-en-criptomonedas" aria-hidden="true">#</a> Aplazado: donaciones en criptomonedas</h3>
+<p>No se soportan ni en el alfa ni en los pilotos. Si una organización acepta cripto por su propio procesador externo, la plataforma puede registrarlo como una donación manual o externa. Ni se impide activamente ni se soporta activamente.</p>
+<p><strong>Fundamento:</strong> No hay claridad regulatoria sobre las donaciones en criptomonedas a campañas políticas en la mayoría de las jurisdicciones objetivo. Construir soporte ahora sería construir marcos de cumplimiento contra reglas que no están definidas. Reevaluar cuando aparezca claridad regulatoria en alguna jurisdicción objetivo.</p>
+<h3 id="aplazado-donaciones-pareadas-por-empleadores" tabindex="-1"><a class="heading-anchor" href="#aplazado-donaciones-pareadas-por-empleadores" aria-hidden="true">#</a> Aplazado: donaciones pareadas por empleadores</h3>
+<p>No se soportan ni en el alfa ni en los pilotos.</p>
+<p><strong>Fundamento:</strong> Las donaciones pareadas por empleadores son sobre todo una funcionalidad estadounidense y corporativa, poco relevante para la mayoría de las jurisdicciones del Sur Global. Construir esa infraestructura antes de que el mercado estadounidense sea una parte significativa de la base de usuarios sería invertir demasiado pronto. Reevaluar cuando la plataforma madure y el mercado estadounidense crezca.</p>
+<h3 id="aplazado-recaudación-de-fondos-entre-pares" tabindex="-1"><a class="heading-anchor" href="#aplazado-recaudación-de-fondos-entre-pares" aria-hidden="true">#</a> Aplazado: recaudación de fondos entre pares</h3>
+<p>Todas las páginas de recaudación las controla la campaña. Las páginas de recaudación creadas por simpatizantes y vinculadas a una campaña quedan aplazadas.</p>
+<p><strong>Fundamento:</strong> La recaudación entre pares añade complejidad de cumplimiento (¿quién responde por el contenido de una página creada por un simpatizante?) y carga de moderación. El modelo de datos ya la contempla (páginas creadas por simpatizantes con seguimiento de atribución), así que se puede añadir después sin dolores de migración.</p>
+<h3 id="aplazado-monitoreo-automatizado-de-medios" tabindex="-1"><a class="heading-anchor" href="#aplazado-monitoreo-automatizado-de-medios" aria-hidden="true">#</a> Aplazado: monitoreo automatizado de medios</h3>
+<p>El seguimiento de la cobertura mediática es solo registro manual. El monitoreo automatizado de medios (rastrear publicaciones en busca de menciones) queda aplazado como oportunidad estratégica.</p>
+<p><strong>Fundamento:</strong> Los servicios de monitoreo de medios existentes (Meltwater, Cision) son caros, están centrados en Occidente y cubren mal los medios regionales y locales del Sur Global. Una capacidad de monitoreo de medios propia de GreenGrass, que cubra los medios en lengua local de los países objetivo, podría ser un gran diferenciador, pero merece una inversión seria como iniciativa de producto dedicada, no una integración añadida.</p>
+<h2 id="consecuencias" tabindex="-1"><a class="heading-anchor" href="#consecuencias" aria-hidden="true">#</a> Consecuencias</h2>
+<p><strong>Beneficios:</strong></p>
+<ul>
+<li>Unos límites de alcance claros evitan la proliferación descontrolada de funcionalidades en una fase de desarrollo ya de por sí ambiciosa</li>
+<li>Las decisiones de lo que queda dentro del alcance aseguran que la plataforma cubra el ciclo de vida completo de la campaña (incluidos los momentos de más riesgo, como el día de elecciones)</li>
+<li>Lo aplazado tiene criterios de reevaluación claros; no es una exclusión permanente</li>
+<li>Dejar la gamificación fuera del alcance es una posición de principio que define el carácter de la plataforma</li>
+</ul>
+<p><strong>Costos:</strong></p>
+<ul>
+<li>No soportar donaciones en cripto puede dejar fuera a algunos donantes potenciales en jurisdicciones donde se están volviendo comunes</li>
+<li>El monitoreo manual de medios genera trabajo para el equipo de prensa que se podría automatizar</li>
+<li>Sin recaudación entre pares, las campañas no pueden pedirles a sus simpatizantes que recauden dinero en sus propias redes</li>
+</ul>
+<p><strong>Restricciones:</strong></p>
+<ul>
+<li>De lo aplazado hay que considerar desde ahora sus implicaciones en el modelo de datos, para evitar dolores de migración cuando por fin se construya</li>
+<li>Los criterios de «reevaluar cuando…» de lo aplazado tienen que quedar anotados y revisarse periódicamente</li>
+</ul>
+<p><strong>ADR relacionados:</strong> <a href="./006-field-operations-gotv.html">ADR-006</a> (detalles del GOTV dentro del alcance), <a href="./007-fundraising-payments.html">ADR-007</a> (alcance de la recaudación, cripto y donaciones pareadas aplazadas), <a href="./008-communications-messaging.html">ADR-008</a> (detalles de la mensajería interna dentro del alcance)</p>
+
+    </article>
+  </main>
+  <div class="toc-rail"><nav class="toc" aria-label="En esta página"><div class="toc-label">En esta página</div><ul><li class="toc-2"><a href="#contexto"># Contexto</a></li><li class="toc-2"><a href="#decisión"># Decisión</a></li><li class="toc-3"><a href="#dentro-del-alcance-operaciones-de-gotv-especificación-aparte"># Dentro del alcance: operaciones de GOTV (especificación aparte)</a></li><li class="toc-3"><a href="#dentro-del-alcance-mensajería-interna-con-cifrado-e2e-especificación-aparte"># Dentro del alcance: mensajería interna con cifrado E2E (especificación aparte)</a></li><li class="toc-3"><a href="#dentro-del-alcance-gestión-de-prensa-y-medios-especificación-aparte"># Dentro del alcance: gestión de prensa y medios (especificación aparte)</a></li><li class="toc-3"><a href="#fuera-del-alcance-gamificación-del-voluntariado"># Fuera del alcance: gamificación del voluntariado</a></li><li class="toc-3"><a href="#aplazado-donaciones-en-criptomonedas"># Aplazado: donaciones en criptomonedas</a></li><li class="toc-3"><a href="#aplazado-donaciones-pareadas-por-empleadores"># Aplazado: donaciones pareadas por empleadores</a></li><li class="toc-3"><a href="#aplazado-recaudación-de-fondos-entre-pares"># Aplazado: recaudación de fondos entre pares</a></li><li class="toc-3"><a href="#aplazado-monitoreo-automatizado-de-medios"># Aplazado: monitoreo automatizado de medios</a></li><li class="toc-2"><a href="#consecuencias"># Consecuencias</a></li></ul></nav></div>
+</div>
+<script src="../../assets/search.js" defer></script>
+<script src="../../assets/app.js" defer></script>
+</body>
+</html>

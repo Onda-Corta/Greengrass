@@ -42,6 +42,11 @@ The shift lifecycle is a first-class event boundary: start shift downloads data 
 
 Default touch targets are 44px minimum (WCAG 2.1 AAA). Field mode increases to 56px minimum to account for walking, one-handed use, poor lighting, and gloves. Issue checkboxes in poll watcher forms use 44px tap areas. "Not Home" auto-advances after 3 seconds to minimize dwell time between doors.
 
+<!-- REVISIT: touch-target sizes disagree across three documents. This heading says 48px
+in field mode; the paragraph below says 56px; ADR-011 says 56px field / 44px standard; and
+ux-decisions.md sets --touch-target-min: 48px / --touch-target-field: 56px. The 48px here
+is the orphan value. Pick one and propagate. -->
+
 Dynamic resource reallocation on election day uses automatic suggestions with human approval: the platform analyzes real-time turnout data and surfaces reallocation recommendations ("Precinct 7 at 35% turnout — consider shifting canvassers from Precinct 12 at 78%"). War room staff approve, reject, or modify each suggestion.
 
 ## Consequences

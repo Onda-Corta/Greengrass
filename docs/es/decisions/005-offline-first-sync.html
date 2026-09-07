@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="es" data-base="../../" data-no-results="No hay resultados para">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ADR-005: Prioridad sin conexión y sincronización · GreenGrass</title>
+<meta name="description" content="ADR-005: Prioridad sin conexión y sincronización — Documentación de especificación y diseño de GreenGrass.">
+<link rel="alternate" hreflang="en" href="../../decisions/005-offline-first-sync.html">
+<link rel="alternate" hreflang="es" href="./005-offline-first-sync.html">
+<link rel="alternate" hreflang="x-default" href="../../decisions/005-offline-first-sync.html">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%232563eb'/%3E%3Cstop offset='1' stop-color='%2316a34a'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='32' height='32' rx='7' fill='url(%23g)'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="../../assets/styles.css">
+</head>
+<body>
+<a class="skip-link" href="#content">Saltar al contenido</a>
+<header class="site-header">
+  <button type="button" class="menu-toggle" aria-label="Alternar navegación" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+  <a class="brand" href="../../es/index.html">
+    <span class="brand-mark" aria-hidden="true"></span>
+    <span class="brand-text"><strong>GreenGrass</strong><small>Especificación y diseño</small></span>
+  </a>
+  <div class="search">
+    <input type="search" id="search-input" placeholder="Buscar en la documentación…" autocomplete="off" aria-label="Buscar en la documentación">
+    <div id="search-results" class="search-results" hidden></div>
+  </div>
+  <nav class="lang-switch" aria-label="Idioma"><a class="lang-opt" href="../../decisions/005-offline-first-sync.html" hreflang="en" lang="en" title="View this page in English">EN</a><span class="lang-opt active" aria-current="true">ES</span></nav>
+  <button type="button" class="theme-toggle" aria-label="Alternar modo oscuro" title="Alternar modo oscuro">
+    <span class="theme-icon" aria-hidden="true"></span>
+  </button>
+</header>
+<div class="layout">
+  <div class="sidebar-backdrop" hidden></div>
+  <aside class="sidebar" aria-label="Navegación de la documentación">
+    <nav class="nav">
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">Inicio<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../index.html">GreenGrass</a></li></ul></div>
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">Especificaciones<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../spec/product.html">Proyecto: GreenGrass</a></li><li><a href="../spec/mvp.html">MVP de GreenGrass — plan de producto</a></li><li><a href="../spec/users.html">Usuarios y roles</a></li><li><a href="../spec/workflows.html">Flujos de trabajo principales</a></li><li><a href="../spec/geography.html">Geografía objetivo</a></li><li><a href="../spec/security.html">Seguridad y modelo de amenazas</a></li><li><a href="../spec/compliance.html">Cumplimiento y marco legal</a></li><li><a href="../spec/fundraising.html">Recaudación de fondos e infraestructura de pagos</a></li><li><a href="../spec/integrations.html">Integraciones externas</a></li><li><a href="../spec/support.html">Soporte y puesta en marcha de organizaciones</a></li><li><a href="../spec/gotv.html">GOTV y operaciones del día de elecciones</a></li><li><a href="../spec/messaging.html">Comunicaciones internas y notificaciones</a></li><li><a href="../spec/press.html">Prensa, medios y comunicaciones públicas</a></li><li><a href="../spec/comms-intelligence.html">Inteligencia de comunicaciones — hoja de ruta post-MVP</a></li></ul></div>
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">Arquitectura<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../design/architecture/system.html">Arquitectura del sistema</a></li></ul></div>
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">Diseño UX<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../design/ux/00-overview.html">Resumen del diseño de UX</a></li><li><a href="../design/ux/01-information-architecture/navigation-model.html">Modelo de navegación</a></li><li><a href="../design/ux/01-information-architecture/screen-inventory.html">Inventario de pantallas</a></li><li><a href="../design/ux/01-information-architecture/persona-views.html">Vistas por arquetipo</a></li><li><a href="../design/ux/01-information-architecture/url-structure.html">Estructura de URL</a></li><li><a href="../design/ux/02-global-patterns/pattern-catalog.html">Catálogo de patrones</a></li><li><a href="../design/ux/02-global-patterns/offline-sync-patterns.html">Patrones sin conexión y de sincronización</a></li><li><a href="../design/ux/02-global-patterns/notification-patterns.html">Patrones de notificaciones</a></li><li><a href="../design/ux/02-global-patterns/search-patterns.html">Patrones de búsqueda</a></li><li><a href="../design/ux/02-global-patterns/settings-help-patterns.html">Patrones de ajustes y ayuda</a></li><li><a href="../design/ux/02-global-patterns/security-ux-patterns.html">Patrones de UX de seguridad</a></li><li><a href="../design/ux/03-design-system/foundations.html">Fundamentos del sistema de diseño</a></li><li><a href="../design/ux/03-design-system/theming-strategy.html">Estrategia de temas</a></li><li><a href="../design/ux/03-design-system/component-inventory.html">Inventario de componentes</a></li><li><a href="../design/ux/03-design-system/responsive-strategy.html">Estrategia de diseño adaptable</a></li></ul></div>
+<div class="nav-section open"><button type="button" class="nav-section-title" aria-expanded="true">Decisiones<span class="chev" aria-hidden="true"></span></button><ul><li><a href="./001-platform-architecture.html">ADR-001: Arquitectura y despliegue de la plataforma</a></li><li><a href="./002-security-threat-model.html">ADR-002: Seguridad y modelo de amenazas</a></li><li><a href="./003-identity-access-organization.html">ADR-003: Identidad, acceso y organización</a></li><li><a href="./004-data-model-integrity.html">ADR-004: Modelo de datos e integridad</a></li><li><a href="./005-offline-first-sync.html" aria-current="page" class="active">ADR-005: Prioridad sin conexión y sincronización</a></li><li><a href="./006-field-operations-gotv.html">ADR-006: Operaciones de campo y GOTV</a></li><li><a href="./007-fundraising-payments.html">ADR-007: Recaudación de fondos y pagos</a></li><li><a href="./008-communications-messaging.html">ADR-008: Comunicaciones y mensajería</a></li><li><a href="./009-compliance-legal.html">ADR-009: Cumplimiento y marco legal</a></li><li><a href="./010-internationalization-localization.html">ADR-010: Internacionalización y localización</a></li><li><a href="./011-design-system-ux.html">ADR-011: Sistema de diseño y fundamentos de UX</a></li><li><a href="./012-external-integrations.html">ADR-012: Integraciones externas</a></li><li><a href="./013-analytics-ai.html">ADR-013: Analítica e IA</a></li><li><a href="./014-volunteer-onboarding.html">ADR-014: Voluntariado e incorporación</a></li><li><a href="./015-product-scope.html">ADR-015: Límites del alcance del producto</a></li><li><a href="./016-cross-cutting-resolutions.html">ADR-016: Resoluciones transversales</a></li><li><a href="./017-sharing-contract-trust-model.html">ADR-017: El contrato de intercambio como primitiva universal de confianza</a></li><li><a href="./ux-decisions.html">Decisiones de UX — fase de wireframes</a></li></ul></div>
+    </nav>
+  </aside>
+  <main id="content" class="content">
+    <nav class="breadcrumb" aria-label="Ruta de navegación">Decisiones</nav>
+    <article class="prose">
+<h1 id="adr-005-prioridad-sin-conexión-y-sincronización" tabindex="-1"><a class="heading-anchor" href="#adr-005-prioridad-sin-conexión-y-sincronización" aria-hidden="true">#</a> ADR-005: Prioridad sin conexión y sincronización</h1>
+<p><strong>Estado:</strong> Aceptada
+<strong>Fecha:</strong> 2026-03-03
+<strong>Fuentes:</strong> <code>design/architecture/system.md</code>, <code>spec/workflows.md</code>, <code>design/ux/02-global-patterns/offline-sync-patterns.md</code></p>
+<h2 id="contexto" tabindex="-1"><a class="heading-anchor" href="#contexto" aria-hidden="true">#</a> Contexto</h2>
+<p>Las operaciones de campo centrales de GreenGrass —trabajo de campo, inscripción de votantes, registro de entrada en eventos, puerta a puerta de GOTV (Get Out The Vote — movilización del voto)— ocurren en lugares con mala conectividad o sin ninguna: zonas rurales, eventos al aire libre, barrios urbanos densos con cobertura irregular. Son además los flujos de trabajo más sensibles al tiempo de toda la plataforma. Un voluntario parado frente a una puerta no puede esperar una petición de red. Una jornada de inscripción de votantes en una plaza de mercado rural no puede detenerse por la conectividad. En esas rutas críticas, la plataforma tiene que funcionar de forma confiable sin ninguna conexión de red.</p>
+<p>Al mismo tiempo, los datos capturados sin conexión tienen que sincronizarse tarde o temprano con el servidor, y que varios dispositivos capturen datos sobre los mismos registros sin conexión genera conflictos que hay que resolver sin perder datos.</p>
+<h2 id="decisión" tabindex="-1"><a class="heading-anchor" href="#decisión" aria-hidden="true">#</a> Decisión</h2>
+<h3 id="prioridad-sin-conexión-en-las-operaciones-de-campo" tabindex="-1"><a class="heading-anchor" href="#prioridad-sin-conexión-en-las-operaciones-de-campo" aria-hidden="true">#</a> Prioridad sin conexión en las operaciones de campo</h3>
+<p>El trabajo de campo, la inscripción de votantes, el registro de entrada en eventos y el puerta a puerta de GOTV funcionan por completo sin conexión: están diseñados para funcionar sin conexión primero (offline-first). Los datos se capturan localmente en el dispositivo, cifrados con SQLCipher, y se sincronizan con el servidor cuando hay conectividad. Las listas de recorrido, las teselas de mapa, los guiones de trabajo de campo y los formularios de inscripción de votantes se descargan por adelantado al comenzar el turno. Un voluntario puede completar un turno de campo entero sin conectarse nunca a la red.</p>
+<p>Los flujos de trabajo que no son de campo (paneles, comunicaciones, recaudación de fondos, informes) requieren conectividad y se degradan de forma controlada cuando no hay conexión: las funcionalidades quedan atenuadas y con un distintivo de sin conexión, nunca ocultas.</p>
+<p><strong>Alternativas consideradas:</strong> Se descartó la prioridad en línea con caché porque falla por completo cuando la conectividad se cae en medio de una operación de campo, que es lo normal en los entornos objetivo. Se descartó el funcionamiento sin conexión para todas las funcionalidades por ser alcance innecesario: los flujos de trabajo administrativos no ganan nada con poder operar sin conexión y aumentarían mucho la complejidad.</p>
+<h3 id="event-sourcing-para-el-protocolo-de-sincronización" tabindex="-1"><a class="heading-anchor" href="#event-sourcing-para-el-protocolo-de-sincronización" aria-hidden="true">#</a> Event sourcing para el protocolo de sincronización</h3>
+<p>El protocolo de sincronización se basa en event sourcing (el estado se deriva de un registro inmutable de eventos): cada cambio de datos se captura como un evento inmutable (quién cambió qué, cuándo y desde qué dispositivo). Los eventos se guardan localmente y se reproducen contra el servidor cuando hay conexión. Esto aporta tres capacidades a la vez:</p>
+<ol>
+<li><strong>Sincronización sin conexión</strong> — los eventos se acumulan localmente y se sincronizan por lotes cuando hay conexión</li>
+<li><strong>Registro de auditoría</strong> — el registro de eventos es el registro de auditoría, no un sistema aparte</li>
+<li><strong>Detección de conflictos</strong> — los eventos de distintos dispositivos se pueden comparar para identificar conflictos</li>
+</ol>
+<p>Los eventos se sincronizan en orden cronológico con garantías de idempotencia: reproducir el mismo evento dos veces no tiene ningún efecto. El protocolo de sincronización maneja las conexiones interrumpidas de forma controlada.</p>
+<p><strong>Alternativas consideradas:</strong> Se consideró la sincronización basada en CRDT, pero se descartó por ser sobreingeniería para este dominio: la mayoría de los campos de datos de campaña no ganan nada con la resolución automática de conflictos y, además, el requisito de registro de auditoría obliga a tener registros de evento explícitos de todas formas. Se descartó el simple <em>gana la última escritura</em> porque descarta datos en silencio.</p>
+<h3 id="actualización-híbrida-de-la-lista-de-recorrido-push-y-pull" tabindex="-1"><a class="heading-anchor" href="#actualización-híbrida-de-la-lista-de-recorrido-push-y-pull" aria-hidden="true">#</a> Actualización híbrida de la lista de recorrido: push y pull</h3>
+<p>Durante las operaciones de GOTV, el servidor envía en tiempo real las actualizaciones de la lista de recorrido a los dispositivos conectados (quitando a los votantes de quienes ya se confirmó el voto). Los voluntarios pueden deslizar para actualizar como alternativa de reserva cuando la conectividad es intermitente. Las entradas desactualizadas se marcan visualmente con un indicador de actualidad que muestra el tiempo transcurrido desde la última sincronización.</p>
+<p>Así se equilibra la necesidad de listas de recorrido al día el día de elecciones —donde los datos desactualizados hacen perder tiempo con votantes que ya votaron— con la realidad de que la conectividad en el campo no es confiable.</p>
+<h3 id="cinco-estados-de-conectividad-con-tratamiento-propio-en-el-modo-de-campo" tabindex="-1"><a class="heading-anchor" href="#cinco-estados-de-conectividad-con-tratamiento-propio-en-el-modo-de-campo" aria-hidden="true">#</a> Cinco estados de conectividad, con tratamiento propio en el modo de campo</h3>
+<p>La plataforma distingue cinco estados de conectividad: Conectado, Desactualizado, Sincronizando, Sin conexión y Error. Cada estado tiene un tratamiento de interfaz distinto, que varía según el contexto:</p>
+<ul>
+<li><strong>Aplicación estándar:</strong> &quot;Conectado&quot; no necesita anotación; los problemas se van mostrando de forma progresiva</li>
+<li><strong>Modo de campo:</strong> las marcas de tiempo de sincronización siempre están visibles, porque los datos desactualizados son operativamente peligrosos. Las advertencias ganan urgencia a medida que crece el tiempo sin conexión (ámbar a partir de los 12 minutos)</li>
+</ul>
+<p>Los indicadores de actualidad de los datos muestran cuándo se sincronizó cada registro por última vez: los registros con más de 1 hora de desactualización llevan marcas de tiempo discretas, los de más de 24 horas llevan advertencias en ámbar y los de más de 7 días llevan advertencias destacadas de &quot;sincronización requerida&quot;. Los cambios locales pendientes muestran su estado de sincronización: pendiente, subiendo, sincronizado, en conflicto o fallido.</p>
+<p>La sincronización consciente de la batería adapta su frecuencia al nivel de carga (normal por encima del 50%, reducida entre 20% y 50%, mínima por debajo del 20%) sin que el usuario lo vea.</p>
+<h2 id="consecuencias" tabindex="-1"><a class="heading-anchor" href="#consecuencias" aria-hidden="true">#</a> Consecuencias</h2>
+<p><strong>Beneficios:</strong></p>
+<ul>
+<li>Los voluntarios de campo pueden trabajar de forma confiable sin importar la conectividad: ningún flujo de trabajo se interrumpe</li>
+<li>El event sourcing unifica sincronización, auditoría y detección de conflictos en un solo mecanismo</li>
+<li>La actualización de listas de recorrido con push y pull mantiene los datos de GOTV tan al día como permita la conectividad</li>
+<li>El modelo de cinco estados de conectividad evita que un voluntario trabaje sin saberlo con datos peligrosamente desactualizados</li>
+<li>La sincronización consciente de la batería alarga la carga del dispositivo durante los turnos de campo largos</li>
+</ul>
+<p><strong>Costos:</strong></p>
+<ul>
+<li>La prioridad sin conexión aumenta mucho la complejidad del lado del cliente (base de datos local, cifrado, motor de sincronización, interfaz de conflictos)</li>
+<li>El event sourcing genera más almacenamiento que el CRUD tradicional: cada cambio es un evento, no una mutación</li>
+<li>Descargar por adelantado listas de recorrido, teselas de mapa y guiones al comenzar el turno exige un ancho de banda y un almacenamiento en el dispositivo nada triviales (con un tope de ~200 MB para las teselas de mapa)</li>
+<li>La resolución de conflictos, incluso con reglas automáticas para los campos no conflictivos, exige capacidad del Gestor de datos para los conflictos marcados</li>
+</ul>
+<p><strong>Restricciones:</strong></p>
+<ul>
+<li>El almacenamiento local tiene que estar cifrado (SQLCipher) y borrarse al terminar la sesión</li>
+<li>La sincronización tiene que ser idempotente: una sincronización interrumpida tiene que poder reanudarse sin riesgo</li>
+<li>La caché de teselas de mapa tiene que caber en los límites de almacenamiento de los celulares Android de gama baja</li>
+<li>El día de elecciones, la sincronización tiene que priorizar las actualizaciones del estado de los votantes por encima de cualquier otro tipo de evento</li>
+</ul>
+<p><strong>ADR relacionados:</strong> <a href="./002-security-threat-model.html">ADR-002</a> (cifrado en el dispositivo, minimización de datos), <a href="./004-data-model-integrity.html">ADR-004</a> (resolución de conflictos con fusionar y marcar, el event sourcing como registro de auditoría), <a href="./006-field-operations-gotv.html">ADR-006</a> (actualización de la lista de recorrido en GOTV, prioridad de sincronización el día de elecciones)</p>
+
+    </article>
+  </main>
+  <div class="toc-rail"><nav class="toc" aria-label="En esta página"><div class="toc-label">En esta página</div><ul><li class="toc-2"><a href="#contexto"># Contexto</a></li><li class="toc-2"><a href="#decisión"># Decisión</a></li><li class="toc-3"><a href="#prioridad-sin-conexión-en-las-operaciones-de-campo"># Prioridad sin conexión en las operaciones de campo</a></li><li class="toc-3"><a href="#event-sourcing-para-el-protocolo-de-sincronización"># Event sourcing para el protocolo de sincronización</a></li><li class="toc-3"><a href="#actualización-híbrida-de-la-lista-de-recorrido-push-y-pull"># Actualización híbrida de la lista de recorrido: push y pull</a></li><li class="toc-3"><a href="#cinco-estados-de-conectividad-con-tratamiento-propio-en-el-modo-de-campo"># Cinco estados de conectividad, con tratamiento propio en el modo de campo</a></li><li class="toc-2"><a href="#consecuencias"># Consecuencias</a></li></ul></nav></div>
+</div>
+<script src="../../assets/search.js" defer></script>
+<script src="../../assets/app.js" defer></script>
+</body>
+</html>

@@ -30,6 +30,11 @@ Every layer is designed assuming the layer above it has been compromised. Defens
 
 A secondary passkey logs into a sanitized view of the app that appears functional but contains no sensitive data. The duress login is indistinguishable from a normal login — no visual cues, no different loading behavior. It triggers a silent alert to the user's trusted contacts and Org Admin. Available on the aggressive security tier for tenants operating in hostile political environments.
 
+<!-- REVISIT: "the aggressive security tier" conflates two different axes: metadata
+protection (moderate / aggressive) and isolation (Standard / Enhanced / Maximum /
+Self-hosted). There is no "aggressive security tier"; security.md places duress mode at
+the aggressive metadata-protection tier. -->
+
 The sanitized view shows plausible but scrubbed content — a real account structure with minimal data, not a blank or obviously fake state. This withstands casual inspection by an adversary.
 
 **Alternatives considered:** No duress mode (out of scope) was rejected because physical device seizure is a real threat in target countries. Obvious decoy apps were rejected because they don't withstand inspection.

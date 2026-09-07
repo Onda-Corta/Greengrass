@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="es" data-base="../../" data-no-results="No hay resultados para">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ADR-003: Identidad, acceso y organización · GreenGrass</title>
+<meta name="description" content="ADR-003: Identidad, acceso y organización — Documentación de especificación y diseño de GreenGrass.">
+<link rel="alternate" hreflang="en" href="../../decisions/003-identity-access-organization.html">
+<link rel="alternate" hreflang="es" href="./003-identity-access-organization.html">
+<link rel="alternate" hreflang="x-default" href="../../decisions/003-identity-access-organization.html">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%232563eb'/%3E%3Cstop offset='1' stop-color='%2316a34a'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='32' height='32' rx='7' fill='url(%23g)'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="../../assets/styles.css">
+</head>
+<body>
+<a class="skip-link" href="#content">Saltar al contenido</a>
+<header class="site-header">
+  <button type="button" class="menu-toggle" aria-label="Alternar navegación" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+  <a class="brand" href="../../es/index.html">
+    <span class="brand-mark" aria-hidden="true"></span>
+    <span class="brand-text"><strong>GreenGrass</strong><small>Especificación y diseño</small></span>
+  </a>
+  <div class="search">
+    <input type="search" id="search-input" placeholder="Buscar en la documentación…" autocomplete="off" aria-label="Buscar en la documentación">
+    <div id="search-results" class="search-results" hidden></div>
+  </div>
+  <nav class="lang-switch" aria-label="Idioma"><a class="lang-opt" href="../../decisions/003-identity-access-organization.html" hreflang="en" lang="en" title="View this page in English">EN</a><span class="lang-opt active" aria-current="true">ES</span></nav>
+  <button type="button" class="theme-toggle" aria-label="Alternar modo oscuro" title="Alternar modo oscuro">
+    <span class="theme-icon" aria-hidden="true"></span>
+  </button>
+</header>
+<div class="layout">
+  <div class="sidebar-backdrop" hidden></div>
+  <aside class="sidebar" aria-label="Navegación de la documentación">
+    <nav class="nav">
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">Inicio<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../index.html">GreenGrass</a></li></ul></div>
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">Especificaciones<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../spec/product.html">Proyecto: GreenGrass</a></li><li><a href="../spec/mvp.html">MVP de GreenGrass — plan de producto</a></li><li><a href="../spec/users.html">Usuarios y roles</a></li><li><a href="../spec/workflows.html">Flujos de trabajo principales</a></li><li><a href="../spec/geography.html">Geografía objetivo</a></li><li><a href="../spec/security.html">Seguridad y modelo de amenazas</a></li><li><a href="../spec/compliance.html">Cumplimiento y marco legal</a></li><li><a href="../spec/fundraising.html">Recaudación de fondos e infraestructura de pagos</a></li><li><a href="../spec/integrations.html">Integraciones externas</a></li><li><a href="../spec/support.html">Soporte y puesta en marcha de organizaciones</a></li><li><a href="../spec/gotv.html">GOTV y operaciones del día de elecciones</a></li><li><a href="../spec/messaging.html">Comunicaciones internas y notificaciones</a></li><li><a href="../spec/press.html">Prensa, medios y comunicaciones públicas</a></li><li><a href="../spec/comms-intelligence.html">Inteligencia de comunicaciones — hoja de ruta post-MVP</a></li></ul></div>
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">Arquitectura<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../design/architecture/system.html">Arquitectura del sistema</a></li></ul></div>
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">Diseño UX<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../design/ux/00-overview.html">Resumen del diseño de UX</a></li><li><a href="../design/ux/01-information-architecture/navigation-model.html">Modelo de navegación</a></li><li><a href="../design/ux/01-information-architecture/screen-inventory.html">Inventario de pantallas</a></li><li><a href="../design/ux/01-information-architecture/persona-views.html">Vistas por arquetipo</a></li><li><a href="../design/ux/01-information-architecture/url-structure.html">Estructura de URL</a></li><li><a href="../design/ux/02-global-patterns/pattern-catalog.html">Catálogo de patrones</a></li><li><a href="../design/ux/02-global-patterns/offline-sync-patterns.html">Patrones sin conexión y de sincronización</a></li><li><a href="../design/ux/02-global-patterns/notification-patterns.html">Patrones de notificaciones</a></li><li><a href="../design/ux/02-global-patterns/search-patterns.html">Patrones de búsqueda</a></li><li><a href="../design/ux/02-global-patterns/settings-help-patterns.html">Patrones de ajustes y ayuda</a></li><li><a href="../design/ux/02-global-patterns/security-ux-patterns.html">Patrones de UX de seguridad</a></li><li><a href="../design/ux/03-design-system/foundations.html">Fundamentos del sistema de diseño</a></li><li><a href="../design/ux/03-design-system/theming-strategy.html">Estrategia de temas</a></li><li><a href="../design/ux/03-design-system/component-inventory.html">Inventario de componentes</a></li><li><a href="../design/ux/03-design-system/responsive-strategy.html">Estrategia de diseño adaptable</a></li></ul></div>
+<div class="nav-section open"><button type="button" class="nav-section-title" aria-expanded="true">Decisiones<span class="chev" aria-hidden="true"></span></button><ul><li><a href="./001-platform-architecture.html">ADR-001: Arquitectura y despliegue de la plataforma</a></li><li><a href="./002-security-threat-model.html">ADR-002: Seguridad y modelo de amenazas</a></li><li><a href="./003-identity-access-organization.html" aria-current="page" class="active">ADR-003: Identidad, acceso y organización</a></li><li><a href="./004-data-model-integrity.html">ADR-004: Modelo de datos e integridad</a></li><li><a href="./005-offline-first-sync.html">ADR-005: Prioridad sin conexión y sincronización</a></li><li><a href="./006-field-operations-gotv.html">ADR-006: Operaciones de campo y GOTV</a></li><li><a href="./007-fundraising-payments.html">ADR-007: Recaudación de fondos y pagos</a></li><li><a href="./008-communications-messaging.html">ADR-008: Comunicaciones y mensajería</a></li><li><a href="./009-compliance-legal.html">ADR-009: Cumplimiento y marco legal</a></li><li><a href="./010-internationalization-localization.html">ADR-010: Internacionalización y localización</a></li><li><a href="./011-design-system-ux.html">ADR-011: Sistema de diseño y fundamentos de UX</a></li><li><a href="./012-external-integrations.html">ADR-012: Integraciones externas</a></li><li><a href="./013-analytics-ai.html">ADR-013: Analítica e IA</a></li><li><a href="./014-volunteer-onboarding.html">ADR-014: Voluntariado e incorporación</a></li><li><a href="./015-product-scope.html">ADR-015: Límites del alcance del producto</a></li><li><a href="./016-cross-cutting-resolutions.html">ADR-016: Resoluciones transversales</a></li><li><a href="./017-sharing-contract-trust-model.html">ADR-017: El contrato de intercambio como primitiva universal de confianza</a></li><li><a href="./ux-decisions.html">Decisiones de UX — fase de wireframes</a></li></ul></div>
+    </nav>
+  </aside>
+  <main id="content" class="content">
+    <nav class="breadcrumb" aria-label="Ruta de navegación">Decisiones</nav>
+    <article class="prose">
+<h1 id="adr-003-identidad-acceso-y-organización" tabindex="-1"><a class="heading-anchor" href="#adr-003-identidad-acceso-y-organización" aria-hidden="true">#</a> ADR-003: Identidad, acceso y organización</h1>
+<p><strong>Estado:</strong> Aceptada
+<strong>Fecha:</strong> 2026-03-03
+<strong>Fuentes:</strong> <code>spec/users.md</code>, <code>spec/workflows.md</code></p>
+<h2 id="contexto" tabindex="-1"><a class="heading-anchor" href="#contexto" aria-hidden="true">#</a> Contexto</h2>
+<p>Quienes usan GreenGrass suelen participar en varias organizaciones: una voluntaria puede trabajar a la vez para un candidato, un partido y una alianza. La plataforma tiene que manejar esa realidad multiorganización sin crear identidades duplicadas ni filtrar datos entre organizaciones. Al mismo tiempo, el modelo de roles y permisos tiene que dar cabida a estructuras de campaña muy distintas: desde la campaña de un candidato con tres personas, donde una sola lleva comunicaciones y finanzas, hasta un partido nacional con cientos de personas en el equipo repartidas por regiones geográficas acotadas.</p>
+<p>La aprobación de voluntarios es otro punto de tensión: las campañas de baja amenaza quieren que la gente se inscriba y trabaje el mismo día, mientras que las campañas expuestas a la infiltración necesitan revisar cada inscripción.</p>
+<h2 id="decisión" tabindex="-1"><a class="heading-anchor" href="#decisión" aria-hidden="true">#</a> Decisión</h2>
+<h3 id="identidad-federada-con-perfiles-por-organización" tabindex="-1"><a class="heading-anchor" href="#identidad-federada-con-perfiles-por-organización" aria-hidden="true">#</a> Identidad federada con perfiles por organización</h3>
+<p>Una persona tiene una sola identidad a nivel de plataforma (credenciales de acceso, nombre, datos de contacto, idioma preferido, consentimiento expreso o baja de comunicaciones, historial de donaciones como registro del donante) y un perfil por cada organización a la que pertenece (rol, permisos, horas de voluntariado, asignaciones de trabajo de campo, etiquetas internas, notas del personal). La plataforma sabe que es la misma persona —lo que permite deduplicar y coordinar entre organizaciones al nivel de la alianza—, pero cada organización solo ve sus propios datos sobre esa persona.</p>
+<p>La identidad de plataforma de una persona es independiente de cualquier organización. Puede irse de una organización, entrar a otra o existir sin afiliación. Los datos básicos de identidad viajan con la persona; los datos operativos específicos de cada organización se quedan con la organización.</p>
+<p><strong>Alternativas consideradas:</strong> Se descartaron las identidades por organización (una cuenta distinta en cada una) porque crean registros duplicados, fragmentan el historial de donaciones y hacen imposible la coordinación al nivel de la alianza. Se descartaron los perfiles totalmente compartidos porque filtran datos operativos entre organizaciones.</p>
+<h3 id="reparto-entre-la-identidad-de-plataforma-y-los-datos-que-son-de-la-persona" tabindex="-1"><a class="heading-anchor" href="#reparto-entre-la-identidad-de-plataforma-y-los-datos-que-son-de-la-persona" aria-hidden="true">#</a> Reparto entre la identidad de plataforma y los datos que son de la persona</h3>
+<table>
+<thead>
+<tr>
+<th>Pertenece a la persona (nivel de plataforma)</th>
+<th>Pertenece a la organización</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Credenciales de acceso (login, 2FA)</td>
+<td>Rol y permisos dentro de esa organización</td>
+</tr>
+<tr>
+<td>Nombre, datos de contacto, idioma preferido</td>
+<td>Horas de voluntariado, historial de turnos</td>
+</tr>
+<tr>
+<td>Preferencias de alta y baja en comunicaciones</td>
+<td>Asignaciones de trabajo de campo y notas de campo</td>
+</tr>
+<tr>
+<td>Historial de donaciones (como registro propio del donante)</td>
+<td>Etiquetas, puntajes y segmentos internos</td>
+</tr>
+<tr>
+<td>Membresías e historial de afiliaciones</td>
+<td>Notas del personal sobre la persona</td>
+</tr>
+</tbody>
+</table>
+<p>Este reparto garantiza la portabilidad de los datos (una persona puede llevarse su identidad) sin dejar de respetar la soberanía de cada organización sobre sus datos operativos.</p>
+<h3 id="plantillas-de-rol-híbridas-con-sobrescrituras-por-usuario" tabindex="-1"><a class="heading-anchor" href="#plantillas-de-rol-híbridas-con-sobrescrituras-por-usuario" aria-hidden="true">#</a> Plantillas de rol híbridas con sobrescrituras por usuario</h3>
+<p>La plataforma trae plantillas de rol de personal por defecto (Director de comunicaciones, Director de finanzas, Director de campo, Coordinador de voluntarios, Gestor de datos, Candidato, Adjunto). Los administradores de la organización pueden asignar las plantillas tal cual, apilar varias plantillas sobre una misma persona (el caso de la campaña de tres personas), sobrescribir permisos individuales o crear plantillas propias. Las plantillas se suman al apilarse: una revocación explícita prevalece sobre una concesión.</p>
+<p>El modelo de permisos es híbrido, RBAC más acotación por atributos: las plantillas de rol determinan qué acciones puede ejecutar un usuario, y las asignaciones de ámbito (geográfico, de equipo, de campaña o sin ámbito) determinan sobre qué datos aplican esas acciones.</p>
+<p><strong>Alternativas consideradas:</strong> Se descartó el RBAC puro sin ámbitos porque las campañas necesitan control de acceso geográfico y por equipo. Se descartó el ABAC puro por ser demasiado complejo de administrar para el personal de campaña. Se descartaron los roles fijos sin personalización porque no hay dos estructuras de campaña iguales.</p>
+<h3 id="todos-los-tipos-de-recurso-se-pueden-compartir-en-una-alianza" tabindex="-1"><a class="heading-anchor" href="#todos-los-tipos-de-recurso-se-pueden-compartir-en-una-alianza" aria-hidden="true">#</a> Todos los tipos de recurso se pueden compartir en una alianza</h3>
+<p>Las alianzas permiten cooperar dentro de límites definidos. Entre los recursos que se pueden compartir están las bolsas de voluntarios, los datos de contacto de votantes, la infraestructura de eventos, la recaudación de fondos (con repartos configurables), las listas de comunicación y la analítica. Compartir es opcional: lo activa cada organización, recurso por recurso, y es revocable, auditado y respeta el consentimiento de cada persona. Nada se comparte por defecto: cada organización miembro elige explícitamente qué comparte.</p>
+<h3 id="política-de-aprobación-de-voluntarios-configurable" tabindex="-1"><a class="heading-anchor" href="#política-de-aprobación-de-voluntarios-configurable" aria-hidden="true">#</a> Política de aprobación de voluntarios configurable</h3>
+<p>Cada organización define su propia política: aprobación automática (los voluntarios quedan activos de inmediato) o aprobación requerida (el Coordinador de voluntarios revisa cada inscripción). El valor por defecto se fija a nivel de la organización, con sobrescrituras por canal de inscripción (por ejemplo, aprobar automáticamente a quienes llegan por referencia y exigir aprobación a las inscripciones espontáneas).</p>
+<p><strong>Alternativas consideradas:</strong> Se descartó aprobar siempre de forma automática porque las campañas de alta amenaza necesitan revisar cada inscripción para detectar infiltraciones. Se descartó exigir aprobación siempre porque crea fricción innecesaria en entornos de baja amenaza.</p>
+<h3 id="modelos-de-gobernanza-de-la-alianza-configurables" tabindex="-1"><a class="heading-anchor" href="#modelos-de-gobernanza-de-la-alianza-configurables" aria-hidden="true">#</a> Modelos de gobernanza de la alianza configurables</h3>
+<p>Cada alianza elige un modelo de gobernanza para cada campaña conjunta:</p>
+<ul>
+<li><strong>Controlada por la alianza</strong> — el Administrador de la alianza dirige la operación y las organizaciones miembro aportan recursos</li>
+<li><strong>Controlada por cada organización</strong> — cada organización miembro opera de forma independiente y la alianza aporta la coordinación</li>
+<li><strong>Gobernanza compartida</strong> — campaña conjunta con su propia estructura de roles y personal de varias organizaciones</li>
+</ul>
+<p>Campañas distintas dentro de una misma alianza pueden usar modelos distintos.</p>
+<h2 id="consecuencias" tabindex="-1"><a class="heading-anchor" href="#consecuencias" aria-hidden="true">#</a> Consecuencias</h2>
+<p><strong>Beneficios:</strong></p>
+<ul>
+<li>Una persona puede participar en varias organizaciones sin identidades duplicadas</li>
+<li>El reparto de la propiedad de los datos protege a la vez la portabilidad de la persona y la soberanía de la organización</li>
+<li>Apilar plantillas cubre todo el rango de tamaños de campaña sin tener que diseñar roles a medida</li>
+<li>Compartir dentro de la alianza es lo bastante granular para la política de coalición real sin sacrificar la autonomía de cada organización</li>
+<li>Las políticas de aprobación configurables sirven tanto a campañas abiertas como a campañas sensibles en materia de seguridad</li>
+</ul>
+<p><strong>Costos:</strong></p>
+<ul>
+<li>La identidad federada complica la deduplicación, sobre todo cuando la misma persona entra en una organización a la vez como registro de votante y como usuario activo</li>
+<li>El híbrido de RBAC y ámbitos exige hacerlo cumplir con cuidado en el servidor para evitar fugas de ámbito</li>
+<li>Las reglas para compartir dentro de una alianza crean cadenas de control de acceso complejas que hay que auditar</li>
+</ul>
+<p><strong>Restricciones:</strong></p>
+<ul>
+<li>Los límites entre organizaciones son el ámbito más externo: ningún usuario ve nunca datos de una organización a la que no pertenece</li>
+<li>La visibilidad que tiene la alianza sobre personas presentes en varias organizaciones se limita a metadatos de coordinación, salvo que existan reglas explícitas para compartir</li>
+<li>El consentimiento de la persona prevalece sobre la configuración de intercambio de la organización</li>
+</ul>
+<p><strong>ADR relacionados:</strong> <a href="./001-platform-architecture.html">ADR-001</a> (modelo de federación), <a href="./002-security-threat-model.html">ADR-002</a> (métodos de autenticación), <a href="./004-data-model-integrity.html">ADR-004</a> (registro de auditoría para los cambios de permisos), <a href="./008-communications-messaging.html">ADR-008</a> (cifrado de las comunicaciones de la alianza)</p>
+
+    </article>
+  </main>
+  <div class="toc-rail"><nav class="toc" aria-label="En esta página"><div class="toc-label">En esta página</div><ul><li class="toc-2"><a href="#contexto"># Contexto</a></li><li class="toc-2"><a href="#decisión"># Decisión</a></li><li class="toc-3"><a href="#identidad-federada-con-perfiles-por-organización"># Identidad federada con perfiles por organización</a></li><li class="toc-3"><a href="#reparto-entre-la-identidad-de-plataforma-y-los-datos-que-son-de-la-persona"># Reparto entre la identidad de plataforma y los datos que son de la persona</a></li><li class="toc-3"><a href="#plantillas-de-rol-híbridas-con-sobrescrituras-por-usuario"># Plantillas de rol híbridas con sobrescrituras por usuario</a></li><li class="toc-3"><a href="#todos-los-tipos-de-recurso-se-pueden-compartir-en-una-alianza"># Todos los tipos de recurso se pueden compartir en una alianza</a></li><li class="toc-3"><a href="#política-de-aprobación-de-voluntarios-configurable"># Política de aprobación de voluntarios configurable</a></li><li class="toc-3"><a href="#modelos-de-gobernanza-de-la-alianza-configurables"># Modelos de gobernanza de la alianza configurables</a></li><li class="toc-2"><a href="#consecuencias"># Consecuencias</a></li></ul></nav></div>
+</div>
+<script src="../../assets/search.js" defer></script>
+<script src="../../assets/app.js" defer></script>
+</body>
+</html>

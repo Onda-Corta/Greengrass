@@ -348,6 +348,9 @@ In-event broadcasts serve two distinct audiences with different channels:
 
 The event detail screen provides two distinct broadcast actions: "Notify Staff" (in-app) and "Message Attendees" (SMS), making the audience and channel explicit.
 
+<!-- REVISIT: the heading says last-write-wins but the body says the earliest timestamp
+wins. These are opposite rules. -->
+
 #### #30: Multi-staff offline check-in → Last-write-wins with duplicate detection
 
 When multiple staff check in attendees offline simultaneously (large venue, multiple entry points), each device maintains its own check-in list. On sync, the system merges: if two devices checked in the same person, the earliest timestamp wins and the duplicate is logged. No attendee appears double-checked-in.
@@ -426,6 +429,9 @@ Features explicitly deferred from v1 and designated as major v2 capabilities:
 | **Visual Flow Builder** | #20 | Node-graph drip sequence builder with branching logic, multi-channel orchestration, drag-and-drop |
 | **Shared Content Library** | #23 | Centralized asset management with tagging, search, usage tracking, rights management, cross-feature reuse |
 | **Settings Delegation** | #52 | Controlled delegation of low-risk settings categories to non-OA roles |
+
+<!-- REVISIT: this table lists three v2 tentpole features; the corresponding line in
+Consequences lists four, adding Public Page A/B Testing. -->
 
 ### Press & Media (5 questions: #42–#46)
 
