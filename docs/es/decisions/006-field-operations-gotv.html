@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="es" data-base="../../" data-no-results="No hay resultados para">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ADR-006: Operaciones de campo y GOTV · GreenGrass</title>
+<meta name="description" content="ADR-006: Operaciones de campo y GOTV — Documentación de especificación y diseño de GreenGrass.">
+<link rel="alternate" hreflang="en" href="../../decisions/006-field-operations-gotv.html">
+<link rel="alternate" hreflang="es" href="./006-field-operations-gotv.html">
+<link rel="alternate" hreflang="x-default" href="../../decisions/006-field-operations-gotv.html">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%232563eb'/%3E%3Cstop offset='1' stop-color='%2316a34a'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='32' height='32' rx='7' fill='url(%23g)'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="../../assets/styles.css">
+</head>
+<body>
+<a class="skip-link" href="#content">Saltar al contenido</a>
+<header class="site-header">
+  <button type="button" class="menu-toggle" aria-label="Alternar navegación" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+  <a class="brand" href="../../es/index.html">
+    <span class="brand-mark" aria-hidden="true"></span>
+    <span class="brand-text"><strong>GreenGrass</strong><small>Especificación y diseño</small></span>
+  </a>
+  <div class="search">
+    <input type="search" id="search-input" placeholder="Buscar en la documentación…" autocomplete="off" aria-label="Buscar en la documentación">
+    <div id="search-results" class="search-results" hidden></div>
+  </div>
+  <nav class="lang-switch" aria-label="Idioma"><a class="lang-opt" href="../../decisions/006-field-operations-gotv.html" hreflang="en" lang="en" title="View this page in English">EN</a><span class="lang-opt active" aria-current="true">ES</span></nav>
+  <button type="button" class="theme-toggle" aria-label="Alternar modo oscuro" title="Alternar modo oscuro">
+    <span class="theme-icon" aria-hidden="true"></span>
+  </button>
+</header>
+<div class="layout">
+  <div class="sidebar-backdrop" hidden></div>
+  <aside class="sidebar" aria-label="Navegación de la documentación">
+    <nav class="nav">
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">Inicio<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../index.html">GreenGrass</a></li></ul></div>
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">Especificaciones<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../spec/product.html">Proyecto: GreenGrass</a></li><li><a href="../spec/mvp.html">MVP de GreenGrass — plan de producto</a></li><li><a href="../spec/users.html">Usuarios y roles</a></li><li><a href="../spec/workflows.html">Flujos de trabajo principales</a></li><li><a href="../spec/geography.html">Geografía objetivo</a></li><li><a href="../spec/security.html">Seguridad y modelo de amenazas</a></li><li><a href="../spec/compliance.html">Cumplimiento y marco legal</a></li><li><a href="../spec/fundraising.html">Recaudación de fondos e infraestructura de pagos</a></li><li><a href="../spec/integrations.html">Integraciones externas</a></li><li><a href="../spec/support.html">Soporte y puesta en marcha de organizaciones</a></li><li><a href="../spec/gotv.html">GOTV y operaciones del día de elecciones</a></li><li><a href="../spec/messaging.html">Comunicaciones internas y notificaciones</a></li><li><a href="../spec/press.html">Prensa, medios y comunicaciones públicas</a></li><li><a href="../spec/comms-intelligence.html">Inteligencia de comunicaciones — hoja de ruta post-MVP</a></li></ul></div>
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">Arquitectura<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../design/architecture/system.html">Arquitectura del sistema</a></li></ul></div>
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">Diseño UX<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../design/ux/00-overview.html">Resumen del diseño de UX</a></li><li><a href="../design/ux/01-information-architecture/navigation-model.html">Modelo de navegación</a></li><li><a href="../design/ux/01-information-architecture/screen-inventory.html">Inventario de pantallas</a></li><li><a href="../design/ux/01-information-architecture/persona-views.html">Vistas por arquetipo</a></li><li><a href="../design/ux/01-information-architecture/url-structure.html">Estructura de URL</a></li><li><a href="../design/ux/02-global-patterns/pattern-catalog.html">Catálogo de patrones</a></li><li><a href="../design/ux/02-global-patterns/offline-sync-patterns.html">Patrones sin conexión y de sincronización</a></li><li><a href="../design/ux/02-global-patterns/notification-patterns.html">Patrones de notificaciones</a></li><li><a href="../design/ux/02-global-patterns/search-patterns.html">Patrones de búsqueda</a></li><li><a href="../design/ux/02-global-patterns/settings-help-patterns.html">Patrones de ajustes y ayuda</a></li><li><a href="../design/ux/02-global-patterns/security-ux-patterns.html">Patrones de UX de seguridad</a></li><li><a href="../design/ux/03-design-system/foundations.html">Fundamentos del sistema de diseño</a></li><li><a href="../design/ux/03-design-system/theming-strategy.html">Estrategia de temas</a></li><li><a href="../design/ux/03-design-system/component-inventory.html">Inventario de componentes</a></li><li><a href="../design/ux/03-design-system/responsive-strategy.html">Estrategia de diseño adaptable</a></li></ul></div>
+<div class="nav-section open"><button type="button" class="nav-section-title" aria-expanded="true">Decisiones<span class="chev" aria-hidden="true"></span></button><ul><li><a href="./001-platform-architecture.html">ADR-001: Arquitectura y despliegue de la plataforma</a></li><li><a href="./002-security-threat-model.html">ADR-002: Seguridad y modelo de amenazas</a></li><li><a href="./003-identity-access-organization.html">ADR-003: Identidad, acceso y organización</a></li><li><a href="./004-data-model-integrity.html">ADR-004: Modelo de datos e integridad</a></li><li><a href="./005-offline-first-sync.html">ADR-005: Prioridad sin conexión y sincronización</a></li><li><a href="./006-field-operations-gotv.html" aria-current="page" class="active">ADR-006: Operaciones de campo y GOTV</a></li><li><a href="./007-fundraising-payments.html">ADR-007: Recaudación de fondos y pagos</a></li><li><a href="./008-communications-messaging.html">ADR-008: Comunicaciones y mensajería</a></li><li><a href="./009-compliance-legal.html">ADR-009: Cumplimiento y marco legal</a></li><li><a href="./010-internationalization-localization.html">ADR-010: Internacionalización y localización</a></li><li><a href="./011-design-system-ux.html">ADR-011: Sistema de diseño y fundamentos de UX</a></li><li><a href="./012-external-integrations.html">ADR-012: Integraciones externas</a></li><li><a href="./013-analytics-ai.html">ADR-013: Analítica e IA</a></li><li><a href="./014-volunteer-onboarding.html">ADR-014: Voluntariado e incorporación</a></li><li><a href="./015-product-scope.html">ADR-015: Límites del alcance del producto</a></li><li><a href="./016-cross-cutting-resolutions.html">ADR-016: Resoluciones transversales</a></li><li><a href="./017-sharing-contract-trust-model.html">ADR-017: El contrato de intercambio como primitiva universal de confianza</a></li><li><a href="./ux-decisions.html">Decisiones de UX — fase de wireframes</a></li></ul></div>
+    </nav>
+  </aside>
+  <main id="content" class="content">
+    <nav class="breadcrumb" aria-label="Ruta de navegación">Decisiones</nav>
+    <article class="prose">
+<h1 id="adr-006-operaciones-de-campo-y-gotv" tabindex="-1"><a class="heading-anchor" href="#adr-006-operaciones-de-campo-y-gotv" aria-hidden="true">#</a> ADR-006: Operaciones de campo y GOTV</h1>
+<p><strong>Estado:</strong> Aceptada
+<strong>Fecha:</strong> 2026-03-03
+<strong>Fuentes:</strong> <code>spec/gotv.md</code>, <code>spec/workflows.md</code>, <code>design/ux/04-wireframes/field-mode/field-mode.md</code>, <code>design/ux/03-design-system/foundations.md</code></p>
+<h2 id="contexto" tabindex="-1"><a class="heading-anchor" href="#contexto" aria-hidden="true">#</a> Contexto</h2>
+<p>Las operaciones de campo —trabajo de campo, jornadas de inscripción de votantes, jornadas de llamadas y GOTV (Get Out The Vote — movilización del voto)— son los flujos de trabajo más intensos de la plataforma. El día de elecciones, en particular, comprime toda la actividad de campaña en unas pocas horas con plazos fijos (los centros de votación cierran). Estos flujos de trabajo exigen una interfaz hecha a propósito, optimizada para usarse con una sola mano en el celular mientras se camina, con iluminación variable y conectividad poco confiable. La interfaz estándar de la plataforma, diseñada para escritorio y uso móvil general, es demasiado compleja y tiene áreas táctiles demasiado pequeñas para las condiciones de campo.</p>
+<p>Las operaciones de GOTV también exigen que la plataforma tome decisiones de asignación de recursos en tiempo real: mover a quienes tocan puertas de zonas de alta participación a zonas de baja participación, enrutar las solicitudes de transporte a los conductores cercanos y manejar las oleadas de comunicación hacia los simpatizantes que todavía no han votado.</p>
+<h2 id="decisión" tabindex="-1"><a class="heading-anchor" href="#decisión" aria-hidden="true">#</a> Decisión</h2>
+<h3 id="constructor-automático-del-universo-gotv" tabindex="-1"><a class="heading-anchor" href="#constructor-automático-del-universo-gotv" aria-hidden="true">#</a> Constructor automático del universo GOTV</h3>
+<p>La plataforma genera el universo GOTV automáticamente a partir de criterios configurables: umbrales de puntaje de apoyo, filtros de historial de voto, filtros geográficos. El equipo de campaña revisa, ajusta segmentos, añade o quita votantes y lo cierra. Esto reduce el trabajo manual de armar la lista objetivo y da consistencia, sin quitarle a las personas el control del universo final.</p>
+<p>Los datos de participación electoral (voto adelantado, reportes de quienes tocan puertas, confirmaciones de las jornadas de llamadas, autorreportes de votantes) retroalimentan el universo con confirmaciones ponderadas por confianza: los datos oficiales de la elección sacan al votante de las listas de contacto por completo, mientras que los reportes de campo y de llamadas lo despriorizan sin sacarlo del todo (porque tienen menos certeza).</p>
+<p><strong>Alternativas consideradas:</strong> Armar el universo de forma totalmente manual se descartó porque es propenso a errores a escala y gasta tiempo del equipo en trabajo mecánico. Automatizarlo sin revisión se descartó porque el equipo de campaña entiende matices políticos que el algoritmo no capta.</p>
+<h3 id="integración-de-datos-electorales-lista-para-api-pero-manual-primero" tabindex="-1"><a class="heading-anchor" href="#integración-de-datos-electorales-lista-para-api-pero-manual-primero" aria-hidden="true">#</a> Integración de datos electorales lista para API, pero manual primero</h3>
+<p>Los puntos de integración con las comisiones electorales se diseñan como puntos de conexión para adaptadores, pero todos los países arrancan con flujos de trabajo manuales (subida y descarga de archivos). Las integraciones por API se construyen solo cuando un piloto concreto lo exige. Las API de las comisiones electorales son escasas, poco confiables y varían muchísimo de un país a otro: trabajar en una API por especulación sería trabajo perdido.</p>
+<p>Los datos de voto adelantado y voto ausente siguen el mismo patrón: flujos en tiempo real donde la jurisdicción los ofrece, subida manual como alternativa de reserva universal.</p>
+<h3 id="oleadas-de-comunicación-gotv-configurables" tabindex="-1"><a class="heading-anchor" href="#oleadas-de-comunicación-gotv-configurables" aria-hidden="true">#</a> Oleadas de comunicación GOTV configurables</h3>
+<p>La secuencia de comunicación del día de elecciones (recordatorio de la mañana, seguimiento del mediodía, empuje de la tarde, empuje final) se configura de forma independiente en cada oleada: cada una puede ir totalmente automatizada o dispararse a mano. Los recordatorios de la mañana pueden enviarse solos, mientras que el empuje final puede esperar a que el equipo revise los datos de participación en tiempo real antes de dispararse.</p>
+<p><strong>Alternativas consideradas:</strong> Automatizar todas las oleadas se descartó porque la decisión del empuje final depende de un contexto en tiempo real que solo el equipo del centro de mando puede evaluar. Hacerlas todas a mano se descartó porque los recordatorios de la mañana son rutina y no deberían requerir intervención humana.</p>
+<h3 id="el-modo-de-campo-se-muestra-a-tamaño-de-celular-en-dispositivos-más-grandes" tabindex="-1"><a class="heading-anchor" href="#el-modo-de-campo-se-muestra-a-tamaño-de-celular-en-dispositivos-más-grandes" aria-hidden="true">#</a> El modo de campo se muestra a tamaño de celular en dispositivos más grandes</h3>
+<p>El modo de campo se apodera de toda la pantalla y reemplaza por completo la navegación normal: sin barra lateral, sin pestañas, sin notificaciones ajenas. El mundo del voluntario es la lista de recorrido hasta que termina el turno. En tabletas o computadoras de escritorio, el modo de campo se sigue mostrando con dimensiones de celular para mantener la interfaz de una sola mano, optimizada para caminar. Las tabletas y computadoras que entran a operaciones de campo se redirigen a la vista de gestión.</p>
+<p>El ciclo de vida del turno es un límite de eventos de pleno derecho: iniciar el turno descarga los datos → modo de campo activo → terminar el turno dispara la sincronización + el balance del turno + el registro de horas + la liberación del territorio → regreso al marco normal. La recuperación tras un fallo muestra la última posición y permite retomar.</p>
+<h3 id="áreas-táctiles-de-44px-por-defecto-48px-en-modo-de-campo" tabindex="-1"><a class="heading-anchor" href="#áreas-táctiles-de-44px-por-defecto-48px-en-modo-de-campo" aria-hidden="true">#</a> Áreas táctiles de 44px por defecto, 48px en modo de campo</h3>
+<p>Las áreas táctiles predeterminadas son de 44px como mínimo (WCAG 2.1 AAA). El modo de campo sube a 56px como mínimo para tener en cuenta que se camina, que se usa una sola mano, que hay poca luz y que a veces se llevan guantes. Las casillas de problemas en los formularios de observación electoral usan áreas táctiles de 44px. «No estaba» avanza solo después de 3 segundos para reducir el tiempo entre puertas.</p>
+<!-- REVISIT: El encabezado dice 48px y el cuerpo dice 56px. La incoherencia viene del original en inglés y se conserva a propósito; no la armonices aquí ni en el inglés sin decidir primero cuál es la cifra correcta. -->
+<p>La reasignación dinámica de recursos el día de elecciones funciona con sugerencias automáticas y aprobación humana: la plataforma analiza los datos de participación en tiempo real y muestra recomendaciones de reasignación («Precinto 7 con 35% de participación: considera mover gente que toca puertas desde el Precinto 12, que va en 78%»). El equipo del centro de mando aprueba, rechaza o modifica cada sugerencia.</p>
+<h2 id="consecuencias" tabindex="-1"><a class="heading-anchor" href="#consecuencias" aria-hidden="true">#</a> Consecuencias</h2>
+<p><strong>Beneficios:</strong></p>
+<ul>
+<li>El constructor automático del universo escala a campañas con cientos de miles de votantes objetivo</li>
+<li>La integración de datos electorales manual primero evita trabajo perdido en API poco confiables y deja la arquitectura lista para automatizar más adelante</li>
+<li>Las oleadas de comunicación configurables equilibran la eficiencia de la automatización con el criterio humano en las decisiones de más peso</li>
+<li>Que el modo de campo se apodere de toda la pantalla elimina distracciones y asegura que se pueda usar en condiciones físicas difíciles</li>
+<li>Las áreas táctiles más grandes del modo de campo reducen errores al caminar y al usar una sola mano</li>
+</ul>
+<p><strong>Costos:</strong></p>
+<ul>
+<li>El modo de campo es, en la práctica, un marco de aplicación aparte, con su propio diseño, sus propias pruebas y su propio mantenimiento</li>
+<li>El constructor del universo GOTV hay que afinarlo país por país (cambian los datos de historial de voto y los modelos de puntaje de apoyo)</li>
+<li>La prioridad de sincronización del día de elecciones y el motor de reasignación imponen requisitos de infraestructura en tiempo real considerables</li>
+<li>El modo de campo en tabletas y computadoras, con una interfaz a tamaño de celular, no es lo ideal para quien quiere aprovechar una pantalla grande en el campo</li>
+</ul>
+<p><strong>Restricciones:</strong></p>
+<ul>
+<li>El modo de campo tiene que funcionar por completo sin conexión (ver <a href="./005-offline-first-sync.html">ADR-005</a>)</li>
+<li>Los datos de la lista de recorrido tienen que poder descargarse por adelantado dentro de límites razonables de ancho de banda y almacenamiento</li>
+<li>El intervalo de sincronización del día de elecciones baja a casi tiempo real (cada 30 segundos): la infraestructura tiene que aguantarlo con la carga máxima de voluntarios</li>
+<li>Las sugerencias de reasignación tienen que actualizarse dentro de los 30 segundos siguientes a cualquier cambio en los datos de participación</li>
+</ul>
+<p><strong>ADR relacionados:</strong> <a href="./005-offline-first-sync.html">ADR-005</a> (operaciones de campo con prioridad sin conexión), <a href="./011-design-system-ux.html">ADR-011</a> (áreas táctiles, espaciado, presupuestos de rendimiento), <a href="./013-analytics-ai.html">ADR-013</a> (analítica en tiempo real para los paneles del día de elecciones)</p>
+
+    </article>
+  </main>
+  <div class="toc-rail"><nav class="toc" aria-label="En esta página"><div class="toc-label">En esta página</div><ul><li class="toc-2"><a href="#contexto"># Contexto</a></li><li class="toc-2"><a href="#decisión"># Decisión</a></li><li class="toc-3"><a href="#constructor-automático-del-universo-gotv"># Constructor automático del universo GOTV</a></li><li class="toc-3"><a href="#integración-de-datos-electorales-lista-para-api-pero-manual-primero"># Integración de datos electorales lista para API, pero manual primero</a></li><li class="toc-3"><a href="#oleadas-de-comunicación-gotv-configurables"># Oleadas de comunicación GOTV configurables</a></li><li class="toc-3"><a href="#el-modo-de-campo-se-muestra-a-tamaño-de-celular-en-dispositivos-más-grandes"># El modo de campo se muestra a tamaño de celular en dispositivos más grandes</a></li><li class="toc-3"><a href="#áreas-táctiles-de-44px-por-defecto-48px-en-modo-de-campo"># Áreas táctiles de 44px por defecto, 48px en modo de campo</a></li><li class="toc-2"><a href="#consecuencias"># Consecuencias</a></li></ul></nav></div>
+</div>
+<script src="../../assets/search.js" defer></script>
+<script src="../../assets/app.js" defer></script>
+</body>
+</html>

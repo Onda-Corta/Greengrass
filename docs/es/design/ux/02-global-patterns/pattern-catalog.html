@@ -1,0 +1,776 @@
+<!DOCTYPE html>
+<html lang="es" data-base="../../../../" data-no-results="No hay resultados para">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Catálogo de patrones · GreenGrass</title>
+<meta name="description" content="Catálogo de patrones — Documentación de especificación y diseño de GreenGrass.">
+<link rel="alternate" hreflang="en" href="../../../../design/ux/02-global-patterns/pattern-catalog.html">
+<link rel="alternate" hreflang="es" href="./pattern-catalog.html">
+<link rel="alternate" hreflang="x-default" href="../../../../design/ux/02-global-patterns/pattern-catalog.html">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%232563eb'/%3E%3Cstop offset='1' stop-color='%2316a34a'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='32' height='32' rx='7' fill='url(%23g)'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="../../../../assets/styles.css">
+</head>
+<body>
+<a class="skip-link" href="#content">Saltar al contenido</a>
+<header class="site-header">
+  <button type="button" class="menu-toggle" aria-label="Alternar navegación" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+  <a class="brand" href="../../../../es/index.html">
+    <span class="brand-mark" aria-hidden="true"></span>
+    <span class="brand-text"><strong>GreenGrass</strong><small>Especificación y diseño</small></span>
+  </a>
+  <div class="search">
+    <input type="search" id="search-input" placeholder="Buscar en la documentación…" autocomplete="off" aria-label="Buscar en la documentación">
+    <div id="search-results" class="search-results" hidden></div>
+  </div>
+  <nav class="lang-switch" aria-label="Idioma"><a class="lang-opt" href="../../../../design/ux/02-global-patterns/pattern-catalog.html" hreflang="en" lang="en" title="View this page in English">EN</a><span class="lang-opt active" aria-current="true">ES</span></nav>
+  <button type="button" class="theme-toggle" aria-label="Alternar modo oscuro" title="Alternar modo oscuro">
+    <span class="theme-icon" aria-hidden="true"></span>
+  </button>
+</header>
+<div class="layout">
+  <div class="sidebar-backdrop" hidden></div>
+  <aside class="sidebar" aria-label="Navegación de la documentación">
+    <nav class="nav">
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">Inicio<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../../../index.html">GreenGrass</a></li></ul></div>
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">Especificaciones<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../../../spec/product.html">Proyecto: GreenGrass</a></li><li><a href="../../../spec/mvp.html">MVP de GreenGrass — plan de producto</a></li><li><a href="../../../spec/users.html">Usuarios y roles</a></li><li><a href="../../../spec/workflows.html">Flujos de trabajo principales</a></li><li><a href="../../../spec/geography.html">Geografía objetivo</a></li><li><a href="../../../spec/security.html">Seguridad y modelo de amenazas</a></li><li><a href="../../../spec/compliance.html">Cumplimiento y marco legal</a></li><li><a href="../../../spec/fundraising.html">Recaudación de fondos e infraestructura de pagos</a></li><li><a href="../../../spec/integrations.html">Integraciones externas</a></li><li><a href="../../../spec/support.html">Soporte y puesta en marcha de organizaciones</a></li><li><a href="../../../spec/gotv.html">GOTV y operaciones del día de elecciones</a></li><li><a href="../../../spec/messaging.html">Comunicaciones internas y notificaciones</a></li><li><a href="../../../spec/press.html">Prensa, medios y comunicaciones públicas</a></li><li><a href="../../../spec/comms-intelligence.html">Inteligencia de comunicaciones — hoja de ruta post-MVP</a></li></ul></div>
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">Arquitectura<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../../architecture/system.html">Arquitectura del sistema</a></li></ul></div>
+<div class="nav-section open"><button type="button" class="nav-section-title" aria-expanded="true">Diseño UX<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../00-overview.html">Resumen del diseño de UX</a></li><li><a href="../01-information-architecture/navigation-model.html">Modelo de navegación</a></li><li><a href="../01-information-architecture/screen-inventory.html">Inventario de pantallas</a></li><li><a href="../01-information-architecture/persona-views.html">Vistas por arquetipo</a></li><li><a href="../01-information-architecture/url-structure.html">Estructura de URL</a></li><li><a href="./pattern-catalog.html" aria-current="page" class="active">Catálogo de patrones</a></li><li><a href="./offline-sync-patterns.html">Patrones sin conexión y de sincronización</a></li><li><a href="./notification-patterns.html">Patrones de notificaciones</a></li><li><a href="./search-patterns.html">Patrones de búsqueda</a></li><li><a href="./settings-help-patterns.html">Patrones de ajustes y ayuda</a></li><li><a href="./security-ux-patterns.html">Patrones de UX de seguridad</a></li><li><a href="../03-design-system/foundations.html">Fundamentos del sistema de diseño</a></li><li><a href="../03-design-system/theming-strategy.html">Estrategia de temas</a></li><li><a href="../03-design-system/component-inventory.html">Inventario de componentes</a></li><li><a href="../03-design-system/responsive-strategy.html">Estrategia de diseño adaptable</a></li></ul></div>
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">Decisiones<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../../../decisions/001-platform-architecture.html">ADR-001: Arquitectura y despliegue de la plataforma</a></li><li><a href="../../../decisions/002-security-threat-model.html">ADR-002: Seguridad y modelo de amenazas</a></li><li><a href="../../../decisions/003-identity-access-organization.html">ADR-003: Identidad, acceso y organización</a></li><li><a href="../../../decisions/004-data-model-integrity.html">ADR-004: Modelo de datos e integridad</a></li><li><a href="../../../decisions/005-offline-first-sync.html">ADR-005: Prioridad sin conexión y sincronización</a></li><li><a href="../../../decisions/006-field-operations-gotv.html">ADR-006: Operaciones de campo y GOTV</a></li><li><a href="../../../decisions/007-fundraising-payments.html">ADR-007: Recaudación de fondos y pagos</a></li><li><a href="../../../decisions/008-communications-messaging.html">ADR-008: Comunicaciones y mensajería</a></li><li><a href="../../../decisions/009-compliance-legal.html">ADR-009: Cumplimiento y marco legal</a></li><li><a href="../../../decisions/010-internationalization-localization.html">ADR-010: Internacionalización y localización</a></li><li><a href="../../../decisions/011-design-system-ux.html">ADR-011: Sistema de diseño y fundamentos de UX</a></li><li><a href="../../../decisions/012-external-integrations.html">ADR-012: Integraciones externas</a></li><li><a href="../../../decisions/013-analytics-ai.html">ADR-013: Analítica e IA</a></li><li><a href="../../../decisions/014-volunteer-onboarding.html">ADR-014: Voluntariado e incorporación</a></li><li><a href="../../../decisions/015-product-scope.html">ADR-015: Límites del alcance del producto</a></li><li><a href="../../../decisions/016-cross-cutting-resolutions.html">ADR-016: Resoluciones transversales</a></li><li><a href="../../../decisions/017-sharing-contract-trust-model.html">ADR-017: El contrato de intercambio como primitiva universal de confianza</a></li><li><a href="../../../decisions/ux-decisions.html">Decisiones de UX — fase de wireframes</a></li></ul></div>
+    </nav>
+  </aside>
+  <main id="content" class="content">
+    <nav class="breadcrumb" aria-label="Ruta de navegación">Diseño UX</nav>
+    <article class="prose">
+<h1 id="catálogo-de-patrones" tabindex="-1"><a class="heading-anchor" href="#catálogo-de-patrones" aria-hidden="true">#</a> Catálogo de patrones</h1>
+<h2 id="propósito" tabindex="-1"><a class="heading-anchor" href="#propósito" aria-hidden="true">#</a> Propósito</h2>
+<p>Este documento inventaría los patrones de interfaz que se repiten en GreenGrass. Cada patrón es un modelo de interacción reutilizable que aparece en varias pantallas y áreas funcionales. Definirlos aquí garantiza la coherencia: el mismo patrón debe verse y comportarse igual en todos los lugares donde aparece.</p>
+<p>Este catálogo es la referencia para el diseño de componentes (fase 3) y para los wireframes (fase 4). Los patrones que necesitan una especificación profunda (sincronización sin conexión, notificaciones, búsqueda, seguridad) tienen su propio documento en este directorio.</p>
+<h2 id="resumen-de-patrones" tabindex="-1"><a class="heading-anchor" href="#resumen-de-patrones" aria-hidden="true">#</a> Resumen de patrones</h2>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Patrón</th>
+<th>Cantidad de pantallas</th>
+<th>Sin conexión</th>
+<th>Prioridad móvil</th>
+<th>Arquetipos clave</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Vista de lista</td>
+<td>~23</td>
+<td>Parcial</td>
+<td>Algunas</td>
+<td>Todo el personal</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Vista de detalle</td>
+<td>~14</td>
+<td>Parcial</td>
+<td>Algunas</td>
+<td>Todo el personal</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Formulario de creación/edición</td>
+<td>~29</td>
+<td>No</td>
+<td>Pocas</td>
+<td>Personal que crea contenido</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Interfaz de constructor</td>
+<td>~8</td>
+<td>No</td>
+<td>No</td>
+<td>Personal que crea contenido</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Flujo de asistente</td>
+<td>8</td>
+<td>No</td>
+<td>2</td>
+<td>OA, V</td>
+</tr>
+<tr>
+<td>6</td>
+<td>Panel</td>
+<td>~21</td>
+<td>No</td>
+<td>Algunas</td>
+<td>Todo el personal, C</td>
+</tr>
+<tr>
+<td>7</td>
+<td>Interfaz de mapa</td>
+<td>6</td>
+<td>1</td>
+<td>1</td>
+<td>OA, FiD, V, TL</td>
+</tr>
+<tr>
+<td>8</td>
+<td>Calendario/programación</td>
+<td>~4</td>
+<td>No</td>
+<td>Algunas</td>
+<td>OA, VC, CD</td>
+</tr>
+<tr>
+<td>9</td>
+<td>Redactor</td>
+<td>~5</td>
+<td>No</td>
+<td>Algunas</td>
+<td>OA, CD, FiD</td>
+</tr>
+<tr>
+<td>10</td>
+<td>Cola de aprobaciones</td>
+<td>~3</td>
+<td>No</td>
+<td>1</td>
+<td>C, CD, FD</td>
+</tr>
+<tr>
+<td>11</td>
+<td>Cola de revisión</td>
+<td>~5</td>
+<td>Parcial</td>
+<td>1</td>
+<td>OA, DM, FiD</td>
+</tr>
+<tr>
+<td>12</td>
+<td>Herramienta de registro de entrada</td>
+<td>4</td>
+<td>Sí</td>
+<td>Todas</td>
+<td>VC, TL, V</td>
+</tr>
+<tr>
+<td>13</td>
+<td>Flujo/kanban</td>
+<td>1</td>
+<td>No</td>
+<td>No</td>
+<td>OA, CD</td>
+</tr>
+<tr>
+<td>14</td>
+<td>Flujo de importación/exportación</td>
+<td>5</td>
+<td>No</td>
+<td>No</td>
+<td>OA, DM</td>
+</tr>
+<tr>
+<td>15</td>
+<td>Panel de configuración</td>
+<td>~16</td>
+<td>No</td>
+<td>No</td>
+<td>OA</td>
+</tr>
+<tr>
+<td>16</td>
+<td>Comparación lado a lado</td>
+<td>~3</td>
+<td>No</td>
+<td>No</td>
+<td>OA, DM</td>
+</tr>
+<tr>
+<td>17</td>
+<td>Vista dividida / panel de detalle</td>
+<td>~6</td>
+<td>Parcial</td>
+<td>No</td>
+<td>Todo el personal</td>
+</tr>
+<tr>
+<td>18</td>
+<td>Modo de campo (pantalla completa)</td>
+<td>~16</td>
+<td>Sí</td>
+<td>Todas</td>
+<td>V, TL</td>
+</tr>
+<tr>
+<td>19</td>
+<td>Panel en tiempo real</td>
+<td>~3</td>
+<td>No</td>
+<td>Algunas</td>
+<td>OA, FiD</td>
+</tr>
+<tr>
+<td>20</td>
+<td>Hilo contextual</td>
+<td>~4</td>
+<td>Parcial</td>
+<td>Sí</td>
+<td>Todo el personal</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="1-vista-de-lista" tabindex="-1"><a class="heading-anchor" href="#1-vista-de-lista" aria-hidden="true">#</a> 1. Vista de lista</h2>
+<p>El patrón más común de la plataforma. Una colección de registros que se puede filtrar, ordenar y buscar.</p>
+<h3 id="dónde-aparece" tabindex="-1"><a class="heading-anchor" href="#dónde-aparece" aria-hidden="true">#</a> Dónde aparece</h3>
+<p>Contactos (CRM-001), Segmentos (CRM-005), Historial de importaciones (CRM-012), Campañas de trabajo de campo (CANV-001), Listas de recorrido (CANV-006), Campañas de jornada de llamadas (PHONE-001), Jornadas de inscripción de votantes (VREG-001), Donaciones (FUND-001), Campañas de recaudación (FUND-018), Campañas de correo (COMM-001), Plantillas de correo (COMM-004), Eventos (EVT-001), Campañas de activismo (ACT-001), Contactos de medios (PRESS-001), Listas de medios (PRESS-003), Registro de cobertura (PRESS-010), Puntos de mensaje (PRESS-014), Bandeja de mensajes (MSG-001), Lista del personal (SET-004), Miembros de la alianza (ALLY-002), Problemas de observadores electorales (GOTV-016).</p>
+<h3 id="anatomía" tabindex="-1"><a class="heading-anchor" href="#anatomía" aria-hidden="true">#</a> Anatomía</h3>
+<pre><code>┌──────────────────────────────────────────────────────────┐
+│  [Buscar...]        [Filtrar ▾]  [Ordenar ▾]  [+ Nuevo]  │  ← Barra de acciones
+├──────────────────────────────────────────────────────────┤
+│  ☐  Nombre           Estado      Fecha        Acciones   │  ← Encabezados de columna
+├──────────────────────────────────────────────────────────┤
+│  ☐  Registro 1       Activo      15 ene       ⋯          │
+│  ☐  Registro 2       Borrador    14 ene       ⋯          │
+│  ☐  Registro 3       Activo      13 ene       ⋯          │
+│  ...                                                     │
+├──────────────────────────────────────────────────────────┤
+│  ◀  Página 1 de 12  ▶        Mostrando 1-25 de 287       │  ← Paginación
+└──────────────────────────────────────────────────────────┘
+</code></pre>
+<h3 id="comportamientos" tabindex="-1"><a class="heading-anchor" href="#comportamientos" aria-hidden="true">#</a> Comportamientos</h3>
+<ul>
+<li><strong>Búsqueda</strong> — búsqueda de texto sobre los campos clave (nombre, correo, título), con retardo entre pulsaciones. Se resuelve en el servidor.</li>
+<li><strong>Filtros</strong> — según el tipo de lista. Los filtros activos se muestran como chips encima de la lista. &quot;Limpiar todo&quot; los reinicia.</li>
+<li><strong>Orden</strong> — se ordena al hacer clic en el encabezado de columna. Alterna entre ascendente y descendente. El orden por defecto varía según la lista (lo más reciente primero para la actividad, alfabético para los contactos).</li>
+<li><strong>Acciones masivas</strong> — se seleccionan varias filas con las casillas. Aparece una barra de acciones masivas arriba (borrar, exportar, etiquetar, asignar). Limitada a operaciones seguras.</li>
+<li><strong>Acciones de fila</strong> — menú de desbordamiento (⋯) en cada fila para acciones rápidas (editar, duplicar, borrar, archivar).</li>
+<li><strong>Clic en la fila</strong> — lleva a la vista de detalle. En escritorio con panel de detalle, se abre en el panel derecho. En móvil, lleva a una vista de detalle a pantalla completa.</li>
+<li><strong>Estado vacío</strong> — cuando la lista no tiene registros, muestra un mensaje según el perfil (&quot;Crea tu primera campaña de trabajo de campo&quot; para un Director de campo, &quot;Importa tu padrón electoral&quot; para un Gestor de datos).</li>
+<li><strong>Carga</strong> — filas de esqueleto de carga (no un indicador de carga) mientras llegan los datos.</li>
+<li><strong>Paginación</strong> — paginación en el servidor. 25 filas por defecto. Se puede cambiar a 50 o 100. Desplazamiento infinito en móvil.</li>
+</ul>
+<h3 id="variante-móvil" tabindex="-1"><a class="heading-anchor" href="#variante-móvil" aria-hidden="true">#</a> Variante móvil</h3>
+<p>En móvil, la vista de lista se convierte en una lista vertical de tarjetas:</p>
+<ul>
+<li>Sin columnas de tabla: cada registro es una tarjeta con la información clave apilada en vertical</li>
+<li>Búsqueda y filtro accesibles desde los iconos de la barra superior</li>
+<li>Acciones al deslizar sobre las tarjetas (archivar, borrar) cuando corresponde</li>
+<li>Deslizar para actualizar</li>
+<li>Desplazamiento infinito en vez de paginación</li>
+</ul>
+<h3 id="variante-sin-conexión" tabindex="-1"><a class="heading-anchor" href="#variante-sin-conexión" aria-hidden="true">#</a> Variante sin conexión</h3>
+<p>La mayoría de las listas necesitan conectividad. Excepción: la bandeja de mensajes (MSG-001) muestra las conversaciones en caché cuando no hay conexión, con un banner que advierte que la lista puede no estar al día.</p>
+<hr>
+<h2 id="2-vista-de-detalle" tabindex="-1"><a class="heading-anchor" href="#2-vista-de-detalle" aria-hidden="true">#</a> 2. Vista de detalle</h2>
+<p>Una vista completa de un solo registro, con todos sus campos, los registros relacionados, el historial y las acciones disponibles.</p>
+<h3 id="dónde-aparece-1" tabindex="-1"><a class="heading-anchor" href="#dónde-aparece-1" aria-hidden="true">#</a> Dónde aparece</h3>
+<p>Detalle del contacto (CRM-002), Detalle de la donación (FUND-002), Detalle del evento (EVT-003), Detalle del contacto de medios (PRESS-002), Detalle del respaldo (PRESS-013), Vista de conversación (MSG-002/003), Perfil del simpatizante (SUP-006), Resultados del trabajo de campo (CANV-013).</p>
+<h3 id="anatomía-1" tabindex="-1"><a class="heading-anchor" href="#anatomía-1" aria-hidden="true">#</a> Anatomía</h3>
+<pre><code>┌────────────────────────────────────────────────────────────┐
+│  ← Volver   Nombre del registro          [Editar] [⋯]      │  ← Encabezado
+├────────────────────────────────────────────────────────────┤
+│  ┌───────────────────────┐  ┌─────────────────────────┐    │
+│  │ Información clave     │  │ Estado / etiquetas      │    │
+│  │ (nombre, tipo, fecha) │  │ (activo, marcado, etc.) │    │
+│  └───────────────────────┘  └─────────────────────────┘    │
+├────────────────────────────────────────────────────────────┤
+│  [General] [Actividad] [Relacionados] [Notas]              │  ← Pestañas
+├────────────────────────────────────────────────────────────┤
+│                                                            │
+│  Contenido de la pestaña (campos, cronología, registros)   │
+│                                                            │
+└────────────────────────────────────────────────────────────┘
+</code></pre>
+<h3 id="comportamientos-1" tabindex="-1"><a class="heading-anchor" href="#comportamientos-1" aria-hidden="true">#</a> Comportamientos</h3>
+<ul>
+<li><strong>Encabezado</strong> — nombre o título del registro, estado principal, botón de editar, menú de desbordamiento (borrar, duplicar, fusionar, exportar).</li>
+<li><strong>Pestañas</strong> — organizan la información relacionada sin abrumar. Pestañas habituales: General (campos principales), Actividad (cronología de interacciones), Relacionados (registros enlazados: las donaciones, los eventos y las comunicaciones de un contacto), Notas (notas libres).</li>
+<li><strong>Acción de editar</strong> — lleva al formulario de edición (o habilita la edición en línea para los campos simples).</li>
+<li><strong>Registros relacionados</strong> — se muestran como minilistas dentro de las pestañas. Al hacer clic en uno se va a su vista de detalle.</li>
+<li><strong>Cronología de actividad</strong> — flujo cronológico de todas las interacciones con este registro (correos enviados, donaciones recibidas, eventos a los que asistió, notas añadidas, cambios de estado). Cada entrada enlaza a su origen.</li>
+</ul>
+<h3 id="variante-móvil-1" tabindex="-1"><a class="heading-anchor" href="#variante-móvil-1" aria-hidden="true">#</a> Variante móvil</h3>
+<ul>
+<li>Vista a pantalla completa. El botón de volver regresa a la lista.</li>
+<li>Las pestañas se convierten en una barra horizontal desplazable o en secciones plegables.</li>
+<li>La tarjeta de información clave queda fija arriba al desplazarse.</li>
+</ul>
+<h3 id="escritorio-con-panel-de-detalle" tabindex="-1"><a class="heading-anchor" href="#escritorio-con-panel-de-detalle" aria-hidden="true">#</a> Escritorio con panel de detalle</h3>
+<p>En escritorio, las vistas de detalle pueden abrirse en el panel derecho (vista dividida) mientras la lista sigue visible a la izquierda. La persona usuaria puede moverse entre registros de la lista sin perder el contexto del panel de detalle. El panel se puede cerrar o expandir a pantalla completa.</p>
+<hr>
+<h2 id="3-formulario-de-creaciónedición" tabindex="-1"><a class="heading-anchor" href="#3-formulario-de-creaciónedición" aria-hidden="true">#</a> 3. Formulario de creación/edición</h2>
+<p>Entrada estructurada de datos para crear o modificar registros. El patrón más variado: los formularios van desde la creación de un contacto con 3 campos hasta la configuración de una campaña con más de 20.</p>
+<h3 id="dónde-aparece-2" tabindex="-1"><a class="heading-anchor" href="#dónde-aparece-2" aria-hidden="true">#</a> Dónde aparece</h3>
+<p>Crear/editar contacto (CRM-003), Crear/editar campaña (CANV-002, PHONE-002, VREG-002, FUND-019), Crear/editar evento (EVT-002), Crear/editar grupo (MSG-005), Procesamiento de reembolsos (FUND-009), Gestión de promesas de donación (FUND-008) y muchos más: unas 29 pantallas.</p>
+<h3 id="anatomía-2" tabindex="-1"><a class="heading-anchor" href="#anatomía-2" aria-hidden="true">#</a> Anatomía</h3>
+<pre><code>┌──────────────────────────────────────────────────────────────┐
+│  ← Volver   Crear [tipo de registro]   [Guardar] [Cancelar]  │  ← Encabezado
+├──────────────────────────────────────────────────────────────┤
+│                                                              │
+│  Sección: Información básica                         [▾]     │
+│  ┌────────────────────────────────────────────────────────┐  │
+│  │ Rótulo del campo *        [valor introducido  ]        │  │
+│  │ Rótulo del campo          [valor introducido  ]        │  │
+│  │ Rótulo del campo *        [desplegable ▾      ]        │  │
+│  └────────────────────────────────────────────────────────┘  │
+│                                                              │
+│  Sección: Detalles adicionales                       [▸]     │  ← Plegada
+│                                                              │
+│  Sección: Ajustes                                    [▸]     │  ← Plegada
+│                                                              │
+├──────────────────────────────────────────────────────────────┤
+│  [Cancelar]                                       [Guardar]  │  ← Pie fijo
+└──────────────────────────────────────────────────────────────┘
+</code></pre>
+<h3 id="comportamientos-2" tabindex="-1"><a class="heading-anchor" href="#comportamientos-2" aria-hidden="true">#</a> Comportamientos</h3>
+<ul>
+<li><strong>Revelación progresiva</strong> — los campos se organizan en secciones plegables. Los campos obligatorios se ven por defecto; los opcionales y avanzados quedan en secciones plegadas. Reduce la carga cognitiva en los casos simples.</li>
+<li><strong>Validación</strong> — validación en línea al salir del campo (no en cada pulsación). Los mensajes de error aparecen debajo del campo. Los campos obligatorios llevan asterisco. Validación de todo el formulario al enviar, si pasan las verificaciones en línea.</li>
+<li><strong>Guardado automático</strong> — en los formularios complejos (creación de campañas, configuración de eventos) se guarda un borrador cada 30 segundos. Los borradores se ven en la lista superior con el distintivo de estado &quot;Borrador&quot;.</li>
+<li><strong>Guardar/cancelar fijos</strong> — los botones de acción quedan pegados al borde inferior del viewport (el área visible de la pantalla) para que estén siempre a mano en los formularios largos.</li>
+<li><strong>Cambios sin guardar</strong> — si se sale del formulario con cambios pendientes, aparece un diálogo de confirmación (&quot;Tienes cambios sin guardar. ¿Descartarlos?&quot;).</li>
+<li><strong>Texto de ayuda</strong> — una explicación breve debajo de los campos complejos. En los campos sensibles para el cumplimiento, se incluye una ayuda desplegable de &quot;¿Por qué se requiere esto?&quot;.</li>
+</ul>
+<h3 id="variante-móvil-2" tabindex="-1"><a class="heading-anchor" href="#variante-móvil-2" aria-hidden="true">#</a> Variante móvil</h3>
+<ul>
+<li>Formulario a pantalla completa. Las secciones se apilan en vertical.</li>
+<li>Campos de entrada grandes, con el teclado móvil adecuado (numérico para el teléfono, de correo para el correo).</li>
+<li>Botón de guardar fijo al pie de la pantalla.</li>
+<li>Las secciones plegadas muestran una vista previa de su contenido (el valor del primer campo).</li>
+</ul>
+<hr>
+<h2 id="4-interfaz-de-constructor" tabindex="-1"><a class="heading-anchor" href="#4-interfaz-de-constructor" aria-hidden="true">#</a> 4. Interfaz de constructor</h2>
+<p>Editores visuales e interactivos para componer contenido estructurado complejo. Son las herramientas de mayor potencia de la plataforma, y su complejidad justifica un diseño solo para escritorio.</p>
+<h3 id="subtipos" tabindex="-1"><a class="heading-anchor" href="#subtipos" aria-hidden="true">#</a> Subtipos</h3>
+<h4 id="constructor-de-correos-comm-002-comm-003" tabindex="-1"><a class="heading-anchor" href="#constructor-de-correos-comm-002-comm-003" aria-hidden="true">#</a> Constructor de correos (COMM-002, COMM-003)</h4>
+<p>Editor visual por bloques. Bloques de contenido que se arrastran y sueltan (texto, imagen, botón, separador, columnas). Inserción de tokens de personalización (<code>{{first_name}}</code>, <code>{{donation_amount}}</code>). Interruptor de vista previa móvil. El aviso legal de cumplimiento se inserta solo, según la jurisdicción.</p>
+<h4 id="constructor-de-guiones-canv-003-phone-003" tabindex="-1"><a class="heading-anchor" href="#constructor-de-guiones-canv-003-phone-003" aria-hidden="true">#</a> Constructor de guiones (CANV-003, PHONE-003)</h4>
+<p>Editor de lógica ramificada. Pregunta → opciones de respuesta → pregunta siguiente condicional. Diagrama visual del flujo con las ramas. Modo de prueba para recorrer el guion tal como lo viviría un voluntario.</p>
+<h4 id="constructor-de-segmentos-crm-004" tabindex="-1"><a class="heading-anchor" href="#constructor-de-segmentos-crm-004" aria-hidden="true">#</a> Constructor de segmentos (CRM-004)</h4>
+<p>Constructor de consultas por criterios. Se añaden criterios (campo, operador, valor) y se combinan con lógica Y/O. El recuento de registros que coinciden se actualiza en tiempo real a medida que cambian los criterios. Se guarda como segmento reutilizable.</p>
+<h4 id="constructor-de-formularios-de-donación-fund-003" tabindex="-1"><a class="heading-anchor" href="#constructor-de-formularios-de-donación-fund-003" aria-hidden="true">#</a> Constructor de formularios de donación (FUND-003)</h4>
+<p>Editor de la disposición del formulario. Configura montos sugeridos, métodos de pago, opciones recurrentes, campos personalizados, identidad visual y avisos legales de cumplimiento. Vista previa en vivo del formulario público de donación.</p>
+<h4 id="constructor-de-encuestas-evt-010" tabindex="-1"><a class="heading-anchor" href="#constructor-de-encuestas-evt-010" aria-hidden="true">#</a> Constructor de encuestas (EVT-010)</h4>
+<p>Editor de preguntas. Se añaden preguntas (opción múltiple, abiertas, escala de valoración, NPS). Reordenamiento arrastrando. Reglas de visualización condicional. Modo de vista previa.</p>
+<h3 id="comportamientos-comunes" tabindex="-1"><a class="heading-anchor" href="#comportamientos-comunes" aria-hidden="true">#</a> Comportamientos comunes</h3>
+<ul>
+<li><strong>Vista previa en vivo</strong> — todos los constructores muestran el resultado en tiempo real. En los de correo y formularios de donación, con interruptor de vista previa móvil.</li>
+<li><strong>Biblioteca de plantillas</strong> — se empieza desde una plantilla o en blanco. El trabajo actual se puede guardar como plantilla nueva.</li>
+<li><strong>Deshacer/rehacer</strong> — imprescindible para la edición compleja. Atajos de teclado (Ctrl+Z/Ctrl+Y).</li>
+<li><strong>Historial de versiones</strong> — versiones guardadas automáticamente. Se puede restaurar una anterior.</li>
+<li><strong>Solo en escritorio</strong> — los constructores necesitan pantallas anchas para el lienzo de edición más el panel de vista previa. No están disponibles en móvil.</li>
+</ul>
+<hr>
+<h2 id="5-flujo-de-asistente" tabindex="-1"><a class="heading-anchor" href="#5-flujo-de-asistente" aria-hidden="true">#</a> 5. Flujo de asistente</h2>
+<p>Procesos guiados de varios pasos para tareas de configuración complejas. Ver también: <code>settings-help-patterns.md</code> para los detalles de la incorporación.</p>
+<h3 id="dónde-aparece-3" tabindex="-1"><a class="heading-anchor" href="#dónde-aparece-3" aria-hidden="true">#</a> Dónde aparece</h3>
+<p>Configuración de la organización (WIZ-001), Procesador de pagos (WIZ-002), Generación de llaves BYOK (WIZ-003), Configuración de cumplimiento (WIZ-004), Configuración de WhatsApp Business (WIZ-005), Configuración del número de SMS (WIZ-006), Importación del padrón electoral (WIZ-007), Incorporación de voluntarios (WIZ-008).</p>
+<h3 id="anatomía-3" tabindex="-1"><a class="heading-anchor" href="#anatomía-3" aria-hidden="true">#</a> Anatomía</h3>
+<pre><code>┌────────────────────────────────────────────────────────────┐
+│  [Logo]           Paso 3 de 7          [Guardar y salir]   │  ← Encabezado del asistente
+├────────────────────────────────────────────────────────────┤
+│                                                            │
+│  ○───●───●───○───○───○───○                                 │  ← Barra de progreso
+│       Paso 1  Paso 2  Paso 3                               │
+│                                                            │
+│  ┌──────────────────────────────────────────────────────┐  │
+│  │                                                      │  │
+│  │  Contenido específico del paso                       │  │
+│  │  (campos, instrucciones, confirmación)               │  │
+│  │                                                      │  │
+│  └──────────────────────────────────────────────────────┘  │
+│                                                            │
+├────────────────────────────────────────────────────────────┤
+│  [← Atrás]                                  [Siguiente →]  │  ← Navegación entre pasos
+└────────────────────────────────────────────────────────────┘
+</code></pre>
+<h3 id="comportamientos-3" tabindex="-1"><a class="heading-anchor" href="#comportamientos-3" aria-hidden="true">#</a> Comportamientos</h3>
+<ul>
+<li><strong>Indicador de progreso</strong> — muestra los pasos completados, el actual y los que faltan. Los pasos pueden ir rotulados o numerados.</li>
+<li><strong>Validación por paso</strong> — cada paso se valida antes de dejar avanzar. Volver atrás está siempre disponible.</li>
+<li><strong>Guardar y salir</strong> — conserva el estado del asistente. Al volver, se retoma en el último paso completado.</li>
+<li><strong>Ayuda contextual</strong> — cada paso puede llevar texto de ayuda en línea y enlaces a artículos de la base de conocimiento.</li>
+<li><strong>Estado de finalización</strong> — el último paso resume lo que quedó configurado y sugiere los siguientes pasos.</li>
+<li><strong>Barra lateral sustituida</strong> — durante un asistente, la barra lateral muestra los nombres de los pasos en vez de la navegación normal (según <a href="http://navigation-model.md" target="_blank" rel="noopener noreferrer">navigation-model.md</a>).</li>
+</ul>
+<hr>
+<h2 id="6-panel" tabindex="-1"><a class="heading-anchor" href="#6-panel" aria-hidden="true">#</a> 6. Panel</h2>
+<p>Resúmenes visuales de las métricas clave, organizados en cuadrículas de widgets. Cada perfil tiene un panel predeterminado distinto.</p>
+<h3 id="dónde-aparece-4" tabindex="-1"><a class="heading-anchor" href="#dónde-aparece-4" aria-hidden="true">#</a> Dónde aparece</h3>
+<p>General de la campaña (DASH-001), Operaciones de campo (DASH-002), Recaudación de fondos (DASH-003), Comunicaciones (DASH-004), Voluntarios (DASH-005), Calidad de datos (DASH-006), Cumplimiento (DASH-007), Centro de mando (DASH-008), Líder de equipo (DASH-009), Candidato (DASH-010), Alianza (DASH-011).</p>
+<h3 id="tipos-de-widget" tabindex="-1"><a class="heading-anchor" href="#tipos-de-widget" aria-hidden="true">#</a> Tipos de widget</h3>
+<table>
+<thead>
+<tr>
+<th>Widget</th>
+<th>Descripción</th>
+<th>Ejemplo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Tarjeta de métrica</td>
+<td>Un solo KPI con indicador de tendencia</td>
+<td>&quot;Total recaudado: $47,320 ↑12 %&quot;</td>
+</tr>
+<tr>
+<td>Termómetro</td>
+<td>Barra de progreso hacia una meta</td>
+<td>Meta de recaudación: 63 % de $100K</td>
+</tr>
+<tr>
+<td>Gráfico de líneas</td>
+<td>Tendencia en el tiempo</td>
+<td>Totales diarios de donaciones, vista de 30 días</td>
+</tr>
+<tr>
+<td>Gráfico de barras</td>
+<td>Comparación entre categorías</td>
+<td>Puertas tocadas por territorio</td>
+</tr>
+<tr>
+<td>Mapa de calor</td>
+<td>Distribución geográfica</td>
+<td>Participación por precinto</td>
+</tr>
+<tr>
+<td>Distribución</td>
+<td>Desglose por categoría</td>
+<td>Donantes por nivel de monto</td>
+</tr>
+<tr>
+<td>Lista de alertas</td>
+<td>Elementos que requieren atención</td>
+<td>Marcas de cumplimiento, errores de sincronización</td>
+</tr>
+<tr>
+<td>Flujo de actividad</td>
+<td>Acciones recientes</td>
+<td>Últimas donaciones, altas de voluntarios</td>
+</tr>
+</tbody>
+</table>
+<h3 id="comportamientos-4" tabindex="-1"><a class="heading-anchor" href="#comportamientos-4" aria-hidden="true">#</a> Comportamientos</h3>
+<ul>
+<li><strong>Filtro de rango de fechas</strong> — cada panel arranca con un rango pertinente (hoy para el centro de mando, este mes para recaudación, esta campaña para campo). Se puede ajustar.</li>
+<li><strong>Desglose</strong> — al hacer clic en una tarjeta de métrica o en un gráfico se llega a la lista o a la vista de detalle que hay debajo. La tarjeta de métrica es un atajo, no un callejón sin salida.</li>
+<li><strong>Actualización</strong> — los paneles muestran la marca de &quot;Última actualización: X&quot;. Hay un botón de actualización manual. El panel del centro de mando se actualiza solo cada 30 segundos.</li>
+<li><strong>Cuadrícula adaptable</strong> — los widgets se reacomodan según el viewport. Escritorio: de 2 a 4 columnas. Tableta: 2 columnas. Móvil: 1 columna, apilada en vertical.</li>
+<li><strong>Estados vacíos</strong> — cuando una métrica no tiene datos, el widget muestra un mensaje contextual (&quot;Todavía no hay donaciones — configura tu primer formulario de donación&quot;, con enlace al constructor de formularios).</li>
+</ul>
+<h3 id="variante-móvil-3" tabindex="-1"><a class="heading-anchor" href="#variante-móvil-3" aria-hidden="true">#</a> Variante móvil</h3>
+<p>Los widgets se apilan en vertical por orden de prioridad (la métrica más importante primero). Los gráficos se simplifican a lo esencial (menos rótulos de eje, sin leyenda en los gráficos pequeños). Las tarjetas de métrica pasan a ocupar todo el ancho.</p>
+<hr>
+<h2 id="7-interfaz-de-mapa" tabindex="-1"><a class="heading-anchor" href="#7-interfaz-de-mapa" aria-hidden="true">#</a> 7. Interfaz de mapa</h2>
+<p>Visualizaciones geográficas interactivas para datos espaciales: territorios, avance del trabajo de campo, distribución de votantes, participación.</p>
+<h3 id="dónde-aparece-5" tabindex="-1"><a class="heading-anchor" href="#dónde-aparece-5" aria-hidden="true">#</a> Dónde aparece</h3>
+<p>Gestión de territorios (CANV-004), Generación automática de territorios (CANV-005), Mapa del modo de campo (CANV-009), Avance del trabajo de campo (CANV-014), Corte de territorios para GOTV (GOTV-004), Mapa de participación (GOTV-017).</p>
+<h3 id="subtipos-1" tabindex="-1"><a class="heading-anchor" href="#subtipos-1" aria-hidden="true">#</a> Subtipos</h3>
+<h4 id="mapa-de-gestión-escritorio" tabindex="-1"><a class="heading-anchor" href="#mapa-de-gestión-escritorio" aria-hidden="true">#</a> Mapa de gestión (escritorio)</h4>
+<p>Mapa completo para crear y gestionar territorios. Herramientas de dibujo (polígono, rectángulo), capas de límites (precintos, distritos), superposiciones de datos (densidad de votantes, puntajes de apoyo). Lo usan los Directores de campo para planificar las operaciones.</p>
+<h4 id="mapa-de-campo-móvil-sin-conexión" tabindex="-1"><a class="heading-anchor" href="#mapa-de-campo-móvil-sin-conexión" aria-hidden="true">#</a> Mapa de campo (móvil, sin conexión)</h4>
+<p>Mapa simplificado para los voluntarios en la calle. Muestra la ubicación actual, la ruta de la lista de recorrido y las puertas visitadas frente a las que faltan. Teselas de mapa precargadas en caché para usarlo sin conexión. Áreas táctiles grandes para seleccionar puertas. Sin herramientas de dibujo: solo lectura.</p>
+<h4 id="mapa-de-analítica-escritorio" tabindex="-1"><a class="heading-anchor" href="#mapa-de-analítica-escritorio" aria-hidden="true">#</a> Mapa de analítica (escritorio)</h4>
+<p>Superposiciones de mapa de calor para entender los patrones geográficos. Participación por precinto, cobertura del trabajo de campo, distribución de los puntajes de apoyo. Leyendas con código de color. Acercamiento a zonas concretas.</p>
+<h3 id="comportamientos-comunes-1" tabindex="-1"><a class="heading-anchor" href="#comportamientos-comunes-1" aria-hidden="true">#</a> Comportamientos comunes</h3>
+<ul>
+<li><strong>Mapa base</strong> — callejero por defecto. Satélite disponible para las zonas rurales donde el callejero es pobre.</li>
+<li><strong>Capas</strong> — las capas de datos se activan y desactivan. Capas de límites (precintos, territorios) y capas de datos (mapas de calor, marcadores).</li>
+<li><strong>Búsqueda</strong> — búsqueda por dirección para ir a un punto concreto.</li>
+<li><strong>Zoom y desplazamiento</strong> — controles de mapa estándar. Ajuste automático a los límites de los datos al cargar.</li>
+</ul>
+<hr>
+<h2 id="8-vista-de-calendario-programación" tabindex="-1"><a class="heading-anchor" href="#8-vista-de-calendario-programación" aria-hidden="true">#</a> 8. Vista de calendario / programación</h2>
+<p>Visualización basada en el tiempo para eventos, turnos y contenido programado.</p>
+<h3 id="dónde-aparece-6" tabindex="-1"><a class="heading-anchor" href="#dónde-aparece-6" aria-hidden="true">#</a> Dónde aparece</h3>
+<p>Calendario de publicaciones (SOCIAL-003), Agenda de entrevistas (PRESS-015), programación de eventos (dentro de EVT-002), programación de turnos (dentro de la gestión de voluntarios).</p>
+<h3 id="comportamientos-5" tabindex="-1"><a class="heading-anchor" href="#comportamientos-5" aria-hidden="true">#</a> Comportamientos</h3>
+<ul>
+<li><strong>Modos de vista</strong> — mes, semana, día. El predeterminado varía según el contexto (semana para eventos, mes para el calendario de contenido).</li>
+<li><strong>Código de color</strong> — los eventos se colorean por tipo, estado o asignación.</li>
+<li><strong>Clic para crear</strong> — al hacer clic en una franja vacía se abre un formulario de creación para esa fecha y hora.</li>
+<li><strong>Clic para ver</strong> — al hacer clic en un elemento existente se abre su vista de detalle.</li>
+<li><strong>Arrastrar para reprogramar</strong> — solo en escritorio. Los elementos se arrastran a otra franja horaria.</li>
+</ul>
+<h3 id="variante-móvil-4" tabindex="-1"><a class="heading-anchor" href="#variante-móvil-4" aria-hidden="true">#</a> Variante móvil</h3>
+<p>En móvil, la vista de agenda (lista vertical ordenada por fecha) sustituye a la cuadrícula del calendario. Selector de fecha para navegar. Cada elemento es una tarjeta que se puede tocar.</p>
+<hr>
+<h2 id="9-interfaz-de-redactor" tabindex="-1"><a class="heading-anchor" href="#9-interfaz-de-redactor" aria-hidden="true">#</a> 9. Interfaz de redactor</h2>
+<p>Composición de contenido en tiempo real, con vista previa y verificación de cumplimiento.</p>
+<h3 id="dónde-aparece-7" tabindex="-1"><a class="heading-anchor" href="#dónde-aparece-7" aria-hidden="true">#</a> Dónde aparece</h3>
+<p>Redactor de SMS/WhatsApp (COMM-005), Redactor de publicaciones (SOCIAL-002), Constructor de comunicados de prensa (PRESS-004), Aviso a medios (PRESS-007), Constructor de declaraciones (PRESS-008).</p>
+<h3 id="comportamientos-comunes-2" tabindex="-1"><a class="heading-anchor" href="#comportamientos-comunes-2" aria-hidden="true">#</a> Comportamientos comunes</h3>
+<ul>
+<li><strong>Contador de caracteres</strong> — en SMS y publicaciones sociales, muestra los caracteres que quedan y avisa al llegar a los umbrales.</li>
+<li><strong>Vista previa en vivo</strong> — vista previa en tiempo real del resultado tal como lo verá quien lo reciba. En redes sociales, vistas previas por plataforma (cómo se ve en Twitter frente a Instagram).</li>
+<li><strong>Tokens de personalización</strong> — insertan campos de combinación para contenido específico de cada destinatario.</li>
+<li><strong>Inserción automática de cumplimiento</strong> — los avisos legales propios de cada jurisdicción se añaden solos, según la configuración de la organización.</li>
+<li><strong>Adjuntos multimedia</strong> — carga de imágenes y archivos con vista previa.</li>
+<li><strong>Programar o enviar</strong> — envío inmediato, envío programado (selector de fecha y hora) o guardado como borrador.</li>
+<li><strong>Enrutamiento a aprobación</strong> — si el tipo de contenido requiere aprobación (comunicados de prensa que aprueba el candidato, publicaciones sociales), el flujo de redacción lo manda a la cola de aprobaciones en vez de enviarlo directamente.</li>
+</ul>
+<hr>
+<h2 id="10-cola-de-aprobaciones" tabindex="-1"><a class="heading-anchor" href="#10-cola-de-aprobaciones" aria-hidden="true">#</a> 10. Cola de aprobaciones</h2>
+<p>Revisar y aprobar o rechazar contenido y acciones que necesitan autorización.</p>
+<h3 id="dónde-aparece-8" tabindex="-1"><a class="heading-anchor" href="#dónde-aparece-8" aria-hidden="true">#</a> Dónde aparece</h3>
+<p>Cola de aprobaciones del candidato (MSG-013), Revisión de marcas de cumplimiento (FUND-012), flujos de aprobación de comunicados de prensa, aprobación de publicaciones en redes sociales.</p>
+<h3 id="anatomía-4" tabindex="-1"><a class="heading-anchor" href="#anatomía-4" aria-hidden="true">#</a> Anatomía</h3>
+<pre><code>┌──────────────────────────────────────────────────────────────┐
+│  Aprobaciones pendientes (3)                      [Filtros]  │
+├──────────────────────────────────────────────────────────────┤
+│  ┌──────────────────────────────────────────────────────┐    │
+│  │  Comunicado de prensa: &quot;Declaración sobre edu...&quot;    │    │
+│  │  Enviado por: Maria · hace 2 horas  · URGENTE        │    │
+│  │  [Vista previa]  [Aprobar]  [Rechazar]  [Comentar]   │    │
+│  └──────────────────────────────────────────────────────┘    │
+│  ┌──────────────────────────────────────────────────────┐    │
+│  │  Publicación social: Instagram · Programada hoy 3pm  │    │
+│  │  Enviado por: Carlos · hace 45 min                   │    │
+│  │  [Vista previa]  [Aprobar]  [Rechazar]  [Comentar]   │    │
+│  └──────────────────────────────────────────────────────┘    │
+└──────────────────────────────────────────────────────────────┘
+</code></pre>
+<h3 id="comportamientos-6" tabindex="-1"><a class="heading-anchor" href="#comportamientos-6" aria-hidden="true">#</a> Comportamientos</h3>
+<ul>
+<li><strong>Vista previa</strong> — vista previa completa del contenido tal como se verá al publicarse o enviarse.</li>
+<li><strong>Aprobar/rechazar</strong> — botones de una sola acción. Rechazar exige un motivo (comentario).</li>
+<li><strong>Comentar</strong> — deja una observación sin aprobar ni rechazar. Dispara una notificación a quien lo envió.</li>
+<li><strong>Prioridad</strong> — los elementos urgentes se distinguen visualmente (color, posición, distintivo).</li>
+<li><strong>Contador</strong> — el número de elementos de la cola de aprobaciones aparece como contador en la pestaña móvil y en el elemento de la barra lateral.</li>
+</ul>
+<hr>
+<h2 id="11-cola-de-revisión" tabindex="-1"><a class="heading-anchor" href="#11-cola-de-revisión" aria-hidden="true">#</a> 11. Cola de revisión</h2>
+<p>Revisión estructurada para la calidad de los datos, el cumplimiento y las decisiones operativas. Parecida a la cola de aprobaciones, pero centrada en datos y no en contenido.</p>
+<h3 id="dónde-aparece-9" tabindex="-1"><a class="heading-anchor" href="#dónde-aparece-9" aria-hidden="true">#</a> Dónde aparece</h3>
+<p>Cola de revisión de deduplicación (CRM-006), Comparación de deduplicación (CRM-007), Revisión de marcas de cumplimiento (FUND-012), Cola de problemas de observadores electorales (GOTV-016), Reporte de problemas del observador electoral (GOTV-015).</p>
+<h3 id="comportamientos-7" tabindex="-1"><a class="heading-anchor" href="#comportamientos-7" aria-hidden="true">#</a> Comportamientos</h3>
+<ul>
+<li><strong>Comparación lado a lado</strong> — en la deduplicación, se muestran dos registros uno junto al otro con las diferencias resaltadas. Controles de fusión campo por campo (quedarse con el izquierdo, con el derecho o con ambos).</li>
+<li><strong>Categorización</strong> — los elementos se clasifican por tipo y severidad. Se filtran por categoría.</li>
+<li><strong>Escalamiento</strong> — un elemento puede escalarse a una autoridad superior (los problemas de los observadores electorales al equipo legal, las marcas de cumplimiento al Administrador de la organización).</li>
+<li><strong>Resolución</strong> — cada elemento exige una acción de resolución (fusionar, descartar, marcar, escalar). La resolución queda anotada en el registro de auditoría.</li>
+</ul>
+<hr>
+<h2 id="12-herramienta-de-registro-de-entrada" tabindex="-1"><a class="heading-anchor" href="#12-herramienta-de-registro-de-entrada" aria-hidden="true">#</a> 12. Herramienta de registro de entrada</h2>
+<p>Interfaces rápidas y con prioridad móvil para confirmar la asistencia a eventos y operaciones.</p>
+<h3 id="dónde-aparece-10" tabindex="-1"><a class="heading-anchor" href="#dónde-aparece-10" aria-hidden="true">#</a> Dónde aparece</h3>
+<p>Registro de entrada al evento (EVT-005), Registro de entrada en el punto de concentración (GOTV-023), Registro de entrada del observador electoral (GOTV-014).</p>
+<h3 id="anatomía-5" tabindex="-1"><a class="heading-anchor" href="#anatomía-5" aria-hidden="true">#</a> Anatomía</h3>
+<pre><code>┌────────────────────────────────────────┐
+│  Registro al evento    12 de 45 ✓      │
+├────────────────────────────────────────┤
+│  [Buscar nombre...]                    │
+│                                        │
+│  ┌──────────────────────────────────┐  │
+│  │  Ana Martínez               [✓]  │  │
+│  │  Carlos Reyes               [ ]  │  │
+│  │  Diana Flores               [✓]  │  │
+│  │  Eduardo Vega               [ ]  │  │
+│  └──────────────────────────────────┘  │
+│                                        │
+│  [Escanear código QR]                  │
+└────────────────────────────────────────┘
+</code></pre>
+<h3 id="comportamientos-8" tabindex="-1"><a class="heading-anchor" href="#comportamientos-8" aria-hidden="true">#</a> Comportamientos</h3>
+<ul>
+<li><strong>Búsqueda rápida</strong> — búsqueda predictiva para encontrar a una persona concreta. Salto por primera letra.</li>
+<li><strong>Escaneo de QR</strong> — lectura de códigos QR con la cámara para registrar la entrada rápido (si el voluntario trae el código QR de su invitación).</li>
+<li><strong>Tocar para registrar la entrada</strong> — áreas táctiles grandes. La marca de verificación aparece de inmediato, con una confirmación háptica y visual breve.</li>
+<li><strong>Deshacer</strong> — un registro de entrada por error se puede deshacer dentro de los 10 segundos siguientes.</li>
+<li><strong>Contador</strong> — cuenta corriente de quienes ya registraron la entrada frente a los esperados (&quot;12 de 45 registrados&quot;).</li>
+<li><strong>Sin conexión</strong> — funciona por completo sin conexión. Los datos se guardan en el dispositivo y se sincronizan al reconectar. Indicador claro del estado de sincronización.</li>
+</ul>
+<hr>
+<h2 id="13-vista-de-flujo-kanban" tabindex="-1"><a class="heading-anchor" href="#13-vista-de-flujo-kanban" aria-hidden="true">#</a> 13. Vista de flujo / kanban</h2>
+<p>Vista por etapas para los elementos que avanzan a lo largo de un proceso.</p>
+<h3 id="dónde-aparece-11" tabindex="-1"><a class="heading-anchor" href="#dónde-aparece-11" aria-hidden="true">#</a> Dónde aparece</h3>
+<p>Flujo de respaldos (PRESS-012): identificado → contactado → considerando → comprometido → público.</p>
+<h3 id="comportamientos-9" tabindex="-1"><a class="heading-anchor" href="#comportamientos-9" aria-hidden="true">#</a> Comportamientos</h3>
+<ul>
+<li><strong>Columnas</strong> — una por etapa. Las tarjetas de cada columna representan los elementos.</li>
+<li><strong>Arrastrar para avanzar</strong> — se arrastra una tarjeta de una columna a la siguiente para cambiarla de etapa.</li>
+<li><strong>Contenido de la tarjeta</strong> — la información clave se ve en la tarjeta (nombre, fecha de entrada a la etapa, urgencia).</li>
+<li><strong>Clic para el detalle</strong> — al hacer clic en una tarjeta se abre la vista de detalle completa.</li>
+<li><strong>Recuentos</strong> — el encabezado de cada columna muestra cuántos elementos hay en esa etapa.</li>
+<li><strong>Solo en escritorio</strong> — los tableros kanban necesitan espacio horizontal. En móvil se muestran como una lista filtrable, con la etapa en un desplegable.</li>
+</ul>
+<hr>
+<h2 id="14-flujo-de-importaciónexportación" tabindex="-1"><a class="heading-anchor" href="#14-flujo-de-importaciónexportación" aria-hidden="true">#</a> 14. Flujo de importación/exportación</h2>
+<p>Movimiento de datos hacia dentro y hacia fuera de la plataforma.</p>
+<h3 id="dónde-aparece-12" tabindex="-1"><a class="heading-anchor" href="#dónde-aparece-12" aria-hidden="true">#</a> Dónde aparece</h3>
+<p>Asistente de importación de datos (CRM-008 a CRM-011), Historial de importaciones (CRM-012), Exportación de datos (CRM-013), Carga de voto adelantado (GOTV-002).</p>
+<h3 id="flujo-de-importación" tabindex="-1"><a class="heading-anchor" href="#flujo-de-importación" aria-hidden="true">#</a> Flujo de importación</h3>
+<ol>
+<li><strong>Carga</strong> — arrastrar y soltar, o selector de archivos. Valida el formato (CSV, Excel). Muestra una vista previa del archivo.</li>
+<li><strong>Mapeo de columnas</strong> — detecta los encabezados de columna y deja confirmar o ajustar el mapeo. Muestra datos de muestra de cada campo mapeado.</li>
+<li><strong>Vista previa</strong> — muestra qué se creará, qué se actualizará y qué se omitirá. Destaca los posibles duplicados.</li>
+<li><strong>Confirmación</strong> — resumen de las acciones. Botón de &quot;Importar X registros&quot;.</li>
+<li><strong>Progreso</strong> — barra de progreso durante la importación. No bloquea la navegación: la importación corre en segundo plano y notifica al terminar.</li>
+<li><strong>Informe</strong> — resumen posterior a la importación: X creados, Y actualizados, Z omitidos, W errores. Enlace para revisar los errores.</li>
+</ol>
+<h3 id="flujo-de-exportación" tabindex="-1"><a class="heading-anchor" href="#flujo-de-exportación" aria-hidden="true">#</a> Flujo de exportación</h3>
+<ol>
+<li><strong>Seleccionar los datos</strong> — elige el tipo de registro y aplica filtros (segmento, rango de fechas, etiquetas).</li>
+<li><strong>Elegir los campos</strong> — selecciona qué campos van en la exportación.</li>
+<li><strong>Elegir el formato</strong> — CSV, Excel, JSON.</li>
+<li><strong>Exportar</strong> — corre en segundo plano. Notificación con enlace de descarga cuando esté listo.</li>
+</ol>
+<hr>
+<h2 id="15-panel-de-configuración" tabindex="-1"><a class="heading-anchor" href="#15-panel-de-configuración" aria-hidden="true">#</a> 15. Panel de configuración</h2>
+<p>Interfaces de ajustes para configurar la plataforma, las funcionalidades y las integraciones.</p>
+<h3 id="dónde-aparece-13" tabindex="-1"><a class="heading-anchor" href="#dónde-aparece-13" aria-hidden="true">#</a> Dónde aparece</h3>
+<p>Perfil de la organización (SET-001), Plantillas de rol (SET-002), Configuración de cumplimiento (SET-008), Ajustes de integraciones (SET-012 a SET-016), Facturación (SET-017), Seguridad (SET-019), Cifrado (SET-020).</p>
+<h3 id="anatomía-6" tabindex="-1"><a class="heading-anchor" href="#anatomía-6" aria-hidden="true">#</a> Anatomía</h3>
+<pre><code>┌────────────────────────────────────────────────────────────┐
+│  Ajustes &gt; Cumplimiento                                    │
+├────────────────────────────────────────────────────────────┤
+│                                                            │
+│  ▾ Límites de contribución                                 │
+│    Límite individual    [$2,900    ]                       │
+│    Límite de PAC        [$5,000    ]                       │
+│    ⓘ Basado en los requisitos de tu jurisdicción           │
+│                                                            │
+│  ▸ Período de campaña                                      │
+│  ▸ Avisos legales                                          │
+│  ▸ Conservación de datos                                   │
+│                                                            │
+├────────────────────────────────────────────────────────────┤
+│  Última modificación: 15 ene. 2026 por admin@campaign.org  │
+│  [Cancelar]                                     [Guardar]  │
+└────────────────────────────────────────────────────────────┘
+</code></pre>
+<h3 id="comportamientos-10" tabindex="-1"><a class="heading-anchor" href="#comportamientos-10" aria-hidden="true">#</a> Comportamientos</h3>
+<ul>
+<li><strong>Secciones plegables</strong> — agrupan los ajustes relacionados. Solo una o dos secciones desplegadas a la vez.</li>
+<li><strong>Valores predeterminados inteligentes</strong> — vienen rellenados según la jurisdicción y el contexto. Se rotulan con claridad como predeterminados.</li>
+<li><strong>Texto de ayuda</strong> — explicaciones contextuales para cada ajuste. Los ajustes de cumplimiento incluyen enlaces de &quot;¿Por qué se requiere esto?&quot;.</li>
+<li><strong>Seguimiento de cambios</strong> — muestra quién hizo la última modificación y cuándo. Registro de auditoría de todos los cambios.</li>
+<li><strong>Botón de prueba</strong> — en las integraciones, un botón de &quot;Probar conexión&quot; verifica que la configuración funciona.</li>
+<li><strong>Solo en escritorio</strong> — las interfaces de configuración necesitan disposiciones a todo el ancho para los formularios complejos.</li>
+</ul>
+<hr>
+<h2 id="16-comparación-lado-a-lado" tabindex="-1"><a class="heading-anchor" href="#16-comparación-lado-a-lado" aria-hidden="true">#</a> 16. Comparación lado a lado</h2>
+<p>Interfaz de dos paneles para comparar registros, versiones o variantes.</p>
+<h3 id="dónde-aparece-14" tabindex="-1"><a class="heading-anchor" href="#dónde-aparece-14" aria-hidden="true">#</a> Dónde aparece</h3>
+<p>Comparación de deduplicación (CRM-007), Resultados de la prueba A/B (FUND-014), comparación de versiones de puntos de mensaje.</p>
+<h3 id="comportamientos-11" tabindex="-1"><a class="heading-anchor" href="#comportamientos-11" aria-hidden="true">#</a> Comportamientos</h3>
+<ul>
+<li><strong>Disposición de dos columnas</strong> — el registro A a la izquierda, el registro B a la derecha. Alineados campo por campo.</li>
+<li><strong>Resaltado de diferencias</strong> — los campos que difieren quedan resaltados (con código de color). Los idénticos se atenúan.</li>
+<li><strong>Controles de fusión</strong> — en la deduplicación, cada campo distinto tiene los controles &quot;Quedarme con la izquierda&quot; / &quot;Quedarme con la derecha&quot; / &quot;Ambas&quot;.</li>
+<li><strong>Vista previa</strong> — antes de confirmar una fusión, muestra el registro resultante.</li>
+<li><strong>Solo en escritorio</strong> — necesita espacio horizontal. En tableta, conviene una comparación apilada en vertical. No está disponible en celular.</li>
+</ul>
+<hr>
+<h2 id="17-vista-dividida-panel-de-detalle" tabindex="-1"><a class="heading-anchor" href="#17-vista-dividida-panel-de-detalle" aria-hidden="true">#</a> 17. Vista dividida / panel de detalle</h2>
+<p>Disposición de dos paneles con una lista o vista padre a un lado y una vista de detalle al otro. Definida en <a href="http://navigation-model.md" target="_blank" rel="noopener noreferrer">navigation-model.md</a> como patrón central de interacción en escritorio.</p>
+<h3 id="dónde-aparece-15" tabindex="-1"><a class="heading-anchor" href="#dónde-aparece-15" aria-hidden="true">#</a> Dónde aparece</h3>
+<p>Lista de contactos + detalle, bandeja de mensajes + conversación, lista de donaciones + detalle, lista de eventos + detalle, cola de problemas + detalle.</p>
+<h3 id="comportamientos-12" tabindex="-1"><a class="heading-anchor" href="#comportamientos-12" aria-hidden="true">#</a> Comportamientos</h3>
+<ul>
+<li><strong>Solo en escritorio</strong> — en móvil, la lista y el detalle son vistas separadas a pantalla completa.</li>
+<li><strong>Redimensionable</strong> — se arrastra el separador para ajustar la proporción entre paneles. La preferencia se conserva.</li>
+<li><strong>Se puede cerrar</strong> — el botón de cerrar del panel de detalle devuelve la lista a todo el ancho.</li>
+<li><strong>Navegación dentro del panel</strong> — flechas de anterior y siguiente en el encabezado del panel de detalle, para recorrer los elementos de la lista sin cerrarlo.</li>
+<li><strong>Alternativa de reserva para viewports pequeños</strong> — en viewports de escritorio estrechos, el panel de detalle se abre como superposición en vez de como división lado a lado.</li>
+</ul>
+<hr>
+<h2 id="18-modo-de-campo-pantalla-completa-exclusiva" tabindex="-1"><a class="heading-anchor" href="#18-modo-de-campo-pantalla-completa-exclusiva" aria-hidden="true">#</a> 18. Modo de campo (pantalla completa exclusiva)</h2>
+<p>La interfaz de trabajo de campo, jornada de llamadas, inscripción de votantes y GOTV (Get Out The Vote — movilización del voto) del voluntariado. Un paradigma de navegación completamente distinto al del resto de la aplicación. Se define en detalle en <a href="http://navigation-model.md" target="_blank" rel="noopener noreferrer">navigation-model.md</a>.</p>
+<h3 id="dónde-aparece-16" tabindex="-1"><a class="heading-anchor" href="#dónde-aparece-16" aria-hidden="true">#</a> Dónde aparece</h3>
+<p>Trabajo de campo (CANV-007 a CANV-012), Jornada de llamadas (PHONE-004 a PHONE-006), Inscripción de votantes (VREG-004, VREG-005), GOTV (GOTV-008 a GOTV-010).</p>
+<h3 id="características-clave" tabindex="-1"><a class="heading-anchor" href="#características-clave" aria-hidden="true">#</a> Características clave</h3>
+<ul>
+<li><strong>Pantalla completa</strong> — sin barra lateral, sin pestañas inferiores, sin navegación estándar. Solo el encabezado de campo y los controles de la tarea.</li>
+<li><strong>Progresión lineal</strong> — se avanza de un elemento a otro, uno por uno (la puerta siguiente, la llamada siguiente, el votante siguiente).</li>
+<li><strong>Áreas táctiles grandes</strong> — pensadas para usarse con una sola mano, de pie, caminando o con mala luz.</li>
+<li><strong>Con prioridad sin conexión</strong> — diseñado para funcionar sin conexión primero (offline-first): todos los datos vienen precargados. Funciona sin conectividad. Se sincroniza cuando hay conexión.</li>
+<li><strong>Decisiones mínimas</strong> — la interfaz guía al voluntario por cada interacción con opciones claras y simples.</li>
+<li><strong>Recuperación tras un fallo</strong> — la posición dentro de la lista de recorrido o de llamadas se guarda en el dispositivo después de cada interacción. La app se reinicia exactamente en el mismo punto.</li>
+</ul>
+<p>Ver también: <code>offline-sync-patterns.md</code> para el comportamiento de sincronización durante el modo de campo.</p>
+<hr>
+<h2 id="19-panel-en-tiempo-real-centro-de-mando" tabindex="-1"><a class="heading-anchor" href="#19-panel-en-tiempo-real-centro-de-mando" aria-hidden="true">#</a> 19. Panel en tiempo real (centro de mando)</h2>
+<p>Panel operativo que se actualiza en vivo, para el día de elecciones y las operaciones de campo activas.</p>
+<h3 id="dónde-aparece-17" tabindex="-1"><a class="heading-anchor" href="#dónde-aparece-17" aria-hidden="true">#</a> Dónde aparece</h3>
+<p>Panel del centro de mando (DASH-008), Panel de participación (GOTV-017, GOTV-018), Canal del centro de mando (MSG-007).</p>
+<h3 id="diferencias-clave-con-los-paneles-estándar" tabindex="-1"><a class="heading-anchor" href="#diferencias-clave-con-los-paneles-estándar" aria-hidden="true">#</a> Diferencias clave con los paneles estándar</h3>
+<ul>
+<li><strong>Actualización automática</strong> — los datos se actualizan cada 30 segundos (o por WebSocket donde esté disponible). No hace falta actualizar a mano.</li>
+<li><strong>Priorización de alertas</strong> — los elementos urgentes (zonas de baja participación, problemas escalados, faltantes de recursos) se muestran de forma destacada.</li>
+<li><strong>Botones de acción</strong> — los widgets del panel llevan botones de acción en línea (aprobar una reasignación de recursos, enviar una oleada de mensajes, escalar un problema). El centro de mando es un centro de acción, no solo una pantalla informativa.</li>
+<li><strong>Integración de comunicaciones</strong> — el canal del centro de mando (MSG-007) está integrado en la vista del panel y muestra las actualizaciones estructuradas en tiempo real junto a los datos.</li>
+</ul>
+<hr>
+<h2 id="20-hilo-contextual" tabindex="-1"><a class="heading-anchor" href="#20-hilo-contextual" aria-hidden="true">#</a> 20. Hilo contextual</h2>
+<p>Hilos de discusión adjuntos a objetos concretos de la plataforma (eventos, turnos, problemas, donaciones) para revisar y coordinar en equipo.</p>
+<h3 id="dónde-aparece-18" tabindex="-1"><a class="heading-anchor" href="#dónde-aparece-18" aria-hidden="true">#</a> Dónde aparece</h3>
+<p>Hilo del evento (MSG-008), Hilo del turno (MSG-009), Hilo del problema (MSG-010), Hilo de la donación marcada (MSG-011).</p>
+<h3 id="comportamientos-13" tabindex="-1"><a class="heading-anchor" href="#comportamientos-13" aria-hidden="true">#</a> Comportamientos</h3>
+<ul>
+<li><strong>Adjunto al objeto padre</strong> — al hilo se llega desde la vista de detalle del objeto padre (por ejemplo, una pestaña &quot;Discusión&quot; en la página de detalle del evento), no desde la bandeja de mensajes.</li>
+<li><strong>Misma interfaz de conversación</strong> — usa los mismos componentes de redacción y presentación de mensajes que los mensajes directos y los grupos.</li>
+<li><strong>Participantes</strong> — incluye automáticamente a las personas asociadas al objeto padre (quienes organizan el evento, el voluntariado del turno, quienes revisan el cumplimiento).</li>
+<li><strong>Notificaciones</strong> — los mensajes nuevos en los hilos contextuales avisan a los participantes por el sistema de notificaciones estándar.</li>
+<li><strong>Sin conexión</strong> — los hilos en caché se pueden leer sin conexión. Los mensajes nuevos quedan en cola para sincronizarse.</li>
+</ul>
+<hr>
+<h2 id="aspectos-transversales" tabindex="-1"><a class="heading-anchor" href="#aspectos-transversales" aria-hidden="true">#</a> Aspectos transversales</h2>
+<h3 id="estados-vacíos" tabindex="-1"><a class="heading-anchor" href="#estados-vacíos" aria-hidden="true">#</a> Estados vacíos</h3>
+<p>Todos los patrones tienen un estado vacío: lo que se ve cuando todavía no hay datos. Los estados vacíos son específicos de cada arquetipo:</p>
+<ul>
+<li>Reconocen que no hay datos sin que la persona se sienta perdida</li>
+<li>Sugieren una acción siguiente clara (&quot;Crea tu primer evento&quot;, &quot;Importa tu padrón electoral&quot;)</li>
+<li>Enlazan directamente a la acción que sugieren</li>
+<li>Nunca son un simple &quot;No se encontraron datos&quot;: eso es un mensaje del sistema, no una experiencia de uso</li>
+</ul>
+<h3 id="estados-de-carga" tabindex="-1"><a class="heading-anchor" href="#estados-de-carga" aria-hidden="true">#</a> Estados de carga</h3>
+<ul>
+<li><strong>Listas</strong> — filas de esqueleto de carga (bloques grises que imitan la disposición de las filas reales)</li>
+<li><strong>Paneles</strong> — widgets de esqueleto de carga</li>
+<li><strong>Vistas de detalle</strong> — esqueleto con la estructura de la disposición visible</li>
+<li><strong>Nunca un indicador de carga a pantalla completa</strong> — la persona siempre debe ver dónde está, incluso mientras cargan los datos</li>
+</ul>
+<h3 id="estados-de-error" tabindex="-1"><a class="heading-anchor" href="#estados-de-error" aria-hidden="true">#</a> Estados de error</h3>
+<ul>
+<li><strong>Errores en línea</strong> — los errores de validación del formulario aparecen debajo del campo correspondiente</li>
+<li><strong>Avisos emergentes</strong> — los errores pasajeros (tiempo de espera de red agotado, fallo al guardar) aparecen como avisos emergentes con una acción de reintentar</li>
+<li><strong>Error a pantalla completa</strong> — solo para errores irrecuperables (404, servidor caído). Muestra un mensaje claro y un enlace de &quot;Ir al inicio&quot;</li>
+<li><strong>Errores propios de estar sin conexión</strong> — &quot;Esta funcionalidad requiere conexión&quot;, con una explicación y una sugerencia de qué sí se puede hacer sin conexión</li>
+</ul>
+<h3 id="accesibilidad" tabindex="-1"><a class="heading-anchor" href="#accesibilidad" aria-hidden="true">#</a> Accesibilidad</h3>
+<p>Todos los patrones deben cumplir WCAG 2.1 AA:</p>
+<ul>
+<li>Navegables con teclado (orden de tabulación, indicadores de foco, atajos de teclado)</li>
+<li>Compatibles con lectores de pantalla (rótulos ARIA, roles, regiones activas para el contenido dinámico)</li>
+<li>Relaciones de contraste de color (4.5:1 para texto, 3:1 para texto grande y componentes de la interfaz)</li>
+<li>Áreas táctiles de 44x44px como mínimo en móvil</li>
+<li>Ninguna información se transmite solo con color (siempre acompañada de texto, icono o patrón)</li>
+</ul>
+<h2 id="preguntas-abiertas" tabindex="-1"><a class="heading-anchor" href="#preguntas-abiertas" aria-hidden="true">#</a> Preguntas abiertas</h2>
+<ol>
+<li>
+<p><strong>Arrastrar y soltar en móvil.</strong> Varios patrones usan arrastrar y soltar en escritorio (constructores, kanban, calendario). ¿Cuál es el equivalente en móvil? ¿Pulsación larga para reordenar? ¿O sustituirlo por botones explícitos de mover?</p>
+</li>
+<li>
+<p><strong>Atajos de teclado.</strong> ¿Debe la plataforma tener una capa de atajos de teclado para quienes la usan a fondo (por ejemplo, <code>G</code> y luego <code>D</code> para el panel, <code>G</code> y luego <code>M</code> para los mensajes)? Prioridad baja, pero de mucho valor para el personal que pasa el día entero en la plataforma.</p>
+</li>
+<li>
+<p><strong>Modo oscuro.</strong> Algunos patrones (sobre todo los mapas y los paneles) ganarían con un modo oscuro para la noche electoral y el centro de mando. ¿El modo oscuro debe elegirlo la persona usuaria, activarse solo según la hora o existir solo en ciertas funcionalidades (únicamente el centro de mando)?</p>
+</li>
+</ol>
+<!-- REVISIT: El desglose exacto de componentes (qué patrones se convierten en qué componentes) queda aplazado al component-inventory.md de la fase 3. Este catálogo define los patrones; el inventario de componentes define las unidades de implementación. -->
+
+    </article>
+  </main>
+  <div class="toc-rail"><nav class="toc" aria-label="En esta página"><div class="toc-label">En esta página</div><ul><li class="toc-2"><a href="#propósito"># Propósito</a></li><li class="toc-2"><a href="#resumen-de-patrones"># Resumen de patrones</a></li><li class="toc-2"><a href="#1-vista-de-lista"># 1. Vista de lista</a></li><li class="toc-3"><a href="#dónde-aparece"># Dónde aparece</a></li><li class="toc-3"><a href="#anatomía"># Anatomía</a></li><li class="toc-3"><a href="#comportamientos"># Comportamientos</a></li><li class="toc-3"><a href="#variante-móvil"># Variante móvil</a></li><li class="toc-3"><a href="#variante-sin-conexión"># Variante sin conexión</a></li><li class="toc-2"><a href="#2-vista-de-detalle"># 2. Vista de detalle</a></li><li class="toc-3"><a href="#dónde-aparece-1"># Dónde aparece</a></li><li class="toc-3"><a href="#anatomía-1"># Anatomía</a></li><li class="toc-3"><a href="#comportamientos-1"># Comportamientos</a></li><li class="toc-3"><a href="#variante-móvil-1"># Variante móvil</a></li><li class="toc-3"><a href="#escritorio-con-panel-de-detalle"># Escritorio con panel de detalle</a></li><li class="toc-2"><a href="#3-formulario-de-creaciónedición"># 3. Formulario de creación/edición</a></li><li class="toc-3"><a href="#dónde-aparece-2"># Dónde aparece</a></li><li class="toc-3"><a href="#anatomía-2"># Anatomía</a></li><li class="toc-3"><a href="#comportamientos-2"># Comportamientos</a></li><li class="toc-3"><a href="#variante-móvil-2"># Variante móvil</a></li><li class="toc-2"><a href="#4-interfaz-de-constructor"># 4. Interfaz de constructor</a></li><li class="toc-3"><a href="#subtipos"># Subtipos</a></li><li class="toc-3"><a href="#comportamientos-comunes"># Comportamientos comunes</a></li><li class="toc-2"><a href="#5-flujo-de-asistente"># 5. Flujo de asistente</a></li><li class="toc-3"><a href="#dónde-aparece-3"># Dónde aparece</a></li><li class="toc-3"><a href="#anatomía-3"># Anatomía</a></li><li class="toc-3"><a href="#comportamientos-3"># Comportamientos</a></li><li class="toc-2"><a href="#6-panel"># 6. Panel</a></li><li class="toc-3"><a href="#dónde-aparece-4"># Dónde aparece</a></li><li class="toc-3"><a href="#tipos-de-widget"># Tipos de widget</a></li><li class="toc-3"><a href="#comportamientos-4"># Comportamientos</a></li><li class="toc-3"><a href="#variante-móvil-3"># Variante móvil</a></li><li class="toc-2"><a href="#7-interfaz-de-mapa"># 7. Interfaz de mapa</a></li><li class="toc-3"><a href="#dónde-aparece-5"># Dónde aparece</a></li><li class="toc-3"><a href="#subtipos-1"># Subtipos</a></li><li class="toc-3"><a href="#comportamientos-comunes-1"># Comportamientos comunes</a></li><li class="toc-2"><a href="#8-vista-de-calendario-programación"># 8. Vista de calendario / programación</a></li><li class="toc-3"><a href="#dónde-aparece-6"># Dónde aparece</a></li><li class="toc-3"><a href="#comportamientos-5"># Comportamientos</a></li><li class="toc-3"><a href="#variante-móvil-4"># Variante móvil</a></li><li class="toc-2"><a href="#9-interfaz-de-redactor"># 9. Interfaz de redactor</a></li><li class="toc-3"><a href="#dónde-aparece-7"># Dónde aparece</a></li><li class="toc-3"><a href="#comportamientos-comunes-2"># Comportamientos comunes</a></li><li class="toc-2"><a href="#10-cola-de-aprobaciones"># 10. Cola de aprobaciones</a></li><li class="toc-3"><a href="#dónde-aparece-8"># Dónde aparece</a></li><li class="toc-3"><a href="#anatomía-4"># Anatomía</a></li><li class="toc-3"><a href="#comportamientos-6"># Comportamientos</a></li><li class="toc-2"><a href="#11-cola-de-revisión"># 11. Cola de revisión</a></li><li class="toc-3"><a href="#dónde-aparece-9"># Dónde aparece</a></li><li class="toc-3"><a href="#comportamientos-7"># Comportamientos</a></li><li class="toc-2"><a href="#12-herramienta-de-registro-de-entrada"># 12. Herramienta de registro de entrada</a></li><li class="toc-3"><a href="#dónde-aparece-10"># Dónde aparece</a></li><li class="toc-3"><a href="#anatomía-5"># Anatomía</a></li><li class="toc-3"><a href="#comportamientos-8"># Comportamientos</a></li><li class="toc-2"><a href="#13-vista-de-flujo-kanban"># 13. Vista de flujo / kanban</a></li><li class="toc-3"><a href="#dónde-aparece-11"># Dónde aparece</a></li><li class="toc-3"><a href="#comportamientos-9"># Comportamientos</a></li><li class="toc-2"><a href="#14-flujo-de-importaciónexportación"># 14. Flujo de importación/exportación</a></li><li class="toc-3"><a href="#dónde-aparece-12"># Dónde aparece</a></li><li class="toc-3"><a href="#flujo-de-importación"># Flujo de importación</a></li><li class="toc-3"><a href="#flujo-de-exportación"># Flujo de exportación</a></li><li class="toc-2"><a href="#15-panel-de-configuración"># 15. Panel de configuración</a></li><li class="toc-3"><a href="#dónde-aparece-13"># Dónde aparece</a></li><li class="toc-3"><a href="#anatomía-6"># Anatomía</a></li><li class="toc-3"><a href="#comportamientos-10"># Comportamientos</a></li><li class="toc-2"><a href="#16-comparación-lado-a-lado"># 16. Comparación lado a lado</a></li><li class="toc-3"><a href="#dónde-aparece-14"># Dónde aparece</a></li><li class="toc-3"><a href="#comportamientos-11"># Comportamientos</a></li><li class="toc-2"><a href="#17-vista-dividida-panel-de-detalle"># 17. Vista dividida / panel de detalle</a></li><li class="toc-3"><a href="#dónde-aparece-15"># Dónde aparece</a></li><li class="toc-3"><a href="#comportamientos-12"># Comportamientos</a></li><li class="toc-2"><a href="#18-modo-de-campo-pantalla-completa-exclusiva"># 18. Modo de campo (pantalla completa exclusiva)</a></li><li class="toc-3"><a href="#dónde-aparece-16"># Dónde aparece</a></li><li class="toc-3"><a href="#características-clave"># Características clave</a></li><li class="toc-2"><a href="#19-panel-en-tiempo-real-centro-de-mando"># 19. Panel en tiempo real (centro de mando)</a></li><li class="toc-3"><a href="#dónde-aparece-17"># Dónde aparece</a></li><li class="toc-3"><a href="#diferencias-clave-con-los-paneles-estándar"># Diferencias clave con los paneles estándar</a></li><li class="toc-2"><a href="#20-hilo-contextual"># 20. Hilo contextual</a></li><li class="toc-3"><a href="#dónde-aparece-18"># Dónde aparece</a></li><li class="toc-3"><a href="#comportamientos-13"># Comportamientos</a></li><li class="toc-2"><a href="#aspectos-transversales"># Aspectos transversales</a></li><li class="toc-3"><a href="#estados-vacíos"># Estados vacíos</a></li><li class="toc-3"><a href="#estados-de-carga"># Estados de carga</a></li><li class="toc-3"><a href="#estados-de-error"># Estados de error</a></li><li class="toc-3"><a href="#accesibilidad"># Accesibilidad</a></li><li class="toc-2"><a href="#preguntas-abiertas"># Preguntas abiertas</a></li></ul></nav></div>
+</div>
+<script src="../../../../assets/search.js" defer></script>
+<script src="../../../../assets/app.js" defer></script>
+</body>
+</html>

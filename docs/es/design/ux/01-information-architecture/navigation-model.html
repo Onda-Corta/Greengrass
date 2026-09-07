@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="es" data-base="../../../../" data-no-results="No hay resultados para">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Modelo de navegación · GreenGrass</title>
+<meta name="description" content="Modelo de navegación — Documentación de especificación y diseño de GreenGrass.">
+<link rel="alternate" hreflang="en" href="../../../../design/ux/01-information-architecture/navigation-model.html">
+<link rel="alternate" hreflang="es" href="./navigation-model.html">
+<link rel="alternate" hreflang="x-default" href="../../../../design/ux/01-information-architecture/navigation-model.html">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%232563eb'/%3E%3Cstop offset='1' stop-color='%2316a34a'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='32' height='32' rx='7' fill='url(%23g)'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="../../../../assets/styles.css">
+</head>
+<body>
+<a class="skip-link" href="#content">Saltar al contenido</a>
+<header class="site-header">
+  <button type="button" class="menu-toggle" aria-label="Alternar navegación" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+  <a class="brand" href="../../../../es/index.html">
+    <span class="brand-mark" aria-hidden="true"></span>
+    <span class="brand-text"><strong>GreenGrass</strong><small>Especificación y diseño</small></span>
+  </a>
+  <div class="search">
+    <input type="search" id="search-input" placeholder="Buscar en la documentación…" autocomplete="off" aria-label="Buscar en la documentación">
+    <div id="search-results" class="search-results" hidden></div>
+  </div>
+  <nav class="lang-switch" aria-label="Idioma"><a class="lang-opt" href="../../../../design/ux/01-information-architecture/navigation-model.html" hreflang="en" lang="en" title="View this page in English">EN</a><span class="lang-opt active" aria-current="true">ES</span></nav>
+  <button type="button" class="theme-toggle" aria-label="Alternar modo oscuro" title="Alternar modo oscuro">
+    <span class="theme-icon" aria-hidden="true"></span>
+  </button>
+</header>
+<div class="layout">
+  <div class="sidebar-backdrop" hidden></div>
+  <aside class="sidebar" aria-label="Navegación de la documentación">
+    <nav class="nav">
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">Inicio<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../../../index.html">GreenGrass</a></li></ul></div>
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">Especificaciones<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../../../spec/product.html">Proyecto: GreenGrass</a></li><li><a href="../../../spec/mvp.html">MVP de GreenGrass — plan de producto</a></li><li><a href="../../../spec/users.html">Usuarios y roles</a></li><li><a href="../../../spec/workflows.html">Flujos de trabajo principales</a></li><li><a href="../../../spec/geography.html">Geografía objetivo</a></li><li><a href="../../../spec/security.html">Seguridad y modelo de amenazas</a></li><li><a href="../../../spec/compliance.html">Cumplimiento y marco legal</a></li><li><a href="../../../spec/fundraising.html">Recaudación de fondos e infraestructura de pagos</a></li><li><a href="../../../spec/integrations.html">Integraciones externas</a></li><li><a href="../../../spec/support.html">Soporte y puesta en marcha de organizaciones</a></li><li><a href="../../../spec/gotv.html">GOTV y operaciones del día de elecciones</a></li><li><a href="../../../spec/messaging.html">Comunicaciones internas y notificaciones</a></li><li><a href="../../../spec/press.html">Prensa, medios y comunicaciones públicas</a></li><li><a href="../../../spec/comms-intelligence.html">Inteligencia de comunicaciones — hoja de ruta post-MVP</a></li></ul></div>
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">Arquitectura<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../../architecture/system.html">Arquitectura del sistema</a></li></ul></div>
+<div class="nav-section open"><button type="button" class="nav-section-title" aria-expanded="true">Diseño UX<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../00-overview.html">Resumen del diseño de UX</a></li><li><a href="./navigation-model.html" aria-current="page" class="active">Modelo de navegación</a></li><li><a href="./screen-inventory.html">Inventario de pantallas</a></li><li><a href="./persona-views.html">Vistas por arquetipo</a></li><li><a href="./url-structure.html">Estructura de URL</a></li><li><a href="../02-global-patterns/pattern-catalog.html">Catálogo de patrones</a></li><li><a href="../02-global-patterns/offline-sync-patterns.html">Patrones sin conexión y de sincronización</a></li><li><a href="../02-global-patterns/notification-patterns.html">Patrones de notificaciones</a></li><li><a href="../02-global-patterns/search-patterns.html">Patrones de búsqueda</a></li><li><a href="../02-global-patterns/settings-help-patterns.html">Patrones de ajustes y ayuda</a></li><li><a href="../02-global-patterns/security-ux-patterns.html">Patrones de UX de seguridad</a></li><li><a href="../03-design-system/foundations.html">Fundamentos del sistema de diseño</a></li><li><a href="../03-design-system/theming-strategy.html">Estrategia de temas</a></li><li><a href="../03-design-system/component-inventory.html">Inventario de componentes</a></li><li><a href="../03-design-system/responsive-strategy.html">Estrategia de diseño adaptable</a></li></ul></div>
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">Decisiones<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../../../decisions/001-platform-architecture.html">ADR-001: Arquitectura y despliegue de la plataforma</a></li><li><a href="../../../decisions/002-security-threat-model.html">ADR-002: Seguridad y modelo de amenazas</a></li><li><a href="../../../decisions/003-identity-access-organization.html">ADR-003: Identidad, acceso y organización</a></li><li><a href="../../../decisions/004-data-model-integrity.html">ADR-004: Modelo de datos e integridad</a></li><li><a href="../../../decisions/005-offline-first-sync.html">ADR-005: Prioridad sin conexión y sincronización</a></li><li><a href="../../../decisions/006-field-operations-gotv.html">ADR-006: Operaciones de campo y GOTV</a></li><li><a href="../../../decisions/007-fundraising-payments.html">ADR-007: Recaudación de fondos y pagos</a></li><li><a href="../../../decisions/008-communications-messaging.html">ADR-008: Comunicaciones y mensajería</a></li><li><a href="../../../decisions/009-compliance-legal.html">ADR-009: Cumplimiento y marco legal</a></li><li><a href="../../../decisions/010-internationalization-localization.html">ADR-010: Internacionalización y localización</a></li><li><a href="../../../decisions/011-design-system-ux.html">ADR-011: Sistema de diseño y fundamentos de UX</a></li><li><a href="../../../decisions/012-external-integrations.html">ADR-012: Integraciones externas</a></li><li><a href="../../../decisions/013-analytics-ai.html">ADR-013: Analítica e IA</a></li><li><a href="../../../decisions/014-volunteer-onboarding.html">ADR-014: Voluntariado e incorporación</a></li><li><a href="../../../decisions/015-product-scope.html">ADR-015: Límites del alcance del producto</a></li><li><a href="../../../decisions/016-cross-cutting-resolutions.html">ADR-016: Resoluciones transversales</a></li><li><a href="../../../decisions/017-sharing-contract-trust-model.html">ADR-017: El contrato de intercambio como primitiva universal de confianza</a></li><li><a href="../../../decisions/ux-decisions.html">Decisiones de UX — fase de wireframes</a></li></ul></div>
+    </nav>
+  </aside>
+  <main id="content" class="content">
+    <nav class="breadcrumb" aria-label="Ruta de navegación">Diseño UX</nav>
+    <article class="prose">
+<h1 id="modelo-de-navegación" tabindex="-1"><a class="heading-anchor" href="#modelo-de-navegación" aria-hidden="true">#</a> Modelo de navegación</h1>
+<h2 id="propósito" tabindex="-1"><a class="heading-anchor" href="#propósito" aria-hidden="true">#</a> Propósito</h2>
+<p>Este documento define cómo GreenGrass organiza su superficie de funcionalidades en una estructura navegable. Es el documento de arquitectura de información más importante de todos: cada pantalla, cada wireframe y cada diseño de componente dependen del modelo de navegación.</p>
+<p>El reto central: 9 perfiles distintos, en contextos radicalmente diferentes, comparten una sola aplicación. Una voluntaria que toca puertas con un Android de gama baja en la India rural necesita una interfaz completamente distinta de la que necesita un Administrador de la organización que configura ajustes de cumplimiento desde una computadora de escritorio en Puerto Rico. El modelo de navegación tiene que servir a los dos sin ceder en ninguno.</p>
+<h2 id="paradigma-de-navegación" tabindex="-1"><a class="heading-anchor" href="#paradigma-de-navegación" aria-hidden="true">#</a> Paradigma de navegación</h2>
+<h3 id="disposición-de-escritorio" tabindex="-1"><a class="heading-anchor" href="#disposición-de-escritorio" aria-hidden="true">#</a> Disposición de escritorio</h3>
+<p><strong>DECIDIDO: Híbrido — barra superior + barra lateral.</strong> La barra superior se encarga del contexto (&quot;dónde estoy&quot;): identidad de la organización, búsqueda global, estado de sincronización, notificaciones, perfil de usuario. La barra lateral se encarga de la navegación por funcionalidades (&quot;qué puedo hacer&quot;): elementos adaptables al rol, organizados en secciones plegables. Separación limpia de responsabilidades.</p>
+<h4 id="anatomía-del-marco-de-escritorio" tabindex="-1"><a class="heading-anchor" href="#anatomía-del-marco-de-escritorio" aria-hidden="true">#</a> Anatomía del marco de escritorio</h4>
+<pre><code>┌────────────────────────────────────────────────────────────────────┐
+│  [Logo/Organización]    [Buscar]          [Sinc] [Notif] [Avatar]  │  ← Barra superior
+├────────────────┬───────────────────────────────────────────────────┤
+│                │                                                   │
+│  Barra lateral │            Área de contenido principal            │
+│                │                                                   │
+│  [elementos    │                                                   │
+│   de           │                                                   │
+│   navegación   │                                                   │
+│   adaptados    │                                                   │
+│   al rol]      │                                                   │
+│                │                                                   │
+│                │                                                   │
+│                │                                                   │
+│                ├──────────────────────────────┬────────────────────┤
+│                │                              │ Panel de detalle   │
+│                │                              │ (contextual,       │
+│                │                              │  opcional)         │
+├────────────────┴──────────────────────────────┴────────────────────┤
+│  [Ayuda]  [Idioma]  [Configuración]                                │  ← Pie de la barra lateral
+└────────────────────────────────────────────────────────────────────┘
+</code></pre>
+<p><strong>Barra superior (siempre visible):</strong></p>
+<ul>
+<li>Logo o nombre de la organización (enlaza al inicio). En contexto de alianza, muestra el nombre de la alianza con un desplegable para cambiar de organización.</li>
+<li>Barra de búsqueda global</li>
+<li>Indicador de estado de sincronización (ver <a href="http://offline-sync-patterns.md" target="_blank" rel="noopener noreferrer">offline-sync-patterns.md</a>)</li>
+<li>Campana de notificaciones con contador de no leídas</li>
+<li>Avatar de usuario → menú desplegable (perfil, preferencias, cambiar de organización, cerrar sesión)</li>
+</ul>
+<p><strong>Barra lateral (adaptable al rol):</strong></p>
+<ul>
+<li>Los elementos de navegación cambian según la plantilla o plantillas de rol activas del usuario</li>
+<li>Se pliega a un modo de solo iconos (guarda la preferencia del usuario)</li>
+<li>Zona de pie: acceso a ayuda y soporte, selector de idioma, enlace a configuración</li>
+<li>Ancho de la barra lateral: ~240px desplegada, ~64px plegada</li>
+</ul>
+<p><strong>Área de contenido principal:</strong></p>
+<ul>
+<li>A todo el ancho cuando no hay ningún panel de detalle activo</li>
+<li>Se divide cuando hace falta un panel de detalle (detalle de contacto, hilo de mensajes, etc.)</li>
+<li>Ruta de navegación en la parte superior del área de contenido para la navegación profunda</li>
+</ul>
+<p><strong>Panel de detalle (contextual):</strong></p>
+<ul>
+<li>Aparece a la derecha con información contextual (ver un contacto mientras se recorre una lista, leer un hilo de mensajes desde la bandeja de entrada)</li>
+<li>Se puede cerrar. En viewports (el área visible de la pantalla) de escritorio pequeños, se abre como superposición a pantalla completa en vez de como panel.</li>
+</ul>
+<h4 id="consideraciones-para-rtl" tabindex="-1"><a class="heading-anchor" href="#consideraciones-para-rtl" aria-hidden="true">#</a> Consideraciones para RTL</h4>
+<p>En modo RTL (árabe):</p>
+<ul>
+<li>La barra lateral se mueve al lado derecho</li>
+<li>El panel de detalle se mueve a la izquierda</li>
+<li>Todos los iconos direccionales (flechas, chevrones) se reflejan</li>
+<li>La alineación del texto se invierte</li>
+<li>La ruta de navegación cambia de dirección</li>
+<li>Las propiedades lógicas de CSS (<code>inline-start</code>/<code>inline-end</code>) resuelven esto sin maquetaciones aparte</li>
+</ul>
+<h3 id="disposición-móvil" tabindex="-1"><a class="heading-anchor" href="#disposición-móvil" aria-hidden="true">#</a> Disposición móvil</h3>
+<pre><code>┌──────────────────────────────────┐
+│  [≡/Atrás]  [Título]  [Acciones] │  ← Barra superior (contextual)
+├──────────────────────────────────┤
+│                                  │
+│                                  │
+│        Área de contenido         │
+│       a pantalla completa        │
+│                                  │
+│                                  │
+│                                  │
+│                                  │
+├──────────────────────────────────┤
+│  [Pest1] [Pest2] [Pest3] [Más]   │  ← Barra de pestañas inferior
+└──────────────────────────────────┘
+</code></pre>
+<p><strong>Barra superior:</strong></p>
+<ul>
+<li>Izquierda: menú hamburguesa (en el nivel superior) o flecha de retroceso (al navegar en profundidad)</li>
+<li>Centro: título de la pantalla actual</li>
+<li>Derecha: acciones contextuales (buscar, filtrar, redactar — varía según la pantalla)</li>
+</ul>
+<p><strong>Área de contenido:</strong></p>
+<ul>
+<li>A pantalla completa. Sin barra lateral, sin vistas divididas.</li>
+<li>Las listas y los detalles son pantallas separadas (tocar para entrar al detalle, atrás para volver)</li>
+</ul>
+<p><strong>Barra de pestañas inferior:</strong></p>
+<ul>
+<li>Máximo de 4 a 5 elementos por rol (el resto se abre en una hoja &quot;Más&quot;)</li>
+<li>Los elementos cambian según la plantilla de rol del usuario</li>
+<li>La pestaña activa se indica con relleno o resaltado</li>
+<li>Contadores en las pestañas relevantes (mensajes sin leer, aprobaciones pendientes)</li>
+</ul>
+<p><strong>RTL:</strong> el orden de las pestañas se invierte. La flecha de retroceso apunta a la derecha.</p>
+<h3 id="modo-de-campo-solo-en-móvil" tabindex="-1"><a class="heading-anchor" href="#modo-de-campo-solo-en-móvil" aria-hidden="true">#</a> Modo de campo (solo en móvil)</h3>
+<p>El modo de campo es una <strong>pantalla completa exclusiva</strong> que sustituye por completo el marco de navegación normal. Se activa cuando un voluntario inicia un turno de trabajo de campo, una sesión de inscripción de votantes o una operación de GOTV (Get Out The Vote — movilización del voto).</p>
+<pre><code>┌──────────────────────────────────────┐
+│  [Sinc: hace 2 min]  [●REC] 2:34     │  ← Encabezado de campo
+├──────────────────────────────────────┤
+│                                      │
+│                                      │
+│   Contenido específico de la tarea   │
+│   (lista de recorrido, ficha de      │
+│    puerta, formulario de inscripción,│
+│    ficha de llamada)                 │
+│                                      │
+│                                      │
+│                                      │
+│                                      │
+├──────────────────────────────────────┤
+│ [◀ Ant.]   [3 de 47]   [Sig. ▶]      │  ← Navegación entre tareas
+├──────────────────────────────────────┤
+│  [Terminar turno]   [🔒 Bloquear]    │  ← Acciones de campo
+└──────────────────────────────────────┘
+</code></pre>
+<p><strong>Encabezado de campo:</strong></p>
+<ul>
+<li>Estado de sincronización con el tiempo transcurrido desde la última (destacado: los datos desactualizados son peligrosos el día de elecciones)</li>
+<li>Indicador de grabación (el turno está activo)</li>
+<li>Cronómetro del turno (tiempo transcurrido)</li>
+<li>Sin navegación global, sin barra lateral, sin pestañas inferiores</li>
+</ul>
+<p><strong>Contenido específico de la tarea:</strong></p>
+<ul>
+<li>La pantalla entera se dedica a la tarea actual (la puerta que se está tocando, la llamada que se está haciendo, el votante que se está inscribiendo)</li>
+<li>El contenido varía según el flujo de trabajo, pero siempre muestra: los datos de la persona, el guion o formulario y la interfaz para capturar la respuesta</li>
+</ul>
+<p><strong>Navegación entre tareas:</strong></p>
+<ul>
+<li>Avance lineal por la lista de tareas (lista de recorrido, lista de llamadas)</li>
+<li>Anterior/Siguiente con indicador de posición (&quot;3 de 47&quot;)</li>
+<li>Se puede saltar a un elemento concreto desde una vista de lista</li>
+</ul>
+<p><strong>Acciones de campo:</strong></p>
+<ul>
+<li>Terminar turno: dispara el cierre del turno (sincronización, balance del turno, registro de horas, liberación del territorio)</li>
+<li>Bloquear: botón de pánico — bloquea la app de inmediato y exige autenticarse otra vez (<a href="http://security.md" target="_blank" rel="noopener noreferrer">security.md</a>)</li>
+<li>No hay más navegación. El mundo del voluntario es la lista de recorrido hasta que termina el turno.</li>
+</ul>
+<p><strong>Por qué se apodera de toda la pantalla y no es solo otra disposición de pestañas:</strong>
+El modo de campo responde a un modelo mental radicalmente distinto. La persona voluntaria va caminando, con una sola mano, quizá con mala luz. Necesita áreas táctiles grandes, mínimas decisiones de navegación y cero distracción. El marco normal (barra lateral, pestañas, notificaciones) sería ruido. El modo de campo es la app reducida a su tarea esencial.</p>
+<p><strong>Entrada y salida:</strong></p>
+<ul>
+<li>Entrada: el voluntario toca &quot;Iniciar turno&quot; desde su pantalla de turnos. La app descarga los datos de la lista de recorrido, confirma que todo está listo y cambia al modo de campo.</li>
+<li>Salida: el voluntario toca &quot;Terminar turno&quot;. La app sincroniza los datos pendientes, muestra el balance del turno, registra las horas y vuelve al marco normal.</li>
+<li>Salida anormal: si la app se cae o el dispositivo se apaga, el turno se retoma donde quedó en el siguiente arranque (los datos se guardan localmente después de cada interacción).</li>
+</ul>
+<h2 id="navegación-adaptable-al-rol" tabindex="-1"><a class="heading-anchor" href="#navegación-adaptable-al-rol" aria-hidden="true">#</a> Navegación adaptable al rol</h2>
+<h3 id="cómo-afectan-las-plantillas-de-rol-a-la-navegación" tabindex="-1"><a class="heading-anchor" href="#cómo-afectan-las-plantillas-de-rol-a-la-navegación" aria-hidden="true">#</a> Cómo afectan las plantillas de rol a la navegación</h3>
+<p>La barra lateral (escritorio) y la barra de pestañas inferior (móvil) muestran elementos distintos según la plantilla o plantillas de rol activas del usuario. Cada persona ve solo las funcionalidades a las que tiene acceso: las funcionalidades restringidas no aparecen, no están atenuadas.</p>
+<p><strong>DECIDIDO: Secciones agrupadas.</strong> La barra lateral agrupa los elementos de navegación por rol, con encabezados de sección plegables (por ejemplo, &quot;Comunicaciones&quot;, &quot;Finanzas&quot;, &quot;Campo&quot;). Quien tiene varios roles ve varias secciones, cada una plegable por separado. Da un modelo mental claro —&quot;ahora estoy haciendo trabajo de comunicaciones&quot;— y permite plegar las secciones que no se están usando para reducir el ruido visual.</p>
+<h3 id="elementos-de-navegación-por-arquetipo" tabindex="-1"><a class="heading-anchor" href="#elementos-de-navegación-por-arquetipo" aria-hidden="true">#</a> Elementos de navegación por arquetipo</h3>
+<p>Las tablas siguientes definen lo que ve cada arquetipo. Los elementos marcados con (M) están también en las pestañas inferiores del móvil (máximo de 4 a 5 por arquetipo).</p>
+<h4 id="administrador-de-la-organización" tabindex="-1"><a class="heading-anchor" href="#administrador-de-la-organización" aria-hidden="true">#</a> Administrador de la organización</h4>
+<p>El Administrador de la organización lo ve todo. Su barra lateral es la unión de todas las áreas funcionales.</p>
+<table>
+<thead>
+<tr>
+<th>Sección</th>
+<th>Elementos</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Resumen</strong></td>
+<td>Panel (M), Flujo de actividad</td>
+</tr>
+<tr>
+<td><strong>Personas</strong></td>
+<td>Contactos (M), Segmentos, Importación/Exportación, Cola de deduplicación</td>
+</tr>
+<tr>
+<td><strong>Campo</strong></td>
+<td>Trabajo de campo, Jornadas de llamadas, Inscripción de votantes, Territorios</td>
+</tr>
+<tr>
+<td><strong>Recaudación de fondos</strong></td>
+<td>Donaciones (M), Formularios, Campañas, Cumplimiento, Repartos de la alianza</td>
+</tr>
+<tr>
+<td><strong>Comunicaciones</strong></td>
+<td>Correo, SMS/WhatsApp, Redes sociales, Plantillas</td>
+</tr>
+<tr>
+<td><strong>Eventos</strong></td>
+<td>Eventos (M), Registro de entrada</td>
+</tr>
+<tr>
+<td><strong>Activismo</strong></td>
+<td>Campañas, Peticiones, Comentarios públicos</td>
+</tr>
+<tr>
+<td><strong>Prensa</strong></td>
+<td>Contactos de medios, Comunicados, Cobertura, Respaldos, Redes</td>
+</tr>
+<tr>
+<td><strong>GOTV</strong></td>
+<td>Universo, Concentración, Centro de mando, Transporte, Observadores, Resultados</td>
+</tr>
+<tr>
+<td><strong>Mensajería</strong></td>
+<td>Mensajes (M)</td>
+</tr>
+<tr>
+<td><strong>Alianza</strong></td>
+<td>Panel de la alianza, Miembros, Campañas conjuntas</td>
+</tr>
+<tr>
+<td><strong>Configuración</strong></td>
+<td>Perfil de la organización, Identidad visual, Roles, Cumplimiento, Integraciones, Facturación</td>
+</tr>
+</tbody>
+</table>
+<p>Pestañas en móvil: Panel, Contactos, Donaciones, Mensajes, Más</p>
+<h4 id="director-de-comunicaciones" tabindex="-1"><a class="heading-anchor" href="#director-de-comunicaciones" aria-hidden="true">#</a> Director de comunicaciones</h4>
+<table>
+<thead>
+<tr>
+<th>Sección</th>
+<th>Elementos</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Resumen</strong></td>
+<td>Panel de comunicaciones (M)</td>
+</tr>
+<tr>
+<td><strong>Comunicaciones</strong></td>
+<td>Campañas de correo (M), SMS/WhatsApp, Redes sociales (M), Plantillas</td>
+</tr>
+<tr>
+<td><strong>Prensa</strong></td>
+<td>Contactos de medios, Comunicados, Cobertura, Respaldos, Puntos de mensaje</td>
+</tr>
+<tr>
+<td><strong>Personas</strong></td>
+<td>Contactos, Segmentos</td>
+</tr>
+<tr>
+<td><strong>Mensajería</strong></td>
+<td>Mensajes (M)</td>
+</tr>
+</tbody>
+</table>
+<p>Pestañas en móvil: Panel, Correo, Redes, Mensajes, Más</p>
+<h4 id="director-de-finanzas" tabindex="-1"><a class="heading-anchor" href="#director-de-finanzas" aria-hidden="true">#</a> Director de finanzas</h4>
+<table>
+<thead>
+<tr>
+<th>Sección</th>
+<th>Elementos</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Resumen</strong></td>
+<td>Panel de recaudación (M)</td>
+</tr>
+<tr>
+<td><strong>Recaudación de fondos</strong></td>
+<td>Donaciones (M), Formularios, Campañas, Recurrentes, Reembolsos, Efectivo, Cumplimiento (M)</td>
+</tr>
+<tr>
+<td><strong>Personas</strong></td>
+<td>Donantes, Segmentos</td>
+</tr>
+<tr>
+<td><strong>Mensajería</strong></td>
+<td>Mensajes (M)</td>
+</tr>
+</tbody>
+</table>
+<p>Pestañas en móvil: Panel, Donaciones, Cumplimiento, Mensajes, Más</p>
+<h4 id="director-de-campo" tabindex="-1"><a class="heading-anchor" href="#director-de-campo" aria-hidden="true">#</a> Director de campo</h4>
+<table>
+<thead>
+<tr>
+<th>Sección</th>
+<th>Elementos</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Resumen</strong></td>
+<td>Panel de campo (M)</td>
+</tr>
+<tr>
+<td><strong>Campo</strong></td>
+<td>Trabajo de campo (M), Jornadas de llamadas, Inscripción de votantes, Territorios (M)</td>
+</tr>
+<tr>
+<td><strong>GOTV</strong></td>
+<td>Universo, Concentración, Centro de mando, Transporte, Observadores</td>
+</tr>
+<tr>
+<td><strong>Personas</strong></td>
+<td>Contactos, Segmentos</td>
+</tr>
+<tr>
+<td><strong>Mensajería</strong></td>
+<td>Mensajes (M)</td>
+</tr>
+</tbody>
+</table>
+<p>Pestañas en móvil: Panel, Trabajo de campo, Territorios, Mensajes, Más</p>
+<h4 id="coordinador-de-voluntarios" tabindex="-1"><a class="heading-anchor" href="#coordinador-de-voluntarios" aria-hidden="true">#</a> Coordinador de voluntarios</h4>
+<table>
+<thead>
+<tr>
+<th>Sección</th>
+<th>Elementos</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Resumen</strong></td>
+<td>Panel de voluntarios (M)</td>
+</tr>
+<tr>
+<td><strong>Voluntarios</strong></td>
+<td>Lista de voluntarios (M), Incorporación, Capacitación, Turnos (M), Equipos</td>
+</tr>
+<tr>
+<td><strong>Eventos</strong></td>
+<td>Eventos (M), Registro de entrada</td>
+</tr>
+<tr>
+<td><strong>Mensajería</strong></td>
+<td>Mensajes (M)</td>
+</tr>
+</tbody>
+</table>
+<p>Pestañas en móvil: Panel, Lista de voluntarios, Turnos, Mensajes, Más</p>
+<h4 id="gestor-de-datos" tabindex="-1"><a class="heading-anchor" href="#gestor-de-datos" aria-hidden="true">#</a> Gestor de datos</h4>
+<table>
+<thead>
+<tr>
+<th>Sección</th>
+<th>Elementos</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Resumen</strong></td>
+<td>Panel de datos</td>
+</tr>
+<tr>
+<td><strong>Personas</strong></td>
+<td>Contactos (M), Segmentos, Importación (M), Exportación, Cola de deduplicación (M), Calidad de datos</td>
+</tr>
+<tr>
+<td><strong>Mensajería</strong></td>
+<td>Mensajes (M)</td>
+</tr>
+</tbody>
+</table>
+<p>Pestañas en móvil: Contactos, Importación, Deduplicación, Mensajes, Más</p>
+<h4 id="voluntario" tabindex="-1"><a class="heading-anchor" href="#voluntario" aria-hidden="true">#</a> Voluntario</h4>
+<table>
+<thead>
+<tr>
+<th>Sección</th>
+<th>Elementos</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Lo mío</strong></td>
+<td>Mis turnos (M), Mis tareas, Mi equipo</td>
+</tr>
+<tr>
+<td><strong>Eventos</strong></td>
+<td>Eventos (M)</td>
+</tr>
+<tr>
+<td><strong>Mensajería</strong></td>
+<td>Mensajes (M)</td>
+</tr>
+<tr>
+<td><strong>Capacitación</strong></td>
+<td>Módulos, Certificaciones</td>
+</tr>
+<tr>
+<td><strong>Campo</strong></td>
+<td>Iniciar turno (M) → entra al modo de campo</td>
+</tr>
+</tbody>
+</table>
+<p>Pestañas en móvil: Turnos, Eventos, Mensajes, Iniciar turno</p>
+<p>La pestaña &quot;Iniciar turno&quot; es un botón de acción destacado (visualmente distinto — relleno o de color) que entra al modo de campo.</p>
+<h4 id="líder-de-equipo" tabindex="-1"><a class="heading-anchor" href="#líder-de-equipo" aria-hidden="true">#</a> Líder de equipo</h4>
+<p>Todo lo que ve un Voluntario, más:</p>
+<table>
+<thead>
+<tr>
+<th>Sección</th>
+<th>Elementos adicionales</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Mi equipo</strong></td>
+<td>Lista del equipo, Avance del equipo, Registro de entrada</td>
+</tr>
+<tr>
+<td><strong>Campo</strong></td>
+<td>Asignaciones del equipo (solo lectura)</td>
+</tr>
+</tbody>
+</table>
+<p>Pestañas en móvil: las mismas que las del Voluntario, pero la pestaña &quot;Turnos&quot; muestra por defecto la vista de equipo</p>
+<h4 id="candidato" tabindex="-1"><a class="heading-anchor" href="#candidato" aria-hidden="true">#</a> Candidato</h4>
+<table>
+<thead>
+<tr>
+<th>Sección</th>
+<th>Elementos</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Resumen</strong></td>
+<td>Panel de la campaña (M) — curado, simplificado</td>
+</tr>
+<tr>
+<td><strong>Perfil</strong></td>
+<td>Mi perfil público (M)</td>
+</tr>
+<tr>
+<td><strong>Aprobaciones</strong></td>
+<td>Aprobaciones pendientes (M) — comunicados de prensa, publicaciones en redes</td>
+</tr>
+<tr>
+<td><strong>Mensajería</strong></td>
+<td>Mensajes (M) — las sesiones informativas van destacadas</td>
+</tr>
+</tbody>
+</table>
+<p>Pestañas en móvil: Panel, Perfil, Aprobaciones, Mensajes</p>
+<p>El Candidato ve una vista deliberadamente limitada. Sin ajustes operativos, sin gestión de datos, sin configuración de cumplimiento. El panel muestra métricas de alto nivel (totales de recaudación, número de voluntarios, asistencia a eventos, avance general del trabajo de campo) sin desglosar hasta el detalle operativo.</p>
+<h4 id="simpatizante" tabindex="-1"><a class="heading-anchor" href="#simpatizante" aria-hidden="true">#</a> Simpatizante</h4>
+<p>Los simpatizantes interactúan sobre todo con páginas públicas (sin necesidad de autenticarse). Si inician sesión:</p>
+<table>
+<thead>
+<tr>
+<th>Sección</th>
+<th>Elementos</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Mi perfil</strong></td>
+<td>Perfil (M), Preferencias, Preferencias de comunicación</td>
+</tr>
+<tr>
+<td><strong>Donaciones</strong></td>
+<td>Historial de donaciones (M), Recurrentes, Recibos</td>
+</tr>
+<tr>
+<td><strong>Eventos</strong></td>
+<td>Mis eventos (M)</td>
+</tr>
+</tbody>
+</table>
+<p>Pestañas en móvil: Perfil, Donaciones, Eventos</p>
+<p>Los simpatizantes no ven ninguna funcionalidad interna de la plataforma. Su navegación es un portal personal simple.</p>
+<h2 id="elementos-permanentes-de-la-interfaz" tabindex="-1"><a class="heading-anchor" href="#elementos-permanentes-de-la-interfaz" aria-hidden="true">#</a> Elementos permanentes de la interfaz</h2>
+<p>Elementos presentes en todos los contextos de navegación (salvo el modo de campo, que lo quita todo):</p>
+<h3 id="indicador-de-estado-de-sincronización" tabindex="-1"><a class="heading-anchor" href="#indicador-de-estado-de-sincronización" aria-hidden="true">#</a> Indicador de estado de sincronización</h3>
+<p>Siempre visible en la barra superior. Estados:</p>
+<ul>
+<li><strong>Conectado (en tiempo real)</strong> — punto verde discreto o marca de verificación. Sin texto: por defecto tiene que pasar desapercibido.</li>
+<li><strong>Conectado (desactualizado)</strong> — indicador ámbar con &quot;Última sincronización: hace X min&quot;. Aparece si la sincronización no se ha completado en más de 5 minutos.</li>
+<li><strong>Sincronizando</strong> — indicador animado (pulso discreto o indicador de carga). Breve: normalmente segundos.</li>
+<li><strong>Sin conexión</strong> — indicador destacado: &quot;Sin conexión — los cambios se sincronizarán cuando vuelva la conexión&quot;. Persiste hasta que se reconecta.</li>
+<li><strong>Error de sincronización</strong> — indicador rojo con &quot;Falló la sincronización — toca para reintentar&quot;. Al tocarlo se muestra el detalle del error.</li>
+</ul>
+<p>En el modo de campo, el indicador de sincronización es más grande y muestra el tiempo exacto desde la última sincronización, porque los datos desactualizados son peligrosos en la operación.</p>
+<h3 id="campana-de-notificaciones" tabindex="-1"><a class="heading-anchor" href="#campana-de-notificaciones" aria-hidden="true">#</a> Campana de notificaciones</h3>
+<ul>
+<li>Contador de notificaciones sin leer</li>
+<li>Al tocarla se abre la bandeja de notificaciones (entra desde la derecha, o a pantalla completa en móvil)</li>
+<li>Las notificaciones se agrupan por origen (mensajería, asignaciones, GOTV, recaudación de fondos, etc.)</li>
+<li>Cada notificación enlaza a la pantalla correspondiente</li>
+<li>Acción &quot;Marcar todo como leído&quot;</li>
+<li>Enlace a las preferencias de notificación</li>
+</ul>
+<h3 id="menú-de-usuario" tabindex="-1"><a class="heading-anchor" href="#menú-de-usuario" aria-hidden="true">#</a> Menú de usuario</h3>
+<ul>
+<li>Avatar o iniciales del usuario → desplegable (escritorio) o menú de perfil a pantalla completa (móvil)</li>
+<li>Contiene: ajustes de perfil, preferencias de notificación, idioma, ajustes de seguridad (gestión de passkeys, contactos de confianza), cambio de organización (si pertenece a varias), cerrar sesión</li>
+<li>En modo de coacción: muestra la misma estructura de menú, pero con datos saneados</li>
+</ul>
+<h3 id="selector-de-idioma" tabindex="-1"><a class="heading-anchor" href="#selector-de-idioma" aria-hidden="true">#</a> Selector de idioma</h3>
+<ul>
+<li>Disponible desde el menú de usuario y desde el pie de la barra lateral (escritorio)</li>
+<li>Muestra los idiomas configurados por la organización</li>
+<li>Cambiar de idioma actualiza la interfaz al instante (se guarda en el perfil del usuario)</li>
+<li>No afecta al idioma de los datos (una nota de trabajo de campo escrita en español sigue en español, sea cual sea el idioma de la interfaz)</li>
+</ul>
+<h3 id="acceso-a-la-ayuda" tabindex="-1"><a class="heading-anchor" href="#acceso-a-la-ayuda" aria-hidden="true">#</a> Acceso a la ayuda</h3>
+<ul>
+<li>Icono &quot;?&quot; o enlace &quot;Ayuda&quot; en el pie de la barra lateral (escritorio), y accesible desde el menú de usuario (móvil)</li>
+<li>Abre: ayuda contextual (si la hay para la pantalla actual), búsqueda en la base de conocimiento, chat con el concierge de IA</li>
+<li>La ayuda contextual aparece como panel lateral en escritorio y a pantalla completa en móvil</li>
+</ul>
+<h2 id="contextos-de-navegación-especiales" tabindex="-1"><a class="heading-anchor" href="#contextos-de-navegación-especiales" aria-hidden="true">#</a> Contextos de navegación especiales</h2>
+<h3 id="modo-día-de-elecciones" tabindex="-1"><a class="heading-anchor" href="#modo-día-de-elecciones" aria-hidden="true">#</a> Modo día de elecciones</h3>
+<p>Cuando se activan las operaciones de GOTV (acción explícita del Administrador de la organización):</p>
+<ul>
+<li>El personal del centro de mando ve un banner destacado de &quot;Día de elecciones activo&quot; en la parte superior de la pantalla</li>
+<li>Su navegación se amplía con el Centro de mando de GOTV como elemento principal (fijado arriba en la barra lateral, o sustituyendo la primera pestaña del móvil)</li>
+<li>La prioridad de las notificaciones cambia: las de GOTV suben</li>
+<li>La pantalla del Centro de mando pasa a ser el inicio predeterminado del personal del centro de mando</li>
+<li>Desactivación: el Administrador de la organización la desactiva explícitamente, o se desactiva sola a una hora configurada (después del cierre de las urnas)</li>
+</ul>
+<h3 id="contexto-de-alianza" tabindex="-1"><a class="heading-anchor" href="#contexto-de-alianza" aria-hidden="true">#</a> Contexto de alianza</h3>
+<p><strong>DECIDIDO: Sección propia de alianza en la barra lateral.</strong> Las funcionalidades de alianza aparecen como una sección plegable más de la barra lateral, en línea con el patrón de agrupación por rol. Contiene: Panel de la alianza, Miembros, Campañas conjuntas, Coordinación. No hace falta cambiar de contexto: la alianza es parte del espacio de trabajo del usuario, no un mundo aparte. Es fácil de encontrar y es coherente con el patrón de secciones agrupadas.</p>
+<h3 id="modo-de-coacción-nivel-de-seguridad-agresivo" tabindex="-1"><a class="heading-anchor" href="#modo-de-coacción-nivel-de-seguridad-agresivo" aria-hidden="true">#</a> Modo de coacción (nivel de seguridad agresivo)</h3>
+<p>Cuando alguien inicia sesión con su passkey de coacción:</p>
+<p><strong>DECIDIDO: Estructura real con datos saneados.</strong> La vista de coacción presenta la estructura de navegación real con datos verosímiles pero depurados. Los elementos de navegación, las secciones de la barra lateral y el marco se ven idénticos a los de una sesión normal. El contenido va saneado: las listas de contactos muestran unos pocos contactos inocuos (sin marcadores de sensibilidad política), los paneles muestran cifras bajas y verosímiles, no hay datos de trabajo de campo ni puntajes de identificación de votantes, y las notas sensibles se eliminan. Es la opción más convincente: quien observa ve lo que parece una cuenta real de poca actividad. Las reglas detalladas de saneamiento por área funcional se definirán en <code>security-ux-patterns.md</code>.</p>
+<h3 id="contexto-del-asistente-de-puesta-en-marcha" tabindex="-1"><a class="heading-anchor" href="#contexto-del-asistente-de-puesta-en-marcha" aria-hidden="true">#</a> Contexto del asistente de puesta en marcha</h3>
+<p>Cuando alguien está dentro de un asistente de puesta en marcha (configuración inicial, configuración del procesador de pagos, etc.):</p>
+<ul>
+<li>El asistente se apodera del área de contenido principal, pero los elementos permanentes de la interfaz (barra superior, sincronización, notificaciones) siguen visibles</li>
+<li>La barra lateral muestra los pasos del asistente en vez de la navegación normal</li>
+<li>Una opción &quot;Guardar y salir&quot; permite dejar el asistente y volver a él más tarde</li>
+<li>El estado del asistente se guarda: al volver, se retoma donde se quedó</li>
+</ul>
+<h2 id="persistencia-del-estado-de-navegación" tabindex="-1"><a class="heading-anchor" href="#persistencia-del-estado-de-navegación" aria-hidden="true">#</a> Persistencia del estado de navegación</h2>
+<ul>
+<li><strong>Estado de plegado de la barra lateral</strong> — se guarda como preferencia del usuario (almacenamiento local)</li>
+<li><strong>Última pantalla visitada</strong> — en el siguiente inicio de sesión, la persona vuelve a la última pantalla que visitó (o al inicio si la sesión expiró)</li>
+<li><strong>Estado del modo de campo</strong> — si la app se cierra durante un turno, al volver a abrirla se entra directamente al modo de campo, en la última posición de la lista de recorrido</li>
+<li><strong>Estado del asistente</strong> — el progreso incompleto de un asistente se guarda y se puede retomar</li>
+</ul>
+<h2 id="comportamiento-de-la-navegación-sin-conexión" tabindex="-1"><a class="heading-anchor" href="#comportamiento-de-la-navegación-sin-conexión" aria-hidden="true">#</a> Comportamiento de la navegación sin conexión</h2>
+<p><strong>DECIDIDO: Atenuar con distintivo de sin conexión.</strong> Las funcionalidades que necesitan conexión aparecen atenuadas, con un pequeño distintivo de sin conexión en cada elemento no disponible. Al tocar un elemento atenuado se muestra el mensaje &quot;Requiere conexión&quot;. La estructura de navegación se mantiene estable sea cual sea el estado de la conexión: no hay elementos que aparecen y desaparecen según fluctúa. Las personas usuarias siempre saben qué puede hacer la plataforma, aunque ahora mismo no lo puedan hacer.</p>
+<p><strong>Funcionalidades disponibles sin conexión:</strong></p>
+<ul>
+<li>Modo de campo (trabajo de campo, inscripción de votantes, puerta a puerta de GOTV)</li>
+<li>Registro de entrada en eventos</li>
+<li>Leer mensajes ya sincronizados</li>
+<li>Redactar mensajes (quedan en cola para enviarse)</li>
+<li>Ver contactos del CRM en caché (solo lectura)</li>
+<li>Crear solicitudes de transporte (quedan en cola)</li>
+<li>Reportes de problemas de observadores electorales (quedan en cola)</li>
+</ul>
+<p><strong>Funcionalidades que requieren conexión:</strong></p>
+<ul>
+<li>Todos los paneles y la analítica</li>
+<li>Ajustes y configuración</li>
+<li>Importación y exportación de datos</li>
+<li>Jornadas de llamadas (requieren conectividad para llamar)</li>
+<li>Envíos de comunicaciones (correo, SMS, WhatsApp)</li>
+<li>Publicar en redes sociales</li>
+<li>Centro de mando de GOTV en tiempo real</li>
+<li>Búsqueda (en el servidor)</li>
+<li>Asistentes de puesta en marcha (algunos pasos requieren validación del servidor)</li>
+</ul>
+<h2 id="preguntas-abiertas" tabindex="-1"><a class="heading-anchor" href="#preguntas-abiertas" aria-hidden="true">#</a> Preguntas abiertas</h2>
+<ol>
+<li>
+<p><strong>Navegación contextual frente a navegación permanente.</strong> ¿La barra lateral debe mostrar siempre la navegación completa del rol, o debe adaptarse al contexto (por ejemplo, al ver una campaña de trabajo de campo, mostrar solo la subnavegación de trabajo de campo)? La permanente es más simple; la contextual reduce el desorden, pero puede desorientar.</p>
+</li>
+<li>
+<p><strong>Navegación por teclado.</strong> ¿La plataforma debe tener atajos de teclado para usuarios avanzados (por ejemplo, <code>G luego D</code> para ir al panel, <code>G luego M</code> para ir a los mensajes)? Es común en herramientas como GitHub y Gmail. Prioridad baja, pero de mucho valor para el personal que usa la plataforma todo el día.</p>
+</li>
+<li>
+<p><strong>Rutas de navegación.</strong> ¿Hasta qué profundidad llega la ruta de navegación? Para un camino como Panel → Trabajo de campo → Campaña X → Territorio Y → Lista de recorrido, ¿la ruta muestra todos los niveles o se trunca?</p>
+</li>
+</ol>
+<!-- REVISIT: Los elementos exactos de la barra de pestañas inferior por arquetipo hay que validarlos contra los patrones de uso reales, una vez que estén activos los primeros usuarios alfa. El mapeo inicial de arriba se basa en el análisis de las specs, pero el uso real puede diferir. -->
+<!-- REVISIT: El panel de detalle (el panel derecho en escritorio) necesita reglas cuidadosas de tamaño y comportamiento. ¿Cuándo aparece? ¿Se puede fijar abierto? ¿Se puede redimensionar? Son detalles de diseño de interacción para la fase de wireframes. -->
+
+    </article>
+  </main>
+  <div class="toc-rail"><nav class="toc" aria-label="En esta página"><div class="toc-label">En esta página</div><ul><li class="toc-2"><a href="#propósito"># Propósito</a></li><li class="toc-2"><a href="#paradigma-de-navegación"># Paradigma de navegación</a></li><li class="toc-3"><a href="#disposición-de-escritorio"># Disposición de escritorio</a></li><li class="toc-3"><a href="#disposición-móvil"># Disposición móvil</a></li><li class="toc-3"><a href="#modo-de-campo-solo-en-móvil"># Modo de campo (solo en móvil)</a></li><li class="toc-2"><a href="#navegación-adaptable-al-rol"># Navegación adaptable al rol</a></li><li class="toc-3"><a href="#cómo-afectan-las-plantillas-de-rol-a-la-navegación"># Cómo afectan las plantillas de rol a la navegación</a></li><li class="toc-3"><a href="#elementos-de-navegación-por-arquetipo"># Elementos de navegación por arquetipo</a></li><li class="toc-2"><a href="#elementos-permanentes-de-la-interfaz"># Elementos permanentes de la interfaz</a></li><li class="toc-3"><a href="#indicador-de-estado-de-sincronización"># Indicador de estado de sincronización</a></li><li class="toc-3"><a href="#campana-de-notificaciones"># Campana de notificaciones</a></li><li class="toc-3"><a href="#menú-de-usuario"># Menú de usuario</a></li><li class="toc-3"><a href="#selector-de-idioma"># Selector de idioma</a></li><li class="toc-3"><a href="#acceso-a-la-ayuda"># Acceso a la ayuda</a></li><li class="toc-2"><a href="#contextos-de-navegación-especiales"># Contextos de navegación especiales</a></li><li class="toc-3"><a href="#modo-día-de-elecciones"># Modo día de elecciones</a></li><li class="toc-3"><a href="#contexto-de-alianza"># Contexto de alianza</a></li><li class="toc-3"><a href="#modo-de-coacción-nivel-de-seguridad-agresivo"># Modo de coacción (nivel de seguridad agresivo)</a></li><li class="toc-3"><a href="#contexto-del-asistente-de-puesta-en-marcha"># Contexto del asistente de puesta en marcha</a></li><li class="toc-2"><a href="#persistencia-del-estado-de-navegación"># Persistencia del estado de navegación</a></li><li class="toc-2"><a href="#comportamiento-de-la-navegación-sin-conexión"># Comportamiento de la navegación sin conexión</a></li><li class="toc-2"><a href="#preguntas-abiertas"># Preguntas abiertas</a></li></ul></nav></div>
+</div>
+<script src="../../../../assets/search.js" defer></script>
+<script src="../../../../assets/app.js" defer></script>
+</body>
+</html>

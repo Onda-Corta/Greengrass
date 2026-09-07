@@ -1,0 +1,2185 @@
+<!DOCTYPE html>
+<html lang="es" data-base="../../../../" data-no-results="No hay resultados para">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Estructura de URL · GreenGrass</title>
+<meta name="description" content="Estructura de URL — Documentación de especificación y diseño de GreenGrass.">
+<link rel="alternate" hreflang="en" href="../../../../design/ux/01-information-architecture/url-structure.html">
+<link rel="alternate" hreflang="es" href="./url-structure.html">
+<link rel="alternate" hreflang="x-default" href="../../../../design/ux/01-information-architecture/url-structure.html">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%232563eb'/%3E%3Cstop offset='1' stop-color='%2316a34a'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='32' height='32' rx='7' fill='url(%23g)'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="../../../../assets/styles.css">
+</head>
+<body>
+<a class="skip-link" href="#content">Saltar al contenido</a>
+<header class="site-header">
+  <button type="button" class="menu-toggle" aria-label="Alternar navegación" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+  <a class="brand" href="../../../../es/index.html">
+    <span class="brand-mark" aria-hidden="true"></span>
+    <span class="brand-text"><strong>GreenGrass</strong><small>Especificación y diseño</small></span>
+  </a>
+  <div class="search">
+    <input type="search" id="search-input" placeholder="Buscar en la documentación…" autocomplete="off" aria-label="Buscar en la documentación">
+    <div id="search-results" class="search-results" hidden></div>
+  </div>
+  <nav class="lang-switch" aria-label="Idioma"><a class="lang-opt" href="../../../../design/ux/01-information-architecture/url-structure.html" hreflang="en" lang="en" title="View this page in English">EN</a><span class="lang-opt active" aria-current="true">ES</span></nav>
+  <button type="button" class="theme-toggle" aria-label="Alternar modo oscuro" title="Alternar modo oscuro">
+    <span class="theme-icon" aria-hidden="true"></span>
+  </button>
+</header>
+<div class="layout">
+  <div class="sidebar-backdrop" hidden></div>
+  <aside class="sidebar" aria-label="Navegación de la documentación">
+    <nav class="nav">
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">Inicio<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../../../index.html">GreenGrass</a></li></ul></div>
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">Especificaciones<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../../../spec/product.html">Proyecto: GreenGrass</a></li><li><a href="../../../spec/mvp.html">MVP de GreenGrass — plan de producto</a></li><li><a href="../../../spec/users.html">Usuarios y roles</a></li><li><a href="../../../spec/workflows.html">Flujos de trabajo principales</a></li><li><a href="../../../spec/geography.html">Geografía objetivo</a></li><li><a href="../../../spec/security.html">Seguridad y modelo de amenazas</a></li><li><a href="../../../spec/compliance.html">Cumplimiento y marco legal</a></li><li><a href="../../../spec/fundraising.html">Recaudación de fondos e infraestructura de pagos</a></li><li><a href="../../../spec/integrations.html">Integraciones externas</a></li><li><a href="../../../spec/support.html">Soporte y puesta en marcha de organizaciones</a></li><li><a href="../../../spec/gotv.html">GOTV y operaciones del día de elecciones</a></li><li><a href="../../../spec/messaging.html">Comunicaciones internas y notificaciones</a></li><li><a href="../../../spec/press.html">Prensa, medios y comunicaciones públicas</a></li><li><a href="../../../spec/comms-intelligence.html">Inteligencia de comunicaciones — hoja de ruta post-MVP</a></li></ul></div>
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">Arquitectura<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../../architecture/system.html">Arquitectura del sistema</a></li></ul></div>
+<div class="nav-section open"><button type="button" class="nav-section-title" aria-expanded="true">Diseño UX<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../00-overview.html">Resumen del diseño de UX</a></li><li><a href="./navigation-model.html">Modelo de navegación</a></li><li><a href="./screen-inventory.html">Inventario de pantallas</a></li><li><a href="./persona-views.html">Vistas por arquetipo</a></li><li><a href="./url-structure.html" aria-current="page" class="active">Estructura de URL</a></li><li><a href="../02-global-patterns/pattern-catalog.html">Catálogo de patrones</a></li><li><a href="../02-global-patterns/offline-sync-patterns.html">Patrones sin conexión y de sincronización</a></li><li><a href="../02-global-patterns/notification-patterns.html">Patrones de notificaciones</a></li><li><a href="../02-global-patterns/search-patterns.html">Patrones de búsqueda</a></li><li><a href="../02-global-patterns/settings-help-patterns.html">Patrones de ajustes y ayuda</a></li><li><a href="../02-global-patterns/security-ux-patterns.html">Patrones de UX de seguridad</a></li><li><a href="../03-design-system/foundations.html">Fundamentos del sistema de diseño</a></li><li><a href="../03-design-system/theming-strategy.html">Estrategia de temas</a></li><li><a href="../03-design-system/component-inventory.html">Inventario de componentes</a></li><li><a href="../03-design-system/responsive-strategy.html">Estrategia de diseño adaptable</a></li></ul></div>
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">Decisiones<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../../../decisions/001-platform-architecture.html">ADR-001: Arquitectura y despliegue de la plataforma</a></li><li><a href="../../../decisions/002-security-threat-model.html">ADR-002: Seguridad y modelo de amenazas</a></li><li><a href="../../../decisions/003-identity-access-organization.html">ADR-003: Identidad, acceso y organización</a></li><li><a href="../../../decisions/004-data-model-integrity.html">ADR-004: Modelo de datos e integridad</a></li><li><a href="../../../decisions/005-offline-first-sync.html">ADR-005: Prioridad sin conexión y sincronización</a></li><li><a href="../../../decisions/006-field-operations-gotv.html">ADR-006: Operaciones de campo y GOTV</a></li><li><a href="../../../decisions/007-fundraising-payments.html">ADR-007: Recaudación de fondos y pagos</a></li><li><a href="../../../decisions/008-communications-messaging.html">ADR-008: Comunicaciones y mensajería</a></li><li><a href="../../../decisions/009-compliance-legal.html">ADR-009: Cumplimiento y marco legal</a></li><li><a href="../../../decisions/010-internationalization-localization.html">ADR-010: Internacionalización y localización</a></li><li><a href="../../../decisions/011-design-system-ux.html">ADR-011: Sistema de diseño y fundamentos de UX</a></li><li><a href="../../../decisions/012-external-integrations.html">ADR-012: Integraciones externas</a></li><li><a href="../../../decisions/013-analytics-ai.html">ADR-013: Analítica e IA</a></li><li><a href="../../../decisions/014-volunteer-onboarding.html">ADR-014: Voluntariado e incorporación</a></li><li><a href="../../../decisions/015-product-scope.html">ADR-015: Límites del alcance del producto</a></li><li><a href="../../../decisions/016-cross-cutting-resolutions.html">ADR-016: Resoluciones transversales</a></li><li><a href="../../../decisions/017-sharing-contract-trust-model.html">ADR-017: El contrato de intercambio como primitiva universal de confianza</a></li><li><a href="../../../decisions/ux-decisions.html">Decisiones de UX — fase de wireframes</a></li></ul></div>
+    </nav>
+  </aside>
+  <main id="content" class="content">
+    <nav class="breadcrumb" aria-label="Ruta de navegación">Diseño UX</nav>
+    <article class="prose">
+<h1 id="estructura-de-url" tabindex="-1"><a class="heading-anchor" href="#estructura-de-url" aria-hidden="true">#</a> Estructura de URL</h1>
+<h2 id="propósito" tabindex="-1"><a class="heading-anchor" href="#propósito" aria-hidden="true">#</a> Propósito</h2>
+<p>Este documento mapea el inventario de pantallas (<a href="http://screen-inventory.md" target="_blank" rel="noopener noreferrer">screen-inventory.md</a>) a las rutas de SvelteKit. Define la jerarquía completa de URL de la plataforma e identifica qué rutas son públicas, autenticadas, capaces de funcionar sin conexión o exclusivas de móvil.</p>
+<p>SvelteKit usa enrutamiento basado en archivos en <code>src/routes/</code>. Los grupos de rutas <code>(group)</code> afectan al anidamiento de la maquetación, pero no aparecen en la URL. Los segmentos dinámicos usan <code>[param]</code>. Esta estructura es el puente entre la arquitectura de la información y la implementación.</p>
+<h2 id="arquitectura-de-rutas" tabindex="-1"><a class="heading-anchor" href="#arquitectura-de-rutas" aria-hidden="true">#</a> Arquitectura de rutas</h2>
+<p>La aplicación usa seis layout groups de SvelteKit (grupos de rutas que comparten un marco, sin afectar la URL), cada uno con un marco de navegación distinto:</p>
+<table>
+<thead>
+<tr>
+<th>Grupo</th>
+<th>Marco</th>
+<th>Propósito</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>(public)</code></td>
+<td>Elementos permanentes públicos mínimos</td>
+<td>Páginas públicas — no requieren autenticación</td>
+</tr>
+<tr>
+<td><code>(auth)</code></td>
+<td>Maquetación propia de la autenticación</td>
+<td>Flujos de inicio de sesión, recuperación y registro</td>
+</tr>
+<tr>
+<td><code>(app)</code></td>
+<td>Marco de navegación completo (barra lateral + barra superior)</td>
+<td>Todas las pantallas autenticadas del personal, los voluntarios y el candidato</td>
+</tr>
+<tr>
+<td><code>(field-mode)</code></td>
+<td>Marco del modo de campo (reducido, a pantalla completa)</td>
+<td>Trabajo de campo, jornadas de llamadas, inscripción de votantes y GOTV (Get Out The Vote — movilización del voto) durante un turno activo</td>
+</tr>
+<tr>
+<td><code>(portal)</code></td>
+<td>Marco del portal de simpatizantes</td>
+<td>Autoservicio del simpatizante (navegación mínima)</td>
+</tr>
+<tr>
+<td><code>(wizard)</code></td>
+<td>Marco del asistente (pasos de progreso, sin navegación lateral)</td>
+<td>Asistentes de puesta en marcha</td>
+</tr>
+</tbody>
+</table>
+<p>Cada grupo envuelve un <code>+layout.svelte</code> que define el marco de navegación de todas las rutas que contiene.</p>
+<h2 id="mapa-de-rutas" tabindex="-1"><a class="heading-anchor" href="#mapa-de-rutas" aria-hidden="true">#</a> Mapa de rutas</h2>
+<h3 id="páginas-públicas-public" tabindex="-1"><a class="heading-anchor" href="#páginas-públicas-public" aria-hidden="true">#</a> Páginas públicas — <code>(public)</code></h3>
+<p>No requieren autenticación. Llevan la identidad visual de la organización, pero son de acceso público.</p>
+<table>
+<thead>
+<tr>
+<th>URL</th>
+<th>ID de pantalla</th>
+<th>Pantalla</th>
+<th>Móvil</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>/p/[slug]</code></td>
+<td>PUB-001</td>
+<td>Página de perfil del candidato</td>
+<td>Principal</td>
+</tr>
+<tr>
+<td><code>/o/[slug]</code></td>
+<td>PUB-002</td>
+<td>Página de perfil de la organización</td>
+<td>Principal</td>
+</tr>
+<tr>
+<td><code>/donate/[formId]</code></td>
+<td>PUB-003, FUND-005</td>
+<td>Formulario de donación (alojado)</td>
+<td>Principal</td>
+</tr>
+<tr>
+<td><code>/events/[eventId]</code></td>
+<td>PUB-004, EVT-007</td>
+<td>Página del evento</td>
+<td>Principal</td>
+</tr>
+<tr>
+<td><code>/action/[actionId]</code></td>
+<td>PUB-005, ACT-005</td>
+<td>Página de acción (carta/correo)</td>
+<td>Principal</td>
+</tr>
+<tr>
+<td><code>/petition/[petitionId]</code></td>
+<td>PUB-006, ACT-006</td>
+<td>Página de petición</td>
+<td>Principal</td>
+</tr>
+<tr>
+<td><code>/volunteer</code></td>
+<td>PUB-007</td>
+<td>Página de inscripción de voluntarios</td>
+<td>Principal</td>
+</tr>
+<tr>
+<td><code>/media-kit</code></td>
+<td>PUB-008</td>
+<td>Página del kit de prensa</td>
+<td>Principal</td>
+</tr>
+<tr>
+<td><code>/events/[eventId]/rsvp</code></td>
+<td>EVT-006</td>
+<td>Formulario de confirmación de asistencia</td>
+<td>Principal</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Notas:</strong></p>
+<ul>
+<li><code>/p/</code> y <code>/o/</code> son prefijos cortos para los perfiles públicos: mantienen las URL limpias para compartirlas en redes sociales, materiales impresos y SMS.</li>
+<li><code>/donate/[formId]</code> es la ruta pública más sensible a la latencia: tiene que cargar rápido en dispositivos de gama baja y con conexiones lentas. Se prerrenderiza siempre que se pueda.</li>
+<li>Las páginas públicas de eventos se pueden compartir por URL sin necesidad de iniciar sesión. El formulario de confirmación de asistencia en <code>/events/[eventId]/rsvp</code> recoge la información sin requerir autenticación.</li>
+</ul>
+<hr>
+<h3 id="autenticación-auth" tabindex="-1"><a class="heading-anchor" href="#autenticación-auth" aria-hidden="true">#</a> Autenticación — <code>(auth)</code></h3>
+<p>Pantallas del flujo de autenticación. Usan una maquetación mínima y enfocada: sin barra lateral, sin navegación de la aplicación.</p>
+<table>
+<thead>
+<tr>
+<th>URL</th>
+<th>ID de pantalla</th>
+<th>Pantalla</th>
+<th>Móvil</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>/login</code></td>
+<td>AUTH-001</td>
+<td>Inicio de sesión (passkey)</td>
+<td>Principal</td>
+</tr>
+<tr>
+<td><code>/login/fallback</code></td>
+<td>AUTH-002</td>
+<td>Inicio de sesión alternativo (enlace mágico / OTP por SMS)</td>
+<td>Principal</td>
+</tr>
+<tr>
+<td><code>/recover</code></td>
+<td>AUTH-003</td>
+<td>Recuperación de cuenta (contacto de confianza)</td>
+<td>Principal</td>
+</tr>
+<tr>
+<td><code>/register</code></td>
+<td>AUTH-004</td>
+<td>Registro de passkey</td>
+<td>Principal</td>
+</tr>
+<tr>
+<td><code>/register/trusted-contacts</code></td>
+<td>AUTH-005</td>
+<td>Configuración del contacto de confianza</td>
+<td>Sí</td>
+</tr>
+<tr>
+<td><code>/authorize-device</code></td>
+<td>AUTH-006</td>
+<td>Autorización de dispositivo</td>
+<td>Sí</td>
+</tr>
+<tr>
+<td><code>/session-expired</code></td>
+<td>AUTH-007</td>
+<td>Sesión expirada / volver a autenticarse</td>
+<td>Principal</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Notas:</strong></p>
+<ul>
+<li><code>/login</code> detecta si hay passkey disponible y selecciona automáticamente el flujo adecuado. <code>/login/fallback</code> es para dispositivos sin soporte de passkey, o para cuando la persona lo pide explícitamente.</li>
+<li>Todas las rutas de autenticación funcionan en móvil: autenticarse es la primera experiencia de la mayoría de los usuarios.</li>
+<li><code>/register</code> es el flujo de alta del passkey posterior a aceptar la invitación inicial.</li>
+</ul>
+<hr>
+<h3 id="aplicación-autenticada-app" tabindex="-1"><a class="heading-anchor" href="#aplicación-autenticada-app" aria-hidden="true">#</a> Aplicación autenticada — <code>(app)</code></h3>
+<p>La aplicación principal. Usa el marco de navegación completo (barra superior + barra lateral en escritorio, pestañas inferiores en móvil). Todas las rutas requieren autenticación y el rol las bloquea: la plantilla de rol determina a qué rutas puede acceder cada persona. Entrar a una ruta fuera del propio rol devuelve un 404 (no un 403: las funcionalidades restringidas son invisibles, no prohibidas).</p>
+<h4 id="paneles" tabindex="-1"><a class="heading-anchor" href="#paneles" aria-hidden="true">#</a> Paneles</h4>
+<table>
+<thead>
+<tr>
+<th>URL</th>
+<th>ID de pantalla</th>
+<th>Pantalla</th>
+<th>Arquetipos</th>
+<th>Sin conexión</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>/dashboard</code></td>
+<td>DASH-001</td>
+<td>Panel general de la campaña</td>
+<td>OA, C</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>/dashboard/field</code></td>
+<td>DASH-002</td>
+<td>Panel de operaciones de campo</td>
+<td>OA, FiD</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>/dashboard/fundraising</code></td>
+<td>DASH-003</td>
+<td>Panel de recaudación de fondos</td>
+<td>OA, FD</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>/dashboard/communications</code></td>
+<td>DASH-004</td>
+<td>Panel de comunicaciones</td>
+<td>OA, CD</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>/dashboard/volunteers</code></td>
+<td>DASH-005</td>
+<td>Panel de voluntarios</td>
+<td>OA, VC</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>/dashboard/data</code></td>
+<td>DASH-006</td>
+<td>Panel de calidad de datos</td>
+<td>OA, DM</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>/dashboard/compliance</code></td>
+<td>DASH-007</td>
+<td>Panel de cumplimiento</td>
+<td>OA, FD</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>/dashboard/war-room</code></td>
+<td>DASH-008</td>
+<td>Panel del centro de mando de GOTV</td>
+<td>OA, FiD</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>/dashboard/team</code></td>
+<td>DASH-009</td>
+<td>Panel del líder de equipo</td>
+<td>TL</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>/dashboard/candidate</code></td>
+<td>DASH-010</td>
+<td>Panel del candidato</td>
+<td>C</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>/dashboard/alliance</code></td>
+<td>DASH-011</td>
+<td>Panel de la alianza</td>
+<td>OA</td>
+<td>No</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Enrutamiento de la pantalla de inicio:</strong> cada arquetipo tiene un panel por defecto. Cuando alguien entra a <code>/dashboard</code> (o inicia sesión), el servidor lo redirige al panel que le corresponde por su rol:</p>
+<ul>
+<li>Administrador de la organización → <code>/dashboard</code></li>
+<li>Director de comunicaciones → <code>/dashboard/communications</code></li>
+<li>Director de finanzas → <code>/dashboard/fundraising</code></li>
+<li>Director de campo → <code>/dashboard/field</code></li>
+<li>Coordinador de voluntarios → <code>/dashboard/volunteers</code></li>
+<li>Gestor de datos → <code>/dashboard/data</code></li>
+<li>Candidato → <code>/dashboard/candidate</code></li>
+<li>Líder de equipo → <code>/dashboard/team</code></li>
+<li>Voluntario → <code>/shifts</code> (no es un panel: va directo a los turnos)</li>
+<li>Simpatizante → redirigido al <code>(portal)</code>, en <code>/portal</code></li>
+</ul>
+<h4 id="personas-crm" tabindex="-1"><a class="heading-anchor" href="#personas-crm" aria-hidden="true">#</a> Personas / CRM</h4>
+<table>
+<thead>
+<tr>
+<th>URL</th>
+<th>ID de pantalla</th>
+<th>Pantalla</th>
+<th>Sin conexión</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>/people</code></td>
+<td>CRM-001</td>
+<td>Lista de contactos</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>/people/[contactId]</code></td>
+<td>CRM-002</td>
+<td>Detalle del contacto</td>
+<td>Parcial</td>
+</tr>
+<tr>
+<td><code>/people/[contactId]/edit</code></td>
+<td>CRM-003</td>
+<td>Crear/editar contacto</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>/people/new</code></td>
+<td>CRM-003</td>
+<td>Crear contacto (nueva)</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>/people/segments</code></td>
+<td>CRM-005</td>
+<td>Lista de segmentos</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>/people/segments/new</code></td>
+<td>CRM-004</td>
+<td>Constructor de segmentos (nueva)</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>/people/segments/[segmentId]</code></td>
+<td>CRM-004</td>
+<td>Constructor de segmentos (edición)</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>/people/dedup</code></td>
+<td>CRM-006</td>
+<td>Cola de revisión de deduplicación</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>/people/dedup/[pairId]</code></td>
+<td>CRM-007</td>
+<td>Comparación lado a lado de la deduplicación</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>/people/import</code></td>
+<td>CRM-008</td>
+<td>Asistente de importación de datos — Carga de archivo</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>/people/import/[importId]/map</code></td>
+<td>CRM-009</td>
+<td>Asistente de importación de datos — Mapeo de columnas</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>/people/import/[importId]/preview</code></td>
+<td>CRM-010</td>
+<td>Asistente de importación de datos — Vista previa de la deduplicación</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>/people/import/[importId]/confirm</code></td>
+<td>CRM-011</td>
+<td>Asistente de importación de datos — Confirmación</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>/people/import/history</code></td>
+<td>CRM-012</td>
+<td>Historial de importaciones de datos</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>/people/export</code></td>
+<td>CRM-013</td>
+<td>Exportación de datos</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>/people/data-quality</code></td>
+<td>CRM-014</td>
+<td>Informe de calidad de datos</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>/people/tags</code></td>
+<td>CRM-015</td>
+<td>Gestión de etiquetas</td>
+<td>No</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Notas:</strong></p>
+<ul>
+<li>El asistente de importación de datos (de CRM-008 a CRM-011) usa una progresión de URL de varios pasos. Cada paso es una URL distinta, para que el estado del asistente se pueda guardar en marcadores y compartir.</li>
+<li><code>/people/[contactId]</code> carga datos parciales sin conexión (contactos en caché), pero no puede guardar ediciones sin conexión.</li>
+</ul>
+<h4 id="operaciones-de-campo" tabindex="-1"><a class="heading-anchor" href="#operaciones-de-campo" aria-hidden="true">#</a> Operaciones de campo</h4>
+<table>
+<thead>
+<tr>
+<th>URL</th>
+<th>ID de pantalla</th>
+<th>Pantalla</th>
+<th>Sin conexión</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>/field/canvassing</code></td>
+<td>CANV-001</td>
+<td>Lista de campañas de trabajo de campo</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>/field/canvassing/new</code></td>
+<td>CANV-002</td>
+<td>Crear campaña de trabajo de campo</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>/field/canvassing/[campaignId]</code></td>
+<td>CANV-002</td>
+<td>Editar campaña de trabajo de campo</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>/field/canvassing/[campaignId]/results</code></td>
+<td>CANV-013</td>
+<td>Revisión de resultados del trabajo de campo</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>/field/canvassing/[campaignId]/progress</code></td>
+<td>CANV-014</td>
+<td>Mapa de avance del trabajo de campo</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>/field/scripts/new</code></td>
+<td>CANV-003</td>
+<td>Constructor de guiones (trabajo de campo, nueva)</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>/field/scripts/[scriptId]</code></td>
+<td>CANV-003</td>
+<td>Constructor de guiones (trabajo de campo, edición)</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>/field/turfs</code></td>
+<td>CANV-004</td>
+<td>Mapa de gestión de territorios</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>/field/turfs/auto-generate</code></td>
+<td>CANV-005</td>
+<td>Generación automática de territorios</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>/field/walk-lists</code></td>
+<td>CANV-006</td>
+<td>Gestión de listas de recorrido</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>/field/phone-banking</code></td>
+<td>PHONE-001</td>
+<td>Lista de campañas de jornada de llamadas</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>/field/phone-banking/new</code></td>
+<td>PHONE-002</td>
+<td>Crear campaña de jornada de llamadas</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>/field/phone-banking/[campaignId]</code></td>
+<td>PHONE-002</td>
+<td>Editar campaña de jornada de llamadas</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>/field/phone-banking/[campaignId]/script</code></td>
+<td>PHONE-003</td>
+<td>Constructor de guiones de jornada de llamadas</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>/field/phone-banking/[campaignId]/progress</code></td>
+<td>PHONE-007</td>
+<td>Panel de avance de la jornada de llamadas</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>/field/voter-registration</code></td>
+<td>VREG-001</td>
+<td>Lista de jornadas de inscripción de votantes</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>/field/voter-registration/new</code></td>
+<td>VREG-002</td>
+<td>Crear jornada de inscripción de votantes</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>/field/voter-registration/[driveId]</code></td>
+<td>VREG-002</td>
+<td>Editar jornada de inscripción de votantes</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>/field/voter-registration/[driveId]/templates</code></td>
+<td>VREG-003</td>
+<td>Selector de plantilla de jurisdicción</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>/field/voter-registration/[driveId]/results</code></td>
+<td>VREG-006</td>
+<td>Revisión de resultados de inscripción de votantes</td>
+<td>No</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Notas:</strong></p>
+<ul>
+<li>Las rutas <code>/field/scripts</code> se comparten entre el trabajo de campo y las jornadas de llamadas. Los guiones se crean aquí y las campañas los referencian.</li>
+<li>Todas las pantallas de gestión de campo son preferentemente de escritorio. El trabajo de campo real (tocar puertas, llamar, inscribir) ocurre en el modo de campo, que es un layout group aparte.</li>
+</ul>
+<h4 id="recaudación-de-fondos" tabindex="-1"><a class="heading-anchor" href="#recaudación-de-fondos" aria-hidden="true">#</a> Recaudación de fondos</h4>
+<table>
+<thead>
+<tr>
+<th>URL</th>
+<th>ID de pantalla</th>
+<th>Pantalla</th>
+<th>Sin conexión</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>/fundraising/donations</code></td>
+<td>FUND-001</td>
+<td>Lista de donaciones</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>/fundraising/donations/[donationId]</code></td>
+<td>FUND-002</td>
+<td>Detalle de la donación</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>/fundraising/forms</code></td>
+<td>FUND-003</td>
+<td>Constructor de formularios de donación (lista)</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>/fundraising/forms/new</code></td>
+<td>FUND-003</td>
+<td>Constructor de formularios de donación (nueva)</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>/fundraising/forms/[formId]</code></td>
+<td>FUND-003</td>
+<td>Constructor de formularios de donación (edición)</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>/fundraising/forms/[formId]/preview</code></td>
+<td>FUND-004</td>
+<td>Vista previa del formulario de donación</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>/fundraising/forms/[formId]/embed</code></td>
+<td>FUND-006</td>
+<td>Configuración de incrustación</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>/fundraising/campaigns</code></td>
+<td>FUND-018</td>
+<td>Lista de campañas de recaudación</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>/fundraising/campaigns/new</code></td>
+<td>FUND-019</td>
+<td>Crear campaña de recaudación</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>/fundraising/campaigns/[campaignId]</code></td>
+<td>FUND-019</td>
+<td>Editar campaña de recaudación</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>/fundraising/recurring</code></td>
+<td>FUND-007</td>
+<td>Gestión de donaciones recurrentes</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>/fundraising/pledges</code></td>
+<td>FUND-008</td>
+<td>Gestión de promesas de donación</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>/fundraising/refunds</code></td>
+<td>FUND-009</td>
+<td>Procesamiento de reembolsos</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>/fundraising/cash</code></td>
+<td>FUND-010</td>
+<td>Registro de donaciones en efectivo</td>
+<td>Parcial</td>
+</tr>
+<tr>
+<td><code>/fundraising/cash/reconciliation</code></td>
+<td>FUND-011</td>
+<td>Conciliación de efectivo</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>/fundraising/compliance</code></td>
+<td>FUND-012</td>
+<td>Revisión de marcas de cumplimiento</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>/fundraising/ab-tests</code></td>
+<td>FUND-013</td>
+<td>Configuración de la prueba A/B (lista)</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>/fundraising/ab-tests/new</code></td>
+<td>FUND-013</td>
+<td>Configuración de la prueba A/B (nueva)</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>/fundraising/ab-tests/[testId]</code></td>
+<td>FUND-014</td>
+<td>Resultados de la prueba A/B</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>/fundraising/alliance-splits</code></td>
+<td>FUND-015</td>
+<td>Configuración del reparto de la alianza</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>/fundraising/alliance-reports</code></td>
+<td>FUND-016</td>
+<td>Informe de recaudación de la alianza</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>/fundraising/processors</code></td>
+<td>FUND-017</td>
+<td>Configuración del procesador de pagos</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>/fundraising/statements</code></td>
+<td>FUND-020</td>
+<td>Generador de estados de cuenta anuales</td>
+<td>No</td>
+</tr>
+</tbody>
+</table>
+<h4 id="comunicaciones" tabindex="-1"><a class="heading-anchor" href="#comunicaciones" aria-hidden="true">#</a> Comunicaciones</h4>
+<table>
+<thead>
+<tr>
+<th>URL</th>
+<th>ID de pantalla</th>
+<th>Pantalla</th>
+<th>Sin conexión</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>/communications/email</code></td>
+<td>COMM-001</td>
+<td>Lista de campañas de correo</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>/communications/email/new</code></td>
+<td>COMM-002</td>
+<td>Constructor de campañas de correo (nueva)</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>/communications/email/[campaignId]</code></td>
+<td>COMM-002</td>
+<td>Constructor de campañas de correo (edición)</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>/communications/email/templates</code></td>
+<td>COMM-004</td>
+<td>Biblioteca de plantillas de correo</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>/communications/email/templates/new</code></td>
+<td>COMM-003</td>
+<td>Constructor de plantillas de correo (nueva)</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>/communications/email/templates/[templateId]</code></td>
+<td>COMM-003</td>
+<td>Constructor de plantillas de correo (edición)</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>/communications/sms</code></td>
+<td>COMM-005</td>
+<td>Redactor de SMS/WhatsApp</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>/communications/analytics</code></td>
+<td>COMM-006</td>
+<td>Analítica de comunicaciones</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>/communications/consent</code></td>
+<td>COMM-007</td>
+<td>Gestión del consentimiento</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>/communications/preferences</code></td>
+<td>COMM-008</td>
+<td>Preferencias de comunicación (personal)</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>/communications/unsubscribes</code></td>
+<td>COMM-009</td>
+<td>Gestión de bajas</td>
+<td>No</td>
+</tr>
+</tbody>
+</table>
+<h4 id="redes-sociales" tabindex="-1"><a class="heading-anchor" href="#redes-sociales" aria-hidden="true">#</a> Redes sociales</h4>
+<table>
+<thead>
+<tr>
+<th>URL</th>
+<th>ID de pantalla</th>
+<th>Pantalla</th>
+<th>Sin conexión</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>/social</code></td>
+<td>SOCIAL-001</td>
+<td>Panel de redes sociales</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>/social/compose</code></td>
+<td>SOCIAL-002</td>
+<td>Redactor de publicaciones (multiplataforma)</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>/social/calendar</code></td>
+<td>SOCIAL-003</td>
+<td>Calendario / programación de publicaciones</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>/social/analytics</code></td>
+<td>SOCIAL-004</td>
+<td>Analítica de publicaciones</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>/social/accounts</code></td>
+<td>SOCIAL-005</td>
+<td>Conexión de cuentas de redes sociales</td>
+<td>No</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Notas:</strong></p>
+<ul>
+<li>Las redes sociales son una ruta de primer nivel (<code>/social</code>) en vez de ir anidadas bajo <code>/communications</code>, porque son un área funcional distinta en la barra lateral (la sección de Prensa del Director de comunicaciones).</li>
+<li>La vista previa por plataforma (SOCIAL-006) es un componente dentro del redactor de publicaciones, no una ruta aparte.</li>
+</ul>
+<h4 id="eventos" tabindex="-1"><a class="heading-anchor" href="#eventos" aria-hidden="true">#</a> Eventos</h4>
+<table>
+<thead>
+<tr>
+<th>URL</th>
+<th>ID de pantalla</th>
+<th>Pantalla</th>
+<th>Sin conexión</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>/events</code></td>
+<td>EVT-001</td>
+<td>Lista de eventos</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>/events/new</code></td>
+<td>EVT-002</td>
+<td>Crear evento</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>/events/[eventId]/manage</code></td>
+<td>EVT-002</td>
+<td>Editar evento</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>/events/[eventId]</code></td>
+<td>EVT-003</td>
+<td>Detalle del evento</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>/events/[eventId]/rsvps</code></td>
+<td>EVT-004</td>
+<td>Gestión de confirmaciones de asistencia</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>/events/[eventId]/check-in</code></td>
+<td>EVT-005</td>
+<td>Herramienta de registro de entrada al evento</td>
+<td>Sí</td>
+</tr>
+<tr>
+<td><code>/events/[eventId]/metrics</code></td>
+<td>EVT-008</td>
+<td>Métricas del evento</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>/events/[eventId]/virtual</code></td>
+<td>EVT-009</td>
+<td>Configuración de evento virtual</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>/events/[eventId]/survey</code></td>
+<td>EVT-010</td>
+<td>Constructor de encuestas posteriores al evento</td>
+<td>No</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Notas:</strong></p>
+<ul>
+<li><code>/events/[eventId]</code> es la vista de detalle de solo lectura; <code>/events/[eventId]/manage</code> es el formulario de edición. Así se evita sobrecargar la misma URL con el estado de ver/editar.</li>
+<li><code>/events/[eventId]/check-in</code> es una de las pocas rutas autenticadas que funciona por completo sin conexión. Descarga los datos de las personas inscritas al cargar y funciona desconectada.</li>
+</ul>
+<h4 id="activismo" tabindex="-1"><a class="heading-anchor" href="#activismo" aria-hidden="true">#</a> Activismo</h4>
+<table>
+<thead>
+<tr>
+<th>URL</th>
+<th>ID de pantalla</th>
+<th>Pantalla</th>
+<th>Sin conexión</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>/activism</code></td>
+<td>ACT-001</td>
+<td>Lista de campañas de activismo</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>/activism/letter/new</code></td>
+<td>ACT-002</td>
+<td>Configuración de acción de cartas/correos (nueva)</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>/activism/letter/[actionId]</code></td>
+<td>ACT-002</td>
+<td>Configuración de acción de cartas/correos (edición)</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>/activism/petition/new</code></td>
+<td>ACT-003</td>
+<td>Configuración de petición (nueva)</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>/activism/petition/[petitionId]</code></td>
+<td>ACT-003</td>
+<td>Configuración de petición (edición)</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>/activism/public-comment/new</code></td>
+<td>ACT-004</td>
+<td>Configuración de campaña de comentarios públicos (nueva)</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>/activism/public-comment/[campaignId]</code></td>
+<td>ACT-004</td>
+<td>Configuración de campaña de comentarios públicos (edición)</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>/activism/[campaignId]/analytics</code></td>
+<td>ACT-008</td>
+<td>Analítica de campañas de activismo</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>/activism/[campaignId]/delivery</code></td>
+<td>ACT-009</td>
+<td>Documentación del acto de entrega</td>
+<td>No</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Notas:</strong></p>
+<ul>
+<li>Las páginas de acción de cara al público (<code>/action/[actionId]</code>, <code>/petition/[petitionId]</code>) están en el grupo <code>(public)</code>. Estas rutas del personal son para crear y gestionar las campañas.</li>
+<li>La vista previa de mensajes generados por IA (ACT-007) es un componente dentro de la página pública de acción, no una ruta del personal aparte.</li>
+</ul>
+<h4 id="prensa-y-medios" tabindex="-1"><a class="heading-anchor" href="#prensa-y-medios" aria-hidden="true">#</a> Prensa y medios</h4>
+<table>
+<thead>
+<tr>
+<th>URL</th>
+<th>ID de pantalla</th>
+<th>Pantalla</th>
+<th>Sin conexión</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>/press/contacts</code></td>
+<td>PRESS-001</td>
+<td>Lista de contactos de medios</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>/press/contacts/[contactId]</code></td>
+<td>PRESS-002</td>
+<td>Detalle del contacto de medios</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>/press/lists</code></td>
+<td>PRESS-003</td>
+<td>Gestión de listas de medios</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>/press/releases</code></td>
+<td>PRESS-004</td>
+<td>Constructor de comunicados de prensa (lista)</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>/press/releases/new</code></td>
+<td>PRESS-004</td>
+<td>Constructor de comunicados de prensa (nueva)</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>/press/releases/[releaseId]</code></td>
+<td>PRESS-004</td>
+<td>Constructor de comunicados de prensa (edición)</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>/press/releases/[releaseId]/preview</code></td>
+<td>PRESS-005</td>
+<td>Vista previa del comunicado de prensa</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>/press/releases/[releaseId]/distribute</code></td>
+<td>PRESS-006</td>
+<td>Distribución del comunicado de prensa</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>/press/advisories/new</code></td>
+<td>PRESS-007</td>
+<td>Constructor de avisos a medios (nueva)</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>/press/advisories/[advisoryId]</code></td>
+<td>PRESS-007</td>
+<td>Constructor de avisos a medios (edición)</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>/press/statements/new</code></td>
+<td>PRESS-008</td>
+<td>Constructor de declaraciones (nueva)</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>/press/statements/[statementId]</code></td>
+<td>PRESS-008</td>
+<td>Constructor de declaraciones (edición)</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>/press/media-kit</code></td>
+<td>PRESS-009</td>
+<td>Gestión del kit de prensa</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>/press/coverage</code></td>
+<td>PRESS-010</td>
+<td>Registro de cobertura</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>/press/coverage/analytics</code></td>
+<td>PRESS-011</td>
+<td>Analítica de cobertura</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>/press/endorsements</code></td>
+<td>PRESS-012</td>
+<td>Flujo de respaldos</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>/press/endorsements/[endorsementId]</code></td>
+<td>PRESS-013</td>
+<td>Detalle del respaldo</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>/press/talking-points</code></td>
+<td>PRESS-014</td>
+<td>Biblioteca de puntos de mensaje</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>/press/interviews</code></td>
+<td>PRESS-015</td>
+<td>Agenda de entrevistas</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>/press/spokespersons</code></td>
+<td>PRESS-016</td>
+<td>Configuración de voceros</td>
+<td>No</td>
+</tr>
+</tbody>
+</table>
+<h4 id="gotv-y-día-de-elecciones" tabindex="-1"><a class="heading-anchor" href="#gotv-y-día-de-elecciones" aria-hidden="true">#</a> GOTV y día de elecciones</h4>
+<table>
+<thead>
+<tr>
+<th>URL</th>
+<th>ID de pantalla</th>
+<th>Pantalla</th>
+<th>Sin conexión</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>/gotv/universe</code></td>
+<td>GOTV-001</td>
+<td>Constructor del universo GOTV</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>/gotv/early-voting</code></td>
+<td>GOTV-002</td>
+<td>Carga de datos de voto adelantado</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>/gotv/staging</code></td>
+<td>GOTV-003</td>
+<td>Configuración de los puntos de concentración de voluntarios</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>/gotv/staging/check-in</code></td>
+<td>GOTV-023</td>
+<td>Registro de entrada en el punto de concentración</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>/gotv/turfs</code></td>
+<td>GOTV-004</td>
+<td>Corte de territorios para GOTV</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>/gotv/comms-plan</code></td>
+<td>GOTV-005</td>
+<td>Plan de comunicaciones del día de elecciones</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>/gotv/poll-watchers</code></td>
+<td>GOTV-006</td>
+<td>Registro de observadores electorales</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>/gotv/poll-watchers/credentials</code></td>
+<td>GOTV-007</td>
+<td>Seguimiento de credenciales de observadores electorales</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>/gotv/poll-watchers/issues</code></td>
+<td>GOTV-016</td>
+<td>Cola de problemas de observadores electorales</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>/gotv/rides</code></td>
+<td>GOTV-012</td>
+<td>Coordinación de transporte — Vista del despachador</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>/gotv/turnout</code></td>
+<td>GOTV-017</td>
+<td>Panel de participación — Vista de mapa</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>/gotv/turnout/segments</code></td>
+<td>GOTV-018</td>
+<td>Panel de participación — Vista por segmentos</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>/gotv/reallocation</code></td>
+<td>GOTV-019</td>
+<td>Sugerencias de reasignación</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>/gotv/results/entry</code></td>
+<td>GOTV-020</td>
+<td>Ingreso de resultados de la noche electoral</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>/gotv/results</code></td>
+<td>GOTV-021</td>
+<td>Panel de resultados de la noche electoral</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>/gotv/analysis</code></td>
+<td>GOTV-022</td>
+<td>Análisis posterior a la elección</td>
+<td>No</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Pantallas de GOTV en modo de campo:</strong> GOTV-008, GOTV-009 y GOTV-010 (ficha de puerta, lista de recorrido y llamadas de seguimiento de GOTV) están en el grupo <code>(field-mode)</code>, no aquí.</p>
+<p><strong>Pantallas de GOTV de cara al voluntario:</strong> GOTV-011 (solicitud de transporte), GOTV-014 (registro de entrada del observador electoral) y GOTV-015 (reporte de problemas) están bajo <code>/shifts/...</code> — ver las pantallas del voluntario más abajo.</p>
+<h4 id="mensajería" tabindex="-1"><a class="heading-anchor" href="#mensajería" aria-hidden="true">#</a> Mensajería</h4>
+<table>
+<thead>
+<tr>
+<th>URL</th>
+<th>ID de pantalla</th>
+<th>Pantalla</th>
+<th>Sin conexión</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>/messages</code></td>
+<td>MSG-001</td>
+<td>Lista de mensajes (bandeja de entrada)</td>
+<td>Parcial</td>
+</tr>
+<tr>
+<td><code>/messages/[conversationId]</code></td>
+<td>MSG-002, MSG-003</td>
+<td>Vista de conversación (mensaje directo o grupo)</td>
+<td>Parcial</td>
+</tr>
+<tr>
+<td><code>/messages/[conversationId]/thread/[threadId]</code></td>
+<td>MSG-004</td>
+<td>Vista de hilo</td>
+<td>Parcial</td>
+</tr>
+<tr>
+<td><code>/messages/new-group</code></td>
+<td>MSG-005</td>
+<td>Crear grupo</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>/messages/[conversationId]/settings</code></td>
+<td>MSG-005</td>
+<td>Editar grupo</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>/messages/broadcast</code></td>
+<td>MSG-006</td>
+<td>Redactor de difusiones</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>/messages/war-room</code></td>
+<td>MSG-007</td>
+<td>Canal del centro de mando</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>/messages/alliance</code></td>
+<td>MSG-014</td>
+<td>Canal de la alianza</td>
+<td>No</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Hilos contextuales:</strong> de MSG-008 a MSG-011 (hilos de evento, de turno, de problema y de donación marcada) se abren desde su contexto padre (por ejemplo, la página de detalle de un evento muestra una pestaña «Discusión» que renderiza el hilo contextual en línea). Comparten el componente de vista de conversación, pero se llega a ellos desde la entidad padre, no desde la bandeja de entrada de mensajes.</p>
+<p><strong>Vistas propias del candidato:</strong> MSG-012 (vista de informes) y MSG-013 (cola de aprobaciones) reutilizan la maquetación de mensajes, pero con vistas filtradas:
+| <code>/messages?view=briefings</code> | MSG-012 | Vista de informes del candidato | Parcial |
+| <code>/approvals</code> | MSG-013 | Cola de aprobaciones del candidato | No |</p>
+<h4 id="voluntarios-pantallas-del-coordinador" tabindex="-1"><a class="heading-anchor" href="#voluntarios-pantallas-del-coordinador" aria-hidden="true">#</a> Voluntarios (pantallas del coordinador)</h4>
+<table>
+<thead>
+<tr>
+<th>URL</th>
+<th>ID de pantalla</th>
+<th>Pantalla</th>
+<th>Sin conexión</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>/volunteers/roster</code></td>
+<td>—</td>
+<td>Lista del equipo de voluntarios</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>/volunteers/onboarding</code></td>
+<td>—</td>
+<td>Configuración de la incorporación</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>/volunteers/training</code></td>
+<td>HELP-008</td>
+<td>Editor de contenidos de capacitación</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>/volunteers/training/modules</code></td>
+<td>HELP-004</td>
+<td>Lista de módulos de capacitación (vista de gestión)</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>/volunteers/shifts</code></td>
+<td>—</td>
+<td>Gestión de turnos</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>/volunteers/teams</code></td>
+<td>—</td>
+<td>Gestión de equipos</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>/volunteers/certifications</code></td>
+<td>HELP-007</td>
+<td>Estado de certificación (vista de gestión)</td>
+<td>No</td>
+</tr>
+</tbody>
+</table>
+<h4 id="pantallas-de-autoservicio-del-voluntario" tabindex="-1"><a class="heading-anchor" href="#pantallas-de-autoservicio-del-voluntario" aria-hidden="true">#</a> Pantallas de autoservicio del voluntario</h4>
+<p>Son las pantallas que voluntarios y líderes de equipo ven para su propio trabajo.</p>
+<table>
+<thead>
+<tr>
+<th>URL</th>
+<th>ID de pantalla</th>
+<th>Pantalla</th>
+<th>Sin conexión</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>/shifts</code></td>
+<td>—</td>
+<td>Mis turnos (pantalla de inicio del voluntario)</td>
+<td>Parcial</td>
+</tr>
+<tr>
+<td><code>/shifts/[shiftId]</code></td>
+<td>—</td>
+<td>Detalle del turno</td>
+<td>Parcial</td>
+</tr>
+<tr>
+<td><code>/tasks</code></td>
+<td>—</td>
+<td>Mis tareas</td>
+<td>Parcial</td>
+</tr>
+<tr>
+<td><code>/team</code></td>
+<td>—</td>
+<td>Mi equipo (solo líderes de equipo)</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>/team/roster</code></td>
+<td>—</td>
+<td>Lista del equipo</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>/team/progress</code></td>
+<td>—</td>
+<td>Avance del equipo</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>/training</code></td>
+<td>HELP-004</td>
+<td>Lista de módulos de capacitación</td>
+<td>Parcial</td>
+</tr>
+<tr>
+<td><code>/training/[moduleId]</code></td>
+<td>HELP-005</td>
+<td>Contenido del módulo de capacitación</td>
+<td>Parcial</td>
+</tr>
+<tr>
+<td><code>/training/[moduleId]/quiz</code></td>
+<td>HELP-006</td>
+<td>Cuestionario de capacitación</td>
+<td>Parcial</td>
+</tr>
+<tr>
+<td><code>/training/certifications</code></td>
+<td>HELP-007</td>
+<td>Estado de certificación</td>
+<td>No</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Notas:</strong></p>
+<ul>
+<li><code>/shifts</code> es el inicio del voluntario. Cuando un voluntario entra a la raíz (<code>/</code>), se le redirige aquí.</li>
+<li>La acción «Iniciar turno» desde <code>/shifts/[shiftId]</code> lleva a la persona al grupo <code>(field-mode)</code>.</li>
+</ul>
+<h4 id="pantallas-de-gotv-para-voluntarios" tabindex="-1"><a class="heading-anchor" href="#pantallas-de-gotv-para-voluntarios" aria-hidden="true">#</a> Pantallas de GOTV para voluntarios</h4>
+<p>Pantallas que voluntarios y líderes de equipo usan durante las operaciones de GOTV, fuera del modo de campo.</p>
+<table>
+<thead>
+<tr>
+<th>URL</th>
+<th>ID de pantalla</th>
+<th>Pantalla</th>
+<th>Sin conexión</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>/gotv/ride-request</code></td>
+<td>GOTV-011</td>
+<td>Formulario de solicitud de transporte</td>
+<td>Parcial</td>
+</tr>
+<tr>
+<td><code>/gotv/ride-request/drive</code></td>
+<td>GOTV-013</td>
+<td>Coordinación de transporte — Vista del conductor</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>/gotv/poll-watch/check-in</code></td>
+<td>GOTV-014</td>
+<td>Registro de entrada del observador electoral</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>/gotv/poll-watch/report</code></td>
+<td>GOTV-015</td>
+<td>Formulario de reporte de problemas del observador electoral</td>
+<td>Parcial</td>
+</tr>
+</tbody>
+</table>
+<h4 id="alianza" tabindex="-1"><a class="heading-anchor" href="#alianza" aria-hidden="true">#</a> Alianza</h4>
+<table>
+<thead>
+<tr>
+<th>URL</th>
+<th>ID de pantalla</th>
+<th>Pantalla</th>
+<th>Sin conexión</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>/alliance</code></td>
+<td>ALLY-001</td>
+<td>Panel de la alianza</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>/alliance/members</code></td>
+<td>ALLY-002</td>
+<td>Lista de miembros de la alianza</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>/alliance/join</code></td>
+<td>ALLY-003</td>
+<td>Formulario de solicitud de afiliación</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>/alliance/requests</code></td>
+<td>ALLY-004</td>
+<td>Cola de solicitudes de afiliación</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>/alliance/sharing</code></td>
+<td>ALLY-005</td>
+<td>Configuración del intercambio</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>/alliance/campaigns</code></td>
+<td>ALLY-006</td>
+<td>Configuración de campaña conjunta</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>/alliance/analytics</code></td>
+<td>ALLY-007</td>
+<td>Analítica compartida</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>/alliance/gotv</code></td>
+<td>ALLY-008</td>
+<td>Coordinación de GOTV en la alianza</td>
+<td>No</td>
+</tr>
+</tbody>
+</table>
+<h4 id="ajustes" tabindex="-1"><a class="heading-anchor" href="#ajustes" aria-hidden="true">#</a> Ajustes</h4>
+<table>
+<thead>
+<tr>
+<th>URL</th>
+<th>ID de pantalla</th>
+<th>Pantalla</th>
+<th>Sin conexión</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>/settings</code></td>
+<td>—</td>
+<td>Centro de ajustes</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>/settings/org</code></td>
+<td>SET-001</td>
+<td>Perfil e identidad visual de la organización</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>/settings/roles</code></td>
+<td>SET-002</td>
+<td>Editor de plantillas de rol (lista)</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>/settings/roles/[roleId]</code></td>
+<td>SET-002</td>
+<td>Editor de plantillas de rol (detalle)</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>/settings/roles/[roleId]/permissions</code></td>
+<td>SET-003</td>
+<td>Panel de ajuste de permisos</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>/settings/staff</code></td>
+<td>SET-004</td>
+<td>Lista de gestión del personal</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>/settings/staff/invite</code></td>
+<td>SET-005</td>
+<td>Flujo de invitación del personal</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>/settings/geography</code></td>
+<td>SET-006</td>
+<td>Configuración del ámbito geográfico</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>/settings/campaign-period</code></td>
+<td>SET-007</td>
+<td>Configuración del período de campaña</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>/settings/compliance</code></td>
+<td>SET-008</td>
+<td>Configuración de cumplimiento</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>/settings/contribution-limits</code></td>
+<td>SET-009</td>
+<td>Configuración de límites de contribución</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>/settings/disclaimers</code></td>
+<td>SET-010</td>
+<td>Configuración del texto del aviso legal</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>/settings/data-retention</code></td>
+<td>SET-011</td>
+<td>Política de conservación de datos</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>/settings/integrations</code></td>
+<td>SET-012</td>
+<td>Centro de ajustes de integraciones</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>/settings/integrations/whatsapp</code></td>
+<td>SET-013</td>
+<td>Configuración de WhatsApp Business</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>/settings/integrations/sms</code></td>
+<td>SET-014</td>
+<td>Configuración del proveedor de SMS</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>/settings/integrations/email</code></td>
+<td>SET-015, COMM-010</td>
+<td>Configuración del dominio de correo</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>/settings/integrations/social</code></td>
+<td>SET-016</td>
+<td>Conexiones de cuentas de redes sociales</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>/settings/billing</code></td>
+<td>SET-017</td>
+<td>Facturación y suscripción</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>/settings/audit-trail</code></td>
+<td>SET-018</td>
+<td>Visor del registro de auditoría</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>/settings/security</code></td>
+<td>SET-019</td>
+<td>Ajustes de seguridad</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>/settings/encryption</code></td>
+<td>SET-020</td>
+<td>Gestión de llaves de cifrado</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>/settings/api-keys</code></td>
+<td>SET-021</td>
+<td>Gestión de llaves de API</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>/settings/webhooks</code></td>
+<td>SET-022</td>
+<td>Configuración de webhooks</td>
+<td>No</td>
+</tr>
+</tbody>
+</table>
+<h4 id="ayuda-y-soporte" tabindex="-1"><a class="heading-anchor" href="#ayuda-y-soporte" aria-hidden="true">#</a> Ayuda y soporte</h4>
+<table>
+<thead>
+<tr>
+<th>URL</th>
+<th>ID de pantalla</th>
+<th>Pantalla</th>
+<th>Sin conexión</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>/help</code></td>
+<td>HELP-001</td>
+<td>Navegador de la base de conocimiento</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>/help/[articleSlug]</code></td>
+<td>HELP-002</td>
+<td>Artículo de la base de conocimiento</td>
+<td>Parcial</td>
+</tr>
+<tr>
+<td><code>/help/chat</code></td>
+<td>HELP-003</td>
+<td>Chat del concierge de IA</td>
+<td>No</td>
+</tr>
+</tbody>
+</table>
+<h4 id="perfil-y-preferencias-de-usuario" tabindex="-1"><a class="heading-anchor" href="#perfil-y-preferencias-de-usuario" aria-hidden="true">#</a> Perfil y preferencias de usuario</h4>
+<table>
+<thead>
+<tr>
+<th>URL</th>
+<th>ID de pantalla</th>
+<th>Pantalla</th>
+<th>Sin conexión</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>/profile</code></td>
+<td>PROF-001</td>
+<td>Perfil personal</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>/profile/notifications</code></td>
+<td>PROF-002</td>
+<td>Preferencias de notificaciones</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>/profile/security</code></td>
+<td>PROF-003</td>
+<td>Ajustes de seguridad (personales)</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>/profile/language</code></td>
+<td>PROF-004</td>
+<td>Preferencia de idioma</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>/profile/switch-tenant</code></td>
+<td>PROF-005</td>
+<td>Selector de organización</td>
+<td>No</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3 id="modo-de-campo-field-mode" tabindex="-1"><a class="heading-anchor" href="#modo-de-campo-field-mode" aria-hidden="true">#</a> Modo de campo — <code>(field-mode)</code></h3>
+<p>Marco de pantalla completa exclusiva. Sin barra lateral, sin pestañas inferiores, sin navegación estándar. Solo la barra superior de campo (estado de sincronización, cronómetro del turno) y la navegación entre tareas (anterior/siguiente/terminar turno).</p>
+<p>Todas las rutas del modo de campo requieren un turno activo. Entrar a una URL del modo de campo sin turno activo redirige a <code>/shifts</code>.</p>
+<table>
+<thead>
+<tr>
+<th>URL</th>
+<th>ID de pantalla</th>
+<th>Pantalla</th>
+<th>Sin conexión</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>/field-mode/canvass/[shiftId]</code></td>
+<td>CANV-007</td>
+<td>Modo de campo — Inicio del turno</td>
+<td>Sí</td>
+</tr>
+<tr>
+<td><code>/field-mode/canvass/[shiftId]/list</code></td>
+<td>CANV-008</td>
+<td>Modo de campo — Vista de la lista de recorrido</td>
+<td>Sí</td>
+</tr>
+<tr>
+<td><code>/field-mode/canvass/[shiftId]/map</code></td>
+<td>CANV-009</td>
+<td>Modo de campo — Vista de mapa</td>
+<td>Sí</td>
+</tr>
+<tr>
+<td><code>/field-mode/canvass/[shiftId]/door/[voterId]</code></td>
+<td>CANV-010</td>
+<td>Modo de campo — Ficha de puerta</td>
+<td>Sí</td>
+</tr>
+<tr>
+<td><code>/field-mode/canvass/[shiftId]/door/[voterId]/interact</code></td>
+<td>CANV-011</td>
+<td>Modo de campo — Formulario de interacción</td>
+<td>Sí</td>
+</tr>
+<tr>
+<td><code>/field-mode/canvass/[shiftId]/debrief</code></td>
+<td>CANV-012</td>
+<td>Modo de campo — Fin del turno / balance</td>
+<td>Parcial</td>
+</tr>
+<tr>
+<td><code>/field-mode/phone-bank/[sessionId]</code></td>
+<td>PHONE-004, PHONE-005</td>
+<td>Jornada de llamadas — Interfaz de llamada</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>/field-mode/phone-bank/[sessionId]/result</code></td>
+<td>PHONE-006</td>
+<td>Jornada de llamadas — Formulario de resultado de la llamada</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>/field-mode/voter-reg/[sessionId]</code></td>
+<td>VREG-004</td>
+<td>Formulario de inscripción de votantes</td>
+<td>Sí</td>
+</tr>
+<tr>
+<td><code>/field-mode/voter-reg/[sessionId]/eligibility</code></td>
+<td>VREG-005</td>
+<td>Verificación de elegibilidad</td>
+<td>Sí</td>
+</tr>
+<tr>
+<td><code>/field-mode/gotv/[shiftId]</code></td>
+<td>GOTV-009</td>
+<td>Lista de recorrido de GOTV</td>
+<td>Sí</td>
+</tr>
+<tr>
+<td><code>/field-mode/gotv/[shiftId]/door/[voterId]</code></td>
+<td>GOTV-008</td>
+<td>Ficha de puerta de GOTV</td>
+<td>Sí</td>
+</tr>
+<tr>
+<td><code>/field-mode/gotv/[shiftId]/chase/[voterId]</code></td>
+<td>GOTV-010</td>
+<td>Interfaz de llamadas de seguimiento</td>
+<td>No</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Notas:</strong></p>
+<ul>
+<li>Las URL del modo de campo llevan el ID del turno o de la sesión, para que una aplicación que se cierre inesperadamente pueda retomar exactamente donde se quedó.</li>
+<li>El modo de campo del trabajo de campo es el más complejo: admite vista de lista, vista de mapa y fichas de puerta individuales. El voluntario avanza linealmente por la lista de recorrido, pero puede alternar entre la vista de lista y la de mapa.</li>
+<li>El modo de campo de las jornadas de llamadas no funciona sin conexión (requiere conectividad para llamar).</li>
+<li>El modo de campo de GOTV es una variante simplificada del de trabajo de campo, con un guion y una ficha de puerta propios de GOTV.</li>
+</ul>
+<hr>
+<h3 id="portal-de-simpatizantes-portal" tabindex="-1"><a class="heading-anchor" href="#portal-de-simpatizantes-portal" aria-hidden="true">#</a> Portal de simpatizantes — <code>(portal)</code></h3>
+<p>Marco de navegación mínimo para simpatizantes. Maquetación separada de la aplicación principal: sin barra lateral, sin funcionalidades del personal. Un portal personal sencillo.</p>
+<table>
+<thead>
+<tr>
+<th>URL</th>
+<th>ID de pantalla</th>
+<th>Pantalla</th>
+<th>Sin conexión</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>/portal</code></td>
+<td>SUP-001</td>
+<td>Inicio del simpatizante</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>/portal/donations</code></td>
+<td>SUP-002</td>
+<td>Historial de donaciones</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>/portal/donations/[donationId]</code></td>
+<td>SUP-003</td>
+<td>Vista del recibo de donación</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>/portal/recurring</code></td>
+<td>SUP-004</td>
+<td>Gestión de donaciones recurrentes</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>/portal/payment-methods</code></td>
+<td>SUP-005</td>
+<td>Actualización del método de pago</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>/portal/profile</code></td>
+<td>SUP-006</td>
+<td>Perfil del simpatizante</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>/portal/preferences</code></td>
+<td>SUP-007</td>
+<td>Preferencias de comunicación</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>/portal/events</code></td>
+<td>SUP-008</td>
+<td>Mis eventos</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>/portal/statements</code></td>
+<td>SUP-009</td>
+<td>Descarga del estado de cuenta anual</td>
+<td>No</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Notas:</strong></p>
+<ul>
+<li>El portal de simpatizantes usa autenticación por enlace mágico por defecto (poca fricción). Las funciones completas de la cuenta (modificar donaciones recurrentes, actualizar métodos de pago) requieren passkey o inicio de sesión por correo.</li>
+<li>Las rutas del portal van bajo el prefijo <code>/portal</code> para separarlas del espacio de nombres de la aplicación principal.</li>
+</ul>
+<hr>
+<h3 id="asistentes-de-puesta-en-marcha-wizard" tabindex="-1"><a class="heading-anchor" href="#asistentes-de-puesta-en-marcha-wizard" aria-hidden="true">#</a> Asistentes de puesta en marcha — <code>(wizard)</code></h3>
+<p>El marco del asistente sustituye la barra lateral por indicadores de pasos. Los elementos permanentes globales (barra superior, sincronización, notificaciones) se mantienen.</p>
+<table>
+<thead>
+<tr>
+<th>URL</th>
+<th>ID de pantalla</th>
+<th>Pantalla</th>
+<th>Sin conexión</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>/wizard/org-setup</code></td>
+<td>WIZ-001</td>
+<td>Asistente de configuración de la organización</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>/wizard/payment-processor</code></td>
+<td>WIZ-002</td>
+<td>Asistente del procesador de pagos</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>/wizard/byok</code></td>
+<td>WIZ-003</td>
+<td>Asistente de generación de llaves BYOK</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>/wizard/compliance</code></td>
+<td>WIZ-004</td>
+<td>Asistente de configuración de cumplimiento</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>/wizard/whatsapp</code></td>
+<td>WIZ-005</td>
+<td>Asistente de configuración de WhatsApp Business</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>/wizard/sms</code></td>
+<td>WIZ-006</td>
+<td>Asistente de configuración del número de SMS</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>/wizard/voter-import</code></td>
+<td>WIZ-007</td>
+<td>Asistente de importación del padrón electoral</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>/wizard/volunteer-onboarding</code></td>
+<td>WIZ-008</td>
+<td>Asistente de incorporación de voluntarios</td>
+<td>No</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Notas:</strong></p>
+<ul>
+<li>Cada asistente gestiona el estado de sus pasos en el componente, no en segmentos de la URL. La URL se queda en <code>/wizard/org-setup</code> durante todos los pasos: el avance se guarda en el estado del componente y se persiste en el servidor.</li>
+<li><code>/wizard/volunteer-onboarding</code> es el único asistente de prioridad móvil. Todos los demás son preferentemente de escritorio.</li>
+<li>Los asistentes se pueden abandonar y retomar. Volver a la URL del asistente lo retoma en el último paso completado.</li>
+</ul>
+<hr>
+<h2 id="estructura-de-archivos-de-sveltekit" tabindex="-1"><a class="heading-anchor" href="#estructura-de-archivos-de-sveltekit" aria-hidden="true">#</a> Estructura de archivos de SvelteKit</h2>
+<p>La jerarquía de rutas se mapea al sistema de archivos de SvelteKit:</p>
+<pre><code>src/routes/
+├── (public)/
+│   ├── +layout.svelte              # Marco de página pública (identidad visual mínima)
+│   ├── p/[slug]/+page.svelte       # Perfil del candidato
+│   ├── o/[slug]/+page.svelte       # Perfil de la organización
+│   ├── donate/[formId]/+page.svelte
+│   ├── events/[eventId]/
+│   │   ├── +page.svelte            # Página pública del evento
+│   │   └── rsvp/+page.svelte       # Formulario de confirmación de asistencia
+│   ├── action/[actionId]/+page.svelte
+│   ├── petition/[petitionId]/+page.svelte
+│   ├── volunteer/+page.svelte
+│   └── media-kit/+page.svelte
+│
+├── (auth)/
+│   ├── +layout.svelte              # Maquetación del flujo de autenticación
+│   ├── login/
+│   │   ├── +page.svelte            # Inicio de sesión con passkey
+│   │   └── fallback/+page.svelte   # Enlace mágico / OTP por SMS
+│   ├── recover/+page.svelte
+│   ├── register/
+│   │   ├── +page.svelte            # Alta de passkey
+│   │   └── trusted-contacts/+page.svelte
+│   ├── authorize-device/+page.svelte
+│   └── session-expired/+page.svelte
+│
+├── (app)/
+│   ├── +layout.svelte              # Marco de la aplicación (barra superior + barra lateral + pestañas)
+│   ├── +layout.server.ts           # Guardia de autenticación, resolución del rol
+│   ├── dashboard/
+│   │   ├── +page.svelte            # Panel general de la campaña (+ lógica de redirección)
+│   │   ├── field/+page.svelte
+│   │   ├── fundraising/+page.svelte
+│   │   ├── communications/+page.svelte
+│   │   ├── volunteers/+page.svelte
+│   │   ├── data/+page.svelte
+│   │   ├── compliance/+page.svelte
+│   │   ├── war-room/+page.svelte
+│   │   ├── team/+page.svelte
+│   │   ├── candidate/+page.svelte
+│   │   └── alliance/+page.svelte
+│   ├── people/
+│   │   ├── +page.svelte            # Lista de contactos
+│   │   ├── [contactId]/
+│   │   │   ├── +page.svelte        # Detalle del contacto
+│   │   │   └── edit/+page.svelte
+│   │   ├── new/+page.svelte
+│   │   ├── segments/...
+│   │   ├── dedup/...
+│   │   ├── import/...
+│   │   ├── export/+page.svelte
+│   │   ├── data-quality/+page.svelte
+│   │   └── tags/+page.svelte
+│   ├── field/...                    # Gestión de campo
+│   ├── fundraising/...              # Gestión de la recaudación
+│   ├── communications/...           # Correo, SMS
+│   ├── social/...                   # Redes sociales
+│   ├── events/...                   # Gestión de eventos
+│   ├── activism/...                 # Campañas de activismo
+│   ├── press/...                    # Prensa y medios
+│   ├── gotv/...                     # Operaciones de GOTV
+│   ├── messages/...                 # Mensajería
+│   ├── volunteers/...               # Gestión de voluntarios
+│   ├── shifts/...                   # Autoservicio del voluntario
+│   ├── team/...                     # Líder de equipo
+│   ├── training/...                 # Módulos de capacitación
+│   ├── approvals/+page.svelte      # Aprobaciones del candidato
+│   ├── alliance/...                 # Gestión de la alianza
+│   ├── settings/...                 # Ajustes y administración
+│   ├── help/...                     # Base de conocimiento y soporte
+│   └── profile/...                  # Perfil y preferencias de usuario
+│
+├── (field-mode)/
+│   ├── +layout.svelte              # Marco del modo de campo (sincronización, cronómetro, navegación)
+│   ├── +layout.server.ts           # Guardia de turno activo
+│   └── field-mode/
+│       ├── canvass/[shiftId]/...
+│       ├── phone-bank/[sessionId]/...
+│       ├── voter-reg/[sessionId]/...
+│       └── gotv/[shiftId]/...
+│
+├── (portal)/
+│   ├── +layout.svelte              # Marco del portal de simpatizantes
+│   └── portal/...
+│
+└── (wizard)/
+    ├── +layout.svelte              # Marco del asistente (indicadores de pasos)
+    └── wizard/...
+</code></pre>
+<h2 id="patrones-de-enrutamiento" tabindex="-1"><a class="heading-anchor" href="#patrones-de-enrutamiento" aria-hidden="true">#</a> Patrones de enrutamiento</h2>
+<h3 id="guardias-de-autenticación" tabindex="-1"><a class="heading-anchor" href="#guardias-de-autenticación" aria-hidden="true">#</a> Guardias de autenticación</h3>
+<p>Todas las rutas de <code>(app)</code>, <code>(field-mode)</code> y <code>(wizard)</code> requieren autenticación, y la hace cumplir <code>+layout.server.ts</code> a nivel de grupo:</p>
+<ul>
+<li><strong>Solicitud sin autenticar</strong> → redirige a <code>/login</code> con el parámetro <code>?redirect=</code></li>
+<li><strong>Autenticada pero con el rol equivocado</strong> → 404 (no 403: las funcionalidades restringidas son invisibles)</li>
+<li><strong>Autenticada pero sin turno activo (modo de campo)</strong> → redirige a <code>/shifts</code></li>
+</ul>
+<h3 id="redirección-a-la-pantalla-de-inicio" tabindex="-1"><a class="heading-anchor" href="#redirección-a-la-pantalla-de-inicio" aria-hidden="true">#</a> Redirección a la pantalla de inicio</h3>
+<p><code>/</code> redirige según el rol de cada persona:</p>
+<ul>
+<li>Roles del personal → su panel específico de rol</li>
+<li>Voluntario / Líder de equipo → <code>/shifts</code></li>
+<li>Candidato → <code>/dashboard/candidate</code></li>
+<li>Simpatizante → <code>/portal</code></li>
+</ul>
+<h3 id="enlaces-directos" tabindex="-1"><a class="heading-anchor" href="#enlaces-directos" aria-hidden="true">#</a> Enlaces directos</h3>
+<p>Todas las pantallas admiten enlace directo por diseño. El modo de campo conserva en la URL la posición exacta dentro de una lista de recorrido (<code>/field-mode/canvass/[shiftId]/door/[voterId]</code>), lo que permite recuperarse de un cierre inesperado y pasar de un dispositivo a otro.</p>
+<h3 id="rutas-que-funcionan-sin-conexión" tabindex="-1"><a class="heading-anchor" href="#rutas-que-funcionan-sin-conexión" aria-hidden="true">#</a> Rutas que funcionan sin conexión</h3>
+<p>Las rutas marcadas como capaces de funcionar sin conexión usan un service worker para cachear el marco de la página y una base de datos SQLite local (vía Capacitor) para los datos. La función <code>load</code> de <code>+page.ts</code> de SvelteKit detecta la conectividad y alterna entre traer del servidor y consultar la base de datos local:</p>
+<ul>
+<li><strong>Con conexión:</strong> carga de datos estándar desde el servidor</li>
+<li><strong>Sin conexión:</strong> carga desde la SQLite local, muestra el distintivo «Sin conexión» y deja las escrituras en cola para sincronizar</li>
+</ul>
+<p>Rutas que funcionan sin conexión: todas las de trabajo de campo, inscripción de votantes y GOTV de <code>(field-mode)</code>, <code>/events/[eventId]/check-in</code>, <code>/messages</code> (solo lectura), <code>/shifts</code> (en caché) y <code>/training</code> (módulos en caché).</p>
+<h3 id="comportamiento-de-las-url-en-rtl" tabindex="-1"><a class="heading-anchor" href="#comportamiento-de-las-url-en-rtl" aria-hidden="true">#</a> Comportamiento de las URL en RTL</h3>
+<p>El modo RTL no afecta a las URL: las rutas siguen siendo LTR sea cual sea el idioma de la interfaz. Del volteo visual de la maquetación se encargan el atributo <code>lang</code> de <code>&lt;html&gt;</code> y las propiedades lógicas de CSS. El soporte de RTL no requiere ningún cambio en las URL.</p>
+<h3 id="páginas-de-eventos-públicas-frente-a-autenticadas" tabindex="-1"><a class="heading-anchor" href="#páginas-de-eventos-públicas-frente-a-autenticadas" aria-hidden="true">#</a> Páginas de eventos públicas frente a autenticadas</h3>
+<p>Los eventos tienen dos patrones de URL:</p>
+<ul>
+<li><code>/events/[eventId]</code> (pública, en el grupo <code>(public)</code>) — la página pública que se comparte</li>
+<li><code>/events/[eventId]/manage</code> (autenticada, en el grupo <code>(app)</code>) — la vista de gestión</li>
+</ul>
+<p>SvelteKit lo resuelve por precedencia de layout groups: la ruta <code>/events/[eventId]</code> del grupo <code>(public)</code> existe solo como página pública. Las rutas autenticadas de gestión de eventos llevan los sufijos <code>/manage</code>, <code>/rsvps</code>, <code>/check-in</code> y <code>/metrics</code> para evitar la colisión.</p>
+<h2 id="preguntas-abiertas" tabindex="-1"><a class="heading-anchor" href="#preguntas-abiertas" aria-hidden="true">#</a> Preguntas abiertas</h2>
+<ol>
+<li>
+<p><strong>URL personalizadas para los perfiles públicos.</strong> ¿Deberían las organizaciones poder configurar slugs propios para sus páginas de perfil de candidato o de organización (por ejemplo, <code>/maria-santos</code> en vez de <code>/p/maria-santos</code>)? Haría falta una ruta comodín que compruebe los slugs personalizados antes de caer al 404.</p>
+</li>
+<li>
+<p><strong>Espacio de nombres de las rutas de API.</strong> Las rutas de API de SvelteKit (endpoints de servidor) deberían llevar un prefijo para no colisionar con las rutas de página. Probablemente <code>/api/v1/...</code>, pero eso se solapa con la API REST pública que menciona el documento de arquitectura. Hay que alinear las rutas de servidor de SvelteKit con la API independiente.</p>
+</li>
+<li>
+<p><strong>URL localizadas.</strong> ¿Deberían localizarse las rutas de las URL (por ejemplo, <code>/personas</code> en vez de <code>/people</code> en español, o <code>/contacts</code> en francés)? La mayoría de las aplicaciones internacionalizadas mantienen las URL en inglés con el contenido localizado: implementación más simple y enlaces directos consistentes. Pero algunas jurisdicciones pueden tener requisitos sobre el idioma de las URL oficiales.</p>
+</li>
+</ol>
+<!-- REVISIT: El enrutamiento de la página pública de eventos hay que implementarlo con cuidado para evitar conflictos entre los grupos (public) y (app). Las reglas de resolución de rutas de SvelteKit pueden exigir otro enfoque: quizá un matcher de rutas, o una sola ruta de eventos que elija la maquetación de forma condicional según el estado de autenticación. -->
+<!-- REVISIT: La estructura de URL del modo de campo asume que los ID de turno son seguros para usarse en una URL. Con UUID no hay problema. Con ID secuenciales, conviene considerar alternativas basadas en slug por legibilidad. -->
+
+    </article>
+  </main>
+  <div class="toc-rail"><nav class="toc" aria-label="En esta página"><div class="toc-label">En esta página</div><ul><li class="toc-2"><a href="#propósito"># Propósito</a></li><li class="toc-2"><a href="#arquitectura-de-rutas"># Arquitectura de rutas</a></li><li class="toc-2"><a href="#mapa-de-rutas"># Mapa de rutas</a></li><li class="toc-3"><a href="#páginas-públicas-public"># Páginas públicas — (public)</a></li><li class="toc-3"><a href="#autenticación-auth"># Autenticación — (auth)</a></li><li class="toc-3"><a href="#aplicación-autenticada-app"># Aplicación autenticada — (app)</a></li><li class="toc-3"><a href="#modo-de-campo-field-mode"># Modo de campo — (field-mode)</a></li><li class="toc-3"><a href="#portal-de-simpatizantes-portal"># Portal de simpatizantes — (portal)</a></li><li class="toc-3"><a href="#asistentes-de-puesta-en-marcha-wizard"># Asistentes de puesta en marcha — (wizard)</a></li><li class="toc-2"><a href="#estructura-de-archivos-de-sveltekit"># Estructura de archivos de SvelteKit</a></li><li class="toc-2"><a href="#patrones-de-enrutamiento"># Patrones de enrutamiento</a></li><li class="toc-3"><a href="#guardias-de-autenticación"># Guardias de autenticación</a></li><li class="toc-3"><a href="#redirección-a-la-pantalla-de-inicio"># Redirección a la pantalla de inicio</a></li><li class="toc-3"><a href="#enlaces-directos"># Enlaces directos</a></li><li class="toc-3"><a href="#rutas-que-funcionan-sin-conexión"># Rutas que funcionan sin conexión</a></li><li class="toc-3"><a href="#comportamiento-de-las-url-en-rtl"># Comportamiento de las URL en RTL</a></li><li class="toc-3"><a href="#páginas-de-eventos-públicas-frente-a-autenticadas"># Páginas de eventos públicas frente a autenticadas</a></li><li class="toc-2"><a href="#preguntas-abiertas"># Preguntas abiertas</a></li></ul></nav></div>
+</div>
+<script src="../../../../assets/search.js" defer></script>
+<script src="../../../../assets/app.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="es" data-base="../../" data-no-results="No hay resultados para">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ADR-002: Seguridad y modelo de amenazas · GreenGrass</title>
+<meta name="description" content="ADR-002: Seguridad y modelo de amenazas — Documentación de especificación y diseño de GreenGrass.">
+<link rel="alternate" hreflang="en" href="../../decisions/002-security-threat-model.html">
+<link rel="alternate" hreflang="es" href="./002-security-threat-model.html">
+<link rel="alternate" hreflang="x-default" href="../../decisions/002-security-threat-model.html">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%232563eb'/%3E%3Cstop offset='1' stop-color='%2316a34a'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='32' height='32' rx='7' fill='url(%23g)'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="../../assets/styles.css">
+</head>
+<body>
+<a class="skip-link" href="#content">Saltar al contenido</a>
+<header class="site-header">
+  <button type="button" class="menu-toggle" aria-label="Alternar navegación" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+  <a class="brand" href="../../es/index.html">
+    <span class="brand-mark" aria-hidden="true"></span>
+    <span class="brand-text"><strong>GreenGrass</strong><small>Especificación y diseño</small></span>
+  </a>
+  <div class="search">
+    <input type="search" id="search-input" placeholder="Buscar en la documentación…" autocomplete="off" aria-label="Buscar en la documentación">
+    <div id="search-results" class="search-results" hidden></div>
+  </div>
+  <nav class="lang-switch" aria-label="Idioma"><a class="lang-opt" href="../../decisions/002-security-threat-model.html" hreflang="en" lang="en" title="View this page in English">EN</a><span class="lang-opt active" aria-current="true">ES</span></nav>
+  <button type="button" class="theme-toggle" aria-label="Alternar modo oscuro" title="Alternar modo oscuro">
+    <span class="theme-icon" aria-hidden="true"></span>
+  </button>
+</header>
+<div class="layout">
+  <div class="sidebar-backdrop" hidden></div>
+  <aside class="sidebar" aria-label="Navegación de la documentación">
+    <nav class="nav">
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">Inicio<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../index.html">GreenGrass</a></li></ul></div>
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">Especificaciones<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../spec/product.html">Proyecto: GreenGrass</a></li><li><a href="../spec/mvp.html">MVP de GreenGrass — plan de producto</a></li><li><a href="../spec/users.html">Usuarios y roles</a></li><li><a href="../spec/workflows.html">Flujos de trabajo principales</a></li><li><a href="../spec/geography.html">Geografía objetivo</a></li><li><a href="../spec/security.html">Seguridad y modelo de amenazas</a></li><li><a href="../spec/compliance.html">Cumplimiento y marco legal</a></li><li><a href="../spec/fundraising.html">Recaudación de fondos e infraestructura de pagos</a></li><li><a href="../spec/integrations.html">Integraciones externas</a></li><li><a href="../spec/support.html">Soporte y puesta en marcha de organizaciones</a></li><li><a href="../spec/gotv.html">GOTV y operaciones del día de elecciones</a></li><li><a href="../spec/messaging.html">Comunicaciones internas y notificaciones</a></li><li><a href="../spec/press.html">Prensa, medios y comunicaciones públicas</a></li><li><a href="../spec/comms-intelligence.html">Inteligencia de comunicaciones — hoja de ruta post-MVP</a></li></ul></div>
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">Arquitectura<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../design/architecture/system.html">Arquitectura del sistema</a></li></ul></div>
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">Diseño UX<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../design/ux/00-overview.html">Resumen del diseño de UX</a></li><li><a href="../design/ux/01-information-architecture/navigation-model.html">Modelo de navegación</a></li><li><a href="../design/ux/01-information-architecture/screen-inventory.html">Inventario de pantallas</a></li><li><a href="../design/ux/01-information-architecture/persona-views.html">Vistas por arquetipo</a></li><li><a href="../design/ux/01-information-architecture/url-structure.html">Estructura de URL</a></li><li><a href="../design/ux/02-global-patterns/pattern-catalog.html">Catálogo de patrones</a></li><li><a href="../design/ux/02-global-patterns/offline-sync-patterns.html">Patrones sin conexión y de sincronización</a></li><li><a href="../design/ux/02-global-patterns/notification-patterns.html">Patrones de notificaciones</a></li><li><a href="../design/ux/02-global-patterns/search-patterns.html">Patrones de búsqueda</a></li><li><a href="../design/ux/02-global-patterns/settings-help-patterns.html">Patrones de ajustes y ayuda</a></li><li><a href="../design/ux/02-global-patterns/security-ux-patterns.html">Patrones de UX de seguridad</a></li><li><a href="../design/ux/03-design-system/foundations.html">Fundamentos del sistema de diseño</a></li><li><a href="../design/ux/03-design-system/theming-strategy.html">Estrategia de temas</a></li><li><a href="../design/ux/03-design-system/component-inventory.html">Inventario de componentes</a></li><li><a href="../design/ux/03-design-system/responsive-strategy.html">Estrategia de diseño adaptable</a></li></ul></div>
+<div class="nav-section open"><button type="button" class="nav-section-title" aria-expanded="true">Decisiones<span class="chev" aria-hidden="true"></span></button><ul><li><a href="./001-platform-architecture.html">ADR-001: Arquitectura y despliegue de la plataforma</a></li><li><a href="./002-security-threat-model.html" aria-current="page" class="active">ADR-002: Seguridad y modelo de amenazas</a></li><li><a href="./003-identity-access-organization.html">ADR-003: Identidad, acceso y organización</a></li><li><a href="./004-data-model-integrity.html">ADR-004: Modelo de datos e integridad</a></li><li><a href="./005-offline-first-sync.html">ADR-005: Prioridad sin conexión y sincronización</a></li><li><a href="./006-field-operations-gotv.html">ADR-006: Operaciones de campo y GOTV</a></li><li><a href="./007-fundraising-payments.html">ADR-007: Recaudación de fondos y pagos</a></li><li><a href="./008-communications-messaging.html">ADR-008: Comunicaciones y mensajería</a></li><li><a href="./009-compliance-legal.html">ADR-009: Cumplimiento y marco legal</a></li><li><a href="./010-internationalization-localization.html">ADR-010: Internacionalización y localización</a></li><li><a href="./011-design-system-ux.html">ADR-011: Sistema de diseño y fundamentos de UX</a></li><li><a href="./012-external-integrations.html">ADR-012: Integraciones externas</a></li><li><a href="./013-analytics-ai.html">ADR-013: Analítica e IA</a></li><li><a href="./014-volunteer-onboarding.html">ADR-014: Voluntariado e incorporación</a></li><li><a href="./015-product-scope.html">ADR-015: Límites del alcance del producto</a></li><li><a href="./016-cross-cutting-resolutions.html">ADR-016: Resoluciones transversales</a></li><li><a href="./017-sharing-contract-trust-model.html">ADR-017: El contrato de intercambio como primitiva universal de confianza</a></li><li><a href="./ux-decisions.html">Decisiones de UX — fase de wireframes</a></li></ul></div>
+    </nav>
+  </aside>
+  <main id="content" class="content">
+    <nav class="breadcrumb" aria-label="Ruta de navegación">Decisiones</nav>
+    <article class="prose">
+<h1 id="adr-002-seguridad-y-modelo-de-amenazas" tabindex="-1"><a class="heading-anchor" href="#adr-002-seguridad-y-modelo-de-amenazas" aria-hidden="true">#</a> ADR-002: Seguridad y modelo de amenazas</h1>
+<p><strong>Estado:</strong> Aceptada
+<strong>Fecha:</strong> 2026-03-03
+<strong>Fuentes:</strong> <code>spec/security.md</code>, <code>design/architecture/system.md</code>, <code>design/ux/02-global-patterns/security-ux-patterns.md</code></p>
+<h2 id="contexto" tabindex="-1"><a class="heading-anchor" href="#contexto" aria-hidden="true">#</a> Contexto</h2>
+<p>GreenGrass opera en entornos políticos donde una falla de seguridad tiene consecuencias reales: vigilancia, hostigamiento, arresto o violencia. El modelo de amenazas incluye actores estatales con capacidad de interceptar la red, adversarios políticos que pueden infiltrarse como voluntarios y dispositivos que pueden ser incautados físicamente en un retén o en un allanamiento. Las medidas de seguridad empresariales estándar no bastan: la arquitectura tiene que dar por hecho el compromiso, minimizar el radio de impacto y ofrecer funcionalidades diseñadas específicamente para entornos políticos hostiles.</p>
+<h2 id="decisión" tabindex="-1"><a class="heading-anchor" href="#decisión" aria-hidden="true">#</a> Decisión</h2>
+<h3 id="cifrado-byok-por-defecto" tabindex="-1"><a class="heading-anchor" href="#cifrado-byok-por-defecto" aria-hidden="true">#</a> Cifrado BYOK por defecto</h3>
+<p>Cada organización genera y custodia sus propias llaves de cifrado. GreenGrass no puede descifrar los datos de una organización y, por lo tanto, no puede verse obligada por vía legal a entregarlos. Esto es lo predeterminado, no una opción avanzada: BYOK (Bring Your Own Key — la organización controla su propia llave de cifrado) se presenta como la opción recomendada durante la puesta en marcha, con generación guiada de llaves, flujos seguros de copia de seguridad (incluido el reparto de secretos de Shamir entre varios administradores de la organización) y documentación clara de que perder la llave significa perder los datos para siempre.</p>
+<p>Las organizaciones que eligen explícitamente la comodidad por encima de la soberanía pueden optar por llaves administradas por GreenGrass, lo que habilita la recuperación de datos asistida por soporte y simplifica la operación de las organizaciones menos técnicas.</p>
+<p><strong>Alternativas consideradas:</strong> Se descartó dejar las llaves administradas por defecto y BYOK como opción que la organización activa, porque invierte el modelo de confianza: la plataforma tendría por defecto las llaves de datos políticos sensibles, lo que la convierte en blanco de requerimientos legales. La opción de solo llaves administradas por la plataforma nunca se consideró, dado el modelo de amenazas.</p>
+<h3 id="tls-12-con-preferencia-por-tls-13" tabindex="-1"><a class="heading-anchor" href="#tls-12-con-preferencia-por-tls-13" aria-hidden="true">#</a> TLS 1.2+ con preferencia por TLS 1.3</h3>
+<p>Toda la comunicación de red va cifrada. Los clientes compatibles con TLS 1.3 lo negocian automáticamente; los dispositivos más viejos recurren a TLS 1.2 con las suites de cifrado débiles deshabilitadas. Así se equilibra la seguridad con la accesibilidad de los dispositivos en el Sur Global, donde abundan los equipos antiguos. HTTPS con HSTS y fijación de certificados en los clientes móviles; TLS mutuo para la comunicación entre servicios internos.</p>
+<h3 id="arquitectura-que-da-por-hecho-el-compromiso" tabindex="-1"><a class="heading-anchor" href="#arquitectura-que-da-por-hecho-el-compromiso" aria-hidden="true">#</a> Arquitectura que da por hecho el compromiso</h3>
+<p>Cada capa se diseña asumiendo que la capa de encima ya está comprometida. Defensa en profundidad, no seguridad perimetral. La arquitectura de organización única limita el radio de impacto: comprometer una organización no expone a otra. El cifrado a nivel de aplicación protege los campos de alta sensibilidad (puntuaciones de inclinación política, notas de trabajo de campo, identidad de los donantes, comunicaciones de los candidatos, números de identificación nacional) por encima del cifrado a nivel de almacenamiento, de modo que comprometer la base de datos, por sí solo, no expone los datos más sensibles.</p>
+<h3 id="modo-de-coacción-con-interfaz-saneada" tabindex="-1"><a class="heading-anchor" href="#modo-de-coacción-con-interfaz-saneada" aria-hidden="true">#</a> Modo de coacción con interfaz saneada</h3>
+<p>Un passkey secundario da entrada a una vista saneada de la aplicación, que parece funcional pero no contiene datos sensibles. El inicio de sesión bajo coacción es indistinguible de uno normal: sin señales visuales, sin diferencias en el comportamiento de carga. Dispara una alerta silenciosa a los contactos de confianza de la persona y al Administrador de la organización. Disponible en el nivel de seguridad agresivo para las organizaciones que operan en entornos políticos hostiles.</p>
+<!-- REVISIT: El original dice "the aggressive security tier", que mezcla el eje de protección de metadatos (moderado / agresivo) con el eje de aislamiento (Estándar / Reforzado / Máximo / Autoalojado). No existe un "nivel de seguridad agresivo": `spec/security.md` sitúa el modo de coacción en el nivel agresivo de protección de metadatos. La contradicción se traduce tal cual y hay que arreglarla en el inglés. -->
+<p>La vista saneada muestra contenido verosímil pero depurado: una estructura de cuenta real con datos mínimos, no una pantalla en blanco ni un estado obviamente falso. Así resiste la inspección superficial de un adversario.</p>
+<p><strong>Alternativas consideradas:</strong> Se descartó no tener modo de coacción (dejarlo fuera del alcance) porque la incautación física de dispositivos es una amenaza real en los países objetivo. Se descartaron las aplicaciones señuelo evidentes porque no resisten una inspección.</p>
+<h3 id="solo-datos-operativos-en-los-dispositivos-de-campo" tabindex="-1"><a class="heading-anchor" href="#solo-datos-operativos-en-los-dispositivos-de-campo" aria-hidden="true">#</a> Solo datos operativos en los dispositivos de campo</h3>
+<p>Lo que se descarga de una lista de recorrido contiene solo lo operativamente necesario: nombre, dirección, edad, resultado del contacto anterior y el guion de trabajo de campo. Las notas detalladas de visitas anteriores, las etiquetas y puntajes internos, el historial de donaciones, la identificación nacional y el historial completo de comunicaciones se quedan en el servidor. Si incautan un dispositivo, la exposición es limitada. Todos los datos en el dispositivo van cifrados (SQLCipher) y se borran al terminar la sesión.</p>
+<h2 id="consecuencias" tabindex="-1"><a class="heading-anchor" href="#consecuencias" aria-hidden="true">#</a> Consecuencias</h2>
+<p><strong>Beneficios:</strong></p>
+<ul>
+<li>BYOK deja a GreenGrass arquitectónicamente incapaz de atender un requerimiento de datos para la mayoría de las organizaciones: el modelo de confianza más fuerte posible</li>
+<li>La arquitectura que da por hecho el compromiso implica que ningún punto único de compromiso puede exponer la plataforma entera</li>
+<li>El modo de coacción da protección de seguridad física a los activistas en entornos hostiles</li>
+<li>Llevar datos mínimos en los dispositivos de campo limita la exposición ante el vector de ataque físico más probable: la incautación del dispositivo</li>
+</ul>
+<p><strong>Costos:</strong></p>
+<ul>
+<li>La gestión de llaves BYOK impone una carga considerable a la experiencia de usuario, que hay que resolver con flujos guiados y el reparto de secretos de Shamir</li>
+<li>Perder la llave es perder los datos para siempre: el flujo de puesta en marcha tiene que dejar esa consecuencia inequívocamente clara</li>
+<li>El modo de coacción exige un diseño cuidadoso para ser indistinguible de un inicio de sesión normal, lo que añade complejidad de implementación</li>
+<li>El cifrado a nivel de aplicación por encima del cifrado de almacenamiento añade complejidad a las consultas sobre campos cifrados</li>
+</ul>
+<p><strong>Restricciones:</strong></p>
+<ul>
+<li>Todas las funcionalidades de seguridad tienen que funcionar en los dispositivos de gama baja habituales en el Sur Global</li>
+<li>Las alertas silenciosas de coacción tienen que resistir el monitoreo de la red: la alerta misma no puede ser lo que delate la coacción</li>
+<li>La seguridad tiene que ser invisible durante la operación normal: una experiencia de seguridad intrusiva socava la adopción</li>
+</ul>
+<p><strong>ADR relacionados:</strong> <a href="./001-platform-architecture.html">ADR-001</a> (el aislamiento de organización única es un control de seguridad), <a href="./003-identity-access-organization.html">ADR-003</a> (autenticación y gestión de sesiones), <a href="./005-offline-first-sync.html">ADR-005</a> (cifrado de los datos sin conexión), <a href="./008-communications-messaging.html">ADR-008</a> (cifrado de extremo a extremo para la mensajería)</p>
+
+    </article>
+  </main>
+  <div class="toc-rail"><nav class="toc" aria-label="En esta página"><div class="toc-label">En esta página</div><ul><li class="toc-2"><a href="#contexto"># Contexto</a></li><li class="toc-2"><a href="#decisión"># Decisión</a></li><li class="toc-3"><a href="#cifrado-byok-por-defecto"># Cifrado BYOK por defecto</a></li><li class="toc-3"><a href="#tls-12-con-preferencia-por-tls-13"># TLS 1.2+ con preferencia por TLS 1.3</a></li><li class="toc-3"><a href="#arquitectura-que-da-por-hecho-el-compromiso"># Arquitectura que da por hecho el compromiso</a></li><li class="toc-3"><a href="#modo-de-coacción-con-interfaz-saneada"># Modo de coacción con interfaz saneada</a></li><li class="toc-3"><a href="#solo-datos-operativos-en-los-dispositivos-de-campo"># Solo datos operativos en los dispositivos de campo</a></li><li class="toc-2"><a href="#consecuencias"># Consecuencias</a></li></ul></nav></div>
+</div>
+<script src="../../assets/search.js" defer></script>
+<script src="../../assets/app.js" defer></script>
+</body>
+</html>

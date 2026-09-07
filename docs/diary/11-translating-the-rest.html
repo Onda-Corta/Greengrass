@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en" data-base="../" data-no-results="No results for">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Diary Entry 11: Translating the Rest · GreenGrass</title>
+<meta name="description" content="Diary Entry 11: Translating the Rest — GreenGrass spec &amp; design documentation.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%232563eb'/%3E%3Cstop offset='1' stop-color='%2316a34a'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='32' height='32' rx='7' fill='url(%23g)'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="../assets/styles.css">
+</head>
+<body>
+<a class="skip-link" href="#content">Skip to content</a>
+<header class="site-header">
+  <button type="button" class="menu-toggle" aria-label="Toggle navigation" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+  <a class="brand" href="../index.html">
+    <span class="brand-mark" aria-hidden="true"></span>
+    <span class="brand-text"><strong>GreenGrass</strong><small>Spec &amp; Design</small></span>
+  </a>
+  <div class="search">
+    <input type="search" id="search-input" placeholder="Search docs…" autocomplete="off" aria-label="Search documentation">
+    <div id="search-results" class="search-results" hidden></div>
+  </div>
+  <nav class="lang-switch" aria-label="Language"><span class="lang-opt active" aria-current="true">EN</span><a class="lang-opt lang-opt--fallback" href="../es/index.html" hreflang="es" lang="es" title="Esta página no está traducida. Ir a la documentación en español.">ES</a></nav>
+  <button type="button" class="theme-toggle" aria-label="Toggle dark mode" title="Toggle dark mode">
+    <span class="theme-icon" aria-hidden="true"></span>
+  </button>
+</header>
+<div class="layout">
+  <div class="sidebar-backdrop" hidden></div>
+  <aside class="sidebar" aria-label="Documentation navigation">
+    <nav class="nav">
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">Home<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../index.html">GreenGrass</a></li></ul></div>
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">Specifications<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../spec/product.html">Project: GreenGrass</a></li><li><a href="../spec/mvp.html">GreenGrass MVP — Product Plan</a></li><li><a href="../spec/users.html">Users &amp; Roles</a></li><li><a href="../spec/workflows.html">Core Workflows</a></li><li><a href="../spec/geography.html">Target Geography</a></li><li><a href="../spec/security.html">Security &amp; Threat Model</a></li><li><a href="../spec/compliance.html">Compliance &amp; Legal Framework</a></li><li><a href="../spec/fundraising.html">Fundraising &amp; Payment Infrastructure</a></li><li><a href="../spec/integrations.html">External Integrations</a></li><li><a href="../spec/support.html">Tenant Support &amp; Onboarding</a></li><li><a href="../spec/gotv.html">Get Out The Vote &amp; Election Day Operations</a></li><li><a href="../spec/messaging.html">Internal Communications &amp; Notifications</a></li><li><a href="../spec/press.html">Press, Media &amp; Public Communications</a></li><li><a href="../spec/comms-intelligence.html">Comms Intelligence — Post-MVP Roadmap</a></li></ul></div>
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">Architecture<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../design/architecture/system.html">System Architecture</a></li></ul></div>
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">UX Design<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../design/ux/00-overview.html">UX Design Overview</a></li><li><a href="../design/ux/01-information-architecture/navigation-model.html">Navigation Model</a></li><li><a href="../design/ux/01-information-architecture/screen-inventory.html">Screen Inventory</a></li><li><a href="../design/ux/01-information-architecture/persona-views.html">Persona Views</a></li><li><a href="../design/ux/01-information-architecture/url-structure.html">URL Structure</a></li><li><a href="../design/ux/02-global-patterns/pattern-catalog.html">Pattern Catalog</a></li><li><a href="../design/ux/02-global-patterns/offline-sync-patterns.html">Offline &amp; Sync Patterns</a></li><li><a href="../design/ux/02-global-patterns/notification-patterns.html">Notification Patterns</a></li><li><a href="../design/ux/02-global-patterns/search-patterns.html">Search Patterns</a></li><li><a href="../design/ux/02-global-patterns/settings-help-patterns.html">Settings &amp; Help Patterns</a></li><li><a href="../design/ux/02-global-patterns/security-ux-patterns.html">Security UX Patterns</a></li><li><a href="../design/ux/03-design-system/foundations.html">Design System Foundations</a></li><li><a href="../design/ux/03-design-system/theming-strategy.html">Theming Strategy</a></li><li><a href="../design/ux/03-design-system/component-inventory.html">Component Inventory</a></li><li><a href="../design/ux/03-design-system/responsive-strategy.html">Responsive Strategy</a></li><li><a href="../design/ux/04-wireframes/index.html">Wireframes</a></li><li><a href="../design/ux/04-wireframes/navigation-shell/navigation-shell.html">Navigation Shell Wireframes</a></li><li><a href="../design/ux/04-wireframes/dashboards/dashboards.html">Dashboard Wireframes</a></li><li><a href="../design/ux/04-wireframes/field-mode/field-mode.html">Field Mode Wireframes</a></li><li><a href="../design/ux/04-wireframes/onboarding/onboarding.html">Onboarding Wireframes</a></li><li><a href="../design/ux/04-wireframes/messaging/messaging.html">Messaging Wireframes</a></li><li><a href="../design/ux/04-wireframes/supporter/supporter-portal.html">Supporter Portal Wireframes</a></li><li><a href="../design/ux/04-wireframes/alliance/alliance.html">Alliance Wireframes</a></li><li><a href="../design/ux/04-wireframes/crm/crm.html">CRM / People Wireframes</a></li><li><a href="../design/ux/04-wireframes/field-ops/field-ops.html">Field Operations (Admin) Wireframes</a></li><li><a href="../design/ux/04-wireframes/fundraising/fundraising.html">Fundraising Wireframes</a></li><li><a href="../design/ux/04-wireframes/communications/communications.html">Communications Wireframes</a></li><li><a href="../design/ux/04-wireframes/social-media/social-media.html">Social Media Wireframes</a></li><li><a href="../design/ux/04-wireframes/events/events.html">Events Wireframes</a></li><li><a href="../design/ux/04-wireframes/press/press.html">Press &amp; Media Wireframes</a></li><li><a href="../design/ux/04-wireframes/activism/activism.html">Activism &amp; Engagement Campaign Wireframes</a></li><li><a href="../design/ux/04-wireframes/gotv/gotv.html">GOTV Admin Wireframes</a></li><li><a href="../design/ux/04-wireframes/settings/settings.html">Settings &amp; Admin Wireframes</a></li><li><a href="../design/ux/04-wireframes/auth/auth.html">Authentication Wireframes</a></li><li><a href="../design/ux/04-wireframes/profile/profile.html">User Profile Wireframes</a></li><li><a href="../design/ux/04-wireframes/help/help.html">Support &amp; Help Wireframes</a></li><li><a href="../design/ux/04-wireframes/public/public.html">Public Pages Wireframes</a></li><li><a href="../design/ux/04-wireframes/audit.html">Wireframe Audit Report</a></li></ul></div>
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">Decisions<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../decisions/001-platform-architecture.html">ADR-001: Platform Architecture &amp; Deployment</a></li><li><a href="../decisions/002-security-threat-model.html">ADR-002: Security &amp; Threat Model</a></li><li><a href="../decisions/003-identity-access-organization.html">ADR-003: Identity, Access &amp; Organization</a></li><li><a href="../decisions/004-data-model-integrity.html">ADR-004: Data Model &amp; Integrity</a></li><li><a href="../decisions/005-offline-first-sync.html">ADR-005: Offline-First &amp; Sync</a></li><li><a href="../decisions/006-field-operations-gotv.html">ADR-006: Field Operations &amp; GOTV</a></li><li><a href="../decisions/007-fundraising-payments.html">ADR-007: Fundraising &amp; Payments</a></li><li><a href="../decisions/008-communications-messaging.html">ADR-008: Communications &amp; Messaging</a></li><li><a href="../decisions/009-compliance-legal.html">ADR-009: Compliance &amp; Legal Framework</a></li><li><a href="../decisions/010-internationalization-localization.html">ADR-010: Internationalization &amp; Localization</a></li><li><a href="../decisions/011-design-system-ux.html">ADR-011: Design System &amp; UX Foundations</a></li><li><a href="../decisions/012-external-integrations.html">ADR-012: External Integrations</a></li><li><a href="../decisions/013-analytics-ai.html">ADR-013: Analytics &amp; AI</a></li><li><a href="../decisions/014-volunteer-onboarding.html">ADR-014: Volunteer &amp; Onboarding</a></li><li><a href="../decisions/015-product-scope.html">ADR-015: Product Scope Boundaries</a></li><li><a href="../decisions/016-cross-cutting-resolutions.html">ADR-016: Cross-Cutting Resolutions</a></li><li><a href="../decisions/017-sharing-contract-trust-model.html">ADR-017: The Sharing Contract as Universal Trust Primitive</a></li><li><a href="../decisions/ux-decisions.html">UX Decisions — Wireframe Phase</a></li></ul></div>
+<div class="nav-section open"><button type="button" class="nav-section-title" aria-expanded="true">Diary<span class="chev" aria-hidden="true"></span></button><ul><li><a href="./index.html">Project Diary</a></li><li><a href="./01-from-description-to-specification.html">Entry 1: From Description to Specification</a></li><li><a href="./02-the-architecture-session.html">Entry 2: The Architecture Session</a></li><li><a href="./03-information-architecture.html">Entry 3: Information Architecture</a></li><li><a href="./04-design-system-and-wireframes.html">Entry 4: The Design System and Wireframes</a></li><li><a href="./05-the-wireframe-audit.html">Entry 5: The Wireframe Audit</a></li><li><a href="./06-resolving-the-open-questions.html">Entry 6: Resolving the Open Questions</a></li><li><a href="./07-reconciling-the-architecture.html">Entry 7: Reconciling the Architecture</a></li><li><a href="./08-housekeeping.html">Diary Entry 8: Housekeeping</a></li><li><a href="./09-the-documentation-website.html">Diary Entry 9: The Documentation Website</a></li><li><a href="./10-the-spanish-edition.html">Diary Entry 10: The Spanish Edition</a></li><li><a href="./11-translating-the-rest.html" aria-current="page" class="active">Diary Entry 11: Translating the Rest</a></li></ul></div>
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">Project &amp; Internal<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../claude/MEMORY.html">Memory</a></li><li><a href="../claude/SKILLS.html">Skills</a></li><li><a href="../CLAUDE.html">GreenGrass</a></li></ul></div>
+    </nav>
+  </aside>
+  <main id="content" class="content">
+    <nav class="breadcrumb" aria-label="Breadcrumb">Diary</nav>
+    <article class="prose">
+<h1 id="diary-entry-11-translating-the-rest" tabindex="-1"><a class="heading-anchor" href="#diary-entry-11-translating-the-rest" aria-hidden="true">#</a> Diary Entry 11: Translating the Rest</h1>
+<p><strong>Date:</strong> 2026-09-07</p>
+<hr>
+<h2 id="the-task" tabindex="-1"><a class="heading-anchor" href="#the-task" aria-hidden="true">#</a> The Task</h2>
+<p>&quot;Now I want to translate everything else.&quot;</p>
+<p>Everything else was 68 documents and 233,000 words — five times the spec corpus that entry 10 covered. So the first real decision wasn't about translation at all. It was about what &quot;everything&quot; meant.</p>
+<p>The 23 wireframe documents are 140,000 words on their own, more than half of everything written for this project. They're also the least useful thing to hand a Spanish-speaking organizer first, because they describe screens that don't exist yet. The architecture, the 17 ADRs and the UX foundations are 80,000 words and they're the documents that explain how the thing works and why it works that way. So: those 34, and the wireframes and the diary stay English for now. Forty-eight documents in Spanish, forty-nine pages counting the home page.</p>
+<p>That's a boundary, and the Spanish home page says so plainly instead of pretending the site is complete.</p>
+<h2 id="the-bug-under-the-floorboards-again" tabindex="-1"><a class="heading-anchor" href="#the-bug-under-the-floorboards-again" aria-hidden="true">#</a> The Bug Under the Floorboards, Again</h2>
+<p>Entry 10 found a slugify function eating accents. This time it was worse, because it had been sitting there working.</p>
+<p><code>fix-es-anchors.mjs</code> repoints Spanish cross-references by mapping the Nth English heading to the Nth Spanish one. To do that it needs to know a document's headings, and it found them with a regex over lines starting with <code>#</code>. The site generator finds them a different way: it renders the Markdown and reads the ids off the HTML.</p>
+<p>Those two disagree about <code>design/architecture/system.md</code>. The regex counts 76 headings; markdown-it produces 72. The difference is four <code>###</code> lines living inside an HTML comment — the <code>DECISION NEEDED</code> block where the technology stack was still being argued out. Markdown ignores them. The regex doesn't.</p>
+<p>The map was therefore misaligned from index 66 to the end of the file, and had been the whole time. Nothing pointed at that tail, so nothing broke. But sixteen of the documents queued for translation contain HTML comments, and no translator has any reason to preserve four headings inside one. The first person to reflow that block would have silently repointed every citation of the architecture document.</p>
+<p>The fix isn't a better regex. It's that there should never have been a second way to compute a heading id. There's now one module, it renders the document the way the site renders it, and both scripts import it. Duplicate-slug suffixing is markdown-it-anchor's problem, not ours, so it's correct by construction rather than by reimplementation.</p>
+<p>While I was in there: <code>npm run build</code> validated every link and anchor, printed a warning count, and exited 0 regardless. CI builds and deploys unconditionally. A broken anchor shipped to production with a green check. That's two lines to fix and I should have caught it in entry 9.</p>
+<h2 id="reconciling-before-instead-of-after" tabindex="-1"><a class="heading-anchor" href="#reconciling-before-instead-of-after" aria-hidden="true">#</a> Reconciling Before Instead of After</h2>
+<p>The real finding from entry 10 was that a glossary written in advance is not enough — parallel translators coin conflicting words, and you need a reconciliation pass afterwards. <em>War room</em> came back as both <em>centro de mando</em> and <em>sala de operaciones</em>.</p>
+<p>So this time I tried to do the reconciliation first. Three read-only passes over the corpus, one per domain, each proposing terminology for its own documents and flagging what it expected the others to coin too.</p>
+<p>They disagreed on eight terms. Before a single sentence was translated.</p>
+<p><code>universal chrome</code> came back as both <em>elementos permanentes de la interfaz</em> and <em>elementos universales</em>. <code>drawer</code> as <em>cajón</em> and <em>panel lateral</em>. <code>data freshness</code> as <em>actualidad de los datos</em> and <em>frescura</em>, which is a property of food. <code>caché</code> came back both masculine and feminine. And <code>AI concierge</code> came back as <em>conserje</em>, which is a doorman, against a rule already in the glossary that <em>asistente</em> is taken by <code>wizard</code>.</p>
+<p>Each of those would have been a two-hour cleanup afterwards, spread across a dozen files. Settled in advance, they were a table.</p>
+<p>That's the actual lesson, and it's not the one I expected. Reconciliation isn't a phase that has to come after translation. It's a phase that has to come after <em>disagreement</em>. If you can manufacture the disagreement cheaply — three readers instead of one, arguing about words rather than producing prose — you can move the whole thing to the front.</p>
+<h2 id="the-mistake" tabindex="-1"><a class="heading-anchor" href="#the-mistake" aria-hidden="true">#</a> The Mistake</h2>
+<p>I decided <code>persona</code> should be <strong>arquetipo (de usuario)</strong>, wrote the reasoning into the commit message, and then dropped the row when I assembled the glossary file.</p>
+<p>A translator hit the term, went looking for the row I'd told them to read, grepped the whole file, found nothing, and used <em>perfil</em> instead — reasonably, because two already-published documents used it. Then they told me.</p>
+<p><em>Perfil</em> turns out to be wrong, and demonstrably so: <code>profile</code> is already <em>perfil</em>, so the screen inventory ended up with a column headed <em>Perfiles</em> sitting directly above the row <code>PROF-001 | Perfil personal</code>. Seventy occurrences across eight files had to be walked back.</p>
+<p>The contract is the file. Not the decision, not the commit message, not what I remember deciding. If it isn't in <code>i18n/GLOSSARY.md</code>, it does not exist, and everything downstream is entitled to act as though it doesn't.</p>
+<h2 id="two-rules-worth-keeping" tabindex="-1"><a class="heading-anchor" href="#two-rules-worth-keeping" aria-hidden="true">#</a> Two Rules Worth Keeping</h2>
+<p><strong>Screen names get looked up, not coined.</strong> There are 236 of them, and they appear across the inventory, the URL structure and the pattern catalog. Putting 236 rows in the glossary would have buried the 212 real terms under a phone book. Instead the Spanish screen inventory <em>is</em> the artifact: for screen <code>AREA-NNN</code>, the Spanish name is whatever its row says, and the glossary carries one rule pointing there. It's in the published tree, it's reviewable on the site, and it can't drift from itself.</p>
+<p><strong>Don't fix the English.</strong> Five documents contradict themselves — touch-target sizes that are 44, 48 and 56 pixels in three different documents; a security tier that mixes two different axes; a list introduced as &quot;four capabilities&quot; that enumerates three; a table of three v2 features whose summary line lists four. Every one of those is tempting to quietly correct in translation, and every correction would create an EN/ES divergence that no structural check can catch. They're translated as written, and marked <code>REVISIT:</code> in <em>both</em> languages so the note doesn't evaporate when someone fixes the source.</p>
+<p>Finding them was a side effect. Translation is the most thorough proofread a document ever gets, because it's the only kind of reading that can't skim.</p>
+<h2 id="where-it-landed" tabindex="-1"><a class="heading-anchor" href="#where-it-landed" aria-hidden="true">#</a> Where It Landed</h2>
+<table>
+<thead>
+<tr>
+<th>Metric</th>
+<th>Count</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Documents in Spanish</td>
+<td>48</td>
+<td>Published</td>
+</tr>
+<tr>
+<td>Spanish pages on the site</td>
+<td>49</td>
+<td>Building cleanly</td>
+</tr>
+<tr>
+<td>Words translated this round</td>
+<td>~80,000</td>
+<td>—</td>
+</tr>
+<tr>
+<td>Glossary terms</td>
+<td>596</td>
+<td>Binding</td>
+</tr>
+<tr>
+<td>Still English only</td>
+<td>23 wireframes + the diary</td>
+<td>Stated on the Spanish home page</td>
+</tr>
+<tr>
+<td>Unresolved links and anchors</td>
+<td>0</td>
+<td>Build now fails if not</td>
+</tr>
+</tbody>
+</table>
+<p>The Spanish search index went from 15 documents to 49. That's the change a person actually feels: last round you could search the specs in Spanish, and now you can search almost the whole project.</p>
+<h2 id="next" tabindex="-1"><a class="heading-anchor" href="#next" aria-hidden="true">#</a> Next</h2>
+<p>The wireframes, eventually — 140,000 words and 236 screens, and the glossary that comes out of this round is a much better starting gun than the one that started this one. Everything three translators coined got written back into it, including the terms that didn't conflict, which is the part that's easy to skip and the part that compounds.</p>
+<p>Portuguese is still one table entry and a directory. It was true in entry 10 and it's more true now, because the hard part of a new language isn't the generator — it's having 596 decisions already argued out and written down.</p>
+
+    </article>
+  </main>
+  <div class="toc-rail"><nav class="toc" aria-label="On this page"><div class="toc-label">On this page</div><ul><li class="toc-2"><a href="#the-task"># The Task</a></li><li class="toc-2"><a href="#the-bug-under-the-floorboards-again"># The Bug Under the Floorboards, Again</a></li><li class="toc-2"><a href="#reconciling-before-instead-of-after"># Reconciling Before Instead of After</a></li><li class="toc-2"><a href="#the-mistake"># The Mistake</a></li><li class="toc-2"><a href="#two-rules-worth-keeping"># Two Rules Worth Keeping</a></li><li class="toc-2"><a href="#where-it-landed"># Where It Landed</a></li><li class="toc-2"><a href="#next"># Next</a></li></ul></nav></div>
+</div>
+<script src="../assets/search.js" defer></script>
+<script src="../assets/app.js" defer></script>
+</body>
+</html>

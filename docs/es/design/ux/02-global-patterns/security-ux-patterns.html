@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="es" data-base="../../../../" data-no-results="No hay resultados para">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Patrones de UX de seguridad · GreenGrass</title>
+<meta name="description" content="Patrones de UX de seguridad — Documentación de especificación y diseño de GreenGrass.">
+<link rel="alternate" hreflang="en" href="../../../../design/ux/02-global-patterns/security-ux-patterns.html">
+<link rel="alternate" hreflang="es" href="./security-ux-patterns.html">
+<link rel="alternate" hreflang="x-default" href="../../../../design/ux/02-global-patterns/security-ux-patterns.html">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%232563eb'/%3E%3Cstop offset='1' stop-color='%2316a34a'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='32' height='32' rx='7' fill='url(%23g)'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="../../../../assets/styles.css">
+</head>
+<body>
+<a class="skip-link" href="#content">Saltar al contenido</a>
+<header class="site-header">
+  <button type="button" class="menu-toggle" aria-label="Alternar navegación" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+  <a class="brand" href="../../../../es/index.html">
+    <span class="brand-mark" aria-hidden="true"></span>
+    <span class="brand-text"><strong>GreenGrass</strong><small>Especificación y diseño</small></span>
+  </a>
+  <div class="search">
+    <input type="search" id="search-input" placeholder="Buscar en la documentación…" autocomplete="off" aria-label="Buscar en la documentación">
+    <div id="search-results" class="search-results" hidden></div>
+  </div>
+  <nav class="lang-switch" aria-label="Idioma"><a class="lang-opt" href="../../../../design/ux/02-global-patterns/security-ux-patterns.html" hreflang="en" lang="en" title="View this page in English">EN</a><span class="lang-opt active" aria-current="true">ES</span></nav>
+  <button type="button" class="theme-toggle" aria-label="Alternar modo oscuro" title="Alternar modo oscuro">
+    <span class="theme-icon" aria-hidden="true"></span>
+  </button>
+</header>
+<div class="layout">
+  <div class="sidebar-backdrop" hidden></div>
+  <aside class="sidebar" aria-label="Navegación de la documentación">
+    <nav class="nav">
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">Inicio<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../../../index.html">GreenGrass</a></li></ul></div>
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">Especificaciones<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../../../spec/product.html">Proyecto: GreenGrass</a></li><li><a href="../../../spec/mvp.html">MVP de GreenGrass — plan de producto</a></li><li><a href="../../../spec/users.html">Usuarios y roles</a></li><li><a href="../../../spec/workflows.html">Flujos de trabajo principales</a></li><li><a href="../../../spec/geography.html">Geografía objetivo</a></li><li><a href="../../../spec/security.html">Seguridad y modelo de amenazas</a></li><li><a href="../../../spec/compliance.html">Cumplimiento y marco legal</a></li><li><a href="../../../spec/fundraising.html">Recaudación de fondos e infraestructura de pagos</a></li><li><a href="../../../spec/integrations.html">Integraciones externas</a></li><li><a href="../../../spec/support.html">Soporte y puesta en marcha de organizaciones</a></li><li><a href="../../../spec/gotv.html">GOTV y operaciones del día de elecciones</a></li><li><a href="../../../spec/messaging.html">Comunicaciones internas y notificaciones</a></li><li><a href="../../../spec/press.html">Prensa, medios y comunicaciones públicas</a></li><li><a href="../../../spec/comms-intelligence.html">Inteligencia de comunicaciones — hoja de ruta post-MVP</a></li></ul></div>
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">Arquitectura<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../../architecture/system.html">Arquitectura del sistema</a></li></ul></div>
+<div class="nav-section open"><button type="button" class="nav-section-title" aria-expanded="true">Diseño UX<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../00-overview.html">Resumen del diseño de UX</a></li><li><a href="../01-information-architecture/navigation-model.html">Modelo de navegación</a></li><li><a href="../01-information-architecture/screen-inventory.html">Inventario de pantallas</a></li><li><a href="../01-information-architecture/persona-views.html">Vistas por arquetipo</a></li><li><a href="../01-information-architecture/url-structure.html">Estructura de URL</a></li><li><a href="./pattern-catalog.html">Catálogo de patrones</a></li><li><a href="./offline-sync-patterns.html">Patrones sin conexión y de sincronización</a></li><li><a href="./notification-patterns.html">Patrones de notificaciones</a></li><li><a href="./search-patterns.html">Patrones de búsqueda</a></li><li><a href="./settings-help-patterns.html">Patrones de ajustes y ayuda</a></li><li><a href="./security-ux-patterns.html" aria-current="page" class="active">Patrones de UX de seguridad</a></li><li><a href="../03-design-system/foundations.html">Fundamentos del sistema de diseño</a></li><li><a href="../03-design-system/theming-strategy.html">Estrategia de temas</a></li><li><a href="../03-design-system/component-inventory.html">Inventario de componentes</a></li><li><a href="../03-design-system/responsive-strategy.html">Estrategia de diseño adaptable</a></li></ul></div>
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">Decisiones<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../../../decisions/001-platform-architecture.html">ADR-001: Arquitectura y despliegue de la plataforma</a></li><li><a href="../../../decisions/002-security-threat-model.html">ADR-002: Seguridad y modelo de amenazas</a></li><li><a href="../../../decisions/003-identity-access-organization.html">ADR-003: Identidad, acceso y organización</a></li><li><a href="../../../decisions/004-data-model-integrity.html">ADR-004: Modelo de datos e integridad</a></li><li><a href="../../../decisions/005-offline-first-sync.html">ADR-005: Prioridad sin conexión y sincronización</a></li><li><a href="../../../decisions/006-field-operations-gotv.html">ADR-006: Operaciones de campo y GOTV</a></li><li><a href="../../../decisions/007-fundraising-payments.html">ADR-007: Recaudación de fondos y pagos</a></li><li><a href="../../../decisions/008-communications-messaging.html">ADR-008: Comunicaciones y mensajería</a></li><li><a href="../../../decisions/009-compliance-legal.html">ADR-009: Cumplimiento y marco legal</a></li><li><a href="../../../decisions/010-internationalization-localization.html">ADR-010: Internacionalización y localización</a></li><li><a href="../../../decisions/011-design-system-ux.html">ADR-011: Sistema de diseño y fundamentos de UX</a></li><li><a href="../../../decisions/012-external-integrations.html">ADR-012: Integraciones externas</a></li><li><a href="../../../decisions/013-analytics-ai.html">ADR-013: Analítica e IA</a></li><li><a href="../../../decisions/014-volunteer-onboarding.html">ADR-014: Voluntariado e incorporación</a></li><li><a href="../../../decisions/015-product-scope.html">ADR-015: Límites del alcance del producto</a></li><li><a href="../../../decisions/016-cross-cutting-resolutions.html">ADR-016: Resoluciones transversales</a></li><li><a href="../../../decisions/017-sharing-contract-trust-model.html">ADR-017: El contrato de intercambio como primitiva universal de confianza</a></li><li><a href="../../../decisions/ux-decisions.html">Decisiones de UX — fase de wireframes</a></li></ul></div>
+    </nav>
+  </aside>
+  <main id="content" class="content">
+    <nav class="breadcrumb" aria-label="Ruta de navegación">Diseño UX</nav>
+    <article class="prose">
+<h1 id="patrones-de-ux-de-seguridad" tabindex="-1"><a class="heading-anchor" href="#patrones-de-ux-de-seguridad" aria-hidden="true">#</a> Patrones de UX de seguridad</h1>
+<h2 id="propósito" tabindex="-1"><a class="heading-anchor" href="#propósito" aria-hidden="true">#</a> Propósito</h2>
+<p>Este documento define los patrones de UX de las funcionalidades de seguridad de GreenGrass: el modo de coacción, la gestión de llaves BYOK (Bring Your Own Key — la organización controla su propia llave de cifrado), el manejo de sesiones, el botón de pánico y los flujos de autenticación. Estas funcionalidades protegen a las personas usuarias en contextos políticamente sensibles, donde los datos equivocados en las manos equivocadas pueden ser peligrosos.</p>
+<p>La restricción de diseño: la seguridad tiene que ser invisible en la operación normal e inequívoca ante una amenaza. Una voluntaria que hace trabajo de campo en una zona hostil no debería pensar nunca en el cifrado. Pero si necesita bloquear la app, el botón de pánico tiene que estar al alcance inmediato y ser inconfundible.</p>
+<h2 id="modo-de-coacción" tabindex="-1"><a class="heading-anchor" href="#modo-de-coacción" aria-hidden="true">#</a> Modo de coacción</h2>
+<h3 id="qué-es" tabindex="-1"><a class="heading-anchor" href="#qué-es" aria-hidden="true">#</a> Qué es</h3>
+<p>El modo de coacción se activa cuando alguien inicia sesión con un passkey de coacción (un passkey aparte, dado de alta específicamente para esto). La plataforma muestra una versión saneada de la interfaz real: la navegación se ve idéntica, pero el contenido va depurado para quitar los datos políticamente sensibles.</p>
+<p><strong>DECIDIDO (según <a href="http://navigation-model.md" target="_blank" rel="noopener noreferrer">navigation-model.md</a>): Estructura real con datos saneados.</strong> La vista de coacción presenta la navegación real con datos verosímiles pero depurados.</p>
+<h3 id="alta-del-passkey-de-coacción" tabindex="-1"><a class="heading-anchor" href="#alta-del-passkey-de-coacción" aria-hidden="true">#</a> Alta del passkey de coacción</h3>
+<p>Durante la configuración de seguridad, a quienes están en el nivel de seguridad agresivo se les propone dar de alta un passkey de coacción:</p>
+<pre><code>┌──────────────────────────────────────────────────────┐
+│  Configurar el passkey de coacción                   │
+├──────────────────────────────────────────────────────┤
+│                                                      │
+│  Un passkey de coacción te permite iniciar sesión    │
+│  bajo coacción y ver una versión segura de la        │
+│  plataforma.                                         │
+│                                                      │
+│  Cuando usas este passkey:                           │
+│  • La plataforma se ve y funciona con normalidad     │
+│  • Todos los datos sensibles quedan ocultos          │
+│  • Tus datos reales no se ven afectados              │
+│  • Se envía una alerta silenciosa al administrador   │
+│    de tu organización                                │
+│                                                      │
+│  Importante: usa un dedo o un dispositivo distinto   │
+│  para el passkey de coacción que para el normal.     │
+│                                                      │
+│  [Dar de alta el passkey de coacción]                │
+│  [Omitir por ahora]                                  │
+│                                                      │
+└──────────────────────────────────────────────────────┘
+</code></pre>
+<p><strong>El alta del passkey de coacción nunca es obligatoria</strong> — se ofrece durante la configuración de seguridad y queda disponible en los ajustes personales de seguridad, pero es opcional.</p>
+<h3 id="reglas-de-saneamiento" tabindex="-1"><a class="heading-anchor" href="#reglas-de-saneamiento" aria-hidden="true">#</a> Reglas de saneamiento</h3>
+<p>Con el modo de coacción activo, cada área funcional muestra datos verosímiles pero seguros:</p>
+<table>
+<thead>
+<tr>
+<th>Área funcional</th>
+<th>Vista normal</th>
+<th>Vista de coacción</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Contactos</strong></td>
+<td>CRM completo con puntajes de apoyo y datos de identificación de votantes</td>
+<td>15-20 contactos inocuos. Sin puntajes de apoyo, sin datos de identificación de votantes. Nombres comunes, no identificables como activistas.</td>
+</tr>
+<tr>
+<td><strong>Paneles</strong></td>
+<td>Métricas reales</td>
+<td>Cifras bajas y verosímiles. &quot;47 contactos, 3 eventos, 12 voluntarios&quot;. Sin líneas de tendencia, sin termómetros de meta.</td>
+</tr>
+<tr>
+<td><strong>Trabajo de campo</strong></td>
+<td>Campañas activas, territorios, listas de recorrido</td>
+<td>Ninguna campaña. Estado vacío: &quot;Crea tu primera campaña&quot;.</td>
+</tr>
+<tr>
+<td><strong>Recaudación de fondos</strong></td>
+<td>Historial de donaciones, formularios, cumplimiento</td>
+<td>Unas pocas donaciones pequeñas. Sin marcas de cumplimiento. Sin grandes donantes.</td>
+</tr>
+<tr>
+<td><strong>Mensajes</strong></td>
+<td>Conversaciones reales</td>
+<td>2-3 conversaciones inocuas. &quot;Reunión de equipo mañana&quot;, &quot;Gracias por la actualización&quot;. Sin contenido político.</td>
+</tr>
+<tr>
+<td><strong>Eventos</strong></td>
+<td>Lista completa de eventos con confirmaciones de asistencia</td>
+<td>1-2 eventos públicos pasados. Ningún evento próximo.</td>
+</tr>
+<tr>
+<td><strong>Prensa</strong></td>
+<td>Contactos de medios, comunicados, respaldos</td>
+<td>Vacío. &quot;Todavía no hay actividad de prensa&quot;.</td>
+</tr>
+<tr>
+<td><strong>GOTV</strong></td>
+<td>Operaciones del día de elecciones</td>
+<td>Vacío. No está en modo de elecciones.</td>
+</tr>
+<tr>
+<td><strong>Configuración</strong></td>
+<td>Configuración completa</td>
+<td>Ajustes reducidos. Sin indicadores de nivel de seguridad, sin gestión de llaves de cifrado.</td>
+</tr>
+<tr>
+<td><strong>Registro de auditoría</strong></td>
+<td>Bitácora completa de actividad</td>
+<td>Limitado a la actividad de los datos saneados.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Principios clave:</strong></p>
+<ul>
+<li><strong>Verosímil, no vacío.</strong> Una cuenta completamente vacía sería sospechosa. La vista de coacción muestra una cuenta pequeña, de poca actividad, pero con aspecto real.</li>
+<li><strong>Sin marcadores políticos.</strong> Los nombres de contacto, los títulos de los eventos y el contenido de los mensajes no mencionan partidos, candidaturas ni temas de política pública.</li>
+<li><strong>Consistente entre sesiones.</strong> Los datos de coacción son los mismos cada vez que se usa el passkey de coacción: no cambian entre inicios de sesión. (Si no, quien observa y fuerza dos inicios de sesión vería datos distintos y sabría que algo no cuadra).</li>
+<li><strong>Sin rastros.</strong> La vista de coacción no deja ninguna señal de que la cuenta real tenga más datos. Sin indicadores de &quot;elementos ocultos&quot;, sin contadores que no cuadren, sin metadatos filtrados.</li>
+<li><strong>Alerta silenciosa.</strong> Cuando ocurre un inicio de sesión bajo coacción, se envía una notificación silenciosa al Administrador de la organización (a su correo, no a las notificaciones dentro de la app, por si el Administrador de la organización también está bajo coacción).</li>
+</ul>
+<h3 id="indicadores-del-modo-de-coacción" tabindex="-1"><a class="heading-anchor" href="#indicadores-del-modo-de-coacción" aria-hidden="true">#</a> Indicadores del modo de coacción</h3>
+<p><strong>Para quien está en modo de coacción:</strong> NO hay ningún indicador de que el modo de coacción esté activo. El punto entero es que quien observa no pueda distinguir la vista de coacción de una sesión real. La persona usuaria sabe que usó su passkey de coacción — esa es la única señal.</p>
+<p><strong>Para el Administrador de la organización:</strong> la alerta silenciosa incluye la identidad de la persona, la hora, la información del dispositivo y la ubicación (si está disponible). A partir de ahí puede actuar como corresponda (avisar a los contactos de confianza, activar los protocolos de seguridad de la organización).</p>
+<hr>
+<h2 id="gestión-de-llaves-byok" tabindex="-1"><a class="heading-anchor" href="#gestión-de-llaves-byok" aria-hidden="true">#</a> Gestión de llaves BYOK</h2>
+<h3 id="ceremonia-de-generación-de-llaves" tabindex="-1"><a class="heading-anchor" href="#ceremonia-de-generación-de-llaves" aria-hidden="true">#</a> Ceremonia de generación de llaves</h3>
+<p>El asistente de generación de llaves BYOK (WIZ-003) guía al Administrador de la organización para crear y proteger las llaves de cifrado de su organización. Es uno de los flujos de interfaz más críticos para la seguridad de toda la plataforma.</p>
+<pre><code>Paso 1: comprensión
+┌─────────────────────────────────────────────────────────┐
+│  BYOK: generación de llaves                 Paso 1 de 5 │
+├─────────────────────────────────────────────────────────┤
+│                                                         │
+│  Los datos de tu organización se cifrarán con una       │
+│  llave que solo tú controlas.                           │
+│                                                         │
+│  Qué significa esto:                                    │
+│  ✓ GreenGrass no puede leer tus datos                   │
+│  ✓ Tus datos no se pueden entregar sin tu llave         │
+│  ✓ Eres responsable de guardar una copia de seguridad   │
+│                                                         │
+│  ⚠ Si pierdes tu llave y tu copia de seguridad,         │
+│    tus datos quedan inaccesibles para siempre.          │
+│    GreenGrass no los puede recuperar.                   │
+│                                                         │
+│  [Entendido → Siguiente]                                │
+│                                                         │
+└─────────────────────────────────────────────────────────┘
+
+Paso 2: generación de la llave
+┌─────────────────────────────────────────────────────────┐
+│  Generando tu llave de cifrado...                       │
+│                                                         │
+│  ████████████████████████  100%                         │
+│                                                         │
+│  ✓ Llave generada en tu dispositivo                     │
+│  ✓ La llave nunca sale de tu dispositivo sin cifrar     │
+│                                                         │
+│  [Siguiente →]                                          │
+└─────────────────────────────────────────────────────────┘
+
+Paso 3: copia de seguridad
+┌─────────────────────────────────────────────────────────┐
+│  Haz una copia de seguridad de tu llave                 │
+│                                                         │
+│  Elige uno o más métodos de copia de seguridad:         │
+│                                                         │
+│  [Descargar el archivo de la llave]                     │
+│  Guárdalo en un lugar seguro (USB, caja fuerte)         │
+│                                                         │
+│  [Imprimir la hoja de recuperación]                     │
+│  Una hoja imprimible con tu frase de recuperación       │
+│                                                         │
+│  ⚠ Guarda la copia de seguridad separada de tu          │
+│    dispositivo. Si el dispositivo se ve comprometido,   │
+│    la copia debe estar en otro lugar.                   │
+│                                                         │
+│  [Siguiente →]                                          │
+└─────────────────────────────────────────────────────────┘
+
+Paso 4: verificación
+┌─────────────────────────────────────────────────────────┐
+│  Verifica tu copia de seguridad                         │
+│                                                         │
+│  Escribe la 5.ª y la 11.ª palabra de tu frase de        │
+│  recuperación para confirmar que la guardaste bien:     │
+│                                                         │
+│  Palabra 5:  [________]                                 │
+│  Palabra 11: [________]                                 │
+│                                                         │
+│  [Verificar →]                                          │
+└─────────────────────────────────────────────────────────┘
+
+Paso 5: listo
+┌─────────────────────────────────────────────────────────┐
+│  ✓ Tus llaves de cifrado están configuradas             │
+│                                                         │
+│  Los datos de tu organización ya están cifrados         │
+│  con llaves que solo tú controlas.                      │
+│                                                         │
+│  Recordatorios importantes:                             │
+│  • Mantén segura tu copia de seguridad                  │
+│  • Considera rotar tus llaves periódicamente            │
+│  • Si sospechas un compromiso, rota de inmediato        │
+│                                                         │
+│  [Ir al panel]                                          │
+└─────────────────────────────────────────────────────────┘
+</code></pre>
+<h3 id="rotación-de-llaves" tabindex="-1"><a class="heading-anchor" href="#rotación-de-llaves" aria-hidden="true">#</a> Rotación de llaves</h3>
+<p>La rotación de llaves está en Configuración &gt; Seguridad &gt; Gestión de llaves de cifrado:</p>
+<pre><code>┌────────────────────────────────────────────────────────┐
+│  Gestión de llaves de cifrado                          │
+├────────────────────────────────────────────────────────┤
+│                                                        │
+│  Estado de la llave actual: activa                     │
+│  Creada: 15 de enero de 2026                           │
+│  Última rotación: nunca                                │
+│                                                        │
+│  Recomendación: rota las llaves después de un evento   │
+│  de seguridad (salida de personal, sospecha de         │
+│  compromiso, pérdida de un dispositivo)                │
+│                                                        │
+│  [Rotar la llave]                                      │
+│                                                        │
+│  La rotación vuelve a cifrar todos los datos con una   │
+│  llave nueva. El proceso corre en segundo plano y      │
+│  puede tardar varias horas con conjuntos de datos      │
+│  grandes.                                              │
+│                                                        │
+│  Llaves anteriores: 0 llaves rotadas conservadas       │
+│                                                        │
+└────────────────────────────────────────────────────────┘
+</code></pre>
+<p><strong>Disparadores de rotación de llaves</strong> (sugeridos, no obligatorios):</p>
+<ul>
+<li>Alguien del personal deja la organización</li>
+<li>Dispositivo perdido o robado</li>
+<li>Sospecha de incidente de seguridad</li>
+<li>Rotación periódica (se recomienda anual)</li>
+</ul>
+<p>La plataforma le sugiere al Administrador de la organización considerar la rotación después de eventos relevantes (por ejemplo, &quot;María López salió del personal. Considera rotar tus llaves de cifrado&quot;), pero nunca la impone.</p>
+<hr>
+<h2 id="botón-de-pánico" tabindex="-1"><a class="heading-anchor" href="#botón-de-pánico" aria-hidden="true">#</a> Botón de pánico</h2>
+<h3 id="qué-hace" tabindex="-1"><a class="heading-anchor" href="#qué-hace" aria-hidden="true">#</a> Qué hace</h3>
+<p>El botón de pánico bloquea la app de inmediato y exige autenticarse otra vez. Es la parada de emergencia para las situaciones en las que hay que asegurar la app al instante.</p>
+<h3 id="ubicación" tabindex="-1"><a class="heading-anchor" href="#ubicación" aria-hidden="true">#</a> Ubicación</h3>
+<ul>
+<li><strong>Modo de campo:</strong> visible en la barra de acciones de campo, al pie de la pantalla. Con un icono de candado. Siempre a un toque de distancia.</li>
+<li><strong>App estándar:</strong> no está siempre visible. Se llega con un atajo de teclado (<code>Cmd+Shift+L</code> en escritorio) o con un gesto rápido (por ejemplo, tocar tres veces el icono de la app en móvil).</li>
+</ul>
+<h3 id="comportamiento" tabindex="-1"><a class="heading-anchor" href="#comportamiento" aria-hidden="true">#</a> Comportamiento</h3>
+<pre><code>Al tocar el botón de pánico:
+
+1. La pantalla se pone en blanco de inmediato (blanca o negra, sin destello de contenido)
+2. Se borran todos los datos en memoria
+3. La app muestra la pantalla de inicio de sesión
+4. No queda ninguna indicación de lo que se estaba viendo
+5. Se envía una alerta silenciosa al Administrador de la organización (si está configurada)
+
+Si la persona estaba en modo de campo:
+- Los datos del turno se guardan localmente antes del bloqueo (no se pierde nada)
+- Al autenticarse otra vez, el turno se retoma donde quedó
+- Si se usa el passkey de coacción para volver a entrar: los datos del turno quedan ocultos
+</code></pre>
+<h3 id="consideraciones-de-diseño" tabindex="-1"><a class="heading-anchor" href="#consideraciones-de-diseño" aria-hidden="true">#</a> Consideraciones de diseño</h3>
+<ul>
+<li><strong>Sin diálogo de confirmación.</strong> Un &quot;¿Estás seguro?&quot; arruina el propósito. El botón de pánico es para emergencias: actúa de inmediato.</li>
+<li><strong>Sin animación.</strong> La pantalla se pone en blanco al instante. Sin desvanecido, sin transición. La velocidad es una funcionalidad de seguridad.</li>
+<li><strong>Silencioso.</strong> Sin sonido, sin vibración. El bloqueo no debe llamar la atención.</li>
+<li><strong>Accesible pero no accidental.</strong> En el modo de campo, el botón de bloqueo está donde no se dispara con toques accidentales (en una esquina de la pantalla, exige un toque deliberado). El gesto en móvil exige tres toques rápidos seguidos.</li>
+</ul>
+<hr>
+<h2 id="patrones-de-autenticación" tabindex="-1"><a class="heading-anchor" href="#patrones-de-autenticación" aria-hidden="true">#</a> Patrones de autenticación</h2>
+<h3 id="flujo-de-inicio-de-sesión" tabindex="-1"><a class="heading-anchor" href="#flujo-de-inicio-de-sesión" aria-hidden="true">#</a> Flujo de inicio de sesión</h3>
+<p>El flujo principal de inicio de sesión usa passkeys:</p>
+<pre><code>┌────────────────────────────────────────┐
+│                                        │
+│  [Logo de GreenGrass]                  │
+│                                        │
+│  [Iniciar sesión con passkey]          │
+│                                        │
+│  ─────── o ───────                     │
+│                                        │
+│  [Iniciar sesión con enlace mágico]    │
+│  [Iniciar sesión con código por SMS]   │
+│                                        │
+│  [Recuperar la cuenta →]               │
+│                                        │
+└────────────────────────────────────────┘
+</code></pre>
+<p><strong>Flujo con passkey:</strong></p>
+<ol>
+<li>La persona toca &quot;Iniciar sesión con passkey&quot;</li>
+<li>Aparece la solicitud biométrica del dispositivo (huella, rostro, PIN)</li>
+<li>La autenticación se completa y entra a la app</li>
+<li>Tiempo total: ~2 segundos</li>
+</ol>
+<p><strong>Flujos de reserva</strong> (para dispositivos sin soporte de passkey, o por preferencia):</p>
+<ul>
+<li><strong>Enlace mágico:</strong> escribe su correo → recibe un enlace → lo toca → queda autenticada</li>
+<li><strong>OTP por SMS:</strong> escribe su número de celular → recibe un código → lo escribe → queda autenticada</li>
+</ul>
+<p><strong>No hay flujo con contraseña.</strong> La plataforma no admite contraseñas. Es una decisión de seguridad deliberada: las contraseñas se pueden robar con phishing, los passkeys no.</p>
+<h3 id="gestión-de-sesiones" tabindex="-1"><a class="heading-anchor" href="#gestión-de-sesiones" aria-hidden="true">#</a> Gestión de sesiones</h3>
+<table>
+<thead>
+<tr>
+<th>Perfil</th>
+<th>Duración de la sesión</th>
+<th>Disparadores de reautenticación</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Administrador de la organización</td>
+<td>Corta (horas)</td>
+<td>Acciones sensibles (gestión de llaves, cambios de rol, facturación)</td>
+</tr>
+<tr>
+<td>Personal (todo)</td>
+<td>Media (jornada laboral)</td>
+<td>Acciones sensibles</td>
+</tr>
+<tr>
+<td>Voluntario / Líder de equipo</td>
+<td>Media (jornada laboral) / duración del turno (campo)</td>
+<td>Al terminar el turno, al volver desde segundo plano (&gt;30 min)</td>
+</tr>
+<tr>
+<td>Candidato</td>
+<td>Media (jornada laboral)</td>
+<td>Estándar</td>
+</tr>
+<tr>
+<td>Simpatizante</td>
+<td>Larga (semanas)</td>
+<td>Cambios de pago, actualización de datos personales</td>
+</tr>
+</tbody>
+</table>
+<h3 id="reautenticación" tabindex="-1"><a class="heading-anchor" href="#reautenticación" aria-hidden="true">#</a> Reautenticación</h3>
+<p>Cuando una sesión exige autenticarse otra vez (por una acción sensible o porque expiró):</p>
+<pre><code>┌────────────────────────────────────────────────┐
+│                                                │
+│  Verifica tu identidad                         │
+│                                                │
+│  Esta acción requiere autenticarse otra vez.   │
+│                                                │
+│  [Verificar con passkey]                       │
+│                                                │
+│  [Usar otro método →]                          │
+│                                                │
+└────────────────────────────────────────────────┘
+</code></pre>
+<p>La reautenticación es una sola comprobación biométrica: debería tomar menos de 3 segundos. La persona se queda en la misma pantalla y puede seguir con su acción justo después de verificarse.</p>
+<h3 id="expiración-de-la-sesión" tabindex="-1"><a class="heading-anchor" href="#expiración-de-la-sesión" aria-hidden="true">#</a> Expiración de la sesión</h3>
+<p>Cuando una sesión expira:</p>
+<pre><code>┌────────────────────────────────────────────┐
+│                                            │
+│  Tu sesión expiró                          │
+│                                            │
+│  Por tu seguridad, cerramos tu sesión      │
+│  tras un período de inactividad.           │
+│                                            │
+│  [Iniciar sesión]                          │
+│                                            │
+│  Los cambios sin guardar se conservaron.   │
+│                                            │
+└────────────────────────────────────────────┘
+</code></pre>
+<p><strong>Comportamientos:</strong></p>
+<ul>
+<li><strong>Conservación de los datos sin guardar.</strong> Si estaba llenando un formulario, los datos se guardan localmente y se restauran al volver a iniciar sesión.</li>
+<li><strong>Redirección tras iniciar sesión.</strong> Al autenticarse otra vez, vuelve exactamente a la pantalla en la que estaba.</li>
+<li><strong>Sin exposición de datos.</strong> La pantalla de sesión expirada no muestra nada sobre lo que la persona estaba haciendo.</li>
+</ul>
+<hr>
+<h2 id="recuperación-con-contactos-de-confianza" tabindex="-1"><a class="heading-anchor" href="#recuperación-con-contactos-de-confianza" aria-hidden="true">#</a> Recuperación con contactos de confianza</h2>
+<h3 id="configuración" tabindex="-1"><a class="heading-anchor" href="#configuración" aria-hidden="true">#</a> Configuración</h3>
+<p>Durante la incorporación (o en los ajustes personales de seguridad), se configuran contactos de confianza para recuperar la cuenta:</p>
+<pre><code>┌───────────────────────────────────────────────────────┐
+│  Contactos de confianza                               │
+├───────────────────────────────────────────────────────┤
+│                                                       │
+│  Si pierdes el acceso a tu cuenta, tus contactos      │
+│  de confianza pueden ayudarte a recuperarla.          │
+│                                                       │
+│  Recomendamos 2-3 contactos de confianza que:         │
+│  • Merezcan tu confianza para acceder a tu cuenta     │
+│  • No sea probable que se vean comprometidos a la vez │
+│  • Tengan su propia cuenta de GreenGrass              │
+│                                                       │
+│  Contactos de confianza:                              │
+│  ┌───────────────────────────────────────────────┐    │
+│  │  1. María López (Gerente de campaña)      [✗] │    │
+│  │  2. Carlos Reyes (Director de campo)      [✗] │    │
+│  └───────────────────────────────────────────────┘    │
+│                                                       │
+│  [+ Añadir contacto de confianza]                     │
+│                                                       │
+└───────────────────────────────────────────────────────┘
+</code></pre>
+<h3 id="flujo-de-recuperación" tabindex="-1"><a class="heading-anchor" href="#flujo-de-recuperación" aria-hidden="true">#</a> Flujo de recuperación</h3>
+<p>Cuando alguien necesita recuperar su cuenta:</p>
+<ol>
+<li>Toca &quot;Recuperar la cuenta&quot; en la pantalla de inicio de sesión</li>
+<li>Escribe su correo o su celular para identificar su cuenta</li>
+<li>El sistema avisa a sus contactos de confianza: &quot;Ana necesita ayuda para recuperar su cuenta. Si confías en esta solicitud, apruébala en la app&quot;.</li>
+<li>Los contactos de confianza reciben una notificación dentro de la app con las opciones de aprobar o denegar</li>
+<li>Cuando aprueba el número requerido de contactos de confianza (configurable, 2 de 3 por defecto), la persona puede dar de alta un passkey nuevo</li>
+<li>Queda autenticada con su passkey nuevo</li>
+</ol>
+<p><strong>Consideraciones de seguridad:</strong></p>
+<ul>
+<li>Las notificaciones de recuperación incluyen la identidad de quien solicita y su ubicación aproximada (para que los contactos de confianza puedan verificar)</li>
+<li>Hay un período de espera (configurable, 24 horas por defecto) antes de que la recuperación se complete, para dar tiempo a detectar ingeniería social</li>
+<li>Los intentos fallidos de recuperación quedan registrados y visibles para el Administrador de la organización</li>
+<li>El passkey anterior se invalida cuando la recuperación se completa</li>
+</ul>
+<hr>
+<h2 id="autorización-de-dispositivos" tabindex="-1"><a class="heading-anchor" href="#autorización-de-dispositivos" aria-hidden="true">#</a> Autorización de dispositivos</h2>
+<h3 id="gestión-de-varios-dispositivos" tabindex="-1"><a class="heading-anchor" href="#gestión-de-varios-dispositivos" aria-hidden="true">#</a> Gestión de varios dispositivos</h3>
+<p>Las personas usuarias gestionan sus dispositivos autorizados en los ajustes personales de seguridad:</p>
+<pre><code>┌──────────────────────────────────────────┐
+│  Tus dispositivos                        │
+├──────────────────────────────────────────┤
+│                                          │
+│  ● Este dispositivo                      │
+│    iPhone 14 · Última actividad: ahora   │
+│                                          │
+│  ○ MacBook Pro                           │
+│    Última actividad: hace 2 horas        │
+│    [Quitar]                              │
+│                                          │
+│  ○ iPad Air                              │
+│    Última actividad: hace 3 días         │
+│    [Quitar]                              │
+│                                          │
+│  [+ Añadir dispositivo]                  │
+│                                          │
+└──────────────────────────────────────────┘
+</code></pre>
+<p><strong>Comportamientos:</strong></p>
+<ul>
+<li><strong>Quitar dispositivo</strong> — revoca de inmediato el passkey de ese dispositivo. Si el dispositivo tiene la sesión abierta, la sesión se termina.</li>
+<li><strong>Añadir dispositivo</strong> — genera un código QR o un enlace con tiempo limitado para dar de alta un passkey nuevo en otro dispositivo.</li>
+<li><strong>Nombre del dispositivo</strong> — los dispositivos se nombran solos a partir de su user agent (se pueden renombrar a mano para mayor claridad).</li>
+</ul>
+<hr>
+<h2 id="indicadores-de-seguridad" tabindex="-1"><a class="heading-anchor" href="#indicadores-de-seguridad" aria-hidden="true">#</a> Indicadores de seguridad</h2>
+<h3 id="estado-del-cifrado" tabindex="-1"><a class="heading-anchor" href="#estado-del-cifrado" aria-hidden="true">#</a> Estado del cifrado</h3>
+<p>Visible en los hilos de mensajes (según <a href="http://messaging.md" target="_blank" rel="noopener noreferrer">messaging.md</a>):</p>
+<pre><code>│  🔒 Los mensajes están cifrados de extremo a extremo│
+│  Solo tú y los miembros de esta conversación        │
+│  pueden leerlos.                                    │
+</code></pre>
+<p>En las organizaciones con BYOK, hay un indicador adicional en la configuración:</p>
+<pre><code>│  🔑 Tus datos están cifrados con las llaves de tu      │
+│     organización. GreenGrass no puede acceder a ellos. │
+</code></pre>
+<h3 id="indicador-de-seguridad-de-la-sesión" tabindex="-1"><a class="heading-anchor" href="#indicador-de-seguridad-de-la-sesión" aria-hidden="true">#</a> Indicador de seguridad de la sesión</h3>
+<p>En los ajustes personales de seguridad, un resumen de la seguridad de la sesión actual:</p>
+<pre><code>┌─────────────────────────────────────────────────────────┐
+│  Seguridad de la sesión                                 │
+├─────────────────────────────────────────────────────────┤
+│  ✓ Autenticación con passkey (biométrica)               │
+│  ✓ Conexión cifrada (TLS 1.3)                           │
+│  ✓ Datos cifrados en reposo (BYOK)                      │
+│  ✓ 2 contactos de confianza configurados                │
+│  ○ Passkey de coacción sin configurar  [Configurar →]   │
+└─────────────────────────────────────────────────────────┘
+</code></pre>
+<p>Es informativo: en la operación normal no hay que hacer nada con esto. Está disponible para quien quiera verificar su postura de seguridad.</p>
+<hr>
+<h2 id="preguntas-abiertas" tabindex="-1"><a class="heading-anchor" href="#preguntas-abiertas" aria-hidden="true">#</a> Preguntas abiertas</h2>
+<ol>
+<li>
+<p><strong>Pruebas de verosimilitud del modo de coacción.</strong> ¿Cómo validamos que la vista de coacción resulta convincente? Pruebas con personas que no conocen la funcionalidad de coacción: ¿pueden distinguir entre una cuenta real de poca actividad y una cuenta de coacción?</p>
+</li>
+<li>
+<p><strong>Opción de custodia de llaves.</strong> Para las organizaciones en el nivel Estándar que no quieren la responsabilidad de BYOK, ¿debería existir una opción de llaves gestionadas en la que GreenGrass las custodie? Eso significaría que GreenGrass <em>sí</em> puede leer sus datos, pero algunas organizaciones pueden preferir la comodidad a la soberanía.</p>
+</li>
+<li>
+<p><strong>Bloqueo biométrico en las pantallas sensibles.</strong> Además de la reautenticación a nivel de sesión, ¿ciertas pantallas (configuración de cifrado, registro de auditoría, cumplimiento) deberían exigir una comprobación biométrica cada vez que se abren? Añade fricción, pero aumenta la seguridad en los dispositivos compartidos.</p>
+</li>
+<li>
+<p><strong>Incorporación en seguridad para voluntarios.</strong> Los voluntarios en contextos de alto riesgo tienen que entender el botón de pánico y las funcionalidades de coacción sin abrumarse. ¿Cuánta incorporación en seguridad es razonable para alguien cuya tarea principal es tocar puertas?</p>
+</li>
+</ol>
+<!-- REVISIT: La estrategia de generación de los datos de coacción (cómo se crean y se mantienen los datos saneados) necesita una especificación detallada durante la implementación. ¿Datos estáticos? ¿Generados por procedimiento? ¿Mantenidos a mano por el Administrador de la organización? Cada opción tiene compensaciones distintas en verosimilitud y en carga de mantenimiento. -->
+
+    </article>
+  </main>
+  <div class="toc-rail"><nav class="toc" aria-label="En esta página"><div class="toc-label">En esta página</div><ul><li class="toc-2"><a href="#propósito"># Propósito</a></li><li class="toc-2"><a href="#modo-de-coacción"># Modo de coacción</a></li><li class="toc-3"><a href="#qué-es"># Qué es</a></li><li class="toc-3"><a href="#alta-del-passkey-de-coacción"># Alta del passkey de coacción</a></li><li class="toc-3"><a href="#reglas-de-saneamiento"># Reglas de saneamiento</a></li><li class="toc-3"><a href="#indicadores-del-modo-de-coacción"># Indicadores del modo de coacción</a></li><li class="toc-2"><a href="#gestión-de-llaves-byok"># Gestión de llaves BYOK</a></li><li class="toc-3"><a href="#ceremonia-de-generación-de-llaves"># Ceremonia de generación de llaves</a></li><li class="toc-3"><a href="#rotación-de-llaves"># Rotación de llaves</a></li><li class="toc-2"><a href="#botón-de-pánico"># Botón de pánico</a></li><li class="toc-3"><a href="#qué-hace"># Qué hace</a></li><li class="toc-3"><a href="#ubicación"># Ubicación</a></li><li class="toc-3"><a href="#comportamiento"># Comportamiento</a></li><li class="toc-3"><a href="#consideraciones-de-diseño"># Consideraciones de diseño</a></li><li class="toc-2"><a href="#patrones-de-autenticación"># Patrones de autenticación</a></li><li class="toc-3"><a href="#flujo-de-inicio-de-sesión"># Flujo de inicio de sesión</a></li><li class="toc-3"><a href="#gestión-de-sesiones"># Gestión de sesiones</a></li><li class="toc-3"><a href="#reautenticación"># Reautenticación</a></li><li class="toc-3"><a href="#expiración-de-la-sesión"># Expiración de la sesión</a></li><li class="toc-2"><a href="#recuperación-con-contactos-de-confianza"># Recuperación con contactos de confianza</a></li><li class="toc-3"><a href="#configuración"># Configuración</a></li><li class="toc-3"><a href="#flujo-de-recuperación"># Flujo de recuperación</a></li><li class="toc-2"><a href="#autorización-de-dispositivos"># Autorización de dispositivos</a></li><li class="toc-3"><a href="#gestión-de-varios-dispositivos"># Gestión de varios dispositivos</a></li><li class="toc-2"><a href="#indicadores-de-seguridad"># Indicadores de seguridad</a></li><li class="toc-3"><a href="#estado-del-cifrado"># Estado del cifrado</a></li><li class="toc-3"><a href="#indicador-de-seguridad-de-la-sesión"># Indicador de seguridad de la sesión</a></li><li class="toc-2"><a href="#preguntas-abiertas"># Preguntas abiertas</a></li></ul></nav></div>
+</div>
+<script src="../../../../assets/search.js" defer></script>
+<script src="../../../../assets/app.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="es" data-base="../../../../" data-no-results="No hay resultados para">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Estrategia de diseño adaptable · GreenGrass</title>
+<meta name="description" content="Estrategia de diseño adaptable — Documentación de especificación y diseño de GreenGrass.">
+<link rel="alternate" hreflang="en" href="../../../../design/ux/03-design-system/responsive-strategy.html">
+<link rel="alternate" hreflang="es" href="./responsive-strategy.html">
+<link rel="alternate" hreflang="x-default" href="../../../../design/ux/03-design-system/responsive-strategy.html">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%232563eb'/%3E%3Cstop offset='1' stop-color='%2316a34a'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='32' height='32' rx='7' fill='url(%23g)'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="../../../../assets/styles.css">
+</head>
+<body>
+<a class="skip-link" href="#content">Saltar al contenido</a>
+<header class="site-header">
+  <button type="button" class="menu-toggle" aria-label="Alternar navegación" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+  <a class="brand" href="../../../../es/index.html">
+    <span class="brand-mark" aria-hidden="true"></span>
+    <span class="brand-text"><strong>GreenGrass</strong><small>Especificación y diseño</small></span>
+  </a>
+  <div class="search">
+    <input type="search" id="search-input" placeholder="Buscar en la documentación…" autocomplete="off" aria-label="Buscar en la documentación">
+    <div id="search-results" class="search-results" hidden></div>
+  </div>
+  <nav class="lang-switch" aria-label="Idioma"><a class="lang-opt" href="../../../../design/ux/03-design-system/responsive-strategy.html" hreflang="en" lang="en" title="View this page in English">EN</a><span class="lang-opt active" aria-current="true">ES</span></nav>
+  <button type="button" class="theme-toggle" aria-label="Alternar modo oscuro" title="Alternar modo oscuro">
+    <span class="theme-icon" aria-hidden="true"></span>
+  </button>
+</header>
+<div class="layout">
+  <div class="sidebar-backdrop" hidden></div>
+  <aside class="sidebar" aria-label="Navegación de la documentación">
+    <nav class="nav">
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">Inicio<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../../../index.html">GreenGrass</a></li></ul></div>
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">Especificaciones<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../../../spec/product.html">Proyecto: GreenGrass</a></li><li><a href="../../../spec/mvp.html">MVP de GreenGrass — plan de producto</a></li><li><a href="../../../spec/users.html">Usuarios y roles</a></li><li><a href="../../../spec/workflows.html">Flujos de trabajo principales</a></li><li><a href="../../../spec/geography.html">Geografía objetivo</a></li><li><a href="../../../spec/security.html">Seguridad y modelo de amenazas</a></li><li><a href="../../../spec/compliance.html">Cumplimiento y marco legal</a></li><li><a href="../../../spec/fundraising.html">Recaudación de fondos e infraestructura de pagos</a></li><li><a href="../../../spec/integrations.html">Integraciones externas</a></li><li><a href="../../../spec/support.html">Soporte y puesta en marcha de organizaciones</a></li><li><a href="../../../spec/gotv.html">GOTV y operaciones del día de elecciones</a></li><li><a href="../../../spec/messaging.html">Comunicaciones internas y notificaciones</a></li><li><a href="../../../spec/press.html">Prensa, medios y comunicaciones públicas</a></li><li><a href="../../../spec/comms-intelligence.html">Inteligencia de comunicaciones — hoja de ruta post-MVP</a></li></ul></div>
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">Arquitectura<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../../architecture/system.html">Arquitectura del sistema</a></li></ul></div>
+<div class="nav-section open"><button type="button" class="nav-section-title" aria-expanded="true">Diseño UX<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../00-overview.html">Resumen del diseño de UX</a></li><li><a href="../01-information-architecture/navigation-model.html">Modelo de navegación</a></li><li><a href="../01-information-architecture/screen-inventory.html">Inventario de pantallas</a></li><li><a href="../01-information-architecture/persona-views.html">Vistas por arquetipo</a></li><li><a href="../01-information-architecture/url-structure.html">Estructura de URL</a></li><li><a href="../02-global-patterns/pattern-catalog.html">Catálogo de patrones</a></li><li><a href="../02-global-patterns/offline-sync-patterns.html">Patrones sin conexión y de sincronización</a></li><li><a href="../02-global-patterns/notification-patterns.html">Patrones de notificaciones</a></li><li><a href="../02-global-patterns/search-patterns.html">Patrones de búsqueda</a></li><li><a href="../02-global-patterns/settings-help-patterns.html">Patrones de ajustes y ayuda</a></li><li><a href="../02-global-patterns/security-ux-patterns.html">Patrones de UX de seguridad</a></li><li><a href="./foundations.html">Fundamentos del sistema de diseño</a></li><li><a href="./theming-strategy.html">Estrategia de temas</a></li><li><a href="./component-inventory.html">Inventario de componentes</a></li><li><a href="./responsive-strategy.html" aria-current="page" class="active">Estrategia de diseño adaptable</a></li></ul></div>
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">Decisiones<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../../../decisions/001-platform-architecture.html">ADR-001: Arquitectura y despliegue de la plataforma</a></li><li><a href="../../../decisions/002-security-threat-model.html">ADR-002: Seguridad y modelo de amenazas</a></li><li><a href="../../../decisions/003-identity-access-organization.html">ADR-003: Identidad, acceso y organización</a></li><li><a href="../../../decisions/004-data-model-integrity.html">ADR-004: Modelo de datos e integridad</a></li><li><a href="../../../decisions/005-offline-first-sync.html">ADR-005: Prioridad sin conexión y sincronización</a></li><li><a href="../../../decisions/006-field-operations-gotv.html">ADR-006: Operaciones de campo y GOTV</a></li><li><a href="../../../decisions/007-fundraising-payments.html">ADR-007: Recaudación de fondos y pagos</a></li><li><a href="../../../decisions/008-communications-messaging.html">ADR-008: Comunicaciones y mensajería</a></li><li><a href="../../../decisions/009-compliance-legal.html">ADR-009: Cumplimiento y marco legal</a></li><li><a href="../../../decisions/010-internationalization-localization.html">ADR-010: Internacionalización y localización</a></li><li><a href="../../../decisions/011-design-system-ux.html">ADR-011: Sistema de diseño y fundamentos de UX</a></li><li><a href="../../../decisions/012-external-integrations.html">ADR-012: Integraciones externas</a></li><li><a href="../../../decisions/013-analytics-ai.html">ADR-013: Analítica e IA</a></li><li><a href="../../../decisions/014-volunteer-onboarding.html">ADR-014: Voluntariado e incorporación</a></li><li><a href="../../../decisions/015-product-scope.html">ADR-015: Límites del alcance del producto</a></li><li><a href="../../../decisions/016-cross-cutting-resolutions.html">ADR-016: Resoluciones transversales</a></li><li><a href="../../../decisions/017-sharing-contract-trust-model.html">ADR-017: El contrato de intercambio como primitiva universal de confianza</a></li><li><a href="../../../decisions/ux-decisions.html">Decisiones de UX — fase de wireframes</a></li></ul></div>
+    </nav>
+  </aside>
+  <main id="content" class="content">
+    <nav class="breadcrumb" aria-label="Ruta de navegación">Diseño UX</nav>
+    <article class="prose">
+<h1 id="estrategia-de-diseño-adaptable" tabindex="-1"><a class="heading-anchor" href="#estrategia-de-diseño-adaptable" aria-hidden="true">#</a> Estrategia de diseño adaptable</h1>
+<h2 id="propósito" tabindex="-1"><a class="heading-anchor" href="#propósito" aria-hidden="true">#</a> Propósito</h2>
+<p>Este documento define cómo GreenGrass se adapta a distintos tamaños de pantalla, dispositivos y capacidades de plataforma. Cubre los puntos de quiebre, el comportamiento propio de cada dispositivo, la estrategia del envoltorio nativo de Capacitor y cómo se transforman los componentes según el viewport (el área visible de la pantalla).</p>
+<h2 id="puntos-de-quiebre" tabindex="-1"><a class="heading-anchor" href="#puntos-de-quiebre" aria-hidden="true">#</a> Puntos de quiebre</h2>
+<h3 id="definición" tabindex="-1"><a class="heading-anchor" href="#definición" aria-hidden="true">#</a> Definición</h3>
+<table>
+<thead>
+<tr>
+<th>Token</th>
+<th>Ancho</th>
+<th>Nombre</th>
+<th>Objetivo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--bp-sm</code></td>
+<td>640px</td>
+<td>Pequeño</td>
+<td>Celulares grandes (horizontal), tabletas pequeñas</td>
+</tr>
+<tr>
+<td><code>--bp-md</code></td>
+<td>768px</td>
+<td>Mediano</td>
+<td>Tabletas (vertical)</td>
+</tr>
+<tr>
+<td><code>--bp-lg</code></td>
+<td>1024px</td>
+<td>Grande</td>
+<td>Tabletas (horizontal), laptops pequeñas</td>
+</tr>
+<tr>
+<td><code>--bp-xl</code></td>
+<td>1280px</td>
+<td>Extra grande</td>
+<td>Laptops, monitores de escritorio</td>
+</tr>
+<tr>
+<td><code>--bp-2xl</code></td>
+<td>1536px</td>
+<td>2x extra grande</td>
+<td>Monitores de escritorio grandes</td>
+</tr>
+</tbody>
+</table>
+<h3 id="rangos-de-viewport" tabindex="-1"><a class="heading-anchor" href="#rangos-de-viewport" aria-hidden="true">#</a> Rangos de viewport</h3>
+<table>
+<thead>
+<tr>
+<th>Rango</th>
+<th>Cuadrícula</th>
+<th>Navegación</th>
+<th>Marco</th>
+<th>Objetivo principal</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>&lt;640px</td>
+<td>4 col.</td>
+<td>Pestañas inferiores</td>
+<td>Marco móvil</td>
+<td>Celulares</td>
+</tr>
+<tr>
+<td>640-767px</td>
+<td>4 col.</td>
+<td>Pestañas inferiores</td>
+<td>Marco móvil</td>
+<td>Celulares grandes</td>
+</tr>
+<tr>
+<td>768-1023px</td>
+<td>8 col.</td>
+<td>Barra lateral plegada (superposición)</td>
+<td>Marco de tableta</td>
+<td>Tabletas</td>
+</tr>
+<tr>
+<td>1024-1279px</td>
+<td>12 col.</td>
+<td>Barra lateral (plegable)</td>
+<td>Marco de escritorio</td>
+<td>Laptops pequeñas</td>
+</tr>
+<tr>
+<td>1280px+</td>
+<td>12 col.</td>
+<td>Barra lateral (desplegada por defecto)</td>
+<td>Marco de escritorio</td>
+<td>Escritorio</td>
+</tr>
+</tbody>
+</table>
+<h3 id="uso" tabindex="-1"><a class="heading-anchor" href="#uso" aria-hidden="true">#</a> Uso</h3>
+<p>Los puntos de quiebre se usan con media queries de CSS y un enfoque de prioridad móvil:</p>
+<pre><code class="language-css">/* Los estilos base aplican al viewport más pequeño */
+.component { /* estilos de móvil */ }
+
+@media (min-width: 768px) { /* ajustes para tableta */ }
+@media (min-width: 1024px) { /* ajustes para escritorio */ }
+</code></pre>
+<p>Prioridad móvil significa que los estilos por defecto (sin media query) son los de la pantalla más pequeña. Las mejoras se añaden en los puntos de quiebre más anchos. Así los celulares de gama baja, que procesan CSS despacio, reciben la hoja de estilo más simple.</p>
+<hr>
+<h2 id="categorías-de-dispositivo" tabindex="-1"><a class="heading-anchor" href="#categorías-de-dispositivo" aria-hidden="true">#</a> Categorías de dispositivo</h2>
+<h3 id="celular-768px" tabindex="-1"><a class="heading-anchor" href="#celular-768px" aria-hidden="true">#</a> Celular (&lt; 768px)</h3>
+<p>El dispositivo principal de los voluntarios, los Líderes de equipo, los simpatizantes y los candidatos.</p>
+<p><strong>Disposición:</strong></p>
+<ul>
+<li>Contenido a pantalla completa, sin barra lateral</li>
+<li>Barra de pestañas inferior (4-5 pestañas adaptables al rol)</li>
+<li>Barra superior: atrás o menú, título, acciones contextuales</li>
+<li>Las listas son de tarjetas (no de tablas)</li>
+<li>Las vistas de detalle son a pantalla completa (tocar para entrar, atrás para salir)</li>
+</ul>
+<p><strong>Comportamiento:</strong></p>
+<ul>
+<li>Solo interacciones táctiles (sin estados al pasar el cursor)</li>
+<li>Deslizar para actualizar en las listas</li>
+<li>Desplazamiento infinito en vez de paginación</li>
+<li>Gestos de deslizamiento en las tarjetas (descartar, archivar)</li>
+<li>Hoja inferior para los filtros y las opciones (no desplegables)</li>
+<li>Los campos de formulario usan los teclados nativos del celular (numérico, correo, teléfono)</li>
+</ul>
+<p><strong>Rendimiento:</strong></p>
+<ul>
+<li>El paquete más pequeño posible (división de código agresiva)</li>
+<li>Imágenes con carga diferida y tamaño optimizado</li>
+<li>Estados de carga con esqueleto (sin indicadores de carga a pantalla completa)</li>
+<li>Service worker para cachear el marco sin conexión</li>
+</ul>
+<h3 id="tableta-768px---1023px" tabindex="-1"><a class="heading-anchor" href="#tableta-768px---1023px" aria-hidden="true">#</a> Tableta (768px - 1023px)</h3>
+<p>La usa parte del personal y, de vez en cuando, los Directores de campo que monitorean las operaciones desde un punto de concentración.</p>
+<p><strong>Disposición:</strong></p>
+<ul>
+<li>Cuadrícula de 8 columnas</li>
+<li>Barra lateral plegada por defecto, se despliega como superposición</li>
+<li>Los paneles de detalle pueden aparecer como superposición a la derecha (no como división en línea)</li>
+<li>Las tablas alternan entre vista de tarjetas y vista de tabla según el número de columnas</li>
+</ul>
+<p><strong>Comportamiento:</strong></p>
+<ul>
+<li>Interacciones táctiles + interacciones limitadas con puntero</li>
+<li>Los desplegables se muestran como hojas inferiores cuando se disparan con un toque</li>
+<li>Vista dividida disponible en la mensajería (lista de conversaciones + hilo)</li>
+<li>Arrastrar y soltar funciona, pero no es el modelo de interacción principal</li>
+</ul>
+<h3 id="escritorio-1024px" tabindex="-1"><a class="heading-anchor" href="#escritorio-1024px" aria-hidden="true">#</a> Escritorio (1024px+)</h3>
+<p>El dispositivo principal de los Administradores de la organización, los Directores de comunicaciones, los Directores de finanzas, los Gestores de datos y los Coordinadores de voluntarios.</p>
+<p><strong>Disposición:</strong></p>
+<ul>
+<li>Cuadrícula de 12 columnas</li>
+<li>Barra lateral siempre visible (se pliega a solo iconos)</li>
+<li>Vistas divididas para los patrones de lista + detalle</li>
+<li>Los paneles de detalle se despliegan desde la derecha</li>
+<li>Los modales son diálogos centrados (no a pantalla completa)</li>
+<li>Las tablas son tablas de datos completas, con ordenamiento por columna y selección</li>
+</ul>
+<p><strong>Comportamiento:</strong></p>
+<ul>
+<li>Interacciones con mouse y teclado</li>
+<li>Estados al pasar el cursor sobre los elementos interactivos</li>
+<li>Atajos de teclado disponibles</li>
+<li>Arrastrar y soltar en los constructores, el kanban y el calendario</li>
+<li>Menús contextuales con clic derecho donde corresponda</li>
+<li>Globos de ayuda al pasar el cursor (información disponible sin tener que tocar)</li>
+</ul>
+<hr>
+<h2 id="adaptación-de-los-componentes" tabindex="-1"><a class="heading-anchor" href="#adaptación-de-los-componentes" aria-hidden="true">#</a> Adaptación de los componentes</h2>
+<p>Cómo se transforman los componentes según el punto de quiebre:</p>
+<h3 id="navegación" tabindex="-1"><a class="heading-anchor" href="#navegación" aria-hidden="true">#</a> Navegación</h3>
+<table>
+<thead>
+<tr>
+<th>Componente</th>
+<th>Celular</th>
+<th>Tableta</th>
+<th>Escritorio</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Navegación principal</td>
+<td>Barra de pestañas inferior</td>
+<td>Barra lateral plegada (superposición)</td>
+<td>Barra lateral (desplegada o plegada)</td>
+</tr>
+<tr>
+<td>Navegación secundaria</td>
+<td>Hoja inferior &quot;Más&quot;</td>
+<td>Hoja inferior &quot;Más&quot;</td>
+<td>Secciones de la barra lateral</td>
+</tr>
+<tr>
+<td>Ruta de navegación</td>
+<td>Oculta (flecha de atrás en su lugar)</td>
+<td>Visible (abreviada)</td>
+<td>Visible (ruta completa)</td>
+</tr>
+<tr>
+<td>Búsqueda</td>
+<td>Superposición a pantalla completa</td>
+<td>Superposición a pantalla completa</td>
+<td>En línea en la barra superior</td>
+</tr>
+<tr>
+<td>Menú de usuario</td>
+<td>Perfil a pantalla completa</td>
+<td>Hoja inferior</td>
+<td>Desplegable</td>
+</tr>
+</tbody>
+</table>
+<h3 id="presentación-de-datos" tabindex="-1"><a class="heading-anchor" href="#presentación-de-datos" aria-hidden="true">#</a> Presentación de datos</h3>
+<table>
+<thead>
+<tr>
+<th>Componente</th>
+<th>Celular</th>
+<th>Tableta</th>
+<th>Escritorio</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Tabla de datos</td>
+<td>Lista de tarjetas</td>
+<td>Lista de tarjetas o tabla compacta</td>
+<td>Tabla completa con columnas</td>
+</tr>
+<tr>
+<td>Lista + detalle</td>
+<td>Apilados (cada uno a pantalla completa)</td>
+<td>Vista dividida opcional</td>
+<td>Vista dividida (redimensionable)</td>
+</tr>
+<tr>
+<td>Widgets del panel</td>
+<td>Una columna, apilados</td>
+<td>Dos columnas</td>
+<td>Tres o cuatro columnas</td>
+</tr>
+<tr>
+<td>Gráficas</td>
+<td>Simplificadas (menos rótulos)</td>
+<td>Estándar</td>
+<td>Completas (leyendas, anotaciones)</td>
+</tr>
+<tr>
+<td>Calendario</td>
+<td>Vista de agenda (lista)</td>
+<td>Vista de semana</td>
+<td>Vistas de mes, semana y día</td>
+</tr>
+<tr>
+<td>Kanban / flujo de etapas</td>
+<td>Una sola columna con desplazamiento</td>
+<td>Dos columnas visibles</td>
+<td>Todas las columnas visibles</td>
+</tr>
+</tbody>
+</table>
+<h3 id="formularios" tabindex="-1"><a class="heading-anchor" href="#formularios" aria-hidden="true">#</a> Formularios</h3>
+<table>
+<thead>
+<tr>
+<th>Componente</th>
+<th>Celular</th>
+<th>Tableta</th>
+<th>Escritorio</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Disposición del formulario</td>
+<td>Una columna, apilada</td>
+<td>Una columna</td>
+<td>Dos columnas posibles</td>
+</tr>
+<tr>
+<td>Campos de selección</td>
+<td>Selector nativo del celular</td>
+<td>Hoja inferior</td>
+<td>Desplegable</td>
+</tr>
+<tr>
+<td>Selector de fecha</td>
+<td>Selector nativo del celular</td>
+<td>Calendario emergente</td>
+<td>Calendario emergente</td>
+</tr>
+<tr>
+<td>Subida de archivos</td>
+<td>Cámara + selector de archivos</td>
+<td>Arrastrar y soltar + selector de archivos</td>
+<td>Arrastrar y soltar + selector de archivos</td>
+</tr>
+<tr>
+<td>Selector de color</td>
+<td>Pantalla completa</td>
+<td>Globo contextual</td>
+<td>Globo contextual</td>
+</tr>
+<tr>
+<td>Formularios de varios pasos</td>
+<td>Pantalla completa por paso</td>
+<td>Pantalla completa por paso</td>
+<td>En línea con indicador de pasos</td>
+</tr>
+</tbody>
+</table>
+<h3 id="superposiciones" tabindex="-1"><a class="heading-anchor" href="#superposiciones" aria-hidden="true">#</a> Superposiciones</h3>
+<table>
+<thead>
+<tr>
+<th>Componente</th>
+<th>Celular</th>
+<th>Tableta</th>
+<th>Escritorio</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Modales</td>
+<td>Pantalla completa</td>
+<td>Diálogo centrado (mediano)</td>
+<td>Diálogo centrado</td>
+</tr>
+<tr>
+<td>Paneles laterales</td>
+<td>Pantalla completa u hoja inferior</td>
+<td>Panel lateral (altura completa)</td>
+<td>Panel lateral (altura completa)</td>
+</tr>
+<tr>
+<td>Notificaciones</td>
+<td>Lista a pantalla completa</td>
+<td>Panel lateral</td>
+<td>Panel lateral</td>
+</tr>
+<tr>
+<td>Diálogos de confirmación</td>
+<td>Hoja inferior</td>
+<td>Diálogo centrado</td>
+<td>Diálogo centrado</td>
+</tr>
+<tr>
+<td>Globos de ayuda</td>
+<td>Hoja inferior (al tocar)</td>
+<td>Globo contextual (al tocar o al pasar el cursor)</td>
+<td>Globo contextual (al pasar el cursor)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="modo-de-campo" tabindex="-1"><a class="heading-anchor" href="#modo-de-campo" aria-hidden="true">#</a> Modo de campo</h3>
+<p>El modo de campo es solo para celular, por diseño. Si se accede desde un viewport de tableta o de escritorio:</p>
+<ul>
+<li><strong>Tableta:</strong> se dibuja en un viewport del tamaño de un celular (centrado, con relleno). El modo de campo está pensado para usarse con una mano en el celular: escalarlo a las dimensiones de una tableta dejaría áreas táctiles desproporcionadamente grandes y desperdiciaría pantalla.</li>
+<li><strong>Escritorio:</strong> redirige a la vista de gestión (por ejemplo, <code>/field/canvassing/[campaignId]</code> en vez de <code>/field-mode/canvass/[shiftId]</code>). El personal no hace trabajo de campo desde un escritorio.</li>
+</ul>
+<hr>
+<h2 id="consideraciones-propias-de-capacitor" tabindex="-1"><a class="heading-anchor" href="#consideraciones-propias-de-capacitor" aria-hidden="true">#</a> Consideraciones propias de Capacitor</h2>
+<p>GreenGrass usa Capacitor para envolver la aplicación web de SvelteKit como aplicación móvil nativa. Eso trae consideraciones propias:</p>
+<h3 id="acceso-a-las-api-nativas" tabindex="-1"><a class="heading-anchor" href="#acceso-a-las-api-nativas" aria-hidden="true">#</a> Acceso a las API nativas</h3>
+<table>
+<thead>
+<tr>
+<th>Funcionalidad</th>
+<th>Solo web</th>
+<th>Con Capacitor</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Autenticación con passkey</td>
+<td>API de WebAuthn</td>
+<td>Solicitud biométrica nativa</td>
+</tr>
+<tr>
+<td>Cámara (registro de entrada con QR)</td>
+<td>API <code>getUserMedia</code></td>
+<td>Cámara nativa con lector de QR</td>
+</tr>
+<tr>
+<td>Almacenamiento sin conexión</td>
+<td>IndexedDB (limitado)</td>
+<td>SQLite con SQLCipher (cifrado, más grande)</td>
+</tr>
+<tr>
+<td>Notificaciones push</td>
+<td>API de Web Push</td>
+<td>Push nativo (APNs/FCM)</td>
+</tr>
+<tr>
+<td>Caché de teselas de mapa</td>
+<td>Caché del service worker</td>
+<td>Caché en el sistema de archivos (más grande, persistente)</td>
+</tr>
+<tr>
+<td>Sincronización en segundo plano</td>
+<td>Service worker (limitado)</td>
+<td>Tareas nativas en segundo plano</td>
+</tr>
+<tr>
+<td>Retroalimentación háptica</td>
+<td>API de vibración (limitada)</td>
+<td>Acceso completo al motor háptico</td>
+</tr>
+<tr>
+<td>Enlaces directos</td>
+<td>Manejo de URL</td>
+<td>Universal links / App links</td>
+</tr>
+</tbody>
+</table>
+<h3 id="áreas-seguras" tabindex="-1"><a class="heading-anchor" href="#áreas-seguras" aria-hidden="true">#</a> Áreas seguras</h3>
+<p>iOS y Android tienen áreas seguras (el notch, la barra de estado, el indicador de inicio, la barra de navegación) que no se pueden solapar con contenido interactivo:</p>
+<pre><code class="language-css">/* Respeta las áreas seguras del dispositivo */
+.app-shell {
+  padding-top: env(safe-area-inset-top);
+  padding-bottom: env(safe-area-inset-bottom);
+  padding-left: env(safe-area-inset-left);
+  padding-right: env(safe-area-inset-right);
+}
+</code></pre>
+<p>La barra de pestañas inferior queda por encima del indicador de inicio. La barra superior queda por debajo de la barra de estado y del notch. El botón de pánico del modo de campo tiene que quedar fuera del área segura y aun así poder tocarse.</p>
+<h3 id="barra-de-estado" tabindex="-1"><a class="heading-anchor" href="#barra-de-estado" aria-hidden="true">#</a> Barra de estado</h3>
+<ul>
+<li><strong>Aplicación estándar:</strong> barra de estado clara (texto oscuro sobre fondo claro)</li>
+<li><strong>Modo oscuro:</strong> barra de estado oscura (texto claro sobre fondo oscuro)</li>
+<li><strong>Modo de campo:</strong> barra de estado oculta (modo inmersivo a pantalla completa) para maximizar el espacio de contenido</li>
+<li><strong>El color acompaña al encabezado:</strong> el color de fondo de la barra de estado coincide con el de la barra superior de la aplicación</li>
+</ul>
+<h3 id="icono-de-la-aplicación-y-pantalla-de-bienvenida" tabindex="-1"><a class="heading-anchor" href="#icono-de-la-aplicación-y-pantalla-de-bienvenida" aria-hidden="true">#</a> Icono de la aplicación y pantalla de bienvenida</h3>
+<ul>
+<li><strong>Icono de la aplicación:</strong> lo personaliza la organización. El icono de GreenGrass es el predeterminado de la plataforma. En las compilaciones con la marca de la organización se usa su logo (si funciona en formato cuadrado).</li>
+<li><strong>Pantalla de bienvenida:</strong> breve (&lt; 2 segundos). Muestra el logo de la organización sobre un fondo con su color de marca. Pasa a la aplicación cuando cargan los datos iniciales.</li>
+</ul>
+<h3 id="manejo-del-teclado" tabindex="-1"><a class="heading-anchor" href="#manejo-del-teclado" aria-hidden="true">#</a> Manejo del teclado</h3>
+<p>En móvil, que el teclado virtual tape los campos de formulario es un problema común:</p>
+<ul>
+<li><strong>Desplazamiento hasta el campo activo:</strong> cuando un campo recibe el foco, el viewport se desplaza para mantenerlo visible por encima del teclado.</li>
+<li><strong>Los elementos fijos al pie se reposicionan:</strong> la barra de pestañas inferior y los botones de acción flotantes suben por encima del teclado cuando está abierto.</li>
+<li><strong>Modo de campo:</strong> los campos están en la parte de arriba de la pantalla, así que el teclado no los tapa. Los botones de opción de respuesta son lo bastante grandes para seguir tocándose por encima del teclado.</li>
+</ul>
+<hr>
+<h2 id="presupuestos-de-rendimiento" tabindex="-1"><a class="heading-anchor" href="#presupuestos-de-rendimiento" aria-hidden="true">#</a> Presupuestos de rendimiento</h2>
+<p>El rendimiento es una restricción central: la persona objetivo usa un Android de gama baja con conexión lenta.</p>
+<h3 id="objetivos-de-tamaño-de-paquete" tabindex="-1"><a class="heading-anchor" href="#objetivos-de-tamaño-de-paquete" aria-hidden="true">#</a> Objetivos de tamaño de paquete</h3>
+<table>
+<thead>
+<tr>
+<th>Recurso</th>
+<th>Objetivo</th>
+<th>Notas</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Paquete inicial de JS</td>
+<td>&lt; 150KB comprimidos con gzip</td>
+<td>La salida compilada de SvelteKit ayuda aquí</td>
+</tr>
+<tr>
+<td>CSS inicial</td>
+<td>&lt; 30KB comprimidos con gzip</td>
+<td>Tokens de diseño + estilos base</td>
+</tr>
+<tr>
+<td>First contentful paint</td>
+<td>&lt; 2s en 3G</td>
+<td>El renderizado en el servidor es crítico</td>
+</tr>
+<tr>
+<td>Time to interactive</td>
+<td>&lt; 4s en 3G</td>
+<td>La hidratación tiene que ser rápida</td>
+</tr>
+<tr>
+<td>Fragmento por ruta</td>
+<td>&lt; 50KB comprimidos con gzip</td>
+<td>División de código agresiva</td>
+</tr>
+<tr>
+<td>Fuentes</td>
+<td>0KB</td>
+<td>Pila de fuentes del sistema: no se cargan por red</td>
+</tr>
+</tbody>
+</table>
+<h3 id="estrategia-de-imágenes" tabindex="-1"><a class="heading-anchor" href="#estrategia-de-imágenes" aria-hidden="true">#</a> Estrategia de imágenes</h3>
+<ul>
+<li><strong>Logo e identidad visual:</strong> SVG cuando se pueda, PNG como alternativa de reserva &lt; 20KB</li>
+<li><strong>Imágenes de avatar:</strong> miniaturas de 48x48px, con carga diferida</li>
+<li><strong>Teselas de mapa:</strong> PNG de 256x256px, cacheadas de forma agresiva</li>
+<li><strong>Nada de imágenes decorativas.</strong> Toda imagen cumple una función.</li>
+<li><strong>Imágenes adaptables:</strong> <code>srcset</code> con variantes de tamaño para los distintos viewports</li>
+<li><strong>WebP con PNG como alternativa de reserva</strong> en las imágenes ráster</li>
+</ul>
+<h3 id="estrategia-de-división-de-código" tabindex="-1"><a class="heading-anchor" href="#estrategia-de-división-de-código" aria-hidden="true">#</a> Estrategia de división de código</h3>
+<p>La división de código por rutas de SvelteKit resuelve la mayoría de los casos. Divisiones adicionales:</p>
+<table>
+<thead>
+<tr>
+<th>División</th>
+<th>Disparador</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Componentes de mapa</td>
+<td>Solo se cargan en las pantallas con mapas</td>
+</tr>
+<tr>
+<td>Biblioteca de gráficas</td>
+<td>Solo se carga en las pantallas de panel y de analítica</td>
+</tr>
+<tr>
+<td>Componentes de constructor</td>
+<td>Solo se cargan en las pantallas de constructor (correo, formulario, guion)</td>
+</tr>
+<tr>
+<td>Modo de campo</td>
+<td>Solo se carga al entrar en el modo de campo</td>
+</tr>
+<tr>
+<td>Administración y ajustes</td>
+<td>Solo se cargan para el rol de Administrador de la organización</td>
+</tr>
+</tbody>
+</table>
+<p>Eso significa que la aplicación de un voluntario carga bastante menos código que la de un Administrador de la organización: nunca descarga los fragmentos del constructor, de los ajustes ni de la analítica.</p>
+<hr>
+<h2 id="mejora-progresiva" tabindex="-1"><a class="heading-anchor" href="#mejora-progresiva" aria-hidden="true">#</a> Mejora progresiva</h2>
+<p>La aplicación de SvelteKit usa renderizado en el servidor (SSR) con mejora progresiva:</p>
+<h3 id="sin-javascript" tabindex="-1"><a class="heading-anchor" href="#sin-javascript" aria-hidden="true">#</a> Sin JavaScript</h3>
+<p>La aplicación no es del todo funcional sin JavaScript (la hidratación de SvelteKit hace falta para la interactividad). Aun así, el SSR garantiza que:</p>
+<ul>
+<li>El contenido se ve antes de que cargue el JS (paneles legibles, listas de contactos)</li>
+<li>Los enlaces funcionan antes de la hidratación (se navega con cargas de página completas)</li>
+<li>Los campos de formulario se ven (aunque enviarlos exige JS)</li>
+<li>Los buscadores pueden indexar las páginas públicas</li>
+</ul>
+<h3 id="sin-service-worker" tabindex="-1"><a class="heading-anchor" href="#sin-service-worker" aria-hidden="true">#</a> Sin service worker</h3>
+<p>Sin service worker, la aplicación funciona solo en línea. El service worker añade:</p>
+<ul>
+<li>Caché del marco sin conexión (la navegación sigue funcionando)</li>
+<li>Sincronización en segundo plano de las operaciones en cola</li>
+<li>Manejo de las notificaciones push</li>
+<li>Caché de teselas de mapa</li>
+</ul>
+<p>La aplicación nativa de Capacitor siempre tiene capacidades de service worker. Quienes entran solo por la web (desde el navegador) puede que no, pero la experiencia central se degrada de forma controlada.</p>
+<h3 id="ajustes-para-dispositivos-de-gama-baja" tabindex="-1"><a class="heading-anchor" href="#ajustes-para-dispositivos-de-gama-baja" aria-hidden="true">#</a> Ajustes para dispositivos de gama baja</h3>
+<p>Para dispositivos con poca RAM y poca CPU:</p>
+<ul>
+<li><strong>Listas virtualizadas:</strong> las listas largas dibujan solo los elementos visibles (desplazamiento virtual)</li>
+<li><strong>Animación reducida:</strong> se respeta <code>prefers-reduced-motion</code> y, además, los dispositivos con menos de 4GB de RAM reciben transiciones reducidas</li>
+<li><strong>Reducción de la calidad de imagen:</strong> a las conexiones lentas se les sirven imágenes de menor resolución</li>
+<li><strong>Carga aplazada:</strong> la interfaz no crítica (gráficas, widgets secundarios) carga después del renderizado inicial</li>
+<li><strong>Caché consciente de la memoria:</strong> los límites de la caché son más bajos en los dispositivos con poca memoria</li>
+</ul>
+<hr>
+<h2 id="matriz-de-pruebas" tabindex="-1"><a class="heading-anchor" href="#matriz-de-pruebas" aria-hidden="true">#</a> Matriz de pruebas</h2>
+<h3 id="viewports-de-prueba-obligatorios" tabindex="-1"><a class="heading-anchor" href="#viewports-de-prueba-obligatorios" aria-hidden="true">#</a> Viewports de prueba obligatorios</h3>
+<table>
+<thead>
+<tr>
+<th>Viewport</th>
+<th>Dispositivo representativo</th>
+<th>Prioridad</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>360x640</td>
+<td>Celular Android económico (serie Samsung Galaxy A)</td>
+<td>Crítica</td>
+</tr>
+<tr>
+<td>375x812</td>
+<td>iPhone SE / iPhone 13 Mini</td>
+<td>Crítica</td>
+</tr>
+<tr>
+<td>390x844</td>
+<td>iPhone 14 / 15</td>
+<td>Alta</td>
+</tr>
+<tr>
+<td>412x915</td>
+<td>Google Pixel / Android de gama media</td>
+<td>Alta</td>
+</tr>
+<tr>
+<td>768x1024</td>
+<td>iPad (vertical)</td>
+<td>Media</td>
+</tr>
+<tr>
+<td>1024x768</td>
+<td>iPad (horizontal) / laptop pequeña</td>
+<td>Media</td>
+</tr>
+<tr>
+<td>1280x800</td>
+<td>Laptop estándar</td>
+<td>Alta</td>
+</tr>
+<tr>
+<td>1440x900</td>
+<td>Laptop grande</td>
+<td>Media</td>
+</tr>
+<tr>
+<td>1920x1080</td>
+<td>Monitor de escritorio</td>
+<td>Media</td>
+</tr>
+</tbody>
+</table>
+<h3 id="escenarios-de-prueba-prioritarios" tabindex="-1"><a class="heading-anchor" href="#escenarios-de-prueba-prioritarios" aria-hidden="true">#</a> Escenarios de prueba prioritarios</h3>
+<ol>
+<li><strong>Android económico + 3G lento:</strong> la ruta crítica. Si funciona aquí, funciona en todas partes.</li>
+<li><strong>iPhone + LTE:</strong> el otro gran escenario móvil.</li>
+<li><strong>Escritorio + banda ancha:</strong> la experiencia del personal.</li>
+<li><strong>Tableta + wifi:</strong> caso de uso ocasional.</li>
+<li><strong>RTL en todo lo anterior:</strong> pruebas de maquetación en árabe.</li>
+<li><strong>Modo oscuro en todo lo anterior:</strong> contraste de color y legibilidad.</li>
+<li><strong>Modo de campo en un Android económico:</strong> la experiencia de usuario de mayor riesgo del sistema.</li>
+</ol>
+<hr>
+<h2 id="preguntas-abiertas" tabindex="-1"><a class="heading-anchor" href="#preguntas-abiertas" aria-hidden="true">#</a> Preguntas abiertas</h2>
+<ol>
+<li>
+<p><strong>Dispositivos plegables.</strong> El Samsung Galaxy Z Fold y otros plegables tienen dos viewports (plegado y desplegado). ¿Debería la aplicación manejar explícitamente el pliegue y el cambio de viewport? Prioridad baja, pero mercado en crecimiento.</p>
+</li>
+<li>
+<p><strong>PWA frente a distribución solo nativa.</strong> ¿Debería la aplicación poder instalarse como Progressive Web App (desde el navegador), además de la aplicación nativa envuelta en Capacitor? La PWA reduce la fricción (no hace falta tienda de aplicaciones), pero tiene menos acceso a las API nativas.</p>
+</li>
+<li>
+<p><strong>Proveedor de mapas sin conexión.</strong> Para precachear teselas de mapa, ¿qué proveedor ofrece el mejor soporte de teselas sin conexión en los países objetivo? Las teselas de OSM son gratis, pero pesadas. Las teselas vectoriales (Mapbox/MapLibre) son más livianas, pero exigen más potencia de renderizado en los dispositivos de gama baja.</p>
+</li>
+</ol>
+<!-- REVISIT: Los presupuestos de rendimiento son objetivos, no garantías. Medir el rendimiento real contra los dispositivos objetivo de verdad (celulares Android económicos en los mercados objetivo) es imprescindible durante el desarrollo. Probar en laboratorio con conexiones limitadas es un comienzo, pero no captura toda la realidad de las condiciones de red en las zonas rurales de Brasil o de la India. -->
+
+    </article>
+  </main>
+  <div class="toc-rail"><nav class="toc" aria-label="En esta página"><div class="toc-label">En esta página</div><ul><li class="toc-2"><a href="#propósito"># Propósito</a></li><li class="toc-2"><a href="#puntos-de-quiebre"># Puntos de quiebre</a></li><li class="toc-3"><a href="#definición"># Definición</a></li><li class="toc-3"><a href="#rangos-de-viewport"># Rangos de viewport</a></li><li class="toc-3"><a href="#uso"># Uso</a></li><li class="toc-2"><a href="#categorías-de-dispositivo"># Categorías de dispositivo</a></li><li class="toc-3"><a href="#celular-768px"># Celular (&amp;lt; 768px)</a></li><li class="toc-3"><a href="#tableta-768px---1023px"># Tableta (768px - 1023px)</a></li><li class="toc-3"><a href="#escritorio-1024px"># Escritorio (1024px+)</a></li><li class="toc-2"><a href="#adaptación-de-los-componentes"># Adaptación de los componentes</a></li><li class="toc-3"><a href="#navegación"># Navegación</a></li><li class="toc-3"><a href="#presentación-de-datos"># Presentación de datos</a></li><li class="toc-3"><a href="#formularios"># Formularios</a></li><li class="toc-3"><a href="#superposiciones"># Superposiciones</a></li><li class="toc-3"><a href="#modo-de-campo"># Modo de campo</a></li><li class="toc-2"><a href="#consideraciones-propias-de-capacitor"># Consideraciones propias de Capacitor</a></li><li class="toc-3"><a href="#acceso-a-las-api-nativas"># Acceso a las API nativas</a></li><li class="toc-3"><a href="#áreas-seguras"># Áreas seguras</a></li><li class="toc-3"><a href="#barra-de-estado"># Barra de estado</a></li><li class="toc-3"><a href="#icono-de-la-aplicación-y-pantalla-de-bienvenida"># Icono de la aplicación y pantalla de bienvenida</a></li><li class="toc-3"><a href="#manejo-del-teclado"># Manejo del teclado</a></li><li class="toc-2"><a href="#presupuestos-de-rendimiento"># Presupuestos de rendimiento</a></li><li class="toc-3"><a href="#objetivos-de-tamaño-de-paquete"># Objetivos de tamaño de paquete</a></li><li class="toc-3"><a href="#estrategia-de-imágenes"># Estrategia de imágenes</a></li><li class="toc-3"><a href="#estrategia-de-división-de-código"># Estrategia de división de código</a></li><li class="toc-2"><a href="#mejora-progresiva"># Mejora progresiva</a></li><li class="toc-3"><a href="#sin-javascript"># Sin JavaScript</a></li><li class="toc-3"><a href="#sin-service-worker"># Sin service worker</a></li><li class="toc-3"><a href="#ajustes-para-dispositivos-de-gama-baja"># Ajustes para dispositivos de gama baja</a></li><li class="toc-2"><a href="#matriz-de-pruebas"># Matriz de pruebas</a></li><li class="toc-3"><a href="#viewports-de-prueba-obligatorios"># Viewports de prueba obligatorios</a></li><li class="toc-3"><a href="#escenarios-de-prueba-prioritarios"># Escenarios de prueba prioritarios</a></li><li class="toc-2"><a href="#preguntas-abiertas"># Preguntas abiertas</a></li></ul></nav></div>
+</div>
+<script src="../../../../assets/search.js" defer></script>
+<script src="../../../../assets/app.js" defer></script>
+</body>
+</html>

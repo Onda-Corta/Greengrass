@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="es" data-base="../../" data-no-results="No hay resultados para">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ADR-007: Recaudación de fondos y pagos · GreenGrass</title>
+<meta name="description" content="ADR-007: Recaudación de fondos y pagos — Documentación de especificación y diseño de GreenGrass.">
+<link rel="alternate" hreflang="en" href="../../decisions/007-fundraising-payments.html">
+<link rel="alternate" hreflang="es" href="./007-fundraising-payments.html">
+<link rel="alternate" hreflang="x-default" href="../../decisions/007-fundraising-payments.html">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%232563eb'/%3E%3Cstop offset='1' stop-color='%2316a34a'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='32' height='32' rx='7' fill='url(%23g)'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="../../assets/styles.css">
+</head>
+<body>
+<a class="skip-link" href="#content">Saltar al contenido</a>
+<header class="site-header">
+  <button type="button" class="menu-toggle" aria-label="Alternar navegación" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+  <a class="brand" href="../../es/index.html">
+    <span class="brand-mark" aria-hidden="true"></span>
+    <span class="brand-text"><strong>GreenGrass</strong><small>Especificación y diseño</small></span>
+  </a>
+  <div class="search">
+    <input type="search" id="search-input" placeholder="Buscar en la documentación…" autocomplete="off" aria-label="Buscar en la documentación">
+    <div id="search-results" class="search-results" hidden></div>
+  </div>
+  <nav class="lang-switch" aria-label="Idioma"><a class="lang-opt" href="../../decisions/007-fundraising-payments.html" hreflang="en" lang="en" title="View this page in English">EN</a><span class="lang-opt active" aria-current="true">ES</span></nav>
+  <button type="button" class="theme-toggle" aria-label="Alternar modo oscuro" title="Alternar modo oscuro">
+    <span class="theme-icon" aria-hidden="true"></span>
+  </button>
+</header>
+<div class="layout">
+  <div class="sidebar-backdrop" hidden></div>
+  <aside class="sidebar" aria-label="Navegación de la documentación">
+    <nav class="nav">
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">Inicio<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../index.html">GreenGrass</a></li></ul></div>
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">Especificaciones<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../spec/product.html">Proyecto: GreenGrass</a></li><li><a href="../spec/mvp.html">MVP de GreenGrass — plan de producto</a></li><li><a href="../spec/users.html">Usuarios y roles</a></li><li><a href="../spec/workflows.html">Flujos de trabajo principales</a></li><li><a href="../spec/geography.html">Geografía objetivo</a></li><li><a href="../spec/security.html">Seguridad y modelo de amenazas</a></li><li><a href="../spec/compliance.html">Cumplimiento y marco legal</a></li><li><a href="../spec/fundraising.html">Recaudación de fondos e infraestructura de pagos</a></li><li><a href="../spec/integrations.html">Integraciones externas</a></li><li><a href="../spec/support.html">Soporte y puesta en marcha de organizaciones</a></li><li><a href="../spec/gotv.html">GOTV y operaciones del día de elecciones</a></li><li><a href="../spec/messaging.html">Comunicaciones internas y notificaciones</a></li><li><a href="../spec/press.html">Prensa, medios y comunicaciones públicas</a></li><li><a href="../spec/comms-intelligence.html">Inteligencia de comunicaciones — hoja de ruta post-MVP</a></li></ul></div>
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">Arquitectura<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../design/architecture/system.html">Arquitectura del sistema</a></li></ul></div>
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">Diseño UX<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../design/ux/00-overview.html">Resumen del diseño de UX</a></li><li><a href="../design/ux/01-information-architecture/navigation-model.html">Modelo de navegación</a></li><li><a href="../design/ux/01-information-architecture/screen-inventory.html">Inventario de pantallas</a></li><li><a href="../design/ux/01-information-architecture/persona-views.html">Vistas por arquetipo</a></li><li><a href="../design/ux/01-information-architecture/url-structure.html">Estructura de URL</a></li><li><a href="../design/ux/02-global-patterns/pattern-catalog.html">Catálogo de patrones</a></li><li><a href="../design/ux/02-global-patterns/offline-sync-patterns.html">Patrones sin conexión y de sincronización</a></li><li><a href="../design/ux/02-global-patterns/notification-patterns.html">Patrones de notificaciones</a></li><li><a href="../design/ux/02-global-patterns/search-patterns.html">Patrones de búsqueda</a></li><li><a href="../design/ux/02-global-patterns/settings-help-patterns.html">Patrones de ajustes y ayuda</a></li><li><a href="../design/ux/02-global-patterns/security-ux-patterns.html">Patrones de UX de seguridad</a></li><li><a href="../design/ux/03-design-system/foundations.html">Fundamentos del sistema de diseño</a></li><li><a href="../design/ux/03-design-system/theming-strategy.html">Estrategia de temas</a></li><li><a href="../design/ux/03-design-system/component-inventory.html">Inventario de componentes</a></li><li><a href="../design/ux/03-design-system/responsive-strategy.html">Estrategia de diseño adaptable</a></li></ul></div>
+<div class="nav-section open"><button type="button" class="nav-section-title" aria-expanded="true">Decisiones<span class="chev" aria-hidden="true"></span></button><ul><li><a href="./001-platform-architecture.html">ADR-001: Arquitectura y despliegue de la plataforma</a></li><li><a href="./002-security-threat-model.html">ADR-002: Seguridad y modelo de amenazas</a></li><li><a href="./003-identity-access-organization.html">ADR-003: Identidad, acceso y organización</a></li><li><a href="./004-data-model-integrity.html">ADR-004: Modelo de datos e integridad</a></li><li><a href="./005-offline-first-sync.html">ADR-005: Prioridad sin conexión y sincronización</a></li><li><a href="./006-field-operations-gotv.html">ADR-006: Operaciones de campo y GOTV</a></li><li><a href="./007-fundraising-payments.html" aria-current="page" class="active">ADR-007: Recaudación de fondos y pagos</a></li><li><a href="./008-communications-messaging.html">ADR-008: Comunicaciones y mensajería</a></li><li><a href="./009-compliance-legal.html">ADR-009: Cumplimiento y marco legal</a></li><li><a href="./010-internationalization-localization.html">ADR-010: Internacionalización y localización</a></li><li><a href="./011-design-system-ux.html">ADR-011: Sistema de diseño y fundamentos de UX</a></li><li><a href="./012-external-integrations.html">ADR-012: Integraciones externas</a></li><li><a href="./013-analytics-ai.html">ADR-013: Analítica e IA</a></li><li><a href="./014-volunteer-onboarding.html">ADR-014: Voluntariado e incorporación</a></li><li><a href="./015-product-scope.html">ADR-015: Límites del alcance del producto</a></li><li><a href="./016-cross-cutting-resolutions.html">ADR-016: Resoluciones transversales</a></li><li><a href="./017-sharing-contract-trust-model.html">ADR-017: El contrato de intercambio como primitiva universal de confianza</a></li><li><a href="./ux-decisions.html">Decisiones de UX — fase de wireframes</a></li></ul></div>
+    </nav>
+  </aside>
+  <main id="content" class="content">
+    <nav class="breadcrumb" aria-label="Ruta de navegación">Decisiones</nav>
+    <article class="prose">
+<h1 id="adr-007-recaudación-de-fondos-y-pagos" tabindex="-1"><a class="heading-anchor" href="#adr-007-recaudación-de-fondos-y-pagos" aria-hidden="true">#</a> ADR-007: Recaudación de fondos y pagos</h1>
+<p><strong>Estado:</strong> Aceptada
+<strong>Fecha:</strong> 2026-03-03
+<strong>Fuentes:</strong> <code>spec/fundraising.md</code>, <code>spec/workflows.md</code></p>
+<h2 id="contexto" tabindex="-1"><a class="heading-anchor" href="#contexto" aria-hidden="true">#</a> Contexto</h2>
+<p>La recaudación de fondos es una función de supervivencia para las campañas políticas. En el Sur Global, la infraestructura de pagos varía muchísimo: PIX en Brasil es instantáneo, gratuito y está en todas partes; UPI en India está subsidiado por el gobierno y no cuesta nada; el sistema bancario de Líbano colapsó y la mayoría de las transacciones son en efectivo, a través de servicios de transferencia de dinero como OMT. La plataforma tiene que manejar todo esto detrás de una interfaz consistente y, al mismo tiempo, garantizar que cada transacción sea auditable, cumpla con la ley y sea atribuible. Además, las campañas van desde operaciones pequeñas de una sola candidatura hasta grandes alianzas con requisitos complejos de reparto de donaciones.</p>
+<h2 id="decisión" tabindex="-1"><a class="heading-anchor" href="#decisión" aria-hidden="true">#</a> Decisión</h2>
+<h3 id="estrategia-híbrida-de-procesadores-de-pago-globales-y-locales" tabindex="-1"><a class="heading-anchor" href="#estrategia-híbrida-de-procesadores-de-pago-globales-y-locales" aria-hidden="true">#</a> Estrategia híbrida de procesadores de pago globales y locales</h3>
+<p>Un procesador global (por ejemplo, Stripe) maneja las tarjetas de crédito y aporta la infraestructura de base. Los procesadores locales manejan los métodos de pago propios de cada país (PIX, UPI, PromptPay, ATH Móvil, OMT), con las mejores tarifas y cobertura nativa. Cada procesador es un adaptador detrás de una interfaz común: el patrón de adaptador de pagos permite cambiar o añadir procesadores sin rehacer la arquitectura.</p>
+<p>Cada organización firma su propio acuerdo directamente con los procesadores de pago (modelo de comercio directo). GreenGrass facilita la conexión con asistentes de configuración guiada y opciones de procesador preconfiguradas, pero no es parte de la relación financiera. Así se separan las responsabilidades de la forma más limpia y se evita la carga regulatoria de facilitador de pagos (payfac) en cinco países.</p>
+<p><strong>Alternativas consideradas:</strong> Un único procesador global se descartó porque ninguno cubre todos los métodos de pago de los países objetivo con tarifas competitivas. GreenGrass como facilitador de pagos (payfac) se descartó porque obligaría a cumplir la regulación financiera en cada jurisdicción objetivo.</p>
+<h3 id="aceptación-multimoneda-liquidación-en-una-sola-moneda" tabindex="-1"><a class="heading-anchor" href="#aceptación-multimoneda-liquidación-en-una-sola-moneda" aria-hidden="true">#</a> Aceptación multimoneda, liquidación en una sola moneda</h3>
+<p>Las organizaciones aceptan donaciones en varias monedas, pero todas se liquidan en la moneda principal de la organización. Cada donación registra: moneda original, monto original, tasa de cambio al momento de la transacción (guardada de forma inmutable), moneda de liquidación, monto liquidado, cargos del procesador y monto neto. Los repartos de la alianza se calculan sobre el monto liquidado, no sobre el original, para evitar discrepancias de conversión.</p>
+<p><strong>Alternativas consideradas:</strong> La liquidación multimoneda se descartó porque obligaría a las campañas a mantener cuentas bancarias en varias monedas, algo poco práctico para la mayoría de las organizaciones objetivo.</p>
+<h3 id="reintentos-inteligentes-para-las-donaciones-recurrentes" tabindex="-1"><a class="heading-anchor" href="#reintentos-inteligentes-para-las-donaciones-recurrentes" aria-hidden="true">#</a> Reintentos inteligentes para las donaciones recurrentes</h3>
+<p>Cuando falla el cobro de una donación recurrente, la plataforma reintenta en los momentos óptimos que recomiende el procesador, cuando los ofrece (hasta 4 intentos en 14 días), y recurre a un calendario simple (día 1, 3 y 7) con los procesadores que no dan datos de reintento inteligente. Tras el fallo final, la donación se marca como fallida y se notifica tanto al donante (con un enlace para actualizar el método de pago) como a la campaña.</p>
+<h3 id="promesas-de-donación-de-pleno-derecho" tabindex="-1"><a class="heading-anchor" href="#promesas-de-donación-de-pleno-derecho" aria-hidden="true">#</a> Promesas de donación de pleno derecho</h3>
+<p>Las promesas de donación son un tipo formal de donación con su propio ciclo de vida: se crean durante una jornada de llamadas o tocando puertas, se envía un recordatorio según un calendario configurable, se cumplen cuando el donante completa el pago y caducan tras un plazo configurable. Esto conecta la cadena de procesamiento del trabajo de campo con la de recaudación de fondos: una promesa de donación hecha en una puerta se convierte en un compromiso registrado con seguimiento.</p>
+<p><strong>Alternativas consideradas:</strong> Tratar las promesas de donación como notas o etiquetas en los registros de contacto se descartó porque tienen implicaciones financieras y de cumplimiento que exigen un seguimiento estructurado.</p>
+<h3 id="pruebas-ab-integradas-para-los-formularios-de-donación" tabindex="-1"><a class="heading-anchor" href="#pruebas-ab-integradas-para-los-formularios-de-donación" aria-hidden="true">#</a> Pruebas A/B integradas para los formularios de donación</h3>
+<p>Las organizaciones pueden crear variantes de formulario (montos sugeridos, textos y disposiciones distintos), repartir el tráfico entre ellas y medir la conversión de cada variante. La plataforma declara ganadora a una variante según métricas de éxito configurables (tasa de conversión, donación promedio, ingreso total). Es una capacidad central de optimización de la recaudación, no un añadido.</p>
+<h3 id="cero-comisión-de-la-plataforma-sobre-las-donaciones" tabindex="-1"><a class="heading-anchor" href="#cero-comisión-de-la-plataforma-sobre-las-donaciones" aria-hidden="true">#</a> Cero comisión de la plataforma sobre las donaciones</h3>
+<p>GreenGrass no se queda con nada de las donaciones. Las organizaciones pagan solo los cargos de su procesador de pagos. Los ingresos vienen por completo de las suscripciones a la plataforma (planes fijos, no por uso). Eso mantiene honestos los incentivos: GreenGrass gana por la calidad de la plataforma, no por el volumen de donaciones.</p>
+<p><strong>Alternativas consideradas:</strong> Cobrar un porcentaje sobre las donaciones se descartó porque desalinea los incentivos y castiga a las campañas que recaudan bien. Un cargo por transacción se descartó por lo mismo.</p>
+<h3 id="reglas-de-reparto-de-donaciones-configurables-para-las-campañas-de-alianza" tabindex="-1"><a class="heading-anchor" href="#reglas-de-reparto-de-donaciones-configurables-para-las-campañas-de-alianza" aria-hidden="true">#</a> Reglas de reparto de donaciones configurables para las campañas de alianza</h3>
+<p>La recaudación a nivel de alianza admite varios tipos de reparto: por porcentaje, monto fijo primero (una organización recibe una cantidad fija y el resto se reparte) y por umbral (los porcentajes de reparto cambian cuando se alcanza una meta). Los administradores de todas las organizaciones miembro tienen que aprobar por unanimidad cualquier cambio de reparto: el reparto del dinero es demasiado delicado para modificarlo de forma unilateral. El momento del desembolso se configura por campaña: inmediato (cada organización tiene sus cuentas de pago conectadas) o por lotes (se acumula y se desembolsa según un calendario).</p>
+<h2 id="consecuencias" tabindex="-1"><a class="heading-anchor" href="#consecuencias" aria-hidden="true">#</a> Consecuencias</h2>
+<p><strong>Beneficios:</strong></p>
+<ul>
+<li>El método de pago dominante de cada país recibe integración nativa, no una capa de compatibilidad mínima</li>
+<li>El modelo de comercio directo evita la regulación de intermediario financiero en cinco países</li>
+<li>Sin comisión de la plataforma, a la campaña le llega todo menos lo que se queda el procesador, y desaparece cualquier incentivo para empujar el volumen de donaciones</li>
+<li>El seguimiento de las promesas de donación conecta las operaciones de campo con la recaudación de fondos de forma estructurada</li>
+<li>Las pruebas A/B les dan a las campañas con pocos recursos acceso a optimización profesional de la recaudación</li>
+</ul>
+<p><strong>Costos:</strong></p>
+<ul>
+<li>Mantener adaptadores para más de 10 procesadores de pago en cinco países es trabajo de integración permanente</li>
+<li>Manejar varias monedas complica los informes financieros y el cumplimiento</li>
+<li>Manejar donaciones en efectivo (cadena de custodia completa: quien recauda → líder de equipo → personal de finanzas → depósito bancario) exige diseñar el flujo de trabajo con cuidado</li>
+<li>Las reglas de reparto de la alianza con consentimiento unánime pueden frenar los cambios operativos</li>
+</ul>
+<p><strong>Restricciones:</strong></p>
+<ul>
+<li>Las donaciones en efectivo tienen que funcionar sin conexión y sincronizarse después (ver <a href="./005-offline-first-sync.html">ADR-005</a>)</li>
+<li>Cada donación tiene que ser auditable de extremo a extremo para el cumplimiento en financiamiento de campañas</li>
+<li>Los reembolsos solo son posibles por el método de pago original</li>
+<li>El filtrado de contribuciones extranjeras (bloqueo en tiempo real de lo evidentemente inelegible, retención en custodia para los casos límite) tiene que integrarse con las verificaciones de cumplimiento</li>
+</ul>
+<p><strong>ADR relacionados:</strong> <a href="./004-data-model-integrity.html">ADR-004</a> (registro de auditoría completo de las transacciones financieras), <a href="./009-compliance-legal.html">ADR-009</a> (informes de financiamiento de campañas, bloqueo de contribuciones extranjeras), <a href="./003-identity-access-organization.html">ADR-003</a> (gobernanza de la alianza para las reglas de reparto), <a href="./005-offline-first-sync.html">ADR-005</a> (registro de donaciones en efectivo sin conexión)</p>
+
+    </article>
+  </main>
+  <div class="toc-rail"><nav class="toc" aria-label="En esta página"><div class="toc-label">En esta página</div><ul><li class="toc-2"><a href="#contexto"># Contexto</a></li><li class="toc-2"><a href="#decisión"># Decisión</a></li><li class="toc-3"><a href="#estrategia-híbrida-de-procesadores-de-pago-globales-y-locales"># Estrategia híbrida de procesadores de pago globales y locales</a></li><li class="toc-3"><a href="#aceptación-multimoneda-liquidación-en-una-sola-moneda"># Aceptación multimoneda, liquidación en una sola moneda</a></li><li class="toc-3"><a href="#reintentos-inteligentes-para-las-donaciones-recurrentes"># Reintentos inteligentes para las donaciones recurrentes</a></li><li class="toc-3"><a href="#promesas-de-donación-de-pleno-derecho"># Promesas de donación de pleno derecho</a></li><li class="toc-3"><a href="#pruebas-ab-integradas-para-los-formularios-de-donación"># Pruebas A/B integradas para los formularios de donación</a></li><li class="toc-3"><a href="#cero-comisión-de-la-plataforma-sobre-las-donaciones"># Cero comisión de la plataforma sobre las donaciones</a></li><li class="toc-3"><a href="#reglas-de-reparto-de-donaciones-configurables-para-las-campañas-de-alianza"># Reglas de reparto de donaciones configurables para las campañas de alianza</a></li><li class="toc-2"><a href="#consecuencias"># Consecuencias</a></li></ul></nav></div>
+</div>
+<script src="../../assets/search.js" defer></script>
+<script src="../../assets/app.js" defer></script>
+</body>
+</html>

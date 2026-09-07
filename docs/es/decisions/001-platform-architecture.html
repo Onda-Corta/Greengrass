@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="es" data-base="../../" data-no-results="No hay resultados para">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ADR-001: Arquitectura y despliegue de la plataforma · GreenGrass</title>
+<meta name="description" content="ADR-001: Arquitectura y despliegue de la plataforma — Documentación de especificación y diseño de GreenGrass.">
+<link rel="alternate" hreflang="en" href="../../decisions/001-platform-architecture.html">
+<link rel="alternate" hreflang="es" href="./001-platform-architecture.html">
+<link rel="alternate" hreflang="x-default" href="../../decisions/001-platform-architecture.html">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%232563eb'/%3E%3Cstop offset='1' stop-color='%2316a34a'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='32' height='32' rx='7' fill='url(%23g)'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="../../assets/styles.css">
+</head>
+<body>
+<a class="skip-link" href="#content">Saltar al contenido</a>
+<header class="site-header">
+  <button type="button" class="menu-toggle" aria-label="Alternar navegación" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+  <a class="brand" href="../../es/index.html">
+    <span class="brand-mark" aria-hidden="true"></span>
+    <span class="brand-text"><strong>GreenGrass</strong><small>Especificación y diseño</small></span>
+  </a>
+  <div class="search">
+    <input type="search" id="search-input" placeholder="Buscar en la documentación…" autocomplete="off" aria-label="Buscar en la documentación">
+    <div id="search-results" class="search-results" hidden></div>
+  </div>
+  <nav class="lang-switch" aria-label="Idioma"><a class="lang-opt" href="../../decisions/001-platform-architecture.html" hreflang="en" lang="en" title="View this page in English">EN</a><span class="lang-opt active" aria-current="true">ES</span></nav>
+  <button type="button" class="theme-toggle" aria-label="Alternar modo oscuro" title="Alternar modo oscuro">
+    <span class="theme-icon" aria-hidden="true"></span>
+  </button>
+</header>
+<div class="layout">
+  <div class="sidebar-backdrop" hidden></div>
+  <aside class="sidebar" aria-label="Navegación de la documentación">
+    <nav class="nav">
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">Inicio<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../index.html">GreenGrass</a></li></ul></div>
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">Especificaciones<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../spec/product.html">Proyecto: GreenGrass</a></li><li><a href="../spec/mvp.html">MVP de GreenGrass — plan de producto</a></li><li><a href="../spec/users.html">Usuarios y roles</a></li><li><a href="../spec/workflows.html">Flujos de trabajo principales</a></li><li><a href="../spec/geography.html">Geografía objetivo</a></li><li><a href="../spec/security.html">Seguridad y modelo de amenazas</a></li><li><a href="../spec/compliance.html">Cumplimiento y marco legal</a></li><li><a href="../spec/fundraising.html">Recaudación de fondos e infraestructura de pagos</a></li><li><a href="../spec/integrations.html">Integraciones externas</a></li><li><a href="../spec/support.html">Soporte y puesta en marcha de organizaciones</a></li><li><a href="../spec/gotv.html">GOTV y operaciones del día de elecciones</a></li><li><a href="../spec/messaging.html">Comunicaciones internas y notificaciones</a></li><li><a href="../spec/press.html">Prensa, medios y comunicaciones públicas</a></li><li><a href="../spec/comms-intelligence.html">Inteligencia de comunicaciones — hoja de ruta post-MVP</a></li></ul></div>
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">Arquitectura<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../design/architecture/system.html">Arquitectura del sistema</a></li></ul></div>
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">Diseño UX<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../design/ux/00-overview.html">Resumen del diseño de UX</a></li><li><a href="../design/ux/01-information-architecture/navigation-model.html">Modelo de navegación</a></li><li><a href="../design/ux/01-information-architecture/screen-inventory.html">Inventario de pantallas</a></li><li><a href="../design/ux/01-information-architecture/persona-views.html">Vistas por arquetipo</a></li><li><a href="../design/ux/01-information-architecture/url-structure.html">Estructura de URL</a></li><li><a href="../design/ux/02-global-patterns/pattern-catalog.html">Catálogo de patrones</a></li><li><a href="../design/ux/02-global-patterns/offline-sync-patterns.html">Patrones sin conexión y de sincronización</a></li><li><a href="../design/ux/02-global-patterns/notification-patterns.html">Patrones de notificaciones</a></li><li><a href="../design/ux/02-global-patterns/search-patterns.html">Patrones de búsqueda</a></li><li><a href="../design/ux/02-global-patterns/settings-help-patterns.html">Patrones de ajustes y ayuda</a></li><li><a href="../design/ux/02-global-patterns/security-ux-patterns.html">Patrones de UX de seguridad</a></li><li><a href="../design/ux/03-design-system/foundations.html">Fundamentos del sistema de diseño</a></li><li><a href="../design/ux/03-design-system/theming-strategy.html">Estrategia de temas</a></li><li><a href="../design/ux/03-design-system/component-inventory.html">Inventario de componentes</a></li><li><a href="../design/ux/03-design-system/responsive-strategy.html">Estrategia de diseño adaptable</a></li></ul></div>
+<div class="nav-section open"><button type="button" class="nav-section-title" aria-expanded="true">Decisiones<span class="chev" aria-hidden="true"></span></button><ul><li><a href="./001-platform-architecture.html" aria-current="page" class="active">ADR-001: Arquitectura y despliegue de la plataforma</a></li><li><a href="./002-security-threat-model.html">ADR-002: Seguridad y modelo de amenazas</a></li><li><a href="./003-identity-access-organization.html">ADR-003: Identidad, acceso y organización</a></li><li><a href="./004-data-model-integrity.html">ADR-004: Modelo de datos e integridad</a></li><li><a href="./005-offline-first-sync.html">ADR-005: Prioridad sin conexión y sincronización</a></li><li><a href="./006-field-operations-gotv.html">ADR-006: Operaciones de campo y GOTV</a></li><li><a href="./007-fundraising-payments.html">ADR-007: Recaudación de fondos y pagos</a></li><li><a href="./008-communications-messaging.html">ADR-008: Comunicaciones y mensajería</a></li><li><a href="./009-compliance-legal.html">ADR-009: Cumplimiento y marco legal</a></li><li><a href="./010-internationalization-localization.html">ADR-010: Internacionalización y localización</a></li><li><a href="./011-design-system-ux.html">ADR-011: Sistema de diseño y fundamentos de UX</a></li><li><a href="./012-external-integrations.html">ADR-012: Integraciones externas</a></li><li><a href="./013-analytics-ai.html">ADR-013: Analítica e IA</a></li><li><a href="./014-volunteer-onboarding.html">ADR-014: Voluntariado e incorporación</a></li><li><a href="./015-product-scope.html">ADR-015: Límites del alcance del producto</a></li><li><a href="./016-cross-cutting-resolutions.html">ADR-016: Resoluciones transversales</a></li><li><a href="./017-sharing-contract-trust-model.html">ADR-017: El contrato de intercambio como primitiva universal de confianza</a></li><li><a href="./ux-decisions.html">Decisiones de UX — fase de wireframes</a></li></ul></div>
+    </nav>
+  </aside>
+  <main id="content" class="content">
+    <nav class="breadcrumb" aria-label="Ruta de navegación">Decisiones</nav>
+    <article class="prose">
+<h1 id="adr-001-arquitectura-y-despliegue-de-la-plataforma" tabindex="-1"><a class="heading-anchor" href="#adr-001-arquitectura-y-despliegue-de-la-plataforma" aria-hidden="true">#</a> ADR-001: Arquitectura y despliegue de la plataforma</h1>
+<p><strong>Estado:</strong> Aceptada
+<strong>Fecha:</strong> 2026-03-03
+<strong>Fuentes:</strong> <code>design/architecture/system.md</code>, <code>spec/users.md</code>, <code>spec/workflows.md</code>, <code>spec/product.md</code></p>
+<h2 id="contexto" tabindex="-1"><a class="heading-anchor" href="#contexto" aria-hidden="true">#</a> Contexto</h2>
+<p>GreenGrass da servicio a campañas políticas del Sur Global: organizaciones que operan bajo vigilancia activa, en entornos políticos hostiles, en países con realidades regulatorias y de infraestructura radicalmente distintas. La arquitectura de la plataforma tiene que priorizar el aislamiento de seguridad, la soberanía de datos, la accesibilidad desde el celular y la independencia operativa de cada organización. Las arquitecturas SaaS multiorganización tradicionales optimizan la eficiencia operativa a costa de un radio de impacto compartido, un control de la infraestructura compartido y una personalización limitada por organización: todas ellas concesiones inaceptables en este modelo de amenazas.</p>
+<h2 id="decisión" tabindex="-1"><a class="heading-anchor" href="#decisión" aria-hidden="true">#</a> Decisión</h2>
+<h3 id="arquitectura-de-organización-única-con-aislamiento-por-niveles" tabindex="-1"><a class="heading-anchor" href="#arquitectura-de-organización-única-con-aislamiento-por-niveles" aria-hidden="true">#</a> Arquitectura de organización única con aislamiento por niveles</h3>
+<p>Cada organización tiene su propia base de datos, su propia instancia de la aplicación y sus propios recursos. Los niveles de aislamiento escalan según el perfil de amenaza y las necesidades de cada organización:</p>
+<table>
+<thead>
+<tr>
+<th>Nivel</th>
+<th>Nivel de aislamiento</th>
+<th>Para quién</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Estándar</td>
+<td>Contenedores separados, clúster compartido</td>
+<td>Campañas pequeñas, organizaciones de incidencia, entornos de baja amenaza</td>
+</tr>
+<tr>
+<td>Reforzado</td>
+<td>Clúster separado</td>
+<td>Campañas medianas, entornos de amenaza elevada, padrones electorales grandes</td>
+</tr>
+<tr>
+<td>Máximo</td>
+<td>Cuenta de proveedor de nube separada</td>
+<td>Campañas de alto riesgo bajo vigilancia estatal activa, partidos grandes</td>
+</tr>
+<tr>
+<td>Autoalojado</td>
+<td>Infraestructura propia de la organización</td>
+<td>Organizaciones que requieren control físico y administrativo total</td>
+</tr>
+</tbody>
+</table>
+<p>Cada organización elige su nivel durante el aprovisionamiento y puede subir de nivel sin tiempo de inactividad por migración de datos.</p>
+<p><strong>Alternativas consideradas:</strong> Se descartó la arquitectura multiorganización con aislamiento lógico porque comprometer una organización podría exponer a las demás, y porque hacer cumplir políticas de seguridad por organización (llaves de cifrado, residencia de datos, nivel de aislamiento) se vuelve exponencialmente más difícil en una base de datos compartida. Se consideró la multiorganización con aislamiento físico, pero no ofrece ninguna ventaja real frente a la organización única y añade complejidad de coordinación.</p>
+<h3 id="modelo-de-federación-en-vez-de-multiorganización-monolítica" tabindex="-1"><a class="heading-anchor" href="#modelo-de-federación-en-vez-de-multiorganización-monolítica" aria-hidden="true">#</a> Modelo de federación en vez de multiorganización monolítica</h3>
+<p>Las organizaciones son entidades soberanas conectadas por afiliación voluntaria, no subdivisiones de un sistema monolítico. Cada entidad (partido, candidato, organización de incidencia) es una organización cliente completa, con sus propios datos, su propia facturación y su propio control administrativo. Las alianzas son organizaciones cliente ligeras, dedicadas a la coordinación, que permiten compartir recursos entre miembros soberanos sin transferir la propiedad. Las campañas heredan de su entidad matriz.</p>
+<p><strong>Alternativas consideradas:</strong> Se descartó un modelo de propiedad jerárquico (el partido es dueño de los datos del candidato) porque contradice el principio de soberanía: los datos de un candidato son del candidato, y una alianza no puede obligar a sus miembros a compartir datos.</p>
+<h3 id="residencia-de-datos-por-país" tabindex="-1"><a class="heading-anchor" href="#residencia-de-datos-por-país" aria-hidden="true">#</a> Residencia de datos por país</h3>
+<p>Los datos de cada organización se guardan en el país que ella misma elige durante el aprovisionamiento. La arquitectura de organización única hace que esto sea natural: colocar una organización aislada en un país concreto es una cuestión operativa, no un rediseño de la arquitectura. GreenGrass administra infraestructura en cada país objetivo (proveedores de nube o centros de datos locales). Las organizaciones autoalojadas controlan por completo su propia residencia de datos.</p>
+<h3 id="diseño-con-prioridad-móvil" tabindex="-1"><a class="heading-anchor" href="#diseño-con-prioridad-móvil" aria-hidden="true">#</a> Diseño con prioridad móvil</h3>
+<p>La interfaz principal es un celular, no una computadora de escritorio. Todo flujo de trabajo tiene que poder usarse desde un celular; el escritorio es la experiencia ampliada. Esto refleja la realidad de la organización política en el Sur Global, donde los voluntarios y simpatizantes acceden a la plataforma sobre todo desde dispositivos móviles, a menudo de gama baja y con conexiones lentas.</p>
+<h3 id="aprovisionamiento-de-organizaciones-totalmente-automatizado" tabindex="-1"><a class="heading-anchor" href="#aprovisionamiento-de-organizaciones-totalmente-automatizado" aria-hidden="true">#</a> Aprovisionamiento de organizaciones totalmente automatizado</h3>
+<p>Crear una organización es autoservicio, sin intervención humana. La cadena de procesamiento del aprovisionamiento se encarga de principio a fin del levantamiento de la infraestructura, la creación de la base de datos, la configuración de las llaves de cifrado —flujo BYOK (Bring Your Own Key: la organización controla su propia llave de cifrado) o llaves administradas por la plataforma—, el alojamiento en el país que corresponda y la configuración inicial.</p>
+<p><strong>Alternativas consideradas:</strong> Se descartó el aprovisionamiento con intervención humana porque crea un cuello de botella que socava los objetivos de accesibilidad de la plataforma: las campañas del Sur Global necesitan arrancar de inmediato, no esperar al horario laboral de otro huso horario.</p>
+<h2 id="consecuencias" tabindex="-1"><a class="heading-anchor" href="#consecuencias" aria-hidden="true">#</a> Consecuencias</h2>
+<p><strong>Beneficios:</strong></p>
+<ul>
+<li>Comprometer una organización no puede exponer a otra: el radio de impacto se limita a una sola organización</li>
+<li>Las políticas de seguridad por organización (llaves de cifrado, residencia de datos, controles de acceso) se hacen cumplir desde la arquitectura, no solo por configuración</li>
+<li>Se puede colocar una organización en cualquier país sin cambios de arquitectura</li>
+<li>El modelo de federación respeta la soberanía de cada organización, algo crítico en contextos políticos donde la propiedad de los datos tiene consecuencias para la seguridad de las personas</li>
+<li>La prioridad móvil garantiza que la plataforma funcione en los dispositivos que los voluntarios realmente usan</li>
+</ul>
+<p><strong>Costos:</strong></p>
+<ul>
+<li>La complejidad operativa es mucho mayor que en multiorganización: cada organización es su propio despliegue y exige una automatización sólida</li>
+<li>Los costos de infraestructura crecen de forma lineal con la cantidad de organizaciones, en vez de amortizarse entre recursos compartidos</li>
+<li>Automatizar el aprovisionamiento en varios países y con varios proveedores de nube es una inversión de infraestructura considerable</li>
+<li>Las instalaciones autoalojadas fragmentan las versiones y complican el soporte</li>
+</ul>
+<p><strong>Restricciones:</strong></p>
+<ul>
+<li>Todo cambio de infraestructura tiene que funcionar en todos los niveles de aislamiento</li>
+<li>Las actualizaciones tienen que poder desplegarse a cientos de organizaciones independientes sin tiempo de inactividad</li>
+<li>La cadena de procesamiento del aprovisionamiento tiene que ser lo bastante sólida para manejar proveedores de alojamiento distintos en cada país y escenarios de fallo y reversión</li>
+</ul>
+<p><strong>ADR relacionados:</strong> <a href="./002-security-threat-model.html">ADR-002</a> (la arquitectura de seguridad depende del aislamiento de organización única), <a href="./005-offline-first-sync.html">ADR-005</a> (la prioridad móvil impulsa los requisitos de funcionamiento sin conexión), <a href="./010-internationalization-localization.html">ADR-010</a> (el despliegue por país sustenta la residencia de datos)</p>
+
+    </article>
+  </main>
+  <div class="toc-rail"><nav class="toc" aria-label="En esta página"><div class="toc-label">En esta página</div><ul><li class="toc-2"><a href="#contexto"># Contexto</a></li><li class="toc-2"><a href="#decisión"># Decisión</a></li><li class="toc-3"><a href="#arquitectura-de-organización-única-con-aislamiento-por-niveles"># Arquitectura de organización única con aislamiento por niveles</a></li><li class="toc-3"><a href="#modelo-de-federación-en-vez-de-multiorganización-monolítica"># Modelo de federación en vez de multiorganización monolítica</a></li><li class="toc-3"><a href="#residencia-de-datos-por-país"># Residencia de datos por país</a></li><li class="toc-3"><a href="#diseño-con-prioridad-móvil"># Diseño con prioridad móvil</a></li><li class="toc-3"><a href="#aprovisionamiento-de-organizaciones-totalmente-automatizado"># Aprovisionamiento de organizaciones totalmente automatizado</a></li><li class="toc-2"><a href="#consecuencias"># Consecuencias</a></li></ul></nav></div>
+</div>
+<script src="../../assets/search.js" defer></script>
+<script src="../../assets/app.js" defer></script>
+</body>
+</html>

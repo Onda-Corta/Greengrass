@@ -1,0 +1,1072 @@
+<!DOCTYPE html>
+<html lang="es" data-base="../../../../" data-no-results="No hay resultados para">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Inventario de componentes · GreenGrass</title>
+<meta name="description" content="Inventario de componentes — Documentación de especificación y diseño de GreenGrass.">
+<link rel="alternate" hreflang="en" href="../../../../design/ux/03-design-system/component-inventory.html">
+<link rel="alternate" hreflang="es" href="./component-inventory.html">
+<link rel="alternate" hreflang="x-default" href="../../../../design/ux/03-design-system/component-inventory.html">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%232563eb'/%3E%3Cstop offset='1' stop-color='%2316a34a'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='32' height='32' rx='7' fill='url(%23g)'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="../../../../assets/styles.css">
+</head>
+<body>
+<a class="skip-link" href="#content">Saltar al contenido</a>
+<header class="site-header">
+  <button type="button" class="menu-toggle" aria-label="Alternar navegación" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+  <a class="brand" href="../../../../es/index.html">
+    <span class="brand-mark" aria-hidden="true"></span>
+    <span class="brand-text"><strong>GreenGrass</strong><small>Especificación y diseño</small></span>
+  </a>
+  <div class="search">
+    <input type="search" id="search-input" placeholder="Buscar en la documentación…" autocomplete="off" aria-label="Buscar en la documentación">
+    <div id="search-results" class="search-results" hidden></div>
+  </div>
+  <nav class="lang-switch" aria-label="Idioma"><a class="lang-opt" href="../../../../design/ux/03-design-system/component-inventory.html" hreflang="en" lang="en" title="View this page in English">EN</a><span class="lang-opt active" aria-current="true">ES</span></nav>
+  <button type="button" class="theme-toggle" aria-label="Alternar modo oscuro" title="Alternar modo oscuro">
+    <span class="theme-icon" aria-hidden="true"></span>
+  </button>
+</header>
+<div class="layout">
+  <div class="sidebar-backdrop" hidden></div>
+  <aside class="sidebar" aria-label="Navegación de la documentación">
+    <nav class="nav">
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">Inicio<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../../../index.html">GreenGrass</a></li></ul></div>
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">Especificaciones<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../../../spec/product.html">Proyecto: GreenGrass</a></li><li><a href="../../../spec/mvp.html">MVP de GreenGrass — plan de producto</a></li><li><a href="../../../spec/users.html">Usuarios y roles</a></li><li><a href="../../../spec/workflows.html">Flujos de trabajo principales</a></li><li><a href="../../../spec/geography.html">Geografía objetivo</a></li><li><a href="../../../spec/security.html">Seguridad y modelo de amenazas</a></li><li><a href="../../../spec/compliance.html">Cumplimiento y marco legal</a></li><li><a href="../../../spec/fundraising.html">Recaudación de fondos e infraestructura de pagos</a></li><li><a href="../../../spec/integrations.html">Integraciones externas</a></li><li><a href="../../../spec/support.html">Soporte y puesta en marcha de organizaciones</a></li><li><a href="../../../spec/gotv.html">GOTV y operaciones del día de elecciones</a></li><li><a href="../../../spec/messaging.html">Comunicaciones internas y notificaciones</a></li><li><a href="../../../spec/press.html">Prensa, medios y comunicaciones públicas</a></li><li><a href="../../../spec/comms-intelligence.html">Inteligencia de comunicaciones — hoja de ruta post-MVP</a></li></ul></div>
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">Arquitectura<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../../architecture/system.html">Arquitectura del sistema</a></li></ul></div>
+<div class="nav-section open"><button type="button" class="nav-section-title" aria-expanded="true">Diseño UX<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../00-overview.html">Resumen del diseño de UX</a></li><li><a href="../01-information-architecture/navigation-model.html">Modelo de navegación</a></li><li><a href="../01-information-architecture/screen-inventory.html">Inventario de pantallas</a></li><li><a href="../01-information-architecture/persona-views.html">Vistas por arquetipo</a></li><li><a href="../01-information-architecture/url-structure.html">Estructura de URL</a></li><li><a href="../02-global-patterns/pattern-catalog.html">Catálogo de patrones</a></li><li><a href="../02-global-patterns/offline-sync-patterns.html">Patrones sin conexión y de sincronización</a></li><li><a href="../02-global-patterns/notification-patterns.html">Patrones de notificaciones</a></li><li><a href="../02-global-patterns/search-patterns.html">Patrones de búsqueda</a></li><li><a href="../02-global-patterns/settings-help-patterns.html">Patrones de ajustes y ayuda</a></li><li><a href="../02-global-patterns/security-ux-patterns.html">Patrones de UX de seguridad</a></li><li><a href="./foundations.html">Fundamentos del sistema de diseño</a></li><li><a href="./theming-strategy.html">Estrategia de temas</a></li><li><a href="./component-inventory.html" aria-current="page" class="active">Inventario de componentes</a></li><li><a href="./responsive-strategy.html">Estrategia de diseño adaptable</a></li></ul></div>
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">Decisiones<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../../../decisions/001-platform-architecture.html">ADR-001: Arquitectura y despliegue de la plataforma</a></li><li><a href="../../../decisions/002-security-threat-model.html">ADR-002: Seguridad y modelo de amenazas</a></li><li><a href="../../../decisions/003-identity-access-organization.html">ADR-003: Identidad, acceso y organización</a></li><li><a href="../../../decisions/004-data-model-integrity.html">ADR-004: Modelo de datos e integridad</a></li><li><a href="../../../decisions/005-offline-first-sync.html">ADR-005: Prioridad sin conexión y sincronización</a></li><li><a href="../../../decisions/006-field-operations-gotv.html">ADR-006: Operaciones de campo y GOTV</a></li><li><a href="../../../decisions/007-fundraising-payments.html">ADR-007: Recaudación de fondos y pagos</a></li><li><a href="../../../decisions/008-communications-messaging.html">ADR-008: Comunicaciones y mensajería</a></li><li><a href="../../../decisions/009-compliance-legal.html">ADR-009: Cumplimiento y marco legal</a></li><li><a href="../../../decisions/010-internationalization-localization.html">ADR-010: Internacionalización y localización</a></li><li><a href="../../../decisions/011-design-system-ux.html">ADR-011: Sistema de diseño y fundamentos de UX</a></li><li><a href="../../../decisions/012-external-integrations.html">ADR-012: Integraciones externas</a></li><li><a href="../../../decisions/013-analytics-ai.html">ADR-013: Analítica e IA</a></li><li><a href="../../../decisions/014-volunteer-onboarding.html">ADR-014: Voluntariado e incorporación</a></li><li><a href="../../../decisions/015-product-scope.html">ADR-015: Límites del alcance del producto</a></li><li><a href="../../../decisions/016-cross-cutting-resolutions.html">ADR-016: Resoluciones transversales</a></li><li><a href="../../../decisions/017-sharing-contract-trust-model.html">ADR-017: El contrato de intercambio como primitiva universal de confianza</a></li><li><a href="../../../decisions/ux-decisions.html">Decisiones de UX — fase de wireframes</a></li></ul></div>
+    </nav>
+  </aside>
+  <main id="content" class="content">
+    <nav class="breadcrumb" aria-label="Ruta de navegación">Diseño UX</nav>
+    <article class="prose">
+<h1 id="inventario-de-componentes" tabindex="-1"><a class="heading-anchor" href="#inventario-de-componentes" aria-hidden="true">#</a> Inventario de componentes</h1>
+<h2 id="propósito" tabindex="-1"><a class="heading-anchor" href="#propósito" aria-hidden="true">#</a> Propósito</h2>
+<p>Este documento cataloga las categorías de componentes, las convenciones de nombres y las definiciones de estado del sistema de diseño de GreenGrass. Une los fundamentos de diseño (tokens, espaciado, color) con los elementos de interfaz que se construyen a partir de ellos.</p>
+<p>Esto no es una biblioteca de componentes: es un inventario de lo que hay que construir. Los detalles de implementación (las API de los componentes Svelte, las definiciones de props) llegan durante el desarrollo. Este documento garantiza que el sistema de diseño cubra, con un vocabulario de componentes consistente, todos los patrones identificados en el catálogo de patrones (<a href="http://pattern-catalog.md" target="_blank" rel="noopener noreferrer">pattern-catalog.md</a>).</p>
+<h2 id="convenciones-de-nombres" tabindex="-1"><a class="heading-anchor" href="#convenciones-de-nombres" aria-hidden="true">#</a> Convenciones de nombres</h2>
+<h3 id="nombres-de-componente" tabindex="-1"><a class="heading-anchor" href="#nombres-de-componente" aria-hidden="true">#</a> Nombres de componente</h3>
+<p>Los componentes usan PascalCase, con la categoría como prefijo:</p>
+<pre><code>Category/ComponentName
+</code></pre>
+<p>Ejemplos: <code>Button/Primary</code>, <code>Form/TextInput</code>, <code>Layout/Sidebar</code>, <code>Data/Table</code>.</p>
+<h3 id="nombres-de-variante" tabindex="-1"><a class="heading-anchor" href="#nombres-de-variante" aria-hidden="true">#</a> Nombres de variante</h3>
+<p>Las variantes usan sufijos descriptivos:</p>
+<pre><code>Button/Primary
+Button/Secondary
+Button/Ghost
+Button/Danger
+</code></pre>
+<h3 id="nombres-de-estado" tabindex="-1"><a class="heading-anchor" href="#nombres-de-estado" aria-hidden="true">#</a> Nombres de estado</h3>
+<p>Los estados siguen un vocabulario estándar:</p>
+<table>
+<thead>
+<tr>
+<th>Estado</th>
+<th>Descripción</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>default</code></td>
+<td>Estado normal en reposo</td>
+</tr>
+<tr>
+<td><code>hover</code></td>
+<td>El cursor está encima (solo en escritorio)</td>
+</tr>
+<tr>
+<td><code>focus</code></td>
+<td>Foco de teclado (con anillo de foco visible)</td>
+</tr>
+<tr>
+<td><code>active</code></td>
+<td>Mientras se presiona o se hace clic</td>
+</tr>
+<tr>
+<td><code>disabled</code></td>
+<td>No interactivo, atenuado</td>
+</tr>
+<tr>
+<td><code>loading</code></td>
+<td>Esperando una operación asíncrona</td>
+</tr>
+<tr>
+<td><code>error</code></td>
+<td>Fallo de validación o estado de error</td>
+</tr>
+<tr>
+<td><code>selected</code></td>
+<td>Seleccionado en este momento (en una lista, un interruptor, etc.)</td>
+</tr>
+<tr>
+<td><code>expanded</code></td>
+<td>El elemento plegable está desplegado</td>
+</tr>
+<tr>
+<td><code>collapsed</code></td>
+<td>El elemento plegable está plegado</td>
+</tr>
+<tr>
+<td><code>offline</code></td>
+<td>Funcionalidad no disponible por la conectividad</td>
+</tr>
+<tr>
+<td><code>empty</code></td>
+<td>No hay datos que mostrar</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="categorías-de-componentes" tabindex="-1"><a class="heading-anchor" href="#categorías-de-componentes" aria-hidden="true">#</a> Categorías de componentes</h2>
+<h3 id="1-primitivas" tabindex="-1"><a class="heading-anchor" href="#1-primitivas" aria-hidden="true">#</a> 1. Primitivas</h3>
+<p>Los bloques de construcción de más bajo nivel. Se usan dentro de otros componentes; rara vez se usan directamente en la disposición de una página.</p>
+<table>
+<thead>
+<tr>
+<th>Componente</th>
+<th>Descripción</th>
+<th>Estados</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Icon</code></td>
+<td>Dibuja los iconos de Lucide en los tamaños estándar. Maneja el reflejo en RTL de los iconos direccionales.</td>
+<td>default</td>
+</tr>
+<tr>
+<td><code>Badge</code></td>
+<td>Rótulo pequeño para contadores, estados y etiquetas.</td>
+<td>default, variantes: status (success/warning/error/info), count, tag</td>
+</tr>
+<tr>
+<td><code>Avatar</code></td>
+<td>Foto o iniciales de la persona o la organización. Circular.</td>
+<td>default, tamaños: sm/md/lg/xl</td>
+</tr>
+<tr>
+<td><code>Divider</code></td>
+<td>Línea separadora horizontal o vertical.</td>
+<td>default, with-label</td>
+</tr>
+<tr>
+<td><code>Spinner</code></td>
+<td>Indicador de carga. Respeta el movimiento reducido.</td>
+<td>default</td>
+</tr>
+<tr>
+<td><code>Skeleton</code></td>
+<td>Marcador de posición para el contenido que se está cargando.</td>
+<td>text, circle, rectangle</td>
+</tr>
+<tr>
+<td><code>Tooltip</code></td>
+<td>Texto contextual al pasar el cursor o al tocar.</td>
+<td>default</td>
+</tr>
+<tr>
+<td><code>VisuallyHidden</code></td>
+<td>Texto solo para lectores de pantalla.</td>
+<td>default</td>
+</tr>
+</tbody>
+</table>
+<h3 id="2-tipografía" tabindex="-1"><a class="heading-anchor" href="#2-tipografía" aria-hidden="true">#</a> 2. Tipografía</h3>
+<p>Componentes de renderizado de texto, con HTML semántico y aplicación de tokens incorporados.</p>
+<table>
+<thead>
+<tr>
+<th>Componente</th>
+<th>Descripción</th>
+<th>Variantes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Heading</code></td>
+<td>h1-h6 con el tamaño de token que corresponde.</td>
+<td>nivel: 1-6</td>
+</tr>
+<tr>
+<td><code>Text</code></td>
+<td>Texto de cuerpo con variantes de tamaño, peso y color.</td>
+<td>tamaño: xs/sm/base/lg, peso: normal/medium/semibold</td>
+</tr>
+<tr>
+<td><code>Label</code></td>
+<td>Rótulos de los campos de formulario. Se asocia al campo con <code>for</code>.</td>
+<td>default, required</td>
+</tr>
+<tr>
+<td><code>HelpText</code></td>
+<td>Texto explicativo debajo del campo.</td>
+<td>default, error</td>
+</tr>
+<tr>
+<td><code>Link</code></td>
+<td>Texto de enlace con el color y el comportamiento de subrayado que corresponden.</td>
+<td>default, external</td>
+</tr>
+<tr>
+<td><code>Code</code></td>
+<td>Código en línea o en bloque con fuente monoespaciada.</td>
+<td>inline, block</td>
+</tr>
+<tr>
+<td><code>Timestamp</code></td>
+<td>Muestra el tiempo relativo (&quot;hace 2 min&quot;). Se actualiza automáticamente.</td>
+<td>default</td>
+</tr>
+</tbody>
+</table>
+<h3 id="3-botones" tabindex="-1"><a class="heading-anchor" href="#3-botones" aria-hidden="true">#</a> 3. Botones</h3>
+<p>Elementos interactivos que disparan acciones.</p>
+<table>
+<thead>
+<tr>
+<th>Componente</th>
+<th>Descripción</th>
+<th>Estados</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Button/Primary</code></td>
+<td>Llamada a la acción principal. Fondo relleno con el color principal.</td>
+<td>default, hover, focus, active, disabled, loading</td>
+</tr>
+<tr>
+<td><code>Button/Secondary</code></td>
+<td>Acción secundaria. Estilo con contorno.</td>
+<td>igual</td>
+</tr>
+<tr>
+<td><code>Button/Ghost</code></td>
+<td>Acción terciaria. Solo texto, sin fondo.</td>
+<td>igual</td>
+</tr>
+<tr>
+<td><code>Button/Danger</code></td>
+<td>Acción destructiva. Estilo en rojo. Exige confirmación en las acciones críticas.</td>
+<td>igual</td>
+</tr>
+<tr>
+<td><code>Button/Icon</code></td>
+<td>Botón de solo icono. Exige aria-label.</td>
+<td>igual</td>
+</tr>
+<tr>
+<td><code>Button/Group</code></td>
+<td>Grupo horizontal de botones relacionados.</td>
+<td>default</td>
+</tr>
+<tr>
+<td><code>Button/FloatingAction</code></td>
+<td>FAB de móvil para las acciones principales.</td>
+<td>default, expanded (con subacciones)</td>
+</tr>
+<tr>
+<td><code>Button/FieldAction</code></td>
+<td>Botón de área táctil grande para el modo de campo. Altura mínima de 48px.</td>
+<td>default, active, disabled</td>
+</tr>
+</tbody>
+</table>
+<h3 id="4-formularios" tabindex="-1"><a class="heading-anchor" href="#4-formularios" aria-hidden="true">#</a> 4. Formularios</h3>
+<p>Componentes de entrada de datos.</p>
+<table>
+<thead>
+<tr>
+<th>Componente</th>
+<th>Descripción</th>
+<th>Estados</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Form/TextInput</code></td>
+<td>Campo de texto de una línea.</td>
+<td>default, focus, error, disabled, with-icon, with-clear</td>
+</tr>
+<tr>
+<td><code>Form/TextArea</code></td>
+<td>Campo de texto de varias líneas. Crece automáticamente.</td>
+<td>default, focus, error, disabled</td>
+</tr>
+<tr>
+<td><code>Form/Select</code></td>
+<td>Desplegable de selección única.</td>
+<td>default, focus, error, disabled, open</td>
+</tr>
+<tr>
+<td><code>Form/MultiSelect</code></td>
+<td>Selección múltiple con chips.</td>
+<td>igual</td>
+</tr>
+<tr>
+<td><code>Form/Checkbox</code></td>
+<td>Casilla booleana (marcada/desmarcada).</td>
+<td>default, checked, indeterminate, disabled</td>
+</tr>
+<tr>
+<td><code>Form/Radio</code></td>
+<td>Selección única entre opciones.</td>
+<td>default, selected, disabled</td>
+</tr>
+<tr>
+<td><code>Form/Toggle</code></td>
+<td>Interruptor de encendido y apagado.</td>
+<td>default, on, disabled</td>
+</tr>
+<tr>
+<td><code>Form/DatePicker</code></td>
+<td>Selección de fecha (calendario emergente).</td>
+<td>default, focus, error, range</td>
+</tr>
+<tr>
+<td><code>Form/TimePicker</code></td>
+<td>Selección de hora.</td>
+<td>default, focus, error</td>
+</tr>
+<tr>
+<td><code>Form/NumberInput</code></td>
+<td>Campo numérico con incremento y decremento.</td>
+<td>default, focus, error, disabled</td>
+</tr>
+<tr>
+<td><code>Form/CurrencyInput</code></td>
+<td>Campo con formato de moneda y símbolo.</td>
+<td>default, focus, error</td>
+</tr>
+<tr>
+<td><code>Form/PhoneInput</code></td>
+<td>Número de teléfono con selector de código de país.</td>
+<td>default, focus, error</td>
+</tr>
+<tr>
+<td><code>Form/FileUpload</code></td>
+<td>Selección de archivos con arrastrar y soltar.</td>
+<td>default, dragging, uploading, complete, error</td>
+</tr>
+<tr>
+<td><code>Form/ColorPicker</code></td>
+<td>Selección de color (para personalizar la marca).</td>
+<td>default, open</td>
+</tr>
+<tr>
+<td><code>Form/SearchInput</code></td>
+<td>Campo de texto con icono de búsqueda y botón para limpiar.</td>
+<td>default, focus, loading, with-results</td>
+</tr>
+<tr>
+<td><code>Form/FieldGroup</code></td>
+<td>Agrupa campos de formulario relacionados bajo un rótulo. Plegable.</td>
+<td>default, expanded, collapsed</td>
+</tr>
+</tbody>
+</table>
+<h3 id="5-maquetación" tabindex="-1"><a class="heading-anchor" href="#5-maquetación" aria-hidden="true">#</a> 5. Maquetación</h3>
+<p>Componentes estructurales que organizan el contenido de la página.</p>
+<table>
+<thead>
+<tr>
+<th>Componente</th>
+<th>Descripción</th>
+<th>Notas</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Layout/Shell</code></td>
+<td>El marco de la aplicación de nivel superior (barra superior + barra lateral + contenido).</td>
+<td>Barra lateral adaptable al rol. Ver <a href="http://navigation-model.md" target="_blank" rel="noopener noreferrer">navigation-model.md</a>.</td>
+</tr>
+<tr>
+<td><code>Layout/FieldShell</code></td>
+<td>Marco del modo de campo (barra superior de campo + contenido de la tarea + acciones).</td>
+<td>Pantalla completa exclusiva.</td>
+</tr>
+<tr>
+<td><code>Layout/PortalShell</code></td>
+<td>Marco del portal de simpatizantes (barra superior mínima + contenido).</td>
+<td>Navegación simplificada.</td>
+</tr>
+<tr>
+<td><code>Layout/WizardShell</code></td>
+<td>Marco del asistente (encabezado de progreso + contenido del paso + navegación).</td>
+<td>Reemplaza la barra lateral por los pasos.</td>
+</tr>
+<tr>
+<td><code>Layout/Page</code></td>
+<td>Envoltorio de página con título, ruta de navegación y área de acciones.</td>
+<td></td>
+</tr>
+<tr>
+<td><code>Layout/Section</code></td>
+<td>Sección de contenido con encabezado y separador opcionales.</td>
+<td></td>
+</tr>
+<tr>
+<td><code>Layout/Card</code></td>
+<td>Contenedor de contenido elevado.</td>
+<td>elevation-1, hover: elevation-2</td>
+</tr>
+<tr>
+<td><code>Layout/Grid</code></td>
+<td>Envoltorio de CSS grid con número de columnas adaptable.</td>
+<td>4/8/12 columnas</td>
+</tr>
+<tr>
+<td><code>Layout/Stack</code></td>
+<td>Pila vertical con separación consistente.</td>
+<td>gap: de space-2 a space-8</td>
+</tr>
+<tr>
+<td><code>Layout/Cluster</code></td>
+<td>Flex horizontal con ajuste de línea y separación consistente.</td>
+<td></td>
+</tr>
+<tr>
+<td><code>Layout/SplitView</code></td>
+<td>Disposición redimensionable de dos paneles (lista + detalle).</td>
+<td>Solo en escritorio.</td>
+</tr>
+<tr>
+<td><code>Layout/DetailPanel</code></td>
+<td>Panel de detalle que se despliega desde la derecha.</td>
+<td>Se puede cerrar y redimensionar.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="6-navegación" tabindex="-1"><a class="heading-anchor" href="#6-navegación" aria-hidden="true">#</a> 6. Navegación</h3>
+<p>Componentes que ayudan a moverse por la aplicación.</p>
+<table>
+<thead>
+<tr>
+<th>Componente</th>
+<th>Descripción</th>
+<th>Notas</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Nav/Sidebar</code></td>
+<td>Barra lateral de escritorio con secciones adaptables al rol.</td>
+<td>Plegable, con elementos agrupados.</td>
+</tr>
+<tr>
+<td><code>Nav/SidebarItem</code></td>
+<td>Elemento de navegación individual de la barra lateral.</td>
+<td>default, active, with-badge, disabled (sin conexión)</td>
+</tr>
+<tr>
+<td><code>Nav/SidebarSection</code></td>
+<td>Encabezado de grupo plegable en la barra lateral.</td>
+<td>expanded, collapsed</td>
+</tr>
+<tr>
+<td><code>Nav/BottomTabBar</code></td>
+<td>Navegación inferior de móvil. Pestañas adaptables al rol.</td>
+<td></td>
+</tr>
+<tr>
+<td><code>Nav/BottomTab</code></td>
+<td>Pestaña individual de la barra inferior.</td>
+<td>default, active, with-badge</td>
+</tr>
+<tr>
+<td><code>Nav/Breadcrumb</code></td>
+<td>Ruta de navegación para las jerarquías profundas.</td>
+<td></td>
+</tr>
+<tr>
+<td><code>Nav/Pagination</code></td>
+<td>Navegación por páginas en las listas.</td>
+<td></td>
+</tr>
+<tr>
+<td><code>Nav/StepIndicator</code></td>
+<td>Indicador de pasos de un asistente o un proceso.</td>
+<td>pending, active, complete, error</td>
+</tr>
+<tr>
+<td><code>Nav/Tabs</code></td>
+<td>Barra horizontal de pestañas para las secciones de contenido.</td>
+<td></td>
+</tr>
+<tr>
+<td><code>Nav/Tab</code></td>
+<td>Pestaña individual.</td>
+<td>default, active, disabled</td>
+</tr>
+</tbody>
+</table>
+<h3 id="7-presentación-de-datos" tabindex="-1"><a class="heading-anchor" href="#7-presentación-de-datos" aria-hidden="true">#</a> 7. Presentación de datos</h3>
+<p>Componentes para presentar datos.</p>
+<table>
+<thead>
+<tr>
+<th>Componente</th>
+<th>Descripción</th>
+<th>Estados</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Data/Table</code></td>
+<td>Tabla de datos completa, con ordenamiento, selección y acciones.</td>
+<td>default, loading, empty, error</td>
+</tr>
+<tr>
+<td><code>Data/TableRow</code></td>
+<td>Fila de tabla.</td>
+<td>default, selected, hover, expanded (fila de detalle)</td>
+</tr>
+<tr>
+<td><code>Data/List</code></td>
+<td>Lista vertical de elementos (alternativa a la tabla, apta para móvil).</td>
+<td>default, loading, empty</td>
+</tr>
+<tr>
+<td><code>Data/ListItem</code></td>
+<td>Elemento de lista individual. Se puede tocar.</td>
+<td>default, selected, with-actions</td>
+</tr>
+<tr>
+<td><code>Data/CardGrid</code></td>
+<td>Cuadrícula de tarjetas (widgets del panel, resultados de búsqueda).</td>
+<td>default, loading, empty</td>
+</tr>
+<tr>
+<td><code>Data/MetricCard</code></td>
+<td>Muestra un solo KPI (valor + rótulo + tendencia).</td>
+<td>default, loading, positive-trend, negative-trend</td>
+</tr>
+<tr>
+<td><code>Data/Thermometer</code></td>
+<td>Barra de progreso hacia una meta.</td>
+<td>default, with-label, complete</td>
+</tr>
+<tr>
+<td><code>Data/Chart</code></td>
+<td>Envoltorio de los componentes de gráfica (líneas, barras, pastel).</td>
+<td>default, loading, empty, error</td>
+</tr>
+<tr>
+<td><code>Data/Timeline</code></td>
+<td>Lista cronológica de eventos (flujos de actividad).</td>
+<td>default, loading</td>
+</tr>
+<tr>
+<td><code>Data/TimelineItem</code></td>
+<td>Entrada individual de la línea de tiempo.</td>
+<td>default</td>
+</tr>
+<tr>
+<td><code>Data/EmptyState</code></td>
+<td>Marcador de posición sin datos, con mensaje y llamada a la acción.</td>
+<td>contenido según el contexto</td>
+</tr>
+<tr>
+<td><code>Data/KeyValue</code></td>
+<td>Par rótulo-valor para las vistas de detalle.</td>
+<td>default, inline, stacked</td>
+</tr>
+</tbody>
+</table>
+<h3 id="8-retroalimentación" tabindex="-1"><a class="heading-anchor" href="#8-retroalimentación" aria-hidden="true">#</a> 8. Retroalimentación</h3>
+<p>Componentes que comunican el estado del sistema y la respuesta a lo que hace la persona.</p>
+<table>
+<thead>
+<tr>
+<th>Componente</th>
+<th>Descripción</th>
+<th>Notas</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Feedback/Toast</code></td>
+<td>Notificación pasajera, abajo (escritorio) o arriba (móvil).</td>
+<td>success, error, warning, info</td>
+</tr>
+<tr>
+<td><code>Feedback/Alert</code></td>
+<td>Banner de alerta persistente, en línea.</td>
+<td>success, error, warning, info, dismissable</td>
+</tr>
+<tr>
+<td><code>Feedback/ProgressBar</code></td>
+<td>Progreso determinado o indeterminado.</td>
+<td>default, indeterminate</td>
+</tr>
+<tr>
+<td><code>Feedback/SyncIndicator</code></td>
+<td>Muestra el estado de conectividad y sincronización.</td>
+<td>connected, stale, syncing, offline, error</td>
+</tr>
+<tr>
+<td><code>Feedback/FieldSyncIndicator</code></td>
+<td>Indicador de sincronización ampliado para el modo de campo.</td>
+<td>los mismos estados, más grandes</td>
+</tr>
+<tr>
+<td><code>Feedback/OfflineBadge</code></td>
+<td>Distintivo pequeño que indica que una funcionalidad no está disponible sin conexión.</td>
+<td>default</td>
+</tr>
+<tr>
+<td><code>Feedback/FreshnessIndicator</code></td>
+<td>Muestra la antigüedad de los datos (&quot;Última actualización: hace 2 horas&quot;).</td>
+<td>current, stale, warning</td>
+</tr>
+</tbody>
+</table>
+<h3 id="9-superposiciones" tabindex="-1"><a class="heading-anchor" href="#9-superposiciones" aria-hidden="true">#</a> 9. Superposiciones</h3>
+<p>Componentes que aparecen sobre la capa de contenido principal.</p>
+<table>
+<thead>
+<tr>
+<th>Componente</th>
+<th>Descripción</th>
+<th>Notas</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Overlay/Modal</code></td>
+<td>Diálogo centrado. Atrapa el foco.</td>
+<td>tamaños: sm/md/lg</td>
+</tr>
+<tr>
+<td><code>Overlay/Drawer</code></td>
+<td>Panel lateral que entra desde un borde.</td>
+<td>dirección: left/right, tamaños: sm/md/lg</td>
+</tr>
+<tr>
+<td><code>Overlay/BottomSheet</code></td>
+<td>Hoja inferior de móvil (sube desde abajo).</td>
+<td>tamaños: half/full</td>
+</tr>
+<tr>
+<td><code>Overlay/Dropdown</code></td>
+<td>Se posiciona debajo del elemento que lo dispara.</td>
+<td>opción with-search</td>
+</tr>
+<tr>
+<td><code>Overlay/Popover</code></td>
+<td>Se posiciona junto al disparador, con flecha.</td>
+<td></td>
+</tr>
+<tr>
+<td><code>Overlay/ConfirmDialog</code></td>
+<td>Modal con confirmar y cancelar para las acciones destructivas.</td>
+<td>default, danger</td>
+</tr>
+<tr>
+<td><code>Overlay/NotificationDrawer</code></td>
+<td>Bandeja de notificaciones que se despliega.</td>
+<td></td>
+</tr>
+<tr>
+<td><code>Overlay/CommandPalette</code></td>
+<td>Superposición para buscarlo todo (Cmd+K).</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="10-mensajería" tabindex="-1"><a class="heading-anchor" href="#10-mensajería" aria-hidden="true">#</a> 10. Mensajería</h3>
+<p>Componentes propios del sistema de mensajería.</p>
+<table>
+<thead>
+<tr>
+<th>Componente</th>
+<th>Descripción</th>
+<th>Notas</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Messaging/ConversationList</code></td>
+<td>Lista de conversaciones con vista previa.</td>
+<td>default, filtered</td>
+</tr>
+<tr>
+<td><code>Messaging/ConversationItem</code></td>
+<td>Una conversación de la lista.</td>
+<td>default, unread, selected, muted</td>
+</tr>
+<tr>
+<td><code>Messaging/MessageBubble</code></td>
+<td>Mensaje individual dentro de un hilo.</td>
+<td>sent, received, system</td>
+</tr>
+<tr>
+<td><code>Messaging/MessageComposer</code></td>
+<td>Campo de texto con botón de enviar y adjuntos.</td>
+<td>default, with-attachments</td>
+</tr>
+<tr>
+<td><code>Messaging/ThreadIndicator</code></td>
+<td>Indicador en línea de que un mensaje tiene hilo.</td>
+<td>default, with-count</td>
+</tr>
+<tr>
+<td><code>Messaging/EncryptionBadge</code></td>
+<td>Indicador del estado del cifrado de extremo a extremo (E2E).</td>
+<td>encrypted, unencrypted</td>
+</tr>
+<tr>
+<td><code>Messaging/VoiceMessage</code></td>
+<td>Reproductor de mensajes de voz (solo en contextos de campo).</td>
+<td>default, playing</td>
+</tr>
+</tbody>
+</table>
+<h3 id="11-modo-de-campo" tabindex="-1"><a class="heading-anchor" href="#11-modo-de-campo" aria-hidden="true">#</a> 11. Modo de campo</h3>
+<p>Componentes propios de la interfaz del modo de campo.</p>
+<table>
+<thead>
+<tr>
+<th>Componente</th>
+<th>Descripción</th>
+<th>Notas</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Field/ShiftHeader</code></td>
+<td>Barra superior del modo de campo (sincronización, cronómetro, indicador de grabación).</td>
+<td></td>
+</tr>
+<tr>
+<td><code>Field/TaskNav</code></td>
+<td>Navegación anterior/siguiente con contador de posición.</td>
+<td></td>
+</tr>
+<tr>
+<td><code>Field/DoorCard</code></td>
+<td>Ficha con la información del votante para el trabajo de campo.</td>
+<td>default, visited, skipped</td>
+</tr>
+<tr>
+<td><code>Field/ResponseForm</code></td>
+<td>Captura de respuestas guiada por el guion.</td>
+<td>single-select, multi-select, text</td>
+</tr>
+<tr>
+<td><code>Field/ResponseOption</code></td>
+<td>Botón grande para tocar, con las opciones de respuesta.</td>
+<td>default, selected</td>
+</tr>
+<tr>
+<td><code>Field/MapView</code></td>
+<td>Mapa que funciona sin conexión para visualizar la lista de recorrido.</td>
+<td></td>
+</tr>
+<tr>
+<td><code>Field/WalkListItem</code></td>
+<td>Elemento de la lista de recorrido.</td>
+<td>pending, complete, skipped, not-home</td>
+</tr>
+<tr>
+<td><code>Field/PanicButton</code></td>
+<td>Botón de bloqueo y pánico. Siempre accesible.</td>
+<td>default</td>
+</tr>
+<tr>
+<td><code>Field/ShiftTimer</code></td>
+<td>Muestra el tiempo transcurrido del turno.</td>
+<td>running, paused</td>
+</tr>
+<tr>
+<td><code>Field/EndShiftButton</code></td>
+<td>Acción de terminar el turno, con confirmación.</td>
+<td>default</td>
+</tr>
+</tbody>
+</table>
+<h3 id="12-panel" tabindex="-1"><a class="heading-anchor" href="#12-panel" aria-hidden="true">#</a> 12. Panel</h3>
+<p>Componentes para los widgets y las métricas del panel.</p>
+<table>
+<thead>
+<tr>
+<th>Componente</th>
+<th>Descripción</th>
+<th>Notas</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Dashboard/WidgetGrid</code></td>
+<td>Contenedor de cuadrícula adaptable para los widgets del panel.</td>
+<td></td>
+</tr>
+<tr>
+<td><code>Dashboard/Widget</code></td>
+<td>Envoltorio base del widget (título, contenido, área de acciones).</td>
+<td>default, loading, error, empty</td>
+</tr>
+<tr>
+<td><code>Dashboard/AlertWidget</code></td>
+<td>Widget con los elementos que necesitan atención.</td>
+<td>with-count, priority-sorted</td>
+</tr>
+<tr>
+<td><code>Dashboard/ActivityFeed</code></td>
+<td>Widget con el flujo de actividad reciente.</td>
+<td></td>
+</tr>
+<tr>
+<td><code>Dashboard/GoalProgress</code></td>
+<td>Widget termómetro de metas de recaudación o de campo.</td>
+<td></td>
+</tr>
+<tr>
+<td><code>Dashboard/MapWidget</code></td>
+<td>Widget con un mapa incrustado.</td>
+<td></td>
+</tr>
+<tr>
+<td><code>Dashboard/ElectionDayBanner</code></td>
+<td>Banner persistente de &quot;Día de elecciones activo&quot;.</td>
+<td>active, countdown</td>
+</tr>
+</tbody>
+</table>
+<h3 id="13-especializados" tabindex="-1"><a class="heading-anchor" href="#13-especializados" aria-hidden="true">#</a> 13. Especializados</h3>
+<p>Componentes para funcionalidades concretas con patrones de interacción propios.</p>
+<table>
+<thead>
+<tr>
+<th>Componente</th>
+<th>Descripción</th>
+<th>Notas</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Special/CheckInTool</code></td>
+<td>Interfaz rápida de registro de entrada con búsqueda y QR.</td>
+<td></td>
+</tr>
+<tr>
+<td><code>Special/CheckInItem</code></td>
+<td>Elemento individual de la lista de registro de entrada.</td>
+<td>pending, checked-in, absent</td>
+</tr>
+<tr>
+<td><code>Special/ApprovalCard</code></td>
+<td>Elemento de la cola de aprobaciones con vista previa y acciones.</td>
+<td>pending, approved, rejected</td>
+</tr>
+<tr>
+<td><code>Special/ComparisonView</code></td>
+<td>Comparación de registros lado a lado (deduplicación).</td>
+<td></td>
+</tr>
+<tr>
+<td><code>Special/MergeControl</code></td>
+<td>Decisión de fusión campo por campo (quedarse con la izquierda, la derecha o ambas).</td>
+<td></td>
+</tr>
+<tr>
+<td><code>Special/PipelineColumn</code></td>
+<td>Columna kanban en las vistas de flujo de etapas.</td>
+<td></td>
+</tr>
+<tr>
+<td><code>Special/PipelineCard</code></td>
+<td>Tarjeta arrastrable en las vistas de flujo de etapas.</td>
+<td></td>
+</tr>
+<tr>
+<td><code>Special/ImportMapper</code></td>
+<td>Interfaz de correspondencia de columnas para la importación de datos.</td>
+<td></td>
+</tr>
+<tr>
+<td><code>Special/FilterBar</code></td>
+<td>Muestra los filtros activos con chips y una acción para limpiarlos.</td>
+<td></td>
+</tr>
+<tr>
+<td><code>Special/FilterPanel</code></td>
+<td>Configuración de filtros a pantalla completa (móvil).</td>
+<td></td>
+</tr>
+<tr>
+<td><code>Special/SavedFilterSelector</code></td>
+<td>Desplegable para elegir filtros guardados.</td>
+<td></td>
+</tr>
+<tr>
+<td><code>Special/RideRequestCard</code></td>
+<td>Muestra una solicitud de transporte de GOTV (Get Out The Vote — movilización del voto).</td>
+<td>pending, assigned, complete</td>
+</tr>
+<tr>
+<td><code>Special/IssueReportForm</code></td>
+<td>Reporte de problemas del observador electoral (funciona sin conexión).</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="patrones-de-composición-de-componentes" tabindex="-1"><a class="heading-anchor" href="#patrones-de-composición-de-componentes" aria-hidden="true">#</a> Patrones de composición de componentes</h2>
+<h3 id="componentes-compuestos" tabindex="-1"><a class="heading-anchor" href="#componentes-compuestos" aria-hidden="true">#</a> Componentes compuestos</h3>
+<p>Algunos patrones de interfaz se componen de varios componentes que trabajan juntos:</p>
+<table>
+<thead>
+<tr>
+<th>Patrón</th>
+<th>Componentes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Vista de lista</strong></td>
+<td><code>Layout/Page</code> + <code>Special/FilterBar</code> + <code>Data/Table</code> (escritorio) o <code>Data/List</code> (móvil) + <code>Nav/Pagination</code> + <code>Data/EmptyState</code></td>
+</tr>
+<tr>
+<td><strong>Vista de detalle</strong></td>
+<td><code>Layout/Page</code> + <code>Layout/Card</code> + <code>Data/KeyValue</code> + <code>Nav/Tabs</code> + <code>Data/Timeline</code></td>
+</tr>
+<tr>
+<td><strong>Página de formulario</strong></td>
+<td><code>Layout/Page</code> + <code>Form/FieldGroup</code> (varios) + <code>Button/Primary</code> + <code>Button/Secondary</code></td>
+</tr>
+<tr>
+<td><strong>Panel</strong></td>
+<td><code>Layout/Page</code> + <code>Dashboard/WidgetGrid</code> + <code>Dashboard/Widget</code> (varios)</td>
+</tr>
+<tr>
+<td><strong>Vista dividida</strong></td>
+<td><code>Layout/SplitView</code> + <code>Data/List</code> (izquierda) + <code>Layout/DetailPanel</code> (derecha)</td>
+</tr>
+<tr>
+<td><strong>Asistente</strong></td>
+<td><code>Layout/WizardShell</code> + <code>Nav/StepIndicator</code> + contenido propio de cada paso + <code>Button/Primary</code> + <code>Button/Secondary</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="patrón-de-slots" tabindex="-1"><a class="heading-anchor" href="#patrón-de-slots" aria-hidden="true">#</a> Patrón de slots</h3>
+<p>Los componentes que aceptan contenido hijo usan un patrón de slots:</p>
+<pre><code>Layout/Card
+  └── [slot: default] → cualquier contenido
+  └── [slot: header] → título + acciones
+  └── [slot: footer] → contenido del pie
+</code></pre>
+<p>Esa capacidad de composición significa menos componentes especializados y una reutilización más flexible.</p>
+<hr>
+<h2 id="resumen-del-conteo-de-componentes" tabindex="-1"><a class="heading-anchor" href="#resumen-del-conteo-de-componentes" aria-hidden="true">#</a> Resumen del conteo de componentes</h2>
+<table>
+<thead>
+<tr>
+<th>Categoría</th>
+<th>Cantidad</th>
+<th>Notas</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Primitivas</td>
+<td>8</td>
+<td>Elementos fundacionales</td>
+</tr>
+<tr>
+<td>Tipografía</td>
+<td>7</td>
+<td>Renderizado de texto</td>
+</tr>
+<tr>
+<td>Botones</td>
+<td>8</td>
+<td>Disparadores interactivos</td>
+</tr>
+<tr>
+<td>Formularios</td>
+<td>16</td>
+<td>Entrada de datos</td>
+</tr>
+<tr>
+<td>Maquetación</td>
+<td>12</td>
+<td>Estructura</td>
+</tr>
+<tr>
+<td>Navegación</td>
+<td>10</td>
+<td>Movimiento</td>
+</tr>
+<tr>
+<td>Presentación de datos</td>
+<td>12</td>
+<td>Presentación de datos</td>
+</tr>
+<tr>
+<td>Retroalimentación</td>
+<td>7</td>
+<td>Comunicación de estado</td>
+</tr>
+<tr>
+<td>Superposiciones</td>
+<td>8</td>
+<td>Elementos en capas</td>
+</tr>
+<tr>
+<td>Mensajería</td>
+<td>7</td>
+<td>Propios del chat</td>
+</tr>
+<tr>
+<td>Modo de campo</td>
+<td>10</td>
+<td>Propios del campo</td>
+</tr>
+<tr>
+<td>Panel</td>
+<td>7</td>
+<td>Propios del panel</td>
+</tr>
+<tr>
+<td>Especializados</td>
+<td>13</td>
+<td>Propios de una funcionalidad</td>
+</tr>
+<tr>
+<td><strong>Total</strong></td>
+<td><strong>~125</strong></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>Unos <strong>125 componentes</strong> componen el sistema de diseño completo. Es un sistema moderadamente grande, comparable con sistemas de diseño maduros como Carbon (IBM) o Polaris (Shopify), lo que refleja la amplitud de la plataforma.</p>
+<hr>
+<h2 id="preguntas-abiertas" tabindex="-1"><a class="heading-anchor" href="#preguntas-abiertas" aria-hidden="true">#</a> Preguntas abiertas</h2>
+<ol>
+<li>
+<p><strong>Documentación de los componentes.</strong> ¿Debería cada componente tener su propia página de documentación (como las historias de Storybook) desde el primer día, o se documenta a medida que se construyen? Empezar por Storybook garantiza que los componentes queden bien probados de forma aislada, pero añade sobrecarga al desarrollo.</p>
+</li>
+<li>
+<p><strong>Componentes de animación.</strong> ¿Debería el sistema de diseño incluir componentes envoltorio de transición (FadeIn, SlideUp) o manejar todo el movimiento con clases de CSS? Las transiciones basadas en componentes son más explícitas, pero suman al conteo de componentes.</p>
+</li>
+<li>
+<p><strong>Biblioteca de gráficas.</strong> ¿Qué biblioteca de gráficas debería envolver el componente <code>Data/Chart</code>? Las opciones incluyen Chart.js (liviana, basada en canvas), D3 (potente, basada en SVG, más pesada) o una opción nativa de Svelte como LayerCake. La elección afecta el tamaño del paquete y la profundidad de la personalización.</p>
+</li>
+</ol>
+<!-- REVISIT: Las API de los componentes (definiciones de props, firmas de eventos, contratos de slots) quedan aplazadas a la implementación. Este inventario define *qué* existe; la implementación define *cómo* funciona cada componente. -->
+
+    </article>
+  </main>
+  <div class="toc-rail"><nav class="toc" aria-label="En esta página"><div class="toc-label">En esta página</div><ul><li class="toc-2"><a href="#propósito"># Propósito</a></li><li class="toc-2"><a href="#convenciones-de-nombres"># Convenciones de nombres</a></li><li class="toc-3"><a href="#nombres-de-componente"># Nombres de componente</a></li><li class="toc-3"><a href="#nombres-de-variante"># Nombres de variante</a></li><li class="toc-3"><a href="#nombres-de-estado"># Nombres de estado</a></li><li class="toc-2"><a href="#categorías-de-componentes"># Categorías de componentes</a></li><li class="toc-3"><a href="#1-primitivas"># 1. Primitivas</a></li><li class="toc-3"><a href="#2-tipografía"># 2. Tipografía</a></li><li class="toc-3"><a href="#3-botones"># 3. Botones</a></li><li class="toc-3"><a href="#4-formularios"># 4. Formularios</a></li><li class="toc-3"><a href="#5-maquetación"># 5. Maquetación</a></li><li class="toc-3"><a href="#6-navegación"># 6. Navegación</a></li><li class="toc-3"><a href="#7-presentación-de-datos"># 7. Presentación de datos</a></li><li class="toc-3"><a href="#8-retroalimentación"># 8. Retroalimentación</a></li><li class="toc-3"><a href="#9-superposiciones"># 9. Superposiciones</a></li><li class="toc-3"><a href="#10-mensajería"># 10. Mensajería</a></li><li class="toc-3"><a href="#11-modo-de-campo"># 11. Modo de campo</a></li><li class="toc-3"><a href="#12-panel"># 12. Panel</a></li><li class="toc-3"><a href="#13-especializados"># 13. Especializados</a></li><li class="toc-2"><a href="#patrones-de-composición-de-componentes"># Patrones de composición de componentes</a></li><li class="toc-3"><a href="#componentes-compuestos"># Componentes compuestos</a></li><li class="toc-3"><a href="#patrón-de-slots"># Patrón de slots</a></li><li class="toc-2"><a href="#resumen-del-conteo-de-componentes"># Resumen del conteo de componentes</a></li><li class="toc-2"><a href="#preguntas-abiertas"># Preguntas abiertas</a></li></ul></nav></div>
+</div>
+<script src="../../../../assets/search.js" defer></script>
+<script src="../../../../assets/app.js" defer></script>
+</body>
+</html>

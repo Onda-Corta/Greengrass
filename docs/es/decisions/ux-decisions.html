@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="es" data-base="../../" data-no-results="No hay resultados para">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Decisiones de UX — fase de wireframes · GreenGrass</title>
+<meta name="description" content="Decisiones de UX — fase de wireframes — Documentación de especificación y diseño de GreenGrass.">
+<link rel="alternate" hreflang="en" href="../../decisions/ux-decisions.html">
+<link rel="alternate" hreflang="es" href="./ux-decisions.html">
+<link rel="alternate" hreflang="x-default" href="../../decisions/ux-decisions.html">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%232563eb'/%3E%3Cstop offset='1' stop-color='%2316a34a'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='32' height='32' rx='7' fill='url(%23g)'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="../../assets/styles.css">
+</head>
+<body>
+<a class="skip-link" href="#content">Saltar al contenido</a>
+<header class="site-header">
+  <button type="button" class="menu-toggle" aria-label="Alternar navegación" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+  <a class="brand" href="../../es/index.html">
+    <span class="brand-mark" aria-hidden="true"></span>
+    <span class="brand-text"><strong>GreenGrass</strong><small>Especificación y diseño</small></span>
+  </a>
+  <div class="search">
+    <input type="search" id="search-input" placeholder="Buscar en la documentación…" autocomplete="off" aria-label="Buscar en la documentación">
+    <div id="search-results" class="search-results" hidden></div>
+  </div>
+  <nav class="lang-switch" aria-label="Idioma"><a class="lang-opt" href="../../decisions/ux-decisions.html" hreflang="en" lang="en" title="View this page in English">EN</a><span class="lang-opt active" aria-current="true">ES</span></nav>
+  <button type="button" class="theme-toggle" aria-label="Alternar modo oscuro" title="Alternar modo oscuro">
+    <span class="theme-icon" aria-hidden="true"></span>
+  </button>
+</header>
+<div class="layout">
+  <div class="sidebar-backdrop" hidden></div>
+  <aside class="sidebar" aria-label="Navegación de la documentación">
+    <nav class="nav">
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">Inicio<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../index.html">GreenGrass</a></li></ul></div>
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">Especificaciones<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../spec/product.html">Proyecto: GreenGrass</a></li><li><a href="../spec/mvp.html">MVP de GreenGrass — plan de producto</a></li><li><a href="../spec/users.html">Usuarios y roles</a></li><li><a href="../spec/workflows.html">Flujos de trabajo principales</a></li><li><a href="../spec/geography.html">Geografía objetivo</a></li><li><a href="../spec/security.html">Seguridad y modelo de amenazas</a></li><li><a href="../spec/compliance.html">Cumplimiento y marco legal</a></li><li><a href="../spec/fundraising.html">Recaudación de fondos e infraestructura de pagos</a></li><li><a href="../spec/integrations.html">Integraciones externas</a></li><li><a href="../spec/support.html">Soporte y puesta en marcha de organizaciones</a></li><li><a href="../spec/gotv.html">GOTV y operaciones del día de elecciones</a></li><li><a href="../spec/messaging.html">Comunicaciones internas y notificaciones</a></li><li><a href="../spec/press.html">Prensa, medios y comunicaciones públicas</a></li><li><a href="../spec/comms-intelligence.html">Inteligencia de comunicaciones — hoja de ruta post-MVP</a></li></ul></div>
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">Arquitectura<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../design/architecture/system.html">Arquitectura del sistema</a></li></ul></div>
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">Diseño UX<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../design/ux/00-overview.html">Resumen del diseño de UX</a></li><li><a href="../design/ux/01-information-architecture/navigation-model.html">Modelo de navegación</a></li><li><a href="../design/ux/01-information-architecture/screen-inventory.html">Inventario de pantallas</a></li><li><a href="../design/ux/01-information-architecture/persona-views.html">Vistas por arquetipo</a></li><li><a href="../design/ux/01-information-architecture/url-structure.html">Estructura de URL</a></li><li><a href="../design/ux/02-global-patterns/pattern-catalog.html">Catálogo de patrones</a></li><li><a href="../design/ux/02-global-patterns/offline-sync-patterns.html">Patrones sin conexión y de sincronización</a></li><li><a href="../design/ux/02-global-patterns/notification-patterns.html">Patrones de notificaciones</a></li><li><a href="../design/ux/02-global-patterns/search-patterns.html">Patrones de búsqueda</a></li><li><a href="../design/ux/02-global-patterns/settings-help-patterns.html">Patrones de ajustes y ayuda</a></li><li><a href="../design/ux/02-global-patterns/security-ux-patterns.html">Patrones de UX de seguridad</a></li><li><a href="../design/ux/03-design-system/foundations.html">Fundamentos del sistema de diseño</a></li><li><a href="../design/ux/03-design-system/theming-strategy.html">Estrategia de temas</a></li><li><a href="../design/ux/03-design-system/component-inventory.html">Inventario de componentes</a></li><li><a href="../design/ux/03-design-system/responsive-strategy.html">Estrategia de diseño adaptable</a></li></ul></div>
+<div class="nav-section open"><button type="button" class="nav-section-title" aria-expanded="true">Decisiones<span class="chev" aria-hidden="true"></span></button><ul><li><a href="./001-platform-architecture.html">ADR-001: Arquitectura y despliegue de la plataforma</a></li><li><a href="./002-security-threat-model.html">ADR-002: Seguridad y modelo de amenazas</a></li><li><a href="./003-identity-access-organization.html">ADR-003: Identidad, acceso y organización</a></li><li><a href="./004-data-model-integrity.html">ADR-004: Modelo de datos e integridad</a></li><li><a href="./005-offline-first-sync.html">ADR-005: Prioridad sin conexión y sincronización</a></li><li><a href="./006-field-operations-gotv.html">ADR-006: Operaciones de campo y GOTV</a></li><li><a href="./007-fundraising-payments.html">ADR-007: Recaudación de fondos y pagos</a></li><li><a href="./008-communications-messaging.html">ADR-008: Comunicaciones y mensajería</a></li><li><a href="./009-compliance-legal.html">ADR-009: Cumplimiento y marco legal</a></li><li><a href="./010-internationalization-localization.html">ADR-010: Internacionalización y localización</a></li><li><a href="./011-design-system-ux.html">ADR-011: Sistema de diseño y fundamentos de UX</a></li><li><a href="./012-external-integrations.html">ADR-012: Integraciones externas</a></li><li><a href="./013-analytics-ai.html">ADR-013: Analítica e IA</a></li><li><a href="./014-volunteer-onboarding.html">ADR-014: Voluntariado e incorporación</a></li><li><a href="./015-product-scope.html">ADR-015: Límites del alcance del producto</a></li><li><a href="./016-cross-cutting-resolutions.html">ADR-016: Resoluciones transversales</a></li><li><a href="./017-sharing-contract-trust-model.html">ADR-017: El contrato de intercambio como primitiva universal de confianza</a></li><li><a href="./ux-decisions.html" aria-current="page" class="active">Decisiones de UX — fase de wireframes</a></li></ul></div>
+    </nav>
+  </aside>
+  <main id="content" class="content">
+    <nav class="breadcrumb" aria-label="Ruta de navegación">Decisiones</nav>
+    <article class="prose">
+<h1 id="decisiones-de-ux-fase-de-wireframes" tabindex="-1"><a class="heading-anchor" href="#decisiones-de-ux-fase-de-wireframes" aria-hidden="true">#</a> Decisiones de UX — fase de wireframes</h1>
+<p><strong>Estado:</strong> Aceptada
+<strong>Fecha:</strong> 2026-03-03
+<strong>Fuentes:</strong> <code>design/ux/04-wireframes/audit.md</code>, los 21 documentos de wireframes</p>
+<h2 id="propósito" tabindex="-1"><a class="heading-anchor" href="#propósito" aria-hidden="true">#</a> Propósito</h2>
+<p>Este documento recoge las decisiones de UX tomadas durante la fase de wireframes (fase 4) y la auditoría posterior. Establecen convenciones para la estructura de los wireframes, el uso de los tokens de diseño, la especificación del comportamiento sin conexión y la terminología. Complementan las decisiones de arquitectura de <code>decisions/011-design-system-ux.md</code>.</p>
+<hr>
+<h2 id="decisión-1-estructura-de-los-documentos-de-wireframes" tabindex="-1"><a class="heading-anchor" href="#decisión-1-estructura-de-los-documentos-de-wireframes" aria-hidden="true">#</a> Decisión 1: estructura de los documentos de wireframes</h2>
+<h3 id="plantilla-estándar-de-8-secciones" tabindex="-1"><a class="heading-anchor" href="#plantilla-estándar-de-8-secciones" aria-hidden="true">#</a> Plantilla estándar de 8 secciones</h3>
+<p>Todos los documentos de wireframes tienen que seguir esta estructura:</p>
+<ol>
+<li><strong>Propósito</strong> — qué hace el área de funcionalidad y a quién sirve</li>
+<li><strong>Alcance</strong> — tabla que asocia cada ID de pantalla con su nombre, sus perfiles, su estado sin conexión, su contexto móvil y la sección del documento</li>
+<li><strong>Contexto de navegación</strong> — cómo aparece la funcionalidad en la barra lateral o en las pestañas para su perfil principal</li>
+<li><strong>Wireframes de pantalla</strong> — una sección <code>## ID: Screen Name</code> por pantalla, cada una con los wireframes de escritorio y de móvil, las especificaciones de interacción y las notas de diseño</li>
+<li><strong>Resumen de estados vacíos</strong> — los estados vacíos o sin datos de todas las pantallas, consolidados</li>
+<li><strong>Notas de accesibilidad</strong> — consideraciones de accesibilidad propias de la funcionalidad</li>
+<li><strong>Decisiones de diseño</strong> — tabla de las decisiones clave con la opción elegida y su fundamento</li>
+<li><strong>Preguntas abiertas</strong> — preguntas sin resolver para fases futuras</li>
+</ol>
+<h3 id="excepciones" tabindex="-1"><a class="heading-anchor" href="#excepciones" aria-hidden="true">#</a> Excepciones</h3>
+<ul>
+<li><strong>El marco de navegación</strong> usa «Variantes del marco» en lugar de «Alcance» (no tiene ID de pantalla: es el marco que rodea a todas las pantallas)</li>
+<li><strong>El modo de campo</strong> conserva su organización por flujo (Shift Start → Walk List → Door Card → …) con los ID de pantalla añadidos como anotaciones en comentarios HTML en lugar de como encabezados de sección</li>
+<li><strong>La mensajería</strong> se organiza por patrón de interfaz (vista dividida, redacción, briefings) con los ID de pantalla como anotaciones en comentarios HTML</li>
+<li>Los documentos donde el «Contexto de navegación» no aplica (navigation-shell, field-mode, alliance) pueden omitir o adaptar esa sección</li>
+</ul>
+<h3 id="fundamento" tabindex="-1"><a class="heading-anchor" href="#fundamento" aria-hidden="true">#</a> Fundamento</h3>
+<p>Los 12 documentos del lote posterior convergieron de forma natural en esta estructura. Normalizar los 9 del lote inicial para que coincidan permite leer cualquier documento con las mismas expectativas. La estructura además se corresponde directamente con las necesidades de implementación: las tablas de alcance guían la planificación de rutas, el contexto de navegación guía la configuración de la barra lateral y las decisiones de diseño guían las especificaciones de los componentes.</p>
+<hr>
+<h2 id="decisión-2-enfoque-de-integración-de-los-tokens-de-diseño" tabindex="-1"><a class="heading-anchor" href="#decisión-2-enfoque-de-integración-de-los-tokens-de-diseño" aria-hidden="true">#</a> Decisión 2: enfoque de integración de los tokens de diseño</h2>
+<h3 id="anotar-solo-donde-sea-estructural-no-en-todas-partes" tabindex="-1"><a class="heading-anchor" href="#anotar-solo-donde-sea-estructural-no-en-todas-partes" aria-hidden="true">#</a> Anotar solo donde sea estructural, no en todas partes</h3>
+<p>Los documentos de wireframes deben referenciar nombres de tokens de diseño solo donde el valor concreto sea crítico para que el diseño sea correcto:</p>
+<ol>
+<li><strong>Áreas táctiles en el modo de campo</strong> — <code>--touch-target-min: 48px</code> y <code>--touch-target-field: 56px</code> son valores críticos para la seguridad. Se referencian por nombre.</li>
+<li><strong>Espaciado que se aparta de los valores por defecto</strong> — cuando un wireframe usa a propósito un espaciado no estándar, se referencia el token para dejar clara la intención.</li>
+<li><strong>Semántica del color</strong> — donde el significado (éxito, error, advertencia) importa más que la apariencia, se referencian <code>--color-success</code>, <code>--color-error</code> y <code>--color-warning</code>.</li>
+</ol>
+<p><strong>No</strong> hay que anotar los 21 documentos de wireframes con nombres de token para cada valor en píxeles y cada referencia de color. Eso añadiría ruido sin hacer los wireframes más claros.</p>
+<h3 id="fundamento-1" tabindex="-1"><a class="heading-anchor" href="#fundamento-1" aria-hidden="true">#</a> Fundamento</h3>
+<p>Los wireframes son descripciones de pantalla listas para implementar: los leen diseñadores y desarrolladores. Los valores en crudo (<code>16px</code>, <code>24px</code>) se entienden más rápido en un wireframe que los nombres de token (<code>--space-4</code>, <code>--space-6</code>). La anotación exhaustiva de tokens corresponde a la fase de diseño visual (los mockups de alta fidelidad) y a la de implementación de componentes. Los wireframes ya siguen implícitamente la escala de espaciado y la semántica de color del sistema de diseño.</p>
+<hr>
+<h2 id="decisión-3-especificación-del-comportamiento-sin-conexión" tabindex="-1"><a class="heading-anchor" href="#decisión-3-especificación-del-comportamiento-sin-conexión" aria-hidden="true">#</a> Decisión 3: especificación del comportamiento sin conexión</h2>
+<h3 id="cada-pantalla-tiene-que-declarar-su-estado-sin-conexión" tabindex="-1"><a class="heading-anchor" href="#cada-pantalla-tiene-que-declarar-su-estado-sin-conexión" aria-hidden="true">#</a> Cada pantalla tiene que declarar su estado sin conexión</h3>
+<p>La tabla de alcance de cada documento de wireframes tiene que incluir una columna <code>Offline</code> que declare uno de estos tres valores:</p>
+<ul>
+<li><strong>Yes</strong> — funciona por completo sin conexión</li>
+<li><strong>Partial</strong> — parte de la funcionalidad está disponible sin conexión (el comportamiento concreto se describe en el wireframe)</li>
+<li><strong>No</strong> — requiere conectividad; muestra datos en caché o un indicador de estar sin conexión</li>
+</ul>
+<h3 id="incluso-no-es-una-decisión" tabindex="-1"><a class="heading-anchor" href="#incluso-no-es-una-decisión" aria-hidden="true">#</a> Incluso «No» es una decisión</h3>
+<p>La mayoría de las pantallas de administración son genuinamente solo en línea: muestran datos agregados en el servidor (paneles), ejecutan operaciones del lado del servidor (importaciones, exportaciones) o configuran estado compartido (ajustes). Declarar <code>Offline: No</code> no es un hueco: es una especificación correcta y deliberada. Quien implementa no tendría que adivinar.</p>
+<h3 id="las-pantallas-que-funcionan-sin-conexión-necesitan-detalle-explícito" tabindex="-1"><a class="heading-anchor" href="#las-pantallas-que-funcionan-sin-conexión-necesitan-detalle-explícito" aria-hidden="true">#</a> Las pantallas que funcionan sin conexión necesitan detalle explícito</h3>
+<p>Toda pantalla marcada como <code>Yes</code> o <code>Partial</code> tiene que describir:</p>
+<ul>
+<li>qué datos se guardan en caché de antemano</li>
+<li>qué acciones están disponibles sin conexión</li>
+<li>cómo se sincronizan los cambios hechos sin conexión cuando vuelve la conectividad</li>
+<li>cómo se ve la interfaz durante la sincronización</li>
+</ul>
+<p>El modo de campo (<code>field-mode.md</code>) es el ejemplo de referencia para especificar el comportamiento sin conexión. Los patrones de sincronización sin conexión de <code>02-global-patterns/offline-sync-patterns.md</code> definen el marco de trabajo.</p>
+<h3 id="fundamento-2" tabindex="-1"><a class="heading-anchor" href="#fundamento-2" aria-hidden="true">#</a> Fundamento</h3>
+<p>La auditoría de wireframes encontró que los documentos del lote inicial no declaraban su estado sin conexión, lo que dejaba ambigüedad para quien implementa. Como el diseño para funcionar sin conexión primero (offline-first) es un principio central de la plataforma, cada pantalla necesita una declaración explícita, aunque la respuesta sea «esta pantalla no funciona sin conexión».</p>
+<hr>
+<h2 id="decisión-4-convenciones-de-terminología" tabindex="-1"><a class="heading-anchor" href="#decisión-4-convenciones-de-terminología" aria-hidden="true">#</a> Decisión 4: convenciones de terminología</h2>
+<h3 id="términos-canónicos" tabindex="-1"><a class="heading-anchor" href="#términos-canónicos" aria-hidden="true">#</a> Términos canónicos</h3>
+<table>
+<thead>
+<tr>
+<th>Término</th>
+<th>Definición</th>
+<th>Contexto de uso</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Contacto</strong></td>
+<td>Cualquier persona en la base de datos del CRM</td>
+<td>CRM, importación de datos, segmentos, cualquier contexto que se refiera al registro de datos</td>
+</tr>
+<tr>
+<td><strong>Simpatizante</strong></td>
+<td>Una persona que ha hecho algo público (donar, firmar una petición, confirmar asistencia, ser voluntaria)</td>
+<td>Portal de simpatizantes, páginas públicas, activismo, cualquier contexto de cara al usuario</td>
+</tr>
+<tr>
+<td><strong>Donante</strong></td>
+<td>Un simpatizante que ha hecho una contribución económica</td>
+<td>Informes de recaudación, cumplimiento, recibos, declaraciones fiscales</td>
+</tr>
+<tr>
+<td><strong>Personal</strong></td>
+<td>Una persona autenticada con una plantilla de rol de la organización</td>
+<td>Ajustes, permisos, incorporación, registro de auditoría</td>
+</tr>
+<tr>
+<td><strong>Voluntario</strong></td>
+<td>Un miembro del personal con la plantilla de rol Voluntario</td>
+<td>Modo de campo, manejo de turnos, capacitación</td>
+</tr>
+</tbody>
+</table>
+<h3 id="jerarquía" tabindex="-1"><a class="heading-anchor" href="#jerarquía" aria-hidden="true">#</a> Jerarquía</h3>
+<p>«Donante» ⊂ «Simpatizante» ⊂ «Contacto»</p>
+<p>Usa el término más específico que aplique. Quien donó es «donante» en el contexto de recaudación, «simpatizante» en el portal y «contacto» en el CRM.</p>
+<h3 id="aplicación" tabindex="-1"><a class="heading-anchor" href="#aplicación" aria-hidden="true">#</a> Aplicación</h3>
+<ul>
+<li>Corrige la terminología solo en las secciones que se estén modificando durante la normalización estructural, o al añadir wireframes nuevos</li>
+<li>Nada de buscar y reemplazar globalmente en los 21 documentos</li>
+<li>Estos términos canónicos quedan anotados aquí como referencia; se hacen cumplir durante el diseño visual y la implementación</li>
+</ul>
+<h3 id="fundamento-3" tabindex="-1"><a class="heading-anchor" href="#fundamento-3" aria-hidden="true">#</a> Fundamento</h3>
+<p>La auditoría encontró que en algunos documentos de wireframes se usaban «simpatizante», «donante» y «contacto» de forma intercambiable. Aunque el contexto casi siempre desambigua, los términos tienen significados distintos en el modelo de datos (un contacto puede tener cero interacciones; un simpatizante tiene al menos una; un donante tiene al menos una interacción económica). Fijar ahora las definiciones canónicas evita confusiones durante la implementación.</p>
+<hr>
+<h2 id="decisión-5-asignación-de-los-id-de-pantalla" tabindex="-1"><a class="heading-anchor" href="#decisión-5-asignación-de-los-id-de-pantalla" aria-hidden="true">#</a> Decisión 5: asignación de los ID de pantalla</h2>
+<h3 id="cada-pantalla-con-wireframe-tiene-que-tener-un-id-de-pantalla-de-screen-inventorymd" tabindex="-1"><a class="heading-anchor" href="#cada-pantalla-con-wireframe-tiene-que-tener-un-id-de-pantalla-de-screen-inventorymd" aria-hidden="true">#</a> Cada pantalla con wireframe tiene que tener un ID de pantalla de <code>screen-inventory.md</code></h3>
+<p>Los ID de pantalla siguen el formato <code>AREA-NNN</code> (por ejemplo, <code>CANV-007</code>, <code>FUND-001</code>, <code>AUTH-003</code>). Son:</p>
+<ul>
+<li>la referencia cruzada principal entre los wireframes, el inventario de pantallas, la estructura de URL y la implementación</li>
+<li>estables entre ediciones del documento: una vez asignado, un ID de pantalla no cambia</li>
+<li>los encabezados de sección <code>## ID: Screen Name</code> de los documentos de wireframes</li>
+</ul>
+<h3 id="excepciones-1" tabindex="-1"><a class="heading-anchor" href="#excepciones-1" aria-hidden="true">#</a> Excepciones</h3>
+<ul>
+<li><strong>Las variantes del marco de navegación</strong> (escritorio desplegado, plegado, móvil, modo de campo, etc.) son marcos estructurales, no pantallas individuales. No reciben ID de pantalla.</li>
+<li><strong>Los documentos organizados por flujo</strong> (field-mode, messaging) pueden usar anotaciones en comentarios HTML (<code>&lt;!-- CANV-007 --&gt;</code>) en lugar de encabezados con ID de pantalla, cuando la organización por flujo resulta más natural.</li>
+</ul>
+<h3 id="fundamento-4" tabindex="-1"><a class="heading-anchor" href="#fundamento-4" aria-hidden="true">#</a> Fundamento</h3>
+<p>La auditoría encontró 25 pantallas con contenido de wireframe pero sin encabezados con ID de pantalla. Los ID de pantalla son el pegamento entre documentos: el índice de referencias cruzadas de <code>README.md</code> depende de ellos. Poner ID a todas las pantallas con wireframe hace posible una trazabilidad fiable de la especificación a la implementación.</p>
+
+    </article>
+  </main>
+  <div class="toc-rail"><nav class="toc" aria-label="En esta página"><div class="toc-label">En esta página</div><ul><li class="toc-2"><a href="#propósito"># Propósito</a></li><li class="toc-2"><a href="#decisión-1-estructura-de-los-documentos-de-wireframes"># Decisión 1: estructura de los documentos de wireframes</a></li><li class="toc-3"><a href="#plantilla-estándar-de-8-secciones"># Plantilla estándar de 8 secciones</a></li><li class="toc-3"><a href="#excepciones"># Excepciones</a></li><li class="toc-3"><a href="#fundamento"># Fundamento</a></li><li class="toc-2"><a href="#decisión-2-enfoque-de-integración-de-los-tokens-de-diseño"># Decisión 2: enfoque de integración de los tokens de diseño</a></li><li class="toc-3"><a href="#anotar-solo-donde-sea-estructural-no-en-todas-partes"># Anotar solo donde sea estructural, no en todas partes</a></li><li class="toc-3"><a href="#fundamento-1"># Fundamento</a></li><li class="toc-2"><a href="#decisión-3-especificación-del-comportamiento-sin-conexión"># Decisión 3: especificación del comportamiento sin conexión</a></li><li class="toc-3"><a href="#cada-pantalla-tiene-que-declarar-su-estado-sin-conexión"># Cada pantalla tiene que declarar su estado sin conexión</a></li><li class="toc-3"><a href="#incluso-no-es-una-decisión"># Incluso «No» es una decisión</a></li><li class="toc-3"><a href="#las-pantallas-que-funcionan-sin-conexión-necesitan-detalle-explícito"># Las pantallas que funcionan sin conexión necesitan detalle explícito</a></li><li class="toc-3"><a href="#fundamento-2"># Fundamento</a></li><li class="toc-2"><a href="#decisión-4-convenciones-de-terminología"># Decisión 4: convenciones de terminología</a></li><li class="toc-3"><a href="#términos-canónicos"># Términos canónicos</a></li><li class="toc-3"><a href="#jerarquía"># Jerarquía</a></li><li class="toc-3"><a href="#aplicación"># Aplicación</a></li><li class="toc-3"><a href="#fundamento-3"># Fundamento</a></li><li class="toc-2"><a href="#decisión-5-asignación-de-los-id-de-pantalla"># Decisión 5: asignación de los ID de pantalla</a></li><li class="toc-3"><a href="#cada-pantalla-con-wireframe-tiene-que-tener-un-id-de-pantalla-de-screen-inventorymd"># Cada pantalla con wireframe tiene que tener un ID de pantalla de screen-inventory.md</a></li><li class="toc-3"><a href="#excepciones-1"># Excepciones</a></li><li class="toc-3"><a href="#fundamento-4"># Fundamento</a></li></ul></nav></div>
+</div>
+<script src="../../assets/search.js" defer></script>
+<script src="../../assets/app.js" defer></script>
+</body>
+</html>

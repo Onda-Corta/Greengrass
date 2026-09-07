@@ -36,6 +36,9 @@
     <nav class="nav">
 <div class="nav-section open"><button type="button" class="nav-section-title" aria-expanded="true">Inicio<span class="chev" aria-hidden="true"></span></button><ul><li><a href="./index.html" aria-current="page" class="active">GreenGrass</a></li></ul></div>
 <div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">Especificaciones<span class="chev" aria-hidden="true"></span></button><ul><li><a href="./spec/product.html">Proyecto: GreenGrass</a></li><li><a href="./spec/mvp.html">MVP de GreenGrass — plan de producto</a></li><li><a href="./spec/users.html">Usuarios y roles</a></li><li><a href="./spec/workflows.html">Flujos de trabajo principales</a></li><li><a href="./spec/geography.html">Geografía objetivo</a></li><li><a href="./spec/security.html">Seguridad y modelo de amenazas</a></li><li><a href="./spec/compliance.html">Cumplimiento y marco legal</a></li><li><a href="./spec/fundraising.html">Recaudación de fondos e infraestructura de pagos</a></li><li><a href="./spec/integrations.html">Integraciones externas</a></li><li><a href="./spec/support.html">Soporte y puesta en marcha de organizaciones</a></li><li><a href="./spec/gotv.html">GOTV y operaciones del día de elecciones</a></li><li><a href="./spec/messaging.html">Comunicaciones internas y notificaciones</a></li><li><a href="./spec/press.html">Prensa, medios y comunicaciones públicas</a></li><li><a href="./spec/comms-intelligence.html">Inteligencia de comunicaciones — hoja de ruta post-MVP</a></li></ul></div>
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">Arquitectura<span class="chev" aria-hidden="true"></span></button><ul><li><a href="./design/architecture/system.html">Arquitectura del sistema</a></li></ul></div>
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">Diseño UX<span class="chev" aria-hidden="true"></span></button><ul><li><a href="./design/ux/00-overview.html">Resumen del diseño de UX</a></li><li><a href="./design/ux/01-information-architecture/navigation-model.html">Modelo de navegación</a></li><li><a href="./design/ux/01-information-architecture/screen-inventory.html">Inventario de pantallas</a></li><li><a href="./design/ux/01-information-architecture/persona-views.html">Vistas por arquetipo</a></li><li><a href="./design/ux/01-information-architecture/url-structure.html">Estructura de URL</a></li><li><a href="./design/ux/02-global-patterns/pattern-catalog.html">Catálogo de patrones</a></li><li><a href="./design/ux/02-global-patterns/offline-sync-patterns.html">Patrones sin conexión y de sincronización</a></li><li><a href="./design/ux/02-global-patterns/notification-patterns.html">Patrones de notificaciones</a></li><li><a href="./design/ux/02-global-patterns/search-patterns.html">Patrones de búsqueda</a></li><li><a href="./design/ux/02-global-patterns/settings-help-patterns.html">Patrones de ajustes y ayuda</a></li><li><a href="./design/ux/02-global-patterns/security-ux-patterns.html">Patrones de UX de seguridad</a></li><li><a href="./design/ux/03-design-system/foundations.html">Fundamentos del sistema de diseño</a></li><li><a href="./design/ux/03-design-system/theming-strategy.html">Estrategia de temas</a></li><li><a href="./design/ux/03-design-system/component-inventory.html">Inventario de componentes</a></li><li><a href="./design/ux/03-design-system/responsive-strategy.html">Estrategia de diseño adaptable</a></li></ul></div>
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">Decisiones<span class="chev" aria-hidden="true"></span></button><ul><li><a href="./decisions/001-platform-architecture.html">ADR-001: Arquitectura y despliegue de la plataforma</a></li><li><a href="./decisions/002-security-threat-model.html">ADR-002: Seguridad y modelo de amenazas</a></li><li><a href="./decisions/003-identity-access-organization.html">ADR-003: Identidad, acceso y organización</a></li><li><a href="./decisions/004-data-model-integrity.html">ADR-004: Modelo de datos e integridad</a></li><li><a href="./decisions/005-offline-first-sync.html">ADR-005: Prioridad sin conexión y sincronización</a></li><li><a href="./decisions/006-field-operations-gotv.html">ADR-006: Operaciones de campo y GOTV</a></li><li><a href="./decisions/007-fundraising-payments.html">ADR-007: Recaudación de fondos y pagos</a></li><li><a href="./decisions/008-communications-messaging.html">ADR-008: Comunicaciones y mensajería</a></li><li><a href="./decisions/009-compliance-legal.html">ADR-009: Cumplimiento y marco legal</a></li><li><a href="./decisions/010-internationalization-localization.html">ADR-010: Internacionalización y localización</a></li><li><a href="./decisions/011-design-system-ux.html">ADR-011: Sistema de diseño y fundamentos de UX</a></li><li><a href="./decisions/012-external-integrations.html">ADR-012: Integraciones externas</a></li><li><a href="./decisions/013-analytics-ai.html">ADR-013: Analítica e IA</a></li><li><a href="./decisions/014-volunteer-onboarding.html">ADR-014: Voluntariado e incorporación</a></li><li><a href="./decisions/015-product-scope.html">ADR-015: Límites del alcance del producto</a></li><li><a href="./decisions/016-cross-cutting-resolutions.html">ADR-016: Resoluciones transversales</a></li><li><a href="./decisions/017-sharing-contract-trust-model.html">ADR-017: El contrato de intercambio como primitiva universal de confianza</a></li><li><a href="./decisions/ux-decisions.html">Decisiones de UX — fase de wireframes</a></li></ul></div>
     </nav>
   </aside>
   <main id="content" class="content">
@@ -45,18 +48,19 @@
 <p>Una plataforma para manejar elecciones políticas de base en el Sur Global.</p>
 <p>GreenGrass reúne en un solo lugar un gestor de relaciones con constituyentes (CRM), una base de datos de votantes, herramientas de recaudación de fondos, una suite de comunicaciones y analítica de datos. Está pensada para contextos de recursos limitados, conectividad intermitente, poblaciones multilingües y estructuras de organización descentralizadas.</p>
 <h2 id="qué-está-en-español-y-qué-no" tabindex="-1"><a class="heading-anchor" href="#qué-está-en-español-y-qué-no" aria-hidden="true">#</a> Qué está en español y qué no</h2>
-<p>Esta es la versión en español de los 14 documentos de especificación de producto. El resto de la documentación del proyecto —el diseño de UX (37 documentos), la arquitectura del sistema, los 17 registros de decisiones de arquitectura (ADR) y el diario del proyecto— por ahora existe solo en inglés. El botón <strong>EN</strong>, arriba a la derecha, te lleva a la documentación completa en inglés.</p>
+<p>En español está casi todo: las 14 especificaciones de producto, la arquitectura del sistema, los 17 ADR más el registro de decisiones de UX y los 15 documentos de diseño de UX que no son wireframes. Cuarenta y ocho documentos.</p>
+<p>Falta una cosa, y es grande: los 23 documentos de wireframes —236 pantallas, más de la mitad de todo lo que hay escrito en este proyecto— siguen solo en inglés, igual que el diario. Si sigues un enlace a un wireframe desde una página en español, vas a terminar en inglés. No está roto: es lo que todavía no se ha traducido. El botón <strong>EN</strong>, arriba a la derecha, te lleva a la documentación completa en cualquier momento.</p>
 <h2 id="mercados-objetivo" tabindex="-1"><a class="heading-anchor" href="#mercados-objetivo" aria-hidden="true">#</a> Mercados objetivo</h2>
 <p>Puerto Rico (alfa), Brasil, Tailandia, India y Líbano — cada uno con su propio sistema electoral, sus idiomas, sus leyes de protección de datos y sus límites de infraestructura.</p>
 <h2 id="estado-del-proyecto" tabindex="-1"><a class="heading-anchor" href="#estado-del-proyecto" aria-hidden="true">#</a> Estado del proyecto</h2>
 <p><strong>Fase actual: especificación y diseño (completa)</strong></p>
 <p>Las especificaciones de producto, los artefactos de diseño de UX y los documentos de arquitectura están terminados. El proyecto está listo para pasar a implementación.</p>
 <h2 id="orden-de-lectura" tabindex="-1"><a class="heading-anchor" href="#orden-de-lectura" aria-hidden="true">#</a> Orden de lectura</h2>
-<p>Si es tu primera vez con el proyecto, lee las especificaciones en este orden:</p>
+<h3 id="empieza-por-el-producto" tabindex="-1"><a class="heading-anchor" href="#empieza-por-el-producto" aria-hidden="true">#</a> Empieza por el producto</h3>
 <ol>
 <li><strong><a href="./spec/product.html">product.md</a></strong> — Empieza aquí. Descripción general del producto, usuarios objetivo, conjunto de funcionalidades centrales.</li>
 <li><strong><a href="./spec/mvp.html">mvp.md</a></strong> — Plan de producto del MVP: el fideicomiso de datos de la coalición, y el piloto diseñado para probar el supuesto más riesgoso del proyecto.</li>
-<li><strong><a href="./spec/users.html">users.md</a></strong> — Perfiles de usuario, roles, modelo de permisos.</li>
+<li><strong><a href="./spec/users.html">users.md</a></strong> — Arquetipos de usuario, roles, modelo de permisos.</li>
 <li><strong><a href="./spec/workflows.html">workflows.md</a></strong> — 12 flujos de trabajo centrales: trabajo de campo, inscripción de votantes, recaudación de fondos, eventos, comunicaciones y más.</li>
 <li><strong><a href="./spec/geography.html">geography.md</a></strong> — Países objetivo, estrategia de localización, secuencia de despliegue.</li>
 <li><strong><a href="./spec/security.html">security.md</a></strong> — Modelo de amenazas, seguridad en 5 niveles, arquitectura de cifrado, autenticación.</li>
@@ -64,11 +68,62 @@
 <li><strong><a href="./spec/fundraising.html">fundraising.md</a></strong> — Procesamiento de pagos, tipos de donación, recaudación en alianza, experiencia del donante.</li>
 <li><strong><a href="./spec/integrations.html">integrations.md</a></strong> — Sistemas externos: GIS y mapas, SMS, WhatsApp, telefonía, observabilidad.</li>
 <li><strong><a href="./spec/support.html">support.md</a></strong> — Superficie de soporte a las organizaciones, asistentes de puesta en marcha, base de conocimiento, modelo de acompañamiento.</li>
-<li><strong><a href="./spec/gotv.html">gotv.md</a></strong> — GOTV (Get Out The Vote — movilización del voto) y operaciones del día de la elección.</li>
+<li><strong><a href="./spec/gotv.html">gotv.md</a></strong> — GOTV (Get Out The Vote — movilización del voto) y operaciones del día de elecciones.</li>
 <li><strong><a href="./spec/messaging.html">messaging.md</a></strong> — Comunicaciones internas, notificaciones, cifrado de extremo a extremo.</li>
 <li><strong><a href="./spec/press.html">press.md</a></strong> — Prensa, medios, redes sociales, perfiles públicos, respaldos.</li>
 <li><strong><a href="./spec/comms-intelligence.html">comms-intelligence.md</a></strong> — Hoja de ruta post-MVP: inteligencia de medios, verificación de datos, mapa de medios, evaluación de candidaturas e investigación de oposición, ordenadas por iteraciones.</li>
 </ol>
+<h3 id="después-cómo-está-construida" tabindex="-1"><a class="heading-anchor" href="#después-cómo-está-construida" aria-hidden="true">#</a> Después, cómo está construida</h3>
+<ol start="15">
+<li><strong><a href="./design/architecture/system.html">system.md</a></strong> — La arquitectura del sistema completa: topología, modelo de datos, cifrado, sincronización, conservación de datos, stack tecnológico.</li>
+<li><strong><a href="./design/ux/00-overview.html">00-overview.md</a></strong> — Puerta de entrada al diseño de UX: orden de lectura, glosario y las convenciones que sigue el resto.</li>
+</ol>
+<h3 id="y-por-qué-está-construida-así" tabindex="-1"><a class="heading-anchor" href="#y-por-qué-está-construida-así" aria-hidden="true">#</a> Y por qué está construida así</h3>
+<p>Los 17 ADR registran cada decisión de arquitectura, con su contexto, sus alternativas descartadas y lo que cuesta cada una.</p>
+<ul>
+<li><strong><a href="./decisions/001-platform-architecture.html">ADR-001</a></strong> — Arquitectura y despliegue de la plataforma</li>
+<li><strong><a href="./decisions/002-security-threat-model.html">ADR-002</a></strong> — Seguridad y modelo de amenazas</li>
+<li><strong><a href="./decisions/003-identity-access-organization.html">ADR-003</a></strong> — Identidad, acceso y organización</li>
+<li><strong><a href="./decisions/004-data-model-integrity.html">ADR-004</a></strong> — Modelo de datos e integridad</li>
+<li><strong><a href="./decisions/005-offline-first-sync.html">ADR-005</a></strong> — Prioridad sin conexión y sincronización</li>
+<li><strong><a href="./decisions/006-field-operations-gotv.html">ADR-006</a></strong> — Operaciones de campo y GOTV</li>
+<li><strong><a href="./decisions/007-fundraising-payments.html">ADR-007</a></strong> — Recaudación de fondos y pagos</li>
+<li><strong><a href="./decisions/008-communications-messaging.html">ADR-008</a></strong> — Comunicaciones y mensajería</li>
+<li><strong><a href="./decisions/009-compliance-legal.html">ADR-009</a></strong> — Cumplimiento y marco legal</li>
+<li><strong><a href="./decisions/010-internationalization-localization.html">ADR-010</a></strong> — Internacionalización y localización</li>
+<li><strong><a href="./decisions/011-design-system-ux.html">ADR-011</a></strong> — Sistema de diseño y fundamentos de UX</li>
+<li><strong><a href="./decisions/012-external-integrations.html">ADR-012</a></strong> — Integraciones externas</li>
+<li><strong><a href="./decisions/013-analytics-ai.html">ADR-013</a></strong> — Analítica e IA</li>
+<li><strong><a href="./decisions/014-volunteer-onboarding.html">ADR-014</a></strong> — Voluntariado e incorporación</li>
+<li><strong><a href="./decisions/015-product-scope.html">ADR-015</a></strong> — Límites del alcance del producto</li>
+<li><strong><a href="./decisions/016-cross-cutting-resolutions.html">ADR-016</a></strong> — Resoluciones transversales: las 89 preguntas abiertas de la fase de wireframes, resueltas</li>
+<li><strong><a href="./decisions/017-sharing-contract-trust-model.html">ADR-017</a></strong> — El contrato de intercambio como primitiva universal de confianza</li>
+<li><strong><a href="./decisions/ux-decisions.html">ux-decisions.md</a></strong> — Decisiones de UX de la fase de wireframes</li>
+</ul>
+<h3 id="el-diseño-en-detalle" tabindex="-1"><a class="heading-anchor" href="#el-diseño-en-detalle" aria-hidden="true">#</a> El diseño en detalle</h3>
+<p><strong>Arquitectura de la información</strong> — qué pantallas existen, cómo se llega a ellas y qué ve cada quien.</p>
+<ul>
+<li><strong><a href="./design/ux/01-information-architecture/screen-inventory.html">screen-inventory.md</a></strong> — Las 236 pantallas, con su ID, quién accede y si funcionan sin conexión</li>
+<li><strong><a href="./design/ux/01-information-architecture/navigation-model.html">navigation-model.md</a></strong> — Modelo de navegación</li>
+<li><strong><a href="./design/ux/01-information-architecture/persona-views.html">persona-views.md</a></strong> — Vistas por arquetipo</li>
+<li><strong><a href="./design/ux/01-information-architecture/url-structure.html">url-structure.md</a></strong> — Estructura de URL</li>
+</ul>
+<p><strong>Patrones globales</strong> — lo que se comporta igual en toda la plataforma.</p>
+<ul>
+<li><strong><a href="./design/ux/02-global-patterns/pattern-catalog.html">pattern-catalog.md</a></strong> — Los 20 patrones de interfaz que se repiten</li>
+<li><strong><a href="./design/ux/02-global-patterns/offline-sync-patterns.html">offline-sync-patterns.md</a></strong> — Patrones sin conexión y de sincronización</li>
+<li><strong><a href="./design/ux/02-global-patterns/notification-patterns.html">notification-patterns.md</a></strong> — Patrones de notificaciones</li>
+<li><strong><a href="./design/ux/02-global-patterns/search-patterns.html">search-patterns.md</a></strong> — Patrones de búsqueda</li>
+<li><strong><a href="./design/ux/02-global-patterns/security-ux-patterns.html">security-ux-patterns.md</a></strong> — Patrones de UX de seguridad</li>
+<li><strong><a href="./design/ux/02-global-patterns/settings-help-patterns.html">settings-help-patterns.md</a></strong> — Patrones de ajustes y ayuda</li>
+</ul>
+<p><strong>Sistema de diseño</strong> — de qué está hecha la interfaz.</p>
+<ul>
+<li><strong><a href="./design/ux/03-design-system/foundations.html">foundations.md</a></strong> — Fundamentos: tokens, color, tipografía, cuadrícula, movimiento</li>
+<li><strong><a href="./design/ux/03-design-system/component-inventory.html">component-inventory.md</a></strong> — Inventario de componentes</li>
+<li><strong><a href="./design/ux/03-design-system/theming-strategy.html">theming-strategy.md</a></strong> — Estrategia de temas: identidad visual por organización, RTL, modo oscuro</li>
+<li><strong><a href="./design/ux/03-design-system/responsive-strategy.html">responsive-strategy.md</a></strong> — Estrategia de diseño adaptable</li>
+</ul>
 <h2 id="principios-de-diseño" tabindex="-1"><a class="heading-anchor" href="#principios-de-diseño" aria-hidden="true">#</a> Principios de diseño</h2>
 <ul>
 <li><strong>Con prioridad sin conexión</strong> — todo funciona sin conectividad y sincroniza cuando la hay</li>
@@ -80,7 +135,7 @@
 
     </article>
   </main>
-  <div class="toc-rail"><nav class="toc" aria-label="En esta página"><div class="toc-label">En esta página</div><ul><li class="toc-2"><a href="#qué-está-en-español-y-qué-no"># Qué está en español y qué no</a></li><li class="toc-2"><a href="#mercados-objetivo"># Mercados objetivo</a></li><li class="toc-2"><a href="#estado-del-proyecto"># Estado del proyecto</a></li><li class="toc-2"><a href="#orden-de-lectura"># Orden de lectura</a></li><li class="toc-2"><a href="#principios-de-diseño"># Principios de diseño</a></li></ul></nav></div>
+  <div class="toc-rail"><nav class="toc" aria-label="En esta página"><div class="toc-label">En esta página</div><ul><li class="toc-2"><a href="#qué-está-en-español-y-qué-no"># Qué está en español y qué no</a></li><li class="toc-2"><a href="#mercados-objetivo"># Mercados objetivo</a></li><li class="toc-2"><a href="#estado-del-proyecto"># Estado del proyecto</a></li><li class="toc-2"><a href="#orden-de-lectura"># Orden de lectura</a></li><li class="toc-3"><a href="#empieza-por-el-producto"># Empieza por el producto</a></li><li class="toc-3"><a href="#después-cómo-está-construida"># Después, cómo está construida</a></li><li class="toc-3"><a href="#y-por-qué-está-construida-así"># Y por qué está construida así</a></li><li class="toc-3"><a href="#el-diseño-en-detalle"># El diseño en detalle</a></li><li class="toc-2"><a href="#principios-de-diseño"># Principios de diseño</a></li></ul></nav></div>
 </div>
 <script src="../assets/search.js" defer></script>
 <script src="../assets/app.js" defer></script>

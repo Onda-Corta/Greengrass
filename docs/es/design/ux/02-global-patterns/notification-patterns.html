@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+<html lang="es" data-base="../../../../" data-no-results="No hay resultados para">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Patrones de notificaciones · GreenGrass</title>
+<meta name="description" content="Patrones de notificaciones — Documentación de especificación y diseño de GreenGrass.">
+<link rel="alternate" hreflang="en" href="../../../../design/ux/02-global-patterns/notification-patterns.html">
+<link rel="alternate" hreflang="es" href="./notification-patterns.html">
+<link rel="alternate" hreflang="x-default" href="../../../../design/ux/02-global-patterns/notification-patterns.html">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%232563eb'/%3E%3Cstop offset='1' stop-color='%2316a34a'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='32' height='32' rx='7' fill='url(%23g)'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="../../../../assets/styles.css">
+</head>
+<body>
+<a class="skip-link" href="#content">Saltar al contenido</a>
+<header class="site-header">
+  <button type="button" class="menu-toggle" aria-label="Alternar navegación" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+  <a class="brand" href="../../../../es/index.html">
+    <span class="brand-mark" aria-hidden="true"></span>
+    <span class="brand-text"><strong>GreenGrass</strong><small>Especificación y diseño</small></span>
+  </a>
+  <div class="search">
+    <input type="search" id="search-input" placeholder="Buscar en la documentación…" autocomplete="off" aria-label="Buscar en la documentación">
+    <div id="search-results" class="search-results" hidden></div>
+  </div>
+  <nav class="lang-switch" aria-label="Idioma"><a class="lang-opt" href="../../../../design/ux/02-global-patterns/notification-patterns.html" hreflang="en" lang="en" title="View this page in English">EN</a><span class="lang-opt active" aria-current="true">ES</span></nav>
+  <button type="button" class="theme-toggle" aria-label="Alternar modo oscuro" title="Alternar modo oscuro">
+    <span class="theme-icon" aria-hidden="true"></span>
+  </button>
+</header>
+<div class="layout">
+  <div class="sidebar-backdrop" hidden></div>
+  <aside class="sidebar" aria-label="Navegación de la documentación">
+    <nav class="nav">
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">Inicio<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../../../index.html">GreenGrass</a></li></ul></div>
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">Especificaciones<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../../../spec/product.html">Proyecto: GreenGrass</a></li><li><a href="../../../spec/mvp.html">MVP de GreenGrass — plan de producto</a></li><li><a href="../../../spec/users.html">Usuarios y roles</a></li><li><a href="../../../spec/workflows.html">Flujos de trabajo principales</a></li><li><a href="../../../spec/geography.html">Geografía objetivo</a></li><li><a href="../../../spec/security.html">Seguridad y modelo de amenazas</a></li><li><a href="../../../spec/compliance.html">Cumplimiento y marco legal</a></li><li><a href="../../../spec/fundraising.html">Recaudación de fondos e infraestructura de pagos</a></li><li><a href="../../../spec/integrations.html">Integraciones externas</a></li><li><a href="../../../spec/support.html">Soporte y puesta en marcha de organizaciones</a></li><li><a href="../../../spec/gotv.html">GOTV y operaciones del día de elecciones</a></li><li><a href="../../../spec/messaging.html">Comunicaciones internas y notificaciones</a></li><li><a href="../../../spec/press.html">Prensa, medios y comunicaciones públicas</a></li><li><a href="../../../spec/comms-intelligence.html">Inteligencia de comunicaciones — hoja de ruta post-MVP</a></li></ul></div>
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">Arquitectura<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../../architecture/system.html">Arquitectura del sistema</a></li></ul></div>
+<div class="nav-section open"><button type="button" class="nav-section-title" aria-expanded="true">Diseño UX<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../00-overview.html">Resumen del diseño de UX</a></li><li><a href="../01-information-architecture/navigation-model.html">Modelo de navegación</a></li><li><a href="../01-information-architecture/screen-inventory.html">Inventario de pantallas</a></li><li><a href="../01-information-architecture/persona-views.html">Vistas por arquetipo</a></li><li><a href="../01-information-architecture/url-structure.html">Estructura de URL</a></li><li><a href="./pattern-catalog.html">Catálogo de patrones</a></li><li><a href="./offline-sync-patterns.html">Patrones sin conexión y de sincronización</a></li><li><a href="./notification-patterns.html" aria-current="page" class="active">Patrones de notificaciones</a></li><li><a href="./search-patterns.html">Patrones de búsqueda</a></li><li><a href="./settings-help-patterns.html">Patrones de ajustes y ayuda</a></li><li><a href="./security-ux-patterns.html">Patrones de UX de seguridad</a></li><li><a href="../03-design-system/foundations.html">Fundamentos del sistema de diseño</a></li><li><a href="../03-design-system/theming-strategy.html">Estrategia de temas</a></li><li><a href="../03-design-system/component-inventory.html">Inventario de componentes</a></li><li><a href="../03-design-system/responsive-strategy.html">Estrategia de diseño adaptable</a></li></ul></div>
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">Decisiones<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../../../decisions/001-platform-architecture.html">ADR-001: Arquitectura y despliegue de la plataforma</a></li><li><a href="../../../decisions/002-security-threat-model.html">ADR-002: Seguridad y modelo de amenazas</a></li><li><a href="../../../decisions/003-identity-access-organization.html">ADR-003: Identidad, acceso y organización</a></li><li><a href="../../../decisions/004-data-model-integrity.html">ADR-004: Modelo de datos e integridad</a></li><li><a href="../../../decisions/005-offline-first-sync.html">ADR-005: Prioridad sin conexión y sincronización</a></li><li><a href="../../../decisions/006-field-operations-gotv.html">ADR-006: Operaciones de campo y GOTV</a></li><li><a href="../../../decisions/007-fundraising-payments.html">ADR-007: Recaudación de fondos y pagos</a></li><li><a href="../../../decisions/008-communications-messaging.html">ADR-008: Comunicaciones y mensajería</a></li><li><a href="../../../decisions/009-compliance-legal.html">ADR-009: Cumplimiento y marco legal</a></li><li><a href="../../../decisions/010-internationalization-localization.html">ADR-010: Internacionalización y localización</a></li><li><a href="../../../decisions/011-design-system-ux.html">ADR-011: Sistema de diseño y fundamentos de UX</a></li><li><a href="../../../decisions/012-external-integrations.html">ADR-012: Integraciones externas</a></li><li><a href="../../../decisions/013-analytics-ai.html">ADR-013: Analítica e IA</a></li><li><a href="../../../decisions/014-volunteer-onboarding.html">ADR-014: Voluntariado e incorporación</a></li><li><a href="../../../decisions/015-product-scope.html">ADR-015: Límites del alcance del producto</a></li><li><a href="../../../decisions/016-cross-cutting-resolutions.html">ADR-016: Resoluciones transversales</a></li><li><a href="../../../decisions/017-sharing-contract-trust-model.html">ADR-017: El contrato de intercambio como primitiva universal de confianza</a></li><li><a href="../../../decisions/ux-decisions.html">Decisiones de UX — fase de wireframes</a></li></ul></div>
+    </nav>
+  </aside>
+  <main id="content" class="content">
+    <nav class="breadcrumb" aria-label="Ruta de navegación">Diseño UX</nav>
+    <article class="prose">
+<h1 id="patrones-de-notificaciones" tabindex="-1"><a class="heading-anchor" href="#patrones-de-notificaciones" aria-hidden="true">#</a> Patrones de notificaciones</h1>
+<h2 id="propósito" tabindex="-1"><a class="heading-anchor" href="#propósito" aria-hidden="true">#</a> Propósito</h2>
+<p>Este documento define cómo la plataforma entrega notificaciones — el centro de notificaciones, los canales de entrega, los niveles de prioridad, la agrupación y el comportamiento propio de cada arquetipo. Las notificaciones son el tejido conectivo de la plataforma: dicen qué pasó, qué necesita atención y qué viene en camino.</p>
+<p>La restricción de diseño: las notificaciones tienen que ser útiles sin abrumar. Un Coordinador de voluntarios, en un fin de semana cargado de eventos, puede recibir 50 notificaciones en una hora (altas de voluntarios, cancelaciones de turno, confirmaciones de registro de entrada). Un Administrador de la organización el día de elecciones puede recibir 200. El sistema tiene que mostrar lo que importa y suprimir lo que no.</p>
+<h2 id="anatomía-de-la-notificación" tabindex="-1"><a class="heading-anchor" href="#anatomía-de-la-notificación" aria-hidden="true">#</a> Anatomía de la notificación</h2>
+<p>Toda notificación tiene la misma estructura:</p>
+<pre><code>┌──────────────────────────────────────────────────────┐
+│  [Icono]  Fuente · Hora                      [⋯]     │
+│                                                      │
+│  Título (negrita, conciso — qué pasó)                │
+│  Cuerpo (1-2 líneas — contexto y detalle)            │
+│                                                      │
+│  [Acción principal]  [Acción secundaria]             │
+└──────────────────────────────────────────────────────┘
+</code></pre>
+<h3 id="campos" tabindex="-1"><a class="heading-anchor" href="#campos" aria-hidden="true">#</a> Campos</h3>
+<table>
+<thead>
+<tr>
+<th>Campo</th>
+<th>Propósito</th>
+<th>Ejemplo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Icono</strong></td>
+<td>Identificador visual de la fuente de la notificación</td>
+<td>💬 Mensajes, 🚨 Cumplimiento, 📋 Turnos</td>
+</tr>
+<tr>
+<td><strong>Fuente</strong></td>
+<td>Área funcional que generó la notificación</td>
+<td>&quot;Recaudación de fondos&quot;, &quot;GOTV&quot;, &quot;Mensajería&quot;</td>
+</tr>
+<tr>
+<td><strong>Hora</strong></td>
+<td>Marca de tiempo relativa</td>
+<td>&quot;hace 2 min&quot;, &quot;hace 1 hora&quot;, &quot;Ayer&quot;</td>
+</tr>
+<tr>
+<td><strong>Título</strong></td>
+<td>Qué pasó — conciso, accionable</td>
+<td>&quot;Donación nueva: $250 de Ana Martínez&quot;</td>
+</tr>
+<tr>
+<td><strong>Cuerpo</strong></td>
+<td>Contexto — lo justo para decidir si hay que actuar ahora</td>
+<td>&quot;Recurrente · Primera donación en esta campaña&quot;</td>
+</tr>
+<tr>
+<td><strong>Acción principal</strong></td>
+<td>La acción más probable</td>
+<td>&quot;Ver donación&quot;</td>
+</tr>
+<tr>
+<td><strong>Acción secundaria</strong></td>
+<td>Acción alternativa</td>
+<td>&quot;Descartar&quot;</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="centro-de-notificaciones" tabindex="-1"><a class="heading-anchor" href="#centro-de-notificaciones" aria-hidden="true">#</a> Centro de notificaciones</h2>
+<h3 id="acceso" tabindex="-1"><a class="heading-anchor" href="#acceso" aria-hidden="true">#</a> Acceso</h3>
+<ul>
+<li><strong>Escritorio:</strong> icono de campana en la barra superior. El contador muestra las notificaciones sin leer. Al hacer clic se abre la bandeja de notificaciones desde el borde derecho.</li>
+<li><strong>Móvil:</strong> icono de campana en la barra superior. Al tocarlo se abre una vista de notificaciones a pantalla completa.</li>
+</ul>
+<h3 id="disposición" tabindex="-1"><a class="heading-anchor" href="#disposición" aria-hidden="true">#</a> Disposición</h3>
+<pre><code>┌────────────────────────────────────────────────────────────┐
+│  Notificaciones (12 sin leer)    [Marcar todo como leído]  │
+├────────────────────────────────────────────────────────────┤
+│  [Todas]  [Mensajes]  [Turnos]  [Alertas]  [Otras]         │  ← Pestañas de filtro
+├────────────────────────────────────────────────────────────┤
+│                                                            │
+│  HOY                                                       │
+│  ┌──────────────────────────────────────────────────────┐  │
+│  │  🚨 Cumplimiento · hace 15 min                       │  │
+│  │  Límite de contribución cerca                        │  │
+│  │  John Smith: $2,700 de $2,900 del límite             │  │
+│  │  [Revisar]  [Descartar]                              │  │
+│  └──────────────────────────────────────────────────────┘  │
+│  ┌──────────────────────────────────────────────────────┐  │
+│  │  📋 Turnos · hace 1 hora                             │  │
+│  │  Cancelación de turno: Maria Lopez                   │  │
+│  │  Mañana 2pm-6pm · Territorio 12 · Sin reemplazo      │  │
+│  │  [Buscar reemplazo]  [Descartar]                     │  │
+│  └──────────────────────────────────────────────────────┘  │
+│                                                            │
+│  AYER                                                      │
+│  ...                                                       │
+│                                                            │
+│  [Preferencias de notificaciones]                          │
+└────────────────────────────────────────────────────────────┘
+</code></pre>
+<h3 id="agrupación" tabindex="-1"><a class="heading-anchor" href="#agrupación" aria-hidden="true">#</a> Agrupación</h3>
+<p>Las notificaciones se agrupan por tiempo (Hoy, Ayer, Esta semana, Anteriores) y se pueden filtrar por categoría de fuente:</p>
+<table>
+<thead>
+<tr>
+<th>Filtro</th>
+<th>Incluye</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Todas</td>
+<td>Todo</td>
+</tr>
+<tr>
+<td>Mensajes</td>
+<td>Mensajes directos, mensajes de grupo, difusiones, hilos contextuales</td>
+</tr>
+<tr>
+<td>Turnos</td>
+<td>Asignaciones de turno, cancelaciones, recordatorios, alertas de registro de entrada</td>
+</tr>
+<tr>
+<td>Alertas</td>
+<td>Marcas de cumplimiento, alertas de seguridad, errores de sincronización, problemas del sistema</td>
+</tr>
+<tr>
+<td>Otras</td>
+<td>Confirmaciones de asistencia a eventos, notificaciones de donaciones, capacitaciones completadas, etc.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="comportamientos" tabindex="-1"><a class="heading-anchor" href="#comportamientos" aria-hidden="true">#</a> Comportamientos</h3>
+<ul>
+<li><strong>Indicador de sin leer</strong> — las notificaciones sin leer llevan un borde izquierdo de color o un fondo tintado. Las leídas se ven atenuadas.</li>
+<li><strong>Marcar como leída</strong> — al hacer clic en una notificación se marca como leída. Arriba hay un botón &quot;Marcar todo como leído&quot;.</li>
+<li><strong>Descartar</strong> — quita la notificación del centro. No afecta al evento subyacente.</li>
+<li><strong>Enlace directo</strong> — al tocar una notificación se navega a la pantalla relevante (el detalle de la donación, la página de gestión del turno, la conversación, etc.).</li>
+<li><strong>Notificaciones críticas persistentes</strong> — las notificaciones marcadas como críticas (fechas límite de cumplimiento, alertas de seguridad) no se pueden descartar: solo se resuelven actuando sobre ellas.</li>
+<li><strong>Contador</strong> — aparece en el icono de campana. En móvil aparece además en la pestaña inferior correspondiente (la pestaña Mensajes muestra los mensajes sin leer, la pestaña Turnos muestra las notificaciones de turno pendientes).</li>
+</ul>
+<hr>
+<h2 id="niveles-de-prioridad" tabindex="-1"><a class="heading-anchor" href="#niveles-de-prioridad" aria-hidden="true">#</a> Niveles de prioridad</h2>
+<h3 id="definiciones" tabindex="-1"><a class="heading-anchor" href="#definiciones" aria-hidden="true">#</a> Definiciones</h3>
+<table>
+<thead>
+<tr>
+<th>Prioridad</th>
+<th>Tratamiento visual</th>
+<th>Persistencia</th>
+<th>Sonido/vibración</th>
+<th>Ejemplos</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Crítica</strong></td>
+<td>Acento rojo, no se puede descartar</td>
+<td>Hasta que se resuelva</td>
+<td>Sí (salvo silenciado)</td>
+<td>Brecha de seguridad, procesador de pagos caído, violación de cumplimiento</td>
+</tr>
+<tr>
+<td><strong>Alta</strong></td>
+<td>Acento ámbar, prominente</td>
+<td>7 días</td>
+<td>Sí (salvo silenciado)</td>
+<td>Marca de cumplimiento, cancelación de turno sin reemplazo, escalamiento de GOTV</td>
+</tr>
+<tr>
+<td><strong>Normal</strong></td>
+<td>Estándar</td>
+<td>30 días</td>
+<td>Notificación push (configurable)</td>
+<td>Donación nueva, alta de voluntario, mensaje recibido, confirmación de asistencia a evento</td>
+</tr>
+<tr>
+<td><strong>Baja</strong></td>
+<td>Sutil, se puede agrupar</td>
+<td>7 días</td>
+<td>Ninguno</td>
+<td>Capacitación completada, importación de datos terminada, resumen semanal</td>
+</tr>
+</tbody>
+</table>
+<h3 id="prioridad-configurable-por-el-usuario" tabindex="-1"><a class="heading-anchor" href="#prioridad-configurable-por-el-usuario" aria-hidden="true">#</a> Prioridad configurable por el usuario</h3>
+<p>Según la decisión de <code>messaging.md</code>, cada persona configura la prioridad de las notificaciones fuente por fuente. La plataforma trae valores predeterminados sensatos por arquetipo, y cada quien los ajusta:</p>
+<pre><code>┌────────────────────────────────────────────────────────────┐
+│  Preferencias de notificaciones                            │
+├────────────────────────────────────────────────────────────┤
+│                                                            │
+│  Mensajes                                                  │
+│    Mensajes directos      [● Alta   ▾] [Push ✓] [Correo ✓] │
+│    Mensajes de grupo      [● Normal ▾] [Push ✓] [Correo ☐] │
+│    Difusiones             [● Normal ▾] [Push ☐] [Correo ✓] │
+│                                                            │
+│  Turnos                                                    │
+│    Recordatorios de turno [● Alta   ▾] [Push ✓] [Correo ✓] │
+│    Cancelaciones          [● Alta   ▾] [Push ✓] [Correo ✓] │
+│    Asignaciones nuevas    [● Normal ▾] [Push ✓] [Correo ☐] │
+│                                                            │
+│  Recaudación de fondos                                     │
+│    Donaciones nuevas      [● Normal ▾] [Push ☐] [Correo ✓] │
+│    Marcas de cumplimiento [● Crítica]  [Push ✓] [Correo ✓] │  ← No se puede cambiar
+│    ...                                                     │
+│                                                            │
+│  [Restablecer valores predeterminados]                     │
+└────────────────────────────────────────────────────────────┘
+</code></pre>
+<p><strong>No configurables:</strong> algunas notificaciones son siempre críticas y no se pueden bajar de nivel: alertas de seguridad, violaciones de cumplimiento, errores del sistema. En las preferencias aparecen marcadas como &quot;No se puede cambiar&quot;.</p>
+<hr>
+<h2 id="canales-de-entrega" tabindex="-1"><a class="heading-anchor" href="#canales-de-entrega" aria-hidden="true">#</a> Canales de entrega</h2>
+<p>Las notificaciones llegan por varios canales. Qué canales hay disponibles depende de la fuente de la notificación y de las preferencias de cada persona.</p>
+<h3 id="matriz-de-canales" tabindex="-1"><a class="heading-anchor" href="#matriz-de-canales" aria-hidden="true">#</a> Matriz de canales</h3>
+<table>
+<thead>
+<tr>
+<th>Canal</th>
+<th>Latencia</th>
+<th>Caso de uso</th>
+<th>Disponible para</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>En la app</strong></td>
+<td>Inmediata</td>
+<td>Todas las notificaciones</td>
+<td>Todos los usuarios</td>
+</tr>
+<tr>
+<td><strong>Push</strong></td>
+<td>Inmediata</td>
+<td>Notificaciones sensibles al tiempo</td>
+<td>Usuarios de móvil con la app instalada</td>
+</tr>
+<tr>
+<td><strong>Correo</strong></td>
+<td>Minutos</td>
+<td>Resúmenes, contenido detallado, recibos</td>
+<td>Todos los usuarios con correo</td>
+</tr>
+<tr>
+<td><strong>SMS</strong></td>
+<td>Inmediata</td>
+<td>Solo alertas críticas, para quien no tiene la app</td>
+<td>Solo con consentimiento expreso, eventos críticos</td>
+</tr>
+</tbody>
+</table>
+<h3 id="lógica-de-selección-de-canal" tabindex="-1"><a class="heading-anchor" href="#lógica-de-selección-de-canal" aria-hidden="true">#</a> Lógica de selección de canal</h3>
+<ol>
+<li><strong>En la app</strong> — siempre se entrega. Esta es la notificación canónica.</li>
+<li><strong>Push</strong> — se entrega si la persona tiene push activado y la prioridad de la notificación es &gt;= el umbral que configuró para esa fuente.</li>
+<li><strong>Correo</strong> — se entrega si la persona tiene activadas las notificaciones por correo para esa fuente. Los correos se pueden agrupar (ver Resúmenes más abajo).</li>
+<li><strong>SMS</strong> — se entrega solo para notificaciones críticas y cuando la persona se dio de alta en las alertas por SMS. Es el canal de último recurso para quien puede no tener la app abierta (por ejemplo, el Administrador de la organización durante un incidente de seguridad).</li>
+</ol>
+<h3 id="prevención-de-duplicados" tabindex="-1"><a class="heading-anchor" href="#prevención-de-duplicados" aria-hidden="true">#</a> Prevención de duplicados</h3>
+<p>Si alguien ve una notificación por push y después abre la app, la notificación dentro de la app ya debería estar marcada como &quot;vista&quot; (no necesariamente &quot;leída&quot; — vio el push, pero puede que no haya actuado). Así el centro de notificaciones no muestra notificaciones que la persona ya descartó desde el push.</p>
+<hr>
+<h2 id="valores-predeterminados-por-arquetipo" tabindex="-1"><a class="heading-anchor" href="#valores-predeterminados-por-arquetipo" aria-hidden="true">#</a> Valores predeterminados por arquetipo</h2>
+<p>Cada perfil trae valores predeterminados de notificación ajustados a su rol y a su patrón de uso típico.</p>
+<h3 id="administrador-de-la-organización" tabindex="-1"><a class="heading-anchor" href="#administrador-de-la-organización" aria-hidden="true">#</a> Administrador de la organización</h3>
+<p>Ve el conjunto más amplio de notificaciones — estado del sistema, cumplimiento y alertas transversales.</p>
+<table>
+<thead>
+<tr>
+<th>Fuente</th>
+<th>Prioridad predeterminada</th>
+<th>Canales predeterminados</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Alertas de seguridad</td>
+<td>Crítica</td>
+<td>En la app, Push, Correo, SMS</td>
+</tr>
+<tr>
+<td>Marcas de cumplimiento</td>
+<td>Crítica</td>
+<td>En la app, Push, Correo</td>
+</tr>
+<tr>
+<td>Problemas del sistema (sincronización, integraciones)</td>
+<td>Alta</td>
+<td>En la app, Push, Correo</td>
+</tr>
+<tr>
+<td>Facturación</td>
+<td>Alta</td>
+<td>En la app, Correo</td>
+</tr>
+<tr>
+<td>Actividad del personal (contrataciones nuevas, cambios de rol)</td>
+<td>Normal</td>
+<td>En la app, Correo</td>
+</tr>
+<tr>
+<td>Solicitudes de alianza</td>
+<td>Normal</td>
+<td>En la app, Correo</td>
+</tr>
+</tbody>
+</table>
+<h3 id="director-de-comunicaciones" tabindex="-1"><a class="heading-anchor" href="#director-de-comunicaciones" aria-hidden="true">#</a> Director de comunicaciones</h3>
+<p>Centrado en la entrega de contenido y en la interacción.</p>
+<table>
+<thead>
+<tr>
+<th>Fuente</th>
+<th>Prioridad predeterminada</th>
+<th>Canales predeterminados</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Fallos de entrega de correo</td>
+<td>Alta</td>
+<td>En la app, Push, Correo</td>
+</tr>
+<tr>
+<td>Respuestas a aprobaciones de contenido</td>
+<td>Alta</td>
+<td>En la app, Push</td>
+</tr>
+<tr>
+<td>Alertas de rendimiento de campaña</td>
+<td>Normal</td>
+<td>En la app, Correo</td>
+</tr>
+<tr>
+<td>Cobertura de prensa</td>
+<td>Normal</td>
+<td>En la app</td>
+</tr>
+</tbody>
+</table>
+<h3 id="director-de-finanzas" tabindex="-1"><a class="heading-anchor" href="#director-de-finanzas" aria-hidden="true">#</a> Director de finanzas</h3>
+<p>Centrado en el dinero y en el cumplimiento.</p>
+<table>
+<thead>
+<tr>
+<th>Fuente</th>
+<th>Prioridad predeterminada</th>
+<th>Canales predeterminados</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Marcas de cumplimiento</td>
+<td>Crítica</td>
+<td>En la app, Push, Correo</td>
+</tr>
+<tr>
+<td>Problemas del procesador de pagos</td>
+<td>Crítica</td>
+<td>En la app, Push, Correo</td>
+</tr>
+<tr>
+<td>Donaciones grandes (por encima del umbral)</td>
+<td>Alta</td>
+<td>En la app, Push</td>
+</tr>
+<tr>
+<td>Fallos de donaciones recurrentes</td>
+<td>Alta</td>
+<td>En la app, Correo</td>
+</tr>
+<tr>
+<td>Resumen diario de donaciones</td>
+<td>Baja</td>
+<td>Correo</td>
+</tr>
+</tbody>
+</table>
+<h3 id="director-de-campo" tabindex="-1"><a class="heading-anchor" href="#director-de-campo" aria-hidden="true">#</a> Director de campo</h3>
+<p>Centrado en las operaciones y en el GOTV.</p>
+<table>
+<thead>
+<tr>
+<th>Fuente</th>
+<th>Prioridad predeterminada</th>
+<th>Canales predeterminados</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Escalamientos de GOTV</td>
+<td>Crítica</td>
+<td>En la app, Push</td>
+</tr>
+<tr>
+<td>Alertas de operación activa</td>
+<td>Alta</td>
+<td>En la app, Push</td>
+</tr>
+<tr>
+<td>Hitos de avance del trabajo de campo</td>
+<td>Normal</td>
+<td>En la app</td>
+</tr>
+<tr>
+<td>Problemas de observadores electorales</td>
+<td>Alta</td>
+<td>En la app, Push</td>
+</tr>
+</tbody>
+</table>
+<h3 id="coordinador-de-voluntarios" tabindex="-1"><a class="heading-anchor" href="#coordinador-de-voluntarios" aria-hidden="true">#</a> Coordinador de voluntarios</h3>
+<p>Centrado en las personas.</p>
+<table>
+<thead>
+<tr>
+<th>Fuente</th>
+<th>Prioridad predeterminada</th>
+<th>Canales predeterminados</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Cancelaciones de turno</td>
+<td>Alta</td>
+<td>En la app, Push, Correo</td>
+</tr>
+<tr>
+<td>Altas de voluntarios nuevos</td>
+<td>Normal</td>
+<td>En la app, Push</td>
+</tr>
+<tr>
+<td>Alertas de ausencia sin aviso</td>
+<td>Alta</td>
+<td>En la app, Push</td>
+</tr>
+<tr>
+<td>Capacitaciones completadas</td>
+<td>Baja</td>
+<td>En la app</td>
+</tr>
+<tr>
+<td>Hitos de registro de entrada en eventos</td>
+<td>Normal</td>
+<td>En la app</td>
+</tr>
+</tbody>
+</table>
+<h3 id="gestor-de-datos" tabindex="-1"><a class="heading-anchor" href="#gestor-de-datos" aria-hidden="true">#</a> Gestor de datos</h3>
+<p>Centrado en las operaciones de datos.</p>
+<table>
+<thead>
+<tr>
+<th>Fuente</th>
+<th>Prioridad predeterminada</th>
+<th>Canales predeterminados</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Importación completada</td>
+<td>Normal</td>
+<td>En la app, Correo</td>
+</tr>
+<tr>
+<td>Actualizaciones de la cola de deduplicación</td>
+<td>Normal</td>
+<td>En la app</td>
+</tr>
+<tr>
+<td>Alertas de calidad de datos</td>
+<td>Alta</td>
+<td>En la app, Correo</td>
+</tr>
+</tbody>
+</table>
+<h3 id="voluntario" tabindex="-1"><a class="heading-anchor" href="#voluntario" aria-hidden="true">#</a> Voluntario</h3>
+<p>Notificaciones mínimas, orientadas a la acción.</p>
+<table>
+<thead>
+<tr>
+<th>Fuente</th>
+<th>Prioridad predeterminada</th>
+<th>Canales predeterminados</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Recordatorios de turno</td>
+<td>Alta</td>
+<td>En la app, Push</td>
+</tr>
+<tr>
+<td>Cambios de asignación</td>
+<td>Alta</td>
+<td>En la app, Push</td>
+</tr>
+<tr>
+<td>Mensajes del Líder de equipo</td>
+<td>Alta</td>
+<td>En la app, Push</td>
+</tr>
+<tr>
+<td>Asignaciones de capacitación</td>
+<td>Normal</td>
+<td>En la app, Push</td>
+</tr>
+<tr>
+<td>Recordatorios de eventos</td>
+<td>Normal</td>
+<td>En la app, Push</td>
+</tr>
+</tbody>
+</table>
+<h3 id="líder-de-equipo" tabindex="-1"><a class="heading-anchor" href="#líder-de-equipo" aria-hidden="true">#</a> Líder de equipo</h3>
+<p>Todo lo que recibe un Voluntario, más la gestión del equipo.</p>
+<table>
+<thead>
+<tr>
+<th>Fuente</th>
+<th>Prioridad predeterminada</th>
+<th>Canales predeterminados</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Problemas de integrantes del equipo</td>
+<td>Alta</td>
+<td>En la app, Push</td>
+</tr>
+<tr>
+<td>Ausencias sin aviso en el equipo</td>
+<td>Alta</td>
+<td>En la app, Push</td>
+</tr>
+<tr>
+<td>Solicitudes de escalamiento del centro de mando (GOTV)</td>
+<td>Crítica</td>
+<td>En la app, Push</td>
+</tr>
+</tbody>
+</table>
+<h3 id="candidato" tabindex="-1"><a class="heading-anchor" href="#candidato" aria-hidden="true">#</a> Candidato</h3>
+<p>Curadas, solo lo importante.</p>
+<table>
+<thead>
+<tr>
+<th>Fuente</th>
+<th>Prioridad predeterminada</th>
+<th>Canales predeterminados</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Solicitudes de aprobación</td>
+<td>Alta</td>
+<td>En la app, Push</td>
+</tr>
+<tr>
+<td>Informes del equipo</td>
+<td>Alta</td>
+<td>En la app, Push</td>
+</tr>
+<tr>
+<td>Mensajes del equipo clave</td>
+<td>Normal</td>
+<td>En la app, Push</td>
+</tr>
+<tr>
+<td>Resúmenes de hitos de campaña</td>
+<td>Baja</td>
+<td>En la app</td>
+</tr>
+</tbody>
+</table>
+<h3 id="simpatizante" tabindex="-1"><a class="heading-anchor" href="#simpatizante" aria-hidden="true">#</a> Simpatizante</h3>
+<p>Mínimas, transaccionales.</p>
+<table>
+<thead>
+<tr>
+<th>Fuente</th>
+<th>Prioridad predeterminada</th>
+<th>Canales predeterminados</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Recibos de donación</td>
+<td>Normal</td>
+<td>Correo</td>
+</tr>
+<tr>
+<td>Cambios de estado de una donación recurrente</td>
+<td>Alta</td>
+<td>Correo, Push (si se dio de alta)</td>
+</tr>
+<tr>
+<td>Recordatorios de eventos</td>
+<td>Normal</td>
+<td>Correo, Push (si se dio de alta)</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="resúmenes-por-correo" tabindex="-1"><a class="heading-anchor" href="#resúmenes-por-correo" aria-hidden="true">#</a> Resúmenes por correo</h2>
+<p>Para las notificaciones que no exigen atención inmediata, la plataforma ofrece resúmenes por correo que agrupan varias notificaciones en un envío periódico.</p>
+<h3 id="opciones-de-resumen" tabindex="-1"><a class="heading-anchor" href="#opciones-de-resumen" aria-hidden="true">#</a> Opciones de resumen</h3>
+<table>
+<thead>
+<tr>
+<th>Frecuencia</th>
+<th>Contenido</th>
+<th>Destinatarios predeterminados</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>En tiempo real</strong></td>
+<td>Cada notificación se envía de inmediato</td>
+<td>Alertas de seguridad, marcas de cumplimiento</td>
+</tr>
+<tr>
+<td><strong>Cada hora</strong></td>
+<td>Resumen de las notificaciones de la última hora</td>
+<td>No viene activado — el usuario se da de alta</td>
+</tr>
+<tr>
+<td><strong>Diario</strong></td>
+<td>Resumen de fin de día</td>
+<td>Director de finanzas (resumen de donaciones), Coordinador de voluntarios (actividad diaria de los voluntarios)</td>
+</tr>
+<tr>
+<td><strong>Semanal</strong></td>
+<td>Métricas y lo más destacado de la semana</td>
+<td>Candidato (avance de la campaña), Administrador de la organización (panorama semanal)</td>
+</tr>
+</tbody>
+</table>
+<p>Cada quien configura sus preferencias de resumen en los ajustes de notificaciones. Los correos de resumen son resúmenes bien armados, no simples listas de notificaciones: traen contexto, tendencias y enlaces directos a las pantallas relevantes.</p>
+<hr>
+<h2 id="comportamiento-de-las-notificaciones-el-día-de-elecciones" tabindex="-1"><a class="heading-anchor" href="#comportamiento-de-las-notificaciones-el-día-de-elecciones" aria-hidden="true">#</a> Comportamiento de las notificaciones el día de elecciones</h2>
+<p>Cuando se activa el modo GOTV / día de elecciones, el sistema de notificaciones cambia:</p>
+<h3 id="cambios" tabindex="-1"><a class="heading-anchor" href="#cambios" aria-hidden="true">#</a> Cambios</h3>
+<ul>
+<li><strong>Las notificaciones de GOTV suben de prioridad.</strong> Todas las notificaciones relacionadas con GOTV (actualizaciones de participación electoral, escalamientos, sugerencias de reasignación de recursos, solicitudes de transporte, problemas de observadores electorales) pasan a prioridad alta sin importar la configuración de cada persona.</li>
+<li><strong>Las notificaciones que no son de GOTV se suprimen.</strong> Las notificaciones operativas normales (altas de voluntarios nuevos, importaciones de datos, mensajes de rutina) se agrupan en un resumen poselectoral. No desaparecen: se aplazan.</li>
+<li><strong>Feed del centro de mando.</strong> El personal del centro de mando ve un feed continuo de notificaciones integrado en el panel del centro de mando. Es un feed en vivo, no el centro de notificaciones estándar: se desplaza solo a medida que llegan eventos nuevos.</li>
+<li><strong>Las notificaciones de escalamiento son modales.</strong> Los escalamientos críticos de GOTV (problema de seguridad de un observador electoral, anomalía grande de participación) aparecen como diálogos modales que exigen acuse de recibo: no se pueden pasar por alto desplazándose.</li>
+</ul>
+<h3 id="después-de-las-elecciones" tabindex="-1"><a class="heading-anchor" href="#después-de-las-elecciones" aria-hidden="true">#</a> Después de las elecciones</h3>
+<p>Cuando el modo de día de elecciones se desactiva, las notificaciones aplazadas se entregan en un correo de resumen (&quot;Esto es lo que pasó mientras estabas en modo de día de elecciones&quot;). El centro de notificaciones vuelve a su comportamiento normal.</p>
+<hr>
+<h2 id="elementos-de-interfaz-relacionados-con-las-notificaciones" tabindex="-1"><a class="heading-anchor" href="#elementos-de-interfaz-relacionados-con-las-notificaciones" aria-hidden="true">#</a> Elementos de interfaz relacionados con las notificaciones</h2>
+<h3 id="contadores" tabindex="-1"><a class="heading-anchor" href="#contadores" aria-hidden="true">#</a> Contadores</h3>
+<p>Los contadores aparecen en:</p>
+<ul>
+<li><strong>Icono de campana</strong> (barra superior) — total de notificaciones sin leer</li>
+<li><strong>Pestañas inferiores en móvil</strong> — contadores por pestaña donde aplica:
+<ul>
+<li>Pestaña Mensajes: mensajes sin leer</li>
+<li>Pestaña Turnos: notificaciones de turno pendientes</li>
+<li>Pestaña Aprobaciones (Candidato): aprobaciones pendientes</li>
+</ul>
+</li>
+<li><strong>Elementos de la barra lateral</strong> (escritorio) — contadores discretos en los elementos de navegación relevantes</li>
+</ul>
+<h3 id="avisos-emergentes" tabindex="-1"><a class="heading-anchor" href="#avisos-emergentes" aria-hidden="true">#</a> Avisos emergentes</h3>
+<p>Notificaciones transitorias, para retroalimentación inmediata (no quedan guardadas en el centro de notificaciones):</p>
+<pre><code>┌──────────────────────────────────────┐
+│  ✓  Contacto guardado                │  ← Aviso emergente de éxito (3 segundos)
+└──────────────────────────────────────┘
+
+┌──────────────────────────────────────┐
+│  ⚠  Error al guardar · Reintentar    │  ← Aviso emergente de error (persiste hasta que se actúe)
+└──────────────────────────────────────┘
+</code></pre>
+<ul>
+<li><strong>Avisos emergentes de éxito</strong> — aparecen un momento (3 segundos) y se van solos. Confirman que una acción se completó.</li>
+<li><strong>Avisos emergentes de error</strong> — persisten hasta que se descartan o se reintenta. Incluyen una acción de reintento para los errores recuperables.</li>
+<li><strong>Posición</strong> — abajo al centro en escritorio, arriba al centro en móvil (para no chocar con la barra de pestañas inferior).</li>
+</ul>
+<h3 id="sonidos-de-notificación" tabindex="-1"><a class="heading-anchor" href="#sonidos-de-notificación" aria-hidden="true">#</a> Sonidos de notificación</h3>
+<ul>
+<li><strong>Notificaciones críticas</strong> — sonido de alerta del sistema (respeta el silenciado del dispositivo)</li>
+<li><strong>Notificaciones altas</strong> — sonido de notificación discreto</li>
+<li><strong>Normales y bajas</strong> — sin sonido (solo vibración del push, si está activada)</li>
+<li><strong>Modo de campo</strong> — todos los sonidos se suprimen salvo los críticos (quien está tocando puertas no debería distraerse)</li>
+</ul>
+<hr>
+<h2 id="no-molestar" tabindex="-1"><a class="heading-anchor" href="#no-molestar" aria-hidden="true">#</a> No molestar</h2>
+<p>Cualquiera puede activar el modo No molestar:</p>
+<ul>
+<li><strong>Interruptor manual</strong> — desde el menú de usuario</li>
+<li><strong>Programado</strong> — con horas fijas (por ejemplo, de 10pm a 7am)</li>
+<li><strong>Durante los turnos</strong> — se activa solo durante los turnos activos en modo de campo (solo pasan las notificaciones críticas y las del turno)</li>
+</ul>
+<p>Cuando No molestar está activo:</p>
+<ul>
+<li>Las notificaciones push se silencian</li>
+<li>Las notificaciones en la app se siguen acumulando (visibles cuando la persona las revisa)</li>
+<li>Las notificaciones críticas atraviesan No molestar (seguridad, cumplimiento)</li>
+<li>Un indicador discreto de &quot;No molestar activo&quot; aparece en la barra superior</li>
+</ul>
+<hr>
+<h2 id="preguntas-abiertas" tabindex="-1"><a class="heading-anchor" href="#preguntas-abiertas" aria-hidden="true">#</a> Preguntas abiertas</h2>
+<ol>
+<li>
+<p><strong>Vida útil de las notificaciones.</strong> ¿Cuánto deberían persistir las notificaciones en el centro de notificaciones? Lo propuesto ahora: 30 días para las normales, 7 días para las bajas, hasta que se resuelvan para las críticas. ¿30 días es demasiado?</p>
+</li>
+<li>
+<p><strong>Sincronización de notificaciones entre dispositivos.</strong> Si alguien descarta una notificación en su celular, ¿debería descartarse también en su computadora? (Sí, probablemente — las notificaciones deberían sincronizarse entre dispositivos.)</p>
+</li>
+<li>
+<p><strong>Analítica de notificaciones.</strong> ¿Debería la plataforma medir las tasas de interacción con las notificaciones (qué porcentaje se abre, se atiende, se descarta)? Ese dato podría alimentar los valores predeterminados de prioridad y el horario de los resúmenes.</p>
+</li>
+</ol>
+<!-- REVISIT: Las fuentes exactas de notificación por arquetipo van a crecer a medida que se implementen las funcionalidades. Este documento define los patrones y los valores predeterminados; la implementación irá añadiendo los tipos de notificación específicos según se construya cada funcionalidad. -->
+
+    </article>
+  </main>
+  <div class="toc-rail"><nav class="toc" aria-label="En esta página"><div class="toc-label">En esta página</div><ul><li class="toc-2"><a href="#propósito"># Propósito</a></li><li class="toc-2"><a href="#anatomía-de-la-notificación"># Anatomía de la notificación</a></li><li class="toc-3"><a href="#campos"># Campos</a></li><li class="toc-2"><a href="#centro-de-notificaciones"># Centro de notificaciones</a></li><li class="toc-3"><a href="#acceso"># Acceso</a></li><li class="toc-3"><a href="#disposición"># Disposición</a></li><li class="toc-3"><a href="#agrupación"># Agrupación</a></li><li class="toc-3"><a href="#comportamientos"># Comportamientos</a></li><li class="toc-2"><a href="#niveles-de-prioridad"># Niveles de prioridad</a></li><li class="toc-3"><a href="#definiciones"># Definiciones</a></li><li class="toc-3"><a href="#prioridad-configurable-por-el-usuario"># Prioridad configurable por el usuario</a></li><li class="toc-2"><a href="#canales-de-entrega"># Canales de entrega</a></li><li class="toc-3"><a href="#matriz-de-canales"># Matriz de canales</a></li><li class="toc-3"><a href="#lógica-de-selección-de-canal"># Lógica de selección de canal</a></li><li class="toc-3"><a href="#prevención-de-duplicados"># Prevención de duplicados</a></li><li class="toc-2"><a href="#valores-predeterminados-por-arquetipo"># Valores predeterminados por arquetipo</a></li><li class="toc-3"><a href="#administrador-de-la-organización"># Administrador de la organización</a></li><li class="toc-3"><a href="#director-de-comunicaciones"># Director de comunicaciones</a></li><li class="toc-3"><a href="#director-de-finanzas"># Director de finanzas</a></li><li class="toc-3"><a href="#director-de-campo"># Director de campo</a></li><li class="toc-3"><a href="#coordinador-de-voluntarios"># Coordinador de voluntarios</a></li><li class="toc-3"><a href="#gestor-de-datos"># Gestor de datos</a></li><li class="toc-3"><a href="#voluntario"># Voluntario</a></li><li class="toc-3"><a href="#líder-de-equipo"># Líder de equipo</a></li><li class="toc-3"><a href="#candidato"># Candidato</a></li><li class="toc-3"><a href="#simpatizante"># Simpatizante</a></li><li class="toc-2"><a href="#resúmenes-por-correo"># Resúmenes por correo</a></li><li class="toc-3"><a href="#opciones-de-resumen"># Opciones de resumen</a></li><li class="toc-2"><a href="#comportamiento-de-las-notificaciones-el-día-de-elecciones"># Comportamiento de las notificaciones el día de elecciones</a></li><li class="toc-3"><a href="#cambios"># Cambios</a></li><li class="toc-3"><a href="#después-de-las-elecciones"># Después de las elecciones</a></li><li class="toc-2"><a href="#elementos-de-interfaz-relacionados-con-las-notificaciones"># Elementos de interfaz relacionados con las notificaciones</a></li><li class="toc-3"><a href="#contadores"># Contadores</a></li><li class="toc-3"><a href="#avisos-emergentes"># Avisos emergentes</a></li><li class="toc-3"><a href="#sonidos-de-notificación"># Sonidos de notificación</a></li><li class="toc-2"><a href="#no-molestar"># No molestar</a></li><li class="toc-2"><a href="#preguntas-abiertas"># Preguntas abiertas</a></li></ul></nav></div>
+</div>
+<script src="../../../../assets/search.js" defer></script>
+<script src="../../../../assets/app.js" defer></script>
+</body>
+</html>

@@ -38,11 +38,14 @@ npm run serve    # serve docs/ on port 8000
 
 ### Languages
 
-The site is bilingual. The 14 specification documents are available in Spanish, and an
-**EN / ES** switch sits in the top-right of the header on every page. Pages that aren't
-translated still show the switch, dimmed, pointing at the Spanish home page — so the
-Spanish edition is reachable from anywhere rather than appearing only on the pages that
-happen to have it.
+The site is bilingual. Available in Spanish: the 14 specification documents, the system
+architecture, the 17 ADRs plus the UX decisions record, and the 15 UX documents
+that aren't wireframes — 48 documents in
+all. The 23 wireframe documents and the project diary are still English only. An
+**EN / ES** switch sits in the top-right of the header on every page; pages that aren't
+translated still show it, dimmed, pointing at the Spanish home page, so the Spanish
+edition is reachable from anywhere rather than appearing only on the pages that happen
+to have it.
 
 Spanish sources live in `i18n/es/`, mirroring the English paths (`spec/product.md` →
 `i18n/es/spec/product.md`) and building to `docs/es/`. `i18n/GLOSSARY.md` holds the
@@ -129,7 +132,7 @@ GreenGrass/
 │   ├── ...                        # 002-015: security, identity, data, offline, etc.
 │   ├── 016-cross-cutting-resolutions.md  # Resolution of 89 open questions
 │   └── 017-sharing-contract-trust-model.md  # The contract as universal trust primitive
-├── diary/                         # Project diary (9 entries)
+├── diary/                         # Project diary (11 entries)
 ├── scripts/
 │   ├── build.mjs                  # Documentation site generator
 │   └── dev.sh                     # One-command local preview (install, build, serve)

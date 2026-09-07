@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="es" data-base="../../../" data-no-results="No hay resultados para">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Resumen del diseño de UX · GreenGrass</title>
+<meta name="description" content="Resumen del diseño de UX — Documentación de especificación y diseño de GreenGrass.">
+<link rel="alternate" hreflang="en" href="../../../design/ux/00-overview.html">
+<link rel="alternate" hreflang="es" href="./00-overview.html">
+<link rel="alternate" hreflang="x-default" href="../../../design/ux/00-overview.html">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%232563eb'/%3E%3Cstop offset='1' stop-color='%2316a34a'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='32' height='32' rx='7' fill='url(%23g)'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="../../../assets/styles.css">
+</head>
+<body>
+<a class="skip-link" href="#content">Saltar al contenido</a>
+<header class="site-header">
+  <button type="button" class="menu-toggle" aria-label="Alternar navegación" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+  <a class="brand" href="../../../es/index.html">
+    <span class="brand-mark" aria-hidden="true"></span>
+    <span class="brand-text"><strong>GreenGrass</strong><small>Especificación y diseño</small></span>
+  </a>
+  <div class="search">
+    <input type="search" id="search-input" placeholder="Buscar en la documentación…" autocomplete="off" aria-label="Buscar en la documentación">
+    <div id="search-results" class="search-results" hidden></div>
+  </div>
+  <nav class="lang-switch" aria-label="Idioma"><a class="lang-opt" href="../../../design/ux/00-overview.html" hreflang="en" lang="en" title="View this page in English">EN</a><span class="lang-opt active" aria-current="true">ES</span></nav>
+  <button type="button" class="theme-toggle" aria-label="Alternar modo oscuro" title="Alternar modo oscuro">
+    <span class="theme-icon" aria-hidden="true"></span>
+  </button>
+</header>
+<div class="layout">
+  <div class="sidebar-backdrop" hidden></div>
+  <aside class="sidebar" aria-label="Navegación de la documentación">
+    <nav class="nav">
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">Inicio<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../../index.html">GreenGrass</a></li></ul></div>
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">Especificaciones<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../../spec/product.html">Proyecto: GreenGrass</a></li><li><a href="../../spec/mvp.html">MVP de GreenGrass — plan de producto</a></li><li><a href="../../spec/users.html">Usuarios y roles</a></li><li><a href="../../spec/workflows.html">Flujos de trabajo principales</a></li><li><a href="../../spec/geography.html">Geografía objetivo</a></li><li><a href="../../spec/security.html">Seguridad y modelo de amenazas</a></li><li><a href="../../spec/compliance.html">Cumplimiento y marco legal</a></li><li><a href="../../spec/fundraising.html">Recaudación de fondos e infraestructura de pagos</a></li><li><a href="../../spec/integrations.html">Integraciones externas</a></li><li><a href="../../spec/support.html">Soporte y puesta en marcha de organizaciones</a></li><li><a href="../../spec/gotv.html">GOTV y operaciones del día de elecciones</a></li><li><a href="../../spec/messaging.html">Comunicaciones internas y notificaciones</a></li><li><a href="../../spec/press.html">Prensa, medios y comunicaciones públicas</a></li><li><a href="../../spec/comms-intelligence.html">Inteligencia de comunicaciones — hoja de ruta post-MVP</a></li></ul></div>
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">Arquitectura<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../architecture/system.html">Arquitectura del sistema</a></li></ul></div>
+<div class="nav-section open"><button type="button" class="nav-section-title" aria-expanded="true">Diseño UX<span class="chev" aria-hidden="true"></span></button><ul><li><a href="./00-overview.html" aria-current="page" class="active">Resumen del diseño de UX</a></li><li><a href="./01-information-architecture/navigation-model.html">Modelo de navegación</a></li><li><a href="./01-information-architecture/screen-inventory.html">Inventario de pantallas</a></li><li><a href="./01-information-architecture/persona-views.html">Vistas por arquetipo</a></li><li><a href="./01-information-architecture/url-structure.html">Estructura de URL</a></li><li><a href="./02-global-patterns/pattern-catalog.html">Catálogo de patrones</a></li><li><a href="./02-global-patterns/offline-sync-patterns.html">Patrones sin conexión y de sincronización</a></li><li><a href="./02-global-patterns/notification-patterns.html">Patrones de notificaciones</a></li><li><a href="./02-global-patterns/search-patterns.html">Patrones de búsqueda</a></li><li><a href="./02-global-patterns/settings-help-patterns.html">Patrones de ajustes y ayuda</a></li><li><a href="./02-global-patterns/security-ux-patterns.html">Patrones de UX de seguridad</a></li><li><a href="./03-design-system/foundations.html">Fundamentos del sistema de diseño</a></li><li><a href="./03-design-system/theming-strategy.html">Estrategia de temas</a></li><li><a href="./03-design-system/component-inventory.html">Inventario de componentes</a></li><li><a href="./03-design-system/responsive-strategy.html">Estrategia de diseño adaptable</a></li></ul></div>
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">Decisiones<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../../decisions/001-platform-architecture.html">ADR-001: Arquitectura y despliegue de la plataforma</a></li><li><a href="../../decisions/002-security-threat-model.html">ADR-002: Seguridad y modelo de amenazas</a></li><li><a href="../../decisions/003-identity-access-organization.html">ADR-003: Identidad, acceso y organización</a></li><li><a href="../../decisions/004-data-model-integrity.html">ADR-004: Modelo de datos e integridad</a></li><li><a href="../../decisions/005-offline-first-sync.html">ADR-005: Prioridad sin conexión y sincronización</a></li><li><a href="../../decisions/006-field-operations-gotv.html">ADR-006: Operaciones de campo y GOTV</a></li><li><a href="../../decisions/007-fundraising-payments.html">ADR-007: Recaudación de fondos y pagos</a></li><li><a href="../../decisions/008-communications-messaging.html">ADR-008: Comunicaciones y mensajería</a></li><li><a href="../../decisions/009-compliance-legal.html">ADR-009: Cumplimiento y marco legal</a></li><li><a href="../../decisions/010-internationalization-localization.html">ADR-010: Internacionalización y localización</a></li><li><a href="../../decisions/011-design-system-ux.html">ADR-011: Sistema de diseño y fundamentos de UX</a></li><li><a href="../../decisions/012-external-integrations.html">ADR-012: Integraciones externas</a></li><li><a href="../../decisions/013-analytics-ai.html">ADR-013: Analítica e IA</a></li><li><a href="../../decisions/014-volunteer-onboarding.html">ADR-014: Voluntariado e incorporación</a></li><li><a href="../../decisions/015-product-scope.html">ADR-015: Límites del alcance del producto</a></li><li><a href="../../decisions/016-cross-cutting-resolutions.html">ADR-016: Resoluciones transversales</a></li><li><a href="../../decisions/017-sharing-contract-trust-model.html">ADR-017: El contrato de intercambio como primitiva universal de confianza</a></li><li><a href="../../decisions/ux-decisions.html">Decisiones de UX — fase de wireframes</a></li></ul></div>
+    </nav>
+  </aside>
+  <main id="content" class="content">
+    <nav class="breadcrumb" aria-label="Ruta de navegación">Diseño UX</nav>
+    <article class="prose">
+<h1 id="resumen-del-diseño-de-ux" tabindex="-1"><a class="heading-anchor" href="#resumen-del-diseño-de-ux" aria-hidden="true">#</a> Resumen del diseño de UX</h1>
+<h2 id="propósito" tabindex="-1"><a class="heading-anchor" href="#propósito" aria-hidden="true">#</a> Propósito</h2>
+<p>Este directorio contiene los artefactos de diseño de UX de GreenGrass — una plataforma para gestionar elecciones políticas de base en el Sur Global. La fase de diseño de UX viene después de completar 12 especificaciones de producto y un documento de arquitectura del sistema.</p>
+<p>El reto central de UX: 10 arquetipos distintos, en contextos radicalmente diferentes, comparten una sola aplicación. Un voluntario que toca puertas con un Android de gama baja en la India rural necesita una interfaz completamente distinta de la de un Administrador de la organización que configura los ajustes de cumplimiento en una computadora de escritorio en Puerto Rico. La UX tiene que servir a los dos sin ceder con ninguno.</p>
+<h2 id="orden-de-lectura" tabindex="-1"><a class="heading-anchor" href="#orden-de-lectura" aria-hidden="true">#</a> Orden de lectura</h2>
+<h3 id="fase-1-arquitectura-de-la-información" tabindex="-1"><a class="heading-anchor" href="#fase-1-arquitectura-de-la-información" aria-hidden="true">#</a> Fase 1: arquitectura de la información</h3>
+<p>Empieza aquí. Los documentos de arquitectura de la información definen la estructura global de la que cuelga todo lo demás.</p>
+<ol>
+<li>
+<p><strong><a href="./01-information-architecture/navigation-model.html">Modelo de navegación</a></strong> — Cómo la plataforma organiza sus funcionalidades en una estructura navegable. Define el marco de escritorio (híbrido: barra superior + barra lateral), la disposición en móvil (pestañas inferiores) y el modo de campo (pantalla completa exclusiva). El documento de arquitectura de la información más importante.</p>
+</li>
+<li>
+<p><strong><a href="./01-information-architecture/screen-inventory.html">Inventario de pantallas</a></strong> — Catálogo completo de todas las pantallas de la plataforma (~236 pantallas en 21 áreas funcionales). Cada entrada identifica los arquetipos, la capacidad de funcionar sin conexión y la optimización para móvil. La referencia maestra para el trabajo de wireframes y la definición del alcance de la implementación.</p>
+</li>
+<li>
+<p><strong><a href="./01-information-architecture/persona-views.html">Vistas por arquetipo</a></strong> — Cómo la plataforma se muestra distinta para cada uno de los 10 arquetipos. Define las pantallas de inicio, las secciones de la barra lateral, las pestañas en móvil y lo que cada arquetipo <em>no</em> ve. La especificación de la &quot;UX adaptable al rol&quot;.</p>
+</li>
+<li>
+<p><strong><a href="./01-information-architecture/url-structure.html">Estructura de URL</a></strong> — Mapea el inventario de pantallas a las rutas de SvelteKit. Define seis layout groups (grupos de rutas que comparten un marco, sin afectar la URL) — public, auth, app, field-mode, portal, wizard —, los patrones de enrutamiento, las guardias de autenticación y las rutas capaces de funcionar sin conexión.</p>
+</li>
+</ol>
+<h3 id="fase-2-patrones-globales" tabindex="-1"><a class="heading-anchor" href="#fase-2-patrones-globales" aria-hidden="true">#</a> Fase 2: patrones globales</h3>
+<p>Patrones de interfaz recurrentes que aplican a toda la plataforma.</p>
+<ol start="5">
+<li>
+<p><strong><a href="./02-global-patterns/pattern-catalog.html">Catálogo de patrones</a></strong> — 20 patrones de interfaz recurrentes: vistas de lista, vistas de detalle, constructores, formularios, asistentes, paneles, mapas, herramientas de registro de entrada, modo de campo y más. Aspectos transversales: estados vacíos, estados de carga, estados de error, accesibilidad.</p>
+</li>
+<li>
+<p><strong><a href="./02-global-patterns/offline-sync-patterns.html">Patrones sin conexión y de sincronización</a></strong> — Cinco estados de conexión, indicadores de actualidad de los datos, cola de cambios pendientes, resolución de conflictos, estrategia de precarga, atención al consumo de batería y de datos, ciclo de vida de la sincronización del turno.</p>
+</li>
+<li>
+<p><strong><a href="./02-global-patterns/notification-patterns.html">Patrones de notificaciones</a></strong> — Centro de notificaciones, cuatro niveles de prioridad, canales de entrega (en la aplicación, push, correo, SMS), valores predeterminados por arquetipo, resúmenes por correo, comportamiento de las notificaciones el día de elecciones, No molestar.</p>
+</li>
+<li>
+<p><strong><a href="./02-global-patterns/search-patterns.html">Patrones de búsqueda</a></strong> — Búsqueda global con búsqueda predictiva, búsqueda contextual por área funcional, patrones de filtrado, búsquedas guardadas, restricciones que el cifrado impone a la búsqueda (organizaciones con BYOK — Bring Your Own Key, la organización controla su propia llave de cifrado).</p>
+</li>
+<li>
+<p><strong><a href="./02-global-patterns/settings-help-patterns.html">Patrones de ajustes y ayuda</a></strong> — Jerarquía de ajustes en tres niveles (organización/funcionalidad/personal), paneles de ayuda contextual, base de conocimiento, concierge de IA, cambio de idioma, flujos de incorporación, atajos de teclado.</p>
+</li>
+<li>
+<p><strong><a href="./02-global-patterns/security-ux-patterns.html">Patrones de UX de seguridad</a></strong> — Reglas de saneamiento del modo de coacción por área funcional, ceremonia de generación de la llave BYOK, comportamiento del botón de pánico, flujos de autenticación con passkey, gestión de sesiones, recuperación mediante contactos de confianza, autorización de dispositivos.</p>
+</li>
+</ol>
+<h3 id="fase-3-fundamentos-del-sistema-de-diseño" tabindex="-1"><a class="heading-anchor" href="#fase-3-fundamentos-del-sistema-de-diseño" aria-hidden="true">#</a> Fase 3: fundamentos del sistema de diseño</h3>
+<p>Los fundamentos visuales y de componentes.</p>
+<ol start="11">
+<li>
+<p><strong><a href="./03-design-system/foundations.html">Fundamentos del sistema de diseño</a></strong> — Escala de espaciado de 8px, sistema de tokens de color semántico, escala tipográfica Inter, cuadrícula de 4/8/12 columnas, capas de elevación, radio de borde, iconografía Lucide, tokens de movimiento, escala de z-index, modos de densidad.</p>
+</li>
+<li>
+<p><strong><a href="./03-design-system/theming-strategy.html">Estrategia de temas</a></strong> — Identidad visual por organización (color + logo), generación automática de colores derivados, cascada de propiedades personalizadas de CSS, RTL mediante propiedades lógicas de CSS, mapeo de tokens del modo oscuro, modo de alto contraste, modo de texto grande, movimiento reducido, capas de composición del tema.</p>
+</li>
+<li>
+<p><strong><a href="./03-design-system/component-inventory.html">Inventario de componentes</a></strong> — ~125 componentes en 13 categorías: primitivas, tipografía, botones, formularios, maquetación, navegación, presentación de datos, retroalimentación, superposiciones, mensajería, modo de campo, panel, especializados. Convenciones de nombres, definiciones de estado, patrones de composición.</p>
+</li>
+<li>
+<p><strong><a href="./03-design-system/responsive-strategy.html">Estrategia de diseño adaptable</a></strong> — Cinco puntos de quiebre (640/768/1024/1280/1536px), CSS con prioridad móvil, tablas de adaptación de componentes, uso de las API nativas de Capacitor, áreas seguras, presupuestos de rendimiento (150KB de JS, 2s de FCP en 3G), estrategia de división de código, matriz de pruebas.</p>
+</li>
+</ol>
+<h3 id="fase-4-wireframes" tabindex="-1"><a class="heading-anchor" href="#fase-4-wireframes" aria-hidden="true">#</a> Fase 4: wireframes</h3>
+<p>Especificaciones de pantalla detalladas, con wireframes en ASCII para las pantallas y los flujos clave. Listas para implementar. Los documentos de wireframes están todavía solo en inglés, así que estos enlaces llevan a las páginas en inglés.</p>
+<ol start="15">
+<li>
+<p><strong><a href="../../../design/ux/04-wireframes/navigation-shell/navigation-shell.html">Marco de navegación</a></strong> — Marco de escritorio (barra lateral desplegada/plegada, panel de detalle, bandeja de notificaciones, RTL), marco móvil (barras de pestañas por arquetipo, menú hamburguesa, hoja inferior &quot;Más&quot;), marco del modo de campo (lista de recorrido, ficha de puerta, mapa, ciclo de vida del turno), marco del asistente, marco del portal de simpatizantes. Transiciones entre puntos de quiebre, especificaciones de interacción, notas de accesibilidad.</p>
+</li>
+<li>
+<p><strong><a href="../../../design/ux/04-wireframes/dashboards/dashboards.html">Paneles</a></strong> — Los 11 paneles: Panel general de la campaña (Administrador de la organización), Panel de operaciones de campo (Director de campo), Panel de recaudación de fondos (Director de finanzas), Panel de comunicaciones (Director de comunicaciones), Panel de voluntarios (Coordinador de voluntarios), Panel de calidad de datos (Gestor de datos), Panel de cumplimiento (Director de finanzas), Panel del centro de mando de GOTV (Get Out The Vote — movilización del voto; día de elecciones, actualización automática, modo oscuro), Panel del líder de equipo, Panel del candidato (curado y simplificado), Panel de la alianza (referencia cruzada). Estados vacíos, esqueletos de carga.</p>
+</li>
+<li>
+<p><strong><a href="../../../design/ux/04-wireframes/field-mode/field-mode.html">Modo de campo</a></strong> — Ciclo de vida completo del turno: verificación previa al turno, lista de recorrido (vistas de lista y de mapa), ficha de puerta con guion y captura de la respuesta, preguntas de seguimiento, resultado rápido &quot;No estaba&quot;. Variante de jornada de llamadas, variante de inscripción de votantes, ficha de puerta de GOTV, flujo de solicitud de transporte. Confirmación de fin de turno, pantalla de sincronización, balance del turno. Recuperación tras un fallo. Especificaciones de las áreas táctiles.</p>
+</li>
+<li>
+<p><strong><a href="../../../design/ux/04-wireframes/onboarding/onboarding.html">Puesta en marcha e incorporación</a></strong> — Asistente de configuración de la organización (5 pasos: autenticación, perfil de la organización, invitaciones al equipo, configuración, revisión y lanzamiento), Incorporación de voluntarios (4 pasos: cuenta, recorrido, capacitación, listo), Asistente de generación de llaves BYOK (5 pasos, con el reparto de secreto de Shamir). Lista de verificación &quot;Primeros pasos&quot; posterior al asistente.</p>
+</li>
+<li>
+<p><strong><a href="../../../design/ux/04-wireframes/messaging/messaging.html">Mensajería</a></strong> — Vista dividida en escritorio (lista de conversaciones + hilo), flujos a pantalla completa en móvil, redacción, informes al candidato (estructurados y con formato), solicitudes de aprobación (aprobar/rechazar/comentar en línea), canal del centro de mando (día de elecciones, alertas del sistema, reportes de problemas), mensajería sin conexión, indicadores de cifrado.</p>
+</li>
+<li>
+<p><strong><a href="../../../design/ux/04-wireframes/supporter/supporter-portal.html">Portal de simpatizantes</a></strong> — Página pública de donación (sin autenticación, con la identidad visual de la organización), confirmación de la donación, inicio del portal, historial de donaciones con gestión de las recurrentes, eventos con confirmación de asistencia, preferencias de comunicación, página pública del evento. Niveles de autenticación: enlace mágico y cuenta completa.</p>
+</li>
+<li>
+<p><strong><a href="../../../design/ux/04-wireframes/alliance/alliance.html">Alianza</a></strong> — Panel de la alianza (métricas agregadas + desglose por organización, escritorio + móvil), Lista de miembros con panel de detalle, Formulario y cola de solicitudes de afiliación, Configuración del intercambio (vistas por categoría y por organización), Asistente de configuración de campaña conjunta (4 pasos, 4 tipos de campaña, 3 modelos de gobernanza), Analítica compartida (gráficos y tablas entre organizaciones), Coordinación de GOTV en la alianza (centro de mando entre organizaciones el día de elecciones). Estados vacíos para cuando no hay alianza, para la afiliación pendiente y para la alianza nueva.</p>
+</li>
+<li>
+<p><strong><a href="../../../design/ux/04-wireframes/crm/crm.html">CRM / Personas</a></strong> — Lista de contactos (filtrable, con columnas adaptables al arquetipo, escritorio + móvil), Detalle del contacto (registro unificado con pestañas propias de cada arquetipo, línea de tiempo de actividad, parcial sin conexión), Crear/editar contacto (revelación progresiva, detección de duplicados al guardar), Constructor de segmentos (constructor visual de consultas con vista previa en vivo), Lista de segmentos, Cola de revisión de deduplicación (agrupada por confianza), Comparación lado a lado de la deduplicación (fusión campo por campo con vista previa), Asistente de importación de datos (4 pasos: carga, mapeo de columnas, vista previa de la deduplicación, confirmación), Historial de importaciones, Exportación de datos (selección de campos, elección de formato, registrada en la auditoría), Informe de calidad de datos (desglose del puntaje, completitud por campo, problemas de validez, datos desactualizados), Gestión de etiquetas. Estados vacíos.</p>
+</li>
+<li>
+<p><strong><a href="../../../design/ux/04-wireframes/field-ops/field-ops.html">Operaciones de campo (administración)</a></strong> — Trabajo de campo: Lista y creación/edición de campañas, Constructor de guiones (panel dividido con vista previa en vivo, lógica de ramificación, mapeo de puntajes), Mapa de gestión de territorios (dibujar, seleccionar y asignar territorios, código de color por avance), Generación automática de territorios (por restricciones, con vista previa), Gestión de listas de recorrido (asignar y reasignar voluntarios), Revisión de resultados (desglose por territorio, distribución del apoyo, interacciones marcadas), Mapa de avance (vista geográfica a todo el ancho con las posiciones de los voluntarios activos). Jornadas de llamadas: Lista y creación/edición de campañas (BYOP —Bring Your Own Phone, se usan los celulares personales de los voluntarios— o marcador integrado, listas de llamadas por segmento con exclusiones), Constructor de guiones (compartido con el trabajo de campo + pasos propios del teléfono), Panel de avance (actividad de quien llama en tiempo real, resultados de las llamadas, puntajes de apoyo). Inscripción de votantes: Lista y creación/edición de jornadas (según la jurisdicción), Selector de plantilla de jurisdicción (formularios de inscripción por país con reglas de elegibilidad), Revisión de resultados (avance de la inscripción, flujo de seguimiento, problemas de datos). Estados vacíos.</p>
+</li>
+<li>
+<p><strong><a href="../../../design/ux/04-wireframes/fundraising/fundraising.html">Recaudación de fondos (administración)</a></strong> — Lista y detalle de donaciones (filtrables, multimoneda, variante de donación marcada), Constructor de formularios de donación (panel dividido con vista previa en vivo, configuración de montos, campos del donante, apariencia, métodos de pago), Vista previa del formulario, Configuración de incrustación (tipos en línea, modal y botón, lista de dominios permitidos), Lista y creación/edición de campañas de recaudación (seguimiento de la meta, formularios y comunicaciones vinculados), Gestión de donaciones recurrentes (métricas de MRR, ciclo de vida del estado, historial de cobros, pausa y cancelación desde administración), Gestión de promesas de donación (ciclo de vida de la promesa, programación de recordatorios, vinculación con el cumplimiento), Procesamiento de reembolsos (total o parcial, reversión del reparto de la alianza, manejo manual del efectivo), Registro de donaciones en efectivo (con prioridad móvil, capaz de funcionar sin conexión, foto del recibo), Conciliación de efectivo (cotejo en dos columnas, seguimiento de discrepancias), Revisión de marcas de cumplimiento (ordenada por gravedad, indicadores de fraude, acciones de aprobar, reembolsar y bloquear), Configuración y resultados de pruebas A/B (configuración de variantes, seguimiento de la significancia estadística), Configuración del reparto de la alianza (tipos por porcentaje, fijo y por umbral, aprobación unánime), Informe de recaudación de la alianza (desglose por organización, historial de desembolsos), Configuración del procesador de pagos (flujo de conexión guiado, transacciones de prueba, seguridad de las credenciales), Generador de estados de cuenta anuales (generación masiva, envío por correo, descarga en PDF). Estados vacíos.</p>
+</li>
+<li>
+<p><strong><a href="../../../design/ux/04-wireframes/communications/communications.html">Comunicaciones</a></strong> — Lista de campañas de correo (ciclo de vida del estado, métricas en línea), Constructor de campañas de correo (secciones de configuración, audiencia, contenido y envío, selección de plantilla, tokens de personalización, lista de verificación previa al envío, pruebas A/B del asunto, variante de campaña automatizada), Constructor de plantillas de correo (por bloques, con arrastrar y soltar, edición en línea, pie de cumplimiento), Biblioteca de plantillas de correo (cuadrícula de tarjetas con miniaturas y categorías), Redactor de SMS/WhatsApp (selector de canal, contador de caracteres con seguimiento de segmentos, botones de respuesta rápida de WhatsApp, control de la hora del día, verificación de los topes de frecuencia), Analítica de comunicaciones (resumen entre canales, tabla de rendimiento del correo, gráficos de tendencia, salud de la audiencia), Gestión del consentimiento (matriz de canal × finalidad, seguimiento del vencimiento del consentimiento, solicitudes de renovación, reglas predeterminadas por origen del contacto), Preferencias de comunicación (topes de frecuencia, horas de silencio con sobrescritura para GOTV, avisos legales de cumplimiento, identidades de remitente), Gestión de bajas (registro del motivo, alta manual de nuevo con auditoría), Configuración del dominio de envío de correo (generación de registros DNS, verificación de SPF/DKIM/DMARC). Estados vacíos.</p>
+</li>
+<li>
+<p><strong><a href="../../../design/ux/04-wireframes/social-media/social-media.html">Redes sociales</a></strong> — Panel de redes sociales (cuentas conectadas con la cantidad de seguidores, métricas de rendimiento de la semana, próximas publicaciones programadas, publicaciones recientes con la interacción en todas las plataformas), Redactor de publicaciones (multiplataforma con sobrescrituras por plataforma, contadores de caracteres, medios con notas de recorte, avisos legales de cumplimiento, programación, enrutamiento de aprobaciones), Calendario de publicaciones (vistas de mes, semana y lista, reprogramar arrastrando, panel de detalle del día), Analítica de publicaciones (detalle por publicación con desglose por plataforma y gráfico de rendimiento de 48 horas, analítica agregada con comparación entre plataformas y mejores horarios para publicar), Conexión de cuentas de redes sociales (flujo de OAuth, estado del token, permisos concedidos), Vista previa por plataforma (vistas previas lado a lado con advertencias por plataforma). Estados vacíos.</p>
+</li>
+<li>
+<p><strong><a href="../../../design/ux/04-wireframes/events/events.html">Eventos</a></strong> — Lista de eventos (vistas adaptables al arquetipo: administración frente a voluntarios y simpatizantes, iconos por tipo de evento, indicadores de capacidad), Crear/editar evento (selector de presencial, virtual o híbrido, ajustes de confirmación de asistencia con modos abierto, solo por invitación y con aprobación, capacidad con lista de espera, recordatorios, enlaces de promoción, asignación de personal, integración con la recaudación de fondos, medios), Detalle del evento (vista de administración con resumen de confirmaciones, personal e hilo de discusión; vista de voluntario con acción de confirmar, calendario e indicaciones; variante de resultado posterior al evento), Gestión de confirmaciones de asistencia (lista completa con variante de cola de aprobación, acciones masivas, seguimiento de acompañantes), Herramienta de registro de entrada (con prioridad móvil, capaz de funcionar sin conexión, contador de avance, lista alfabética con tocar para registrar la entrada, modo de escaneo de QR con la cámara, inscripción en el momento, áreas táctiles de 56px, retroalimentación háptica, deshacer durante 10 segundos), Métricas del evento (métricas de confirmaciones, asistencia, entradas en el momento y tasa de asistencia; desglose por origen de la confirmación, gráfico de la línea de tiempo de registros de entrada, datos de recaudación, impacto en el CRM, comparación con eventos similares, botones de acción posteriores al evento), Configuración de evento virtual (selección de plataforma, generación de enlaces únicos para el seguimiento de la asistencia, difusión de la grabación), Constructor de encuestas posteriores al evento (6 tipos de pregunta, reordenar arrastrando, visualización de resultados con la distribución de respuestas, vinculación con el CRM de quienes muestran interés en ser voluntarios). Estados vacíos.</p>
+</li>
+<li>
+<p><strong><a href="../../../design/ux/04-wireframes/press/press.html">Prensa y medios</a></strong> — Lista y detalle de contactos de medios (campos de CRM propios de prensa, puntos de relación, historial de interacción con la línea de tiempo de propuesta, respuesta y cobertura, tasa de éxito de las propuestas), Gestión de listas de medios (listas dinámicas por criterios y listas estáticas curadas), Constructor de comunicados de prensa (panel dividido con plantilla estructurada: titular, lugar y fecha, cuerpo, citas, texto institucional y contacto; soporte de embargo informativo, versionado, aviso legal de cumplimiento, flujo de aprobación), Vista previa del comunicado de prensa (formato completo de distribución), Distribución del comunicado de prensa (lista de medios + selección individual, personalización, adjuntos, seguimiento del embargo), Constructor de avisos a medios (plantilla estructurada QUIÉN/QUÉ/CUÁNDO/DÓNDE con relleno automático desde el evento), Constructor de declaraciones (respuesta rápida simplificada, marca de urgente con notificación push, salto de aprobación de emergencia para el OA y el CD), Gestión del kit de prensa (tarjetas de recurso con niveles de acceso público y restringido, el acceso restringido crea contactos en el CRM, seguimiento de descargas), Registro de cobertura (entrada manual con titular, medio, periodista, tono, formato y temas, vinculada a la propuesta o al comunicado), Analítica de cobertura (distribución del tono, desglose por formato, análisis de temas, tasa de propuesta a cobertura, capacidad de respuesta de los periodistas, cobertura a lo largo del tiempo), Flujo de respaldos (kanban: identificado → contactado → considerando → comprometido → público, arrastrar y soltar, &quot;Público&quot; dispara el flujo de anuncio con comunicado de prensa + publicación en redes), Detalle del respaldo (avance de la etapa, perfil de quien respalda, cita, foto, línea de tiempo, asignación), Biblioteca de puntos de mensaje (acordeón organizado por tema, versionado con diferencias, distribución al equipo por mensajería, integración con los informes al candidato), Agenda de entrevistas (pestañas de próximas, pasadas y solicitudes; preparación armada automáticamente con puntos de mensaje + historial del periodista + cobertura reciente del medio; aceptar, rechazar o responder las solicitudes; registro del resultado tras la entrevista), Configuración de voceros (voceros designados con sus áreas temáticas, reglas de enrutamiento de contactos, información de contacto de prensa para los comunicados). Estados vacíos.</p>
+</li>
+<li>
+<p><strong><a href="../../../design/ux/04-wireframes/activism/activism.html">Activismo</a></strong> — Lista de campañas de activismo (tipos carta/correo, petición y comentario público, con métricas propias de cada tipo), Configuración de acción de cartas/correos (información del destinatario, puntos de mensaje con orden de prioridad para la IA, mensaje de plantilla, configuración de la página pública), Configuración de petición (texto de la petición, meta de firmas con comportamiento al alcanzarla, campos de información del firmante con controles de visibilidad), Configuración de campaña de comentarios públicos (organismo regulador, número de expediente, fecha límite con cierre automático, método de envío: directo por la plataforma, descarga manual o ambos), Página de acción — pública (flujo de dos pasos con prioridad móvil: datos del simpatizante → generación del mensaje con IA; contador de acciones como prueba social, aviso legal de cumplimiento con la identidad visual de la organización), Página de petición — pública (firma con prioridad móvil y barra de avance, texto de la petición truncado con opción de desplegar, firmas recientes con presentación que preserva la privacidad), Vista previa de mensajes generados por IA (mensaje único escrito por la IA a partir de los puntos de mensaje + la conexión personal, casilla de aprobación explícita, editar, regenerar o volver a la plantilla, límite de 3 regeneraciones, revelación de transparencia), Analítica de campañas de activismo (métricas propias de cada tipo, gráfico de acciones a lo largo del tiempo, mapa y tabla de distribución geográfica, flujo de acciones por simpatizante con enlaces al CRM, lectura de los mensajes), Documentación del acto de entrega (método, lugar y destinatario de la entrega; evidencia fotográfica con captura desde la cámara, documentos adjuntos, seguimiento de la respuesta del destinatario, personal presente, vinculación con la cobertura de prensa relacionada, soporte parcial sin conexión). Estados vacíos.</p>
+</li>
+<li>
+<p><strong><a href="../../../design/ux/04-wireframes/gotv/gotv.html">Administración de GOTV</a></strong> — Constructor del universo GOTV (constructor de segmentos por criterios con reglas de inclusión y exclusión, filtros de puntaje de apoyo e historial de voto, desglose geográfico, segmentación por niveles para el orden de prioridad, flujo de finalizar y bloquear), Carga de datos de voto adelantado (carga de CSV/Excel con mapeo de columnas, ID de votante como llave principal de cruce con nombre + fecha de nacimiento como alternativa, vista previa del cruce con su impacto en el universo, cargas acumulativas con historial y deshacer), Configuración de los puntos de concentración de voluntarios (mapa con marcadores de ubicación + panel de detalle, seguimiento de la capacidad con barra visual, persona de contacto y horario, lista de suministros personalizable, lista del equipo de voluntarios por punto), Corte de territorios para GOTV (mapa interactivo con herramientas de dibujar, seleccionar y dividir; superposición de mapa de calor de densidad de simpatizantes; generación automática con parámetros configurables: contactos por territorio, tiempo máximo de recorrido, prioridad de optimización; programación en varias pasadas para la mañana, la tarde y la noche; asignación de voluntarios; corte dinámico el día de elecciones), Plan de comunicaciones del día de elecciones (línea de tiempo visual de las oleadas de comunicación; configuración por oleada: hora, disparador automático o manual, canal SMS/WhatsApp/correo, segmentación de la audiencia con filtro dinámico de &quot;quién no ha votado&quot;, tokens de personalización, botones de respuesta rápida de WhatsApp, sobrescritura de las horas de silencio para GOTV, controles de envío en vivo el día de elecciones), Registro de observadores electorales (lista con distintivos de estado ○◐●, centros de votación asignados y de reserva, requisitos y avisos de fecha límite por jurisdicción, exportación de la lista del equipo para la presentación), Seguimiento de credenciales de observadores electorales (número de credencial, fechas y carga del documento, estado de la verificación, resumen imprimible), Coordinación de transporte — Vista del despachador (mapa + panel dividido con las solicitudes pendientes y los conductores disponibles, orden de prioridad con marcas de urgencia por tiempo de espera y accesibilidad, emparejamiento inteligente de conductores por proximidad, vehículo y carga de trabajo, optimización con varios pasajeros, seguimiento del estado: Pendiente → Asignado → En camino → Transportando → Completado, actualización automática, varias fuentes de solicitudes), Cola de problemas de observadores electorales (ordenada por gravedad: Crítica/Alta/Media con distintivos de color e icono; filtro por categoría: Acceso al voto/Equipos/Violación de campaña/Tiempos de espera/Accesibilidad/Intimidación; detalle del problema con evidencia en foto y video, escalamiento a legal, protección electoral o comisión electoral; notas internas con marca de tiempo, registro de auditoría de la resolución, actualización automática con notificación sonora para las críticas), Panel de participación — Vista de mapa (mapa coroplético a todo el ancho con código de color por tasa de participación de rojo a verde en relación con la meta, interruptores de superposición para los límites de territorio, quienes hacen trabajo de campo, los puntos de concentración y los centros de votación; panel de detalle al hacer clic en un territorio con la cantidad de votos por nivel y la confianza de la fuente de datos, actualización automática cada 60s), Panel de participación — Vista por segmentos (tabla con la participación por nivel de apoyo, geografía, demografía y criterios propios; meta frente a real con columna de brecha y marcas ⚠; gráfico de participación a lo largo del tiempo con línea punteada del ritmo objetivo; desglose hasta el contacto individual), Sugerencias de reasignación (sugerencias priorizadas que genera la plataforma: turnos de trabajo de campo, refuerzos de jornadas de llamadas, SMS dirigidos, cada una con la justificación y los datos concretos que la sostienen; controles de aprobar, modificar y rechazar; registro de auditoría de lo ya accionado; regenerar con los datos más recientes), Ingreso de resultados de la noche electoral (ingreso numérico con prioridad móvil por carrera y por centro, candidaturas prellenadas desde la configuración del equipo, estado parcial o final, validación contra la cantidad de votantes inscritos, marca de tiempo registrada automáticamente), Panel de resultados de la noche electoral (gráfico de barras por candidatura con votos y porcentajes, seguimiento del avance del reporte, gráfico de la línea de tiempo de resultados con la tendencia a medida que llegan, tabla por centro con su estado, comparación interna contra las predicciones de los puntajes de apoyo, alternancia a vista de mapa, pestañas por carrera, actualización automática cada 30 segundos), Análisis posterior a la elección (por pestañas: Participación con tablas por segmento y región y comparación con la meta; Operaciones con métricas de puertas tocadas, llamadas y transportes y tasas de contacto por región; Voluntarios con el rendimiento de cada persona; Validación del modelo comparando los puntajes de apoyo con la participación real y una evaluación de la precisión; Recursos con la utilización de los puntos de concentración y la eficiencia operativa; exportación a PDF), Registro de entrada en el punto de concentración (con prioridad móvil, para el Líder de equipo; contador de avance con barra visual, lista de quienes no han registrado la entrada priorizada con teléfonos y territorios asignados, tocar para registrar la entrada con confirmación háptica y deshacer durante 10 segundos, opción de escaneo de QR, áreas táctiles de 56px, reportar un problema y contactar al Director de campo). Estados vacíos. Referencias cruzadas: DASH-008 Panel del centro de mando de GOTV, las pantallas de modo de campo de GOTV (Ficha de puerta, Lista de recorrido, Llamada de seguimiento), ALLY-008 Coordinación de GOTV en la alianza.</p>
+</li>
+<li>
+<p><strong><a href="../../../design/ux/04-wireframes/settings/settings.html">Ajustes y administración</a></strong> — Perfil e identidad visual de la organización (nombre y nombre corto, carga del logo con vista previa de tamaños, selector de color primario y de acento con vista previa en vivo, idioma predeterminado e idiomas adicionales, zona horaria), Editor de plantillas de rol (plantillas del sistema y propias, matriz de permisos con las áreas funcionales como filas y Ver/Crear/Editar/Borrar/Exportar/Administrar como columnas, secciones de funcionalidad plegables, clonar y restablecer los valores predeterminados, cantidad de miembros por rol), Panel de ajuste de permisos (ajustes por persona, solo aditivos, con motivo obligatorio para el registro de auditoría y seguimiento de quién los añadió), Lista de gestión del personal (filtrable por rol y estado, distintivos de Activo/Invitado/Desactivado, acciones de fila: editar el rol, reenviar la invitación, restablecer el passkey, desactivar, ver los ajustes de permisos, ver la actividad), Flujo de invitación del personal (correo + nombre, selección de rol con un resumen en lenguaje llano de lo que puede y no puede hacer, restricción opcional del ámbito geográfico a determinadas regiones), Configuración del ámbito geográfico (mapa con regiones sombreadas + lista de regiones con la cantidad de contactos, selector del nivel de jurisdicción: País/Estado/Distrito/Municipio/Precinto/Propio), Configuración del período de campaña (nombre de la campaña, fechas de inicio, fin y elección, estado con cuenta de días, archivo de los períodos anteriores), Configuración de cumplimiento (selección de jurisdicción y marco, lista de reglas aplicadas con las exigidas por la jurisdicción bloqueadas, comportamiento de la aplicación: bloquear, advertir o marcar), Configuración de límites de contribución (tabla de límites por tipo de donante y por ciclo: Individual/Empresa/PAC/Autofinanciamiento, método de agregación, comportamiento al superar el límite: bloquear, marcar o aceptar parcialmente), Configuración del texto del aviso legal (aviso principal con casillas de aplicación por canal, avisos adicionales, traducciones por idioma), Política de conservación de datos (reglas de conservación por tipo de dato con el plazo y la acción al vencer: borrado automático, archivo o manual; comportamiento de limpieza posterior a la campaña, conservación mínima por cumplimiento), Centro de ajustes de integraciones (cuadrícula de tarjetas por categoría: Comunicaciones/Redes sociales/Pagos/Mapas/Video, con estado, proveedor y hora de la última sincronización por tarjeta), Configuración de WhatsApp Business (número de teléfono, token de la API, prueba de conexión, gestión de plantillas de mensaje con su estado de aprobación), Configuración del proveedor de SMS (selección de proveedor, credenciales, números de teléfono, prueba de entrega), Configuración del dominio de correo (referencia cruzada a COMM-010, registros DNS, verificación de SPF/DKIM/DMARC), Conexiones de cuentas de redes sociales (referencia cruzada a SOCIAL-005, OAuth por plataforma), Facturación y suscripción (plan actual con métricas de uso, método de pago, historial de facturación con descarga de facturas, contacto de facturación), Visor del registro de auditoría (bitácora de todas las acciones de los usuarios, con búsqueda y filtros: inicios de sesión, exportaciones, cambios de permisos, cambios de ajustes; detalle de fila desplegable con la IP y el agente de usuario; no se puede borrar y es a prueba de manipulación; exportación a CSV/JSON), Ajustes de seguridad (tres niveles Estándar/Reforzado/Máximo, requisitos de passkey y MFA, tiempo de expiración de la sesión, lista de IP permitidas con exención para el modo de campo, alertas por correo de respuesta a incidentes ante inicios de sesión, exportaciones y cambios de permisos sospechosos; secciones plegadas de modo de coacción y recuperación por contacto de confianza), Gestión de llaves de cifrado (BYOK para el nivel Máximo, llave actual con algoritmo, estado y quiénes tienen las partes de Shamir; ceremonia de rotación de llaves que exige 3 de 5, exportación de la copia de seguridad cifrada de la llave, historial de llaves con la auditoría de las rotaciones), Gestión de llaves de API (llaves con nombre y permisos acotados por área funcional + lectura/escritura, restricciones de IP, expiración, seguimiento de uso, la llave se muestra una sola vez al generarla), Configuración de webhooks (webhooks con nombre, URL, secreto y selección de eventos; política de reintentos, webhook de prueba, bitácora de entregas con códigos de respuesta y tiempos, seguimiento de la tasa de éxito). Estados vacíos.</p>
+</li>
+<li>
+<p><strong><a href="../../../design/ux/04-wireframes/auth/auth.html">Autenticación</a></strong> — Inicio de sesión con passkey (una sola llamada a la acción en una tarjeta centrada, inicio biométrico en menos de 3 segundos, identidad visual de la organización con su logo y su nombre, &quot;¿Qué es un passkey?&quot; desplegable), Inicio de sesión alternativo (enlace mágico con expiración a los 15 minutos y espera de 60 segundos para reenviar + OTP por SMS de 6 dígitos con envío automático y expiración a los 10 minutos, limitación de frecuencia de 3 por cada 15 minutos), Recuperación de cuenta mediante contactos de confianza (aprobación de 2 de 3 por defecto, período de espera de 24 horas con cuenta regresiva, los passkeys antiguos se invalidan al recuperar, &quot;No, no es esta persona&quot; cancela de inmediato, no hay recuperación iniciada por administración), Registro de passkey (inscripción guiada con instrucciones propias de cada plataforma para Face ID y Touch ID en iOS, biometría en Android y llaves de seguridad; explicación en lenguaje llano de &quot;¿Qué es un passkey?&quot;, opción de passkey de coacción para el nivel de seguridad Máximo), Configuración del contacto de confianza (de 2 a 5 contactos de la misma organización, se les notifica al añadirlos, quitarlos exige volver a autenticarse), Autorización de dispositivo (código QR con expiración a los 5 minutos + código alfanumérico manual, aprobación desde un dispositivo existente con los detalles del dispositivo, el nuevo dispositivo aparece en la lista), Sesión expirada (los datos se conservan en el almacenamiento local, volver a autenticarse con un toque, variante de reautenticación para acciones sensibles que muestra la descripción de la acción y el contexto del tiempo de expiración). Estados de casos límite (no se encontró passkey, límite de frecuencia alcanzado, sin contactos de confianza, dispositivo incompatible, QR expirado).</p>
+</li>
+<li>
+<p><strong><a href="../../../design/ux/04-wireframes/profile/profile.html">Perfil de usuario</a></strong> — Perfil personal (nombre, subir y quitar el avatar, teléfono con verificación, correo de solo lectura gestionado por administración, idioma y zona horaria, rol y organización, último inicio de sesión), Preferencias de notificaciones (matriz de canal × tipo: columnas En la aplicación/Push/Correo/SMS × filas Mensajes/Aprobaciones/Asignaciones/Recordatorios/Novedades de campaña/Alertas de seguridad; horas de silencio con hora de inicio y fin e interruptor de sobrescritura para GOTV; frecuencia del resumen por correo: en tiempo real, diario o semanal), Ajustes de seguridad (personales) (lista de dispositivos registrados con plataforma, navegador y último uso, y con reautenticación obligatoria para quitarlos; gestión de contactos de confianza con añadir y quitar; lista de verificación de seguridad con indicadores ✓/○ para passkey, contactos de confianza, recuperación y dispositivos; configuración del passkey de coacción para el nivel Máximo), Preferencia de idioma (botones de opción que se aplican al instante, inversión automática a RTL, encabezado bilingüe que muestra el idioma actual y el nuevo, lista de idiomas controlada por la organización), Selector de organización (tarjetas de organización con logo, rol y última actividad; cambio de contexto completo que limpia el estado local; [+ Unirse a otra organización] con entrada del código de invitación). Estados vacíos.</p>
+</li>
+<li>
+<p><strong><a href="../../../design/ux/04-wireframes/help/help.html">Soporte y ayuda</a></strong> — Navegador de la base de conocimiento (búsqueda de texto completo con resultados instantáneos, artículos filtrados por rol y priorizados según el arquetipo de la persona, tarjetas de categoría que reflejan la estructura de la barra lateral, artículos populares y actualizados recientemente, cuadrícula en escritorio y lista en móvil), Artículo de la base de conocimiento (contenido con formato y tabla de contenidos en una barra lateral, artículos relacionados, retroalimentación de pulgar arriba o abajo, funcionamiento parcial sin conexión con el texto y las imágenes en caché, enlaces directos a pantallas de la plataforma, ruta de navegación), Chat del concierge de IA (consciente del contexto: sabe en qué pantalla está la persona y cuál es su rol; respuestas con enlaces a artículos + enlaces de acción directa, historial de chat persistente, panel lateral en escritorio y pantalla completa en móvil, escalamiento a soporte humano para las organizaciones con plan premium, chips de sugerencias rápidas), Lista de módulos de capacitación (vista de voluntario con secciones de Obligatorios y Recomendados y barras de avance; vista de administración con las tasas de finalización por módulo y la matriz por voluntario), Contenido del módulo de capacitación (lecciones secuenciales con indicador de avance, contenido en texto, imágenes y video, caché sin conexión para texto e imágenes, marcador y retomar, tiempo estimado), Cuestionario de capacitación (una pregunta a la vez con puntos de avance, umbral de aprobación configurable, opción de repetir, capaz de funcionar sin conexión con sincronización al reconectar, revisión de resultados con las respuestas correctas y sus explicaciones), Estado de certificación (vista de voluntario con tarjetas de módulo que muestran ✓ completado, ◐ en curso y ○ sin empezar; matriz cruzada de administración con voluntarios en las filas y módulos en las columnas; seguimiento del vencimiento con avisos de renovación), Editor de contenidos de capacitación (ajustes del módulo con título, descripción y requisitos; lista de lecciones con reordenar arrastrando; editor de preguntas del cuestionario con 4 tipos de pregunta; asignación dirigida a todos, a roles concretos o a personas concretas; versionado con estados de borrador y publicado; acciones de guardar borrador y publicar). Estados vacíos.</p>
+</li>
+</ol>
+<!-- REVISIT: el punto 35 cita "PUB-003 Portal de simpatizantes", pero screen-inventory.md
+asigna PUB-003 al Formulario de donación (alojado); el portal de simpatizantes es el bloque
+SUP-*. La incoherencia viene del original en inglés. -->
+<ol start="35">
+<li><strong><a href="../../../design/ux/04-wireframes/public/public.html">Páginas públicas</a></strong> — Página de perfil del candidato (URL corta <code>/p/[slug]</code>, foto, nombre, cargo y lema de la candidatura, biografía con texto completo desplegable, respaldos tomados dinámicamente del flujo de respaldos, próximos eventos públicos tomados del módulo de eventos, llamadas a la acción de donar y ser voluntario, enlaces a redes sociales, metaetiquetas de SEO y Open Graph, aviso legal de cumplimiento de la organización), Página de perfil de la organización (URL corta <code>/o/[slug]</code>, logo, nombre y misión de la organización, imagen principal, llamadas a la acción de participación para donar, ser voluntario y asistir a eventos, próximos eventos tomados dinámicamente del módulo de eventos, cobertura de prensa reciente tomada del registro de cobertura, aviso legal de cumplimiento), Página de inscripción de voluntarios (campos obligatorios mínimos: solo nombre y correo; teléfono opcional; casillas de interés para emparejar con roles: trabajo de campo, jornadas de llamadas, eventos, entrada de datos, otro; cuadrícula de disponibilidad; integración con el CRM que crea o cruza el contacto y lo etiqueta como &quot;Aspirante a voluntario&quot;; consentimiento expreso sin marcar de antemano; pantalla de confirmación con propuesta de donación y botones para compartir en redes), Página del kit de prensa (información de contacto de prensa con nombre, cargo, correo y teléfono; recursos descargables organizados por categoría: logos en PNG/SVG, fotos en alta resolución, documentos en PDF; acceso restringido opcional que pide el correo y crea un contacto en el CRM etiquetado como &quot;Medios&quot;, seguimiento de descargas por recurso; cobertura de prensa reciente). Referencias cruzadas: PUB-003 Portal de simpatizantes (<a href="http://supporter-portal.md" target="_blank" rel="noopener noreferrer">supporter-portal.md</a> + <a href="http://fundraising.md" target="_blank" rel="noopener noreferrer">fundraising.md</a>), PUB-004 Página del evento (<a href="http://events.md" target="_blank" rel="noopener noreferrer">events.md</a> EVT-003), PUB-005 Página de acción (<a href="http://activism.md" target="_blank" rel="noopener noreferrer">activism.md</a> ACT-005), PUB-006 Página de petición (<a href="http://activism.md" target="_blank" rel="noopener noreferrer">activism.md</a> ACT-006). Estados vacíos.</li>
+</ol>
+<h3 id="auditoría-de-wireframes" tabindex="-1"><a class="heading-anchor" href="#auditoría-de-wireframes" aria-hidden="true">#</a> Auditoría de wireframes</h3>
+<ol start="36">
+<li>
+<p><strong><a href="../../../design/ux/04-wireframes/audit.html">Informe de auditoría de wireframes</a></strong> — Auditoría estructural de los 21 documentos de wireframes. Resumen ejecutivo con estadísticas de cobertura (236 pantallas inventariadas, 15 que faltaban y ya se añadieron, 9 documentos normalizados a la estructura estándar). Análisis de huecos documento por documento, evaluación del uso de los tokens del sistema de diseño, calificación de la cobertura sin conexión, auditoría de terminología. Apéndice A: 89 preguntas abiertas consolidadas de todos los documentos, categorizadas y deduplicadas. Apéndice B: decisiones de diseño consolidadas de todos los documentos, con análisis de contradicciones.</p>
+</li>
+<li>
+<p><strong><a href="../../../design/ux/04-wireframes/index.html#screen-index">Índice de pantallas</a></strong> — Referencia cruzada de los 236 ID de pantalla a su ubicación en los wireframes, con su estado (Completa / Cubierta / Referencia cruzada / Falta).</p>
+</li>
+</ol>
+<h2 id="principios-de-ux" tabindex="-1"><a class="heading-anchor" href="#principios-de-ux" aria-hidden="true">#</a> Principios de UX</h2>
+<p>Estos principios guían todas las decisiones de diseño de GreenGrass.</p>
+<h3 id="1-el-voluntario-en-el-campo-va-primero" tabindex="-1"><a class="heading-anchor" href="#1-el-voluntario-en-el-campo-va-primero" aria-hidden="true">#</a> 1. El voluntario en el campo va primero</h3>
+<p>Cada decisión de diseño se pone a prueba contra el usuario más difícil: un voluntario con un Android de gama baja y conectividad intermitente, caminando puerta a puerta en una zona rural. Si un patrón no le sirve, no se lanza. Las interfaces de administración de escritorio importan, pero nunca pueden comprometer la experiencia de campo.</p>
+<h3 id="2-complejidad-invisible" tabindex="-1"><a class="heading-anchor" href="#2-complejidad-invisible" aria-hidden="true">#</a> 2. Complejidad invisible</h3>
+<p>10 arquetipos comparten una sola aplicación, pero nadie debería sentir el peso de los demás. Las funcionalidades fuera del acceso de una persona están ausentes: no atenuadas, no escondidas tras diálogos de permisos, sino verdaderamente invisibles. El Voluntario ve una aplicación simple y enfocada. El Administrador de la organización ve una plataforma completa. Ninguno sabe que existe la vista del otro.</p>
+<h3 id="3-estar-sin-conexión-no-es-un-estado-de-error" tabindex="-1"><a class="heading-anchor" href="#3-estar-sin-conexión-no-es-un-estado-de-error" aria-hidden="true">#</a> 3. Estar sin conexión no es un estado de error</h3>
+<p>El modo sin conexión es una condición de operación de pleno derecho, no una alternativa degradada. La interfaz tiene que comunicar el estado de la conexión con claridad, pero sin hacer sentir que se está usando una versión rota de la aplicación. Las operaciones de campo funcionan por completo sin conexión. Los datos se sincronizan cuando se puede.</p>
+<h3 id="4-estabilidad-antes-que-dinamismo-en-la-navegación" tabindex="-1"><a class="heading-anchor" href="#4-estabilidad-antes-que-dinamismo-en-la-navegación" aria-hidden="true">#</a> 4. Estabilidad antes que dinamismo en la navegación</h3>
+<p>La estructura de navegación se mantiene estable sea cual sea la conexión, el contexto o la hora del día. Los elementos no aparecen y desaparecen según cambian las condiciones. Las funcionalidades no disponibles sin conexión aparecen atenuadas, con un distintivo, no se quitan. Las personas construyen memoria muscular de dónde está cada cosa, y esa memoria tiene que ser confiable.</p>
+<h3 id="5-la-seguridad-es-invisible-hasta-que-importa" tabindex="-1"><a class="heading-anchor" href="#5-la-seguridad-es-invisible-hasta-que-importa" aria-hidden="true">#</a> 5. La seguridad es invisible hasta que importa</h3>
+<p>La arquitectura de seguridad (modelo de 5 niveles, cifrado BYOK, autenticación con passkey, modo de coacción) es sustancial, pero nadie debería sentir su peso durante la operación normal. Iniciar sesión debería ser un solo toque (passkey). El cifrado debería ser automático. Las pantallas de seguridad (registro de auditoría, gestión de llaves, modo de coacción) están disponibles, pero no destacadas. La excepción: cuando la seguridad <em>sí</em> necesita atención (passkey comprometido, rotación de llaves, amenaza activa), la interfaz tiene que ser inequívoca y directa.</p>
+<h3 id="6-respetar-el-dispositivo" tabindex="-1"><a class="heading-anchor" href="#6-respetar-el-dispositivo" aria-hidden="true">#</a> 6. Respetar el dispositivo</h3>
+<p>El móvil no es un escritorio encogido. Las pantallas de móvil se diseñan para móvil: áreas táctiles grandes, desplazamiento vertical, operación con una sola mano. Las pantallas de escritorio usan el espacio: tablas de datos, paneles lado a lado, arrastrar y soltar. La misma funcionalidad puede tener interfaces muy distintas en cada plataforma, y eso está bien.</p>
+<h3 id="7-el-rtl-es-estructural-no-decorativo" tabindex="-1"><a class="heading-anchor" href="#7-el-rtl-es-estructural-no-decorativo" aria-hidden="true">#</a> 7. El RTL es estructural, no decorativo</h3>
+<p>El soporte de derecha a izquierda está incorporado en cada decisión de maquetación desde el primer día, no añadido después. La posición de la barra lateral, el orden de la barra de pestañas, la dirección de los iconos, la alineación del texto, la dirección de la ruta de navegación: todo se define con propiedades lógicas (<code>inline-start</code>/<code>inline-end</code>), no físicas (<code>left</code>/<code>right</code>).</p>
+<h3 id="8-el-día-de-elecciones-es-otra-aplicación" tabindex="-1"><a class="heading-anchor" href="#8-el-día-de-elecciones-es-otra-aplicación" aria-hidden="true">#</a> 8. El día de elecciones es otra aplicación</h3>
+<p>Cuando se activan las operaciones de GOTV, la plataforma se transforma. Los paneles cambian, las prioridades de las notificaciones se mueven, aparecen pantallas nuevas, el modo de campo pasa a los flujos propios de GOTV. Esa transformación está diseñada, no improvisada: es parte del modelo de navegación y de las vistas por arquetipo.</p>
+<h2 id="glosario" tabindex="-1"><a class="heading-anchor" href="#glosario" aria-hidden="true">#</a> Glosario</h2>
+<table>
+<thead>
+<tr>
+<th>Término</th>
+<th>Definición</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Modo de campo</strong></td>
+<td>Pantalla completa exclusiva en móvil para el trabajo de un turno activo (trabajo de campo, jornadas de llamadas, inscripción de votantes, GOTV). Sustituye por completo el marco de navegación normal.</td>
+</tr>
+<tr>
+<td><strong>Marco de navegación</strong></td>
+<td>El armazón permanente de la interfaz alrededor del contenido: barra superior, barra lateral (escritorio), barra de pestañas inferior (móvil).</td>
+</tr>
+<tr>
+<td><strong>Plantilla de rol</strong></td>
+<td>Un conjunto de permisos y elementos de navegación, con nombre propio, que se asigna a una persona usuaria. Determina lo que esa persona ve.</td>
+</tr>
+<tr>
+<td><strong>Arquetipo (de usuario)</strong></td>
+<td>Uno de los 10 usuarios arquetípicos: Administrador de la organización, Director de comunicaciones, Director de finanzas, Director de campo, Coordinador de voluntarios, Gestor de datos, Voluntario, Líder de equipo, Candidato, Simpatizante.</td>
+</tr>
+<tr>
+<td><strong>Layout group</strong></td>
+<td>Concepto de enrutamiento de SvelteKit: rutas agrupadas bajo un marco compartido, sin afectar la URL. GreenGrass usa seis: <code>(public)</code>, <code>(auth)</code>, <code>(app)</code>, <code>(field-mode)</code>, <code>(portal)</code>, <code>(wizard)</code>.</td>
+</tr>
+<tr>
+<td><strong>Elementos permanentes de la interfaz</strong></td>
+<td>Elementos de interfaz presentes en todos los contextos de navegación (salvo el modo de campo): indicador de sincronización, campana de notificaciones, menú de usuario, selector de idioma, acceso a la ayuda.</td>
+</tr>
+<tr>
+<td><strong>Panel de detalle</strong></td>
+<td>Un panel contextual a la derecha, en escritorio, que muestra información adicional sin salir de donde se está (por ejemplo, ver un contacto mientras se recorre una lista).</td>
+</tr>
+<tr>
+<td><strong>Modo de coacción</strong></td>
+<td>Una funcionalidad de seguridad: iniciar sesión con un passkey especial muestra una versión saneada de la plataforma, con datos verosímiles pero depurados.</td>
+</tr>
+<tr>
+<td><strong>Centro de mando</strong></td>
+<td>Donde se dirige la operación de GOTV del día de elecciones en tiempo real. Incluye el seguimiento de la participación, la reasignación de recursos, el escalamiento de problemas y la coordinación de las comunicaciones.</td>
+</tr>
+<tr>
+<td><strong>Alianza</strong></td>
+<td>Una federación de organizaciones soberanas que comparten recursos, coordinan campañas y reparten la recaudación mediante reglas de intercambio explícitas.</td>
+</tr>
+<tr>
+<td><strong>GOTV</strong></td>
+<td>Get Out The Vote — movilización del voto: las operaciones del día de elecciones centradas en lograr que los simpatizantes identificados voten de verdad.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="referencias-cruzadas-a-las-especificaciones" tabindex="-1"><a class="heading-anchor" href="#referencias-cruzadas-a-las-especificaciones" aria-hidden="true">#</a> Referencias cruzadas a las especificaciones</h2>
+<table>
+<thead>
+<tr>
+<th>Concepto de UX</th>
+<th>Especificación principal</th>
+<th>Secciones clave</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Arquetipos y roles</td>
+<td><code>spec/users.md</code></td>
+<td>Los 10 arquetipos, plantillas de rol, permisos</td>
+</tr>
+<tr>
+<td>Flujos de trabajo principales</td>
+<td><code>spec/workflows.md</code></td>
+<td>12 flujos de trabajo: trabajo de campo, recaudación de fondos, eventos, etc.</td>
+</tr>
+<tr>
+<td>UX de seguridad</td>
+<td><code>spec/security.md</code></td>
+<td>Modelo de 5 niveles, modo de coacción, autenticación con passkey, BYOK</td>
+</tr>
+<tr>
+<td>Comportamiento sin conexión</td>
+<td><code>design/architecture/system.md</code></td>
+<td>Protocolo de sincronización, base de datos sin conexión, resolución de conflictos</td>
+</tr>
+<tr>
+<td>Operaciones del día de elecciones</td>
+<td><code>spec/gotv.md</code></td>
+<td>Centro de mando, seguimiento de la participación, trabajo de campo de GOTV</td>
+</tr>
+<tr>
+<td>Mensajería</td>
+<td><code>spec/messaging.md</code></td>
+<td>Mensajes directos, grupos, difusiones, cifrado de extremo a extremo</td>
+</tr>
+<tr>
+<td>UX de recaudación de fondos</td>
+<td><code>spec/fundraising.md</code></td>
+<td>Formularios de donación, portal del donante, cumplimiento</td>
+</tr>
+<tr>
+<td>Comunicaciones</td>
+<td><code>spec/workflows.md</code> + <code>spec/press.md</code></td>
+<td>Correo, SMS, redes sociales, prensa</td>
+</tr>
+<tr>
+<td>Localización</td>
+<td><code>spec/geography.md</code></td>
+<td>5 países objetivo, RTL, multilingüe</td>
+</tr>
+<tr>
+<td>Soporte y ayuda</td>
+<td><code>spec/support.md</code></td>
+<td>8 asistentes de puesta en marcha, base de conocimiento, concierge</td>
+</tr>
+<tr>
+<td>Cumplimiento</td>
+<td><code>spec/compliance.md</code></td>
+<td>Financiamiento de campañas, protección de datos, consentimiento</td>
+</tr>
+<tr>
+<td>Arquitectura del sistema</td>
+<td><code>design/architecture/system.md</code></td>
+<td>SvelteKit + Capacitor, la API primero, aislamiento por organización</td>
+</tr>
+</tbody>
+</table>
+<h2 id="decisiones-de-diseño" tabindex="-1"><a class="heading-anchor" href="#decisiones-de-diseño" aria-hidden="true">#</a> Decisiones de diseño</h2>
+<p>Las decisiones específicas de UX se registran en <code>decisions/ux-decisions.md</code>. Ese documento cubre las convenciones estructurales de los wireframes, el enfoque de integración de los tokens de diseño, la especificación del comportamiento sin conexión, las convenciones de terminología y la asignación de ID de pantalla.</p>
+<p>Decisiones clave ya tomadas durante el trabajo de arquitectura de la información de la fase 1:</p>
+<table>
+<thead>
+<tr>
+<th>Decisión</th>
+<th>Elección</th>
+<th>Documento</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Paradigma de navegación en escritorio</td>
+<td>Híbrido: barra superior (contexto) + barra lateral (funcionalidades)</td>
+<td><a href="http://navigation-model.md" target="_blank" rel="noopener noreferrer">navigation-model.md</a></td>
+</tr>
+<tr>
+<td>Acumulación de roles en la navegación</td>
+<td>Secciones agrupadas con encabezados plegables</td>
+<td><a href="http://navigation-model.md" target="_blank" rel="noopener noreferrer">navigation-model.md</a></td>
+</tr>
+<tr>
+<td>Navegación de la alianza</td>
+<td>Sección propia de alianza en la barra lateral</td>
+<td><a href="http://navigation-model.md" target="_blank" rel="noopener noreferrer">navigation-model.md</a></td>
+</tr>
+<tr>
+<td>Navegación en modo de coacción</td>
+<td>Estructura real saneada con datos depurados</td>
+<td><a href="http://navigation-model.md" target="_blank" rel="noopener noreferrer">navigation-model.md</a></td>
+</tr>
+<tr>
+<td>Degradación de funcionalidades sin conexión</td>
+<td>Atenuar con distintivo de sin conexión (navegación estable)</td>
+<td><a href="http://navigation-model.md" target="_blank" rel="noopener noreferrer">navigation-model.md</a></td>
+</tr>
+</tbody>
+</table>
+
+    </article>
+  </main>
+  <div class="toc-rail"><nav class="toc" aria-label="En esta página"><div class="toc-label">En esta página</div><ul><li class="toc-2"><a href="#propósito"># Propósito</a></li><li class="toc-2"><a href="#orden-de-lectura"># Orden de lectura</a></li><li class="toc-3"><a href="#fase-1-arquitectura-de-la-información"># Fase 1: arquitectura de la información</a></li><li class="toc-3"><a href="#fase-2-patrones-globales"># Fase 2: patrones globales</a></li><li class="toc-3"><a href="#fase-3-fundamentos-del-sistema-de-diseño"># Fase 3: fundamentos del sistema de diseño</a></li><li class="toc-3"><a href="#fase-4-wireframes"># Fase 4: wireframes</a></li><li class="toc-3"><a href="#auditoría-de-wireframes"># Auditoría de wireframes</a></li><li class="toc-2"><a href="#principios-de-ux"># Principios de UX</a></li><li class="toc-3"><a href="#1-el-voluntario-en-el-campo-va-primero"># 1. El voluntario en el campo va primero</a></li><li class="toc-3"><a href="#2-complejidad-invisible"># 2. Complejidad invisible</a></li><li class="toc-3"><a href="#3-estar-sin-conexión-no-es-un-estado-de-error"># 3. Estar sin conexión no es un estado de error</a></li><li class="toc-3"><a href="#4-estabilidad-antes-que-dinamismo-en-la-navegación"># 4. Estabilidad antes que dinamismo en la navegación</a></li><li class="toc-3"><a href="#5-la-seguridad-es-invisible-hasta-que-importa"># 5. La seguridad es invisible hasta que importa</a></li><li class="toc-3"><a href="#6-respetar-el-dispositivo"># 6. Respetar el dispositivo</a></li><li class="toc-3"><a href="#7-el-rtl-es-estructural-no-decorativo"># 7. El RTL es estructural, no decorativo</a></li><li class="toc-3"><a href="#8-el-día-de-elecciones-es-otra-aplicación"># 8. El día de elecciones es otra aplicación</a></li><li class="toc-2"><a href="#glosario"># Glosario</a></li><li class="toc-2"><a href="#referencias-cruzadas-a-las-especificaciones"># Referencias cruzadas a las especificaciones</a></li><li class="toc-2"><a href="#decisiones-de-diseño"># Decisiones de diseño</a></li></ul></nav></div>
+</div>
+<script src="../../../assets/search.js" defer></script>
+<script src="../../../assets/app.js" defer></script>
+</body>
+</html>

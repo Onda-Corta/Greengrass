@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="es" data-base="../../../../" data-no-results="No hay resultados para">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Patrones sin conexión y de sincronización · GreenGrass</title>
+<meta name="description" content="Patrones sin conexión y de sincronización — Documentación de especificación y diseño de GreenGrass.">
+<link rel="alternate" hreflang="en" href="../../../../design/ux/02-global-patterns/offline-sync-patterns.html">
+<link rel="alternate" hreflang="es" href="./offline-sync-patterns.html">
+<link rel="alternate" hreflang="x-default" href="../../../../design/ux/02-global-patterns/offline-sync-patterns.html">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%232563eb'/%3E%3Cstop offset='1' stop-color='%2316a34a'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='32' height='32' rx='7' fill='url(%23g)'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="../../../../assets/styles.css">
+</head>
+<body>
+<a class="skip-link" href="#content">Saltar al contenido</a>
+<header class="site-header">
+  <button type="button" class="menu-toggle" aria-label="Alternar navegación" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+  <a class="brand" href="../../../../es/index.html">
+    <span class="brand-mark" aria-hidden="true"></span>
+    <span class="brand-text"><strong>GreenGrass</strong><small>Especificación y diseño</small></span>
+  </a>
+  <div class="search">
+    <input type="search" id="search-input" placeholder="Buscar en la documentación…" autocomplete="off" aria-label="Buscar en la documentación">
+    <div id="search-results" class="search-results" hidden></div>
+  </div>
+  <nav class="lang-switch" aria-label="Idioma"><a class="lang-opt" href="../../../../design/ux/02-global-patterns/offline-sync-patterns.html" hreflang="en" lang="en" title="View this page in English">EN</a><span class="lang-opt active" aria-current="true">ES</span></nav>
+  <button type="button" class="theme-toggle" aria-label="Alternar modo oscuro" title="Alternar modo oscuro">
+    <span class="theme-icon" aria-hidden="true"></span>
+  </button>
+</header>
+<div class="layout">
+  <div class="sidebar-backdrop" hidden></div>
+  <aside class="sidebar" aria-label="Navegación de la documentación">
+    <nav class="nav">
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">Inicio<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../../../index.html">GreenGrass</a></li></ul></div>
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">Especificaciones<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../../../spec/product.html">Proyecto: GreenGrass</a></li><li><a href="../../../spec/mvp.html">MVP de GreenGrass — plan de producto</a></li><li><a href="../../../spec/users.html">Usuarios y roles</a></li><li><a href="../../../spec/workflows.html">Flujos de trabajo principales</a></li><li><a href="../../../spec/geography.html">Geografía objetivo</a></li><li><a href="../../../spec/security.html">Seguridad y modelo de amenazas</a></li><li><a href="../../../spec/compliance.html">Cumplimiento y marco legal</a></li><li><a href="../../../spec/fundraising.html">Recaudación de fondos e infraestructura de pagos</a></li><li><a href="../../../spec/integrations.html">Integraciones externas</a></li><li><a href="../../../spec/support.html">Soporte y puesta en marcha de organizaciones</a></li><li><a href="../../../spec/gotv.html">GOTV y operaciones del día de elecciones</a></li><li><a href="../../../spec/messaging.html">Comunicaciones internas y notificaciones</a></li><li><a href="../../../spec/press.html">Prensa, medios y comunicaciones públicas</a></li><li><a href="../../../spec/comms-intelligence.html">Inteligencia de comunicaciones — hoja de ruta post-MVP</a></li></ul></div>
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">Arquitectura<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../../architecture/system.html">Arquitectura del sistema</a></li></ul></div>
+<div class="nav-section open"><button type="button" class="nav-section-title" aria-expanded="true">Diseño UX<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../00-overview.html">Resumen del diseño de UX</a></li><li><a href="../01-information-architecture/navigation-model.html">Modelo de navegación</a></li><li><a href="../01-information-architecture/screen-inventory.html">Inventario de pantallas</a></li><li><a href="../01-information-architecture/persona-views.html">Vistas por arquetipo</a></li><li><a href="../01-information-architecture/url-structure.html">Estructura de URL</a></li><li><a href="./pattern-catalog.html">Catálogo de patrones</a></li><li><a href="./offline-sync-patterns.html" aria-current="page" class="active">Patrones sin conexión y de sincronización</a></li><li><a href="./notification-patterns.html">Patrones de notificaciones</a></li><li><a href="./search-patterns.html">Patrones de búsqueda</a></li><li><a href="./settings-help-patterns.html">Patrones de ajustes y ayuda</a></li><li><a href="./security-ux-patterns.html">Patrones de UX de seguridad</a></li><li><a href="../03-design-system/foundations.html">Fundamentos del sistema de diseño</a></li><li><a href="../03-design-system/theming-strategy.html">Estrategia de temas</a></li><li><a href="../03-design-system/component-inventory.html">Inventario de componentes</a></li><li><a href="../03-design-system/responsive-strategy.html">Estrategia de diseño adaptable</a></li></ul></div>
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">Decisiones<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../../../decisions/001-platform-architecture.html">ADR-001: Arquitectura y despliegue de la plataforma</a></li><li><a href="../../../decisions/002-security-threat-model.html">ADR-002: Seguridad y modelo de amenazas</a></li><li><a href="../../../decisions/003-identity-access-organization.html">ADR-003: Identidad, acceso y organización</a></li><li><a href="../../../decisions/004-data-model-integrity.html">ADR-004: Modelo de datos e integridad</a></li><li><a href="../../../decisions/005-offline-first-sync.html">ADR-005: Prioridad sin conexión y sincronización</a></li><li><a href="../../../decisions/006-field-operations-gotv.html">ADR-006: Operaciones de campo y GOTV</a></li><li><a href="../../../decisions/007-fundraising-payments.html">ADR-007: Recaudación de fondos y pagos</a></li><li><a href="../../../decisions/008-communications-messaging.html">ADR-008: Comunicaciones y mensajería</a></li><li><a href="../../../decisions/009-compliance-legal.html">ADR-009: Cumplimiento y marco legal</a></li><li><a href="../../../decisions/010-internationalization-localization.html">ADR-010: Internacionalización y localización</a></li><li><a href="../../../decisions/011-design-system-ux.html">ADR-011: Sistema de diseño y fundamentos de UX</a></li><li><a href="../../../decisions/012-external-integrations.html">ADR-012: Integraciones externas</a></li><li><a href="../../../decisions/013-analytics-ai.html">ADR-013: Analítica e IA</a></li><li><a href="../../../decisions/014-volunteer-onboarding.html">ADR-014: Voluntariado e incorporación</a></li><li><a href="../../../decisions/015-product-scope.html">ADR-015: Límites del alcance del producto</a></li><li><a href="../../../decisions/016-cross-cutting-resolutions.html">ADR-016: Resoluciones transversales</a></li><li><a href="../../../decisions/017-sharing-contract-trust-model.html">ADR-017: El contrato de intercambio como primitiva universal de confianza</a></li><li><a href="../../../decisions/ux-decisions.html">Decisiones de UX — fase de wireframes</a></li></ul></div>
+    </nav>
+  </aside>
+  <main id="content" class="content">
+    <nav class="breadcrumb" aria-label="Ruta de navegación">Diseño UX</nav>
+    <article class="prose">
+<h1 id="patrones-sin-conexión-y-de-sincronización" tabindex="-1"><a class="heading-anchor" href="#patrones-sin-conexión-y-de-sincronización" aria-hidden="true">#</a> Patrones sin conexión y de sincronización</h1>
+<h2 id="propósito" tabindex="-1"><a class="heading-anchor" href="#propósito" aria-hidden="true">#</a> Propósito</h2>
+<p>Este documento define cómo la plataforma comunica el estado de la conexión, la actualidad de los datos, el progreso de la sincronización y la resolución de conflictos. El funcionamiento sin conexión es una funcionalidad de pleno derecho, no una alternativa de reserva degradada: estos patrones tienen que hacer que trabajar sin conexión se sienta natural y confiable.</p>
+<p>El objetivo de diseño: una voluntaria que va tocando puertas con conectividad intermitente nunca debería preguntarse &quot;¿mis datos están al día?&quot; ni &quot;¿se guardó mi trabajo?&quot;. La interfaz tiene que responder las dos preguntas de un vistazo, en todo momento.</p>
+<h2 id="estados-de-conexión" tabindex="-1"><a class="heading-anchor" href="#estados-de-conexión" aria-hidden="true">#</a> Estados de conexión</h2>
+<p>La plataforma reconoce cinco estados de conexión. El tratamiento en la interfaz cambia según el contexto (app estándar frente a modo de campo).</p>
+<h3 id="definición-de-los-estados" tabindex="-1"><a class="heading-anchor" href="#definición-de-los-estados" aria-hidden="true">#</a> Definición de los estados</h3>
+<table>
+<thead>
+<tr>
+<th>Estado</th>
+<th>Condición</th>
+<th>Duración</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Conectado</strong></td>
+<td>Conexión en tiempo real con el servidor. Sincronización activa.</td>
+<td>Operación normal</td>
+</tr>
+<tr>
+<td><strong>Conectado (desactualizado)</strong></td>
+<td>Hay conexión, pero la última sincronización correcta fue hace más de 5 min</td>
+<td>Transitorio: suele resolverse rápido</td>
+</tr>
+<tr>
+<td><strong>Sincronizando</strong></td>
+<td>Sincronizando datos activamente (subida o bajada)</td>
+<td>Breve: de segundos a ~1 minuto</td>
+</tr>
+<tr>
+<td><strong>Sin conexión</strong></td>
+<td>Sin conexión con el servidor. Operación solo local.</td>
+<td>De minutos a horas</td>
+</tr>
+<tr>
+<td><strong>Error de sincronización</strong></td>
+<td>Hay conexión, pero la sincronización falla</td>
+<td>Hasta que se resuelva o se reintente</td>
+</tr>
+</tbody>
+</table>
+<h3 id="indicador-en-la-app-estándar" tabindex="-1"><a class="heading-anchor" href="#indicador-en-la-app-estándar" aria-hidden="true">#</a> Indicador en la app estándar</h3>
+<p>En la barra superior, un indicador compacto muestra el estado actual:</p>
+<pre><code>Conectado:                [●]                                      (punto verde, sin texto — predeterminado discreto)
+Desactualizado:           [● Última sincronización: hace 8 min]    (punto ámbar + marca de tiempo)
+Sincronizando:            [↻]                                      (icono de sincronización animado, breve)
+Sin conexión:             [◌ Sin conexión]                         (punto gris + rótulo, permanente)
+Error de sincronización:  [⚠ Sincronización fallida · Reintentar]  (icono rojo + enlace de acción)
+</code></pre>
+<p>Al tocar el indicador, en cualquier estado, se abre un panel de detalle de sincronización que muestra:</p>
+<ul>
+<li>La hora de la última sincronización correcta</li>
+<li>El número de cambios locales pendientes (en cola para subir)</li>
+<li>El progreso de la sincronización en curso (si está sincronizando)</li>
+<li>El detalle del error (si está en estado de error)</li>
+<li>El disparador manual &quot;Sincronizar ahora&quot;</li>
+</ul>
+<h3 id="indicador-en-el-modo-de-campo" tabindex="-1"><a class="heading-anchor" href="#indicador-en-el-modo-de-campo" aria-hidden="true">#</a> Indicador en el modo de campo</h3>
+<p>En el modo de campo, el indicador de sincronización es más grande y más visible: los datos desactualizados durante el trabajo de campo son peligrosos en la operación (puedes tocar una puerta que otro voluntario ya tocó).</p>
+<pre><code>Conectado:                [● Sincronizado hace 30 s]               (verde, con la marca de tiempo siempre visible)
+Desactualizado:           [● Sincronizado hace 12 min]             (ámbar, más urgente a medida que pasa el tiempo)
+Sincronizando:            [↻ Sincronizando...]                     (animado, barra de ancho completo)
+Sin conexión:             [◌ Sin conexión · 47 min]                (gris, con el tiempo transcurrido sin conexión)
+Error de sincronización:  [⚠ Sincronización fallida · Reintentar]  (rojo, barra de ancho completo, imposible de ignorar)
+</code></pre>
+<p><strong>Por qué la marca de tiempo siempre está visible en el modo de campo:</strong> en la app estándar, &quot;conectado&quot; no necesita anotación — la persona usuaria confía en que la app está al día. En el modo de campo, el voluntario necesita saber <em>cuán</em> al día. &quot;Sincronizado hace 30 segundos&quot; frente a &quot;sincronizado hace 12 minutos&quot; es la diferencia entre una lista de recorrido fiable y otra con asignaciones posiblemente desactualizadas.</p>
+<hr>
+<h2 id="actualidad-de-los-datos" tabindex="-1"><a class="heading-anchor" href="#actualidad-de-los-datos" aria-hidden="true">#</a> Actualidad de los datos</h2>
+<h3 id="indicadores-de-actualidad-en-los-registros" tabindex="-1"><a class="heading-anchor" href="#indicadores-de-actualidad-en-los-registros" aria-hidden="true">#</a> Indicadores de actualidad en los registros</h3>
+<p>Al ver registros que pueden estar desactualizados (en caché desde una sincronización anterior), la interfaz muestra un indicador de actualidad:</p>
+<pre><code>┌────────────────────────────────────────────────────┐
+│  Ana Martínez                                      │
+│  Última actualización: hace 2 horas  [↻ Actualizar]│
+│                                                    │
+│  Teléfono: (787) 555-0123                          │
+│  Dirección: Calle Sol 45, San Juan                 │
+│  Puntaje de apoyo: 4                               │
+│  Último contacto: 15 de ene. (trabajo de campo)    │
+└────────────────────────────────────────────────────┘
+</code></pre>
+<p><strong>Reglas:</strong></p>
+<ul>
+<li>Registros actualizados dentro del último ciclo de sincronización: sin indicador de actualidad (están al día)</li>
+<li>Registros con más de 1 hora desde la última actualización: marca de tiempo discreta (&quot;Última actualización: hace 2 horas&quot;)</li>
+<li>Registros con más de 24 horas desde la última actualización: indicador ámbar (&quot;Los datos pueden estar desactualizados&quot;)</li>
+<li>Registros con más de 7 días desde la última actualización: advertencia destacada (&quot;Datos desactualizados: hay que sincronizar&quot;)</li>
+</ul>
+<h3 id="actualidad-en-el-modo-de-campo" tabindex="-1"><a class="heading-anchor" href="#actualidad-en-el-modo-de-campo" aria-hidden="true">#</a> Actualidad en el modo de campo</h3>
+<p>Los registros de la lista de recorrido en el modo de campo muestran la actualidad de otra manera: el estado de la asignación importa más que la antigüedad del registro:</p>
+<ul>
+<li><strong>Asignado a ti, sincronizado hace poco:</strong> sin indicador (confía en la asignación)</li>
+<li><strong>Asignado a ti, pero otro voluntario puede haber pasado desde la última sincronización:</strong> distintivo ámbar (&quot;Puede que ya lo hayan visitado: verifica antes de tocar&quot;)</li>
+<li><strong>Reasignado desde tu última sincronización:</strong> distintivo rojo (&quot;Ya no está en tu lista: sáltalo&quot;), con la actualización real aplicada en la siguiente sincronización</li>
+</ul>
+<hr>
+<h2 id="cola-de-cambios-pendientes" tabindex="-1"><a class="heading-anchor" href="#cola-de-cambios-pendientes" aria-hidden="true">#</a> Cola de cambios pendientes</h2>
+<p>Cuando la persona usuaria hace cambios sin conexión (registrar una interacción de trabajo de campo, redactar un mensaje, actualizar un contacto), los cambios se guardan localmente y quedan en cola para sincronizar.</p>
+<h3 id="indicador-de-la-cola" tabindex="-1"><a class="heading-anchor" href="#indicador-de-la-cola" aria-hidden="true">#</a> Indicador de la cola</h3>
+<p>El panel de detalle de sincronización muestra los cambios pendientes:</p>
+<pre><code>┌───────────────────────────────────────────────┐
+│  Cambios pendientes (7)                       │
+│                                               │
+│  3 interacciones de trabajo de campo          │
+│  2 actualizaciones de contactos               │
+│  1 mensaje (en cola)                          │
+│  1 registro de entrada a un evento            │
+│                                               │
+│  Estos cambios se subirán cuando              │
+│  vuelvas a tener conexión.                    │
+│                                               │
+│  [Sincronizar ahora]  (atenuado sin conexión) │
+└───────────────────────────────────────────────┘
+</code></pre>
+<h3 id="iconos-de-estado-de-los-cambios" tabindex="-1"><a class="heading-anchor" href="#iconos-de-estado-de-los-cambios" aria-hidden="true">#</a> Iconos de estado de los cambios</h3>
+<p>Cada cambio pendiente muestra su estado:</p>
+<table>
+<thead>
+<tr>
+<th>Icono</th>
+<th>Estado</th>
+<th>Significado</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>◌</td>
+<td>Pendiente</td>
+<td>Guardado localmente, esperando conexión</td>
+</tr>
+<tr>
+<td>↻</td>
+<td>Subiendo</td>
+<td>Se está enviando al servidor</td>
+</tr>
+<tr>
+<td>✓</td>
+<td>Sincronizado</td>
+<td>Subido correctamente</td>
+</tr>
+<tr>
+<td>⚠</td>
+<td>Conflicto</td>
+<td>El servidor tiene una versión más nueva: hay que resolverlo</td>
+</tr>
+<tr>
+<td>✗</td>
+<td>Fallido</td>
+<td>Falló la subida: se reintentará</td>
+</tr>
+</tbody>
+</table>
+<h3 id="indicadores-en-contexto" tabindex="-1"><a class="heading-anchor" href="#indicadores-en-contexto" aria-hidden="true">#</a> Indicadores en contexto</h3>
+<p>Los registros con cambios locales pendientes muestran un indicador discreto en las vistas de lista y de detalle:</p>
+<pre><code>│  Ana Martínez        ◌ Editado localmente  │
+</code></pre>
+<p>Esto le dice a la persona usuaria: &quot;Tus cambios están guardados en este dispositivo, pero todavía no llegaron al servidor&quot;. Es informativo, no alarmante: los cambios locales son el estado normal cuando se trabaja sin conexión.</p>
+<hr>
+<h2 id="comportamiento-de-la-sincronización" tabindex="-1"><a class="heading-anchor" href="#comportamiento-de-la-sincronización" aria-hidden="true">#</a> Comportamiento de la sincronización</h2>
+<h3 id="sincronización-automática" tabindex="-1"><a class="heading-anchor" href="#sincronización-automática" aria-hidden="true">#</a> Sincronización automática</h3>
+<p>Cuando hay conexión, la app sincroniza automáticamente:</p>
+<ul>
+<li><strong>Al abrir la app:</strong> sincronización completa de todos los cambios desde la última sesión</li>
+<li><strong>En segundo plano:</strong> sincronización incremental cada 60 segundos (app estándar) o cada 30 segundos (modo de campo)</li>
+<li><strong>Tras una acción significativa:</strong> intento de sincronización inmediato después de crear o actualizar un registro (si hay conexión)</li>
+<li><strong>Al recuperar la conexión:</strong> sincronización completa al pasar de sin conexión a con conexión</li>
+</ul>
+<h3 id="sincronización-manual" tabindex="-1"><a class="heading-anchor" href="#sincronización-manual" aria-hidden="true">#</a> Sincronización manual</h3>
+<p>Hay una acción &quot;Sincronizar ahora&quot; disponible:</p>
+<ul>
+<li>En el panel de detalle de sincronización (tocando el indicador de sincronización)</li>
+<li>En el modo de campo, como botón en el encabezado de campo</li>
+<li>Deslizar para actualizar en las vistas de lista dispara una sincronización</li>
+</ul>
+<h3 id="progreso-de-la-sincronización" tabindex="-1"><a class="heading-anchor" href="#progreso-de-la-sincronización" aria-hidden="true">#</a> Progreso de la sincronización</h3>
+<p>Durante una sincronización con un volumen de datos considerable (sincronización inicial, sincronización masiva después de un período sin conexión), se muestra el progreso:</p>
+<pre><code>┌────────────────────────────────────────────────┐
+│  Sincronizando...                              │
+│  ████████████░░░░░░  67%                       │
+│  Subiendo 5 de 7 cambios                       │
+│  Descargando la lista de recorrido actualizada │
+└────────────────────────────────────────────────┘
+</code></pre>
+<p>En las sincronizaciones incrementales de rutina (pequeñas y rápidas) no hay indicador de progreso: solo el breve icono animado de sincronización en el encabezado.</p>
+<hr>
+<h2 id="resolución-de-conflictos" tabindex="-1"><a class="heading-anchor" href="#resolución-de-conflictos" aria-hidden="true">#</a> Resolución de conflictos</h2>
+<p>Los conflictos ocurren cuando el mismo registro se modifica localmente y en el servidor antes de una sincronización. La arquitectura de event sourcing (el estado se deriva de un registro inmutable de eventos) descrita en <a href="http://system.md" target="_blank" rel="noopener noreferrer">system.md</a> resuelve la mayoría de los conflictos automáticamente, pero algunos necesitan la atención de la persona usuaria.</p>
+<h3 id="resolución-automática" tabindex="-1"><a class="heading-anchor" href="#resolución-automática" aria-hidden="true">#</a> Resolución automática</h3>
+<p>El servidor resuelve la mayoría de los conflictos con reglas propias del dominio:</p>
+<ul>
+<li><strong>Gana la última escritura</strong> en los campos simples (número de teléfono, dirección, estado)</li>
+<li><strong>Fusión aditiva</strong> en el historial de interacciones (las respuestas del trabajo de campo nunca se pierden: se conservan las dos versiones)</li>
+<li><strong>Gana el servidor</strong> en los cambios de asignación (si un territorio se reasigna, la asignación del servidor tiene prioridad)</li>
+<li><strong>Gana el cliente</strong> en el trabajo de campo en curso (si un voluntario está a mitad de turno, sus datos locales tienen prioridad hasta que termina el turno)</li>
+</ul>
+<h3 id="conflictos-que-ve-la-persona-usuaria" tabindex="-1"><a class="heading-anchor" href="#conflictos-que-ve-la-persona-usuaria" aria-hidden="true">#</a> Conflictos que ve la persona usuaria</h3>
+<p>Poco frecuentes, pero posibles. Cuando la resolución automática no basta, la persona usuaria ve una notificación de conflicto:</p>
+<pre><code>┌──────────────────────────────────────────────────────────┐
+│  ⚠ Conflicto de sincronización                           │
+│                                                          │
+│  Contacto: Ana Martínez                                  │
+│  Otra persona actualizó el número de                     │
+│  teléfono mientras estabas sin conexión.                 │
+│                                                          │
+│  Tu versión:           (787) 555-0123                    │
+│  Versión del servidor: (787) 555-0456                    │
+│                                                          │
+│  [Quedarme con la mía]  [Quedarme con la suya]  [Ambas]  │
+└──────────────────────────────────────────────────────────┘
+</code></pre>
+<p><strong>Reglas para presentar los conflictos:</strong></p>
+<ul>
+<li>Mostrar solo los conflictos que la persona usuaria puede resolver de verdad (no mostrar los conflictos a nivel de sistema)</li>
+<li>Optar por defecto por la opción más segura (ante la duda, conservar las dos versiones y dejar que una persona lo resuelva)</li>
+<li>Los conflictos quedan en cola en el sistema de notificaciones y persisten hasta resolverse</li>
+<li>Nunca impedir que la persona usuaria siga trabajando mientras haya conflictos pendientes</li>
+</ul>
+<hr>
+<h2 id="funcionalidades-disponibles-sin-conexión" tabindex="-1"><a class="heading-anchor" href="#funcionalidades-disponibles-sin-conexión" aria-hidden="true">#</a> Funcionalidades disponibles sin conexión</h2>
+<h3 id="matriz-de-disponibilidad-de-funcionalidades" tabindex="-1"><a class="heading-anchor" href="#matriz-de-disponibilidad-de-funcionalidades" aria-hidden="true">#</a> Matriz de disponibilidad de funcionalidades</h3>
+<table>
+<thead>
+<tr>
+<th>Funcionalidad</th>
+<th>Con conexión</th>
+<th>Sin conexión</th>
+<th>Notas</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Modo de campo (trabajo de campo)</td>
+<td>Completa</td>
+<td>Completa</td>
+<td>La lista de recorrido se descarga antes de iniciar el turno</td>
+</tr>
+<tr>
+<td>Modo de campo (inscripción de votantes)</td>
+<td>Completa</td>
+<td>Completa</td>
+<td>Los formularios funcionan localmente; el envío queda en cola</td>
+</tr>
+<tr>
+<td>Modo de campo (puerta a puerta de GOTV)</td>
+<td>Completa</td>
+<td>Completa</td>
+<td>Igual que el trabajo de campo</td>
+</tr>
+<tr>
+<td>Registro de entrada a eventos</td>
+<td>Completa</td>
+<td>Completa</td>
+<td>La lista de asistentes se descarga por adelantado</td>
+</tr>
+<tr>
+<td>Leer mensajes</td>
+<td>Completa</td>
+<td>En caché</td>
+<td>Muestra los mensajes ya sincronizados</td>
+</tr>
+<tr>
+<td>Redactar mensajes</td>
+<td>Completa</td>
+<td>En cola</td>
+<td>Se redactan localmente y se envían al sincronizar</td>
+</tr>
+<tr>
+<td>Ver contactos</td>
+<td>Completa</td>
+<td>En caché</td>
+<td>Solo lectura, contactos ya sincronizados</td>
+</tr>
+<tr>
+<td>Ver turnos</td>
+<td>Completa</td>
+<td>En caché</td>
+<td>Horario de turnos ya sincronizado</td>
+</tr>
+<tr>
+<td>Módulos de capacitación</td>
+<td>Completa</td>
+<td>En caché</td>
+<td>Disponibles los módulos ya vistos</td>
+</tr>
+<tr>
+<td>Solicitud de transporte</td>
+<td>Completa</td>
+<td>En cola</td>
+<td>La solicitud se crea localmente y se envía al sincronizar</td>
+</tr>
+<tr>
+<td>Reporte de problemas del observador electoral</td>
+<td>Completa</td>
+<td>En cola</td>
+<td>El reporte queda en cola localmente</td>
+</tr>
+<tr>
+<td>Registro de donaciones en efectivo</td>
+<td>Completa</td>
+<td>En cola</td>
+<td>Se registra localmente con recibo</td>
+</tr>
+<tr>
+<td>Paneles</td>
+<td>Completa</td>
+<td>No disponible</td>
+<td>Requiere agregación en el servidor</td>
+</tr>
+<tr>
+<td>Configuración y ajustes</td>
+<td>Completa</td>
+<td>No disponible</td>
+<td>Requiere validación del servidor</td>
+</tr>
+<tr>
+<td>Constructores (correo, formularios, etc.)</td>
+<td>Completa</td>
+<td>No disponible</td>
+<td>Dependencias complejas del lado del servidor</td>
+</tr>
+<tr>
+<td>Búsqueda</td>
+<td>Completa</td>
+<td>Limitada</td>
+<td>Solo puede buscar en los datos locales en caché</td>
+</tr>
+<tr>
+<td>Jornada de llamadas</td>
+<td>Completa</td>
+<td>No disponible</td>
+<td>Requiere conectividad para llamar</td>
+</tr>
+<tr>
+<td>Importación/exportación de datos</td>
+<td>Completa</td>
+<td>No disponible</td>
+<td>El manejo de archivos requiere servidor</td>
+</tr>
+<tr>
+<td>Publicación en redes sociales</td>
+<td>Completa</td>
+<td>No disponible</td>
+<td>Requiere conectividad con las API</td>
+</tr>
+</tbody>
+</table>
+<h3 id="presentación-de-las-funcionalidades-sin-conexión" tabindex="-1"><a class="heading-anchor" href="#presentación-de-las-funcionalidades-sin-conexión" aria-hidden="true">#</a> Presentación de las funcionalidades sin conexión</h3>
+<p>Según el modelo de navegación (<a href="http://navigation-model.md" target="_blank" rel="noopener noreferrer">navigation-model.md</a>), las funcionalidades no disponibles sin conexión aparecen <strong>atenuadas, con un distintivo de sin conexión</strong>, no ocultas. Al tocar un elemento atenuado se muestra:</p>
+<pre><code>┌───────────────────────────────────────────┐
+│  ◌  Requiere conexión                     │
+│                                           │
+│  Ahora mismo estás sin conexión. Esta     │
+│  funcionalidad estará disponible cuando   │
+│  te vuelvas a conectar.                   │
+│                                           │
+│  Mientras tanto puedes:                   │
+│  • Ver los contactos en caché             │
+│  • Leer los mensajes sincronizados        │
+│  • Continuar tu turno de trabajo de campo │
+│                                           │
+│  [Descartar]                              │
+└───────────────────────────────────────────┘
+</code></pre>
+<p>La sección &quot;Mientras tanto puedes&quot; redirige la atención hacia lo que sí está disponible: nunca hay que dejar a la persona usuaria en un callejón sin salida.</p>
+<hr>
+<h2 id="precarga-y-caché" tabindex="-1"><a class="heading-anchor" href="#precarga-y-caché" aria-hidden="true">#</a> Precarga y caché</h2>
+<h3 id="precarga-del-turno" tabindex="-1"><a class="heading-anchor" href="#precarga-del-turno" aria-hidden="true">#</a> Precarga del turno</h3>
+<p>Cuando un voluntario toca &quot;Iniciar turno&quot;, la app descarga todo lo necesario para el turno antes de entrar al modo de campo:</p>
+<ol>
+<li>La lista de recorrido (los registros de votantes del territorio asignado)</li>
+<li>Las teselas de mapa del área del territorio</li>
+<li>El guion y las opciones de respuesta</li>
+<li>La lista del equipo (para los líderes de equipo)</li>
+</ol>
+<p>El progreso se muestra así:</p>
+<pre><code>┌────────────────────────────────────┐
+│  Preparando tu turno...            │
+│                                    │
+│  ✓ Lista de recorrido (47 puertas) │
+│  ✓ Teselas de mapa                 │
+│  ↻ Guion y formularios...          │
+│  ○ Lista del equipo                │
+│                                    │
+│  ████████████████░░░  82%          │
+│                                    │
+│  [Cancelar]                        │
+└────────────────────────────────────┘
+</code></pre>
+<p><strong>Si se cae la conexión durante la precarga:</strong> la precarga se reanuda cuando vuelve la conexión. Si el voluntario no puede esperar, puede iniciar el turno con los datos que se hayan descargado (con una advertencia sobre los datos incompletos).</p>
+<h3 id="caché-en-segundo-plano" tabindex="-1"><a class="heading-anchor" href="#caché-en-segundo-plano" aria-hidden="true">#</a> Caché en segundo plano</h3>
+<p>La app guarda en caché de forma proactiva los datos que la persona usuaria probablemente vaya a necesitar:</p>
+<ul>
+<li><strong>Mensajes:</strong> las últimas 100 conversaciones, sincronizadas de forma incremental</li>
+<li><strong>Contactos:</strong> los contactos vistos hace poco (los últimos 50)</li>
+<li><strong>Turnos:</strong> los próximos 7 días del horario de turnos</li>
+<li><strong>Capacitación:</strong> los módulos ya empezados</li>
+<li><strong>Eventos:</strong> los próximos eventos con confirmación de asistencia</li>
+</ul>
+<p>La caché se gestiona automáticamente: los datos más antiguos se desalojan cuando se alcanzan los límites de almacenamiento. La persona usuaria nunca gestiona la caché a mano.</p>
+<h3 id="caché-de-teselas-de-mapa" tabindex="-1"><a class="heading-anchor" href="#caché-de-teselas-de-mapa" aria-hidden="true">#</a> Caché de teselas de mapa</h3>
+<p>Las teselas de mapa para uso sin conexión se guardan en caché de dos maneras:</p>
+<ul>
+<li><strong>Automática:</strong> al precargar un turno se descargan las teselas del área del territorio</li>
+<li><strong>Proactiva:</strong> si el voluntario tiene Wi-Fi, las teselas de todos sus territorios próximos se descargan por adelantado en segundo plano</li>
+</ul>
+<p>El tamaño de la caché de teselas está acotado (configurable, ~200 MB por defecto) para no llenar el almacenamiento de los celulares de gama baja.</p>
+<hr>
+<h2 id="ritmo-de-sincronización-y-batería" tabindex="-1"><a class="heading-anchor" href="#ritmo-de-sincronización-y-batería" aria-hidden="true">#</a> Ritmo de sincronización y batería</h2>
+<h3 id="adaptación-a-la-batería" tabindex="-1"><a class="heading-anchor" href="#adaptación-a-la-batería" aria-hidden="true">#</a> Adaptación a la batería</h3>
+<p>En móvil, la frecuencia de sincronización se adapta al nivel de batería:</p>
+<ul>
+<li><strong>Batería &gt;50 %:</strong> intervalo de sincronización normal (30 s en modo de campo, 60 s en la app estándar)</li>
+<li><strong>Batería 20-50 %:</strong> intervalo reducido (60 s en modo de campo, 120 s en la app estándar)</li>
+<li><strong>Batería &lt;20 %:</strong> sincronización mínima (solo manual, o cada 5 minutos para los datos críticos del modo de campo)</li>
+</ul>
+<p>A la persona usuaria nunca se le avisa de esta adaptación: ocurre en silencio. El único efecto visible es que la marca de tiempo de la última sincronización se actualiza con menos frecuencia cuando queda poca batería.</p>
+<h3 id="adaptación-al-consumo-de-datos" tabindex="-1"><a class="heading-anchor" href="#adaptación-al-consumo-de-datos" aria-hidden="true">#</a> Adaptación al consumo de datos</h3>
+<p>Para quienes usan conexiones con límite de datos (habituales en las geografías objetivo):</p>
+<ul>
+<li>La sincronización inicial y la precarga del turno muestran el tamaño estimado (&quot;Esto usará aproximadamente 15 MB&quot;)</li>
+<li>La sincronización en segundo plano usa el mínimo de ancho de banda (solo diferencias, comprimidas)</li>
+<li>La descarga de teselas de mapa es opcional y muestra advertencias de tamaño en las conexiones con límite de datos</li>
+</ul>
+<hr>
+<h2 id="ciclo-de-vida-del-turno-y-sincronización" tabindex="-1"><a class="heading-anchor" href="#ciclo-de-vida-del-turno-y-sincronización" aria-hidden="true">#</a> Ciclo de vida del turno y sincronización</h2>
+<p>Un turno de trabajo de campo tiene un ciclo de vida de sincronización propio:</p>
+<ol>
+<li><strong>Antes del turno:</strong> descarga completa de la lista de recorrido, las teselas de mapa y el guion. Estado de sincronización: &quot;Listo&quot;.</li>
+<li><strong>Durante el turno:</strong> cada interacción completada se guarda localmente de inmediato. La sincronización en segundo plano sube las interacciones completadas cada 30 segundos cuando hay conexión. Sin conexión, las interacciones se acumulan localmente.</li>
+<li><strong>Pausa del turno:</strong> si el voluntario hace una pausa, la sincronización sigue en segundo plano. Al reanudar, se retoma donde quedó.</li>
+<li><strong>Fin del turno:</strong> el voluntario toca &quot;Terminar turno&quot;. La app intenta una sincronización final de todos los datos restantes. Sin conexión, muestra: &quot;Tienes X interacciones sin subir. Se subirán cuando vuelvas a tener conexión. Puedes cerrar la app sin problema&quot;.</li>
+<li><strong>Después del turno:</strong> aviso de balance del turno (horas, notas, problemas). Se sincroniza cuando se puede. El turno queda &quot;cerrado&quot; localmente aunque el balance todavía no se haya sincronizado.</li>
+<li><strong>Salida anormal:</strong> la app se cae o el dispositivo se apaga. En el siguiente arranque, el turno se retoma en la última posición guardada. No se pierden datos: cada interacción se persiste localmente en el momento en que se registra.</li>
+</ol>
+<hr>
+<h2 id="recuperación-ante-errores" tabindex="-1"><a class="heading-anchor" href="#recuperación-ante-errores" aria-hidden="true">#</a> Recuperación ante errores</h2>
+<h3 id="estrategia-de-reintentos-de-sincronización" tabindex="-1"><a class="heading-anchor" href="#estrategia-de-reintentos-de-sincronización" aria-hidden="true">#</a> Estrategia de reintentos de sincronización</h3>
+<p>Las sincronizaciones fallidas se reintentan con espera exponencial:</p>
+<ul>
+<li>Primer reintento: inmediato</li>
+<li>Segundo reintento: a los 30 segundos</li>
+<li>Tercer reintento: a los 2 minutos</li>
+<li>Reintentos siguientes: cada 5 minutos</li>
+<li>Tras 10 fallos: se detiene el reintento automático y se muestra un error permanente con un botón manual &quot;Reintentar&quot;</li>
+</ul>
+<h3 id="salvaguardas-de-integridad-de-los-datos" tabindex="-1"><a class="heading-anchor" href="#salvaguardas-de-integridad-de-los-datos" aria-hidden="true">#</a> Salvaguardas de integridad de los datos</h3>
+<ul>
+<li><strong>Los datos locales nunca se borran hasta confirmar que se sincronizaron.</strong> La app conserva copias locales de todas las interacciones hasta que el servidor acusa recibo.</li>
+<li><strong>Acuses de recibo de sincronización.</strong> El servidor devuelve un acuse por cada evento sincronizado. Solo después de confirmarlo se marca la copia local como sincronizada.</li>
+<li><strong>Sincronización idempotente.</strong> Si el mismo evento se envía dos veces (por ejemplo, tras un tiempo de espera agotado en el que el servidor lo recibió pero el cliente no recibió el acuse), el servidor deduplica. Las interacciones no se cuentan dos veces.</li>
+</ul>
+<hr>
+<h2 id="preguntas-abiertas" tabindex="-1"><a class="heading-anchor" href="#preguntas-abiertas" aria-hidden="true">#</a> Preguntas abiertas</h2>
+<ol>
+<li>
+<p><strong>Notificación de sincronización al reconectar.</strong> Cuando alguien vuelve a tener conexión después de un uso prolongado sin ella, ¿la app debería mostrar una notificación que resuma lo que se sincronizó? (&quot;Volviste a tener conexión. Se subieron 23 interacciones y la lista de recorrido se actualizó con 3 cambios&quot;). Es útil, pero puede volverse ruidoso.</p>
+</li>
+<li>
+<p><strong>Monitoreo de la frecuencia de conflictos.</strong> ¿La plataforma debería seguir la tasa de conflictos por territorio y por equipo para detectar problemas operativos? Una tasa alta puede indicar asignaciones solapadas o una distribución de datos desactualizada: problemas que necesitan intervención humana, no solo patrones de interfaz.</p>
+</li>
+<li>
+<p><strong>Límites de duración sin conexión.</strong> ¿Debería haber una duración máxima sin conexión a partir de la cual la lista de recorrido se considere demasiado desactualizada para usarse? Si un voluntario no sincroniza en 24 horas, su lista de recorrido puede estar completamente equivocada. ¿La app debería advertir o bloquear?</p>
+</li>
+</ol>
+<!-- REVISIT: Los tamaños exactos de datos para la precarga (lista de recorrido + teselas de mapa + guion) hay que medirlos contra volúmenes de datos reales una vez implementado el modelo de datos. El límite de 200 MB para la caché de teselas y las estimaciones de la precarga del turno son valores provisionales. -->
+
+    </article>
+  </main>
+  <div class="toc-rail"><nav class="toc" aria-label="En esta página"><div class="toc-label">En esta página</div><ul><li class="toc-2"><a href="#propósito"># Propósito</a></li><li class="toc-2"><a href="#estados-de-conexión"># Estados de conexión</a></li><li class="toc-3"><a href="#definición-de-los-estados"># Definición de los estados</a></li><li class="toc-3"><a href="#indicador-en-la-app-estándar"># Indicador en la app estándar</a></li><li class="toc-3"><a href="#indicador-en-el-modo-de-campo"># Indicador en el modo de campo</a></li><li class="toc-2"><a href="#actualidad-de-los-datos"># Actualidad de los datos</a></li><li class="toc-3"><a href="#indicadores-de-actualidad-en-los-registros"># Indicadores de actualidad en los registros</a></li><li class="toc-3"><a href="#actualidad-en-el-modo-de-campo"># Actualidad en el modo de campo</a></li><li class="toc-2"><a href="#cola-de-cambios-pendientes"># Cola de cambios pendientes</a></li><li class="toc-3"><a href="#indicador-de-la-cola"># Indicador de la cola</a></li><li class="toc-3"><a href="#iconos-de-estado-de-los-cambios"># Iconos de estado de los cambios</a></li><li class="toc-3"><a href="#indicadores-en-contexto"># Indicadores en contexto</a></li><li class="toc-2"><a href="#comportamiento-de-la-sincronización"># Comportamiento de la sincronización</a></li><li class="toc-3"><a href="#sincronización-automática"># Sincronización automática</a></li><li class="toc-3"><a href="#sincronización-manual"># Sincronización manual</a></li><li class="toc-3"><a href="#progreso-de-la-sincronización"># Progreso de la sincronización</a></li><li class="toc-2"><a href="#resolución-de-conflictos"># Resolución de conflictos</a></li><li class="toc-3"><a href="#resolución-automática"># Resolución automática</a></li><li class="toc-3"><a href="#conflictos-que-ve-la-persona-usuaria"># Conflictos que ve la persona usuaria</a></li><li class="toc-2"><a href="#funcionalidades-disponibles-sin-conexión"># Funcionalidades disponibles sin conexión</a></li><li class="toc-3"><a href="#matriz-de-disponibilidad-de-funcionalidades"># Matriz de disponibilidad de funcionalidades</a></li><li class="toc-3"><a href="#presentación-de-las-funcionalidades-sin-conexión"># Presentación de las funcionalidades sin conexión</a></li><li class="toc-2"><a href="#precarga-y-caché"># Precarga y caché</a></li><li class="toc-3"><a href="#precarga-del-turno"># Precarga del turno</a></li><li class="toc-3"><a href="#caché-en-segundo-plano"># Caché en segundo plano</a></li><li class="toc-3"><a href="#caché-de-teselas-de-mapa"># Caché de teselas de mapa</a></li><li class="toc-2"><a href="#ritmo-de-sincronización-y-batería"># Ritmo de sincronización y batería</a></li><li class="toc-3"><a href="#adaptación-a-la-batería"># Adaptación a la batería</a></li><li class="toc-3"><a href="#adaptación-al-consumo-de-datos"># Adaptación al consumo de datos</a></li><li class="toc-2"><a href="#ciclo-de-vida-del-turno-y-sincronización"># Ciclo de vida del turno y sincronización</a></li><li class="toc-2"><a href="#recuperación-ante-errores"># Recuperación ante errores</a></li><li class="toc-3"><a href="#estrategia-de-reintentos-de-sincronización"># Estrategia de reintentos de sincronización</a></li><li class="toc-3"><a href="#salvaguardas-de-integridad-de-los-datos"># Salvaguardas de integridad de los datos</a></li><li class="toc-2"><a href="#preguntas-abiertas"># Preguntas abiertas</a></li></ul></nav></div>
+</div>
+<script src="../../../../assets/search.js" defer></script>
+<script src="../../../../assets/app.js" defer></script>
+</body>
+</html>

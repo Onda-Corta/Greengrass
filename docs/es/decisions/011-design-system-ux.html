@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="es" data-base="../../" data-no-results="No hay resultados para">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ADR-011: Sistema de diseño y fundamentos de UX · GreenGrass</title>
+<meta name="description" content="ADR-011: Sistema de diseño y fundamentos de UX — Documentación de especificación y diseño de GreenGrass.">
+<link rel="alternate" hreflang="en" href="../../decisions/011-design-system-ux.html">
+<link rel="alternate" hreflang="es" href="./011-design-system-ux.html">
+<link rel="alternate" hreflang="x-default" href="../../decisions/011-design-system-ux.html">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%232563eb'/%3E%3Cstop offset='1' stop-color='%2316a34a'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='32' height='32' rx='7' fill='url(%23g)'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="../../assets/styles.css">
+</head>
+<body>
+<a class="skip-link" href="#content">Saltar al contenido</a>
+<header class="site-header">
+  <button type="button" class="menu-toggle" aria-label="Alternar navegación" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+  <a class="brand" href="../../es/index.html">
+    <span class="brand-mark" aria-hidden="true"></span>
+    <span class="brand-text"><strong>GreenGrass</strong><small>Especificación y diseño</small></span>
+  </a>
+  <div class="search">
+    <input type="search" id="search-input" placeholder="Buscar en la documentación…" autocomplete="off" aria-label="Buscar en la documentación">
+    <div id="search-results" class="search-results" hidden></div>
+  </div>
+  <nav class="lang-switch" aria-label="Idioma"><a class="lang-opt" href="../../decisions/011-design-system-ux.html" hreflang="en" lang="en" title="View this page in English">EN</a><span class="lang-opt active" aria-current="true">ES</span></nav>
+  <button type="button" class="theme-toggle" aria-label="Alternar modo oscuro" title="Alternar modo oscuro">
+    <span class="theme-icon" aria-hidden="true"></span>
+  </button>
+</header>
+<div class="layout">
+  <div class="sidebar-backdrop" hidden></div>
+  <aside class="sidebar" aria-label="Navegación de la documentación">
+    <nav class="nav">
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">Inicio<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../index.html">GreenGrass</a></li></ul></div>
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">Especificaciones<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../spec/product.html">Proyecto: GreenGrass</a></li><li><a href="../spec/mvp.html">MVP de GreenGrass — plan de producto</a></li><li><a href="../spec/users.html">Usuarios y roles</a></li><li><a href="../spec/workflows.html">Flujos de trabajo principales</a></li><li><a href="../spec/geography.html">Geografía objetivo</a></li><li><a href="../spec/security.html">Seguridad y modelo de amenazas</a></li><li><a href="../spec/compliance.html">Cumplimiento y marco legal</a></li><li><a href="../spec/fundraising.html">Recaudación de fondos e infraestructura de pagos</a></li><li><a href="../spec/integrations.html">Integraciones externas</a></li><li><a href="../spec/support.html">Soporte y puesta en marcha de organizaciones</a></li><li><a href="../spec/gotv.html">GOTV y operaciones del día de elecciones</a></li><li><a href="../spec/messaging.html">Comunicaciones internas y notificaciones</a></li><li><a href="../spec/press.html">Prensa, medios y comunicaciones públicas</a></li><li><a href="../spec/comms-intelligence.html">Inteligencia de comunicaciones — hoja de ruta post-MVP</a></li></ul></div>
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">Arquitectura<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../design/architecture/system.html">Arquitectura del sistema</a></li></ul></div>
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">Diseño UX<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../design/ux/00-overview.html">Resumen del diseño de UX</a></li><li><a href="../design/ux/01-information-architecture/navigation-model.html">Modelo de navegación</a></li><li><a href="../design/ux/01-information-architecture/screen-inventory.html">Inventario de pantallas</a></li><li><a href="../design/ux/01-information-architecture/persona-views.html">Vistas por arquetipo</a></li><li><a href="../design/ux/01-information-architecture/url-structure.html">Estructura de URL</a></li><li><a href="../design/ux/02-global-patterns/pattern-catalog.html">Catálogo de patrones</a></li><li><a href="../design/ux/02-global-patterns/offline-sync-patterns.html">Patrones sin conexión y de sincronización</a></li><li><a href="../design/ux/02-global-patterns/notification-patterns.html">Patrones de notificaciones</a></li><li><a href="../design/ux/02-global-patterns/search-patterns.html">Patrones de búsqueda</a></li><li><a href="../design/ux/02-global-patterns/settings-help-patterns.html">Patrones de ajustes y ayuda</a></li><li><a href="../design/ux/02-global-patterns/security-ux-patterns.html">Patrones de UX de seguridad</a></li><li><a href="../design/ux/03-design-system/foundations.html">Fundamentos del sistema de diseño</a></li><li><a href="../design/ux/03-design-system/theming-strategy.html">Estrategia de temas</a></li><li><a href="../design/ux/03-design-system/component-inventory.html">Inventario de componentes</a></li><li><a href="../design/ux/03-design-system/responsive-strategy.html">Estrategia de diseño adaptable</a></li></ul></div>
+<div class="nav-section open"><button type="button" class="nav-section-title" aria-expanded="true">Decisiones<span class="chev" aria-hidden="true"></span></button><ul><li><a href="./001-platform-architecture.html">ADR-001: Arquitectura y despliegue de la plataforma</a></li><li><a href="./002-security-threat-model.html">ADR-002: Seguridad y modelo de amenazas</a></li><li><a href="./003-identity-access-organization.html">ADR-003: Identidad, acceso y organización</a></li><li><a href="./004-data-model-integrity.html">ADR-004: Modelo de datos e integridad</a></li><li><a href="./005-offline-first-sync.html">ADR-005: Prioridad sin conexión y sincronización</a></li><li><a href="./006-field-operations-gotv.html">ADR-006: Operaciones de campo y GOTV</a></li><li><a href="./007-fundraising-payments.html">ADR-007: Recaudación de fondos y pagos</a></li><li><a href="./008-communications-messaging.html">ADR-008: Comunicaciones y mensajería</a></li><li><a href="./009-compliance-legal.html">ADR-009: Cumplimiento y marco legal</a></li><li><a href="./010-internationalization-localization.html">ADR-010: Internacionalización y localización</a></li><li><a href="./011-design-system-ux.html" aria-current="page" class="active">ADR-011: Sistema de diseño y fundamentos de UX</a></li><li><a href="./012-external-integrations.html">ADR-012: Integraciones externas</a></li><li><a href="./013-analytics-ai.html">ADR-013: Analítica e IA</a></li><li><a href="./014-volunteer-onboarding.html">ADR-014: Voluntariado e incorporación</a></li><li><a href="./015-product-scope.html">ADR-015: Límites del alcance del producto</a></li><li><a href="./016-cross-cutting-resolutions.html">ADR-016: Resoluciones transversales</a></li><li><a href="./017-sharing-contract-trust-model.html">ADR-017: El contrato de intercambio como primitiva universal de confianza</a></li><li><a href="./ux-decisions.html">Decisiones de UX — fase de wireframes</a></li></ul></div>
+    </nav>
+  </aside>
+  <main id="content" class="content">
+    <nav class="breadcrumb" aria-label="Ruta de navegación">Decisiones</nav>
+    <article class="prose">
+<h1 id="adr-011-sistema-de-diseño-y-fundamentos-de-ux" tabindex="-1"><a class="heading-anchor" href="#adr-011-sistema-de-diseño-y-fundamentos-de-ux" aria-hidden="true">#</a> ADR-011: Sistema de diseño y fundamentos de UX</h1>
+<p><strong>Estado:</strong> Aceptada
+<strong>Fecha:</strong> 2026-03-03
+<strong>Fuentes:</strong> <code>design/ux/01-information-architecture/navigation-model.md</code>, <code>design/ux/03-design-system/foundations.md</code>, <code>design/ux/03-design-system/theming-strategy.md</code>, <code>design/ux/03-design-system/responsive-strategy.md</code></p>
+<h2 id="contexto" tabindex="-1"><a class="heading-anchor" href="#contexto" aria-hidden="true">#</a> Contexto</h2>
+<p>GreenGrass tiene que correr en celulares Android de gama baja sobre conexiones 3G en el Sur Global y, a la vez, ofrecer una experiencia de escritorio completa al personal de campaña que maneja operaciones complejas. El sistema de diseño tiene que soportar la identidad visual por organización (las campañas políticas necesitan sus colores y sus logos), la dirección de texto RTL, los requisitos de accesibilidad y una interfaz de modo de campo pensada para usarse con una mano mientras se camina. Cada decisión de diseño afecta el rendimiento, y el rendimiento es un requisito de supervivencia: una carga de 10 segundos en 3G significa que el voluntario que está en la puerta se da por vencido.</p>
+<h2 id="decisión" tabindex="-1"><a class="heading-anchor" href="#decisión" aria-hidden="true">#</a> Decisión</h2>
+<h3 id="escritorio-navegación-híbrida-de-barra-superior-y-barra-lateral" tabindex="-1"><a class="heading-anchor" href="#escritorio-navegación-híbrida-de-barra-superior-y-barra-lateral" aria-hidden="true">#</a> Escritorio: navegación híbrida de barra superior y barra lateral</h3>
+<p>En escritorio se usa una barra superior para el contexto (identidad de la organización, búsqueda global, estado de sincronización, notificaciones, perfil) y una barra lateral plegable para la navegación de funcionalidades adaptable al rol. La barra lateral muestra elementos distintos según la plantilla de rol de la persona: las funcionalidades restringidas no aparecen, no se muestran atenuadas. Las secciones de la barra lateral se pliegan de forma independiente y su estado persiste por usuario.</p>
+<p>En móvil se usa una barra de pestañas inferior (4-5 pestañas adaptables al rol) con contenido a pantalla completa y navegación de retroceso o de menú en la barra superior. El modo de campo es una pantalla completa exclusiva, sin barra lateral ni pestañas: solo navegación anterior/siguiente, indicador de posición y los botones de terminar turno y de pánico.</p>
+<p><strong>Alternativas consideradas:</strong> Se descartó usar solo la barra superior (sin barra lateral) porque las plataformas de campaña tienen demasiadas áreas de funcionalidad para una navegación puramente horizontal. Se descartó la barra de pestañas inferior con menú hamburguesa en escritorio porque esconde la navegación detrás de un clic más. Se descartó usar la misma navegación en todos los dispositivos porque el celular, la tableta y el escritorio tienen patrones de interacción radicalmente distintos.</p>
+<h3 id="pila-de-fuentes-del-sistema-sin-fuentes-personalizadas" tabindex="-1"><a class="heading-anchor" href="#pila-de-fuentes-del-sistema-sin-fuentes-personalizadas" aria-hidden="true">#</a> Pila de fuentes del sistema, sin fuentes personalizadas</h3>
+<p>La plataforma usa <code>system-ui</code> con alternativas de reserva a las fuentes propias de cada plataforma: Roboto (Android), San Francisco (iOS), Noto Sans (cobertura Unicode). No se carga ninguna fuente web personalizada. Así no hay demora por carga de fuentes, se logra la mejor cobertura posible de las escrituras latina, tailandesa, devanagari y árabe, y el renderizado es consistente en cada plataforma.</p>
+<p><strong>Alternativas consideradas:</strong> Se consideraron —y al principio se usaron— fuentes web personalizadas (Inter y similares), y luego se descartaron porque añaden tiempo de carga en conexiones lentas, obligan a manejar alternativas de reserva y no cubren las escrituras tailandesa, devanagari y árabe con la fiabilidad de las fuentes del sistema.</p>
+<h3 id="personalización-por-organización-solo-de-color-y-logo" tabindex="-1"><a class="heading-anchor" href="#personalización-por-organización-solo-de-color-y-logo" aria-hidden="true">#</a> Personalización por organización solo de color y logo</h3>
+<p>Las organizaciones pueden personalizar su color principal, su logo y su favicon. La fuente, la maquetación, los estilos de los componentes y el espaciado son fijos. Esto evita que la personalización de la organización rompa el espaciado o la alineación, y reduce la matriz de pruebas a las variantes de color.</p>
+<h3 id="generación-automática-de-colores-derivados-a-partir-del-color-principal" tabindex="-1"><a class="heading-anchor" href="#generación-automática-de-colores-derivados-a-partir-del-color-principal" aria-hidden="true">#</a> Generación automática de colores derivados a partir del color principal</h3>
+<p>El color principal de la organización genera automáticamente el color de hover (10 % más oscuro), el de estado activo (20 % más oscuro), el de fondo sutil (95 % más claro) y el del texto sobre el color principal (blanco o negro, el que dé una relación de contraste de 4.5:1). Si el color de marca se parece demasiado a los colores de estado (rojo, ámbar, verde), el sistema avisa durante la configuración. La generación de colores usa algoritmos de color perceptual (OKLCH antes que HSL).</p>
+<h3 id="unidad-base-de-espaciado-de-8px-con-escala-geométrica" tabindex="-1"><a class="heading-anchor" href="#unidad-base-de-espaciado-de-8px-con-escala-geométrica" aria-hidden="true">#</a> Unidad base de espaciado de 8px con escala geométrica</h3>
+<p>Todo el espaciado usa una escala geométrica anclada en 8px: 0, 1px, 2px, 4px, 8px, 12px, 16px, 24px, 32px, 48px, 64px, 96px. Los márgenes en móvil son de 16px; en escritorio, de 32-64px. Un espaciado consistente crea ritmo visual y elimina los valores en píxeles improvisados.</p>
+<h3 id="css-con-prioridad-móvil-y-división-de-código-agresiva" tabindex="-1"><a class="heading-anchor" href="#css-con-prioridad-móvil-y-división-de-código-agresiva" aria-hidden="true">#</a> CSS con prioridad móvil y división de código agresiva</h3>
+<p>Los estilos base apuntan al viewport (el área visible de la pantalla) más pequeño; las mejoras se añaden con media queries. Puntos de quiebre: 640px (celulares grandes), 768px (tabletas), 1024px (laptops pequeñas), 1280px (laptops), 1536px (monitores grandes). La división de código es por ruta y por funcionalidad: los mapas, las gráficas, los constructores de formularios, las herramientas de administración y el modo de campo se cargan solo cuando hacen falta.</p>
+<h3 id="presupuestos-de-rendimiento-orientados-a-3g" tabindex="-1"><a class="heading-anchor" href="#presupuestos-de-rendimiento-orientados-a-3g" aria-hidden="true">#</a> Presupuestos de rendimiento orientados a 3G</h3>
+<table>
+<thead>
+<tr>
+<th>Métrica</th>
+<th>Presupuesto</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>JS inicial</td>
+<td>&lt;150KB comprimido con gzip</td>
+</tr>
+<tr>
+<td>CSS</td>
+<td>&lt;30KB</td>
+</tr>
+<tr>
+<td>First Contentful Paint</td>
+<td>&lt;2s en 3G</td>
+</tr>
+<tr>
+<td>Time to Interactive</td>
+<td>&lt;4s en 3G</td>
+</tr>
+<tr>
+<td>Fragmento por ruta</td>
+<td>&lt;50KB</td>
+</tr>
+<tr>
+<td>Fuentes web</td>
+<td>0KB (fuentes del sistema)</td>
+</tr>
+</tbody>
+</table>
+<p>Las imágenes usan WebP con PNG como alternativa de reserva, <code>srcset</code> para el tamaño adaptable, carga diferida para los avatares y teselas precargadas en caché para los mapas. Los logos van en SVG.</p>
+<p>El sistema de diseño usa propiedades personalizadas de CSS (tokens de diseño) para todos los valores visuales, nunca valores en crudo. Esto permite aplicar temas por organización en tiempo de ejecución sin cambiar código. La arquitectura de tokens tiene tres capas: la paleta primitiva (colores en crudo, que no se usan directamente), los tokens semánticos (describen su propósito: <code>--color-surface-primary</code>, <code>--color-text-secondary</code>) y los overrides de tema (la personalización por organización). El modo oscuro reasigna los tokens de superficie, texto y borde. Los temas de accesibilidad (alto contraste, texto grande, movimiento reducido) se aplican como atributos de datos.</p>
+<h2 id="consecuencias" tabindex="-1"><a class="heading-anchor" href="#consecuencias" aria-hidden="true">#</a> Consecuencias</h2>
+<p><strong>Beneficios:</strong></p>
+<ul>
+<li>Las fuentes del sistema no añaden ninguna demora de carga y dan la mejor cobertura de escrituras, algo crítico en contextos multilingües y de bajo ancho de banda</li>
+<li>Limitar la personalización por organización al color mantiene manejable la matriz de pruebas sin renunciar a la identidad visual de la campaña</li>
+<li>La generación automática de colores derivados garantiza la accesibilidad sin exigirle conocimientos de diseño al personal de campaña</li>
+<li>Los presupuestos de rendimiento orientados a 3G aseguran que la plataforma funcione en las redes y los dispositivos que los voluntarios usan de verdad</li>
+<li>La arquitectura de tokens de diseño permite aplicar temas en tiempo de ejecución, el modo oscuro y los temas de accesibilidad con un solo mecanismo</li>
+</ul>
+<p><strong>Costos:</strong></p>
+<ul>
+<li>Usar la pila de fuentes del sistema hace que la tipografía de la plataforma varíe un poco de un sistema operativo a otro</li>
+<li>Personalizar solo el color puede frustrar a las campañas con identidades visuales fuertes que van más allá del color</li>
+<li>La división de código agresiva exige un manejo cuidadoso de las dependencias para evitar cargas en cascada</li>
+<li>El presupuesto de 150KB de JS es extremadamente ajustado y exigirá vigilancia constante a medida que se añadan funcionalidades</li>
+</ul>
+<p><strong>Restricciones:</strong></p>
+<ul>
+<li>Cada componente tiene que funcionar en todos los puntos de quiebre, en LTR y en RTL, y con el tema claro y el oscuro</li>
+<li>Las áreas táctiles del modo de campo (56px como mínimo) exigen un tratamiento de disposición distinto al del modo estándar (44px)</li>
+<li>Hay que respetar <code>prefers-reduced-motion</code>: todo el movimiento es funcional, sin animaciones decorativas</li>
+<li>Las pruebas tienen que priorizar los dispositivos Android económicos (360x640) como objetivo crítico</li>
+</ul>
+<p><strong>ADR relacionados:</strong> <a href="./010-internationalization-localization.html">ADR-010</a> (soporte de RTL con propiedades lógicas, cobertura tipográfica multilingüe), <a href="./006-field-operations-gotv.html">ADR-006</a> (interfaz del modo de campo, áreas táctiles), <a href="./001-platform-architecture.html">ADR-001</a> (diseño con prioridad móvil)</p>
+
+    </article>
+  </main>
+  <div class="toc-rail"><nav class="toc" aria-label="En esta página"><div class="toc-label">En esta página</div><ul><li class="toc-2"><a href="#contexto"># Contexto</a></li><li class="toc-2"><a href="#decisión"># Decisión</a></li><li class="toc-3"><a href="#escritorio-navegación-híbrida-de-barra-superior-y-barra-lateral"># Escritorio: navegación híbrida de barra superior y barra lateral</a></li><li class="toc-3"><a href="#pila-de-fuentes-del-sistema-sin-fuentes-personalizadas"># Pila de fuentes del sistema, sin fuentes personalizadas</a></li><li class="toc-3"><a href="#personalización-por-organización-solo-de-color-y-logo"># Personalización por organización solo de color y logo</a></li><li class="toc-3"><a href="#generación-automática-de-colores-derivados-a-partir-del-color-principal"># Generación automática de colores derivados a partir del color principal</a></li><li class="toc-3"><a href="#unidad-base-de-espaciado-de-8px-con-escala-geométrica"># Unidad base de espaciado de 8px con escala geométrica</a></li><li class="toc-3"><a href="#css-con-prioridad-móvil-y-división-de-código-agresiva"># CSS con prioridad móvil y división de código agresiva</a></li><li class="toc-3"><a href="#presupuestos-de-rendimiento-orientados-a-3g"># Presupuestos de rendimiento orientados a 3G</a></li><li class="toc-2"><a href="#consecuencias"># Consecuencias</a></li></ul></nav></div>
+</div>
+<script src="../../assets/search.js" defer></script>
+<script src="../../assets/app.js" defer></script>
+</body>
+</html>
