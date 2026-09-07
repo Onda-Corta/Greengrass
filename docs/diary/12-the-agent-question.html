@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en" data-base="../" data-no-results="No results for">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Diary Entry 12: The Agent Question · GreenGrass</title>
+<meta name="description" content="Diary Entry 12: The Agent Question — GreenGrass spec &amp; design documentation.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%232563eb'/%3E%3Cstop offset='1' stop-color='%2316a34a'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='32' height='32' rx='7' fill='url(%23g)'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="../assets/styles.css">
+</head>
+<body>
+<a class="skip-link" href="#content">Skip to content</a>
+<header class="site-header">
+  <button type="button" class="menu-toggle" aria-label="Toggle navigation" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+  <a class="brand" href="../index.html">
+    <span class="brand-mark" aria-hidden="true"></span>
+    <span class="brand-text"><strong>GreenGrass</strong><small>Spec &amp; Design</small></span>
+  </a>
+  <div class="search">
+    <input type="search" id="search-input" placeholder="Search docs…" autocomplete="off" aria-label="Search documentation">
+    <div id="search-results" class="search-results" hidden></div>
+  </div>
+  <nav class="lang-switch" aria-label="Language"><span class="lang-opt active" aria-current="true">EN</span><a class="lang-opt lang-opt--fallback" href="../es/index.html" hreflang="es" lang="es" title="Esta página no está traducida. Ir a la documentación en español.">ES</a></nav>
+  <button type="button" class="theme-toggle" aria-label="Toggle dark mode" title="Toggle dark mode">
+    <span class="theme-icon" aria-hidden="true"></span>
+  </button>
+</header>
+<div class="layout">
+  <div class="sidebar-backdrop" hidden></div>
+  <aside class="sidebar" aria-label="Documentation navigation">
+    <nav class="nav">
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">Home<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../index.html">GreenGrass</a></li></ul></div>
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">Specifications<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../spec/product.html">Project: GreenGrass</a></li><li><a href="../spec/mvp.html">GreenGrass MVP — Product Plan</a></li><li><a href="../spec/users.html">Users &amp; Roles</a></li><li><a href="../spec/workflows.html">Core Workflows</a></li><li><a href="../spec/geography.html">Target Geography</a></li><li><a href="../spec/security.html">Security &amp; Threat Model</a></li><li><a href="../spec/compliance.html">Compliance &amp; Legal Framework</a></li><li><a href="../spec/fundraising.html">Fundraising &amp; Payment Infrastructure</a></li><li><a href="../spec/integrations.html">External Integrations</a></li><li><a href="../spec/support.html">Tenant Support &amp; Onboarding</a></li><li><a href="../spec/gotv.html">Get Out The Vote &amp; Election Day Operations</a></li><li><a href="../spec/messaging.html">Internal Communications &amp; Notifications</a></li><li><a href="../spec/press.html">Press, Media &amp; Public Communications</a></li><li><a href="../spec/comms-intelligence.html">Comms Intelligence — Post-MVP Roadmap</a></li></ul></div>
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">Architecture<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../design/architecture/system.html">System Architecture</a></li></ul></div>
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">UX Design<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../design/ux/00-overview.html">UX Design Overview</a></li><li><a href="../design/ux/01-information-architecture/navigation-model.html">Navigation Model</a></li><li><a href="../design/ux/01-information-architecture/screen-inventory.html">Screen Inventory</a></li><li><a href="../design/ux/01-information-architecture/persona-views.html">Persona Views</a></li><li><a href="../design/ux/01-information-architecture/url-structure.html">URL Structure</a></li><li><a href="../design/ux/02-global-patterns/pattern-catalog.html">Pattern Catalog</a></li><li><a href="../design/ux/02-global-patterns/offline-sync-patterns.html">Offline &amp; Sync Patterns</a></li><li><a href="../design/ux/02-global-patterns/notification-patterns.html">Notification Patterns</a></li><li><a href="../design/ux/02-global-patterns/search-patterns.html">Search Patterns</a></li><li><a href="../design/ux/02-global-patterns/settings-help-patterns.html">Settings &amp; Help Patterns</a></li><li><a href="../design/ux/02-global-patterns/security-ux-patterns.html">Security UX Patterns</a></li><li><a href="../design/ux/03-design-system/foundations.html">Design System Foundations</a></li><li><a href="../design/ux/03-design-system/theming-strategy.html">Theming Strategy</a></li><li><a href="../design/ux/03-design-system/component-inventory.html">Component Inventory</a></li><li><a href="../design/ux/03-design-system/responsive-strategy.html">Responsive Strategy</a></li><li><a href="../design/ux/04-wireframes/index.html">Wireframes</a></li><li><a href="../design/ux/04-wireframes/navigation-shell/navigation-shell.html">Navigation Shell Wireframes</a></li><li><a href="../design/ux/04-wireframes/dashboards/dashboards.html">Dashboard Wireframes</a></li><li><a href="../design/ux/04-wireframes/field-mode/field-mode.html">Field Mode Wireframes</a></li><li><a href="../design/ux/04-wireframes/onboarding/onboarding.html">Onboarding Wireframes</a></li><li><a href="../design/ux/04-wireframes/messaging/messaging.html">Messaging Wireframes</a></li><li><a href="../design/ux/04-wireframes/supporter/supporter-portal.html">Supporter Portal Wireframes</a></li><li><a href="../design/ux/04-wireframes/alliance/alliance.html">Alliance Wireframes</a></li><li><a href="../design/ux/04-wireframes/crm/crm.html">CRM / People Wireframes</a></li><li><a href="../design/ux/04-wireframes/field-ops/field-ops.html">Field Operations (Admin) Wireframes</a></li><li><a href="../design/ux/04-wireframes/fundraising/fundraising.html">Fundraising Wireframes</a></li><li><a href="../design/ux/04-wireframes/communications/communications.html">Communications Wireframes</a></li><li><a href="../design/ux/04-wireframes/social-media/social-media.html">Social Media Wireframes</a></li><li><a href="../design/ux/04-wireframes/events/events.html">Events Wireframes</a></li><li><a href="../design/ux/04-wireframes/press/press.html">Press &amp; Media Wireframes</a></li><li><a href="../design/ux/04-wireframes/activism/activism.html">Activism &amp; Engagement Campaign Wireframes</a></li><li><a href="../design/ux/04-wireframes/gotv/gotv.html">GOTV Admin Wireframes</a></li><li><a href="../design/ux/04-wireframes/settings/settings.html">Settings &amp; Admin Wireframes</a></li><li><a href="../design/ux/04-wireframes/auth/auth.html">Authentication Wireframes</a></li><li><a href="../design/ux/04-wireframes/profile/profile.html">User Profile Wireframes</a></li><li><a href="../design/ux/04-wireframes/help/help.html">Support &amp; Help Wireframes</a></li><li><a href="../design/ux/04-wireframes/public/public.html">Public Pages Wireframes</a></li><li><a href="../design/ux/04-wireframes/audit.html">Wireframe Audit Report</a></li></ul></div>
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">Decisions<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../decisions/001-platform-architecture.html">ADR-001: Platform Architecture &amp; Deployment</a></li><li><a href="../decisions/002-security-threat-model.html">ADR-002: Security &amp; Threat Model</a></li><li><a href="../decisions/003-identity-access-organization.html">ADR-003: Identity, Access &amp; Organization</a></li><li><a href="../decisions/004-data-model-integrity.html">ADR-004: Data Model &amp; Integrity</a></li><li><a href="../decisions/005-offline-first-sync.html">ADR-005: Offline-First &amp; Sync</a></li><li><a href="../decisions/006-field-operations-gotv.html">ADR-006: Field Operations &amp; GOTV</a></li><li><a href="../decisions/007-fundraising-payments.html">ADR-007: Fundraising &amp; Payments</a></li><li><a href="../decisions/008-communications-messaging.html">ADR-008: Communications &amp; Messaging</a></li><li><a href="../decisions/009-compliance-legal.html">ADR-009: Compliance &amp; Legal Framework</a></li><li><a href="../decisions/010-internationalization-localization.html">ADR-010: Internationalization &amp; Localization</a></li><li><a href="../decisions/011-design-system-ux.html">ADR-011: Design System &amp; UX Foundations</a></li><li><a href="../decisions/012-external-integrations.html">ADR-012: External Integrations</a></li><li><a href="../decisions/013-analytics-ai.html">ADR-013: Analytics &amp; AI</a></li><li><a href="../decisions/014-volunteer-onboarding.html">ADR-014: Volunteer &amp; Onboarding</a></li><li><a href="../decisions/015-product-scope.html">ADR-015: Product Scope Boundaries</a></li><li><a href="../decisions/016-cross-cutting-resolutions.html">ADR-016: Cross-Cutting Resolutions</a></li><li><a href="../decisions/017-sharing-contract-trust-model.html">ADR-017: The Sharing Contract as Universal Trust Primitive</a></li><li><a href="../decisions/018-ai-agent-posture.html">ADR-018: AI Agent Posture</a></li><li><a href="../decisions/ux-decisions.html">UX Decisions — Wireframe Phase</a></li></ul></div>
+<div class="nav-section open"><button type="button" class="nav-section-title" aria-expanded="true">Diary<span class="chev" aria-hidden="true"></span></button><ul><li><a href="./index.html">Project Diary</a></li><li><a href="./01-from-description-to-specification.html">Entry 1: From Description to Specification</a></li><li><a href="./02-the-architecture-session.html">Entry 2: The Architecture Session</a></li><li><a href="./03-information-architecture.html">Entry 3: Information Architecture</a></li><li><a href="./04-design-system-and-wireframes.html">Entry 4: The Design System and Wireframes</a></li><li><a href="./05-the-wireframe-audit.html">Entry 5: The Wireframe Audit</a></li><li><a href="./06-resolving-the-open-questions.html">Entry 6: Resolving the Open Questions</a></li><li><a href="./07-reconciling-the-architecture.html">Entry 7: Reconciling the Architecture</a></li><li><a href="./08-housekeeping.html">Diary Entry 8: Housekeeping</a></li><li><a href="./09-the-documentation-website.html">Diary Entry 9: The Documentation Website</a></li><li><a href="./10-the-spanish-edition.html">Diary Entry 10: The Spanish Edition</a></li><li><a href="./11-translating-the-rest.html">Diary Entry 11: Translating the Rest</a></li><li><a href="./12-the-agent-question.html" aria-current="page" class="active">Diary Entry 12: The Agent Question</a></li></ul></div>
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">Project &amp; Internal<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../claude/MEMORY.html">Memory</a></li><li><a href="../claude/SKILLS.html">Skills</a></li><li><a href="../CLAUDE.html">GreenGrass</a></li></ul></div>
+    </nav>
+  </aside>
+  <main id="content" class="content">
+    <nav class="breadcrumb" aria-label="Breadcrumb">Diary</nav>
+    <article class="prose">
+<h1 id="diary-entry-12-the-agent-question" tabindex="-1"><a class="heading-anchor" href="#diary-entry-12-the-agent-question" aria-hidden="true">#</a> Diary Entry 12: The Agent Question</h1>
+<p><strong>Date:</strong> 2026-09-07</p>
+<hr>
+<h2 id="the-task" tabindex="-1"><a class="heading-anchor" href="#the-task" aria-hidden="true">#</a> The Task</h2>
+<p>Entries 8, 9, 10 and 11 all ended the same way: the next step is implementation.</p>
+<p>It isn't. Not yet. There's one question the spec never asked, and it has to be answered before a line of production code gets written.</p>
+<p>The corpus decided AI five times. It never decided what happens if AI agents run <em>through</em> the product.</p>
+<h2 id="what-the-spec-decided" tabindex="-1"><a class="heading-anchor" href="#what-the-spec-decided" aria-hidden="true">#</a> What the Spec Decided</h2>
+<p>Five bounded decisions, each one a feature with a human standing at the exit:</p>
+<ul>
+<li><strong>ADR-013</strong> — AI drafts a personalized activism message. The supporter reads it, edits it, approves it. The approval is a consent record in the audit trail.</li>
+<li><strong>ADR-010</strong> — AI drafts translations. Humans sign off. Security prompts, legal text, donation forms and consent language always require human review.</li>
+<li><strong>ADR-014</strong> — an AI concierge handles first contact for support, escalating to a human for anything high-stakes. BYOK key management was named explicitly: lose the key, lose the data, so a person verifies.</li>
+<li><strong>ADR-016 §38</strong> — BYOM. The organization brings its own model, its own endpoint, its own credentials.</li>
+<li><strong><code>design/architecture/system.md</code>, &quot;AI Integration&quot;</strong> — the abstraction layer that implements all of the above, with guardrails written out: stay on topic, no fabricated statistics, no external knowledge in the concierge, because a hallucinated answer about election law has real consequences.</li>
+</ul>
+<p>Every one of those is a good decision. Every one of them is also a <em>box</em>. Something goes in, a draft comes out, a person approves it.</p>
+<p>Agents aren't a box. They're a mode. And the documents that would have to absorb a mode don't mention AI at all.</p>
+<h2 id="what-the-spec-never-asked" tabindex="-1"><a class="heading-anchor" href="#what-the-spec-never-asked" aria-hidden="true">#</a> What the Spec Never Asked</h2>
+<p><strong>The threat model has zero AI in it.</strong> Not one mention across <code>spec/security.md</code> or ADR-002. Five tiers of threat actor — state, geopolitical, political opponent, criminal, insider — and no prompt injection, no model exfiltration, no question of what authority a non-human actor holds. Principle 8 reads: &quot;No single credential, key, or person should be able to expose the entire platform.&quot; An agent holding a scoped key across feature areas is precisely that, and it isn't a person, so the sentence doesn't even catch it.</p>
+<p><strong>Compliance mentions AI once</strong>, in a sub-processor disclosure bullet. There is no automated-decision-making or profiling section anywhere in <code>spec/compliance.md</code> — in a product that assigns 1–5 support scores to individual voters, deployed in jurisdictions governed by GDPR Article 22 and LGPD Article 20. A prompt carrying voter PII to a model endpoint in another country is a cross-border transfer, and the transfer section doesn't know it exists. ADR-009 already refused automated content filtering for lèse-majesté on the grounds that it's unreliable and puts GreenGrass in the business of censoring political speech. An agent reading a Thai tenant's content walks straight into that refusal.</p>
+<p><strong>The audit trail has no non-human actor.</strong> ADR-004 and SET-018 log a user, an IP, a user agent. There's no actor type for an agent, no &quot;acting on behalf of,&quot; no model for retaining prompts or responses. ADR-016 §49 promises that staff &quot;can see exactly why a suggestion was made&quot; — an explainability commitment a language model cannot meet as written.</p>
+<p><strong>Offline is the founding promise, and agents break it.</strong> ADR-005 exists because canvassers work in places with no signal. Every agent-mediated feature is online-only by construction; the design system already says so about the concierge. A product whose core value is working without connectivity cannot quietly acquire a layer that requires it.</p>
+<p><strong>The pricing model and the cost model contradict each other.</strong> <code>spec/fundraising.md</code> decided flat subscription tiers — &quot;not tied to donation volume, user count, or any usage metric... no surprises.&quot; Per-token inference is a usage metric. Nothing in the corpus reconciles those two sentences, and pervasive agents make the gap the size of the business.</p>
+<p><strong>And there's a doctrine here that nobody ever named.</strong> <em>Machine proposes, human disposes.</em> It's the answer in ADR-006 for the GOTV universe builder, in <code>spec/gotv.md</code> for election-day reallocation, in ADR-010 for translation, in ADR-013 for activism messages, in <code>spec/users.md</code> for deduplication — no automatic merging, because misattributing a donation in a political context is too expensive. Five separate documents reached the same conclusion independently and none of them wrote it down as a principle. If agents become pervasive, it has to be promoted to a cross-cutting rule, because right now it survives only as a habit.</p>
+<h2 id="what-the-read-through-turned-up" tabindex="-1"><a class="heading-anchor" href="#what-the-read-through-turned-up" aria-hidden="true">#</a> What the Read-Through Turned Up</h2>
+<p>Four things worth recording, none of which I'm fixing here:</p>
+<p><code>decisions/013-analytics-ai.md</code> still says <strong>Status: Accepted</strong> with no supersession banner, even though the architecture document states its model choice was superseded by ADR-016 §38.</p>
+<p><code>design/ux/04-wireframes/dashboards/dashboards.md</code> still describes war-room reallocation suggestions as &quot;AI-generated, require human approval.&quot; ADR-016 §49 made them rule-based for v1. The wireframe never got the memo.</p>
+<p>ADR-016 lists a &quot;BYOM AI provider abstraction layer <strong>and settings screen</strong>&quot; as a required new capability. <code>settings.md</code> runs SET-001 through SET-022 and there is no such screen, in the wireframes or in the screen inventory. The architecture decided it and the UX never drew it.</p>
+<p>And the strongest argument against pervasive agents is already on the record, twice. ADR-012 chose self-hosted map tiles specifically so that &quot;no third party sees canvassing patterns.&quot; <code>spec/comms-intelligence.md</code> requires &quot;no superuser read path&quot; for opposition research — Org Admin can grant access and cannot read; Platform Admin cannot read at all. An agent with cross-feature read scope is a superuser read path. The project has already decided how it feels about this. It just hasn't applied the decision to itself.</p>
+<p>I'm leaving all four alone deliberately. The rule from entry 11 holds: don't quietly fix the source. Name it where it can be seen, in both languages, and let the fix be a decision somebody makes on purpose.</p>
+<h2 id="the-review" tabindex="-1"><a class="heading-anchor" href="#the-review" aria-hidden="true">#</a> The Review</h2>
+<p>ADR-018 is now open, with status <strong>Proposed</strong> — the first ADR in this project that isn't Accepted. It decides exactly one thing: nothing with agent characteristics reaches production until the review lands. The five accepted features ship as specified. Anything with broader read scope, tool authority, or the ability to act without a person approving the act is gated.</p>
+<p>What the review has to settle: extend the threat model; write the automated-decision-making and profiling section; give the audit model a non-human actor; answer the offline story honestly; reconcile per-token cost with flat pricing; promote <em>machine proposes, human disposes</em> to a stated principle; decide whether an agent may ever touch compartmented data under ADR-017; and draw the BYOM settings screen that ADR-016 already committed to.</p>
+<h2 id="where-it-stands" tabindex="-1"><a class="heading-anchor" href="#where-it-stands" aria-hidden="true">#</a> Where It Stands</h2>
+<table>
+<thead>
+<tr>
+<th>Artifact</th>
+<th>Count</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Spec documents</td>
+<td>14</td>
+<td>Unchanged</td>
+</tr>
+<tr>
+<td>UX documents</td>
+<td>37</td>
+<td>Unchanged</td>
+</tr>
+<tr>
+<td>ADRs</td>
+<td>18</td>
+<td>17 accepted, 1 proposed</td>
+</tr>
+<tr>
+<td>Diary entries</td>
+<td>12</td>
+<td>Current</td>
+</tr>
+<tr>
+<td>Documents that mention AI</td>
+<td>~20</td>
+<td>Feature-by-feature</td>
+</tr>
+<tr>
+<td>Threat model documents that mention AI</td>
+<td>0</td>
+<td>The gap</td>
+</tr>
+<tr>
+<td>Production gate</td>
+<td>1</td>
+<td>Open</td>
+</tr>
+</tbody>
+</table>
+<h2 id="next" tabindex="-1"><a class="heading-anchor" href="#next" aria-hidden="true">#</a> Next</h2>
+<p>The review, then implementation. In that order.</p>
+<p>The argument for doing it now rather than later is just arithmetic. Right now the corpus is 89 English documents and no code, and the review is a reading exercise. After the pilot, it's a system holding the Puerto Rican electoral roll, donation records, and canvassing notes about identifiable people's politics — and the same review becomes a migration, a re-consent, and a conversation with a regulator.</p>
+<p>The project has been good at deciding things before building them. This is one more.</p>
+
+    </article>
+  </main>
+  <div class="toc-rail"><nav class="toc" aria-label="On this page"><div class="toc-label">On this page</div><ul><li class="toc-2"><a href="#the-task"># The Task</a></li><li class="toc-2"><a href="#what-the-spec-decided"># What the Spec Decided</a></li><li class="toc-2"><a href="#what-the-spec-never-asked"># What the Spec Never Asked</a></li><li class="toc-2"><a href="#what-the-read-through-turned-up"># What the Read-Through Turned Up</a></li><li class="toc-2"><a href="#the-review"># The Review</a></li><li class="toc-2"><a href="#where-it-stands"># Where It Stands</a></li><li class="toc-2"><a href="#next"># Next</a></li></ul></nav></div>
+</div>
+<script src="../assets/search.js" defer></script>
+<script src="../assets/app.js" defer></script>
+</body>
+</html>

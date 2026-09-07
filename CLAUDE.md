@@ -6,14 +6,14 @@ GreenGrass is a custom platform for managing grassroots political elections in t
 
 ## Project Phase
 
-**Current phase: Specification & Design (complete)**
+**Current phase: Specification & Design (complete) — one review open before production**
 
-All spec and design work is done. The project is ready for implementation.
+All spec and design work is done. One cross-cutting question is open and gates production: the corpus decided AI five times as bounded features and never asked what changes if AI agents operate throughout the product. `decisions/018-ai-agent-posture.md` is `Proposed` — the first non-accepted ADR — and lists what the review must resolve. Do not add agent-shaped capability (cross-feature read scope, tool authority, autonomous action, broad credentials) to the spec or to an implementation without resolving it first.
 
 Completed phases:
 1. **Product definition** — 12 spec documents covering product, users, workflows, security, compliance, etc.
 2. **UX design** — 37 documents: information architecture, global patterns, design system, 21 wireframes (236 screens)
-3. **Architecture** — system architecture document, 17 ADRs formalizing all decisions
+3. **Architecture** — system architecture document, 18 ADRs (17 accepted, 1 proposed) formalizing all decisions
 
 ## Project Structure
 
@@ -27,7 +27,7 @@ GreenGrass/
 │   └── es/                        # Spanish mirror of the English tree
 │       ├── README.md              # Spanish home page
 │       ├── spec/                  # The 14 specs, in Spanish
-│       ├── decisions/             # The 17 ADRs + ux-decisions, in Spanish
+│       ├── decisions/             # The 18 ADRs + ux-decisions, in Spanish
 │       └── design/                # Architecture + the 15 non-wireframe UX docs
 ├── spec/                          # Product specifications (14 docs)
 │   ├── product.md                 # High-level product description
@@ -53,8 +53,8 @@ GreenGrass/
 │   │   └── 04-wireframes/         # 21 wireframe documents (236 screens)
 │   └── architecture/
 │       └── system.md              # System architecture and data model
-├── decisions/                     # Architecture Decision Records (17 ADRs)
-├── diary/                         # Project diary (11 entries)
+├── decisions/                     # Architecture Decision Records (18 ADRs)
+├── diary/                         # Project diary (12 entries)
 ├── scripts/build.mjs              # Documentation site generator (Node + markdown-it)
 ├── scripts/dev.sh                 # One-command local preview (install, build, serve)
 ├── site-assets/                   # Site styles + client-side scripts (search, nav)
@@ -70,7 +70,7 @@ The site is bilingual. English sources live at the repo root; Spanish lives unde
 `i18n/es/`, mirroring the English path exactly (`spec/product.md` ->
 `i18n/es/spec/product.md`) and building to `docs/es/`. An EN/ES switch in the site
 header moves between them. Translated so far: the 14 specs, the system architecture,
-the 17 ADRs plus `ux-decisions.md`, and the 15 non-wireframe UX documents. Still English only: the 23
+the 18 ADRs plus `ux-decisions.md`, and the 15 non-wireframe UX documents. Still English only: the 23
 wireframe documents under `design/ux/04-wireframes/` and the project diary — the
 switch on those pages is styled as a fallback and goes to the Spanish home page.
 

@@ -407,7 +407,7 @@ del sitio, y además arrastra un ancla. Se fijan aquí y no se vuelven a decidir
 | Inglés | Español |
 |---|---|
 | Context / Decision / Consequences | **Contexto** / **Decisión** / **Consecuencias** |
-| `**Status:** Accepted` | `**Estado:** Aceptada` |
+| `**Status:** Accepted` / `**Status:** Proposed` | `**Estado:** Aceptada` / `**Estado:** Propuesta` |
 | `**Date:**` / `**Sources:**` | `**Fecha:**` / `**Fuentes:**` |
 | `**Alternatives considered:**` | `**Alternativas consideradas:**` |
 | `**Benefits:**` / `**Costs:**` / `**Constraints:**` | `**Beneficios:**` / `**Costos:**` / `**Restricciones:**` |
@@ -633,6 +633,20 @@ un *registro* de decisión de arquitectura, como ya dice la portada en español.
 | knowledge base (KB) | **base de conocimiento** | |
 | widget | **widget** | Masculino, se mantiene: *el widget*, *los widgets*. Ninguna perífrasis española aguanta *widget builder*, *widget vocabulary* ni `Dashboard/WidgetGrid`. |
 | in scope / out of scope | **dentro del alcance** / **fuera del alcance** | No *ámbito*: eso está reservado para `scope` de permisos. |
+| AI agent | **agente de IA** | No *asistente* (es `wizard`) ni *concierge* (es el de soporte). El plural es *agentes de IA*. Un `agent` sin *AI* delante, en este corpus, sigue siendo siempre de IA. |
+| agent characteristics / agent-shaped | **características de agente** | *Una capacidad con características de agente*. Evitar *agéntico*, que no dice nada en español. |
+| prompt | **prompt** *(se mantiene)*, masculino | *El prompt*, *los prompts*, *los datos del prompt*. Como `token` y `widget`: ninguna perífrasis aguanta `prompt injection` ni `prompt data`. |
+| prompt injection | **inyección de prompts** | Paralelo a `SQL injection` → *inyección de SQL*. |
+| model exfiltration | **exfiltración de modelo** | |
+| automated decision-making | **decisiones automatizadas** | Como en el RGPD art. 22 y la LGPD art. 20, que es donde aparece. No *toma de decisiones automatizada*, más largo y sin ganancia. |
+| profiling (RGPD/LGPD) | **elaboración de perfiles** | Término del RGPD en español. No *perfilado*. Nada que ver con `profile` → **perfil**, que es la pantalla. |
+| tool authority | **capacidad de invocar herramientas** | Se reformula porque *autoridad de herramientas* no se entiende. El contraste es con devolver texto para que una persona actúe. |
+| read scope | **alcance de lectura** | *Alcance*, no *ámbito*: coherente con `in scope` → *dentro del alcance*. |
+| non-human actor | **actor no humano** | Coherente con `threat actor` → **actor de amenaza**. |
+| superuser read path | **vía de lectura de superusuario** | |
+| inference / per-token cost | **inferencia** / **costo por token** | `token` no se traduce; ver la regla general. |
+| machine proposes, human disposes | **la máquina propone, la persona dispone** | Calca deliberadamente el refrán. No *el humano dispone*. |
+| gate (sobre producción) | **condicionar** (verbo) / **punto de decisión** (sustantivo) | Amplía la fila de `gate` de la primera parte: *la revisión condiciona la producción*, no *la producción está bloqueada*. El sustantivo sigue siendo *punto de decisión*. |
 | scope creep | **expansión descontrolada del alcance** | |
 | deferred | **aplazado** | Marcador de estado en encabezados. No *diferido*, que en finanzas significa otra cosa, ni alternar con *pospuesto*. |
 | revisit criteria | **criterios de reevaluación** | El marcador `REVISIT:` de los comentarios HTML sigue en inglés; esto es la prosa. |

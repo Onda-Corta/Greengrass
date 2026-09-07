@@ -6,7 +6,7 @@ GreenGrass reúne en un solo lugar un gestor de relaciones con constituyentes (C
 
 ## Qué está en español y qué no
 
-En español está casi todo: las 14 especificaciones de producto, la arquitectura del sistema, los 17 ADR más el registro de decisiones de UX y los 15 documentos de diseño de UX que no son wireframes. Cuarenta y ocho documentos.
+En español está casi todo: las 14 especificaciones de producto, la arquitectura del sistema, los 18 ADR más el registro de decisiones de UX y los 15 documentos de diseño de UX que no son wireframes. Cuarenta y nueve documentos.
 
 Falta una cosa, y es grande: los 23 documentos de wireframes —236 pantallas, más de la mitad de todo lo que hay escrito en este proyecto— siguen solo en inglés, igual que el diario. Si sigues un enlace a un wireframe desde una página en español, vas a terminar en inglés. No está roto: es lo que todavía no se ha traducido. El botón **EN**, arriba a la derecha, te lleva a la documentación completa en cualquier momento.
 
@@ -46,7 +46,7 @@ Las especificaciones de producto, los artefactos de diseño de UX y los document
 
 ### Y por qué está construida así
 
-Los 17 ADR registran cada decisión de arquitectura, con su contexto, sus alternativas descartadas y lo que cuesta cada una.
+Los 18 ADR registran cada decisión de arquitectura, con su contexto, sus alternativas descartadas y lo que cuesta cada una.
 
 - **[ADR-001](decisions/001-platform-architecture.md)** — Arquitectura y despliegue de la plataforma
 - **[ADR-002](decisions/002-security-threat-model.md)** — Seguridad y modelo de amenazas

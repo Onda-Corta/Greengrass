@@ -10,9 +10,11 @@ Puerto Rico (alpha), Brazil, Thailand, India, and Lebanon — each with distinct
 
 ## Project Status
 
-**Current phase: Specification & Design (complete)**
+**Current phase: Specification & Design (complete) — one review open before production**
 
-All product specifications, UX design artifacts, and architecture documents are complete. The project is ready to move into implementation.
+All product specifications, UX design artifacts, and architecture documents are complete.
+
+One question remains open and gates production rather than implementation. The corpus decided AI five times, feature by feature, and never asked what changes if AI agents operate throughout the product. The threat model, the compliance framework and the audit model contain effectively no treatment of a non-human actor. [ADR-018](decisions/018-ai-agent-posture.md) records this as the project's first `Proposed` decision: the five accepted AI features ship as specified, and anything with broader read scope, tool authority or autonomous action waits for the review. See [diary entry 12](diary/12-the-agent-question.md).
 
 ## Documentation Website
 
@@ -39,8 +41,8 @@ npm run serve    # serve docs/ on port 8000
 ### Languages
 
 The site is bilingual. Available in Spanish: the 14 specification documents, the system
-architecture, the 17 ADRs plus the UX decisions record, and the 15 UX documents
-that aren't wireframes — 48 documents in
+architecture, the 18 ADRs plus the UX decisions record, and the 15 UX documents
+that aren't wireframes — 49 documents in
 all. The 23 wireframe documents and the project diary are still English only. An
 **EN / ES** switch sits in the top-right of the header on every page; pages that aren't
 translated still show it, dimmed, pointing at the Spanish home page, so the Spanish
@@ -131,8 +133,9 @@ GreenGrass/
 │   ├── 001-platform-architecture.md
 │   ├── ...                        # 002-015: security, identity, data, offline, etc.
 │   ├── 016-cross-cutting-resolutions.md  # Resolution of 89 open questions
-│   └── 017-sharing-contract-trust-model.md  # The contract as universal trust primitive
-├── diary/                         # Project diary (11 entries)
+│   ├── 017-sharing-contract-trust-model.md  # The contract as universal trust primitive
+│   └── 018-ai-agent-posture.md    # Proposed — AI agent review gates production
+├── diary/                         # Project diary (12 entries)
 ├── scripts/
 │   ├── build.mjs                  # Documentation site generator
 │   └── dev.sh                     # One-command local preview (install, build, serve)
