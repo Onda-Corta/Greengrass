@@ -427,8 +427,8 @@ del sitio, y además arrastra un ancla. Se fijan aquí y no se vuelven a decidir
 
 Las fechas de los ADR se quedan en formato ISO (`2026-03-03`): son metadatos, no prosa,
 y la regla de meses abreviados no les aplica. `ADR-001`…`ADR-017` y las referencias con
-`§` tampoco cambian. *ADR* es femenino —*la ADR-004*, *las ADR relacionadas*— porque es
-una decisión.
+`§` tampoco cambian. *ADR* es masculino —*el ADR-004*, *los ADR relacionados*— porque es
+un *registro* de decisión de arquitectura, como ya dice la portada en español.
 
 ## Sistemas distribuidos, eventos y sincronización
 
@@ -532,6 +532,9 @@ una decisión.
 |---|---|---|
 | shell / navigation shell | **marco** / **marco de navegación** | También *marco de modo de campo*, *marco del asistente*, *marco del portal*. No *caparazón*, no *estructura* —`load-bearing` ya es *estructural* y chocarían en el mismo párrafo—, no *shell*. |
 | universal chrome | **elementos permanentes de la interfaz** | Forma corta después de la primera aparición: *los elementos permanentes*. No *cromo*: en español eso es el metal o el navegador. Tampoco *elementos universales*, que se lee como "estándar de la industria" y no como "están siempre". |
+| persona (arquetipo de usuario) | **arquetipo (de usuario)** | No *persona*: la traducción publicada satura esa palabra con su sentido corriente —*«personas que inician sesión»*, *«los datos viajan con la persona»*— y estos documentos ponen las dos acepciones en la misma oración. Tampoco *perfil*: `profile` ya es **perfil**, y la columna quedaría encabezada *Perfiles* justo encima de la fila `PROF-001 | Perfil personal`. El original da la salida al definir la persona como *«archetypal users»*. El archivo sigue llamándose `persona-views.md`. |
+| settings / setting / configuration | **ajustes** / **ajuste** / **configuración** | El inglés ya distingue las tres y el inventario de pantallas lo respeta: `Settings` es el área y la sección de la barra lateral (*Ajustes y administración*, *Ajustes de seguridad*, *Centro de ajustes*), un `setting` suelto es un **ajuste**, y `Configuration` es una pantalla concreta (*Configuración de cumplimiento*, *Configuración del dominio de correo*). Sin el desdoblamiento sale *«la configuración de la configuración»*. |
+| role template | **plantilla de rol** | Ya aparece dentro de este glosario, en la nota de `Deputy`, y tres veces en `spec/users.md`: se formaliza, no se decide. |
 | sidebar | **barra lateral** | |
 | header bar / top bar | **barra superior** | El original alterna las dos formas para el mismo elemento; el español usa una. |
 | bottom tab bar | **barra de pestañas inferior** | No *tabs*, no *solapas*. |
@@ -681,3 +684,168 @@ Además de los desdoblamientos que el glosario ya registra para `opt-in` y `pled
 | log | **registro** / **bitácora** | *Registro* ya carga con `record`, `audit trail` y `read logging`. Cuando dos sentidos caen en la misma frase, el segundo es **bitácora**. |
 | field | **campo** (dato) / **de campo** (trabajo) | Convergen en español y es tolerable, pero *una llave derivada del token de sesión de campo* tiene que leerse como el turno, no como la columna. |
 | tier | **nivel** (aislamiento, metadatos, conservación, autenticación, analítica, filtrado) / **plan** (suscripción) | Seis escalas distintas usan la misma palabra inglesa. Los *flat tiers* de precio son **planes**; si todo es "nivel", se cruzan. |
+
+## Acuñados durante la traducción
+
+Todo lo que los traductores tuvieron que inventar sobre la marcha, incluido lo que no
+chocó con nada. Se recoge aquí para que quien traduzca los wireframes empiece con un
+contrato más fuerte del que tuvo esta ronda.
+
+### Pantallas, artefactos y acciones
+
+| Inglés | Español | Nota |
+|---|---|---|
+| builder (de segmentos, guiones, comunicados, universo…) | **constructor de…** | Una sola palabra para los doce constructores. Ya publicado como *Constructor de comunicados* en `spec/press.md`. |
+| composer | **redactor de…** | Deliberadamente distinto de *constructor*: el redactor escribe un mensaje, el constructor arma un artefacto reutilizable. No *compositor*, que es de música. |
+| check-in (sustantivo) | **registro de entrada** | Forma nominal de `check in → registrar la entrada`. |
+| drive (de inscripción, de llamadas) | **jornada** | Ya publicado en `spec/workflows.md`. |
+| dispatcher | **despachador** | Ya publicado en `spec/gotv.md`. |
+| turf cutting | **corte de territorios** | Ya publicado en `spec/gotv.md`. |
+| magic link | **enlace mágico** | Ya publicado en `spec/users.md` y `spec/fundraising.md`. No se deja en inglés. |
+| login fallback | **inicio de sesión alternativo** | La rama *alternativa* de `fallback`; *de reserva* se lee raro como título de pantalla. |
+| tenant switcher | **selector de organización** | |
+| permission override | **ajuste de permisos** | No *override*, que aquí queda reservado para los tokens de diseño. |
+| quiz | **cuestionario** | Se califica; la *verificación de conocimiento* no. |
+| report (documento generado) | **informe** | El corpus usa *reporte* para la presentación regulatoria y *informe* para el documento generado. |
+| year-end statement | **estado de cuenta anual** | Ya publicado en `spec/fundraising.md`. |
+| delivery event (de una petición) | **acto de entrega** | No *evento*: eso es la funcionalidad de Eventos. |
+| embed config | **configuración de incrustación** | |
+| signup page | **página de inscripción** | Evita *registro*, ya sobrecargado con `record` y `log`. |
+| feature area | **área funcional** | |
+| Settings Hub | **Centro de ajustes** | |
+| ticket (de evento) | **entrada** | No *boleto*: *boleta* es la papeleta electoral y *Boleto* es un método de pago brasileño que ya aparece en el corpus. Los campos `ticket_type` / `ticket_quantity` no se tocan. |
+| attendee | **persona asistente** | Forma larga a propósito: *asistente* solo ya es `wizard`. |
+| town hall | **asamblea comunitaria** | |
+| Event Manager | **Gerente de eventos** | Nombre de rol: mayúscula solo en la primera palabra. |
+| target (de una acción de activismo) | **destinatario** | La persona legisladora o el organismo al que se le escribe. |
+
+### Interfaz
+
+| Inglés | Español | Nota |
+|---|---|---|
+| chevron | **chevrón** | En plural, *chevrones*. |
+| hamburger menu | **menú hamburguesa** | |
+| overflow menu (⋯) | **menú de desbordamiento** | |
+| sidebar footer | **pie de la barra lateral** | |
+| shift timer | **cronómetro del turno** | |
+| phone bank call card | **ficha de llamada** | Familia de *ficha de puerta*. |
+| dirty state | **cambios sin guardar** | *Estado sucio* es inusable. El rótulo en negrita se lee **Cambios sin guardar**. |
+| debounced | **con retardo entre pulsaciones** | Forma corta después de la primera aparición: *con retardo*. No hay sustantivo limpio; se reformula. |
+| standard app | **app estándar** | Se opone a *modo de campo*. |
+| enrollment / to enroll (passkey) | **alta** / **dar de alta** | Evita *registro*, ya cargado por `record` y `log`, e *inscripción*, reservada para `voter registration`. |
+| battery / data awareness | **adaptación a la batería** / **al consumo de datos** | *Awareness* no tiene sustantivo limpio; lo que el texto describe es adaptación. |
+| exponential backoff | **espera exponencial** | |
+| sync receipt | **acuse de recibo de sincronización** | |
+| placeholder value | **valor provisional** | Tercer sentido: ni *texto de ejemplo* (campo de formulario) ni *marcador de posición* (mapa sin cachear). |
+| full-table scan | **recorrido completo de tabla** | |
+| metered connection | **conexión con límite de datos** | |
+| key generation ceremony / recovery phrase | **ceremonia de generación de llaves** / **frase de recuperación** | |
+| breadcrumbs (la metáfora, *no breadcrumbs*) | **sin rastros** | Deliberadamente **no** `breadcrumb → ruta de navegación`: aquí son las migas de Hansel y Gretel, no el componente de navegación. |
+| user agent | **user agent** *(se mantiene)* | |
+
+| activity feed | **flujo de actividad** | |
+| feed (del centro de mando) | **feed** *(se mantiene, m.)* | Como `snackbar` y `widget`: *flujo continuo* choca con `stream → flujo`. |
+| acknowledgment (modal) | **acuse de recibo** | No *confirmación*, ya tomada por `confirmation dialog`. |
+| thermometer (widget) | **termómetro** | |
+| Overview (sección) | **Resumen** | Coherente con `spec/users.md` y `spec/workflows.md`. |
+| My Stuff (sección) | **Lo mío** | |
+| Help Center | **Centro de ayuda** | No choca con *centro de notificaciones* ni con *centro de mando*. |
+| no-show | **ausencia sin aviso** | Forma corta después: *ausencia*. *Inasistencia* pierde el matiz de "confirmó y no apareció". |
+| Keep Left / Keep Right | **Quedarme con la izquierda / con la derecha** | Familia de *Quedarme con la mía / con la suya / Ambas*. |
+| merge field / merge tag | **campo de combinación** | Término asentado de combinación de correspondencia; deja libre `tag → etiqueta`. |
+| vanity URL | **URL personalizada** | Femenino; plural *las URL*. |
+| catch-all route | **ruta comodín** | |
+| auth guard | **guardia de autenticación** | También *guardia de turno activo*. |
+| **Override:** (rótulo de excepción) | **Excepción:** | No es el `theme override`; aquí rotula una excepción documentada a un valor por rol. |
+
+### Sistema de diseño y plataforma web
+
+| Inglés | Español | Nota |
+|---|---|---|
+| responsive | **adaptable** | *Estrategia de diseño adaptable*, *imágenes adaptables*. Ni el calco *responsive* ni *adaptativo*. |
+| tablet | **tableta** | Forma de la RAE. En Puerto Rico se oye *tablet*, pero el registro escrito pide *tableta*. |
+| hover (en prosa) | **al pasar el cursor** | Como valor de estado, `hover` es identificador y no se toca. |
+| mouse | **mouse** | LatAm y Puerto Rico. No *ratón*. |
+| font stack | **pila de fuentes** | |
+| easing | **curva de aceleración** | Los valores `ease-out` / `ease-in-out` no se tocan. |
+| splash screen | **pantalla de bienvenida** | No *pantalla de inicio*, reservada para `Home Screen`. |
+| Feedback (categoría de componentes) | **Retroalimentación** | |
+| slot / Slot Pattern | **slot** / **Patrón de slots** | Las claves `[slot: default]` quedan intactas. |
+| deferred loading | **carga aplazada** | Deliberadamente distinto de `lazy loading → carga diferida`: aparecen en el mismo documento. |
+| chunk (por ruta) | **fragmento** | Distinto de `bundle → paquete`. |
+| gzipped | **comprimido con gzip** | |
+| CTA | **llamada a la acción** | Se desarrolla; no se deja la sigla. |
+| First Contentful Paint / Time to Interactive | *(se mantienen en inglés)* | Nombres propios de métricas web, como `WCAG`. |
+| custom domain | **dominio personalizado** | |
+| SLA | **SLA** *(se mantiene)* | |
+
+### Arquitectura y datos
+
+| Inglés | Español | Nota |
+|---|---|---|
+| technology stack | **stack tecnológico** | `stack` ya se usa suelto en `spec/integrations.md`. No *pila tecnológica*. |
+| envelope encryption | **cifrado de sobre** | Deriva de `envelope key → llave de sobre`. |
+| to hash | **hashear** | |
+| certificate pinning | **fijación de certificados** | |
+| Shamir's secret sharing | **reparto de secretos de Shamir** | El apellido no se traduce; el resto sí. |
+| attribute scoping | **acotación por atributos** | Se apoya en `scope → ámbito` y `scoped → acotada`. |
+| additive merge | **fusión aditiva** | Distinto de `merge-and-flag`. |
+| battery-aware sync | **sincronización consciente de la batería** | |
+| push + pull (refresco de listas) | **push y pull** | Nombres del mecanismo; el verbo sí se traduce (*el servidor envía*). |
+| bootstrap problem | **el problema del arranque** | |
+| feedback loop | **bucle de retroalimentación** | |
+| ward | **barrio** | Nivel de la jerarquía geográfica, junto a *precinto* y *centro de votación*. |
+| adapter shim | **capa de compatibilidad mínima** | El punto de la frase es que el adaptador nativo no es un remiendo. |
+| framework | **framework** *(se mantiene, m.)* | *Marco* ya es `shell` y chocarían en el mismo párrafo. |
+| SMS gateway | **pasarela de SMS** | No *puerta de enlace*. |
+| purge | **purga / purgar** | |
+| timestamp | **marca de tiempo** | Salvo dentro de listas de campos de metadatos, donde `spec/messaging.md` ya publica *fecha y hora*. |
+| buffer (geográfico) | **margen** | |
+| data feed | **flujo de datos** | No *fuente*, reservada para `source` y `beat`. |
+| GIS | **SIG** | Sigla española asentada; se glosa en la primera aparición. |
+| NLP | **PLN (procesamiento de lenguaje natural)** | Se glosa en la primera aparición. |
+| electoral boundary data | **datos de límites electorales** | Aplica `boundary → límite`. |
+| translation memory | **memoria de traducción** | |
+| settlement currency / amount | **moneda de liquidación** / **monto liquidado** | |
+| sentiment score (de un votante) | **puntaje de inclinación política** | Ya publicado así en `spec/security.md`. Distinto del `support score → puntaje de apoyo` y del *puntaje de identificación de votantes*. |
+| voter ID score | **puntaje de identificación de votantes** | El resultado del proceso de identificación, no la escala de apoyo. |
+
+### Método, negocio y cumplimiento
+
+| Inglés | Español | Nota |
+|---|---|---|
+| metadata trove | **acervo de metadatos** | No *tesoro*, que suena a hallazgo feliz; no *botín*, que mete un ladrón que la frase no nombra. |
+| gap | **vacío** | *Brecha* está tomada por `breach`; *laguna* suena jurídico. |
+| to draw a boundary | **trazar un límite** | Frase fija. |
+| to narrow (un contrato) | **estrechar** | Distinto de `to contract → restringir`, el término de arte de la regla unánime/unilateral. |
+| to operationalize | **hacer operativa** | |
+| contract graph / traversal | **grafo de contratos** / **recorrido** | Coherente con `actor graph → grafo de actores`. |
+| status quo | **statu quo** | |
+| syntactic sugar | **azúcar sintáctico** | |
+| feature creep | **proliferación descontrolada de funcionalidades** | Deliberadamente distinto de `scope creep → expansión descontrolada del alcance`: aparecen en el mismo documento. |
+| headcount | **plantilla** | |
+| cold signups | **inscripciones espontáneas** | No *en frío*, que es calco. |
+| curated | **curado** | |
+| scrutiny (regulatoria) | **fiscalización** | No *escrutinio*, que en un producto electoral es el conteo de votos: la misma razón que `candidate vetting`. |
+| rollup (analítica) | **consolidado** | Ya usado en `spec/workflows.md`. |
+| appeal (recaudación) | **convocatoria** | Ya usado en `spec/workflows.md`. |
+| outcomes (de llamadas) | **desenlaces** | Ya usado en `spec/workflows.md`. |
+| engagement (redes) | **interacción** | |
+| asset | **recurso** | *Biblioteca compartida de recursos*. |
+| checklist | **lista de verificación** | |
+| capacity (de un local) | **aforo** | |
+| date/time slot | **franja de fecha y hora** | |
+| timeout (plazo) | **plazo** | |
+| approval routing | **enrutamiento a aprobación** | Distinto de `channel router → enrutador de canales`. |
+| crash recovery | **recuperación tras un fallo** | |
+| mockup | **mockup** *(se mantiene)* | Como `wireframe`. |
+| exemplar | **ejemplo de referencia** | |
+
+### Tres sentidos más que hay que desdoblar
+
+| Inglés | Español | Nota |
+|---|---|---|
+| roster | **lista del equipo** (Team Roster, del líder de equipo) / **lista de voluntarios** (Roster, del coordinador de voluntarios) | El inglés distingue las dos con un calificador; en español la misma cadena en los dos sitios borraría la distinción. En `url-structure.md`, *Volunteer Roster* es **Lista del equipo de voluntarios**, con el calificador completo. |
+| script | **guion** (texto de contacto) / **sistema de escritura** (latino, tailandés, devanagari) | No hay ningún `script` de JavaScript en el corpus. |
+| pipeline | **cadena de procesamiento** (técnico) / **flujo de respaldos** (endorsement) / **flujo de etapas** (vista kanban) | |
+| override | **sobrescritura** (ajustes, temas) / **Excepción:** (rótulo de excepción a un valor por rol) | |

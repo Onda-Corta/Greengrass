@@ -305,6 +305,9 @@ Elevation (shadow depth) communicates layering — what's on top of what.
 - **Default size:** 20px (within a 24px bounding box for touch target padding)
 - **Stroke width:** 1.5px (matches the Inter font's visual weight at body sizes)
 
+<!-- REVISIT: the stroke weight is justified as matching "the Inter font's visual weight",
+but this document and ADR-011 both reject Inter in favour of the system font stack. -->
+
 ### Icon Sizes
 
 | Token | Size | Use |

@@ -18,6 +18,9 @@ Three gaps follow.
 
 **"Inherits" is undefined for data.** Campaign is the sole non-sovereign entity ([users.md § Organization Hierarchy](../spec/users.md#organization-hierarchy)), inheriting "their parent's billing and administrative structure" ([users.md § Organization Hierarchy](../spec/users.md#organization-hierarchy)). Billing and administration are clear. Data access is not. A candidacy running a primary against a rival from its own party has no way to represent the boundary it needs, because the model offers no boundary at that level.
 
+<!-- REVISIT: "these are four capabilities" but only three are enumerated (per-record
+access lists, read logging, no superuser read path). -->
+
 **Compartmented storage reads as an entirely new primitive.** `spec/comms-intelligence.md` requires per-record access lists, read logging, and no superuser read path for candidate vetting and opposition research. Under the current model these are four capabilities the platform lacks, requiring their own ADR and their own engineering effort.
 
 ### Conflicts this ADR resolves
