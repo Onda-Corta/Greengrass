@@ -145,7 +145,7 @@ Los centros de mando del día de elecciones (gotv.md) tienen necesidades de comu
 Según lo decidido en security.md y system.md:
 
 - **Protocolo:** Signal Protocol (Double Ratchet) o equivalente. Bien auditado, ampliamente implementado, maneja bien varios dispositivos.
-- **Generación de llaves:** cada usuario genera un par de llaves pública/privada durante la incorporación ([system.md § Autenticación en modo de campo](../design/architecture/system.md#field-mode-authentication)). Las llaves privadas nunca salen del dispositivo.
+- **Generación de llaves:** cada usuario genera un par de llaves pública/privada durante la incorporación ([system.md § Autenticación en modo de campo](../design/architecture/system.md#autenticación-en-modo-de-campo)). Las llaves privadas nunca salen del dispositivo.
 - **Varios dispositivos:** una persona puede tener varios dispositivos (celular y computadora). La distribución de llaves entre dispositivos usa el patrón establecido (un dispositivo nuevo se autoriza desde uno existente o por recuperación con contactos de confianza).
 - **Cifrado de grupo:** protocolo Sender Keys para mensajes grupales (cada emisor tiene una llave compartida con todos los integrantes del grupo — eficiente, una sola operación de cifrado por envío sin importar el tamaño del grupo).
 - **Custodia de llaves (opcional):** cuando la organización activa la custodia, una copia de la llave privada del usuario se cifra con la llave de sobre de la organización y se guarda en el servidor. Habilita la búsqueda del lado del servidor y la recuperación de dispositivos sin contactos de confianza.
