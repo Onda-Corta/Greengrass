@@ -33,9 +33,19 @@ Estas decisiones de producto (tomadas en las especificaciones) son las que más 
 │  └──────┬────────┘  └──────┬──────────────┘  └────────────────┘  │
 │         │                  │                                     │
 │  ┌──────┴──────────────────┴──────────────────────────────────┐  │
+│  │   Catálogo de servicios · Derechos de uso · Medición       │  │
+│  │   (qué existe, quién lo activó, qué costó — solo           │  │
+│  │    metadatos; ADR-019)                                     │  │
+│  └──────┬──────────────────┬──────────────────────────────────┘  │
+│  ┌──────┴──────────────────┴──────────────────────────────────┐  │
 │  │                Capa de federación / alianza                │  │
 │  │ (coordinación entre organizaciones, reglas de intercambio, │  │
 │  │   deduplicación, no volver a tocar, campañas conjuntas)    │  │
+│  └──────┬──────────────────┬──────────────────────────────────┘  │
+│  ┌──────┴──────────────────┴──────────────────────────────────┐  │
+│  │   Servicios centrales (captura, análisis, constructores,   │  │
+│  │   transporte por canal) — código compartido, ejecutado     │  │
+│  │   por organización bajo sus llaves, nada se conserva       │  │
 │  └──────┬──────────────────┬──────────────────────────────────┘  │
 └─────────┼──────────────────┼─────────────────────────────────────┘
           │                  │
@@ -63,6 +73,8 @@ Estas decisiones de producto (tomadas en las especificaciones) son las que más 
 2. **Capa de federación** — media las interacciones entre organizaciones: coordinación de alianzas, gestión de recursos compartidos, deduplicación entre organizaciones, orquestación de campañas conjuntas. Opera sobre reglas de intercambio explícitas y nunca tiene acceso general a los datos de una organización.
 
 3. **Capa de organización** — una instancia de aplicación completa y aislada por cada entidad soberana (partido, organización o candidatura). Cada organización tiene su propio servidor de aplicación, base de datos, caché y cola de trabajos. Ninguna organización puede ver los datos de otra salvo a través de las reglas de intercambio de la capa de federación.
+
+**Los servicios centrales no son una cuarta capa.** Son capacidades alojadas en la plataforma que una organización activa desde el catálogo y que se ejecutan por organización, bajo sus llaves y sus contratos, sin conservar nada entre llamadas ([ADR-019](../../decisions/019-central-services-and-metered-billing.md)). El catálogo, los derechos de uso y la medición que los rigen son componentes de la capa de plataforma que guardan solo metadatos. Ver [Arquitectura de servicios centrales](#arquitectura-de-servicios-centrales).
 
 ---
 
@@ -166,6 +178,7 @@ TenantRegistration
 ├── encryption_key_reference (ruta en Vault o en poder de la organización)
 ├── affiliations[] → TenantRegistration (con affiliation_type)
 ├── billing_info
+├── entitlements[] → Entitlement (servicios centrales que esta organización activó)
 ├── status (provisioning | active | suspended | decommissioned)
 ├── created_at
 └── updated_at
@@ -176,9 +189,44 @@ Affiliation
 ├── child_tenant → TenantRegistration (partido, organización o candidatura)
 ├── affiliation_type (alliance_member | party_candidate)
 ├── sharing_rules (marcas de activación por recurso)
+├── billing_mode (member_pays | alliance_pays) — se fija en la puesta en marcha; solo lo cambian los dos OA
 ├── status (pending | active | revoked)
 ├── created_at
 └── updated_at
+
+ServiceCatalogueEntry
+├── id (UUID)
+├── service (capture | electoral_analysis | opposition_research | builder_text | builder_image | builder_video | channel_transport | mutual_suppression)
+├── countries[] (dónde se ofrece)
+├── hosting_tiers[] (standard | enhanced | maximum | self_hosted)
+├── supplier (quién factura el costo variable; nulo si no hay)
+├── unit, unit_price_passthrough (el precio del proveedor, sin margen)
+├── allocation_method (per_tenant | published_allocation — para proveedores que facturan en conjunto)
+├── data_leaves_perimeter (booleano — dispara la aceptación de la frontera de cifrado)
+└── updated_at
+
+Entitlement
+├── id (UUID)
+├── tenant → TenantRegistration
+├── catalogue_entry → ServiceCatalogueEntry
+├── credential_reference (acotada a esta organización y a este servicio únicamente)
+├── acknowledged_perimeter_exit (booleano, con actor y marca de tiempo)
+├── spend_cap (soft_warning, hard_stop — en la moneda de facturación de la organización)
+├── billed_to → TenantRegistration (la propia organización, o la alianza bajo alliance_pays)
+├── status (enabled | suspended_by_cap | disabled)
+├── enabled_by → PlatformIdentity
+└── created_at
+
+UsageEvent (solo metadatos — sin contenido; nivel de conservación del registro de auditoría)
+├── id (UUID)
+├── tenant → TenantRegistration
+├── entitlement → Entitlement
+├── actor (PlatformIdentity, o un tipo de actor no humano cuando la ADR-018 defina uno)
+├── contract_reference (el contrato de intercambio bajo el que corrió la llamada, si lo hay)
+├── units, quantity
+├── supplier_cost, currency
+├── billed_to → TenantRegistration
+└── occurred_at
 ```
 
 ### Entidades a nivel de organización (base de datos por organización)
@@ -929,7 +977,7 @@ En los **paneles operativos** (centro de mando de GOTV, operaciones de campo), e
 
 **DECIDIDO:** NATS JetStream.
 
-Transmisión de eventos liviana y duradera. Más simple de operar que Kafka y suficiente para el volumen de eventos por organización (miles de eventos al día, no millones por segundo). Un solo binario, fácil de desplegar por organización o como servicio compartido dentro del clúster de un país. Admite suscripciones duraderas para la cadena de analítica en tiempo real y reproducción de eventos para la arquitectura de event sourcing.
+Transmisión de eventos liviana y duradera. Más simple de operar que Kafka y suficiente para el volumen de eventos por organización (miles de eventos al día, no millones por segundo). Un solo binario, fácil de desplegar por organización o como servicio compartido dentro del clúster de un país. Admite suscripciones duraderas para la cadena de analítica en tiempo real y reproducción de eventos para la arquitectura de event sourcing. Los eventos de uso de los servicios centrales ([ADR-019](../../decisions/019-central-services-and-metered-billing.md)) se publican en el mismo flujo por organización; la cadena de medición es un suscriptor duradero más.
 
 ---
 
@@ -1133,6 +1181,7 @@ Detección de idioma: responde en el idioma en que se le escribe. Si la confianz
 - Cada adaptador maneja la autenticación, la limitación de frecuencia, el manejo de errores y el mapeo de datos de un sistema externo.
 - Los adaptadores son por organización (cada organización configura sus propias llaves de API, cuentas, etc.).
 - Los datos que pasan por las integraciones quedan en el registro de auditoría.
+- Los servicios centrales ([ADR-019](../../decisions/019-central-services-and-metered-billing.md)) se consumen a través de esta misma capa: un adaptador por servicio, una credencial acotada a esta organización y a este servicio, el mismo monitoreo de estado y el mismo registro de auditoría. Para la instancia de la organización, un servicio alojado en la plataforma y uno externo se ven igual.
 
 **Monitoreo del estado de las integraciones** (decidido en [ADR-016 §56](../../decisions/016-cross-cutting-resolutions.md)):
 
@@ -1155,6 +1204,59 @@ La pantalla de detalle de la integración muestra una línea de tiempo de estado
 - **No es un añadido posterior:** La API pública es la misma API que consume el frontend de GreenGrass. No hay puertas traseras privadas fuera del alcance de la API pública. Una organización puede construir sobre GreenGrass cualquier cosa que GreenGrass pueda construir.
 
 Es un compromiso central con el modelo de soberanía — quien puede construir sobre la plataforma no queda atrapado en ella.
+
+---
+
+## Arquitectura de servicios centrales
+
+(Decidido en la [ADR-019](../../decisions/019-central-services-and-metered-billing.md))
+
+### Módulos internos y servicios centrales
+
+Cada capacidad es una de dos cosas. Un **módulo interno** corre dentro de la instancia de la organización sobre sus propios datos: CRM, operaciones de campo, GOTV, recaudación de fondos, eventos, mensajería interna, redacción de comunicaciones. Activar uno por organización es activar funcionalidades por configuración dentro de una instalación de organización única; nada del aislamiento cambia. Un **servicio central** es una capacidad alojada en la plataforma que una organización activa desde el catálogo: captura de medios desde fuentes públicas, análisis electoral, entrega de investigación de la oposición, generación de texto, imagen y video, transporte por canal, y la verificación de supresión mutua del piloto. Los módulos internos los cubre la suscripción fija. Los servicios centrales cargan costos variables de terceros que se trasladan a la organización al costo, sin margen ([fundraising.md § Modelo de ingresos de la plataforma](../../spec/fundraising.md#modelo-de-ingresos-de-la-plataforma)).
+
+### Ejecución por organización
+
+```
+App de la organización ──► Adaptador (credencial acotada) ──► Servicio central ──► Proveedor
+                                                                    │
+                                                         corre bajo las llaves y
+                                                         los contratos de la organización
+                                                                    │
+                                                         el resultado se escribe de vuelta
+                                                         en la organización (en el compartimento,
+                                                         si el contrato lo dice)
+                                                                    │
+                                                         evento de uso → flujo de la organización
+                                                         (solo metadatos)
+```
+
+- **Una organización por llamada.** Un servicio central actúa para exactamente una organización, bajo su credencial, sus llaves y sus contratos de intercambio. La plataforma nunca es parte de un contrato, así que no hay vía desde una llamada hecha para la organización A hacia los datos de la organización B.
+- **Nada se conserva.** El servicio no guarda corpus, índice, memoria ni caché de material derivado de la organización entre llamadas. El estado de trabajo vive dentro de la organización, cifrado con sus llaves. Un servicio que conservara estado derivado de la organización sería él mismo la vía de lectura de superusuario que la hoja de ruta de inteligencia de comunicaciones prohíbe.
+- **El resultado aterriza según el contrato.** La investigación entregada a una organización aterriza en el compartimento que sus contratos especifiquen. El Administrador de la organización no puede leerla ahí; el Administrador de la plataforma no puede leerla en absoluto.
+- **Los datos públicos son la excepción, y solo los datos.** Un corpus de captura construido a partir de medios públicos puede compartirse entre organizaciones dentro de un país. Las consultas contra él se acotan por organización y nunca se agregan, porque qué está vigilando una campaña no es público. Es el razonamiento de las teselas de mapa de la [ADR-012](../../decisions/012-external-integrations.md) aplicado a un corpus.
+
+### Catálogo, derechos de uso y medición
+
+La capa de plataforma gana un componente en tres partes, que guarda solo metadatos. Sus entidades están en el [Modelo de datos](#modelo-de-datos).
+
+- **Catálogo.** Qué servicios existen, en qué países y en qué niveles de aislamiento, de qué proveedor, a qué precio unitario trasladado, y si una llamada lleva datos de la organización más allá del perímetro de cifrado.
+- **Derechos de uso.** Uno por organización y por servicio, creado por un Administrador de la organización. Cada uno lleva una credencial acotada a esa organización y a ese servicio, consumida a través de la capa de adaptadores del centro de integraciones. Activar un servicio marcado como que sale del perímetro exige la misma aceptación explícita que la configuración de BYOM ([Arquitectura BYOM](#arquitectura-byom)). Cada derecho de uso lleva un tope de gasto con un aviso y un corte. Nada viene activado por defecto.
+- **Medición.** Cada llamada emite un evento de uso en el flujo de eventos propio de la organización: organización, servicio, unidades, costo del proveedor, actor que invoca y contrato que rige. Los eventos de uso son metadatos del registro de auditoría según la ADR-016 §4 y nunca conservan contenido. La cadena de facturación y la vista de auditoría de la propia organización son ambas suscriptoras.
+
+**Los derechos de uso acotan a cualquier agente futuro.** Un agente que actúa para una organización no puede tener credencial a ningún servicio que la organización no haya activado, y cada llamada que hace es un evento medido con un actor. Esto aporta el mecanismo de amplitud de credenciales que pide la [ADR-018](../../decisions/018-ai-agent-posture.md) sin resolver esa ADR ni añadir ninguna capacidad de agente.
+
+### Derechos de uso pagados por la alianza
+
+Una afiliación lleva un `billing_mode`: `member_pays` (por defecto) o `alliance_pays`. La alianza elige su valor por defecto en la puesta en marcha; cada miembro ve el modo que aplica antes de aceptar la afiliación; cambiarlo en una afiliación activa requiere a los dos Administradores de la organización. Bajo `alliance_pays`, los eventos de uso de los derechos de uso del miembro se facturan al estado de cuenta de la alianza. Pagar no es ver: los resultados siguen aterrizando en la organización miembro bajo sus llaves, y la alianza recibe servicio, unidades y costo, nunca contenido ni consultas.
+
+### Disponibilidad por nivel de aislamiento
+
+| Nivel | Servicios centrales |
+|------|------------------|
+| Estándar, Reforzado | Todos disponibles |
+| Máximo | Los servicios cuyas llamadas llevan datos de la organización más allá del perímetro exigen la aceptación explícita de la frontera de cifrado. La captura la exige acotada a los metadatos de consulta. |
+| Autoalojado | Llamadas remotas a la infraestructura de GreenGrass, desactivadas por defecto. Se activan bajo la misma aceptación, o se corre el paquete propio del servicio dentro del perímetro cuando GreenGrass publique uno. |
 
 ---
 
@@ -1299,3 +1401,4 @@ Para las organizaciones autoalojadas, GreenGrass entrega:
 13. ~~URL de las organizaciones~~ → Subdominio por defecto + soporte de dominio propio
 14. ~~Conservación de datos~~ → Escalonada (operativa / cumplimiento / auditoría / reversión de importaciones), según la [ADR-016 §4](../../decisions/016-cross-cutting-resolutions.md). Deja sin efecto la política uniforme de 10 años de la ADR-004.
 15. ~~89 preguntas abiertas de los wireframes~~ → Todas resueltas, según la [ADR-016](../../decisions/016-cross-cutting-resolutions.md)
+16. ~~Capacidades compartidas y costo por uso~~ → Servicios centrales ejecutados por organización, con traslado al costo medido por uso y sin margen, según la [ADR-019](../../decisions/019-central-services-and-metered-billing.md). Enmienda el modelo de ingresos solo fijo de la ADR-007.

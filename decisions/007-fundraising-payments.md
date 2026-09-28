@@ -3,6 +3,7 @@
 **Status:** Accepted
 **Date:** 2026-03-03
 **Sources:** `spec/fundraising.md`, `spec/workflows.md`
+**Amended by:** [ADR-019](019-central-services-and-metered-billing.md) — the revenue model gains a second, metered billing plane for central services, passed through at cost with no margin. "Flat tiers, not usage-based" below now describes the subscription plane only.
 
 ## Context
 

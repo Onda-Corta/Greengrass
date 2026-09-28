@@ -3,6 +3,7 @@
 **Estado:** Aceptada
 **Fecha:** 2026-03-03
 **Fuentes:** `spec/workflows.md`, `design/architecture/system.md`
+**Nota:** [system.md § Integración de IA](../design/architecture/system.md#integración-de-ia) afirma que la «decisión sobre el modelo de IA» de esta ADR quedó sustituida por la [ADR-016](016-cross-cutting-resolutions.md) §38 (BYOM). Esta ADR nunca eligió modelo ni proveedor; el modelo híbrido de llave gestionada / BYOK que se dice que decidió vivió solo en las preguntas abiertas del propio `system.md`. Nada de lo que hay aquí queda sustituido. La ADR-016 §38 rige la elección del modelo. Aviso añadido por la [ADR-019](019-central-services-and-metered-billing.md).
 
 ## Contexto
 

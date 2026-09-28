@@ -3,6 +3,7 @@
 **Status:** Accepted
 **Date:** 2026-03-03
 **Sources:** `spec/workflows.md`, `design/architecture/system.md`
+**Note:** [system.md § AI Integration](../design/architecture/system.md#ai-integration) states that this ADR's "AI model decision" was superseded by [ADR-016](016-cross-cutting-resolutions.md) §38 (BYOM). This ADR never chose a model or provider; the hybrid managed-key / BYOK model it is said to have decided lived only in `system.md`'s own open questions. Nothing here is superseded. ADR-016 §38 governs model choice. Banner added by [ADR-019](019-central-services-and-metered-billing.md).
 
 ## Context
 

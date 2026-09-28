@@ -3,6 +3,7 @@
 **Estado:** Aceptada
 **Fecha:** 2026-03-03
 **Fuentes:** `spec/fundraising.md`, `spec/workflows.md`
+**Enmendada por:** [ADR-019](019-central-services-and-metered-billing.md) — el modelo de ingresos gana un segundo plano de facturación, medido por uso, para los servicios centrales, trasladado al costo y sin margen. «Planes fijos, no por uso», más abajo, describe ahora solo el plano de la suscripción.
 
 ## Contexto
 
