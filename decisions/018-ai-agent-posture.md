@@ -2,8 +2,8 @@
 
 **Status:** Proposed
 **Date:** 2026-09-07
-**Updated:** 2026-09-28 — the proposal under review added. Status unchanged: nothing in it is accepted.
-**Sources:** `spec/security.md`, `spec/compliance.md`, `spec/fundraising.md`, `spec/gotv.md`, `spec/comms-intelligence.md`, `design/architecture/system.md`, `decisions/019-central-services-and-metered-billing.md`, `decisions/020-central-service-line-up-and-builders.md`, `decisions/021-creator-program-and-content-pipeline.md`, `design/ux/04-wireframes/content-ops/content-ops.md`
+**Updated:** 2026-09-28 — the proposal under review added; later the same day its worked example was replaced by the WhatsApp approval flow. Status unchanged: nothing in it is accepted.
+**Sources:** `spec/security.md`, `spec/compliance.md`, `spec/fundraising.md`, `spec/gotv.md`, `spec/comms-intelligence.md`, `design/architecture/system.md`, `decisions/019-central-services-and-metered-billing.md`, `decisions/020-central-service-line-up-and-builders.md`, `decisions/021-content-approval-pipeline.md`, `design/ux/04-wireframes/content-ops/content-ops.md`
 
 ## Context
 
@@ -87,7 +87,7 @@ Three accepted decisions have landed since this ADR was opened, each deliberatel
 
 - [ADR-019](019-central-services-and-metered-billing.md) added central services, per-tenant entitlements, and metered pass-through billing at cost.
 - [ADR-020](020-central-service-line-up-and-builders.md) named the four central services and accepted text builders. A text builder is invoked by a person, reads only what that person hands it, returns a draft, and cannot send, so it has none of the four gating properties above. Image and video builders stay proposed until this ADR is accepted with item 6 answered.
-- [ADR-021](021-creator-program-and-content-pipeline.md) added the creator program. It held the source wireframes' three AI screens for this review.
+- [ADR-021](021-content-approval-pipeline.md) generalized post approval into a content pipeline reviewed in rounds. Its first version also specified a program for managing content creators, and held that prototype's three AI screens here; both were withdrawn the same day.
 
 ### The per-tenant harness, as drawn
 
@@ -118,35 +118,39 @@ For three of the review's eight items, and for one of its four gating properties
 
 - **Item 5, cost.** ADR-019's metered plane: inference and generation costs pass through to the tenant at cost, with no margin; under BYOM the tenant's own provider bills the tenant directly. What the platform default tier includes, and whether the free plan carries any metered allowance, stays open, as ADR-019 recorded.
 - **Credential breadth.** ADR-019's entitlements: one credential per tenant per central service. An agent acting for a tenant could hold no credential to a service the tenant has not enabled, and every call it made would be a metered usage event with an actor. This bounds what the harness can *call*. It does not bound what it can *read* inside its own tenant, which is the open question below.
-- **Item 6, the human gate.** The proposed principle is *machine proposes, human disposes*, and the drawing supplies its first enumerated form: **no agent dispatches.** An agent holds no credential to channel transport or to builder dispatch, and nothing it produces reaches a recipient except through a person's send. ADR-020 and ADR-021 already apply this to builders and to the creator program; the proposal extends it to every agent. The remaining forms and their exceptions are for the review to enumerate.
+- **Item 6, the human gate.** The proposed principle is *machine proposes, human disposes*, and the drawing supplies its first enumerated form: **no agent dispatches.** An agent holds no credential to channel transport or to builder dispatch, and nothing it produces reaches a recipient except through a person's send. ADR-020 and ADR-021 already apply this to builders and to the content pipeline; the proposal extends it to every agent. The remaining forms and their exceptions are for the review to enumerate.
 - **Item 7, compartmented data.** The proposed answer: an agent reads compartmented data only under the contract of the person who invoked it, and never more than that person could read. Research delivered by the Analysis service lands in the compartment its contract names (ADR-019), and an agent invoked by someone outside that compartment cannot see it. The proposal also rules out background reads of compartmented data entirely. A read on someone's behalf is logged as that person's read, through the agent, under [ADR-017 § Observability: a distinction in the metadata ladder, not a new rung](017-sharing-contract-trust-model.md#observability-a-distinction-in-the-metadata-ladder-not-a-new-rung).
 
 ### What it leaves open
 
 The drawing is silent on four items and makes one of them sharper.
 
-- **Read scope.** This is the central decision the review has to make. The content operations flow below reads one inbound item and one designated document. The harness reads strategy, knowledge base, geo data and the CRM. The first is the floor and the second is the ceiling, and the review has to decide where between them an agent may operate, per source.
+- **Read scope.** This is the central decision the review has to make. The worked example below reads the candidate's own message, the strategy documents, the knowledge base and the candidate's calendar, and stops short of voter records. The harness as drawn reads strategy, knowledge base, geo data and the whole CRM, support scores included. The review has to decide, per source, how far an agent may read.
 - **Item 2, automated decision-making and profiling.** The arrow from the CRM into the agents means an agent reading support scores for identifiable voters. That is exactly the case item 2 names, and the drawing makes it concrete rather than hypothetical.
 - **Item 1, the threat model; item 3, the audit model; item 4, offline; item 8, the BYOM settings screen.** Unanswered. The on-behalf-of relation proposed under item 7 is a start on item 3, not an answer to it.
 
-### Worked example: the content operations AI flow
+### Worked example: approving the day's posts over WhatsApp
 
-The creator-management wireframes behind ADR-021 include a three-screen AI flow. It is proposed here as a bounded feature, the first to be evaluated under this review, and it is not accepted.
+A prototype conversation, shared alongside the alliance services board and mapped onto it, shows a candidate running a day of social media from WhatsApp. It is proposed here as a bounded feature, the first to be evaluated under this review, and it is not accepted.
 
-**What it does.** On an inbound creator submission, a person clicks "Analyze with AI". The model reads the item and the strategy documents the tenant has designated in its knowledge base. It returns a strategic-fit score, recommended networks and formats with its reasoning, and the passages of the strategy document it relied on. The person accepts, edits or rejects the recommendation. If they accept, the model drafts production instructions per format: caption, visual direction, required hashtags, publication window and call to action. The person sends the instructions into the normal approval queue. Every step has an "Approve without AI" path.
+**What it does.** At the start of the day the tenant's campaign agent writes to the candidate on WhatsApp and asks what to focus on. The candidate answers with a voice note: the topic, the tone, and an interview later that morning. The agent transcribes it, reads the tenant's strategy, its knowledge base and the candidate's calendar, and sends back talking points for the interview as a PDF. It then recommends four pieces for social media, each with its network and the time it would go out. Each piece arrives as its own WhatsApp card with three buttons: Approve, Request changes and Discard. Approved pieces go into the schedule. Later, a staff member reviews the images in GreenGrass and asks for changes to two pieces. The agent makes them and sends the second versions back to the candidate, who approves them from WhatsApp. Each piece is published at its time, and the agent reports when it goes out.
+
+**Where it meets the gate.** Six places, each for the review to decide:
+
+1. **Read scope.** The agent reads strategy, the knowledge base and the calendar: wider than a single feature, the first gating property. It does not read voter records, which puts it between the two ends of the read-scope question above.
+2. **It speaks first.** The agent opens the conversation at a set time, before anyone asks: autonomous action, the third gating property. WhatsApp adds its own rule, since a message the business starts outside the 24-hour window has to be a pre-approved template ([integrations.md § WhatsApp Business API](../spec/integrations.md#whatsapp-business-api)).
+3. **Generated images.** The pieces carry generated images, and image builders are proposed, not accepted ([ADR-020](020-central-service-line-up-and-builders.md)). If a piece shows the candidate, it is the identifiable-person question recorded below.
+4. **Who dispatches.** The agent schedules what the candidate approved, and the proposal above says no agent dispatches. The review has to decide whether a person's tap on Approve, bound to one version of one piece at one time, counts as that person's send, with the agent only placing it in the schedule.
+5. **Changes after approval.** Staff change a piece the candidate has already approved. [ADR-021](021-content-approval-pipeline.md) says approval covers one round and nothing unapproved is published. The review has to confirm the agent is bound by the same rule when the new version is not approved by its time.
+6. **Audit.** Each approval has to record the candidate as the actor and the agent as the channel it passed through. The audit model has no non-human actor yet (item 3).
 
 **Proposed bounds:**
-- **Read scope:** the one item and the designated documents. No CRM, no messages, no other items.
-- **No tool authority:** the output enters the approval queue only by a person's action, and the flow can neither dispatch nor publish.
-- **Credentials:** the tenant's BYOM provider or the platform default, under an entitlement.
-- **Audit:** an agent actor type with an on-behalf-of relation to the person who clicked.
-- **Citations mandatory:** every recommendation cites the passages it rests on, under the provenance rule at [comms-intelligence.md § 8.2 Provenance is mandatory](../spec/comms-intelligence.md#82-provenance-is-mandatory).
-- **Optional at every step.**
-
-**The part that needs a decision.** In the source wireframes, every inbound item is classified against the strategy document *on arrival*, in the background, and badged with a fit score before anyone opens it. No person invokes that read, and it writes a badge no person approved: it has the third gating property, autonomous action. ADR-021 specified the inbox without it. The review has three options:
-- drop it, and classify only when a person asks;
-- allow it as a logged background read limited to the inbound item and the designated documents;
-- allow it only for tenants that opt in.
+- **Read scope:** the candidate's messages, the strategy documents and knowledge base the tenant designates, and the calendar. No contacts, voter records, donations or other messages.
+- **Nothing goes out without a tap:** every published piece carries a named person's approval of that exact version. A new version voids it.
+- **No tool authority beyond the schedule:** the agent may place an approved piece in the schedule and nothing more. It holds no credential to publish, and none to channel transport beyond its own conversation with the candidate.
+- **Credentials:** the tenant's BYOM provider or the platform default, under an entitlement, and the tenant's own WhatsApp Business number.
+- **Citations mandatory:** talking points cite the knowledge-base passages they rest on, under the provenance rule at [comms-intelligence.md § 8.2 Provenance is mandatory](../spec/comms-intelligence.md#82-provenance-is-mandatory).
+- **A path without the agent:** staff can draft the same pieces and the candidate can approve them in the content pipeline's own screens.
 
 ### Questions recorded by later ADRs
 
@@ -171,4 +175,4 @@ The creator-management wireframes behind ADR-021 include a three-screen AI flow.
 - Tenant ownership of credentials ([integrations.md § Integration Principles](../spec/integrations.md#integration-principles)) applies to model providers as it does to every other integration
 - This ADR adds no new capability and reverses no accepted decision. It records a gate and the questions behind it
 
-**Related ADRs:** [ADR-002](002-security-threat-model.md) (threat model to extend), [ADR-004](004-data-model-integrity.md) (audit trail to extend), [ADR-005](005-offline-first-sync.md) (offline constraint), [ADR-009](009-compliance-legal.md) (automated filtering refused), [ADR-010](010-internationalization-localization.md) (AI translation with review), [ADR-012](012-external-integrations.md) (no third-party visibility precedent), [ADR-013](013-analytics-ai.md) (AI messaging; model choice superseded), [ADR-014](014-volunteer-onboarding.md) (AI concierge), [ADR-016](016-cross-cutting-resolutions.md) (BYOM §38, rule-based reallocation §49, tiered retention §4), [ADR-017](017-sharing-contract-trust-model.md) (contracts govern every boundary), [ADR-019](019-central-services-and-metered-billing.md) (cost item and credential boundary proposed), [ADR-020](020-central-service-line-up-and-builders.md) (text builders accepted outside the gate; image and video wait on item 6), [ADR-021](021-creator-program-and-content-pipeline.md) (the AI flow held as this review's worked example)
+**Related ADRs:** [ADR-002](002-security-threat-model.md) (threat model to extend), [ADR-004](004-data-model-integrity.md) (audit trail to extend), [ADR-005](005-offline-first-sync.md) (offline constraint), [ADR-009](009-compliance-legal.md) (automated filtering refused), [ADR-010](010-internationalization-localization.md) (AI translation with review), [ADR-012](012-external-integrations.md) (no third-party visibility precedent), [ADR-013](013-analytics-ai.md) (AI messaging; model choice superseded), [ADR-014](014-volunteer-onboarding.md) (AI concierge), [ADR-016](016-cross-cutting-resolutions.md) (BYOM §38, rule-based reallocation §49, tiered retention §4), [ADR-017](017-sharing-contract-trust-model.md) (contracts govern every boundary), [ADR-019](019-central-services-and-metered-billing.md) (cost item and credential boundary proposed), [ADR-020](020-central-service-line-up-and-builders.md) (text builders accepted outside the gate; image and video wait on item 6), [ADR-021](021-content-approval-pipeline.md) (the content pipeline an agent's pieces would enter; its WhatsApp approval question points here)

@@ -194,66 +194,24 @@ An endorsement is someone else vouching for the candidate, in their own words. F
 - **Distribution** — talking points can be pushed to designated staff via the internal messaging system (messaging.md) when updated.
 - **Candidate briefing integration** — talking points feed into the candidate briefing messages ([messaging.md § Alliance Communication](messaging.md#alliance-communication)). Before an interview or press event, the candidate receives relevant talking points.
 
-## Creator Program
+## Content Pipeline
 
-Much of a campaign's reach now lives on other people's accounts: militants, spokespeople, candidates and independent influencers who publish to their own audiences. A creator program briefs them, reviews what they make, and tracks what it does. It extends this spec rather than adding a second CRM ([ADR-021](../decisions/021-creator-program-and-content-pipeline.md)). Screens are in [content-ops.md](../design/ux/04-wireframes/content-ops/content-ops.md).
+Most pieces go through more than one round before they are published: a caption gets shortened, a photo gets swapped. The content pipeline generalizes the [Post Approval Workflow](#post-approval-workflow) above to review in rounds ([ADR-021](../decisions/021-content-approval-pipeline.md)). Screens are in [content-ops.md](../design/ux/04-wireframes/content-ops/content-ops.md).
 
-### Creators as CRM Records
+### Review Rounds
 
-Creators are treated exactly like media contacts. A creator uses the existing Contact record type ([users.md § Contact](users.md#contact)) with creator-specific fields:
+Everything the organization publishes moves through one pipeline: pending → draft → under review → revision requested → approved → published.
 
-- **Tier** — A (top priority), B (second priority), C (selected) or D (general). Tier sets how closely the team works with the creator and how their content is approved
-- **Tier history** — every change of tier, with date and who made it
-- **Platforms and handles** — where the creator publishes (Instagram, TikTok, Facebook, X, YouTube, LinkedIn, Threads, blog) and under which handle
-- **Content types expected** — video, image, text, audio
-- **WhatsApp number** — the channel briefs and replies travel on
-- **Notes** — free-text relationship notes (encrypted per data model)
-- **Last submission, response rate, posting compliance** — auto-populated from dispatch and review history
+- **Every round is kept** with its asset. The reviewer sees the current round beside the previous one, with the differences marked (text diff for captions, timestamps for video).
+- **Requesting a revision requires a comment**, and opens a new round.
+- **Escalation** — an Editor can pull an Approver into the thread without moving the piece to approval.
+- **Final approval** follows the Post Approval Workflow: the candidate where the organization routes final approval to them, otherwise an Approver. Batch approval and the emergency bypass apply unchanged.
+- **Defaults** — all content requires approval before it is published ([ADR-016](../decisions/016-cross-cutting-resolutions.md) #22). An approved piece goes out when a person publishes it or at the time a person scheduled.
+- **Drafting** — a person may draft a piece with the text builder ([ADR-020](../decisions/020-central-service-line-up-and-builders.md)); the draft enters the pipeline like any other.
 
-Influencers are creators and use the same profile. A creator who is also a volunteer, donor, staff member or candidate is the same Person with one more facet. The creator roster is an org-level resource, like media lists, and any tenant may keep one: a party, a candidacy or an alliance.
+### Versioned Assets
 
-### Tiers and Routing
-
-| Tier | Working relationship | Approval route |
-|------|----------------------|----------------|
-| A — Top priority | Two-way conversation, briefs developed together | Multi-round approval |
-| B — Second priority | Two-way conversation | Multi-round approval |
-| C — Selected | Briefs and posts to publish | Simple approve or reject |
-| D — General | Posts to publish, handled in bulk | Simple approve or reject; bulk approval |
-
-Tier is the team's editorial priority, not a score. It is never shown to the creator as a rank.
-
-### Dispatch
-
-- **Two kinds of dispatch.** A *post to publish* is finished content the creator posts as-is. A *brief* is direction the creator turns into their own content.
-- **Recipients** — named creators, a whole tier, or a selection across tiers.
-- **Per-creator tracking** — delivered, viewed, response, and status for each recipient. Reminders go only to creators who have not answered.
-- **Channel** — WhatsApp by default, within the conversation-window rules at [integrations.md § WhatsApp Business API](integrations.md#whatsapp-business-api). Email where the creator prefers it.
-- **Every dispatch is a person's send.** A dispatch can be scheduled; it is never triggered by a machine.
-
-### Content Review
-
-Creator submissions and the organization's own posts share one pipeline: pending → draft → under review → revision requested → approved → published. It generalizes the [Post Approval Workflow](#post-approval-workflow) above.
-
-- **Multi-round approval (tiers A and B)** — every round is kept with its asset, and the reviewer sees the current round beside the previous one with the differences marked. Requesting a revision requires a comment. An Editor can escalate to an Approver. Final approval notifies the creator.
-- **Simple approval (tiers C and D)** — approve or reject, with an optional note to the creator. Tier C and D items can be approved in bulk.
-- **Defaults** — all content requires approval before it is published, as for social posts. The emergency bypass for the Org Admin and Communications Director applies.
-- **Versioned assets** — each round's asset is stored as a version. This is the first part of the shared asset library to be built ([ADR-021](../decisions/021-creator-program-and-content-pipeline.md)).
-
-### Creator Engagement
-
-- **Per-creator engagement** — likes, shares, comments and views on content published through the program, pulled by the same platform adapters as the organization's own analytics.
-- **Staff-only, never ranked** — the view is visible only to staff whose role templates include it. Creators never see it, and it carries no rank, position or badge ([ADR-015](../decisions/015-product-scope.md) rules out leaderboards).
-
-### Compliance for Creator Content
-
-- **Disclaimers** — content a creator publishes at a campaign's request is political communication, and the [Political Advertising Disclaimers on Social Media](#political-advertising-disclaimers-on-social-media) rules apply. A dispatch carries the required disclaimer in the platform-appropriate format.
-- **Paid creators** — payment is a campaign expenditure, reported under [compliance.md § Campaign Finance Reporting](compliance.md#campaign-finance-reporting). The post carries the platform's paid-partnership label.
-- **Unpaid creators** — content produced for a campaign without payment may be an in-kind contribution in some jurisdictions. See Open Questions.
-
-### Creators Across Tenants
-
-A creator relationship crosses a tenant boundary only under a sharing contract ([ADR-017](../decisions/017-sharing-contract-trust-model.md)), the same as any other contact. The common case is an alliance briefing a member party's candidate, who publishes on the candidate's own account. That is a relationship between two tenants: their contract governs what the alliance may send and see, and either side may contract it unilaterally. A creator who works with several tenants has a separate relationship with each, and no tenant sees another's thread.
+Each round's asset is stored as a version, with a comparison against the previous round. This is the first part of the shared asset library to be built ([ADR-021](../decisions/021-content-approval-pipeline.md)); the rest of the library stays in v2.
 
 ## Press Events
 
@@ -335,7 +293,7 @@ Tenant App → Post Scheduler → Platform Adapter → Social Media API
 
 5. **Brazil horário eleitoral** — Brazil's mandatory free TV/radio time for political campaigns is a unique media requirement. Should the platform support scheduling and tracking content for this format, or is it out of scope?
 
-6. **Unpaid creator content as an in-kind contribution** — when a creator produces content for a campaign without payment, is that an in-kind contribution under the jurisdiction's campaign finance rules, and does briefing the creator change the answer? For legal counsel, per jurisdiction, before the creator program launches ([ADR-021](../decisions/021-creator-program-and-content-pipeline.md)).
+6. **Approving from WhatsApp** — could the candidate approve a piece from a WhatsApp card instead of the web app? The only version drawn so far has an AI agent preparing and scheduling the pieces, and it is held as [ADR-018](../decisions/018-ai-agent-posture.md)'s worked example. Whether approval from WhatsApp can ship with no agent in the loop, and what the approval tap has to record, is not decided ([ADR-021](../decisions/021-content-approval-pipeline.md)).
 
 <!-- REVISIT: Social media platform API access for political content is increasingly restricted (Meta, Twitter/X). The adapter architecture must gracefully handle API access changes, rate limit reductions, and platform policy changes. The copy-paste fallback is a critical safety net. -->
 <!-- REVISIT: Social media disclaimer requirements are evolving rapidly across jurisdictions. The compliance integration for social media needs to be easily updatable as laws change. -->

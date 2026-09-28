@@ -158,8 +158,8 @@ Según system.md, una arquitectura modular de adaptadores permite integrar cada 
 #### Flujo de aprobación de publicaciones
 
 - **Borrador → Revisión → Aprobación → Programar o publicar** — las publicaciones en redes siguen el mismo flujo de aprobación del candidato que los comunicados de prensa ([messaging.md § Comunicación en alianzas](messaging.md#comunicación-en-alianzas)).
-- **Aprobación por lote** — el candidato puede revisar y aprobar varias publicaciones programadas en una sola sesión.
-- **Salida de emergencia** — el Administrador de la organización o el Director de comunicaciones puede publicar sin aprobación del candidato cuando la respuesta es urgente (queda registrado para auditoría y se le avisa al candidato después).
+- **Aprobación en bloque** — el candidato puede revisar y aprobar varias publicaciones programadas en una sola sesión.
+- **Excepción de emergencia** — el Administrador de la organización o el Director de comunicaciones puede publicar sin aprobación del candidato cuando la respuesta es urgente (queda registrado para auditoría y se le avisa al candidato después).
 
 #### Analítica
 
@@ -194,66 +194,24 @@ Un respaldo es otra persona diciendo, con sus propias palabras, que apoya al can
 - **Distribución** — los puntos de mensaje se pueden empujar al personal designado por el sistema de mensajería interna (messaging.md) cuando se actualizan.
 - **Integración con los informes al candidato** — los puntos de mensaje alimentan los mensajes de informe al candidato ([messaging.md § Comunicación en alianzas](messaging.md#comunicación-en-alianzas)). Antes de una entrevista o un acto de prensa, el candidato recibe los puntos relevantes.
 
-## Programa de creadores
+## Flujo de contenido
 
-Buena parte del alcance de una campaña vive hoy en las cuentas de otras personas: militancia, voceros, candidaturas e influencers que publican para su propio público. Un programa de creadores les entrega encargos, revisa lo que producen y da seguimiento a lo que logra. Amplía esta especificación en vez de agregar un segundo CRM ([ADR-021](../decisions/021-creator-program-and-content-pipeline.md)). Las pantallas están en [content-ops.md](../design/ux/04-wireframes/content-ops/content-ops.md).
+La mayoría de las piezas pasan por más de una ronda antes de publicarse: se acorta el texto de una publicación, se cambia una foto. El flujo de contenido generaliza el [Flujo de aprobación de publicaciones](#flujo-de-aprobación-de-publicaciones) de más arriba a la revisión por rondas ([ADR-021](../decisions/021-content-approval-pipeline.md)). Las pantallas están en [content-ops.md](../design/ux/04-wireframes/content-ops/content-ops.md).
 
-### Los creadores son registros del CRM
+### Rondas de revisión
 
-Los creadores se tratan exactamente igual que los contactos de medios. Un creador usa el tipo de registro Contacto que ya existe ([users.md § Contacto](users.md#contacto)) con campos propios de creador:
+Todo lo que publica la organización pasa por un solo flujo: pendiente → borrador → en revisión → cambios pedidos → aprobado → publicado.
 
-- **Nivel** — A (prioridad máxima), B (segunda prioridad), C (seleccionado) o D (general). El nivel define qué tan de cerca trabaja el equipo con el creador y cómo se aprueba su contenido
-- **Historial de niveles** — cada cambio de nivel, con la fecha y quién lo hizo
-- **Plataformas y cuentas** — dónde publica el creador (Instagram, TikTok, Facebook, X, YouTube, LinkedIn, Threads, blog) y con qué nombre de usuario
-- **Tipos de contenido esperados** — video, imagen, texto, audio
-- **Número de WhatsApp** — el canal por el que viajan los encargos y las respuestas
-- **Notas** — notas libres sobre la relación (cifradas según el modelo de datos)
-- **Última entrega, tasa de respuesta, cumplimiento de publicación** — se llenan solos a partir del historial de despachos y revisiones
+- **Cada ronda se guarda** con su recurso. Quien revisa ve la ronda actual junto a la anterior, con las diferencias marcadas (comparación de texto para el texto de la publicación, marcas de tiempo para el video).
+- **Pedir cambios exige un comentario**, y abre una ronda nueva.
+- **Escalamiento** — un Editor puede sumar a un Aprobador al hilo sin pasar la pieza a aprobación.
+- **La aprobación final** sigue el Flujo de aprobación de publicaciones: aprueba el candidato donde la organización le asigna la aprobación final; si no, un Aprobador. La aprobación en bloque y la excepción de emergencia aplican sin cambios.
+- **Valores por defecto** — todo contenido requiere aprobación antes de publicarse ([ADR-016](../decisions/016-cross-cutting-resolutions.md) #22). Una pieza aprobada sale cuando una persona la publica o a la hora que una persona programó.
+- **Redacción** — una persona puede redactar una pieza con el constructor de texto ([ADR-020](../decisions/020-central-service-line-up-and-builders.md)); el borrador entra al flujo como cualquier otro.
 
-Los influencers son creadores y usan el mismo perfil. Un creador que además es voluntario, donante, integrante del equipo o candidato es la misma Persona con una faceta más. La lista de creadores es un recurso de la organización, como las listas de medios, y cualquier organización puede tener una: un partido, una candidatura o una alianza.
+### Recursos versionados
 
-### Niveles y rutas
-
-| Nivel | Relación de trabajo | Ruta de aprobación |
-|------|----------------------|----------------|
-| A — Prioridad máxima | Conversación de doble vía, encargos desarrollados en conjunto | Aprobación en varias rondas |
-| B — Segunda prioridad | Conversación de doble vía | Aprobación en varias rondas |
-| C — Seleccionado | Encargos y piezas para publicar | Aprobación simple: aprobar o rechazar |
-| D — General | Piezas para publicar, manejadas en bloque | Aprobación simple; aprobación en bloque |
-
-El nivel es la prioridad editorial del equipo, no una puntuación. Nunca se le muestra al creador como una posición.
-
-### Despacho
-
-- **Dos tipos de despacho.** Una *pieza para publicar* es contenido terminado que el creador publica tal cual. Un *encargo* es una dirección que el creador convierte en contenido propio.
-- **Destinatarios** — creadores con nombre, un nivel entero o una selección de varios niveles.
-- **Seguimiento por creador** — entregado, visto, respuesta y estado de cada destinatario. Los recordatorios van solo a los creadores que no han respondido.
-- **Canal** — WhatsApp por defecto, dentro de las reglas de la ventana de conversación de [integrations.md § WhatsApp Business API](integrations.md#whatsapp-business-api). Correo electrónico cuando el creador lo prefiera.
-- **Todo despacho es el envío de una persona.** Un despacho se puede programar; nunca lo dispara una máquina.
-
-### Revisión de contenido
-
-Las entregas de los creadores y las publicaciones propias de la organización comparten un solo flujo de contenido: pendiente → borrador → en revisión → cambios pedidos → aprobado → publicado. Generaliza el [Flujo de aprobación de publicaciones](#flujo-de-aprobación-de-publicaciones) de más arriba.
-
-- **Aprobación en varias rondas (niveles A y B)** — cada ronda se guarda con su recurso, y quien revisa ve la ronda actual junto a la anterior con las diferencias marcadas. Pedir cambios exige un comentario. Un Editor puede escalar a un Aprobador. La aprobación final le avisa al creador.
-- **Aprobación simple (niveles C y D)** — aprobar o rechazar, con una nota opcional para el creador. Los elementos de niveles C y D se pueden aprobar en bloque.
-- **Valores por defecto** — todo contenido requiere aprobación antes de publicarse, igual que las publicaciones en redes. Aplica la excepción de emergencia del Administrador de la organización y del Director de comunicaciones.
-- **Recursos versionados** — el recurso de cada ronda se guarda como una versión. Es la primera parte de la Biblioteca compartida de contenidos que se construye ([ADR-021](../decisions/021-creator-program-and-content-pipeline.md)).
-
-### Interacción de los creadores
-
-- **Interacción por creador** — me gusta, veces compartido, comentarios y visualizaciones del contenido publicado a través del programa, obtenidos por los mismos adaptadores de plataforma que la analítica propia de la organización.
-- **Solo para el equipo, nunca en orden de posiciones** — la vista la ve solo el equipo cuyas plantillas de rol la incluyen. Los creadores nunca la ven, y no lleva posición, puesto ni insignia (la [ADR-015](../decisions/015-product-scope.md) descarta las tablas de posiciones).
-
-### Cumplimiento para el contenido de creadores
-
-- **Avisos legales** — el contenido que un creador publica a pedido de una campaña es comunicación política, y aplican las reglas de [Avisos legales de publicidad política en redes sociales](#avisos-legales-de-publicidad-política-en-redes-sociales). Un despacho lleva el aviso legal obligatorio en el formato de cada plataforma.
-- **Creadores pagados** — el pago es un gasto de campaña, que se informa según [compliance.md § Reportes de financiamiento de campañas](compliance.md#reportes-de-financiamiento-de-campañas). La publicación lleva la etiqueta de contenido patrocinado de la plataforma.
-- **Creadores no pagados** — el contenido producido para una campaña sin pago puede ser una contribución en especie en algunas jurisdicciones. Ver Preguntas abiertas.
-
-### Los creadores entre organizaciones
-
-Una relación con un creador cruza el límite de una organización solo bajo un contrato de intercambio ([ADR-017](../decisions/017-sharing-contract-trust-model.md)), igual que cualquier otro contacto. El caso común es una alianza que le da encargos al candidato de un partido miembro, que publica en su propia cuenta. Esa es una relación entre dos organizaciones: su contrato rige lo que la alianza puede enviar y ver, y cualquiera de las dos partes puede restringirlo de forma unilateral. Un creador que trabaja con varias organizaciones tiene una relación separada con cada una, y ninguna ve la conversación de otra.
+El recurso de cada ronda se guarda como una versión, con una comparación contra la ronda anterior. Es la primera parte de la Biblioteca compartida de contenidos que se construye ([ADR-021](../decisions/021-content-approval-pipeline.md)); el resto de la biblioteca sigue en la v2.
 
 ## Eventos de prensa
 
@@ -335,7 +293,7 @@ Tenant App → Post Scheduler → Platform Adapter → Social Media API
 
 5. **El *horário eleitoral* de Brasil** — el tiempo obligatorio y gratuito de TV y radio para las campañas es un requisito de medios único. ¿Debería la plataforma permitir programar y dar seguimiento al contenido de ese formato, o queda fuera de alcance?
 
-6. **El contenido de creadores no pagados como contribución en especie** — cuando un creador produce contenido para una campaña sin cobrar, ¿es una contribución en especie según las reglas de financiamiento de campaña de la jurisdicción, y cambia la respuesta si la campaña le dio el encargo? Para el asesor legal, jurisdicción por jurisdicción, antes de lanzar el programa de creadores ([ADR-021](../decisions/021-creator-program-and-content-pipeline.md)).
+6. **La aprobación desde WhatsApp** — ¿podría el candidato aprobar una pieza desde una tarjeta de WhatsApp en vez de la aplicación web? La única versión dibujada hasta ahora tiene un agente de IA que prepara y programa las piezas, y queda reservada como el ejemplo desarrollado de la [ADR-018](../decisions/018-ai-agent-posture.md). No está decidido si la aprobación desde WhatsApp puede salir sin ningún agente de por medio, ni qué tiene que registrar el toque en Aprobado ([ADR-021](../decisions/021-content-approval-pipeline.md)).
 
 <!-- REVISIT: El acceso por API al contenido político está cada vez más restringido en las plataformas de redes sociales (Meta, Twitter/X). La arquitectura de adaptadores tiene que absorber con elegancia los cambios de acceso, las reducciones de límite de tasa y los cambios de política de plataforma. La alternativa de copiar y pegar es una red de seguridad crítica. -->
 <!-- REVISIT: Los requisitos de aviso legal en redes sociales están cambiando rápido en todas las jurisdicciones. La integración de cumplimiento para redes sociales tiene que ser fácil de actualizar a medida que cambian las leyes. -->

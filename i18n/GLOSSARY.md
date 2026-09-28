@@ -955,36 +955,47 @@ Fijados antes de traducir la ADR-020 y las secciones de la hoja de ruta y la arq
 
 ---
 
-# Términos añadidos para la ADR-021 (programa de creadores y flujo de contenido)
+# Términos añadidos para la ADR-021 (flujo de aprobación de contenido)
 
-Fijados antes de traducir la ADR-021, el programa de creadores de `spec/press.md`, la bandeja de doble vía de `spec/integrations.md`, las plantillas de rol nuevas de `spec/users.md` y las secciones de arquitectura de la información que registran las pantallas nuevas.
+Fijados antes de traducir la ADR-021 y las secciones que registran sus pantallas. La primera versión de la ADR-021 especificaba también un programa de creadores; se retiró el mismo día, porque GreenGrass no es una herramienta para gestionar creadores de contenido. Sus términos quedan abajo, marcados como retirados, para que nadie los reintroduzca sin darse cuenta.
 
-## Creadores y flujo de contenido
+## Flujo de contenido
 
 | Inglés | Español | Nota |
 |---|---|---|
-| creator | **creador** / **creadora** (de contenido) | Quien publica en sus propias cuentas por encargo de la campaña o con su material: militancia, voceros, candidaturas, influencers. |
-| influencer | **influencer** *(se mantiene)*, *el/la influencer* | Uso asentado en Puerto Rico y América Latina. No *influenciador*. |
-| creator program | **programa de creadores** | |
-| creator profile | **perfil de creador** | Los campos de creador sobre un registro de Contacto, igual que los campos de prensa. No es un tipo de registro nuevo. |
-| tier (A–D, de creadores) | **nivel** (*Nivel A*) | La séptima escala que usa la palabra; ver la fila `tier` de la tercera parte. |
-| tier history | **historial de niveles** | |
-| Creator Manager (plantilla de rol) | **Gestor de creadores** | Como `Data Manager → Gestor de datos`. |
+| content pipeline | **flujo de contenido** | Como `endorsement pipeline → flujo de respaldos`. |
+| content approval pipeline (título de la ADR-021) | **flujo de aprobación de contenido** | |
+| review round | **ronda de revisión** | *Revisión por rondas*, *aprobación final*. |
+| review in rounds | **revisión por rondas** | |
+| request revision | **pedir cambios** | El estado `REVISION_REQUESTED` es cadena de base de datos y no se traduce. |
+| diff (entre rondas) | **comparación entre rondas** | |
+| versioned asset | **recurso versionado** | `asset → recurso`. |
+| batch approval | **aprobación en bloque** | No *aprobación por lote(s)*: *por lotes* es el procesamiento por lotes frente al de tiempo real. |
+| emergency bypass | **excepción de emergencia** | Publicar sin la aprobación del candidato cuando la respuesta es urgente. No *salida de emergencia*. |
 | Editor (plantilla de rol) | **Editor** | |
 | Approver (plantilla de rol) | **Aprobador** | |
-| dispatch (a creadores) | **despacho** / **despachar** | Coherente con *despachar* en el enrutador de canales y con *despacho de salida*. |
-| post to publish | **pieza para publicar** | Uno de los dos tipos de despacho; el otro es el **encargo**. |
-| content pipeline | **flujo de contenido** | Como `endorsement pipeline → flujo de respaldos`. |
-| review round | **ronda de revisión** | *Aprobación en varias rondas*, *aprobación simple*, *aprobación final*. |
-| request revision | **pedir cambios** | El estado `REVISION_REQUESTED` es cadena de base de datos y no se traduce. |
-| diff (entre rondas) | **comparación entre versiones** | |
-| versioned asset | **recurso versionado** | `asset → recurso`. |
-| two-way inbox | **bandeja de doble vía** | |
+| Content Dashboard (CONTENT-001) | **Panel de contenido** | Los nombres de pantalla se buscan en el `screen-inventory.md` en español. |
+| Approval (CONTENT-004) | **Aprobación** | |
+| Revised (encabezado de ADR) | **Revisada:** | Como `Updated → Actualizada:`. |
+| withdrawn (decisión) | **retirado** / **retirada** | *Lo que esta ADR ya no decide.* |
 | conversation window (WhatsApp, 24 horas) | **ventana de conversación** | `window → ventana`. |
 | template message (WhatsApp) | **mensaje de plantilla** | |
-| in-kind contribution | **contribución en especie** | *Contribución*, como `contribution limit → límite de contribución`. |
-| branded content / paid partnership | **contenido patrocinado** | |
 | staff-only | **solo para el equipo** | |
+
+## Retirados con el programa de creadores
+
+No se usan en el corpus vigente. Si vuelven a aparecer, es señal de que alguien está reintroduciendo el programa de creadores.
+
+| Inglés | Español (retirado) |
+|---|---|
+| creator / creator program / creator profile | creador, creadora / programa de creadores / perfil de creador |
+| influencer | influencer |
+| tier (A–D, de creadores) / tier history | nivel / historial de niveles |
+| Creator Manager (plantilla de rol) | Gestor de creadores |
+| dispatch (a creadores) / post to publish | despacho / pieza para publicar |
+| two-way inbox | bandeja de doble vía |
+| in-kind contribution (de creadores) | contribución en especie |
+| branded content / paid partnership | contenido patrocinado |
 
 ---
 
@@ -1007,10 +1018,18 @@ Fijados antes de traducir la sección nueva de la ADR-018.
 | invoking person / to invoke | **la persona que lo invoca** / **invocar** | |
 | background read | **lectura en segundo plano** | |
 | floor / ceiling (del alcance de lectura) | **piso** / **techo** | |
-| worked example | **ejemplo desarrollado** | Ya usado en la ADR-021. |
+| worked example | **ejemplo desarrollado** | |
 | strategic fit (score) | **afinidad estratégica** / **puntuación de afinidad estratégica** | |
 | production instructions | **instrucciones de producción** | Como en los wireframes originales, que ya estaban en español. |
 | approve without AI | **aprobar sin IA** | Texto del botón en el original. |
 | call to action | **llamada a la acción** | Ya usado en `workflows.md`. |
 | publication window | **ventana de publicación** | `window → ventana`. |
 | no agent dispatches | **ningún agente despacha** | Primera forma enumerada del principio de la compuerta humana. |
+| campaign agent (el del ejemplo) | **Agente de Campaña** | Como aparece en el prototipo, que ya estaba en español. |
+| voice note | **nota de voz** | |
+| Approve / Request changes / Discard (botones de WhatsApp) | **Aprobado** / **Pedir cambios** / **Descartar** | Texto de los botones en el prototipo. |
+| the approval tap | **el toque en Aprobado** | |
+| schedule (de publicaciones) / to schedule | **programación** / **programar** | *Las programo*, en el prototipo. |
+| it speaks first | **habla primero** | El agente inicia la conversación sin que nadie se lo pida. |
+| business-initiated message (WhatsApp) | **mensaje que inicia la empresa** | Fuera de la ventana de 24 horas, solo con plantilla aprobada. |
+| changes after approval | **cambios después de la aprobación** | |

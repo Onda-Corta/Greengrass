@@ -16,7 +16,7 @@ All product specifications, UX design artifacts, and architecture documents are 
 
 One question remains open and gates production rather than implementation. The corpus decided AI five times, feature by feature, and never asked what changes if AI agents operate throughout the product. The threat model, the compliance framework and the audit model contain effectively no treatment of a non-human actor. [ADR-018](decisions/018-ai-agent-posture.md) records this as the project's first `Proposed` decision: the five accepted AI features ship as specified, and anything with broader read scope, tool authority or autonomous action waits for the review. See [diary entry 12](diary/12-the-agent-question.md).
 
-The first decision taken since that gate opened is [ADR-019](decisions/019-central-services-and-metered-billing.md): shared capabilities get a home as central services executed per tenant, and the flat pricing model gains a second plane that passes third-party costs through at cost, with no margin. It supplies mechanisms the ADR-018 review can use and resolves nothing that review must decide. See [diary entry 13](diary/13-services-a-la-carte.md). [ADR-020](decisions/020-central-service-line-up-and-builders.md) names the four central services (Capture, Analysis, Builders, channel transport) and sequences them into the comms intelligence roadmap: text builders are accepted, while image and video builders wait for the ADR-018 review. [ADR-021](decisions/021-creator-program-and-content-pipeline.md) adds the creator program to the press spec: creators are contacts like journalists and influencers, their content goes through one approval pipeline, and the prototype's AI screens wait for the same review. ADR-018 itself now carries the board's per-tenant agent harness as the proposal under review, with proposed answers for cost, credential breadth, the human gate and compartmented data. It remains `Proposed`, and read scope is the question it most needs to settle. See [diary entry 14](diary/14-the-proposal-under-review.md).
+The first decision taken since that gate opened is [ADR-019](decisions/019-central-services-and-metered-billing.md): shared capabilities get a home as central services executed per tenant, and the flat pricing model gains a second plane that passes third-party costs through at cost, with no margin. It supplies mechanisms the ADR-018 review can use and resolves nothing that review must decide. See [diary entry 13](diary/13-services-a-la-carte.md). [ADR-020](decisions/020-central-service-line-up-and-builders.md) names the four central services (Capture, Analysis, Builders, channel transport) and sequences them into the comms intelligence roadmap: text builders are accepted, while image and video builders wait for the ADR-018 review. [ADR-021](decisions/021-content-approval-pipeline.md) generalizes post approval into a content pipeline reviewed in rounds, each round kept and every revision request commented; a creator program it first specified was withdrawn the same day, because GreenGrass is not a tool for managing content creators. ADR-018 itself now carries the board's per-tenant agent harness as the proposal under review, with proposed answers for cost, credential breadth, the human gate and compartmented data, and a worked example in which a candidate approves the day's posts over WhatsApp. It remains `Proposed`, and read scope is the question it most needs to settle. See [diary entry 14](diary/14-the-proposal-under-review.md) and [diary entry 15](diary/15-not-a-creator-tool.md).
 
 ## Documentation Website
 
@@ -128,7 +128,7 @@ GreenGrass/
 │   │   ├── 01-information-architecture/  # Navigation, screens, personas, URLs
 │   │   ├── 02-global-patterns/    # Offline, notifications, search, security UX
 │   │   ├── 03-design-system/      # Foundations, theming, components, responsive
-│   │   └── 04-wireframes/         # 22 wireframe documents (248 screens)
+│   │   └── 04-wireframes/         # 22 wireframe documents (240 screens)
 │   └── architecture/
 │       └── system.md              # System architecture
 ├── decisions/                     # Architecture Decision Records (ADRs)
@@ -139,8 +139,8 @@ GreenGrass/
 │   ├── 018-ai-agent-posture.md    # Proposed — AI agent review gates production
 │   ├── 019-central-services-and-metered-billing.md  # Central services, metered pass-through at cost
 │   ├── 020-central-service-line-up-and-builders.md  # Capture, Analysis, Builders, transport
-│   └── 021-creator-program-and-content-pipeline.md  # Creators as contacts, content pipeline
-├── diary/                         # Project diary (14 entries)
+│   └── 021-content-approval-pipeline.md  # Content pipeline, review in rounds
+├── diary/                         # Project diary (15 entries)
 ├── scripts/
 │   ├── build.mjs                  # Documentation site generator
 │   └── dev.sh                     # One-command local preview (install, build, serve)

@@ -360,18 +360,10 @@ Este inventario se deriva de los 12 documentos de especificación y del modelo d
 
 | ID | Pantalla | Arquetipos | Sin conexión | Móvil | Ref. de especificación |
 |----|--------|----------|---------|--------|----------|
-| CONTENT-001 | Panel de operaciones de contenido | OA, CD | No | Sí | press.md — programa de creadores |
-| CONTENT-002 | Lista de creadores | OA, CD | No | Escritorio | press.md — creadores como registros del CRM |
-| CONTENT-003 | Perfil de creador | OA, CD | No | Sí | press.md — creadores como registros del CRM |
-| CONTENT-004 | Bandeja de entrada | OA, CD | No | Sí | integrations.md — bandeja de doble vía |
-| CONTENT-005 | Revisión de contenido | OA, CD | No | Escritorio | press.md — revisión de contenido |
-| CONTENT-006 | Redactor de despachos | OA, CD | No | Sí | press.md — despacho |
-| CONTENT-007 | Seguimiento de despachos | OA, CD | No | Escritorio | press.md — despacho |
-| CONTENT-008 | Cola de aprobación | OA, CD, C | No | Escritorio | press.md — revisión de contenido |
-| CONTENT-009 | Aprobación en varias rondas | OA, CD, C | No | Escritorio | press.md — niveles y rutas |
-| CONTENT-010 | Aprobación simple | OA, CD, C | No | Escritorio | press.md — niveles y rutas |
-| CONTENT-011 | Interacción por creador | OA, CD | No | Escritorio | press.md — interacción de los creadores |
-| CONTENT-012 | Edición del perfil de creador | OA, CD | No | Escritorio | press.md — creadores como registros del CRM |
+| CONTENT-001 | Panel de contenido | OA, CD | No | Sí | press.md — flujo de contenido |
+| CONTENT-002 | Revisión de contenido | OA, CD | No | Escritorio | press.md — rondas de revisión |
+| CONTENT-003 | Cola de aprobación | OA, CD, C | No | Sí | press.md — rondas de revisión |
+| CONTENT-004 | Aprobación | OA, CD, C | No | Sí | press.md — rondas de revisión |
 
 ## Resumen
 
@@ -398,9 +390,9 @@ Este inventario se deriva de los 12 documentos de especificación y del modelo d
 | Páginas públicas | 8 | 0 | 8 |
 | Autenticación | 7 | 0 | 5 |
 | Perfil de usuario | 5 | 0 | 0 |
-| Operaciones de contenido | 12 | 0 | 0 |
-| **Total** | **248** | **24** | **53** |
+| Operaciones de contenido | 4 | 0 | 0 |
+| **Total** | **240** | **24** | **53** |
 
-La plataforma tiene aproximadamente **248 pantallas distintas**, de las cuales **24 funcionan sin conexión** y **53 son de prioridad móvil** (diseñadas sobre todo para usarse en el celular). Las demás funcionan en móvil, pero están diseñadas con prioridad de escritorio (configuración compleja, tablas de datos, constructores).
+La plataforma tiene aproximadamente **240 pantallas distintas**, de las cuales **24 funcionan sin conexión** y **53 son de prioridad móvil** (diseñadas sobre todo para usarse en el celular). Las demás funcionan en móvil, pero están diseñadas con prioridad de escritorio (configuración compleja, tablas de datos, constructores).
 
 <!-- REVISIT: Este inventario va a crecer a medida que la implementación revele subpantallas y flujos modales que este nivel de análisis no captura. Los ID de pantalla dan un sistema de referencia estable para lo que se añada. -->
