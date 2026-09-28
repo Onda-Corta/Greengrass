@@ -2,7 +2,8 @@
 
 **Status:** Proposed
 **Date:** 2026-09-07
-**Sources:** `spec/security.md`, `spec/compliance.md`, `spec/fundraising.md`, `spec/gotv.md`, `spec/comms-intelligence.md`, `design/architecture/system.md`
+**Updated:** 2026-09-28 — the proposal under review added. Status unchanged: nothing in it is accepted.
+**Sources:** `spec/security.md`, `spec/compliance.md`, `spec/fundraising.md`, `spec/gotv.md`, `spec/comms-intelligence.md`, `design/architecture/system.md`, `decisions/019-central-services-and-metered-billing.md`, `decisions/020-central-service-line-up-and-builders.md`, `decisions/021-creator-program-and-content-pipeline.md`, `design/ux/04-wireframes/content-ops/content-ops.md`
 
 ## Context
 
@@ -76,6 +77,81 @@ Acceptance requires an answer to each of the following, recorded here or in the 
 7. **Compartmented data** — whether an agent may ever read data governed by a sharing contract under [ADR-017](017-sharing-contract-trust-model.md), given that the platform is never a party to a contract.
 8. **BYOM settings screen** — the screen [ADR-016](016-cross-cutting-resolutions.md) committed to, added to the wireframes and the screen inventory, including the encryption-boundary warning already specified at [system.md § BYOM Architecture](../design/architecture/system.md#byom-architecture).
 
+## The proposal under review
+
+Everything in this section is a proposal for the review to evaluate. None of it is accepted, none of it appears in the architecture document as structure, and the gate above is unchanged.
+
+### What has changed since the review opened
+
+Three accepted decisions have landed since this ADR was opened, each deliberately short of the gate:
+
+- [ADR-019](019-central-services-and-metered-billing.md) added central services, per-tenant entitlements, and metered pass-through billing at cost.
+- [ADR-020](020-central-service-line-up-and-builders.md) named the four central services and accepted text builders. A text builder is invoked by a person, reads only what that person hands it, returns a draft, and cannot send, so it has none of the four gating properties above. Image and video builders stay proposed until this ADR is accepted with item 6 answered.
+- [ADR-021](021-creator-program-and-content-pipeline.md) added the creator program. It held the source wireframes' three AI screens for this review.
+
+### The per-tenant harness, as drawn
+
+The alliance services board recorded in [diary entry 13](../diary/13-services-a-la-carte.md) draws one agent harness per tenant, inside each tenant's enclave:
+
+```
+  Strategy ──┐
+  Knowledge  │
+  base     ──┼──► AGENTS (memory, retrieval, ──► PEOPLE ──► Builders dispatch
+  Geo data ──┤     skills, context,             (teams,      (text, image, video)
+  CRM ───────┘     model router)                 committees,
+                                                 militants,  ──► Outbound dispatch
+       Capture ──► (into each tenant)             spokespeople,   (email, SMS,
+       Analysis ─► (into each tenant)             candidates)      WhatsApp, social)
+                                                              ▲
+                                        mutual suppression ───┘ before every send
+```
+
+Three properties of the drawing matter to the review:
+
+1. **The harness is per tenant.** Each enclave has its own strategy, knowledge base, geo data, CRM and agents. No agent reads another tenant's sources, and the alliance draws no harness over its members.
+2. **Agents feed people, and only people dispatch.** Every arrow into builders dispatch and outbound dispatch starts at a person. No arrow runs from the harness to a send.
+3. **The harness reads four sources.** That is read scope wider than a single feature, the first gating property above. The drawing does not claim otherwise.
+
+### What the proposal answers
+
+For three of the review's eight items, and for one of its four gating properties, the drawing and the three new ADRs supply a proposed answer. Each is for the review to accept, amend or reject.
+
+- **Item 5, cost.** ADR-019's metered plane: inference and generation costs pass through to the tenant at cost, with no margin; under BYOM the tenant's own provider bills the tenant directly. What the platform default tier includes, and whether the free plan carries any metered allowance, stays open, as ADR-019 recorded.
+- **Credential breadth.** ADR-019's entitlements: one credential per tenant per central service. An agent acting for a tenant could hold no credential to a service the tenant has not enabled, and every call it made would be a metered usage event with an actor. This bounds what the harness can *call*. It does not bound what it can *read* inside its own tenant, which is the open question below.
+- **Item 6, the human gate.** The proposed principle is *machine proposes, human disposes*, and the drawing supplies its first enumerated form: **no agent dispatches.** An agent holds no credential to channel transport or to builder dispatch, and nothing it produces reaches a recipient except through a person's send. ADR-020 and ADR-021 already apply this to builders and to the creator program; the proposal extends it to every agent. The remaining forms and their exceptions are for the review to enumerate.
+- **Item 7, compartmented data.** The proposed answer: an agent reads compartmented data only under the contract of the person who invoked it, and never more than that person could read. Research delivered by the Analysis service lands in the compartment its contract names (ADR-019), and an agent invoked by someone outside that compartment cannot see it. The proposal also rules out background reads of compartmented data entirely. A read on someone's behalf is logged as that person's read, through the agent, under [ADR-017 § Observability: a distinction in the metadata ladder, not a new rung](017-sharing-contract-trust-model.md#observability-a-distinction-in-the-metadata-ladder-not-a-new-rung).
+
+### What it leaves open
+
+The drawing is silent on four items and makes one of them sharper.
+
+- **Read scope.** This is the central decision the review has to make. The content operations flow below reads one inbound item and one designated document. The harness reads strategy, knowledge base, geo data and the CRM. The first is the floor and the second is the ceiling, and the review has to decide where between them an agent may operate, per source.
+- **Item 2, automated decision-making and profiling.** The arrow from the CRM into the agents means an agent reading support scores for identifiable voters. That is exactly the case item 2 names, and the drawing makes it concrete rather than hypothetical.
+- **Item 1, the threat model; item 3, the audit model; item 4, offline; item 8, the BYOM settings screen.** Unanswered. The on-behalf-of relation proposed under item 7 is a start on item 3, not an answer to it.
+
+### Worked example: the content operations AI flow
+
+The creator-management wireframes behind ADR-021 include a three-screen AI flow. It is proposed here as a bounded feature, the first to be evaluated under this review, and it is not accepted.
+
+**What it does.** On an inbound creator submission, a person clicks "Analyze with AI". The model reads the item and the strategy documents the tenant has designated in its knowledge base. It returns a strategic-fit score, recommended networks and formats with its reasoning, and the passages of the strategy document it relied on. The person accepts, edits or rejects the recommendation. If they accept, the model drafts production instructions per format: caption, visual direction, required hashtags, publication window and call to action. The person sends the instructions into the normal approval queue. Every step has an "Approve without AI" path.
+
+**Proposed bounds:**
+- **Read scope:** the one item and the designated documents. No CRM, no messages, no other items.
+- **No tool authority:** the output enters the approval queue only by a person's action, and the flow can neither dispatch nor publish.
+- **Credentials:** the tenant's BYOM provider or the platform default, under an entitlement.
+- **Audit:** an agent actor type with an on-behalf-of relation to the person who clicked.
+- **Citations mandatory:** every recommendation cites the passages it rests on, under the provenance rule at [comms-intelligence.md § 8.2 Provenance is mandatory](../spec/comms-intelligence.md#82-provenance-is-mandatory).
+- **Optional at every step.**
+
+**The part that needs a decision.** In the source wireframes, every inbound item is classified against the strategy document *on arrival*, in the background, and badged with a fit score before anyone opens it. No person invokes that read, and it writes a badge no person approved: it has the third gating property, autonomous action. ADR-021 specified the inbox without it. The review has three options:
+- drop it, and classify only when a person asks;
+- allow it as a logged background read limited to the inbound item and the designated documents;
+- allow it only for tenants that opt in.
+
+### Questions recorded by later ADRs
+
+- **From ADR-020:** whether an image or video builder may ever depict a real, identifiable person, and what identification as generated content a published image or video must carry. These belong under item 6 and, for disclosure, under item 2's compliance section.
+
 ## Consequences
 
 **Benefits:**
@@ -95,4 +171,4 @@ Acceptance requires an answer to each of the following, recorded here or in the 
 - Tenant ownership of credentials ([integrations.md § Integration Principles](../spec/integrations.md#integration-principles)) applies to model providers as it does to every other integration
 - This ADR adds no new capability and reverses no accepted decision. It records a gate and the questions behind it
 
-**Related ADRs:** [ADR-002](002-security-threat-model.md) (threat model to extend), [ADR-004](004-data-model-integrity.md) (audit trail to extend), [ADR-005](005-offline-first-sync.md) (offline constraint), [ADR-009](009-compliance-legal.md) (automated filtering refused), [ADR-010](010-internationalization-localization.md) (AI translation with review), [ADR-012](012-external-integrations.md) (no third-party visibility precedent), [ADR-013](013-analytics-ai.md) (AI messaging; model choice superseded), [ADR-014](014-volunteer-onboarding.md) (AI concierge), [ADR-016](016-cross-cutting-resolutions.md) (BYOM §38, rule-based reallocation §49, tiered retention §4), [ADR-017](017-sharing-contract-trust-model.md) (contracts govern every boundary)
+**Related ADRs:** [ADR-002](002-security-threat-model.md) (threat model to extend), [ADR-004](004-data-model-integrity.md) (audit trail to extend), [ADR-005](005-offline-first-sync.md) (offline constraint), [ADR-009](009-compliance-legal.md) (automated filtering refused), [ADR-010](010-internationalization-localization.md) (AI translation with review), [ADR-012](012-external-integrations.md) (no third-party visibility precedent), [ADR-013](013-analytics-ai.md) (AI messaging; model choice superseded), [ADR-014](014-volunteer-onboarding.md) (AI concierge), [ADR-016](016-cross-cutting-resolutions.md) (BYOM §38, rule-based reallocation §49, tiered retention §4), [ADR-017](017-sharing-contract-trust-model.md) (contracts govern every boundary), [ADR-019](019-central-services-and-metered-billing.md) (cost item and credential boundary proposed), [ADR-020](020-central-service-line-up-and-builders.md) (text builders accepted outside the gate; image and video wait on item 6), [ADR-021](021-creator-program-and-content-pipeline.md) (the AI flow held as this review's worked example)
