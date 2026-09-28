@@ -3,7 +3,7 @@
 **Status:** Accepted
 **Date:** 2026-03-04
 **Sources:** `design/ux/04-wireframes/audit.md` (Appendix A: Consolidated Open Questions)
-**Amended by:** [ADR-019](019-central-services-and-metered-billing.md) — §2: a third send-time layer, cross-tenant mutual suppression, runs after the two decided below for a tenant in an alliance whose contract carries the suppression term ([system.md § Cross-channel orchestration engine](../design/architecture/system.md#cross-channel-orchestration-engine)). The two layers decided here are unchanged. [ADR-020](020-central-service-line-up-and-builders.md) — #25: in-platform video editing stays external as decided below; generating video from a brief is a separate capability, proposed and gated on [ADR-018](018-ai-agent-posture.md). Until it is accepted, #25 applies to all video.
+**Amended by:** [ADR-019](019-central-services-and-metered-billing.md) — §2: a third send-time layer, cross-tenant mutual suppression, runs after the two decided below for a tenant in an alliance whose contract carries the suppression term ([system.md § Cross-channel orchestration engine](../design/architecture/system.md#cross-channel-orchestration-engine)). The two layers decided here are unchanged.
 
 ## Context
 

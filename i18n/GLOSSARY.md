@@ -923,32 +923,3 @@ Fijados antes de traducir la tercera capa del motor de orquestación y los pasos
 | probing / to probe (a partner's list) | **tanteo** / **tantear** | Consultar por personas con las que no se tiene relación para averiguar si el socio las tiene. No *sondeo*, que ya es `polling → sondeo periódico`. |
 | unanswered member | **miembro que no responde** | *Un miembro que no responde no es un veto.* |
 | send record | **registro del envío** | Lo que queda de cada envío. No confundir con el *registro de auditoría*. |
-
----
-
-# Términos añadidos para la ADR-020 (los cuatro servicios centrales y los constructores)
-
-Fijados antes de traducir la ADR-020 y las secciones de la hoja de ruta y la arquitectura que toca.
-
-## Los cuatro servicios
-
-| Inglés | Español | Nota |
-|---|---|---|
-| Capture (el servicio) | **captura** / **servicio de captura** | Ya en el diagrama de topología de `system.md`. Distinto de `snapshot → instantánea`, que prohíbe *captura* en otro sentido. |
-| Analysis (el servicio) | **análisis** / **servicio de análisis** | |
-| Builders (el servicio) | **constructores** / **servicio de constructores** | Sigue la regla `builder → constructor de…`. *Constructor de texto*, *de imágenes*, *de video*. Las *Artes* del tablero son el constructor de imágenes: `builder_image` en el catálogo. |
-| channel transport / outbound dispatch | **transporte por canal** / **despacho de salida** | *Transporte por canal* ya está en `system.md`. *Despacho de salida* solo cuando se cita el tablero. |
-| line-up (de servicios) | *(se reformula)* | **Los cuatro servicios centrales.** Sin calco de *alineación*, que en español de PR es de deportes. |
-| published polls / commissioned polling | **encuestas publicadas** / **encuestas encargadas** | Nunca *sondeo*: ya es `polling → sondeo periódico` y `corpus probe → sondeo de corpus`. |
-| transcription / transcribed | **transcripción** / **transcrito** | |
-| electoral analysis / published results | **análisis electoral** / **resultados publicados** | |
-| self-vetting | **investigación propia** | Como en la Iteración 5 de `comms-intelligence.md`. |
-| brief (de un constructor) | **encargo** | Lo que la persona le entrega al constructor. No *brief*, que queda como anglicismo de agencia. |
-| draft (lo que devuelve un constructor) | **borrador** | Ya fijado. El estado `ai_generated` es cadena de base de datos y no se traduce. |
-| marked as generated | **marcado como generado** | |
-| send authority | **capacidad de enviar** | Como `tool authority → capacidad de invocar herramientas`. |
-| proposed (funcionalidad, no aceptada) | **propuesto** | Nunca *candidato*: en un producto electoral eso es la persona que se postula. El inglés evita *candidate* por la misma razón. |
-| video editing / timeline editor | **edición de video** / **editor de línea de tiempo** | |
-| synthetic media / identifiable person | **medios sintéticos** / **persona identificable** | |
-| labelling (de contenido generado) | **identificación como contenido generado** | No *etiquetado*, que choca con `tag → etiqueta`; no *rótulo*, que ya es de formularios. |
-| unscheduled | **sin iteración asignada** | |

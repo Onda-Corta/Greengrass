@@ -108,20 +108,3 @@ nothing. Matching needs a second blind index keyed per alliance contract, becaus
 tenant-keyed one cannot match across tenants. An unanswered member is not a veto: the
 send proceeds and the record notes who did not answer. No diary entry: entry 14 is
 reserved for PR 5.
-
-## ADR-020: The Four Central Services & Builders (2026-09-28, Accepted)
-
-PR 3 of five. The board's four services are Capture, Analysis, Builders and channel
-transport. Capture is comms-intelligence Iteration 3 (sources: published press,
-transcribed broadcast, public social accounts, published polls; never closed
-messaging), still gated on the Iteration 0 corpus probe; ADR-015 banner records the
-move from deferred to specified. Analysis delivers Iterations 5–6 into compartments and
-adds electoral analysis over published results, which is named but unscheduled (§12 Q7).
-Builders is a new Iteration 7, off the main line, depending only on Iteration 1.
-
-Builder bounds: invoked by a person with a brief, reads only what it is handed, returns
-a draft into existing approval workflows, no credential to transport. Text builders are
-accepted; image and video builders are **proposed** and cannot be enabled until ADR-018
-is accepted with item 6 answered. ADR-016 #25 holds for video editing; generation is a
-separate, gated capability (banner extended). "Proposed", never "candidate": the word
-collides with the political candidate in both languages.
