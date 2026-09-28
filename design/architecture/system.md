@@ -33,9 +33,19 @@ These product decisions (from the specs) have the strongest influence on archite
 │  └──────┬───────┘  └──────┬───────┘  └───────────────┘  │
 │         │                 │                               │
 │  ┌──────┴─────────────────┴──────────────────────────┐   │
+│  │   Service Catalogue · Entitlements · Metering       │   │
+│  │   (what exists, who enabled it, what it cost —      │   │
+│  │    metadata only; ADR-019)                          │   │
+│  └──────┬─────────────────┬──────────────────────────┘   │
+│  ┌──────┴─────────────────┴──────────────────────────┐   │
 │  │              Federation / Alliance Layer            │   │
 │  │     (cross-tenant coordination, sharing rules,      │   │
 │  │      dedup, don't-re-knock, joint campaigns)        │   │
+│  └──────┬─────────────────┬──────────────────────────┘   │
+│  ┌──────┴─────────────────┴──────────────────────────┐   │
+│  │   Central Services (capture, analysis, builders,    │   │
+│  │   channel transport) — shared code, executed per    │   │
+│  │   tenant under its keys, nothing retained           │   │
 │  └──────┬─────────────────┬──────────────────────────┘   │
 └─────────┼─────────────────┼──────────────────────────────┘
           │                 │
@@ -63,6 +73,8 @@ These product decisions (from the specs) have the strongest influence on archite
 2. **Federation layer** — mediates cross-tenant interactions: alliance coordination, shared resource management, dedup across orgs, joint campaign orchestration. Operates on explicit sharing rules, never has blanket access to tenant data.
 
 3. **Tenant layer** — one complete, isolated application instance per sovereign entity (party, org, or candidate). Each tenant has its own application server, database, cache, and job queue. No tenant can see another tenant's data except through the federation layer's sharing rules.
+
+**Central services are not a fourth layer.** They are platform-hosted capabilities that a tenant enables from the catalogue and that execute per tenant, under that tenant's keys and contracts, retaining nothing between calls ([ADR-019](../../decisions/019-central-services-and-metered-billing.md)). The catalogue, entitlements and metering that govern them are platform-layer components holding metadata only. See [Central Services Architecture](#central-services-architecture).
 
 ---
 
@@ -166,6 +178,7 @@ TenantRegistration
 ├── encryption_key_reference (vault path or tenant-held)
 ├── affiliations[] → TenantRegistration (with affiliation_type)
 ├── billing_info
+├── entitlements[] → Entitlement (central services this tenant has enabled)
 ├── status (provisioning | active | suspended | decommissioned)
 ├── created_at
 └── updated_at
@@ -176,9 +189,44 @@ Affiliation
 ├── child_tenant → TenantRegistration (party, org, or candidate)
 ├── affiliation_type (alliance_member | party_candidate)
 ├── sharing_rules (per-resource opt-in flags)
+├── billing_mode (member_pays | alliance_pays) — set at onboarding, changed only by both OAs
 ├── status (pending | active | revoked)
 ├── created_at
 └── updated_at
+
+ServiceCatalogueEntry
+├── id (UUID)
+├── service (capture | electoral_analysis | opposition_research | builder_text | builder_image | builder_video | channel_transport | mutual_suppression)
+├── countries[] (where it is offered)
+├── hosting_tiers[] (standard | enhanced | maximum | self_hosted)
+├── supplier (who bills the variable cost; null if none)
+├── unit, unit_price_passthrough (the supplier's price, no margin)
+├── allocation_method (per_tenant | published_allocation — for suppliers that bill in aggregate)
+├── data_leaves_perimeter (boolean — triggers the encryption-boundary acknowledgement)
+└── updated_at
+
+Entitlement
+├── id (UUID)
+├── tenant → TenantRegistration
+├── catalogue_entry → ServiceCatalogueEntry
+├── credential_reference (scoped to this tenant and this service only)
+├── acknowledged_perimeter_exit (boolean, with actor and timestamp)
+├── spend_cap (soft_warning, hard_stop — in the tenant's billing currency)
+├── billed_to → TenantRegistration (the tenant itself, or the alliance under alliance_pays)
+├── status (enabled | suspended_by_cap | disabled)
+├── enabled_by → PlatformIdentity
+└── created_at
+
+UsageEvent (metadata only — no content; audit-trail retention tier)
+├── id (UUID)
+├── tenant → TenantRegistration
+├── entitlement → Entitlement
+├── actor (PlatformIdentity, or a non-human actor type once ADR-018 defines one)
+├── contract_reference (the sharing contract the call ran under, if any)
+├── units, quantity
+├── supplier_cost, currency
+├── billed_to → TenantRegistration
+└── occurred_at
 ```
 
 ### Tenant-level entities (per-tenant database)
@@ -927,7 +975,7 @@ On **operational dashboards** (GOTV war room, field ops), the freshness indicato
 
 **DECIDED:** NATS JetStream.
 
-Lightweight, durable event streaming. Simpler to operate than Kafka, sufficient for per-tenant event volumes (thousands of events per day, not millions per second). Single binary, easy to deploy per-tenant or as a shared service within a country cluster. Supports durable subscriptions for the real-time analytics pipeline and event replay for the event sourcing architecture.
+Lightweight, durable event streaming. Simpler to operate than Kafka, sufficient for per-tenant event volumes (thousands of events per day, not millions per second). Single binary, easy to deploy per-tenant or as a shared service within a country cluster. Supports durable subscriptions for the real-time analytics pipeline and event replay for the event sourcing architecture. Usage events from central services ([ADR-019](../../decisions/019-central-services-and-metered-billing.md)) are published on the same per-tenant stream; the metering pipeline is one more durable subscriber.
 
 ---
 
@@ -1129,6 +1177,7 @@ Language detection: responds in the language the user types in. Falls back to th
 - Each adapter handles auth, rate limiting, error handling, and data mapping for one external system.
 - Adapters are per-tenant (each tenant configures their own API keys, accounts, etc.).
 - Data flowing through integrations is logged in the audit trail.
+- Central services ([ADR-019](../../decisions/019-central-services-and-metered-billing.md)) are consumed through this same layer: one adapter per service, one credential scoped to this tenant and this service, the same health monitoring and audit logging. To the tenant instance, a platform-hosted service and an external one look alike.
 
 **Integration health monitoring** (decided in [ADR-016 §56](../../decisions/016-cross-cutting-resolutions.md)):
 
@@ -1151,6 +1200,59 @@ The integration detail screen shows a health timeline (last 30 days) so the OA c
 - **Not an afterthought:** The public API is the same API the GreenGrass frontend consumes. No private backdoors that the public API can't access. Tenants can build anything on top of GreenGrass that GreenGrass itself can build.
 
 This is a core commitment to the sovereignty model — tenants who can build on top of the platform aren't locked into it.
+
+---
+
+## Central Services Architecture
+
+(Decided in [ADR-019](../../decisions/019-central-services-and-metered-billing.md))
+
+### Internal modules and central services
+
+Every capability is one of two things. An **internal module** runs inside the tenant instance on the tenant's own data: CRM, field operations, GOTV, fundraising, events, internal messaging, outreach composition. Enabling one per tenant is feature flagging inside a single-tenant deployment; nothing about tenant isolation changes. A **central service** is a platform-hosted capability a tenant enables from the catalogue: media capture over public sources, electoral analysis, opposition research delivery, text, image and video generation, channel transport, and the pilot's mutual suppression check. Internal modules are covered by the flat subscription. Central services carry costs that GreenGrass is itself billed for by the unit, which pass through to the tenant at cost, with no margin ([fundraising.md § Platform Revenue Model](../../spec/fundraising.md#platform-revenue-model)).
+
+### Per-tenant execution
+
+```
+Tenant App ──► Adapter (scoped credential) ──► Central Service ──► Supplier
+                                                     │
+                                          runs under the tenant's
+                                          keys and contracts
+                                                     │
+                                          result written back into
+                                          the tenant (compartment
+                                          if the contract says so)
+                                                     │
+                                          usage event → tenant stream
+                                          (metadata only)
+```
+
+- **One tenant per call.** A central service acts for exactly one tenant, under that tenant's credential, keys and sharing contracts. The platform is never a party to a contract, so there is no path from a call made for tenant A to tenant B's data.
+- **Nothing retained.** The service keeps no corpus, index, memory or cache of tenant-derived material across calls. Working state lives inside the tenant, encrypted with the tenant's keys. A service that retained tenant-derived state would itself be the superuser read path the comms intelligence roadmap forbids.
+- **Output lands per contract.** Research delivered into a tenant lands in the compartment the tenant's contracts specify. The Org Admin cannot read it there; the Platform Admin cannot read it at all.
+- **Public data is the exception, and only the data.** A capture corpus built from public media may be shared across tenants within a country. Queries against it are tenant-scoped and never aggregated, because what a campaign is watching is not public. This is the map-tile reasoning from [ADR-012](../../decisions/012-external-integrations.md) applied to a corpus.
+
+### Catalogue, entitlements and metering
+
+The platform layer gains one component in three parts, holding metadata only. Its entities are in the [Data Model](#data-model).
+
+- **Catalogue.** Which services exist, in which countries and at which isolation tiers, from which supplier, at what pass-through unit price, and whether a call carries tenant data beyond the encryption perimeter.
+- **Entitlements.** One per tenant per service, created by an Org Admin. Each carries a credential scoped to that tenant and that service, consumed through the integration hub's adapter layer. Enabling a service flagged as leaving the perimeter requires the same explicit acknowledgement as BYOM configuration ([BYOM architecture](#byom-architecture)). Each entitlement carries a spend cap with a soft warning and a hard stop. Nothing is enabled by default.
+- **Metering.** Every call emits a usage event on the tenant's own event stream: tenant, service, units, supplier cost, invoking actor and governing contract. Usage events are audit-trail metadata under ADR-016 §4 and never retain content. The billing pipeline and the tenant's own audit view are both subscribers.
+
+**Entitlements bound any future agent.** An agent acting for a tenant can hold no credential to a service the tenant has not enabled, and every call it makes is a metered event with an actor. This supplies the credential-breadth mechanism [ADR-018](../../decisions/018-ai-agent-posture.md) asks for without resolving that ADR or adding any agent capability.
+
+### Alliance-paid entitlements
+
+An affiliation carries a `billing_mode`: `member_pays` (default) or `alliance_pays`. The alliance chooses its default at onboarding; each member sees the applicable mode before accepting affiliation; changing it on a live affiliation requires both Org Admins. Under `alliance_pays`, usage events from the member's entitlements are billed to the alliance's statement. Paying is not seeing: results still land in the member tenant under the member's keys, and the alliance receives service, units and cost, never content or queries.
+
+### Availability by isolation tier
+
+| Tier | Central services |
+|------|------------------|
+| Standard, Enhanced | All available |
+| Maximum | Services whose calls carry tenant data beyond the perimeter require the explicit encryption-boundary acknowledgement. Capture requires it scoped to query metadata. |
+| Self-hosted | Remote calls into GreenGrass infrastructure, disabled by default. Enable under the same acknowledgement, or run the service's own package inside the perimeter where GreenGrass publishes one. |
 
 ---
 
@@ -1295,3 +1397,4 @@ For self-hosted tenants, GreenGrass provides:
 13. ~~Tenant URLs~~ → Subdomain default + custom domain support
 14. ~~Data retention~~ → Tiered (operational/compliance/audit/import rollback) per [ADR-016 §4](../../decisions/016-cross-cutting-resolutions.md). Supersedes ADR-004's uniform 10-year policy.
 15. ~~89 wireframe open questions~~ → All resolved per [ADR-016](../../decisions/016-cross-cutting-resolutions.md)
+16. ~~Shared capabilities and usage-based cost~~ → Central services executed per tenant, with metered pass-through at cost and no margin, per [ADR-019](../../decisions/019-central-services-and-metered-billing.md). Amends the flat-only revenue model in ADR-007.

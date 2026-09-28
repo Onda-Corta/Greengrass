@@ -863,3 +863,43 @@ contrato más fuerte del que tuvo esta ronda.
 | script | **guion** (texto de contacto) / **sistema de escritura** (latino, tailandés, devanagari) | No hay ningún `script` de JavaScript en el corpus. |
 | pipeline | **cadena de procesamiento** (técnico) / **flujo de respaldos** (endorsement) / **flujo de etapas** (vista kanban) | |
 | override | **sobrescritura** (ajustes, temas) / **Excepción:** (rótulo de excepción a un valor por rol) | |
+
+---
+
+# Términos añadidos para la ADR-019 (servicios centrales y facturación medida)
+
+Fijados antes de traducir la ADR y las secciones que enmienda, para que la traducción no los acuñe sobre la marcha.
+
+## Servicios y facturación
+
+| Inglés | Español | Nota |
+|---|---|---|
+| central service | **servicio central** | Capacidad alojada en la plataforma que una organización activa desde el catálogo y que se ejecuta por organización. No *servicio compartido*: lo compartido es el código, nunca el estado, y la ADR insiste en esa diferencia. |
+| internal module | **módulo interno** | Lo que corre dentro de la instancia de la organización sobre sus propios datos. Va en la suscripción fija. |
+| service catalogue / catalog | **catálogo de servicios** | |
+| entitlement | **derecho de uso** | El registro organización × servicio que crea el OA al activar un servicio. No *habilitación* (es la acción) ni *licencia* (es jurídico). En los bloques del modelo de datos, `Entitlement` no se traduce. |
+| to enable / to disable (a service) | **activar** / **desactivar** | |
+| metering / metered | **medición de uso** / **medido por uso** | *Servicio medido por uso*, *costos medidos*. Nunca *metraje*. |
+| usage event | **evento de uso** | |
+| billing plane | **plano de facturación** | Son dos: la suscripción fija y el traslado al costo. *Plano*, no *plan*: el plan ya es el `tier` de suscripción. |
+| flat subscription | **suscripción fija** | Coherente con *niveles de suscripción fija* y *planes fijos*, ya en uso. |
+| pass-through (at cost) | **traslado al costo** | Coherente con `processing fee pass-through → traslado del cargo por procesamiento`. |
+| markup / margin | **margen** | *GreenGrass no le carga margen a los costos medidos.* No *sobreprecio*, que suena a abuso; no *comisión*, que ya es la de las donaciones. |
+| no margin | **sin margen** | |
+| spend cap | **tope de gasto** | Como `frequency cap → tope de frecuencia`. |
+| soft warning / hard stop | **aviso** / **corte** | El tope de gasto tiene un aviso y un corte. |
+| statement (billing) | **estado de cuenta** | Ya usado para donantes (*estados de cuenta anuales*). |
+| supplier | **proveedor** | Quien factura el costo variable. Coincide con `provider → proveedor`; el contexto desambigua. |
+| allocation (of an aggregate bill) | **reparto** | *Método de reparto publicado.* Coherente con `split → reparto` en recaudación. |
+| à la carte / ad hoc | **a la carta** | |
+| billing mode | **modo de facturación** | Los valores `member_pays` / `alliance_pays` son cadenas de base de datos y no se traducen. |
+| alliance pays / member pays (prosa) | **paga la alianza** / **paga cada miembro** | |
+| to pay on behalf of | **pagar en nombre de** | |
+| free-rider | **quien se beneficia sin aportar** | Sin calco. |
+| shared code, not shared state | **código compartido, no estado compartido** | Frase fija de la ADR-019. |
+| amended by (encabezado de ADR) | **Enmendada por:** | La ADR-017 ya usa *enmendada*. |
+| amendment banner | **aviso de enmienda** | Distinto de `supersession banner → aviso de sustitución`, ya usado en la ADR-018. |
+| encryption perimeter | **perímetro de cifrado** | La ADR-018 traduce `encryption boundary` como *frontera de cifrado*; el original usa las dos palabras y se mantienen las dos. |
+| superuser read path | **vía de lectura de superusuario** | Como ya aparece en la hoja de ruta de inteligencia de comunicaciones. |
+| feature flagging | **activar funcionalidades por configuración** | Sin calco; la frase completa es más clara que cualquier sustantivo. |
+| load-bearing (distinction) | **estructural** | *Una distinción estructural.* No *que soporta carga*. |

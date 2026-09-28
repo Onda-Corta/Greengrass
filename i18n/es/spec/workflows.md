@@ -30,6 +30,8 @@ El recorrido que va de "queremos usar GreenGrass" a "estamos corriendo nuestra c
 ```
 1. El fundador se registra en el sitio web de GreenGrass
 2. Elige el tipo de entidad: Partido/Organización, Candidato o Alianza
+   a. Si es Alianza: elige el modo de facturación por defecto de los servicios centrales de sus
+      miembros — member_pays (por defecto) o alliance_pays (ADR-019). Cada miembro lo ve al afiliarse.
 3. Elige el nivel de alojamiento (estándar / reforzado / máximo) y el país de residencia de los datos
 4. Elige el modelo de cifrado (BYOK —Bring Your Own Key, la organización controla su propia
    llave de cifrado— por defecto; llaves gestionadas si lo pide)
@@ -52,6 +54,10 @@ El recorrido que va de "queremos usar GreenGrass" a "estamos corriendo nuestra c
 Te registras, configuras, se aprovisiona y arrancas: sin intervención humana. La plataforma maneja el aprovisionamiento de punta a punta: levantar la infraestructura, crear la base de datos, configurar las llaves de cifrado (flujo BYOK o gestionadas) y la configuración inicial.
 
 Es ambicioso desde lo arquitectónico, dado que hay residencia de datos por país y aislamiento de organización única, pero es la meta correcta. La cadena de aprovisionamiento tiene que ser lo bastante confiable como para crear organizaciones aisladas en el país correcto y a demanda.
+
+**DECIDIDO:** El modo de facturación de la alianza es un ajuste de la puesta en marcha ([ADR-019](../decisions/019-central-services-and-metered-billing.md)).
+
+Una alianza elige al ponerse en marcha si paga los costos medidos de servicios centrales que generan sus miembros (`alliance_pays`) o si cada miembro paga los suyos (`member_pays`, el valor por defecto). Cada solicitud de afiliación le muestra al miembro qué modo aplica antes de que acepte. Cambiar el modo en una afiliación activa requiere a los Administradores de la organización de la alianza y del miembro. Pagar no le da a la alianza ninguna vista de los datos ni de las consultas del miembro; recibe solo el estado de cuenta.
 
 <!-- REVISIT: La automatización del aprovisionamiento es una pieza mayor de trabajo de infraestructura. Necesita tratamiento detallado en la especificación de arquitectura: orquestación, proveedores de alojamiento por país, manejo de fallos, reversión. Las fases tempranas (alfa/piloto) podrían usar una cadena más simple con salvaguardas mientras se construye la automatización completa. -->
 

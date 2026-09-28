@@ -30,6 +30,8 @@ The journey from "we want to use GreenGrass" to "we're running our campaign on i
 ```
 1. Org founder signs up on GreenGrass website
 2. Select entity type: Party/Org, Candidate, or Alliance
+   a. If Alliance: choose the default billing mode for members' central services —
+      member_pays (default) or alliance_pays (ADR-019). Shown to each member on affiliation.
 3. Choose hosting tier (standard / enhanced / maximum) and data residency country
 4. Choose encryption model (BYOK default, managed keys opt-in)
 5. Platform Admin provisions the tenant
@@ -51,6 +53,10 @@ The journey from "we want to use GreenGrass" to "we're running our campaign on i
 Sign up, configure, provision, go — no human in the loop. The platform handles tenant provisioning end-to-end: infrastructure spin-up, database creation, encryption key setup (BYOK flow or managed), and initial configuration.
 
 This is architecturally ambitious given per-country data residency and single-tenant isolation, but it's the right target. The provisioning pipeline must be reliable enough to create isolated tenants in the correct country on demand.
+
+**DECIDED:** Alliance billing mode is an onboarding setting ([ADR-019](../decisions/019-central-services-and-metered-billing.md)).
+
+An alliance chooses at setup whether it pays the metered central-service costs its members incur (`alliance_pays`) or each member pays its own (`member_pays`, the default). Every affiliation request shows the member which mode applies before the member accepts. Changing the mode on a live affiliation requires the Org Admins of both the alliance and the member. Paying does not grant the alliance any view of the member's data or queries; it receives the statement only.
 
 <!-- REVISIT: The provisioning automation pipeline is a major piece of infrastructure work. Needs detailed treatment in the architecture spec — orchestration, country-specific hosting providers, failure handling, rollback. Early phases (alpha/pilot) may use a simpler pipeline with guardrails while full automation is built out. -->
 

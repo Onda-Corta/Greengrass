@@ -290,14 +290,31 @@ Already decided in workflows.md: real-time fundraising thermometer, Finance Dire
 
 ## Platform Revenue Model
 
-**DECIDED: Flat subscription tiers.** Fixed monthly/annual pricing based on feature tier (basic, professional, enterprise). Not tied to donation volume, user count, or any usage metric. Predictable for campaigns, simple to understand, no surprises. A genuinely usable free or very-low-cost tier must exist for resource-constrained campaigns.
+**DECIDED: Two billing planes — a flat subscription, and metered pass-through at cost.** Amended by [ADR-019](../decisions/019-central-services-and-metered-billing.md). The original decision read: flat subscription tiers, not tied to donation volume, user count, or any usage metric. That remains true of the subscription. It stopped being true of the whole model once the platform gained central services whose third-party costs cannot be made flat.
+
+**Plane 1 — Flat subscription.** Fixed monthly/annual pricing based on plan (basic, professional, enterprise). Covers the tenant instance, every internal module the plan includes, and GreenGrass's own cost of building and operating central services. Predictable for campaigns, simple to understand, no surprises. A genuinely usable free or very-low-cost plan must exist for resource-constrained campaigns.
+
+**Plane 2 — Metered pass-through, at cost.** Central services ([ADR-019](../decisions/019-central-services-and-metered-billing.md)) carry variable costs that reach GreenGrass metered, billed by the unit, and that cannot be made flat: inference tokens from a model provider, per-message charges from SMS and WhatsApp gateways, per-generation charges from media generation providers, per-source fees from data suppliers, and infrastructure a cloud provider bills GreenGrass per unit to run the service. These pass through to the tenant that incurred them.
+
+**GreenGrass takes no margin on metered costs.** The supplier's price is the tenant's price: no markup, no rounding up, no bundling into opaque units, no minimum spend. Where a supplier bills GreenGrass in aggregate rather than per tenant, the allocation method is published and the tenant pays its allocated share and nothing more. Where a supplier's terms make exact pass-through impossible, the closest achievable approximation is used and the deviation is documented in the service's catalogue entry. GreenGrass's revenue comes from the subscription alone, for the same reason it takes no cut of donations: the platform earns from platform quality, never from volume.
+
+What is never metered: GreenGrass's own compute, storage and staff time when GreenGrass pays for them flat, as reserved capacity or salaries. Those are subscription costs. The test is whether GreenGrass itself receives a metered bill: when a cloud provider charges GreenGrass by the unit to run a service, that charge passes through at cost like any other. A service that generates no metered bill has no metered plane at all.
+
+**Transparency obligations for metered services.** Nothing is enabled by default. Before enabling a service the tenant sees its unit price, the supplier it originates from, and a worked estimate. The tenant can set a spend cap per service, with a soft warning and a hard stop. A monthly statement itemizes every metered service by units and cost.
+
+**Alliances paying for members.** An alliance can absorb the metered costs of its members' use of central services. This is a setting on the affiliation, `member_pays` (default) or `alliance_pays`, chosen when the alliance is set up and shown to each member before it accepts affiliation ([workflows.md § 1. Tenant Onboarding](workflows.md#1-tenant-onboarding)). Changing it on a live affiliation requires the Org Admins of both sides, the same rule that governs donation split changes. Paying is not seeing: results land in the member tenant under the member's keys, and the alliance receives the statement, never the content.
 
 ### Pricing Principles (from product.md, to be preserved regardless of model)
 
 - **Not per-user pricing** — explicitly rejected. Campaigns shouldn't be penalized for having more volunteers.
 - **Not per-transaction pricing** — GreenGrass takes zero cut of donations (decided above).
-- **Accessible to resource-constrained campaigns** — free or very low-cost tier must exist and be genuinely usable, not hobbled.
+- **Accessible to resource-constrained campaigns** — free or very low-cost plan must exist and be genuinely usable, not hobbled.
 - **Transparent** — no hidden fees, no surprise charges.
+- **No margin on pass-through costs** — added by ADR-019. Variable third-party costs reach the tenant at cost. GreenGrass never earns from a tenant's consumption.
+
+### Deferred: metered allowance in the free plan
+
+Whether the free or very-low-cost plan includes any metered allowance — a starting balance of central-service use, and if so how much and for which services — is deferred. The accessibility principle stands as written. This is recorded here so that it is not read as decided either way; the pilot should inform it.
 
 ## Fraud Prevention
 

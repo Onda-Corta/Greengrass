@@ -40,7 +40,7 @@ Meanwhile the doorway is already open. [integrations.md § Integration Principle
 
 Three contradictions surfaced while assembling this ADR. Following the practice established for translation, they are named rather than silently fixed, so that correcting them is a decision somebody makes deliberately.
 
-1. [ADR-013](013-analytics-ai.md) is `Status: Accepted` with no supersession banner, although [system.md § AI Integration](../design/architecture/system.md#ai-integration) states its AI model decision was superseded by [ADR-016](016-cross-cutting-resolutions.md) §38.
+1. [ADR-013](013-analytics-ai.md) is `Status: Accepted` with no supersession banner, although [system.md § AI Integration](../design/architecture/system.md#ai-integration) states its AI model decision was superseded by [ADR-016](016-cross-cutting-resolutions.md) §38. *Resolved by [ADR-019](019-central-services-and-metered-billing.md): a clarifying banner records that ADR-013 never made a model decision and that ADR-016 §38 governs.*
 2. [dashboards.md § War Room — Key Differences From Other Dashboards](../design/ux/04-wireframes/dashboards/dashboards.md#war-room-key-differences-from-other-dashboards) describes reallocation suggestions as "AI-generated," after [ADR-016](016-cross-cutting-resolutions.md) §49 made them rule-based for v1.
 3. [ADR-016](016-cross-cutting-resolutions.md) lists a BYOM provider abstraction layer *and settings screen* as a required new capability. No such screen exists in [settings.md](../design/ux/04-wireframes/settings/settings.md) (SET-001 through SET-022) or in [screen-inventory.md](../design/ux/01-information-architecture/screen-inventory.md).
 

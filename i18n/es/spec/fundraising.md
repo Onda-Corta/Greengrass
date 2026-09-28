@@ -290,14 +290,31 @@ Ya decidido en workflows.md: termómetro de recaudación en tiempo real, panel d
 
 ## Modelo de ingresos de la plataforma
 
-**DECIDIDO: niveles de suscripción fija.** Precio mensual o anual fijo según el nivel de funcionalidades (básico, profesional, empresarial). No está atado al volumen de donaciones, al número de usuarios ni a ninguna métrica de uso. Predecible para las campañas, simple de entender, sin sorpresas. Tiene que existir un nivel gratuito o de costo muy bajo que sea genuinamente usable para campañas con pocos recursos.
+**DECIDIDO: dos planos de facturación — una suscripción fija y un traslado al costo, medido por uso.** Enmendado por la [ADR-019](../decisions/019-central-services-and-metered-billing.md). La decisión original decía: niveles de suscripción fija, no atados al volumen de donaciones, al número de usuarios ni a ninguna métrica de uso. Eso sigue siendo cierto para la suscripción. Dejó de serlo para el modelo entero cuando la plataforma ganó servicios centrales cuyos costos de terceros no se pueden volver fijos.
+
+**Plano 1 — Suscripción fija.** Precio mensual o anual fijo según el plan (básico, profesional, empresarial). Cubre la instancia de la organización, cada módulo interno que el plan incluya y el costo propio de GreenGrass por construir y operar los servicios centrales. Predecible para las campañas, simple de entender, sin sorpresas. Tiene que existir un plan gratuito o de costo muy bajo que sea genuinamente usable para campañas con pocos recursos.
+
+**Plano 2 — Traslado al costo, medido por uso.** Los servicios centrales ([ADR-019](../decisions/019-central-services-and-metered-billing.md)) cargan costos variables que le llegan a GreenGrass medidos, facturados por unidad, y que no se pueden volver fijos: tokens de inferencia de un proveedor de modelos, cargos por mensaje de las pasarelas de SMS y de WhatsApp, cargos por generación de los proveedores de generación de medios, cuotas por fuente de los proveedores de datos, e infraestructura que un proveedor de nube le factura a GreenGrass por unidad para correr el servicio. Esos costos se trasladan a la organización que los generó.
+
+**GreenGrass no le carga margen a los costos medidos.** El precio del proveedor es el precio de la organización: sin recargo, sin redondeo hacia arriba, sin empaquetar en unidades opacas, sin consumo mínimo. Cuando un proveedor le factura a GreenGrass en conjunto y no por organización, el método de reparto se publica y la organización paga su parte y nada más. Cuando las condiciones de un proveedor hacen imposible el traslado exacto, se usa la aproximación más cercana alcanzable y la desviación queda documentada en la entrada del servicio en el catálogo. Los ingresos de GreenGrass vienen únicamente de la suscripción, por la misma razón por la que no se queda con nada de las donaciones: la plataforma gana por la calidad de la plataforma, nunca por el volumen.
+
+Lo que nunca se mide: el cómputo, el almacenamiento y el tiempo del personal de GreenGrass cuando GreenGrass los paga fijos, como capacidad reservada o como salarios. Eso es costo de la suscripción. La prueba es si GreenGrass recibe ella misma una factura medida: cuando un proveedor de nube le cobra a GreenGrass por unidad por correr un servicio, ese cargo se traslada al costo como cualquier otro. Un servicio que no genera ninguna factura medida no tiene plano medido en absoluto.
+
+**Obligaciones de transparencia de los servicios medidos.** Nada viene activado por defecto. Antes de activar un servicio, la organización ve su precio unitario, el proveedor del que viene y una estimación con números. La organización puede fijar un tope de gasto por servicio, con un aviso y un corte. Un estado de cuenta mensual detalla cada servicio medido por unidades y por costo.
+
+**Alianzas que pagan por sus miembros.** Una alianza puede absorber los costos medidos que genera el uso de servicios centrales por parte de sus miembros. Es un ajuste de la afiliación, `member_pays` (por defecto) o `alliance_pays`, que se elige al poner en marcha la alianza y que cada miembro ve antes de aceptar la afiliación ([workflows.md § 1. Puesta en marcha de una organización](workflows.md#1-puesta-en-marcha-de-una-organización)). Cambiarlo en una afiliación activa requiere a los Administradores de la organización de los dos lados, la misma regla que rige los cambios en el reparto de donaciones. Pagar no es ver: los resultados aterrizan en la organización miembro bajo las llaves del miembro, y la alianza recibe el estado de cuenta, nunca el contenido.
 
 ### Principios de precios (de product.md, se preservan sin importar el modelo)
 
 - **No es precio por usuario** — explícitamente rechazado. Una campaña no debería pagar más por tener más voluntarios.
 - **No es precio por transacción** — GreenGrass no se queda con nada de las donaciones (decidido arriba).
-- **Accesible para campañas con pocos recursos** — tiene que existir un nivel gratuito o de costo muy bajo, y tiene que ser genuinamente usable, no una versión mutilada.
+- **Accesible para campañas con pocos recursos** — tiene que existir un plan gratuito o de costo muy bajo, y tiene que ser genuinamente usable, no una versión mutilada.
 - **Transparente** — sin cargos ocultos, sin cobros sorpresa.
+- **Sin margen sobre los costos trasladados** — añadido por la ADR-019. Los costos variables de terceros llegan a la organización al costo. GreenGrass nunca gana con el consumo de una organización.
+
+### Diferido: asignación medida en el plan gratuito
+
+Si el plan gratuito o de costo muy bajo incluye alguna asignación medida —un saldo inicial de uso de servicios centrales y, de ser así, cuánto y para qué servicios— queda diferido. El principio de accesibilidad se mantiene tal como está escrito. Queda registrado aquí para que no se lea como decidido en ningún sentido; el piloto debería informarlo.
 
 ## Prevención de fraude
 
