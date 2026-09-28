@@ -272,18 +272,10 @@ The main application. Uses the full navigation shell (header bar + sidebar on de
 | `/press/talking-points` | PRESS-014 | Talking Points Library | No |
 | `/press/interviews` | PRESS-015 | Interview Schedule | No |
 | `/press/spokespersons` | PRESS-016 | Spokesperson Configuration | No |
-| `/press/content` | CONTENT-001 | Content Operations Dashboard | No |
-| `/press/creators` | CONTENT-002 | Creator List | No |
-| `/press/creators/new` | CONTENT-012 | Creator Profile Edit (new) | No |
-| `/press/creators/[creatorId]` | CONTENT-003 | Creator Profile | No |
-| `/press/creators/[creatorId]/edit` | CONTENT-012 | Creator Profile Edit | No |
-| `/press/creators/engagement` | CONTENT-011 | Creator Engagement | No |
-| `/press/content/inbox` | CONTENT-004 | Inbound Inbox | No |
-| `/press/content/[itemId]` | CONTENT-005 | Content Review | No |
-| `/press/content/dispatch/new` | CONTENT-006 | Dispatch Composer | No |
-| `/press/content/dispatch/[dispatchId]` | CONTENT-007 | Dispatch Tracking | No |
-| `/press/content/approvals` | CONTENT-008 | Approval Queue | No |
-| `/press/content/approvals/[itemId]` | CONTENT-009 / CONTENT-010 | Multi-round or Simple Approval, by tier | No |
+| `/press/content` | CONTENT-001 | Content Dashboard | No |
+| `/press/content/[itemId]` | CONTENT-002 | Content Review | No |
+| `/press/content/approvals` | CONTENT-003 | Approval Queue | No |
+| `/press/content/approvals/[itemId]` | CONTENT-004 | Approval | No |
 
 #### GOTV & Election Day
 

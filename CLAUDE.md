@@ -8,11 +8,11 @@ GreenGrass is a custom platform for managing grassroots political elections in t
 
 **Current phase: Specification & Design (complete) — one review open before production**
 
-All spec and design work is done. One cross-cutting question is open and gates production: the corpus decided AI five times as bounded features and never asked what changes if AI agents operate throughout the product. `decisions/018-ai-agent-posture.md` is `Proposed` — the first non-accepted ADR — and lists what the review must resolve. Do not add agent-shaped capability (cross-feature read scope, tool authority, autonomous action, broad credentials) to the spec or to an implementation without resolving it first. `decisions/019-central-services-and-metered-billing.md` (accepted) adds central services, a service catalogue with per-tenant entitlements, and metered pass-through billing at cost with no margin; it supplies mechanisms ADR-018 can build on and does not resolve it. `decisions/020-central-service-line-up-and-builders.md` (accepted) names the four central services and accepts text builders only; image and video builders are proposed and cannot be enabled until ADR-018 is accepted. `decisions/021-creator-program-and-content-pipeline.md` (accepted) adds the creator program: creators are Contact records exactly like press contacts and influencers, and the wireframes' three AI screens are held for the ADR-018 review. ADR-018 now carries the board's per-tenant agent harness and the content-ops AI flow as the proposal under review. That section is a proposal, not a decision: do not treat anything in it as accepted.
+All spec and design work is done. One cross-cutting question is open and gates production: the corpus decided AI five times as bounded features and never asked what changes if AI agents operate throughout the product. `decisions/018-ai-agent-posture.md` is `Proposed` — the first non-accepted ADR — and lists what the review must resolve. Do not add agent-shaped capability (cross-feature read scope, tool authority, autonomous action, broad credentials) to the spec or to an implementation without resolving it first. `decisions/019-central-services-and-metered-billing.md` (accepted) adds central services, a service catalogue with per-tenant entitlements, and metered pass-through billing at cost with no margin; it supplies mechanisms ADR-018 can build on and does not resolve it. `decisions/020-central-service-line-up-and-builders.md` (accepted) names the four central services and accepts text builders only; image and video builders are proposed and cannot be enabled until ADR-018 is accepted. `decisions/021-content-approval-pipeline.md` (accepted) generalizes post approval into a content pipeline reviewed in rounds. GreenGrass is not a tool for managing content creators: a creator program ADR-021 first specified was withdrawn, so do not reintroduce creator rosters, tiers, dispatch to creators or a creator inbox. ADR-018 now carries the board's per-tenant agent harness and, as its worked example, a candidate approving the day's posts over WhatsApp, as the proposal under review. That section is a proposal, not a decision: do not treat anything in it as accepted.
 
 Completed phases:
 1. **Product definition** — 12 spec documents covering product, users, workflows, security, compliance, etc.
-2. **UX design** — 38 documents: information architecture, global patterns, design system, 22 wireframes (248 screens)
+2. **UX design** — 38 documents: information architecture, global patterns, design system, 22 wireframes (240 screens)
 3. **Architecture** — system architecture document, 21 ADRs (20 accepted, 1 proposed) formalizing all decisions
 
 ## Project Structure
@@ -50,11 +50,11 @@ GreenGrass/
 │   │   ├── 01-information-architecture/  # Navigation, screens, personas, URLs
 │   │   ├── 02-global-patterns/    # Offline, notifications, search, security UX
 │   │   ├── 03-design-system/      # Foundations, theming, components, responsive
-│   │   └── 04-wireframes/         # 22 wireframe documents (248 screens)
+│   │   └── 04-wireframes/         # 22 wireframe documents (240 screens)
 │   └── architecture/
 │       └── system.md              # System architecture and data model
 ├── decisions/                     # Architecture Decision Records (21 ADRs)
-├── diary/                         # Project diary (14 entries)
+├── diary/                         # Project diary (15 entries)
 ├── scripts/build.mjs              # Documentation site generator (Node + markdown-it)
 ├── scripts/dev.sh                 # One-command local preview (install, build, serve)
 ├── site-assets/                   # Site styles + client-side scripts (search, nav)

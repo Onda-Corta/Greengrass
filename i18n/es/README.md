@@ -8,7 +8,7 @@ GreenGrass reúne en un solo lugar un gestor de relaciones con constituyentes (C
 
 En español está casi todo: las 14 especificaciones de producto, la arquitectura del sistema, los 21 ADR más el registro de decisiones de UX y los 15 documentos de diseño de UX que no son wireframes. Cincuenta y dos documentos.
 
-Falta una cosa, y es grande: los 24 documentos de wireframes —248 pantallas, más de la mitad de todo lo que hay escrito en este proyecto— siguen solo en inglés, igual que el diario. Si sigues un enlace a un wireframe desde una página en español, vas a terminar en inglés. No está roto: es lo que todavía no se ha traducido. El botón **EN**, arriba a la derecha, te lleva a la documentación completa en cualquier momento.
+Falta una cosa, y es grande: los 24 documentos de wireframes —240 pantallas, más de la mitad de todo lo que hay escrito en este proyecto— siguen solo en inglés, igual que el diario. Si sigues un enlace a un wireframe desde una página en español, vas a terminar en inglés. No está roto: es lo que todavía no se ha traducido. El botón **EN**, arriba a la derecha, te lleva a la documentación completa en cualquier momento.
 
 ## Mercados objetivo
 
@@ -68,14 +68,14 @@ Los 21 ADR registran cada decisión de arquitectura, con su contexto, sus altern
 - **[ADR-018](decisions/018-ai-agent-posture.md)** — Postura ante los agentes de IA (propuesta)
 - **[ADR-019](decisions/019-central-services-and-metered-billing.md)** — Servicios centrales y facturación medida
 - **[ADR-020](decisions/020-central-service-line-up-and-builders.md)** — Los cuatro servicios centrales y los constructores
-- **[ADR-021](decisions/021-creator-program-and-content-pipeline.md)** — Programa de creadores y flujo de contenido
+- **[ADR-021](decisions/021-content-approval-pipeline.md)** — Flujo de aprobación de contenido
 - **[ux-decisions.md](decisions/ux-decisions.md)** — Decisiones de UX de la fase de wireframes
 
 ### El diseño en detalle
 
 **Arquitectura de la información** — qué pantallas existen, cómo se llega a ellas y qué ve cada quien.
 
-- **[screen-inventory.md](design/ux/01-information-architecture/screen-inventory.md)** — Las 248 pantallas, con su ID, quién accede y si funcionan sin conexión
+- **[screen-inventory.md](design/ux/01-information-architecture/screen-inventory.md)** — Las 240 pantallas, con su ID, quién accede y si funcionan sin conexión
 - **[navigation-model.md](design/ux/01-information-architecture/navigation-model.md)** — Modelo de navegación
 - **[persona-views.md](design/ux/01-information-architecture/persona-views.md)** — Vistas por arquetipo
 - **[url-structure.md](design/ux/01-information-architecture/url-structure.md)** — Estructura de URL

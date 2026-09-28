@@ -25,7 +25,7 @@
 | `profile/` | `profile.md` | Personal Profile (name, avatar, phone, language, timezone, role info), Notification Preferences (channel × type matrix, quiet hours with GOTV override, email digest frequency), Security Settings — Personal (device list, trusted contacts, security checklist, duress passkey), Language Preference (instant-apply, RTL auto-flip, bilingual header), Tenant Switcher (org cards with role/last active, full context switch). Empty states. |
 | `help/` | `help.md` | Knowledge Base Browser (full-text search, role-filtered, categories), Knowledge Base Article (formatted content with TOC, related articles, thumbs up/down, partial offline), AI Concierge Chat (context-aware, article + action links, desktop side panel / mobile full screen, escalation), Training Module List (volunteer progress view / admin completion matrix), Training Module Content (sequential lessons, offline caching), Training Quiz (one-at-a-time, pass/fail, retake, offline-capable), Certification Status (volunteer cards / admin cross-tab matrix, expiration tracking), Training Content Editor (lesson list, quiz editor, assignment, versioning). Empty states. |
 | `public/` | `public.md` | Candidate Profile Page (short URL, photo/bio, endorsements, events, donate/volunteer CTAs, SEO), Organization Profile Page (mission, hero image, get involved CTAs, dynamic events + press), Volunteer Signup Page (minimal fields, interest checkboxes, CRM integration, consent opt-in), Media Kit Page (press contact, downloadable assets with optional gated access, download tracking). Cross-refs: PUB-003 Supporter Portal, PUB-004 Event Page, PUB-005 Action Page, PUB-006 Petition Page. Empty states. |
-| `content-ops/` | `content-ops.md` | Content Operations Dashboard, Creator List/Profile/Profile Edit (creator fields on Contact records, tiers A–D, WhatsApp conversation with window state), Inbound Inbox, Content Review (round history, comparison, required revision comments), Dispatch Composer + Tracking (posts to publish and briefs, per-creator status, window-aware templates), Approval Queue with tier routing to Multi-round or Simple Approval, Creator Engagement (staff-only, never ranked). Redrawn from a 21-screen prototype; AI screens held for ADR-018. |
+| `content-ops/` | `content-ops.md` | Content Dashboard (today's schedule with pipeline state, what waits on you, topics from talking points), Content Review (round history, comparison between rounds, required revision comments, escalation), Approval Queue (sorted by scheduled time, batch approval), Approval (current and previous round side by side; mobile). Redrawn from the review screens of a prototype built for managing content creators; the creator screens are not drawn. |
 
 ## Format
 
@@ -56,7 +56,7 @@ They serve as the bridge between the design system foundations (Phase 3) and vis
 19. **User profile** — personal settings, notification preferences, security (personal), language preference, tenant switching
 20. **Support & help** — knowledge base, AI concierge chat, volunteer training modules with quizzes and certification, training content editor
 21. **Public pages** — candidate profile, org profile, volunteer signup, media kit (plus cross-references to supporter portal, events, activism)
-22. **Content operations** — the creator program: roster and tiers, inbound inbox, multi-round and simple review, dispatch of briefs and posts to creators, staff-only engagement
+22. **Content operations** — the content pipeline: review in rounds, the approval queue, and final approval
 
 ## Cross-References
 
@@ -72,7 +72,7 @@ They serve as the bridge between the design system foundations (Phase 3) and vis
 
 ## Screen Index
 
-Complete cross-reference of all 248 screen IDs from `screen-inventory.md` to their wireframe location.
+Complete cross-reference of all 240 screen IDs from `screen-inventory.md` to their wireframe location.
 
 **Status key:**
 - **Complete** — Full wireframe under screen ID heading
@@ -421,32 +421,24 @@ Complete cross-reference of all 248 screen IDs from `screen-inventory.md` to the
 | PROF-004 | Language Preference | `profile/profile.md` | Complete |
 | PROF-005 | Tenant Switcher | `profile/profile.md` | Complete |
 
-### 22. Content Operations (12 screens)
+### 22. Content Operations (4 screens)
 
 | ID | Screen | Document | Status |
 |----|--------|----------|--------|
-| CONTENT-001 | Content Operations Dashboard | `content-ops/content-ops.md` | Complete |
-| CONTENT-002 | Creator List | `content-ops/content-ops.md` | Complete |
-| CONTENT-003 | Creator Profile | `content-ops/content-ops.md` | Complete |
-| CONTENT-004 | Inbound Inbox | `content-ops/content-ops.md` | Complete |
-| CONTENT-005 | Content Review | `content-ops/content-ops.md` | Complete |
-| CONTENT-006 | Dispatch Composer | `content-ops/content-ops.md` | Complete |
-| CONTENT-007 | Dispatch Tracking | `content-ops/content-ops.md` | Complete |
-| CONTENT-008 | Approval Queue | `content-ops/content-ops.md` | Complete |
-| CONTENT-009 | Multi-round Approval | `content-ops/content-ops.md` | Complete |
-| CONTENT-010 | Simple Approval | `content-ops/content-ops.md` | Complete |
-| CONTENT-011 | Creator Engagement | `content-ops/content-ops.md` | Complete |
-| CONTENT-012 | Creator Profile Edit | `content-ops/content-ops.md` | Complete |
+| CONTENT-001 | Content Dashboard | `content-ops/content-ops.md` | Complete |
+| CONTENT-002 | Content Review | `content-ops/content-ops.md` | Complete |
+| CONTENT-003 | Approval Queue | `content-ops/content-ops.md` | Complete |
+| CONTENT-004 | Approval | `content-ops/content-ops.md` | Complete |
 
 ### Summary
 
 | Status | Count |
 |--------|-------|
-| Complete | 208 |
+| Complete | 200 |
 | Covered (no ID heading) | 25 |
 | Cross-ref | 5 |
 | Missing | 0 |
 | Navigation shell (no screen IDs) | 10 variants |
-| **Total** | **248** |
+| **Total** | **240** |
 
 The 10 navigation shell variants (desktop expanded/collapsed, detail panel, notification drawer, RTL, mobile standard, field mode, wizard, supporter portal, mobile "More") are not assigned screen IDs in the inventory — they are structural shells, not screens.

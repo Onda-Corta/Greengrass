@@ -12,10 +12,10 @@
 | Spec documents | 14 |
 | UX documents | 38 (in reading order) |
 | Wireframe documents | 22 |
-| Screens | 248 |
+| Screens | 240 |
 | Languages | 2 (EN, ES) — 52 documents in Spanish |
 | ADRs | 21 (001-021; 20 accepted, 018 proposed) |
-| Diary entries | 14 |
+| Diary entries | 15 |
 
 ## Completed Work
 
@@ -23,7 +23,7 @@
 2. **Architecture** — System architecture document with data model, infrastructure, and technical decisions
 3. **Information Architecture** — Navigation model, screen inventory, persona views, URL structure
 4. **Design System** — Foundations, theming, components, responsive strategy
-5. **Wireframes** — 22 documents covering 248 screens across all feature areas
+5. **Wireframes** — 22 documents covering 240 screens across all feature areas
 6. **Wireframe Audit** — Normalized structure, filled gaps, consolidated open questions
 7. **Open Question Resolution** — All 89 questions resolved in ADR-016
 8. **Architecture Reconciliation** — system.md updated to reflect ADR-016 decisions
@@ -126,7 +126,7 @@ is accepted with item 6 answered. ADR-016 #25 holds for video editing; generatio
 separate, gated capability (banner extended). "Proposed", never "candidate": the word
 collides with the political candidate in both languages.
 
-## ADR-021: Creator Program & Content Pipeline (2026-09-28, Accepted)
+## ADR-021: Creator Program & Content Pipeline (2026-09-28, Accepted — superseded the same day, see "ADR-021 Narrowed" below)
 
 PR 4 of five, from the Replit prototype at whats-app-manager.replit.app/wireframe-viewer
 (21 screens: 17 desktop + 4 mobile; commercial sample data). User decision: **creators
@@ -160,3 +160,25 @@ builders changed the count. The on-arrival fit badge is flagged as autonomous ac
 with three options for the review. ADR-020's image/video questions are recorded under item
 6. Diary entry 14 closes the loop from entry 12.
 
+
+## ADR-021 Narrowed: Not a Creator Tool (2026-09-28, still Accepted)
+
+User direction, after a diagram built on the creator wireframes: **"we're not trying to
+manage content creators."** ADR-021 renamed to `021-content-approval-pipeline.md`
+(Content Approval Pipeline) and narrowed to review in rounds: every round kept, compare
+rounds, revision requests need a comment, Editor can escalate, final approval by the
+candidate or an Approver per the Post Approval Workflow, nothing published by a machine,
+versioned assets forward from v2. Role templates: Editor, Approver (Creator Manager gone).
+Withdrawn on the record in ADR-021 "What this ADR no longer decides": creators as
+contacts, tiers, dispatch, tier routing, two-way WhatsApp inbox (integrations.md reverted
+to pre-ADR-021), per-creator engagement, creator compliance, the prototype's AI screens.
+content-ops.md is 4 screens (CONTENT-001 Content Dashboard, 002 Content Review, 003
+Approval Queue, 004 Approval); 248 → 240 screens. Glossary keeps creator terms in a
+"retired" table. **Do not reintroduce creator rosters, tiers, dispatch or a creator inbox.**
+
+ADR-018's worked example is now a candidate approving the day's posts over WhatsApp
+(from a prototype PDF; drawn on the Whimsical services board): agent reads strategy, KB,
+calendar; speaks first; generates images; schedules approved pieces; staff change pieces
+after approval; audit needs an on-behalf-of actor. The central question for item 6: does
+a tap on Approve count as the person's send? "Approving from WhatsApp without an agent"
+is an open question in press.md, not decided. Diary entry 15.

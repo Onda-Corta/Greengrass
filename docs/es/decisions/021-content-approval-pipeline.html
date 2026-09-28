@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="es" data-base="../../" data-no-results="No hay resultados para">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ADR-021: Flujo de aprobación de contenido · GreenGrass</title>
+<meta name="description" content="ADR-021: Flujo de aprobación de contenido — Documentación de especificación y diseño de GreenGrass.">
+<link rel="alternate" hreflang="en" href="../../decisions/021-content-approval-pipeline.html">
+<link rel="alternate" hreflang="es" href="./021-content-approval-pipeline.html">
+<link rel="alternate" hreflang="x-default" href="../../decisions/021-content-approval-pipeline.html">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%232563eb'/%3E%3Cstop offset='1' stop-color='%2316a34a'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='32' height='32' rx='7' fill='url(%23g)'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="../../assets/styles.css">
+</head>
+<body>
+<a class="skip-link" href="#content">Saltar al contenido</a>
+<header class="site-header">
+  <button type="button" class="menu-toggle" aria-label="Alternar navegación" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+  <a class="brand" href="../../es/index.html">
+    <span class="brand-mark" aria-hidden="true"></span>
+    <span class="brand-text"><strong>GreenGrass</strong><small>Especificación y diseño</small></span>
+  </a>
+  <div class="search">
+    <input type="search" id="search-input" placeholder="Buscar en la documentación…" autocomplete="off" aria-label="Buscar en la documentación">
+    <div id="search-results" class="search-results" hidden></div>
+  </div>
+  <nav class="lang-switch" aria-label="Idioma"><a class="lang-opt" href="../../decisions/021-content-approval-pipeline.html" hreflang="en" lang="en" title="View this page in English">EN</a><span class="lang-opt active" aria-current="true">ES</span></nav>
+  <button type="button" class="theme-toggle" aria-label="Alternar modo oscuro" title="Alternar modo oscuro">
+    <span class="theme-icon" aria-hidden="true"></span>
+  </button>
+</header>
+<div class="layout">
+  <div class="sidebar-backdrop" hidden></div>
+  <aside class="sidebar" aria-label="Navegación de la documentación">
+    <nav class="nav">
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">Inicio<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../index.html">GreenGrass</a></li></ul></div>
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">Especificaciones<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../spec/product.html">Proyecto: GreenGrass</a></li><li><a href="../spec/mvp.html">MVP de GreenGrass — plan de producto</a></li><li><a href="../spec/users.html">Usuarios y roles</a></li><li><a href="../spec/workflows.html">Flujos de trabajo principales</a></li><li><a href="../spec/geography.html">Geografía objetivo</a></li><li><a href="../spec/security.html">Seguridad y modelo de amenazas</a></li><li><a href="../spec/compliance.html">Cumplimiento y marco legal</a></li><li><a href="../spec/fundraising.html">Recaudación de fondos e infraestructura de pagos</a></li><li><a href="../spec/integrations.html">Integraciones externas</a></li><li><a href="../spec/support.html">Soporte y puesta en marcha de organizaciones</a></li><li><a href="../spec/gotv.html">GOTV y operaciones del día de elecciones</a></li><li><a href="../spec/messaging.html">Comunicaciones internas y notificaciones</a></li><li><a href="../spec/press.html">Prensa, medios y comunicaciones públicas</a></li><li><a href="../spec/comms-intelligence.html">Inteligencia de comunicaciones — hoja de ruta post-MVP</a></li></ul></div>
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">Arquitectura<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../design/architecture/system.html">Arquitectura del sistema</a></li></ul></div>
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">Diseño UX<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../design/ux/00-overview.html">Resumen del diseño de UX</a></li><li><a href="../design/ux/01-information-architecture/navigation-model.html">Modelo de navegación</a></li><li><a href="../design/ux/01-information-architecture/screen-inventory.html">Inventario de pantallas</a></li><li><a href="../design/ux/01-information-architecture/persona-views.html">Vistas por arquetipo</a></li><li><a href="../design/ux/01-information-architecture/url-structure.html">Estructura de URL</a></li><li><a href="../design/ux/02-global-patterns/pattern-catalog.html">Catálogo de patrones</a></li><li><a href="../design/ux/02-global-patterns/offline-sync-patterns.html">Patrones sin conexión y de sincronización</a></li><li><a href="../design/ux/02-global-patterns/notification-patterns.html">Patrones de notificaciones</a></li><li><a href="../design/ux/02-global-patterns/search-patterns.html">Patrones de búsqueda</a></li><li><a href="../design/ux/02-global-patterns/settings-help-patterns.html">Patrones de ajustes y ayuda</a></li><li><a href="../design/ux/02-global-patterns/security-ux-patterns.html">Patrones de UX de seguridad</a></li><li><a href="../design/ux/03-design-system/foundations.html">Fundamentos del sistema de diseño</a></li><li><a href="../design/ux/03-design-system/theming-strategy.html">Estrategia de temas</a></li><li><a href="../design/ux/03-design-system/component-inventory.html">Inventario de componentes</a></li><li><a href="../design/ux/03-design-system/responsive-strategy.html">Estrategia de diseño adaptable</a></li></ul></div>
+<div class="nav-section open"><button type="button" class="nav-section-title" aria-expanded="true">Decisiones<span class="chev" aria-hidden="true"></span></button><ul><li><a href="./001-platform-architecture.html">ADR-001: Arquitectura y despliegue de la plataforma</a></li><li><a href="./002-security-threat-model.html">ADR-002: Seguridad y modelo de amenazas</a></li><li><a href="./003-identity-access-organization.html">ADR-003: Identidad, acceso y organización</a></li><li><a href="./004-data-model-integrity.html">ADR-004: Modelo de datos e integridad</a></li><li><a href="./005-offline-first-sync.html">ADR-005: Prioridad sin conexión y sincronización</a></li><li><a href="./006-field-operations-gotv.html">ADR-006: Operaciones de campo y GOTV</a></li><li><a href="./007-fundraising-payments.html">ADR-007: Recaudación de fondos y pagos</a></li><li><a href="./008-communications-messaging.html">ADR-008: Comunicaciones y mensajería</a></li><li><a href="./009-compliance-legal.html">ADR-009: Cumplimiento y marco legal</a></li><li><a href="./010-internationalization-localization.html">ADR-010: Internacionalización y localización</a></li><li><a href="./011-design-system-ux.html">ADR-011: Sistema de diseño y fundamentos de UX</a></li><li><a href="./012-external-integrations.html">ADR-012: Integraciones externas</a></li><li><a href="./013-analytics-ai.html">ADR-013: Analítica e IA</a></li><li><a href="./014-volunteer-onboarding.html">ADR-014: Voluntariado e incorporación</a></li><li><a href="./015-product-scope.html">ADR-015: Límites del alcance del producto</a></li><li><a href="./016-cross-cutting-resolutions.html">ADR-016: Resoluciones transversales</a></li><li><a href="./017-sharing-contract-trust-model.html">ADR-017: El contrato de intercambio como primitiva universal de confianza</a></li><li><a href="./018-ai-agent-posture.html">ADR-018: Postura ante los agentes de IA</a></li><li><a href="./019-central-services-and-metered-billing.html">ADR-019: Servicios centrales y facturación medida</a></li><li><a href="./020-central-service-line-up-and-builders.html">ADR-020: Los cuatro servicios centrales y los constructores</a></li><li><a href="./021-content-approval-pipeline.html" aria-current="page" class="active">ADR-021: Flujo de aprobación de contenido</a></li><li><a href="./ux-decisions.html">Decisiones de UX — fase de wireframes</a></li></ul></div>
+    </nav>
+  </aside>
+  <main id="content" class="content">
+    <nav class="breadcrumb" aria-label="Ruta de navegación">Decisiones</nav>
+    <article class="prose">
+<h1 id="adr-021-flujo-de-aprobación-de-contenido" tabindex="-1"><a class="heading-anchor" href="#adr-021-flujo-de-aprobación-de-contenido" aria-hidden="true">#</a> ADR-021: Flujo de aprobación de contenido</h1>
+<p><strong>Estado:</strong> Aceptada
+<strong>Fecha:</strong> 2026-09-28
+<strong>Revisada:</strong> 2026-09-28 — se acota al flujo de aprobación. La primera versión también especificaba un programa de creadores; esa parte se retira. Ver <a href="#lo-que-esta-adr-ya-no-decide">Lo que esta ADR ya no decide</a>.
+<strong>Fuentes:</strong> <code>spec/press.md</code>, <code>spec/users.md</code>, <code>design/ux/04-wireframes/content-ops/content-ops.md</code>, <code>decisions/003-identity-access-organization.md</code>, <code>decisions/016-cross-cutting-resolutions.md</code>, <code>decisions/018-ai-agent-posture.md</code>, <code>decisions/020-central-service-line-up-and-builders.md</code></p>
+<h2 id="contexto" tabindex="-1"><a class="heading-anchor" href="#contexto" aria-hidden="true">#</a> Contexto</h2>
+<p><a href="../spec/press.html#flujo-de-aprobaci%C3%B3n-de-publicaciones">press.md § Flujo de aprobación de publicaciones</a> aprueba las publicaciones de la organización en redes sociales de una sola pasada: borrador, revisión, aprobación, programar o publicar. El #22 de la <a href="./016-cross-cutting-resolutions.html">ADR-016</a> hizo de la aprobación el valor por defecto para toda publicación. Ninguno de los dos dice qué pasa cuando quien revisa devuelve una pieza. En la práctica, la mayoría de las piezas pasan por más de una ronda: se acorta el texto de una publicación, se cambia una foto, y la versión que por fin sale no es la que se entregó primero.</p>
+<p>Un conjunto de wireframes de baja fidelidad que llegó junto con el tablero de servicios de la alianza que recoge la <a href="../../diary/13-services-a-la-carte.html">entrada 13 del diario</a> dibujó bien esa revisión ronda por ronda: el historial de rondas, una comparación entre rondas, un comentario obligatorio en cada pedido de cambios y el escalamiento a quien da la aprobación final. Los mismos wireframes estaban construidos alrededor de un programa para manejar creadores de contenido externos. Para eso no es GreenGrass, y esta ADR se queda solo con la revisión.</p>
+<h3 id="conflictos-que-resuelve-esta-adr" tabindex="-1"><a class="heading-anchor" href="#conflictos-que-resuelve-esta-adr" aria-hidden="true">#</a> Conflictos que resuelve esta ADR</h3>
+<ol>
+<li><strong><a href="./016-cross-cutting-resolutions.html">ADR-016</a> #22</strong> aprueba una publicación una sola vez. La revisión por rondas necesita que cada ronda se guarde, se compare y se comente.</li>
+<li><strong><a href="./016-cross-cutting-resolutions.html">ADR-016</a> #23</strong> limita la v1 a la carga directa de archivos y hace de la Biblioteca compartida de contenidos un pilar de la v2. Las rondas de revisión necesitan recursos versionados.</li>
+</ol>
+<h2 id="decisión" tabindex="-1"><a class="heading-anchor" href="#decisión" aria-hidden="true">#</a> Decisión</h2>
+<h3 id="el-flujo-de-contenido-generaliza-la-aprobación-de-publicaciones" tabindex="-1"><a class="heading-anchor" href="#el-flujo-de-contenido-generaliza-la-aprobación-de-publicaciones" aria-hidden="true">#</a> El flujo de contenido generaliza la aprobación de publicaciones</h3>
+<p>El contenido que publica la organización pasa por un solo flujo: pendiente, borrador, en revisión, cambios pedidos, aprobado, publicado.</p>
+<ul>
+<li><strong>Cada ronda se guarda.</strong> Un pedido de cambios abre una ronda nueva. Quien revisa ve la ronda actual junto a la anterior, con las diferencias marcadas.</li>
+<li><strong>Un pedido de cambios necesita un comentario.</strong> Una pieza nunca se devuelve sin decir por qué.</li>
+<li><strong>Un Editor puede escalar a un Aprobador</strong> y sumarlo al hilo sin pasar la pieza a aprobación.</li>
+<li><strong>La aprobación final sigue el Flujo de aprobación de publicaciones.</strong> Donde la organización le asigna la aprobación final al candidato, aprueba el candidato, igual que con los comunicados de prensa; si no, aprueba un Aprobador. La aprobación en bloque funciona como ya funciona para las publicaciones programadas.</li>
+<li><strong>El valor por defecto del #22 se mantiene.</strong> Todo contenido requiere aprobación antes de publicarse. Un Administrador de la organización puede relajarlo como lo permite el #22, y la excepción de emergencia de <a href="../spec/press.html#flujo-de-aprobaci%C3%B3n-de-publicaciones">press.md § Flujo de aprobación de publicaciones</a> aplica sin cambios.</li>
+<li><strong>Publicar es la acción de una persona.</strong> Una pieza aprobada sale cuando una persona la publica o a la hora que una persona programó. Ninguna máquina publica nada (<a href="./020-central-service-line-up-and-builders.html">ADR-020</a>). Una persona puede redactar una pieza con el constructor de texto que aceptó la ADR-020; el borrador entra al flujo como cualquier otro.</li>
+</ul>
+<h3 id="dos-plantillas-de-rol" tabindex="-1"><a class="heading-anchor" href="#dos-plantillas-de-rol" aria-hidden="true">#</a> Dos plantillas de rol</h3>
+<p>El modelo híbrido de la <a href="./003-identity-access-organization.html">ADR-003</a> gana dos plantillas de personal por defecto, especificadas en <a href="../spec/users.html#personal">users.md § Personal</a>: <strong>Editor</strong>, que revisa las piezas, pide cambios y escala; y <strong>Aprobador</strong>, que da la aprobación final. Se suman a las plantillas existentes. En una campaña pequeña, el Director de comunicaciones tiene las dos.</p>
+<h3 id="los-recursos-versionados-se-adelantan-desde-la-v2" tabindex="-1"><a class="heading-anchor" href="#los-recursos-versionados-se-adelantan-desde-la-v2" aria-hidden="true">#</a> Los recursos versionados se adelantan desde la v2</h3>
+<p>Una ronda de revisión no significa nada sin el recurso que revisó. El recurso de cada ronda se guarda como una versión, con una comparación contra la ronda anterior. Ese almacenamiento es el núcleo de la Biblioteca compartida de contenidos, y pasa a la primera construcción del flujo. El resto de la biblioteca sigue siendo un pilar de la v2: etiquetado, búsqueda, seguimiento de uso, gestión de derechos, colecciones de marca y reutilización entre funcionalidades.</p>
+<h3 id="la-aprobación-desde-whatsapp-no-se-decide-aquí" tabindex="-1"><a class="heading-anchor" href="#la-aprobación-desde-whatsapp-no-se-decide-aquí" aria-hidden="true">#</a> La aprobación desde WhatsApp no se decide aquí</h3>
+<p>En los mercados objetivo, los candidatos viven en WhatsApp, y aprobar una pieza desde una tarjeta de WhatsApp es una superficie obvia para el último paso de este flujo. La única versión dibujada hasta ahora tiene un agente de IA que prepara las piezas y las programa, y queda reservada como el ejemplo desarrollado de la <a href="./018-ai-agent-posture.html">ADR-018</a>. Si una persona puede aprobar desde WhatsApp sin ningún agente de por medio queda anotado como pregunta abierta en <a href="../spec/press.html#preguntas-abiertas">press.md § Preguntas abiertas</a>.</p>
+<h3 id="lo-que-esta-adr-ya-no-decide" tabindex="-1"><a class="heading-anchor" href="#lo-que-esta-adr-ya-no-decide" aria-hidden="true">#</a> Lo que esta ADR ya no decide</h3>
+<p>La primera versión de esta ADR, aceptada más temprano el mismo día, también especificaba un programa para manejar creadores de contenido. Se retira por completo, porque GreenGrass no es una herramienta para manejar creadores de contenido. Queda anotado aquí para que el cambio de rumbo se vea en vez de pasar en silencio:</p>
+<ul>
+<li><strong>Los creadores como registros de Contacto</strong>, con niveles de la A a la D, y las relaciones con creadores entre organizaciones bajo un contrato de intercambio.</li>
+<li><strong>El despacho</strong> de encargos y publicaciones a los creadores, con seguimiento de la entrega por creador y recordatorios.</li>
+<li><strong>Las rutas por nivel</strong> hacia la aprobación en varias rondas o la simple, y la aprobación en bloque de los niveles bajos.</li>
+<li><strong>Una bandeja de WhatsApp de doble vía</strong> para las entregas y las conversaciones con los creadores.</li>
+<li><strong>La interacción por creador</strong>, solo para el equipo y sin orden de posiciones.</li>
+<li><strong>La plantilla de rol de Gestor de creadores.</strong></li>
+<li><strong>El cumplimiento para los creadores</strong>: los avisos legales que llevaban los despachos, las etiquetas de contenido patrocinado y la pregunta sobre la contribución en especie para el asesor legal.</li>
+<li><strong>Las tres pantallas de IA del prototipo</strong>, que la ADR-018 tenía reservadas como su ejemplo desarrollado. El ejemplo desarrollado de la ADR-018 es ahora el flujo de aprobación por WhatsApp.</li>
+</ul>
+<p>Ocho de las doce pantallas de operaciones de contenido se fueron con él. Las cuatro que quedan son el panel, la revisión de contenido, la cola de aprobación y la aprobación.</p>
+<h3 id="orden-interno-avisos-de-enmienda" tabindex="-1"><a class="heading-anchor" href="#orden-interno-avisos-de-enmienda" aria-hidden="true">#</a> Orden interno: avisos de enmienda</h3>
+<p>Esta ADR agrega una entrada <strong>Enmendada por</strong> a la <a href="./016-cross-cutting-resolutions.html">ADR-016</a> por el #22 y el #23.</p>
+<h2 id="consecuencias" tabindex="-1"><a class="heading-anchor" href="#consecuencias" aria-hidden="true">#</a> Consecuencias</h2>
+<p><strong>Beneficios:</strong></p>
+<ul>
+<li>Una pieza que va y viene conserva su historial, y quien aprueba ve qué cambió y por qué</li>
+<li>La parte de la Biblioteca compartida de contenidos que la revisión necesita llega cuando llega la revisión</li>
+<li>El flujo es el mismo que el candidato ya usa para los comunicados de prensa y las publicaciones, con rondas añadidas</li>
+</ul>
+<p><strong>Costos:</strong></p>
+<ul>
+<li>Adelantar los recursos versionados agrega almacenamiento y trabajo de comparación a la primera construcción</li>
+<li>Retirar el programa de creadores el mismo día en que se aceptó deja un hueco en el registro entre la entrada 14 del diario y esta revisión; la entrada 15 del diario lo recoge</li>
+</ul>
+<p><strong>Restricciones:</strong></p>
+<ul>
+<li>Todo contenido requiere aprobación por defecto; ninguna máquina publica nada</li>
+<li>Todo pedido de cambios lleva un comentario</li>
+<li>La aprobación desde WhatsApp está abierta; cualquier versión con un agente espera a la ADR-018</li>
+</ul>
+<p><strong>ADR relacionados:</strong> <a href="./003-identity-access-organization.html">ADR-003</a> (dos plantillas de rol agregadas al modelo híbrido), <a href="./016-cross-cutting-resolutions.html">ADR-016</a> (enmendada — el #22 se generaliza al flujo de contenido; los recursos versionados del #23 se adelantan), <a href="./018-ai-agent-posture.html">ADR-018</a> (el flujo de aprobación por WhatsApp reservado como ejemplo desarrollado de la revisión), <a href="./020-central-service-line-up-and-builders.html">ADR-020</a> (ninguna máquina publica nada; el constructor de texto puede redactar una pieza)</p>
+
+    </article>
+  </main>
+  <div class="toc-rail"><nav class="toc" aria-label="En esta página"><div class="toc-label">En esta página</div><ul><li class="toc-2"><a href="#contexto"># Contexto</a></li><li class="toc-3"><a href="#conflictos-que-resuelve-esta-adr"># Conflictos que resuelve esta ADR</a></li><li class="toc-2"><a href="#decisión"># Decisión</a></li><li class="toc-3"><a href="#el-flujo-de-contenido-generaliza-la-aprobación-de-publicaciones"># El flujo de contenido generaliza la aprobación de publicaciones</a></li><li class="toc-3"><a href="#dos-plantillas-de-rol"># Dos plantillas de rol</a></li><li class="toc-3"><a href="#los-recursos-versionados-se-adelantan-desde-la-v2"># Los recursos versionados se adelantan desde la v2</a></li><li class="toc-3"><a href="#la-aprobación-desde-whatsapp-no-se-decide-aquí"># La aprobación desde WhatsApp no se decide aquí</a></li><li class="toc-3"><a href="#lo-que-esta-adr-ya-no-decide"># Lo que esta ADR ya no decide</a></li><li class="toc-3"><a href="#orden-interno-avisos-de-enmienda"># Orden interno: avisos de enmienda</a></li><li class="toc-2"><a href="#consecuencias"># Consecuencias</a></li></ul></nav></div>
+</div>
+<script src="../../assets/search.js" defer></script>
+<script src="../../assets/app.js" defer></script>
+</body>
+</html>

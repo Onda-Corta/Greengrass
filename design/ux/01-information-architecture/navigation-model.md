@@ -183,7 +183,7 @@ The Org Admin sees everything. Their sidebar is the union of all feature areas.
 | **Communications** | Email, SMS/WhatsApp, Social Media, Templates |
 | **Events** | Events (M), Check-in |
 | **Activism** | Campaigns, Petitions, Public Comments |
-| **Press** | Media Contacts, Creators, Content, Releases, Coverage, Endorsements, Social |
+| **Press** | Media Contacts, Content, Releases, Coverage, Endorsements, Social |
 | **GOTV** | Universe, Staging, War Room, Rides, Poll Watchers, Results |
 | **Messaging** | Messages (M) |
 | **Alliance** | Alliance Dashboard, Members, Shared Campaigns |
@@ -197,7 +197,7 @@ Mobile tabs: Dashboard, Contacts, Donations, Messages, More
 |---------|-------|
 | **Overview** | Comms Dashboard (M) |
 | **Communications** | Email Campaigns (M), SMS/WhatsApp, Social Media (M), Templates |
-| **Press** | Media Contacts, Creators, Content, Releases, Coverage, Endorsements, Talking Points |
+| **Press** | Media Contacts, Content, Releases, Coverage, Endorsements, Talking Points |
 | **People** | Contacts, Segments |
 | **Messaging** | Messages (M) |
 

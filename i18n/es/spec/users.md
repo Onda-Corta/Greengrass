@@ -166,24 +166,17 @@ Trabajadores pagos o de alto rango de la campaña, con acceso por rol a áreas e
 - Manejar la deduplicación y la calidad de los datos
 
 #### Editor
-- Revisar las entregas de los creadores y las publicaciones propias de la organización
+- Revisar las piezas de la organización en el flujo de contenido
 - Pedir cambios, con comentario obligatorio, y escalar a un Aprobador
-- Redactar y enviar despachos a los creadores
-- Responder en las conversaciones con los creadores
+- Pasar piezas a aprobación
 
 #### Aprobador
 - Dar la aprobación final al contenido del flujo
-- Aprobar o rechazar contenido de niveles C y D, uno por uno o en bloque
 - Pedir más cambios o rechazar en la etapa final
-
-#### Gestor de creadores
-- Agregar creadores, mantener sus perfiles y asignar y cambiar sus niveles
-- Manejar la lista de creadores y su intercambio con otras organizaciones, dentro de los contratos de la organización
-- Ver la interacción por creador
 
 **DECIDIDO:** Híbrido — plantillas de rol como punto de partida, con permisos ajustables por usuario.
 
-La plataforma viene con un conjunto de plantillas de rol de personal por defecto (Director de comunicaciones, Director de finanzas, Director de campo, Coordinador de voluntarios, Gestor de datos, Editor, Aprobador, Gestor de creadores). Las tres últimas sirven al programa de creadores ([press.md § Programa de creadores](press.md#programa-de-creadores)); en una campaña pequeña, el Director de comunicaciones tiene las tres. Los administradores de la organización pueden:
+La plataforma viene con un conjunto de plantillas de rol de personal por defecto (Director de comunicaciones, Director de finanzas, Director de campo, Coordinador de voluntarios, Gestor de datos, Editor, Aprobador). Las dos últimas sirven al flujo de contenido ([press.md § Flujo de contenido](press.md#flujo-de-contenido)); en una campaña pequeña, el Director de comunicaciones tiene las dos. Los administradores de la organización pueden:
 
 - Asignar una plantilla tal cual a alguien del personal (cubre la mayoría de los casos)
 - Asignar varias plantillas a una sola persona (la campaña de tres personas donde alguien hace comunicaciones y finanzas)

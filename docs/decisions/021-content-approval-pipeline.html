@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en" data-base="../" data-no-results="No results for">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ADR-021: Content Approval Pipeline · GreenGrass</title>
+<meta name="description" content="ADR-021: Content Approval Pipeline — GreenGrass spec &amp; design documentation.">
+<link rel="alternate" hreflang="en" href="./021-content-approval-pipeline.html">
+<link rel="alternate" hreflang="es" href="../es/decisions/021-content-approval-pipeline.html">
+<link rel="alternate" hreflang="x-default" href="./021-content-approval-pipeline.html">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%232563eb'/%3E%3Cstop offset='1' stop-color='%2316a34a'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='32' height='32' rx='7' fill='url(%23g)'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="../assets/styles.css">
+</head>
+<body>
+<a class="skip-link" href="#content">Skip to content</a>
+<header class="site-header">
+  <button type="button" class="menu-toggle" aria-label="Toggle navigation" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+  <a class="brand" href="../index.html">
+    <span class="brand-mark" aria-hidden="true"></span>
+    <span class="brand-text"><strong>GreenGrass</strong><small>Spec &amp; Design</small></span>
+  </a>
+  <div class="search">
+    <input type="search" id="search-input" placeholder="Search docs…" autocomplete="off" aria-label="Search documentation">
+    <div id="search-results" class="search-results" hidden></div>
+  </div>
+  <nav class="lang-switch" aria-label="Language"><span class="lang-opt active" aria-current="true">EN</span><a class="lang-opt" href="../es/decisions/021-content-approval-pipeline.html" hreflang="es" lang="es" title="Ver esta página en español">ES</a></nav>
+  <button type="button" class="theme-toggle" aria-label="Toggle dark mode" title="Toggle dark mode">
+    <span class="theme-icon" aria-hidden="true"></span>
+  </button>
+</header>
+<div class="layout">
+  <div class="sidebar-backdrop" hidden></div>
+  <aside class="sidebar" aria-label="Documentation navigation">
+    <nav class="nav">
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">Home<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../index.html">GreenGrass</a></li></ul></div>
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">Specifications<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../spec/product.html">Project: GreenGrass</a></li><li><a href="../spec/mvp.html">GreenGrass MVP — Product Plan</a></li><li><a href="../spec/users.html">Users &amp; Roles</a></li><li><a href="../spec/workflows.html">Core Workflows</a></li><li><a href="../spec/geography.html">Target Geography</a></li><li><a href="../spec/security.html">Security &amp; Threat Model</a></li><li><a href="../spec/compliance.html">Compliance &amp; Legal Framework</a></li><li><a href="../spec/fundraising.html">Fundraising &amp; Payment Infrastructure</a></li><li><a href="../spec/integrations.html">External Integrations</a></li><li><a href="../spec/support.html">Tenant Support &amp; Onboarding</a></li><li><a href="../spec/gotv.html">Get Out The Vote &amp; Election Day Operations</a></li><li><a href="../spec/messaging.html">Internal Communications &amp; Notifications</a></li><li><a href="../spec/press.html">Press, Media &amp; Public Communications</a></li><li><a href="../spec/comms-intelligence.html">Comms Intelligence — Post-MVP Roadmap</a></li></ul></div>
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">Architecture<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../design/architecture/system.html">System Architecture</a></li></ul></div>
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">UX Design<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../design/ux/00-overview.html">UX Design Overview</a></li><li><a href="../design/ux/01-information-architecture/navigation-model.html">Navigation Model</a></li><li><a href="../design/ux/01-information-architecture/screen-inventory.html">Screen Inventory</a></li><li><a href="../design/ux/01-information-architecture/persona-views.html">Persona Views</a></li><li><a href="../design/ux/01-information-architecture/url-structure.html">URL Structure</a></li><li><a href="../design/ux/02-global-patterns/pattern-catalog.html">Pattern Catalog</a></li><li><a href="../design/ux/02-global-patterns/offline-sync-patterns.html">Offline &amp; Sync Patterns</a></li><li><a href="../design/ux/02-global-patterns/notification-patterns.html">Notification Patterns</a></li><li><a href="../design/ux/02-global-patterns/search-patterns.html">Search Patterns</a></li><li><a href="../design/ux/02-global-patterns/settings-help-patterns.html">Settings &amp; Help Patterns</a></li><li><a href="../design/ux/02-global-patterns/security-ux-patterns.html">Security UX Patterns</a></li><li><a href="../design/ux/03-design-system/foundations.html">Design System Foundations</a></li><li><a href="../design/ux/03-design-system/theming-strategy.html">Theming Strategy</a></li><li><a href="../design/ux/03-design-system/component-inventory.html">Component Inventory</a></li><li><a href="../design/ux/03-design-system/responsive-strategy.html">Responsive Strategy</a></li><li><a href="../design/ux/04-wireframes/index.html">Wireframes</a></li><li><a href="../design/ux/04-wireframes/navigation-shell/navigation-shell.html">Navigation Shell Wireframes</a></li><li><a href="../design/ux/04-wireframes/dashboards/dashboards.html">Dashboard Wireframes</a></li><li><a href="../design/ux/04-wireframes/field-mode/field-mode.html">Field Mode Wireframes</a></li><li><a href="../design/ux/04-wireframes/onboarding/onboarding.html">Onboarding Wireframes</a></li><li><a href="../design/ux/04-wireframes/messaging/messaging.html">Messaging Wireframes</a></li><li><a href="../design/ux/04-wireframes/supporter/supporter-portal.html">Supporter Portal Wireframes</a></li><li><a href="../design/ux/04-wireframes/alliance/alliance.html">Alliance Wireframes</a></li><li><a href="../design/ux/04-wireframes/crm/crm.html">CRM / People Wireframes</a></li><li><a href="../design/ux/04-wireframes/field-ops/field-ops.html">Field Operations (Admin) Wireframes</a></li><li><a href="../design/ux/04-wireframes/fundraising/fundraising.html">Fundraising Wireframes</a></li><li><a href="../design/ux/04-wireframes/communications/communications.html">Communications Wireframes</a></li><li><a href="../design/ux/04-wireframes/social-media/social-media.html">Social Media Wireframes</a></li><li><a href="../design/ux/04-wireframes/events/events.html">Events Wireframes</a></li><li><a href="../design/ux/04-wireframes/press/press.html">Press &amp; Media Wireframes</a></li><li><a href="../design/ux/04-wireframes/activism/activism.html">Activism &amp; Engagement Campaign Wireframes</a></li><li><a href="../design/ux/04-wireframes/gotv/gotv.html">GOTV Admin Wireframes</a></li><li><a href="../design/ux/04-wireframes/settings/settings.html">Settings &amp; Admin Wireframes</a></li><li><a href="../design/ux/04-wireframes/auth/auth.html">Authentication Wireframes</a></li><li><a href="../design/ux/04-wireframes/profile/profile.html">User Profile Wireframes</a></li><li><a href="../design/ux/04-wireframes/help/help.html">Support &amp; Help Wireframes</a></li><li><a href="../design/ux/04-wireframes/public/public.html">Public Pages Wireframes</a></li><li><a href="../design/ux/04-wireframes/audit.html">Wireframe Audit Report</a></li><li><a href="../design/ux/04-wireframes/content-ops/content-ops.html">Content Operations Wireframes</a></li></ul></div>
+<div class="nav-section open"><button type="button" class="nav-section-title" aria-expanded="true">Decisions<span class="chev" aria-hidden="true"></span></button><ul><li><a href="./001-platform-architecture.html">ADR-001: Platform Architecture &amp; Deployment</a></li><li><a href="./002-security-threat-model.html">ADR-002: Security &amp; Threat Model</a></li><li><a href="./003-identity-access-organization.html">ADR-003: Identity, Access &amp; Organization</a></li><li><a href="./004-data-model-integrity.html">ADR-004: Data Model &amp; Integrity</a></li><li><a href="./005-offline-first-sync.html">ADR-005: Offline-First &amp; Sync</a></li><li><a href="./006-field-operations-gotv.html">ADR-006: Field Operations &amp; GOTV</a></li><li><a href="./007-fundraising-payments.html">ADR-007: Fundraising &amp; Payments</a></li><li><a href="./008-communications-messaging.html">ADR-008: Communications &amp; Messaging</a></li><li><a href="./009-compliance-legal.html">ADR-009: Compliance &amp; Legal Framework</a></li><li><a href="./010-internationalization-localization.html">ADR-010: Internationalization &amp; Localization</a></li><li><a href="./011-design-system-ux.html">ADR-011: Design System &amp; UX Foundations</a></li><li><a href="./012-external-integrations.html">ADR-012: External Integrations</a></li><li><a href="./013-analytics-ai.html">ADR-013: Analytics &amp; AI</a></li><li><a href="./014-volunteer-onboarding.html">ADR-014: Volunteer &amp; Onboarding</a></li><li><a href="./015-product-scope.html">ADR-015: Product Scope Boundaries</a></li><li><a href="./016-cross-cutting-resolutions.html">ADR-016: Cross-Cutting Resolutions</a></li><li><a href="./017-sharing-contract-trust-model.html">ADR-017: The Sharing Contract as Universal Trust Primitive</a></li><li><a href="./018-ai-agent-posture.html">ADR-018: AI Agent Posture</a></li><li><a href="./019-central-services-and-metered-billing.html">ADR-019: Central Services &amp; Metered Billing</a></li><li><a href="./020-central-service-line-up-and-builders.html">ADR-020: Central Service Line-up &amp; Builders</a></li><li><a href="./021-content-approval-pipeline.html" aria-current="page" class="active">ADR-021: Content Approval Pipeline</a></li><li><a href="./ux-decisions.html">UX Decisions — Wireframe Phase</a></li></ul></div>
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">Diary<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../diary/index.html">Project Diary</a></li><li><a href="../diary/01-from-description-to-specification.html">Entry 1: From Description to Specification</a></li><li><a href="../diary/02-the-architecture-session.html">Entry 2: The Architecture Session</a></li><li><a href="../diary/03-information-architecture.html">Entry 3: Information Architecture</a></li><li><a href="../diary/04-design-system-and-wireframes.html">Entry 4: The Design System and Wireframes</a></li><li><a href="../diary/05-the-wireframe-audit.html">Entry 5: The Wireframe Audit</a></li><li><a href="../diary/06-resolving-the-open-questions.html">Entry 6: Resolving the Open Questions</a></li><li><a href="../diary/07-reconciling-the-architecture.html">Entry 7: Reconciling the Architecture</a></li><li><a href="../diary/08-housekeeping.html">Diary Entry 8: Housekeeping</a></li><li><a href="../diary/09-the-documentation-website.html">Diary Entry 9: The Documentation Website</a></li><li><a href="../diary/10-the-spanish-edition.html">Diary Entry 10: The Spanish Edition</a></li><li><a href="../diary/11-translating-the-rest.html">Diary Entry 11: Translating the Rest</a></li><li><a href="../diary/12-the-agent-question.html">Diary Entry 12: The Agent Question</a></li><li><a href="../diary/13-services-a-la-carte.html">Diary Entry 13: Services à la Carte</a></li><li><a href="../diary/14-the-proposal-under-review.html">Diary Entry 14: The Proposal Under Review</a></li><li><a href="../diary/15-not-a-creator-tool.html">Diary Entry 15: Not a Creator Tool</a></li></ul></div>
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">Project &amp; Internal<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../claude/MEMORY.html">Memory</a></li><li><a href="../claude/SKILLS.html">Skills</a></li><li><a href="../CLAUDE.html">GreenGrass</a></li></ul></div>
+    </nav>
+  </aside>
+  <main id="content" class="content">
+    <nav class="breadcrumb" aria-label="Breadcrumb">Decisions</nav>
+    <article class="prose">
+<h1 id="adr-021-content-approval-pipeline" tabindex="-1"><a class="heading-anchor" href="#adr-021-content-approval-pipeline" aria-hidden="true">#</a> ADR-021: Content Approval Pipeline</h1>
+<p><strong>Status:</strong> Accepted
+<strong>Date:</strong> 2026-09-28
+<strong>Revised:</strong> 2026-09-28 — narrowed to the approval pipeline. The first version also specified a creator program; that part is withdrawn. See <a href="#what-this-adr-no-longer-decides">What this ADR no longer decides</a>.
+<strong>Sources:</strong> <code>spec/press.md</code>, <code>spec/users.md</code>, <code>design/ux/04-wireframes/content-ops/content-ops.md</code>, <code>decisions/003-identity-access-organization.md</code>, <code>decisions/016-cross-cutting-resolutions.md</code>, <code>decisions/018-ai-agent-posture.md</code>, <code>decisions/020-central-service-line-up-and-builders.md</code></p>
+<h2 id="context" tabindex="-1"><a class="heading-anchor" href="#context" aria-hidden="true">#</a> Context</h2>
+<p><a href="../spec/press.html#post-approval-workflow">press.md § Post Approval Workflow</a> approves the organization's social posts in one pass: draft, review, approve, schedule or publish. <a href="./016-cross-cutting-resolutions.html">ADR-016</a> #22 made approval the default for every post. Neither says what happens when a reviewer sends a piece back. In practice most pieces go through more than one round: a caption gets shortened, a photo gets swapped, and the version that finally goes out is not the one first submitted.</p>
+<p>A set of lo-fi wireframes that arrived alongside the alliance services board recorded in <a href="../diary/13-services-a-la-carte.html">diary entry 13</a> drew that round-by-round review well: round history, a comparison between rounds, a required comment on every change request, and escalation to a final approver. The same wireframes were built around a program for managing outside content creators. That part is not what GreenGrass is for, and this ADR keeps only the review.</p>
+<h3 id="conflicts-this-adr-resolves" tabindex="-1"><a class="heading-anchor" href="#conflicts-this-adr-resolves" aria-hidden="true">#</a> Conflicts this ADR resolves</h3>
+<ol>
+<li><strong><a href="./016-cross-cutting-resolutions.html">ADR-016</a> #22</strong> approves a post once. Review in rounds needs each round kept, compared and commented.</li>
+<li><strong><a href="./016-cross-cutting-resolutions.html">ADR-016</a> #23</strong> keeps v1 to direct file upload and makes the Shared Content Library a v2 tentpole. Review rounds need versioned assets.</li>
+</ol>
+<h2 id="decision" tabindex="-1"><a class="heading-anchor" href="#decision" aria-hidden="true">#</a> Decision</h2>
+<h3 id="the-content-pipeline-generalizes-post-approval" tabindex="-1"><a class="heading-anchor" href="#the-content-pipeline-generalizes-post-approval" aria-hidden="true">#</a> The content pipeline generalizes post approval</h3>
+<p>Content the organization publishes moves through one pipeline: pending, draft, under review, revision requested, approved, published.</p>
+<ul>
+<li><strong>Every round is kept.</strong> A revision request opens a new round. The reviewer sees the current round beside the previous one, with the differences marked.</li>
+<li><strong>A revision request needs a comment.</strong> A piece is never sent back without saying why.</li>
+<li><strong>An Editor can escalate to an Approver</strong>, pulling them into the thread without moving the piece to approval.</li>
+<li><strong>Final approval follows the Post Approval Workflow.</strong> Where the organization routes final approval to the candidate, the candidate approves, as for press releases; otherwise an Approver does. Batch approval works as it already does for scheduled posts.</li>
+<li><strong>#22's default stands.</strong> All content requires approval before it is published. An Org Admin may relax that as #22 allows, and the emergency bypass in <a href="../spec/press.html#post-approval-workflow">press.md § Post Approval Workflow</a> applies unchanged.</li>
+<li><strong>Publishing is a person's action.</strong> An approved piece goes out when a person publishes it or at the time a person scheduled. Nothing is published by a machine (<a href="./020-central-service-line-up-and-builders.html">ADR-020</a>). A person may draft a piece with the text builder ADR-020 accepted; the draft enters the pipeline like any other.</li>
+</ul>
+<h3 id="two-role-templates" tabindex="-1"><a class="heading-anchor" href="#two-role-templates" aria-hidden="true">#</a> Two role templates</h3>
+<p><a href="./003-identity-access-organization.html">ADR-003</a>'s hybrid model gains two default staff templates, specified in <a href="../spec/users.html#staff">users.md § Staff</a>: <strong>Editor</strong>, who reviews pieces, requests revisions and escalates; and <strong>Approver</strong>, who gives final approval. They stack with the existing templates. In a small campaign the Communications Director holds both.</p>
+<h3 id="versioned-assets-move-forward-from-v2" tabindex="-1"><a class="heading-anchor" href="#versioned-assets-move-forward-from-v2" aria-hidden="true">#</a> Versioned assets move forward from v2</h3>
+<p>A review round means nothing without the asset it reviewed. Each round's asset is kept as a version, with a comparison against the previous round. That storage is the core of the Shared Content Library, and it moves into the first build of the pipeline. The rest of the library stays a v2 tentpole: tagging, search, usage tracking, rights management, brand collections and reuse across features.</p>
+<h3 id="approving-from-whatsapp-is-not-decided-here" tabindex="-1"><a class="heading-anchor" href="#approving-from-whatsapp-is-not-decided-here" aria-hidden="true">#</a> Approving from WhatsApp is not decided here</h3>
+<p>Candidates in the target markets live in WhatsApp, and approving a piece from a WhatsApp card is an obvious surface for the last step of this pipeline. The only version drawn so far has an AI agent preparing the pieces and scheduling them, and it is held as <a href="./018-ai-agent-posture.html">ADR-018</a>'s worked example. Whether a person can approve from WhatsApp with no agent in the loop is recorded as an open question at <a href="../spec/press.html#open-questions">press.md § Open Questions</a>.</p>
+<h3 id="what-this-adr-no-longer-decides" tabindex="-1"><a class="heading-anchor" href="#what-this-adr-no-longer-decides" aria-hidden="true">#</a> What this ADR no longer decides</h3>
+<p>The first version of this ADR, accepted earlier the same day, also specified a program for managing content creators. It is withdrawn in full, because GreenGrass is not a tool for managing content creators. Recorded here so the reversal is visible rather than silent:</p>
+<ul>
+<li><strong>Creators as Contact records</strong>, with tiers A to D, and creator relationships across tenants under a sharing contract.</li>
+<li><strong>Dispatch</strong> of briefs and posts to creators, with per-creator delivery tracking and reminders.</li>
+<li><strong>Tier-based routing</strong> to multi-round or simple approval, and bulk approval of low tiers.</li>
+<li><strong>A two-way WhatsApp inbox</strong> for creator submissions and conversations.</li>
+<li><strong>Per-creator engagement</strong>, staff-only and unranked.</li>
+<li><strong>The Creator Manager role template.</strong></li>
+<li><strong>Creator compliance</strong>: disclaimers carried by dispatches, paid-partnership labels, and the in-kind contribution question for counsel.</li>
+<li><strong>The prototype's three AI screens</strong>, which ADR-018 had been holding as its worked example. ADR-018's worked example is now the WhatsApp approval flow.</li>
+</ul>
+<p>Eight of the twelve content-operations screens went with it. The four that remain are the dashboard, content review, the approval queue and approval.</p>
+<h3 id="housekeeping-amendment-banners" tabindex="-1"><a class="heading-anchor" href="#housekeeping-amendment-banners" aria-hidden="true">#</a> Housekeeping: amendment banners</h3>
+<p>This ADR adds an <strong>Amended by</strong> entry to <a href="./016-cross-cutting-resolutions.html">ADR-016</a> for #22 and #23.</p>
+<h2 id="consequences" tabindex="-1"><a class="heading-anchor" href="#consequences" aria-hidden="true">#</a> Consequences</h2>
+<p><strong>Benefits:</strong></p>
+<ul>
+<li>A piece that goes back and forth keeps its history, and the approver sees what changed and why</li>
+<li>The part of the Shared Content Library that review needs arrives when review arrives</li>
+<li>The pipeline is the same one the candidate already uses for press releases and posts, with rounds added</li>
+</ul>
+<p><strong>Costs:</strong></p>
+<ul>
+<li>Pulling versioned assets forward adds storage and comparison work to the first build</li>
+<li>Withdrawing the creator program the day it was accepted leaves a gap in the record between diary entry 14 and this revision; diary entry 15 records it</li>
+</ul>
+<p><strong>Constraints:</strong></p>
+<ul>
+<li>All content requires approval by default; nothing is published by a machine</li>
+<li>Every revision request carries a comment</li>
+<li>Approval from WhatsApp is open; any version with an agent in it waits for ADR-018</li>
+</ul>
+<p><strong>Related ADRs:</strong> <a href="./003-identity-access-organization.html">ADR-003</a> (two role templates added to the hybrid model), <a href="./016-cross-cutting-resolutions.html">ADR-016</a> (amended — #22 generalizes to the content pipeline; #23's versioned assets move forward), <a href="./018-ai-agent-posture.html">ADR-018</a> (the WhatsApp approval flow held as the review's worked example), <a href="./020-central-service-line-up-and-builders.html">ADR-020</a> (nothing published by a machine; the text builder may draft a piece)</p>
+
+    </article>
+  </main>
+  <div class="toc-rail"><nav class="toc" aria-label="On this page"><div class="toc-label">On this page</div><ul><li class="toc-2"><a href="#context"># Context</a></li><li class="toc-3"><a href="#conflicts-this-adr-resolves"># Conflicts this ADR resolves</a></li><li class="toc-2"><a href="#decision"># Decision</a></li><li class="toc-3"><a href="#the-content-pipeline-generalizes-post-approval"># The content pipeline generalizes post approval</a></li><li class="toc-3"><a href="#two-role-templates"># Two role templates</a></li><li class="toc-3"><a href="#versioned-assets-move-forward-from-v2"># Versioned assets move forward from v2</a></li><li class="toc-3"><a href="#approving-from-whatsapp-is-not-decided-here"># Approving from WhatsApp is not decided here</a></li><li class="toc-3"><a href="#what-this-adr-no-longer-decides"># What this ADR no longer decides</a></li><li class="toc-3"><a href="#housekeeping-amendment-banners"># Housekeeping: amendment banners</a></li><li class="toc-2"><a href="#consequences"># Consequences</a></li></ul></nav></div>
+</div>
+<script src="../assets/search.js" defer></script>
+<script src="../assets/app.js" defer></script>
+</body>
+</html>
