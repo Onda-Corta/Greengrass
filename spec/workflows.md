@@ -444,7 +444,9 @@ Outreach across email, SMS, WhatsApp, and social media.
 2. Schedule or send:
    a. Send immediately or schedule for optimal time
    b. System checks: opt-in status, bounce list, suppression list
-   c. Sends in batches (deliverability management)
+   c. Mutual suppression check, in an alliance whose contract carries the term:
+      recipients another member contacted in the last N days are skipped
+   d. Sends in batches (deliverability management)
 3. Tracking:
    a. Open rate, click rate, unsubscribe rate
    b. Bounces and complaints processed automatically
@@ -465,11 +467,15 @@ Outreach across email, SMS, WhatsApp, and social media.
    a. Opt-in verification (has recipient consented to this channel?)
    b. Time-of-day restrictions (no messages at 3am)
    c. Frequency caps (don't over-message)
+   d. Mutual suppression check, in an alliance whose contract carries the term:
+      recipients another member contacted in the last N days are skipped
 3. Send and track:
    a. Delivery status, read receipts (WhatsApp), replies
    b. Replies routed to appropriate staff for response
    c. Engagement data flows back to CRM
 ```
+
+In both flows the mutual suppression check runs last, on recipients who passed every other check, so a member asks its partners only about people it is about to message. It is the pilot's primitive ([mvp.md § The core coordination primitive: mutual suppression](mvp.md#the-core-coordination-primitive-mutual-suppression)) running inside the send flow, and it is distinct from the tenant's own suppression list of unsubscribes and hard bounces. How it matches, what crosses and what happens when a member does not answer are in [system.md § Cross-channel orchestration engine](../design/architecture/system.md#cross-channel-orchestration-engine).
 
 ### Social media flow
 

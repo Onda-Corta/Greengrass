@@ -103,7 +103,7 @@
 <ul>
 <li><strong>AI Model:</strong> BYOM (Bring Your Own Model) — tenants provide their own API keys</li>
 <li><strong>Data Retention:</strong> Tiered policy (operational/compliance/archival)</li>
-<li><strong>Channel Orchestration:</strong> Two-layer (platform-wide + per-campaign)</li>
+<li><strong>Channel Orchestration:</strong> Two layers per tenant (per-channel caps, cross-channel quiet window); ADR-019 adds a third for alliance members, cross-tenant mutual suppression</li>
 <li><strong>Election Results Security:</strong> Multi-layer (Entry → Confirmation → Entry Lock → Canvass)</li>
 <li><strong>v2 Tentpoles:</strong> Visual Flow Builder, Shared Content Library, Settings Delegation, Public Page A/B Testing</li>
 </ul>
@@ -155,10 +155,21 @@ ADR-013 (banner added). Diary entry 13.</p>
 (mvp/workflows/system), the four central services into the comms-intelligence
 iterations, content ops from the creator wireframes into <a href="http://press.md" target="_blank" rel="noopener noreferrer">press.md</a>, then ADR-018 fed
 with the board as the proposal under review.</p>
+<h2 id="mutual-suppression-as-the-first-central-service-2026-09-28" tabindex="-1"><a class="heading-anchor" href="#mutual-suppression-as-the-first-central-service-2026-09-28" aria-hidden="true">#</a> Mutual Suppression as the First Central Service (2026-09-28)</h2>
+<p>PR 2 of the five planned against the ADR-019 board. <code>spec/mvp.md</code> § 2 places the pilot's
+suppression check in the catalogue; <code>system.md</code> § Cross-channel orchestration engine gains
+layer 3; <code>workflows.md</code> § 7 adds the step to the email and SMS/WhatsApp flows; <code>users.md</code>
+lists recent contact as a shareable resource; ADR-016 gets an Amended-by banner for §2.</p>
+<p>Three design points were made explicit rather than left implied. The &quot;shared ledger&quot; is
+each member's own contact history, asked per call, since a central service retains
+nothing. Matching needs a second blind index keyed per alliance contract, because the
+tenant-keyed one cannot match across tenants. An unanswered member is not a veto: the
+send proceeds and the record notes who did not answer. No diary entry: entry 14 is
+reserved for PR 5.</p>
 
     </article>
   </main>
-  <div class="toc-rail"><nav class="toc" aria-label="On this page"><div class="toc-label">On this page</div><ul><li class="toc-2"><a href="#project-state"># Project State</a></li><li class="toc-2"><a href="#key-counts"># Key Counts</a></li><li class="toc-2"><a href="#completed-work"># Completed Work</a></li><li class="toc-2"><a href="#key-decisions-from-adr-016"># Key Decisions (from ADR-016)</a></li><li class="toc-2"><a href="#file-locations"># File Locations</a></li><li class="toc-2"><a href="#open-gate-ai-agent-posture-adr-018-proposed"># Open Gate: AI Agent Posture (ADR-018, Proposed)</a></li><li class="toc-2"><a href="#recent-session-2026-09-07"># Recent Session (2026-09-07)</a></li><li class="toc-2"><a href="#adr-019-central-services-metered-billing-2026-09-28-accepted"># ADR-019: Central Services &amp;amp; Metered Billing (2026-09-28, Accepted)</a></li></ul></nav></div>
+  <div class="toc-rail"><nav class="toc" aria-label="On this page"><div class="toc-label">On this page</div><ul><li class="toc-2"><a href="#project-state"># Project State</a></li><li class="toc-2"><a href="#key-counts"># Key Counts</a></li><li class="toc-2"><a href="#completed-work"># Completed Work</a></li><li class="toc-2"><a href="#key-decisions-from-adr-016"># Key Decisions (from ADR-016)</a></li><li class="toc-2"><a href="#file-locations"># File Locations</a></li><li class="toc-2"><a href="#open-gate-ai-agent-posture-adr-018-proposed"># Open Gate: AI Agent Posture (ADR-018, Proposed)</a></li><li class="toc-2"><a href="#recent-session-2026-09-07"># Recent Session (2026-09-07)</a></li><li class="toc-2"><a href="#adr-019-central-services-metered-billing-2026-09-28-accepted"># ADR-019: Central Services &amp;amp; Metered Billing (2026-09-28, Accepted)</a></li><li class="toc-2"><a href="#mutual-suppression-as-the-first-central-service-2026-09-28"># Mutual Suppression as the First Central Service (2026-09-28)</a></li></ul></nav></div>
 </div>
 <script src="../assets/search.js" defer></script>
 <script src="../assets/app.js" defer></script>

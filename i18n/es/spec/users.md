@@ -77,6 +77,7 @@ Las alianzas permiten cooperar en límites definidos. Cada organización miembro
 | Infraestructura de eventos | Mítines conjuntos, listas de confirmación compartidas, calendarios coordinados | El evento sigue perteneciendo a la organización que lo creó; las confirmaciones llegan a todas las organizaciones coanfitrionas |
 | Recaudación de fondos | Páginas de recaudación conjunta con repartos de donaciones configurables | Los registros financieros de cada organización siguen siendo soberanos; las reglas de reparto se definen a nivel de campaña |
 | Listas de comunicación | Listas de simpatizantes compartidas para mensajería coordinada | Las organizaciones comparten quién está en la lista, no su segmentación interna ni sus datos de participación |
+| Contacto reciente (supresión mutua) | Si el miembro contactó a una persona en los últimos N días, respondido como una marca de sí/no antes de que otro miembro envíe | Del miembro no sale nada más que la marca: ni qué miembro, ni cuándo, ni por qué canal. Ver [system.md § Motor de orquestación entre canales](../design/architecture/system.md#motor-de-orquestación-entre-canales) |
 | Analítica | Paneles agregados de toda la alianza | Las organizaciones miembro ven agregados de toda la alianza; el desglose por organización requiere el consentimiento de esa organización |
 
 **Reglas de intercambio:**

@@ -46,6 +46,8 @@ Es la primitiva correcta por cuatro razones:
 
 La cobertura por geografía y la coordinación de «no vuelvas a tocar esta puerta» son objetivos secundarios, sujetos a datos de dirección que puede que ninguno de los dos partidos tenga (§4.3).
 
+**La supresión mutua es además el primer servicio central de la plataforma.** Según la [ADR-019](../decisions/019-central-services-and-metered-billing.md), es la primera entrada del catálogo de servicios: una verificación que cada miembro activa para sí, que corre para el miembro que pregunta y para nadie más, y que no guarda nada entre llamadas. En el producto completo está en la ruta de envío de todos los canales, después de los topes de frecuencia y la ventana de silencio del propio miembro, así que se consulta antes de cada envío en vez de correrse como un paso aparte ([system.md § Motor de orquestación entre canales](../design/architecture/system.md#motor-de-orquestación-entre-canales)). Nada de esto cambia el piloto. Los miembros siguen enviando desde sus propias herramientas, y la marca sigue siendo lo único que cruza. Una cosa queda explícita: el libro compartido contra el que opera la Fase 3 no es una copia común guardada en ningún lado. Es el registro que cada miembro lleva de a quién contactó, consultado en cada llamada, porque un servicio central no conserva nada. En el piloto ese registro se alimenta de lo que sube cada miembro; en el producto completo lo escribe el enrutador de canales. Lo que gana este replanteamiento es continuidad: la verificación que construye el piloto es la que lanza la plataforma.
+
 ---
 
 ## 3. Los partidos

@@ -841,19 +841,29 @@ Tenant App → Post Scheduler → Platform Adapter → Social Media API
 
 ### Cross-channel orchestration engine
 
-(Decided in [ADR-016 §2](../../decisions/016-cross-cutting-resolutions.md))
+(Layers 1 and 2 decided in [ADR-016 §2](../../decisions/016-cross-cutting-resolutions.md); layer 3 in [ADR-019](../../decisions/019-central-services-and-metered-billing.md))
 
-Communications are governed by two complementary layers enforced at send time:
+Communications are governed by three layers enforced at send time, in order. The first two are the tenant's own. The third applies only to a tenant in an alliance whose sharing contract carries the suppression term.
 
 **Layer 1 — Per-channel frequency caps** (existing decision): Org-wide ceilings on contacts per channel per time period. Example: max 2 emails/week, max 1 SMS/day. Configured by OA in communications settings.
 
 **Layer 2 — Cross-channel quiet window** (new): After contacting a person on *any* channel about a specific topic, same-topic messages on other channels are suppressed for a configurable window (default: 24 hours). Different topics on different channels are allowed, up to each channel's per-channel cap.
 
-**Enforcement:** The channel router checks both layers before dispatching any message. A message that passes the per-channel cap may still be deferred by the cross-channel quiet window. Deferred messages are re-evaluated at the next send window.
+**Layer 3 — Cross-tenant mutual suppression** (the first central service, [ADR-019](../../decisions/019-central-services-and-metered-billing.md)): For recipients that pass layers 1 and 2, the router asks the mutual suppression service whether any other alliance member contacted each of them in the last N days, where N is a term of the alliance's sharing contract. The answer is one yes/no flag per recipient. It does not say which member, when, or on what channel. This is the pilot's primitive ([mvp.md § The core coordination primitive: mutual suppression](../../spec/mvp.md#the-core-coordination-primitive-mutual-suppression)) placed in the send path.
 
-**Per-person contact log:** Each person's recent contact history (channel, topic, timestamp) is maintained in the cache layer for fast enforcement lookups at send time.
+- **It runs last on purpose.** A tenant asks its partners only about people it is actually about to message, never about its whole list. Anyone layers 1 and 2 hold back is never asked about.
+- **It runs for the sending tenant alone.** Each other member answers from its own contact history, inside its own instance, and what leaves that instance is the flag. The service combines the flags and keeps nothing. The other members are not acted for; they answer under the contract they granted. No shared ledger exists outside the tenants.
+- **Directional and revocable.** A member answers only askers its contract grants the suppression term to. Withdrawing the term is unilateral and takes effect on the next call. A record whose person has opted out of data sharing never produces a flag ([users.md § Cross-org sharing within alliances](../../spec/users.md#cross-org-sharing-within-alliances)).
+- **Matching needs an alliance-keyed index.** The blind index under [Application-level encryption](#application-level-encryption) is keyed per tenant, so by design it cannot match across tenants. Suppression matches on a second blind index over normalized phone and email, keyed per alliance contract, since keys scope to contracts ([ADR-017 § Compartments are the bottom rung, not a new primitive](../../decisions/017-sharing-contract-trust-model.md#compartments-are-the-bottom-rung-not-a-new-primitive)). The key is held by the members, never by GreenGrass, and rotates when membership changes, as alliance messaging keys do under [ADR-008](../../decisions/008-communications-messaging.md). The service sees tokens it cannot reverse.
+- **An unanswered member is not a veto.** If a member's instance does not answer within the send window, the send proceeds without that member's flags and the send record notes which member did not answer. One member's outage never halts another member's operations.
+- **Asking is visible.** Each answering member's audit log records every query it answers: who asked, under which contract, how many recipients, how many flags. Never the recipients themselves. A member holding the alliance key could compute tokens for people it has no relationship with and ask about them. The router never does this, but a hostile member could bypass its own router. The audit trail makes that probing visible and revocation ends it; it cannot be designed away, for the same reason [mvp.md § 8. What "egalitarian" costs architecturally](../../spec/mvp.md#8-what-egalitarian-costs-architecturally) gives about leverage.
+- **No metered plane unless GreenGrass is billed per call.** The check has no supplier. Unless a cloud provider bills GreenGrass by the unit to run it, it generates no metered bill, and under ADR-019 there is then nothing to pass through. It still needs an entitlement, and each call still emits a usage event, because the event is the audit record. Its calls carry only tokens GreenGrass cannot reverse, so it does not leave the encryption perimeter and needs no acknowledgement at the Maximum tier.
 
-**v2 forward reference:** The [Visual Flow Builder](../../decisions/016-cross-cutting-resolutions.md) (v2 tentpole) will orchestrate multi-channel sequences within a single flow. The two-layer model provides the enforcement substrate that the flow builder routes through.
+**Enforcement:** The channel router checks all three layers, in order, before dispatching any message. A message that passes the per-channel cap may still be deferred by the cross-channel quiet window. Deferred messages are re-evaluated at the next send window. A recipient flagged by mutual suppression is skipped rather than deferred, since deferring would return the same answer until the N days run out, and the skip is recorded on the send so staff can see why the count dropped.
+
+**Per-person contact log:** Each person's recent contact history (channel, topic, timestamp) is maintained in the cache layer for fast enforcement lookups at send time. The tenant's contact history is also what it answers other members' mutual suppression queries from, through the alliance-keyed index.
+
+**v2 forward reference:** The [Visual Flow Builder](../../decisions/016-cross-cutting-resolutions.md) (v2 tentpole) will orchestrate multi-channel sequences within a single flow. The three-layer model provides the enforcement substrate that the flow builder routes through.
 
 ---
 

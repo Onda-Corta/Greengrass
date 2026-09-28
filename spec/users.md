@@ -77,6 +77,7 @@ Alliances enable cooperation at defined boundaries. Member orgs choose what to s
 | Event infrastructure | Joint rallies, shared RSVP lists, coordinated event scheduling | Event ownership stays with creating org; RSVPs flow to all co-hosting orgs |
 | Fundraising | Joint fundraising pages with configurable donation splits | Each org's financial records remain sovereign; split rules defined at campaign level |
 | Communication lists | Shared supporter lists for coordinated messaging | Orgs share list membership, not their internal segmentation or engagement data |
+| Recent contact (mutual suppression) | Whether the member contacted a person in the last N days, answered as a yes/no flag before another member sends | Nothing but the flag leaves the member: not which member, not when, not on which channel. See [system.md § Cross-channel orchestration engine](../design/architecture/system.md#cross-channel-orchestration-engine) |
 | Analytics | Aggregate dashboards across the alliance | Member orgs see alliance-wide aggregates; per-org breakdowns require that org's consent |
 
 **Sharing rules:**

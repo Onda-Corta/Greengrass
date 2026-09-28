@@ -46,6 +46,8 @@ This is the right primitive for four reasons:
 
 Coverage-by-geography and don't-re-knock coordination are stretch goals, contingent on address data neither party may have (§4.3).
 
+**Mutual suppression is also the platform's first central service.** Under [ADR-019](../decisions/019-central-services-and-metered-billing.md) it is the first entry in the service catalogue: a check each member enables for itself, that runs for the member asking and no one else, and that keeps nothing between calls. In the full product it sits in the send path of every channel, after the member's own frequency caps and quiet window, so it is consulted before every send rather than run as a separate step ([system.md § Cross-channel orchestration engine](../design/architecture/system.md#cross-channel-orchestration-engine)). None of this changes the pilot. Members still send from their own tooling, and the flag is still the only thing that crosses. One thing is made explicit: the shared ledger that Phase 3 operates against is not a pooled copy held anywhere. It is each member's own record of whom it contacted, asked per call, because a central service retains nothing. In the pilot that record is fed by what each member uploads; in the full product the channel router writes it. The reframing buys continuity: the check the pilot builds is the check the platform ships.
+
 ---
 
 ## 3. The parties

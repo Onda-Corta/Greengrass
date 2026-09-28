@@ -459,7 +459,9 @@ Contacto por correo, SMS, WhatsApp y redes sociales.
 2. Programa o envía:
    a. Envía de inmediato o programa para el mejor momento
    b. El sistema verifica: estado de alta, lista de rebotes, lista de supresión
-   c. Envía por tandas (manejo de la entregabilidad)
+   c. Verificación de supresión mutua, en una alianza cuyo contrato incluye el término:
+      se omiten los destinatarios que otro miembro contactó en los últimos N días
+   d. Envía por tandas (manejo de la entregabilidad)
 3. Seguimiento:
    a. Tasa de apertura, de clics y de bajas
    b. Los rebotes y las quejas se procesan automáticamente
@@ -480,11 +482,15 @@ Contacto por correo, SMS, WhatsApp y redes sociales.
    a. Verificación del alta (¿esta persona consintió recibir mensajes por este canal?)
    b. Restricciones de horario (nada de mensajes a las 3 de la mañana)
    c. Topes de frecuencia (no saturar)
+   d. Verificación de supresión mutua, en una alianza cuyo contrato incluye el término:
+      se omiten los destinatarios que otro miembro contactó en los últimos N días
 3. Envío y seguimiento:
    a. Estado de entrega, confirmaciones de lectura (WhatsApp), respuestas
    b. Las respuestas se enrutan a la persona del equipo que corresponda
    c. Los datos de participación vuelven al CRM
 ```
+
+En los dos flujos, la verificación de supresión mutua va última, sobre los destinatarios que pasaron todas las demás verificaciones, así que un miembro les pregunta a sus socios solo por las personas a las que está a punto de escribirles. Es la primitiva del piloto ([mvp.md § La primitiva de coordinación central: la supresión mutua](mvp.md#la-primitiva-de-coordinación-central-la-supresión-mutua)) funcionando dentro del flujo de envío, y es distinta de la lista de supresión propia de la organización, que son sus bajas y sus rebotes duros. Cómo cruza, qué atraviesa el límite y qué pasa cuando un miembro no responde está en [system.md § Motor de orquestación entre canales](../design/architecture/system.md#motor-de-orquestación-entre-canales).
 
 ### Flujo de redes sociales
 

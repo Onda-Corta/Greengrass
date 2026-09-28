@@ -3,6 +3,7 @@
 **Status:** Accepted
 **Date:** 2026-03-04
 **Sources:** `design/ux/04-wireframes/audit.md` (Appendix A: Consolidated Open Questions)
+**Amended by:** [ADR-019](019-central-services-and-metered-billing.md) — §2: a third send-time layer, cross-tenant mutual suppression, runs after the two decided below for a tenant in an alliance whose contract carries the suppression term ([system.md § Cross-channel orchestration engine](../design/architecture/system.md#cross-channel-orchestration-engine)). The two layers decided here are unchanged.
 
 ## Context
 
