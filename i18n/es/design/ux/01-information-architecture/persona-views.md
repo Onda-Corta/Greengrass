@@ -62,7 +62,7 @@ El Administrador de la organización trabaja sobre todo en escritorio. El móvil
 - **Resumen:** Panel de comunicaciones
 - **Comunicaciones:** Campañas de correo, SMS/WhatsApp, Plantillas
 - **Redes sociales:** Panel, Redactor de publicaciones, Calendario, Analítica, Conexiones de cuentas
-- **Prensa:** Contactos de medios, Comunicados, Avisos a medios, Declaraciones, Cobertura, Respaldos, Puntos de mensaje, Entrevistas
+- **Prensa:** Contactos de medios, Creadores, Contenido, Comunicados, Avisos a medios, Declaraciones, Cobertura, Respaldos, Puntos de mensaje, Entrevistas
 - **Personas:** Contactos, Segmentos (para segmentar las comunicaciones)
 - **Mensajería:** Mensajes
 

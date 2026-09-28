@@ -923,3 +923,65 @@ Fijados antes de traducir la tercera capa del motor de orquestación y los pasos
 | probing / to probe (a partner's list) | **tanteo** / **tantear** | Consultar por personas con las que no se tiene relación para averiguar si el socio las tiene. No *sondeo*, que ya es `polling → sondeo periódico`. |
 | unanswered member | **miembro que no responde** | *Un miembro que no responde no es un veto.* |
 | send record | **registro del envío** | Lo que queda de cada envío. No confundir con el *registro de auditoría*. |
+
+---
+
+# Términos añadidos para la ADR-020 (los cuatro servicios centrales y los constructores)
+
+Fijados antes de traducir la ADR-020 y las secciones de la hoja de ruta y la arquitectura que toca.
+
+## Los cuatro servicios
+
+| Inglés | Español | Nota |
+|---|---|---|
+| Capture (el servicio) | **captura** / **servicio de captura** | Ya en el diagrama de topología de `system.md`. Distinto de `snapshot → instantánea`, que prohíbe *captura* en otro sentido. |
+| Analysis (el servicio) | **análisis** / **servicio de análisis** | |
+| Builders (el servicio) | **constructores** / **servicio de constructores** | Sigue la regla `builder → constructor de…`. *Constructor de texto*, *de imágenes*, *de video*. Las *Artes* del tablero son el constructor de imágenes: `builder_image` en el catálogo. |
+| channel transport / outbound dispatch | **transporte por canal** / **despacho de salida** | *Transporte por canal* ya está en `system.md`. *Despacho de salida* solo cuando se cita el tablero. |
+| line-up (de servicios) | *(se reformula)* | **Los cuatro servicios centrales.** Sin calco de *alineación*, que en español de PR es de deportes. |
+| published polls / commissioned polling | **encuestas publicadas** / **encuestas encargadas** | Nunca *sondeo*: ya es `polling → sondeo periódico` y `corpus probe → sondeo de corpus`. |
+| transcription / transcribed | **transcripción** / **transcrito** | |
+| electoral analysis / published results | **análisis electoral** / **resultados publicados** | |
+| self-vetting | **investigación propia** | Como en la Iteración 5 de `comms-intelligence.md`. |
+| brief (de un constructor) | **encargo** | Lo que la persona le entrega al constructor. No *brief*, que queda como anglicismo de agencia. |
+| draft (lo que devuelve un constructor) | **borrador** | Ya fijado. El estado `ai_generated` es cadena de base de datos y no se traduce. |
+| marked as generated | **marcado como generado** | |
+| send authority | **capacidad de enviar** | Como `tool authority → capacidad de invocar herramientas`. |
+| proposed (funcionalidad, no aceptada) | **propuesto** | Nunca *candidato*: en un producto electoral eso es la persona que se postula. El inglés evita *candidate* por la misma razón. |
+| video editing / timeline editor | **edición de video** / **editor de línea de tiempo** | |
+| synthetic media / identifiable person | **medios sintéticos** / **persona identificable** | |
+| labelling (de contenido generado) | **identificación como contenido generado** | No *etiquetado*, que choca con `tag → etiqueta`; no *rótulo*, que ya es de formularios. |
+| unscheduled | **sin iteración asignada** | |
+
+---
+
+# Términos añadidos para la ADR-021 (programa de creadores y flujo de contenido)
+
+Fijados antes de traducir la ADR-021, el programa de creadores de `spec/press.md`, la bandeja de doble vía de `spec/integrations.md`, las plantillas de rol nuevas de `spec/users.md` y las secciones de arquitectura de la información que registran las pantallas nuevas.
+
+## Creadores y flujo de contenido
+
+| Inglés | Español | Nota |
+|---|---|---|
+| creator | **creador** / **creadora** (de contenido) | Quien publica en sus propias cuentas por encargo de la campaña o con su material: militancia, voceros, candidaturas, influencers. |
+| influencer | **influencer** *(se mantiene)*, *el/la influencer* | Uso asentado en Puerto Rico y América Latina. No *influenciador*. |
+| creator program | **programa de creadores** | |
+| creator profile | **perfil de creador** | Los campos de creador sobre un registro de Contacto, igual que los campos de prensa. No es un tipo de registro nuevo. |
+| tier (A–D, de creadores) | **nivel** (*Nivel A*) | La séptima escala que usa la palabra; ver la fila `tier` de la tercera parte. |
+| tier history | **historial de niveles** | |
+| Creator Manager (plantilla de rol) | **Gestor de creadores** | Como `Data Manager → Gestor de datos`. |
+| Editor (plantilla de rol) | **Editor** | |
+| Approver (plantilla de rol) | **Aprobador** | |
+| dispatch (a creadores) | **despacho** / **despachar** | Coherente con *despachar* en el enrutador de canales y con *despacho de salida*. |
+| post to publish | **pieza para publicar** | Uno de los dos tipos de despacho; el otro es el **encargo**. |
+| content pipeline | **flujo de contenido** | Como `endorsement pipeline → flujo de respaldos`. |
+| review round | **ronda de revisión** | *Aprobación en varias rondas*, *aprobación simple*, *aprobación final*. |
+| request revision | **pedir cambios** | El estado `REVISION_REQUESTED` es cadena de base de datos y no se traduce. |
+| diff (entre rondas) | **comparación entre versiones** | |
+| versioned asset | **recurso versionado** | `asset → recurso`. |
+| two-way inbox | **bandeja de doble vía** | |
+| conversation window (WhatsApp, 24 horas) | **ventana de conversación** | `window → ventana`. |
+| template message (WhatsApp) | **mensaje de plantilla** | |
+| in-kind contribution | **contribución en especie** | *Contribución*, como `contribution limit → límite de contribución`. |
+| branded content / paid partnership | **contenido patrocinado** | |
+| staff-only | **solo para el equipo** | |

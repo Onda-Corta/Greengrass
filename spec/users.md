@@ -165,9 +165,25 @@ Paid or senior campaign workers with role-based access to specific platform area
 - Build reports and custom queries
 - Manage deduplication and data quality
 
+#### Editor
+- Review creator submissions and the organization's own posts
+- Request revisions, with a required comment, and escalate to an Approver
+- Compose and send dispatches to creators
+- Reply in creator conversations
+
+#### Approver
+- Give final approval to content in the pipeline
+- Approve or reject tier C and D content, individually or in bulk
+- Request further revisions or reject at the final stage
+
+#### Creator Manager
+- Add creators, maintain their profiles, and assign and change tiers
+- Manage the creator roster and its sharing with other tenants, within the org's contracts
+- View per-creator engagement
+
 **DECIDED:** Hybrid — role templates as starting points with per-user permission overrides.
 
-The platform ships with a default set of staff role templates (Communications Director, Finance Director, Field Director, Volunteer Coordinator, Data Manager). Org admins can:
+The platform ships with a default set of staff role templates (Communications Director, Finance Director, Field Director, Volunteer Coordinator, Data Manager, Editor, Approver, Creator Manager). The last three serve the creator program ([press.md § Creator Program](press.md#creator-program)); in a small campaign the Communications Director holds all three. Org admins can:
 
 - Assign a template to a staff member as-is (covers most cases)
 - Assign multiple templates to one person (the three-person campaign where someone does comms and finance)

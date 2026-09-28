@@ -184,7 +184,7 @@ El Administrador de la organización lo ve todo. Su barra lateral es la unión d
 | **Comunicaciones** | Correo, SMS/WhatsApp, Redes sociales, Plantillas |
 | **Eventos** | Eventos (M), Registro de entrada |
 | **Activismo** | Campañas, Peticiones, Comentarios públicos |
-| **Prensa** | Contactos de medios, Comunicados, Cobertura, Respaldos, Redes |
+| **Prensa** | Contactos de medios, Creadores, Contenido, Comunicados, Cobertura, Respaldos, Redes |
 | **GOTV** | Universo, Concentración, Centro de mando, Transporte, Observadores, Resultados |
 | **Mensajería** | Mensajes (M) |
 | **Alianza** | Panel de la alianza, Miembros, Campañas conjuntas |
@@ -198,7 +198,7 @@ Pestañas en móvil: Panel, Contactos, Donaciones, Mensajes, Más
 |---------|-------|
 | **Resumen** | Panel de comunicaciones (M) |
 | **Comunicaciones** | Campañas de correo (M), SMS/WhatsApp, Redes sociales (M), Plantillas |
-| **Prensa** | Contactos de medios, Comunicados, Cobertura, Respaldos, Puntos de mensaje |
+| **Prensa** | Contactos de medios, Creadores, Contenido, Comunicados, Cobertura, Respaldos, Puntos de mensaje |
 | **Personas** | Contactos, Segmentos |
 | **Mensajería** | Mensajes (M) |
 

@@ -62,7 +62,7 @@ The Org Admin primarily works on desktop. Mobile is for checking dashboards, rea
 - **Overview:** Comms Dashboard
 - **Communications:** Email Campaigns, SMS/WhatsApp, Templates
 - **Social Media:** Dashboard, Post Composer, Calendar, Analytics, Account Connections
-- **Press:** Media Contacts, Releases, Advisories, Statements, Coverage, Endorsements, Talking Points, Interviews
+- **Press:** Media Contacts, Creators, Content, Releases, Advisories, Statements, Coverage, Endorsements, Talking Points, Interviews
 - **People:** Contacts, Segments (for targeting communications)
 - **Messaging:** Messages
 

@@ -272,6 +272,18 @@ La aplicación principal. Usa el marco de navegación completo (barra superior +
 | `/press/talking-points` | PRESS-014 | Biblioteca de puntos de mensaje | No |
 | `/press/interviews` | PRESS-015 | Agenda de entrevistas | No |
 | `/press/spokespersons` | PRESS-016 | Configuración de voceros | No |
+| `/press/content` | CONTENT-001 | Panel de operaciones de contenido | No |
+| `/press/creators` | CONTENT-002 | Lista de creadores | No |
+| `/press/creators/new` | CONTENT-012 | Edición del perfil de creador (nuevo) | No |
+| `/press/creators/[creatorId]` | CONTENT-003 | Perfil de creador | No |
+| `/press/creators/[creatorId]/edit` | CONTENT-012 | Edición del perfil de creador | No |
+| `/press/creators/engagement` | CONTENT-011 | Interacción por creador | No |
+| `/press/content/inbox` | CONTENT-004 | Bandeja de entrada | No |
+| `/press/content/[itemId]` | CONTENT-005 | Revisión de contenido | No |
+| `/press/content/dispatch/new` | CONTENT-006 | Redactor de despachos | No |
+| `/press/content/dispatch/[dispatchId]` | CONTENT-007 | Seguimiento de despachos | No |
+| `/press/content/approvals` | CONTENT-008 | Cola de aprobación | No |
+| `/press/content/approvals/[itemId]` | CONTENT-009 / CONTENT-010 | Aprobación en varias rondas o simple, según el nivel | No |
 
 #### GOTV y día de elecciones
 
