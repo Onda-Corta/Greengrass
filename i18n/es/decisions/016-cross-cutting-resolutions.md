@@ -3,6 +3,7 @@
 **Estado:** Aceptada
 **Fecha:** 2026-03-04
 **Fuentes:** `design/ux/04-wireframes/audit.md` (Apéndice A: preguntas abiertas consolidadas)
+**Enmendada por:** [ADR-019](019-central-services-and-metered-billing.md) — §2: una tercera capa en el momento del envío, la supresión mutua entre organizaciones, corre después de las dos que se deciden más abajo para una organización en una alianza cuyo contrato incluye el término de supresión ([system.md § Motor de orquestación entre canales](../design/architecture/system.md#motor-de-orquestación-entre-canales)). Las dos capas decididas aquí no cambian.
 
 ## Contexto
 

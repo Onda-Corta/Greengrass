@@ -903,3 +903,23 @@ Fijados antes de traducir la ADR y las secciones que enmienda, para que la tradu
 | superuser read path | **vía de lectura de superusuario** | Como ya aparece en la hoja de ruta de inteligencia de comunicaciones. |
 | feature flagging | **activar funcionalidades por configuración** | Sin calco; la frase completa es más clara que cualquier sustantivo. |
 | load-bearing (distinction) | **estructural** | *Una distinción estructural.* No *que soporta carga*. |
+
+---
+
+# Términos añadidos para la supresión mutua como servicio central
+
+Fijados antes de traducir la tercera capa del motor de orquestación y los pasos nuevos de los flujos de envío.
+
+## Supresión mutua en la ruta de envío
+
+| Inglés | Español | Nota |
+|---|---|---|
+| mutual suppression check | **verificación de supresión mutua** | Ya en uso en la sección de servicios centrales de `system.md`. Distinta de la `suppression list → lista de supresión`, que son las bajas y los rebotes propios de cada organización. Las dos aparecen en el mismo paso del flujo de correo. |
+| suppression term (de un contrato) | **término de supresión** | Como *Términos uniformes en cada peldaño* en la ADR-017. No *cláusula*. |
+| flag (sí/no) | **marca** | *Una marca de sí/no por destinatario*, como ya dice `mvp.md`. Nunca *bandera*. |
+| to skip (a recipient) | **omitir** | El destinatario marcado se omite, no se aplaza. Distinto de `to defer → aplazar`, que es lo que hacen las capas 1 y 2. El *sáltatelo* coloquial de `mvp.md` se queda donde está. |
+| send path | **ruta de envío** | Por donde pasa todo mensaje antes de despacharse. |
+| alliance-keyed blind index | **índice ciego con llave de la alianza** | `key → llave`. Se opone al índice ciego con llave de la organización, que por diseño no cruza entre organizaciones. |
+| probing / to probe (a partner's list) | **tanteo** / **tantear** | Consultar por personas con las que no se tiene relación para averiguar si el socio las tiene. No *sondeo*, que ya es `polling → sondeo periódico`. |
+| unanswered member | **miembro que no responde** | *Un miembro que no responde no es un veto.* |
+| send record | **registro del envío** | Lo que queda de cada envío. No confundir con el *registro de auditoría*. |

@@ -458,7 +458,9 @@
 2. Programa o envía:
    a. Envía de inmediato o programa para el mejor momento
    b. El sistema verifica: estado de alta, lista de rebotes, lista de supresión
-   c. Envía por tandas (manejo de la entregabilidad)
+   c. Verificación de supresión mutua, en una alianza cuyo contrato incluye el término:
+      se omiten los destinatarios que otro miembro contactó en los últimos N días
+   d. Envía por tandas (manejo de la entregabilidad)
 3. Seguimiento:
    a. Tasa de apertura, de clics y de bajas
    b. Los rebotes y las quejas se procesan automáticamente
@@ -476,11 +478,14 @@
    a. Verificación del alta (¿esta persona consintió recibir mensajes por este canal?)
    b. Restricciones de horario (nada de mensajes a las 3 de la mañana)
    c. Topes de frecuencia (no saturar)
+   d. Verificación de supresión mutua, en una alianza cuyo contrato incluye el término:
+      se omiten los destinatarios que otro miembro contactó en los últimos N días
 3. Envío y seguimiento:
    a. Estado de entrega, confirmaciones de lectura (WhatsApp), respuestas
    b. Las respuestas se enrutan a la persona del equipo que corresponda
    c. Los datos de participación vuelven al CRM
 </code></pre>
+<p>En los dos flujos, la verificación de supresión mutua va última, sobre los destinatarios que pasaron todas las demás verificaciones, así que un miembro les pregunta a sus socios solo por las personas a las que está a punto de escribirles. Es la primitiva del piloto (<a href="./mvp.html#la-primitiva-de-coordinaci%C3%B3n-central-la-supresi%C3%B3n-mutua">mvp.md § La primitiva de coordinación central: la supresión mutua</a>) funcionando dentro del flujo de envío, y es distinta de la lista de supresión propia de la organización, que son sus bajas y sus rebotes duros. Cómo cruza, qué atraviesa el límite y qué pasa cuando un miembro no responde está en <a href="../design/architecture/system.html#motor-de-orquestaci%C3%B3n-entre-canales">system.md § Motor de orquestación entre canales</a>.</p>
 <h3 id="flujo-de-redes-sociales" tabindex="-1"><a class="heading-anchor" href="#flujo-de-redes-sociales" aria-hidden="true">#</a> Flujo de redes sociales</h3>
 <pre><code>1. El Director de comunicaciones crea una publicación:
    a. Escribe el contenido, adjunta multimedia

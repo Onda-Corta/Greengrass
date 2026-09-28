@@ -34,7 +34,7 @@
 
 - **AI Model:** BYOM (Bring Your Own Model) — tenants provide their own API keys
 - **Data Retention:** Tiered policy (operational/compliance/archival)
-- **Channel Orchestration:** Two-layer (platform-wide + per-campaign)
+- **Channel Orchestration:** Two layers per tenant (per-channel caps, cross-channel quiet window); ADR-019 adds a third for alliance members, cross-tenant mutual suppression
 - **Election Results Security:** Multi-layer (Entry → Confirmation → Entry Lock → Canvass)
 - **v2 Tentpoles:** Visual Flow Builder, Shared Content Library, Settings Delegation, Public Page A/B Testing
 
@@ -94,3 +94,17 @@ Planned follow-ups from the same Whimsical board: suppression as first catalogue
 (mvp/workflows/system), the four central services into the comms-intelligence
 iterations, content ops from the creator wireframes into press.md, then ADR-018 fed
 with the board as the proposal under review.
+
+## Mutual Suppression as the First Central Service (2026-09-28)
+
+PR 2 of the five planned against the ADR-019 board. `spec/mvp.md` § 2 places the pilot's
+suppression check in the catalogue; `system.md` § Cross-channel orchestration engine gains
+layer 3; `workflows.md` § 7 adds the step to the email and SMS/WhatsApp flows; `users.md`
+lists recent contact as a shareable resource; ADR-016 gets an Amended-by banner for §2.
+
+Three design points were made explicit rather than left implied. The "shared ledger" is
+each member's own contact history, asked per call, since a central service retains
+nothing. Matching needs a second blind index keyed per alliance contract, because the
+tenant-keyed one cannot match across tenants. An unanswered member is not a veto: the
+send proceeds and the record notes who did not answer. No diary entry: entry 14 is
+reserved for PR 5.
