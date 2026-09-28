@@ -100,6 +100,8 @@ When a media contact's interaction results in coverage:
 
 **DECIDED: Deferred — but flagged as a strategic opportunity.** Manual logging only for now. Automated media monitoring is deferred not because it's unimportant, but because it deserves serious investment rather than a bolt-on integration. Existing media monitoring services (Meltwater, Cision, etc.) are expensive, Western-focused, and poorly cover regional and local media in the global south. This is a significant market gap. A GreenGrass-native media monitoring capability — especially one that covers local-language media across target countries — could be a major differentiator. Revisit as a dedicated product initiative, not an afterthought.
 
+**Since specified.** Automated monitoring is now the Capture central service in [comms-intelligence.md § 9. The iterations](comms-intelligence.md#9-the-iterations), Iteration 3, with its build gated on the corpus probe ([ADR-020](../decisions/020-central-service-line-up-and-builders.md)). Manual logging stays as described above until then, and remains the fallback for coverage that capture cannot reach.
+
 ### Coverage Analytics
 
 - **Coverage volume** — total coverage over time, by outlet, by sentiment

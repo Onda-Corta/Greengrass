@@ -73,7 +73,7 @@ The spec suite is partly ahead of the request and partly absent.
 
 | Capability | Status | Evidence |
 |---|---|---|
-| **Media monitoring** | Deferred **as a named strategic opportunity** | [press.md § Coverage Logging](press.md#coverage-logging), `decisions/015-product-scope.md` |
+| **Media monitoring** | Deferred **as a named strategic opportunity**; since specified as the Capture central service, build gated on Iteration 0 | [press.md § Coverage Logging](press.md#coverage-logging), `decisions/015-product-scope.md`, [ADR-020](../decisions/020-central-service-line-up-and-builders.md) |
 | **Talking points** | **Exists** — versioned, topic-organized, team-shared | [press.md § Talking Points](press.md#talking-points); PRESS-014 in [press.md § PRESS-014: Talking Points Library](../design/ux/04-wireframes/press/press.md#press-014-talking-points-library) |
 | **Media map** | Partial — contacts carry outlet, beat, coverage area; the landscape itself is prose | [press.md § Media Contacts as CRM Records](press.md#media-contacts-as-crm-records), [press.md § Media Landscape Differences](press.md#media-landscape-differences) |
 | **Analyst profiles** | Partial — journalists are Contact records with relationship state; analysts are a different object | [press.md § Media Contacts as CRM Records](press.md#media-contacts-as-crm-records), [users.md § Contact](users.md#contact) |
@@ -268,10 +268,18 @@ Ordered by dependency, not by appeal. Each releases only when its gate passes.
 | **0** | **Corpus probe** | §7.4. Two markets, one week of coverage, measure reachability | None — runs alongside the MVP's Phase 0/1 | 1 person, 3 weeks |
 | **1** | **Talking points + claims ledger** | PRESS-014 extended with the three additions from §4; claim records with sources, status, approved response | MVP decision gate passed ([mvp.md § 7. Phases](mvp.md#7-phases)) | 2 eng + 1 designer, ~6 weeks |
 | **2** | **The actor graph** | Outlet as first-class record; journalist and analyst profiles; media map views | Iteration 1 in real use | ~8 weeks |
-| **3** | **Monitoring ingestion** | Source configuration, monitoring inbox, hit → coverage promotion feeding PRESS-010/011 | **Iteration 0 result** — see kill criteria | ~12 weeks, plus ongoing corpus operations |
+| **3** | **Monitoring ingestion** | The Capture central service: published press, broadcast (transcribed), public social accounts and published polls. Source configuration, monitoring inbox, hit → coverage promotion feeding PRESS-010/011 | **Iteration 0 result** — see kill criteria | ~12 weeks, plus ongoing corpus operations |
 | **4** | **Compartmentation primitive** | The ADR from §6, plus per-record access lists, read logging, key scoping | Iterations 1–3 shipped; no dossier work starts before this | ~8 weeks, cross-cutting |
 | **5** | **Candidate vetting** | Self-vetting dossiers under the §8 doctrine | Iteration 4 complete; doctrine written and adopted | ~6 weeks |
 | **6** | **Opposition research** | Same store, external subjects | **Legal review complete per jurisdiction** (§8.4) | ~4 weeks on top of 5 |
+| **7** | **Builders** | The Builders central service. Text drafts from a brief and selected talking points, entering the existing approval workflows. Image and video builders are proposed, not accepted | Iteration 1 in real use. Image and video also need [ADR-018](../decisions/018-ai-agent-posture.md) accepted with item 6 answered | Not yet estimated |
+
+**The iterations build four central services** ([ADR-020](../decisions/020-central-service-line-up-and-builders.md)), all running under [ADR-019](../decisions/019-central-services-and-metered-billing.md): enabled per tenant, executed for one tenant per call, nothing retained, metered costs passed through at cost.
+
+- **Capture is Iteration 3.** The corpus is public data and may be shared within a country; what a tenant asks of it is not, and stays tenant-scoped. The corpus probe remains the gate: the service is built only if Iteration 0 says the coverage is reachable.
+- **Analysis delivers Iterations 5 and 6** into the requesting tenant's compartment, and adds electoral analysis over published results, which shares like the corpus. Iterations 4 to 6, their order and their gates are unchanged. Electoral analysis has no iteration yet (§12).
+- **Builders is Iteration 7**, off the main line (§9.1).
+- **Channel transport is already specified** in the platform's communication infrastructure, with mutual suppression before every send. The iterations add nothing to it.
 
 ### 9.1 Why this order
 
@@ -283,6 +291,8 @@ Ordered by dependency, not by appeal. Each releases only when its gate passes.
 
 **Iteration 5 before 6** because self-vetting is the same machinery with far lower legal exposure, and it proves the compartment works on material where a mistake is survivable.
 
+**Iteration 7 sits off the main line.** It depends on Iteration 1 and nothing after it: a builder grounds its drafts in the talking points and approved responses the claims ledger holds, and without them the rule against claims not in the source material has little source material to apply. It can run alongside Iterations 2 to 6. A builder reads only what the person invoking it supplies, returns a draft, and has no send authority, so text builders fall outside the ADR-018 gate. Image and video builders wait for it.
+
 ### 9.2 Kept from the start, despite looking deferrable
 
 - **Provenance on every claim, from Iteration 1.** Retrofitting sourcing onto a ledger that already contains unsourced assertions does not work; the assertions never get sources.
@@ -290,7 +300,7 @@ Ordered by dependency, not by appeal. Each releases only when its gate passes.
 
 ### 9.3 Screen reuse
 
-Most of this is not new drawing. Iteration 1 extends PRESS-014. Iteration 2 reuses CRM-001/002 patterns for the graph and PRESS-001/002 for person views. Iteration 3 feeds PRESS-010 and PRESS-011, which are already wireframed as manual-entry screens and become automatically populated. Genuinely new and unwireframed: the monitoring inbox, the claims ledger, the outlet record, and the compartment management surface.
+Most of this is not new drawing. Iteration 1 extends PRESS-014. Iteration 2 reuses CRM-001/002 patterns for the graph and PRESS-001/002 for person views. Iteration 3 feeds PRESS-010 and PRESS-011, which are already wireframed as manual-entry screens and become automatically populated. Iteration 7 reuses the composers and the approval screens a draft enters. Genuinely new and unwireframed: the monitoring inbox, the claims ledger, the outlet record, the compartment management surface, and the builder brief.
 
 ---
 
@@ -335,8 +345,9 @@ Everything else waits for March 2028.
 4. If the coalition-shared actor graph (§3.1) is viable, does contributing to it create the same free-rider legibility problem as the contribution ledger at [mvp.md § Appendix — Hypotheses beyond the core assumption](mvp.md#appendix-hypotheses-beyond-the-core-assumption) — and does H8's mitigation transfer?
 5. Does the claims ledger connect to the AI activism message generation at ADR-013, which already draws on talking points? If a claim's approved response can seed a generated message, the two systems are closer than this document assumes.
 6. Does self-vetting sell on its own, without opposition research attached? Same machinery, far lower exposure, possibly the more honest product.
+7. When is electoral analysis over published results built, and does it belong in this roadmap or beside the post-election analysis in GOTV? [ADR-020](../decisions/020-central-service-line-up-and-builders.md) names it as a service and leaves it unscheduled.
 
 ### For the pilot parties, once the gate passes
 
-7. Would MVC, PIP, or DS pay for this, and at what tier?
-8. Who at a campaign of ten people owns this work today, and is it anyone's actual job? If the answer is "nobody, it happens in a WhatsApp group," that is both the opportunity and the adoption problem.
+8. Would MVC, PIP, or DS pay for this, and at what tier?
+9. Who at a campaign of ten people owns this work today, and is it anyone's actual job? If the answer is "nobody, it happens in a WhatsApp group," that is both the opportunity and the adoption problem.

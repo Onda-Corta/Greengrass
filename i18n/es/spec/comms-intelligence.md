@@ -73,7 +73,7 @@ El conjunto de especificaciones va en parte por delante del pedido y en parte no
 
 | Capacidad | Estado | Evidencia |
 |---|---|---|
-| **Monitoreo de medios** | Aplazado **como oportunidad estratégica explícita** | [press.md § Registro de cobertura](press.md#registro-de-cobertura), `decisions/015-product-scope.md` |
+| **Monitoreo de medios** | Aplazado **como oportunidad estratégica explícita**; ya especificado como el servicio central de captura, con su construcción condicionada a la Iteración 0 | [press.md § Registro de cobertura](press.md#registro-de-cobertura), `decisions/015-product-scope.md`, [ADR-020](../decisions/020-central-service-line-up-and-builders.md) |
 | **Puntos de mensaje** | **Existen** — versionados, organizados por tema, compartidos con el equipo | [press.md § Puntos de mensaje](press.md#puntos-de-mensaje); PRESS-014 en [press.md § PRESS-014: Biblioteca de puntos de mensaje](../design/ux/04-wireframes/press/press.md#press-014-talking-points-library) |
 | **Mapa de medios** | Parcial — los contactos llevan medio, área temática y zona de cobertura; el panorama en sí es prosa | [press.md § Contactos de medios como registros del CRM](press.md#los-contactos-de-medios-son-registros-del-crm), [press.md § Diferencias del panorama mediático](press.md#diferencias-en-el-panorama-de-medios) |
 | **Perfiles de analistas** | Parcial — los periodistas son registros de Contacto con estado de relación; los analistas son otro objeto | [press.md § Contactos de medios como registros del CRM](press.md#los-contactos-de-medios-son-registros-del-crm), [users.md § Contacto](users.md#contacto) |
@@ -268,10 +268,18 @@ Ordenadas por dependencia, no por atractivo. Cada una sale solo cuando pasa su p
 | **0** | **Sondeo de corpus** | §7.4. Dos mercados, una semana de cobertura, medir alcanzabilidad | Ninguno — corre en paralelo a la Fase 0/1 del MVP | 1 persona, 3 semanas |
 | **1** | **Puntos de mensaje + libro de afirmaciones** | PRESS-014 ampliada con los tres agregados del §4; registros de afirmación con fuentes, estado y respuesta aprobada | Pasó el punto de decisión del MVP ([mvp.md § 7. Fases](mvp.md#7-fases)) | 2 ing. + 1 diseñador, ~6 semanas |
 | **2** | **El grafo de actores** | El medio como registro de primera clase; perfiles de periodistas y analistas; vistas del mapa de medios | La Iteración 1 en uso real | ~8 semanas |
-| **3** | **Ingesta de monitoreo** | Configuración de fuentes, bandeja de monitoreo, promoción de coincidencia → cobertura que alimenta PRESS-010/011 | **Resultado de la Iteración 0** — ver criterios de cancelación | ~12 semanas, más operación continua del corpus |
+| **3** | **Ingesta de monitoreo** | El servicio central de captura: prensa publicada, medios de difusión (transcritos), cuentas públicas de redes sociales y encuestas publicadas. Configuración de fuentes, bandeja de monitoreo, promoción de coincidencia → cobertura que alimenta PRESS-010/011 | **Resultado de la Iteración 0** — ver criterios de cancelación | ~12 semanas, más operación continua del corpus |
 | **4** | **Primitiva de compartimentación** | El ADR del §6, más listas de acceso por registro, registro de lecturas y alcance de llaves | Iteraciones 1–3 entregadas; ningún trabajo de expedientes empieza antes de esto | ~8 semanas, transversal |
 | **5** | **Investigación de antecedentes de candidaturas** | Expedientes de investigación propia bajo la doctrina del §8 | Iteración 4 completa; doctrina escrita y adoptada | ~6 semanas |
 | **6** | **Investigación de la oposición** | El mismo almacén, sujetos externos | **Revisión legal completa en cada jurisdicción** (§8.4) | ~4 semanas sobre la 5 |
+| **7** | **Constructores** | El servicio central de constructores. Borradores de texto a partir de un encargo y de los puntos de mensaje elegidos, que entran en los flujos de aprobación existentes. Los constructores de imágenes y de video quedan propuestos, no aceptados | La Iteración 1 en uso real. Imágenes y video necesitan además que la [ADR-018](../decisions/018-ai-agent-posture.md) se acepte con el punto 6 respondido | Sin estimar todavía |
+
+**Las iteraciones construyen cuatro servicios centrales** ([ADR-020](../decisions/020-central-service-line-up-and-builders.md)), y todos corren bajo la [ADR-019](../decisions/019-central-services-and-metered-billing.md): se activan por organización, se ejecutan para una sola organización por llamada, no conservan nada y trasladan al costo los costos medidos.
+
+- **La captura es la Iteración 3.** El corpus son datos públicos y puede compartirse dentro de un país; lo que una organización le pregunta no lo es, y se queda acotado a ella. El sondeo de corpus sigue siendo el punto de decisión: el servicio se construye solo si la Iteración 0 dice que la cobertura es alcanzable.
+- **El análisis entrega las Iteraciones 5 y 6** en el compartimento de la organización que las pide, y agrega el análisis electoral sobre resultados publicados, que se comparte como el corpus. Las Iteraciones 4 a 6, su orden y sus puntos de decisión no cambian. El análisis electoral todavía no tiene iteración (§12).
+- **Los constructores son la Iteración 7**, fuera de la línea principal (§9.1).
+- **El transporte por canal ya está especificado** en la infraestructura de comunicaciones de la plataforma, con la supresión mutua antes de cada envío. Las iteraciones no le agregan nada.
 
 ### 9.1 Por qué este orden
 
@@ -283,6 +291,8 @@ Ordenadas por dependencia, no por atractivo. Cada una sale solo cuando pasa su p
 
 **La Iteración 5 antes que la 6** porque investigarse a uno mismo es la misma maquinaria con mucha menos exposición legal, y prueba que el compartimento funciona sobre material donde un error se sobrevive.
 
+**La Iteración 7 queda fuera de la línea principal.** Depende de la Iteración 1 y de nada posterior: un constructor apoya sus borradores en los puntos de mensaje y las respuestas aprobadas que guarda el libro de afirmaciones, y sin ellos la regla contra las afirmaciones que no están en el material de origen tiene poco material de origen al que aplicarse. Puede correr en paralelo a las Iteraciones 2 a 6. Un constructor lee solo lo que le entrega la persona que lo invoca, devuelve un borrador y no tiene capacidad de enviar, así que los constructores de texto quedan fuera del punto de decisión de la ADR-018. Los de imágenes y video esperan a esa revisión.
+
 ### 9.2 Se mantienen desde el principio, aunque parezcan aplazables
 
 - **Procedencia en cada afirmación, desde la Iteración 1.** Agregarle fuentes después a un libro que ya contiene afirmaciones sin fuente no funciona; esas afirmaciones nunca reciben fuentes.
@@ -290,7 +300,7 @@ Ordenadas por dependencia, no por atractivo. Cada una sale solo cuando pasa su p
 
 ### 9.3 Reutilización de pantallas
 
-La mayor parte de esto no es dibujo nuevo. La Iteración 1 amplía PRESS-014. La Iteración 2 reutiliza los patrones de CRM-001/002 para el grafo y PRESS-001/002 para las vistas de personas. La Iteración 3 alimenta PRESS-010 y PRESS-011, que ya tienen wireframe como pantallas de captura manual y pasan a llenarse automáticamente. Genuinamente nuevo y sin wireframe: la bandeja de monitoreo, el libro de afirmaciones, el registro del medio y la superficie de administración de compartimentos.
+La mayor parte de esto no es dibujo nuevo. La Iteración 1 amplía PRESS-014. La Iteración 2 reutiliza los patrones de CRM-001/002 para el grafo y PRESS-001/002 para las vistas de personas. La Iteración 3 alimenta PRESS-010 y PRESS-011, que ya tienen wireframe como pantallas de captura manual y pasan a llenarse automáticamente. La Iteración 7 reutiliza los redactores y las pantallas de aprobación a las que entra un borrador. Genuinamente nuevo y sin wireframe: la bandeja de monitoreo, el libro de afirmaciones, el registro del medio, la superficie de administración de compartimentos y el encargo del constructor.
 
 ---
 
@@ -335,8 +345,9 @@ Todo lo demás espera a marzo de 2028.
 4. Si el grafo de actores compartido por la coalición (§3.1) es viable, ¿aportar a él crea el mismo problema de legibilidad del aprovechamiento gratuito que el libro de contribuciones de [mvp.md § Apéndice — Hipótesis más allá del supuesto central](mvp.md#apéndice-hipótesis-más-allá-del-supuesto-central)? ¿Y se transfiere la mitigación de H8?
 5. ¿El libro de afirmaciones se conecta con la generación de mensajes de activismo con IA del ADR-013, que ya se nutre de los puntos de mensaje? Si la respuesta aprobada de una afirmación puede sembrar un mensaje generado, los dos sistemas están más cerca de lo que este documento supone.
 6. ¿La investigación de antecedentes propios se vende sola, sin la investigación de la oposición adosada? La misma maquinaria, mucha menos exposición, posiblemente el producto más honesto.
+7. ¿Cuándo se construye el análisis electoral sobre resultados publicados, y va en esta hoja de ruta o junto al análisis poselectoral de GOTV? La [ADR-020](../decisions/020-central-service-line-up-and-builders.md) lo nombra como servicio y lo deja sin iteración asignada.
 
 ### Para los partidos del piloto, una vez que pase el punto de decisión
 
-7. ¿Pagarían MVC, PIP o DS por esto, y en qué nivel?
-8. ¿Quién es responsable de este trabajo hoy en una campaña de diez personas, y es el trabajo real de alguien? Si la respuesta es "nadie, pasa en un grupo de WhatsApp", eso es a la vez la oportunidad y el problema de adopción.
+8. ¿Pagarían MVC, PIP o DS por esto, y en qué nivel?
+9. ¿Quién es responsable de este trabajo hoy en una campaña de diez personas, y es el trabajo real de alguien? Si la respuesta es "nadie, pasa en un grupo de WhatsApp", eso es a la vez la oportunidad y el problema de adopción.

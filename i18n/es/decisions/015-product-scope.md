@@ -3,6 +3,7 @@
 **Estado:** Aceptada
 **Fecha:** 2026-03-03
 **Fuentes:** `spec/workflows.md`, `spec/fundraising.md`, `spec/gotv.md`, `spec/messaging.md`, `spec/press.md`
+**Enmendada por:** [ADR-020](020-central-service-line-up-and-builders.md) — el monitoreo automatizado de medios pasa de aplazado a especificado, como el servicio central de captura. Su construcción sigue condicionada al sondeo de corpus, la Iteración 0 de [comms-intelligence.md § 9. Las iteraciones](../spec/comms-intelligence.md#9-las-iteraciones). El resto de esta ADR no cambia.
 
 ## Contexto
 

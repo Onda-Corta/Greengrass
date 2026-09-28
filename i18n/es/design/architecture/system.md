@@ -1225,6 +1225,21 @@ Es un compromiso central con el modelo de soberanía — quien puede construir s
 
 Cada capacidad es una de dos cosas. Un **módulo interno** corre dentro de la instancia de la organización sobre sus propios datos: CRM, operaciones de campo, GOTV, recaudación de fondos, eventos, mensajería interna, redacción de comunicaciones. Activar uno por organización es activar funcionalidades por configuración dentro de una instalación de organización única; nada del aislamiento cambia. Un **servicio central** es una capacidad alojada en la plataforma que una organización activa desde el catálogo: captura de medios desde fuentes públicas, análisis electoral, entrega de investigación de la oposición, generación de texto, imagen y video, transporte por canal, y la verificación de supresión mutua del piloto. Los módulos internos los cubre la suscripción fija. Los servicios centrales cargan costos que a GreenGrass misma le facturan por unidad, y que se trasladan a la organización al costo, sin margen ([fundraising.md § Modelo de ingresos de la plataforma](../../spec/fundraising.md#modelo-de-ingresos-de-la-plataforma)).
 
+### Los cuatro servicios
+
+(Decidido en la [ADR-020](../../decisions/020-central-service-line-up-and-builders.md))
+
+| Servicio | Entradas del catálogo | Sobre qué trabaja | Dónde aterriza el resultado | Costo medido |
+|---|---|---|---|---|
+| **Captura** | `capture` | Prensa publicada, medios de difusión (transcritos), cuentas públicas de redes sociales, encuestas publicadas. Nunca mensajería cerrada | La bandeja de monitoreo de la organización | Proveedores de transcripción y de datos, cuando facturan por unidad |
+| **Análisis** | `electoral_analysis`, `opposition_research` | Resultados publicados (se comparten como el corpus de captura); hallazgos de investigación (nunca se comparten) | La organización; la investigación, en el compartimento que nombre su contrato | Inferencia, cuando se usa |
+| **Constructores** | `builder_text`, `builder_image`, `builder_video` | Solo el encargo, los puntos de mensaje y los archivos que entrega la persona que lo invoca | Un borrador en la organización, marcado como generado | Inferencia y generación |
+| **Transporte por canal** | `channel_transport`, `mutual_suppression` | Los mensajes de salida de la propia organización | El destinatario, después de las tres capas del momento del envío | Pasarelas de SMS y WhatsApp, por mensaje |
+
+**Los constructores nunca envían.** A un constructor lo invoca una persona con un encargo; no tiene vía de lectura hacia contactos, registros de votantes, mensajes, donaciones ni compartimentos, y no tiene credencial para el transporte por canal. Su borrador entra en el flujo de aprobación que ya aplica a ese contenido. Los constructores pasan por la capa de abstracción de IA como cualquier otra funcionalidad de IA ([Arquitectura BYOM](#arquitectura-byom)); con BYOM, el proveedor propio de la organización le factura a ella y no hay nada que trasladar. `builder_text` se puede activar. `builder_image` y `builder_video` existen en el catálogo pero no se pueden activar hasta que la [ADR-018](../../decisions/018-ai-agent-posture.md) se acepte con su punto sobre la compuerta humana respondido.
+
+**El orden de construcción** sigue [comms-intelligence.md § 9. Las iteraciones](../../spec/comms-intelligence.md#9-las-iteraciones): la captura es la Iteración 3, condicionada al sondeo de corpus; la entrega de investigación son las Iteraciones 5 y 6, después de la primitiva de compartimentación; los constructores son la Iteración 7. El transporte por canal y la supresión mutua son parte de la infraestructura de comunicaciones de la plataforma, no de la hoja de ruta.
+
 ### Ejecución por organización
 
 ```
