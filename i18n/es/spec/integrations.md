@@ -153,6 +153,19 @@ Ya decidido: manejo de canales con conciencia del TSE para Brasil. La integraci�
 
 **DECIDIDO: API directa con Meta, más acompañamiento en la puesta en marcha.** Cada organización se registra directamente con Meta — sin sobreprecio de intermediarios, y la relación es suya. El proceso de verificación de Meta es complicado, así que GreenGrass ofrece un servicio de acompañamiento (humano o asistido por IA) para guiar a la organización por la verificación, la creación de la cuenta de negocio y la aprobación de plantillas. Mejor una fricción de una sola vez al arrancar que un sobreprecio permanente por mensaje de un BSP.
 
+#### Bandeja de doble vía
+
+Los mensajes de WhatsApp entrantes llegan a una bandeja por organización: respuestas a los envíos, y las entregas y conversaciones del programa de creadores ([press.md § Programa de creadores](press.md#programa-de-creadores)). El texto, las imágenes, el video y las notas de voz se guardan como datos de la organización, bajo sus llaves.
+
+La bandeja funciona dentro de las reglas de la Business API, no a su alrededor:
+
+- **La ventana de conversación.** El equipo puede responder en formato libre durante las 24 horas siguientes al último mensaje de la otra persona. La bandeja muestra, por conversación, si la ventana está abierta y cuándo se cierra.
+- **Fuera de la ventana, solo plantillas.** Un mensaje enviado después de que se cierra la ventana tiene que usar una plantilla preaprobada. Un encargo a un creador despachado fuera de la ventana sale como una plantilla que lo anuncia, y su contenido llega cuando el creador responde.
+- **El estado de aprobación de las plantillas** se sigue como ya se hace para los envíos salientes, y una plantilla pendiente o rechazada no se puede enviar.
+- **Una conversación por persona y por organización.** Un creador que trabaja con dos organizaciones tiene dos conversaciones separadas, una con el número de cada organización. Ninguna ve la de la otra.
+
+El teléfono personal de alguien del equipo no es un canal admitido para el trabajo del programa: saca la conversación de la organización, del registro de auditoría y del perímetro de cifrado ([ADR-021](../decisions/021-creator-program-and-content-pipeline.md)).
+
 ### Provisión de números
 
 El SMS necesita números de envío (long codes, short codes o números libres de cargo, según el país y el caso de uso).

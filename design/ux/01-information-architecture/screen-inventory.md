@@ -356,6 +356,23 @@ This inventory is derived from the 12 spec documents and the navigation model. I
 | PROF-004 | Language Preference | All authenticated | No | Yes | geography.md — localization |
 | PROF-005 | Tenant Switcher | Multi-tenant users | No | Yes | users.md — federation |
 
+## 22. Content Operations
+
+| ID | Screen | Personas | Offline | Mobile | Spec ref |
+|----|--------|----------|---------|--------|----------|
+| CONTENT-001 | Content Operations Dashboard | OA, CD | No | Yes | press.md — creator program |
+| CONTENT-002 | Creator List | OA, CD | No | Desktop | press.md — creators as CRM records |
+| CONTENT-003 | Creator Profile | OA, CD | No | Yes | press.md — creators as CRM records |
+| CONTENT-004 | Inbound Inbox | OA, CD | No | Yes | integrations.md — two-way inbox |
+| CONTENT-005 | Content Review | OA, CD | No | Desktop | press.md — content review |
+| CONTENT-006 | Dispatch Composer | OA, CD | No | Yes | press.md — dispatch |
+| CONTENT-007 | Dispatch Tracking | OA, CD | No | Desktop | press.md — dispatch |
+| CONTENT-008 | Approval Queue | OA, CD, C | No | Desktop | press.md — content review |
+| CONTENT-009 | Multi-round Approval | OA, CD, C | No | Desktop | press.md — tiers and routing |
+| CONTENT-010 | Simple Approval | OA, CD, C | No | Desktop | press.md — tiers and routing |
+| CONTENT-011 | Creator Engagement | OA, CD | No | Desktop | press.md — creator engagement |
+| CONTENT-012 | Creator Profile Edit | OA, CD | No | Desktop | press.md — creators as CRM records |
+
 ## Summary
 
 | Feature Area | Screen Count | Offline Screens | Mobile-Primary Screens |
@@ -381,8 +398,9 @@ This inventory is derived from the 12 spec documents and the navigation model. I
 | Public Pages | 8 | 0 | 8 |
 | Authentication | 7 | 0 | 5 |
 | User Profile | 5 | 0 | 0 |
-| **Total** | **236** | **24** | **53** |
+| Content Operations | 12 | 0 | 0 |
+| **Total** | **248** | **24** | **53** |
 
-The platform has approximately **236 distinct screens**, of which **24 work offline** and **53 are mobile-primary** (designed primarily for phone use). The remaining screens work on mobile but are designed desktop-first (complex configuration, data tables, builders).
+The platform has approximately **248 distinct screens**, of which **24 work offline** and **53 are mobile-primary** (designed primarily for phone use). The remaining screens work on mobile but are designed desktop-first (complex configuration, data tables, builders).
 
 <!-- REVISIT: This inventory will grow as implementation reveals sub-screens and modal flows not captured at this level of analysis. The screen IDs provide a stable reference system for additions. -->

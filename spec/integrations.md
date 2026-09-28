@@ -153,6 +153,19 @@ Already decided: TSE-aware channel management for Brazil. WhatsApp integration v
 
 **DECIDED: Direct Meta API with onboarding concierge.** Each tenant registers directly with Meta — no intermediary markup, tenant owns the relationship. Meta's verification process is complex, so GreenGrass provides an onboarding concierge service (human or AI-assisted) to guide tenants through verification, business account setup, and template approval. One-time onboarding friction is better than permanent per-message BSP markup.
 
+#### Two-Way Inbox
+
+Inbound WhatsApp messages land in a per-tenant inbox: replies to outreach, and the creator program's submissions and conversations ([press.md § Creator Program](press.md#creator-program)). Text, images, video and voice notes are stored as tenant data under the tenant's keys.
+
+The inbox works inside the Business API's rules rather than around them:
+
+- **The conversation window.** Staff may reply free-form for 24 hours after the other person's last message. The inbox shows, per conversation, whether the window is open and when it closes.
+- **Outside the window, templates only.** A message sent after the window closes must use a pre-approved template. A creator brief dispatched outside the window goes as a template announcing it, and its content follows once the creator replies.
+- **Template approval status** is tracked as it already is for outbound messaging, and a pending or rejected template cannot be sent.
+- **One thread per person per tenant.** A creator working with two tenants has two separate threads, one on each tenant's number. Neither tenant sees the other's.
+
+A staff member's personal phone is not a supported channel for program work: it takes the thread out of the tenant, the audit trail and the encryption perimeter ([ADR-021](../decisions/021-creator-program-and-content-pipeline.md)).
+
 ### Number Provisioning
 
 SMS requires sender numbers (long codes, short codes, or toll-free numbers depending on country and use case).

@@ -16,7 +16,7 @@ All product specifications, UX design artifacts, and architecture documents are 
 
 One question remains open and gates production rather than implementation. The corpus decided AI five times, feature by feature, and never asked what changes if AI agents operate throughout the product. The threat model, the compliance framework and the audit model contain effectively no treatment of a non-human actor. [ADR-018](decisions/018-ai-agent-posture.md) records this as the project's first `Proposed` decision: the five accepted AI features ship as specified, and anything with broader read scope, tool authority or autonomous action waits for the review. See [diary entry 12](diary/12-the-agent-question.md).
 
-The first decision taken since that gate opened is [ADR-019](decisions/019-central-services-and-metered-billing.md): shared capabilities get a home as central services executed per tenant, and the flat pricing model gains a second plane that passes third-party costs through at cost, with no margin. It supplies mechanisms the ADR-018 review can use and resolves nothing that review must decide. See [diary entry 13](diary/13-services-a-la-carte.md). [ADR-020](decisions/020-central-service-line-up-and-builders.md) names the four central services (Capture, Analysis, Builders, channel transport) and sequences them into the comms intelligence roadmap: text builders are accepted, while image and video builders wait for the ADR-018 review.
+The first decision taken since that gate opened is [ADR-019](decisions/019-central-services-and-metered-billing.md): shared capabilities get a home as central services executed per tenant, and the flat pricing model gains a second plane that passes third-party costs through at cost, with no margin. It supplies mechanisms the ADR-018 review can use and resolves nothing that review must decide. See [diary entry 13](diary/13-services-a-la-carte.md). [ADR-020](decisions/020-central-service-line-up-and-builders.md) names the four central services (Capture, Analysis, Builders, channel transport) and sequences them into the comms intelligence roadmap: text builders are accepted, while image and video builders wait for the ADR-018 review. [ADR-021](decisions/021-creator-program-and-content-pipeline.md) adds the creator program to the press spec: creators are contacts like journalists and influencers, their content goes through one approval pipeline, and the prototype's AI screens wait for the same review.
 
 ## Documentation Website
 
@@ -43,9 +43,9 @@ npm run serve    # serve docs/ on port 8000
 ### Languages
 
 The site is bilingual. Available in Spanish: the 14 specification documents, the system
-architecture, the 20 ADRs plus the UX decisions record, and the 15 UX documents
-that aren't wireframes — 51 documents in
-all. The 23 wireframe documents and the project diary are still English only. An
+architecture, the 21 ADRs plus the UX decisions record, and the 15 UX documents
+that aren't wireframes — 52 documents in
+all. The 24 wireframe documents and the project diary are still English only. An
 **EN / ES** switch sits in the top-right of the header on every page; pages that aren't
 translated still show it, dimmed, pointing at the Spanish home page, so the Spanish
 edition is reachable from anywhere rather than appearing only on the pages that happen
@@ -97,8 +97,8 @@ If you're new to the project, read the specs in this order:
 13. **[`spec/press.md`](spec/press.md)** — Press, media, social media, public profiles, endorsements.
 14. **[`spec/comms-intelligence.md`](spec/comms-intelligence.md)** — Post-MVP roadmap: media intelligence, fact check, media map, candidate vetting and opposition research, sequenced as iterations.
 15. **[`design/architecture/system.md`](design/architecture/system.md)** — System architecture, data model, infrastructure.
-16. **[`design/ux/00-overview.md`](design/ux/00-overview.md)** — UX design overview with reading order for all 37 UX documents.
-17. **[`decisions/`](decisions/)** — 20 Architecture Decision Records extracting and formalizing decisions from all spec and design documents.
+16. **[`design/ux/00-overview.md`](design/ux/00-overview.md)** — UX design overview with reading order for all 38 UX documents.
+17. **[`decisions/`](decisions/)** — 21 Architecture Decision Records extracting and formalizing decisions from all spec and design documents.
 
 ## Project Structure
 
@@ -128,7 +128,7 @@ GreenGrass/
 │   │   ├── 01-information-architecture/  # Navigation, screens, personas, URLs
 │   │   ├── 02-global-patterns/    # Offline, notifications, search, security UX
 │   │   ├── 03-design-system/      # Foundations, theming, components, responsive
-│   │   └── 04-wireframes/         # 21 wireframe documents (236 screens)
+│   │   └── 04-wireframes/         # 22 wireframe documents (248 screens)
 │   └── architecture/
 │       └── system.md              # System architecture
 ├── decisions/                     # Architecture Decision Records (ADRs)
@@ -138,7 +138,8 @@ GreenGrass/
 │   ├── 017-sharing-contract-trust-model.md  # The contract as universal trust primitive
 │   ├── 018-ai-agent-posture.md    # Proposed — AI agent review gates production
 │   ├── 019-central-services-and-metered-billing.md  # Central services, metered pass-through at cost
-│   └── 020-central-service-line-up-and-builders.md  # Capture, Analysis, Builders, transport
+│   ├── 020-central-service-line-up-and-builders.md  # Capture, Analysis, Builders, transport
+│   └── 021-creator-program-and-content-pipeline.md  # Creators as contacts, content pipeline
 ├── diary/                         # Project diary (13 entries)
 ├── scripts/
 │   ├── build.mjs                  # Documentation site generator

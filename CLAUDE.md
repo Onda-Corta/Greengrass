@@ -8,12 +8,12 @@ GreenGrass is a custom platform for managing grassroots political elections in t
 
 **Current phase: Specification & Design (complete) — one review open before production**
 
-All spec and design work is done. One cross-cutting question is open and gates production: the corpus decided AI five times as bounded features and never asked what changes if AI agents operate throughout the product. `decisions/018-ai-agent-posture.md` is `Proposed` — the first non-accepted ADR — and lists what the review must resolve. Do not add agent-shaped capability (cross-feature read scope, tool authority, autonomous action, broad credentials) to the spec or to an implementation without resolving it first. `decisions/019-central-services-and-metered-billing.md` (accepted) adds central services, a service catalogue with per-tenant entitlements, and metered pass-through billing at cost with no margin; it supplies mechanisms ADR-018 can build on and does not resolve it. `decisions/020-central-service-line-up-and-builders.md` (accepted) names the four central services and accepts text builders only; image and video builders are proposed and cannot be enabled until ADR-018 is accepted.
+All spec and design work is done. One cross-cutting question is open and gates production: the corpus decided AI five times as bounded features and never asked what changes if AI agents operate throughout the product. `decisions/018-ai-agent-posture.md` is `Proposed` — the first non-accepted ADR — and lists what the review must resolve. Do not add agent-shaped capability (cross-feature read scope, tool authority, autonomous action, broad credentials) to the spec or to an implementation without resolving it first. `decisions/019-central-services-and-metered-billing.md` (accepted) adds central services, a service catalogue with per-tenant entitlements, and metered pass-through billing at cost with no margin; it supplies mechanisms ADR-018 can build on and does not resolve it. `decisions/020-central-service-line-up-and-builders.md` (accepted) names the four central services and accepts text builders only; image and video builders are proposed and cannot be enabled until ADR-018 is accepted. `decisions/021-creator-program-and-content-pipeline.md` (accepted) adds the creator program: creators are Contact records exactly like press contacts and influencers, and the wireframes' three AI screens are held for the ADR-018 review.
 
 Completed phases:
 1. **Product definition** — 12 spec documents covering product, users, workflows, security, compliance, etc.
-2. **UX design** — 37 documents: information architecture, global patterns, design system, 21 wireframes (236 screens)
-3. **Architecture** — system architecture document, 20 ADRs (19 accepted, 1 proposed) formalizing all decisions
+2. **UX design** — 38 documents: information architecture, global patterns, design system, 22 wireframes (248 screens)
+3. **Architecture** — system architecture document, 21 ADRs (20 accepted, 1 proposed) formalizing all decisions
 
 ## Project Structure
 
@@ -27,7 +27,7 @@ GreenGrass/
 │   └── es/                        # Spanish mirror of the English tree
 │       ├── README.md              # Spanish home page
 │       ├── spec/                  # The 14 specs, in Spanish
-│       ├── decisions/             # The 20 ADRs + ux-decisions, in Spanish
+│       ├── decisions/             # The 21 ADRs + ux-decisions, in Spanish
 │       └── design/                # Architecture + the 15 non-wireframe UX docs
 ├── spec/                          # Product specifications (14 docs)
 │   ├── product.md                 # High-level product description
@@ -45,15 +45,15 @@ GreenGrass/
 │   ├── press.md                   # Press, media, and public communications
 │   └── comms-intelligence.md      # Post-MVP roadmap: comms intelligence
 ├── design/
-│   ├── ux/                        # UX design artifacts (37 docs)
+│   ├── ux/                        # UX design artifacts (38 docs)
 │   │   ├── 00-overview.md         # Reading order and glossary
 │   │   ├── 01-information-architecture/  # Navigation, screens, personas, URLs
 │   │   ├── 02-global-patterns/    # Offline, notifications, search, security UX
 │   │   ├── 03-design-system/      # Foundations, theming, components, responsive
-│   │   └── 04-wireframes/         # 21 wireframe documents (236 screens)
+│   │   └── 04-wireframes/         # 22 wireframe documents (248 screens)
 │   └── architecture/
 │       └── system.md              # System architecture and data model
-├── decisions/                     # Architecture Decision Records (20 ADRs)
+├── decisions/                     # Architecture Decision Records (21 ADRs)
 ├── diary/                         # Project diary (13 entries)
 ├── scripts/build.mjs              # Documentation site generator (Node + markdown-it)
 ├── scripts/dev.sh                 # One-command local preview (install, build, serve)
@@ -70,7 +70,7 @@ The site is bilingual. English sources live at the repo root; Spanish lives unde
 `i18n/es/`, mirroring the English path exactly (`spec/product.md` ->
 `i18n/es/spec/product.md`) and building to `docs/es/`. An EN/ES switch in the site
 header moves between them. Translated so far: the 14 specs, the system architecture,
-the 20 ADRs plus `ux-decisions.md`, and the 15 non-wireframe UX documents. Still English only: the 23
+the 21 ADRs plus `ux-decisions.md`, and the 15 non-wireframe UX documents. Still English only: the 24
 wireframe documents under `design/ux/04-wireframes/` and the project diary — the
 switch on those pages is styled as a fallback and goes to the Spanish home page.
 
