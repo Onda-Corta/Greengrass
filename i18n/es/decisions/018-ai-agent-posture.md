@@ -2,7 +2,8 @@
 
 **Estado:** Propuesta
 **Fecha:** 2026-09-07
-**Fuentes:** `spec/security.md`, `spec/compliance.md`, `spec/fundraising.md`, `spec/gotv.md`, `spec/comms-intelligence.md`, `design/architecture/system.md`
+**Actualizada:** 2026-09-28 — se agrega la propuesta en revisión. El estado no cambia: nada de lo que contiene está aceptado.
+**Fuentes:** `spec/security.md`, `spec/compliance.md`, `spec/fundraising.md`, `spec/gotv.md`, `spec/comms-intelligence.md`, `design/architecture/system.md`, `decisions/019-central-services-and-metered-billing.md`, `decisions/020-central-service-line-up-and-builders.md`, `decisions/021-creator-program-and-content-pipeline.md`, `design/ux/04-wireframes/content-ops/content-ops.md`
 
 ## Contexto
 
@@ -76,6 +77,81 @@ Aceptarla exige una respuesta a cada uno de estos puntos, registrada aquí o en 
 7. **Datos compartimentados** — si un agente puede llegar a leer datos regidos por un contrato de intercambio bajo la [ADR-017](017-sharing-contract-trust-model.md), dado que la plataforma nunca es parte de un contrato.
 8. **Pantalla de configuración de BYOM** — la pantalla a la que la [ADR-016](016-cross-cutting-resolutions.md) ya se comprometió, incorporada a los wireframes y al inventario de pantallas, con la advertencia sobre la frontera de cifrado ya especificada en [system.md § Arquitectura BYOM](../design/architecture/system.md#arquitectura-byom).
 
+## La propuesta en revisión
+
+Todo lo que contiene esta sección es una propuesta para que la revisión la evalúe. Nada está aceptado, nada aparece como estructura en el documento de arquitectura, y el punto de decisión de arriba no cambia.
+
+### Qué cambió desde que se abrió la revisión
+
+Desde que se abrió esta ADR se aceptaron tres decisiones, cada una a propósito sin llegar al punto de decisión:
+
+- La [ADR-019](019-central-services-and-metered-billing.md) agregó los servicios centrales, los derechos de uso por organización y la facturación medida por uso con traslado al costo.
+- La [ADR-020](020-central-service-line-up-and-builders.md) nombró los cuatro servicios centrales y aceptó los constructores de texto. A un constructor de texto lo invoca una persona, lee solo lo que esa persona le entrega, devuelve un borrador y no puede enviar, así que no tiene ninguna de las cuatro propiedades que condicionan de arriba. Los constructores de imágenes y de video siguen propuestos hasta que esta ADR se acepte con el punto 6 respondido.
+- La [ADR-021](021-creator-program-and-content-pipeline.md) agregó el programa de creadores. Reservó para esta revisión las tres pantallas de IA de los wireframes de origen.
+
+### El arnés por organización, tal como está dibujado
+
+El tablero de servicios de la alianza que recoge la [entrada 13 del diario](../diary/13-services-a-la-carte.md) dibuja un arnés de agentes por organización, dentro del enclave de cada una:
+
+```
+  Estrategia ─┐
+  Base de     │
+  conocim.  ──┼──► AGENTES (memoria, recup., ──► PERSONAS ──► Despacho de constructores
+  Datos geo ──┤     habilidades, contexto,       (equipos,     (texto, imagen, video)
+  CRM ────────┘     enrutador de modelos)         comités,
+                                                  militancia,  ──► Despacho de salida
+       Captura ──► (hacia cada organización)      voceros,         (correo, SMS,
+       Análisis ─► (hacia cada organización)      candidaturas)    WhatsApp, redes)
+                                                               ▲
+                                          supresión mutua ─────┘ antes de cada envío
+```
+
+Tres propiedades del dibujo le importan a la revisión:
+
+1. **El arnés es por organización.** Cada enclave tiene su propia estrategia, base de conocimiento, datos geográficos, CRM y agentes. Ningún agente lee las fuentes de otra organización, y la alianza no dibuja ningún arnés por encima de sus miembros.
+2. **Los agentes alimentan a personas, y solo las personas despachan.** Toda flecha hacia el despacho de constructores y el despacho de salida sale de una persona. Ninguna flecha va del arnés a un envío.
+3. **El arnés lee cuatro fuentes.** Eso es un alcance de lectura mayor que una sola funcionalidad, la primera propiedad que condiciona de arriba. El dibujo no dice otra cosa.
+
+### Lo que la propuesta responde
+
+Para tres de los ocho puntos de la revisión, y para una de sus cuatro propiedades que condicionan, el dibujo y las tres ADR nuevas aportan una respuesta propuesta. Cada una es para que la revisión la acepte, la enmiende o la rechace.
+
+- **Punto 5, el costo.** El plano medido de la ADR-019: los costos de inferencia y de generación se trasladan a la organización al costo, sin margen; con BYOM, el proveedor propio de la organización le factura a ella directamente. Qué incluye el plan por defecto de la plataforma, y si el plan gratuito trae alguna asignación medida, sigue abierto, como lo dejó anotado la ADR-019.
+- **La amplitud de las credenciales.** Los derechos de uso de la ADR-019: una credencial por organización y por servicio central. Un agente que actúe para una organización no podría tener credencial para un servicio que la organización no activó, y cada llamada suya sería un evento de uso medido con un actor. Esto acota lo que el arnés puede *llamar*. No acota lo que puede *leer* dentro de su propia organización, que es la pregunta abierta de más abajo.
+- **Punto 6, la compuerta humana.** El principio propuesto es *la máquina propone, la persona dispone*, y el dibujo aporta su primera forma enumerada: **ningún agente despacha.** Un agente no tiene credencial para el transporte por canal ni para el despacho de constructores, y nada de lo que produce llega a un destinatario salvo por el envío de una persona. La ADR-020 y la ADR-021 ya lo aplican a los constructores y al programa de creadores; la propuesta lo extiende a todo agente. Las demás formas y sus excepciones le toca enumerarlas a la revisión.
+- **Punto 7, los datos compartimentados.** La respuesta propuesta: un agente lee datos compartimentados solo bajo el contrato de la persona que lo invocó, y nunca más de lo que esa persona podría leer. La investigación que entrega el servicio de análisis aterriza en el compartimento que nombra su contrato (ADR-019), y un agente invocado por alguien de fuera de ese compartimento no la puede ver. La propuesta además descarta por completo las lecturas en segundo plano de datos compartimentados. Una lectura en nombre de alguien se registra como lectura de esa persona, a través del agente, según [ADR-017 § Observabilidad: una distinción dentro de la escala de metadatos, no un peldaño nuevo](017-sharing-contract-trust-model.md#observabilidad-una-distinción-dentro-de-la-escala-de-metadatos-no-un-peldaño-nuevo).
+
+### Lo que deja abierto
+
+El dibujo no dice nada sobre cuatro puntos y vuelve más agudo uno de ellos.
+
+- **El alcance de lectura.** Esta es la decisión central que tiene que tomar la revisión. El flujo de operaciones de contenido de más abajo lee un elemento entrante y un documento designado. El arnés lee estrategia, base de conocimiento, datos geográficos y el CRM. El primero es el piso y el segundo el techo, y la revisión tiene que decidir en qué punto entre ambos puede operar un agente, fuente por fuente.
+- **Punto 2, decisiones automatizadas y elaboración de perfiles.** La flecha del CRM hacia los agentes significa un agente leyendo puntajes de apoyo de votantes identificables. Es exactamente el caso que nombra el punto 2, y el dibujo lo vuelve concreto en vez de hipotético.
+- **Punto 1, el modelo de amenazas; punto 3, el modelo de auditoría; punto 4, el funcionamiento sin conexión; punto 8, la pantalla de configuración de BYOM.** Sin respuesta. La relación «en nombre de» propuesta en el punto 7 es un comienzo para el punto 3, no una respuesta.
+
+### Ejemplo desarrollado: el flujo de IA de operaciones de contenido
+
+Los wireframes de manejo de creadores que están detrás de la ADR-021 incluyen un flujo de IA de tres pantallas. Aquí se propone como funcionalidad acotada, la primera que se evalúa bajo esta revisión, y no está aceptado.
+
+**Qué hace.** Sobre una entrega entrante de un creador, una persona hace clic en "Analizar con IA". El modelo lee el elemento y los documentos de estrategia que la organización designó en su base de conocimiento. Devuelve una puntuación de afinidad estratégica, las redes y formatos recomendados con su razonamiento, y los pasajes del documento de estrategia en los que se apoyó. La persona acepta, edita o rechaza la recomendación. Si la acepta, el modelo redacta instrucciones de producción por formato: texto de la publicación, dirección visual, etiquetas obligatorias, ventana de publicación y llamada a la acción. La persona envía las instrucciones a la cola de aprobación normal. Cada paso tiene un camino para aprobar sin IA.
+
+**Límites propuestos:**
+- **Alcance de lectura:** ese elemento y los documentos designados. Ni el CRM, ni los mensajes, ni otros elementos.
+- **Sin capacidad de invocar herramientas:** el resultado entra a la cola de aprobación solo por la acción de una persona, y el flujo no puede despachar ni publicar.
+- **Credenciales:** el proveedor BYOM de la organización o el de la plataforma por defecto, bajo un derecho de uso.
+- **Auditoría:** un tipo de actor agente con una relación «en nombre de» con la persona que hizo clic.
+- **Citas obligatorias:** cada recomendación cita los pasajes en que se apoya, según la regla de procedencia de [comms-intelligence.md § 8.2 La procedencia es obligatoria](../spec/comms-intelligence.md#82-la-procedencia-es-obligatoria).
+- **Opcional en cada paso.**
+
+**La parte que necesita una decisión.** En los wireframes de origen, cada elemento entrante se clasifica contra el documento de estrategia *al llegar*, en segundo plano, y recibe una marca de afinidad antes de que nadie lo abra. Ninguna persona invoca esa lectura, y escribe una marca que ninguna persona aprobó: tiene la tercera propiedad que condiciona, la acción autónoma. La ADR-021 especificó la bandeja sin ella. La revisión tiene tres opciones:
+- quitarla, y clasificar solo cuando una persona lo pida;
+- permitirla como lectura en segundo plano registrada, limitada al elemento entrante y a los documentos designados;
+- permitirla solo para las organizaciones que la activen.
+
+### Preguntas anotadas por ADR posteriores
+
+- **De la ADR-020:** si un constructor de imágenes o de video puede retratar alguna vez a una persona real e identificable, y qué identificación como contenido generado debe llevar una imagen o un video generado cuando se publica. Corresponden al punto 6 y, en lo que toca a la divulgación, a la sección de cumplimiento del punto 2.
+
 ## Consecuencias
 
 **Beneficios:**
@@ -95,4 +171,4 @@ Aceptarla exige una respuesta a cada uno de estos puntos, registrada aquí o en 
 - Que las organizaciones sean dueñas de sus credenciales ([integrations.md § Principios de integración](../spec/integrations.md#principios-de-integración)) vale para los proveedores de modelos igual que para cualquier otra integración
 - Esta ADR no agrega ninguna capacidad nueva ni revierte ninguna decisión aceptada. Deja registrado un punto de decisión y las preguntas que hay detrás
 
-**ADR relacionados:** [ADR-002](002-security-threat-model.md) (modelo de amenazas por extender), [ADR-004](004-data-model-integrity.md) (registro de auditoría por extender), [ADR-005](005-offline-first-sync.md) (restricción de trabajo sin conexión), [ADR-009](009-compliance-legal.md) (filtrado automático rechazado), [ADR-010](010-internationalization-localization.md) (traducción con IA y revisión), [ADR-012](012-external-integrations.md) (precedente de no dar visibilidad a terceros), [ADR-013](013-analytics-ai.md) (mensajes con IA; elección de modelo sustituida), [ADR-014](014-volunteer-onboarding.md) (concierge de IA), [ADR-016](016-cross-cutting-resolutions.md) (BYOM §38, reasignación basada en reglas §49, retención por niveles §4), [ADR-017](017-sharing-contract-trust-model.md) (los contratos rigen toda frontera)
+**ADR relacionados:** [ADR-002](002-security-threat-model.md) (modelo de amenazas por extender), [ADR-004](004-data-model-integrity.md) (registro de auditoría por extender), [ADR-005](005-offline-first-sync.md) (restricción de trabajo sin conexión), [ADR-009](009-compliance-legal.md) (filtrado automático rechazado), [ADR-010](010-internationalization-localization.md) (traducción con IA y revisión), [ADR-012](012-external-integrations.md) (precedente de no dar visibilidad a terceros), [ADR-013](013-analytics-ai.md) (mensajes con IA; elección de modelo sustituida), [ADR-014](014-volunteer-onboarding.md) (concierge de IA), [ADR-016](016-cross-cutting-resolutions.md) (BYOM §38, reasignación basada en reglas §49, retención por niveles §4), [ADR-017](017-sharing-contract-trust-model.md) (los contratos rigen toda frontera), [ADR-019](019-central-services-and-metered-billing.md) (el punto del costo y la frontera de credenciales, propuestos), [ADR-020](020-central-service-line-up-and-builders.md) (constructores de texto aceptados fuera del punto de decisión; imágenes y video esperan al punto 6), [ADR-021](021-creator-program-and-content-pipeline.md) (el flujo de IA reservado como ejemplo desarrollado de esta revisión)

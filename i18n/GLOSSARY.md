@@ -985,3 +985,32 @@ Fijados antes de traducir la ADR-021, el programa de creadores de `spec/press.md
 | in-kind contribution | **contribución en especie** | *Contribución*, como `contribution limit → límite de contribución`. |
 | branded content / paid partnership | **contenido patrocinado** | |
 | staff-only | **solo para el equipo** | |
+
+---
+
+# Términos añadidos para la propuesta en revisión de la ADR-018
+
+Fijados antes de traducir la sección nueva de la ADR-018.
+
+## Arnés de agentes y ejemplo desarrollado
+
+| Inglés | Español | Nota |
+|---|---|---|
+| Updated (encabezado de ADR) | **Actualizada:** | Como `Amended by → Enmendada por:`. |
+| proposal under review | **propuesta en revisión** | |
+| harness (agent harness) | **arnés de agentes** | Como lo llama el tablero. No *marco* ni *entorno*. |
+| enclave | **enclave** | El recinto de cada organización en el tablero. |
+| model router | **enrutador de modelos** | Distinto de `channel router → enrutador de canales`. |
+| retrieval (RAG) | **recuperación** | *Memoria, recuperación, habilidades, contexto.* |
+| skills (de un agente) | **habilidades** | |
+| on behalf of (relación de auditoría) | **en nombre de** | *La relación «en nombre de».* |
+| invoking person / to invoke | **la persona que lo invoca** / **invocar** | |
+| background read | **lectura en segundo plano** | |
+| floor / ceiling (del alcance de lectura) | **piso** / **techo** | |
+| worked example | **ejemplo desarrollado** | Ya usado en la ADR-021. |
+| strategic fit (score) | **afinidad estratégica** / **puntuación de afinidad estratégica** | |
+| production instructions | **instrucciones de producción** | Como en los wireframes originales, que ya estaban en español. |
+| approve without AI | **aprobar sin IA** | Texto del botón en el original. |
+| call to action | **llamada a la acción** | Ya usado en `workflows.md`. |
+| publication window | **ventana de publicación** | `window → ventana`. |
+| no agent dispatches | **ningún agente despacha** | Primera forma enumerada del principio de la compuerta humana. |
