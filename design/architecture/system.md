@@ -1221,6 +1221,21 @@ This is a core commitment to the sovereignty model — tenants who can build on 
 
 Every capability is one of two things. An **internal module** runs inside the tenant instance on the tenant's own data: CRM, field operations, GOTV, fundraising, events, internal messaging, outreach composition. Enabling one per tenant is feature flagging inside a single-tenant deployment; nothing about tenant isolation changes. A **central service** is a platform-hosted capability a tenant enables from the catalogue: media capture over public sources, electoral analysis, opposition research delivery, text, image and video generation, channel transport, and the pilot's mutual suppression check. Internal modules are covered by the flat subscription. Central services carry costs that GreenGrass is itself billed for by the unit, which pass through to the tenant at cost, with no margin ([fundraising.md § Platform Revenue Model](../../spec/fundraising.md#platform-revenue-model)).
 
+### The four services
+
+(Decided in [ADR-020](../../decisions/020-central-service-line-up-and-builders.md))
+
+| Service | Catalogue entries | Works on | Output lands | Metered cost |
+|---|---|---|---|---|
+| **Capture** | `capture` | Published press, broadcast (transcribed), public social accounts, published polls. Never closed messaging | The tenant's monitoring inbox | Transcription and data suppliers, where they bill per unit |
+| **Analysis** | `electoral_analysis`, `opposition_research` | Published results (shared like the capture corpus); research findings (never shared) | The tenant; research into the compartment its contract names | Inference, where used |
+| **Builders** | `builder_text`, `builder_image`, `builder_video` | Only the brief, talking points and assets the invoking person supplies | A draft in the tenant, marked as generated | Inference and generation |
+| **Channel transport** | `channel_transport`, `mutual_suppression` | The tenant's own outbound messages | The recipient, after the three send-time layers | SMS and WhatsApp gateways per message |
+
+**Builders never send.** A builder is invoked by a person with a brief, has no read path into contacts, voter records, messages, donations or compartments, and holds no credential to channel transport. Its draft enters the approval workflow that already applies to that content. Builders route through the AI abstraction layer like every other AI feature ([BYOM architecture](#byom-architecture)); under BYOM the tenant's own provider bills the tenant and nothing passes through. `builder_text` can be enabled. `builder_image` and `builder_video` exist in the catalogue but cannot be enabled until [ADR-018](../../decisions/018-ai-agent-posture.md) is accepted with its human-gate item answered.
+
+**Build order** follows [comms-intelligence.md § 9. The iterations](../../spec/comms-intelligence.md#9-the-iterations): Capture is Iteration 3, gated on the corpus probe; research delivery is Iterations 5 and 6, after the compartmentation primitive; Builders is Iteration 7. Channel transport and mutual suppression are part of the platform's communication infrastructure, not the roadmap.
+
 ### Per-tenant execution
 
 ```

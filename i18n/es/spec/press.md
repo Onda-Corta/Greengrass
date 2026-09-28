@@ -100,6 +100,8 @@ Cuando la interacción con un contacto de medios produce cobertura:
 
 **DECIDIDO: Aplazado, pero marcado como oportunidad estratégica.** Por ahora, solo registro manual. El monitoreo automático de medios se aplaza no por falta de importancia, sino porque merece una inversión seria y no una integración pegada con cinta adhesiva. Los servicios de monitoreo que existen (Meltwater, Cision, etc.) son caros, están centrados en Occidente y cubren mal a los medios regionales y locales del Sur Global. Ahí hay un hueco de mercado grande. Un monitoreo de medios nativo de GreenGrass —especialmente uno que cubra medios en lenguas locales de los países objetivo— podría ser un diferenciador mayor. Retomarlo como iniciativa de producto dedicada, no como añadido.
 
+**Ya especificado.** El monitoreo automatizado es ahora el servicio central de captura en [comms-intelligence.md § 9. Las iteraciones](comms-intelligence.md#9-las-iteraciones), Iteración 3, con su construcción condicionada al sondeo de corpus ([ADR-020](../decisions/020-central-service-line-up-and-builders.md)). Mientras tanto, el registro manual sigue como se describe arriba, y queda como respaldo para la cobertura que la captura no alcance.
+
 ### Analítica de cobertura
 
 - **Volumen de cobertura** — cobertura total en el tiempo, por medio y por tono

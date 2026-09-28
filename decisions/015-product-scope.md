@@ -3,6 +3,7 @@
 **Status:** Accepted
 **Date:** 2026-03-03
 **Sources:** `spec/workflows.md`, `spec/fundraising.md`, `spec/gotv.md`, `spec/messaging.md`, `spec/press.md`
+**Amended by:** [ADR-020](020-central-service-line-up-and-builders.md) — automated media monitoring moves from deferred to specified, as the Capture central service. Its build stays gated on the corpus probe, Iteration 0 of [comms-intelligence.md § 9. The iterations](../spec/comms-intelligence.md#9-the-iterations). The rest of this ADR is unchanged.
 
 ## Context
 

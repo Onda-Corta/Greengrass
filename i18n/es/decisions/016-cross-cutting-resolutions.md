@@ -3,7 +3,7 @@
 **Estado:** Aceptada
 **Fecha:** 2026-03-04
 **Fuentes:** `design/ux/04-wireframes/audit.md` (Apéndice A: preguntas abiertas consolidadas)
-**Enmendada por:** [ADR-019](019-central-services-and-metered-billing.md) — §2: una tercera capa en el momento del envío, la supresión mutua entre organizaciones, corre después de las dos que se deciden más abajo para una organización en una alianza cuyo contrato incluye el término de supresión ([system.md § Motor de orquestación entre canales](../design/architecture/system.md#motor-de-orquestación-entre-canales)). Las dos capas decididas aquí no cambian.
+**Enmendada por:** [ADR-019](019-central-services-and-metered-billing.md) — §2: una tercera capa en el momento del envío, la supresión mutua entre organizaciones, corre después de las dos que se deciden más abajo para una organización en una alianza cuyo contrato incluye el término de supresión ([system.md § Motor de orquestación entre canales](../design/architecture/system.md#motor-de-orquestación-entre-canales)). Las dos capas decididas aquí no cambian. [ADR-020](020-central-service-line-up-and-builders.md) — #25: la edición de video dentro de la plataforma sigue siendo externa, como se decide más abajo; generar video a partir de un encargo es otra capacidad, propuesta y condicionada a la [ADR-018](018-ai-agent-posture.md). Hasta que se acepte, el #25 aplica a todo video.
 
 ## Contexto
 

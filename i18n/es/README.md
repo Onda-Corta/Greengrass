@@ -6,7 +6,7 @@ GreenGrass reúne en un solo lugar un gestor de relaciones con constituyentes (C
 
 ## Qué está en español y qué no
 
-En español está casi todo: las 14 especificaciones de producto, la arquitectura del sistema, los 19 ADR más el registro de decisiones de UX y los 15 documentos de diseño de UX que no son wireframes. Cincuenta documentos.
+En español está casi todo: las 14 especificaciones de producto, la arquitectura del sistema, los 20 ADR más el registro de decisiones de UX y los 15 documentos de diseño de UX que no son wireframes. Cincuenta y un documentos.
 
 Falta una cosa, y es grande: los 23 documentos de wireframes —236 pantallas, más de la mitad de todo lo que hay escrito en este proyecto— siguen solo en inglés, igual que el diario. Si sigues un enlace a un wireframe desde una página en español, vas a terminar en inglés. No está roto: es lo que todavía no se ha traducido. El botón **EN**, arriba a la derecha, te lleva a la documentación completa en cualquier momento.
 
@@ -46,7 +46,7 @@ Las especificaciones de producto, los artefactos de diseño de UX y los document
 
 ### Y por qué está construida así
 
-Los 19 ADR registran cada decisión de arquitectura, con su contexto, sus alternativas descartadas y lo que cuesta cada una.
+Los 20 ADR registran cada decisión de arquitectura, con su contexto, sus alternativas descartadas y lo que cuesta cada una.
 
 - **[ADR-001](decisions/001-platform-architecture.md)** — Arquitectura y despliegue de la plataforma
 - **[ADR-002](decisions/002-security-threat-model.md)** — Seguridad y modelo de amenazas
@@ -65,6 +65,9 @@ Los 19 ADR registran cada decisión de arquitectura, con su contexto, sus altern
 - **[ADR-015](decisions/015-product-scope.md)** — Límites del alcance del producto
 - **[ADR-016](decisions/016-cross-cutting-resolutions.md)** — Resoluciones transversales: las 89 preguntas abiertas de la fase de wireframes, resueltas
 - **[ADR-017](decisions/017-sharing-contract-trust-model.md)** — El contrato de intercambio como primitiva universal de confianza
+- **[ADR-018](decisions/018-ai-agent-posture.md)** — Postura ante los agentes de IA (propuesta)
+- **[ADR-019](decisions/019-central-services-and-metered-billing.md)** — Servicios centrales y facturación medida
+- **[ADR-020](decisions/020-central-service-line-up-and-builders.md)** — Los cuatro servicios centrales y los constructores
 - **[ux-decisions.md](decisions/ux-decisions.md)** — Decisiones de UX de la fase de wireframes
 
 ### El diseño en detalle

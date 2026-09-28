@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en" data-base="../" data-no-results="No results for">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ADR-020: Central Service Line-up &amp; Builders · GreenGrass</title>
+<meta name="description" content="ADR-020: Central Service Line-up &amp; Builders — GreenGrass spec &amp; design documentation.">
+<link rel="alternate" hreflang="en" href="./020-central-service-line-up-and-builders.html">
+<link rel="alternate" hreflang="es" href="../es/decisions/020-central-service-line-up-and-builders.html">
+<link rel="alternate" hreflang="x-default" href="./020-central-service-line-up-and-builders.html">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%232563eb'/%3E%3Cstop offset='1' stop-color='%2316a34a'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='32' height='32' rx='7' fill='url(%23g)'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="../assets/styles.css">
+</head>
+<body>
+<a class="skip-link" href="#content">Skip to content</a>
+<header class="site-header">
+  <button type="button" class="menu-toggle" aria-label="Toggle navigation" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+  <a class="brand" href="../index.html">
+    <span class="brand-mark" aria-hidden="true"></span>
+    <span class="brand-text"><strong>GreenGrass</strong><small>Spec &amp; Design</small></span>
+  </a>
+  <div class="search">
+    <input type="search" id="search-input" placeholder="Search docs…" autocomplete="off" aria-label="Search documentation">
+    <div id="search-results" class="search-results" hidden></div>
+  </div>
+  <nav class="lang-switch" aria-label="Language"><span class="lang-opt active" aria-current="true">EN</span><a class="lang-opt" href="../es/decisions/020-central-service-line-up-and-builders.html" hreflang="es" lang="es" title="Ver esta página en español">ES</a></nav>
+  <button type="button" class="theme-toggle" aria-label="Toggle dark mode" title="Toggle dark mode">
+    <span class="theme-icon" aria-hidden="true"></span>
+  </button>
+</header>
+<div class="layout">
+  <div class="sidebar-backdrop" hidden></div>
+  <aside class="sidebar" aria-label="Documentation navigation">
+    <nav class="nav">
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">Home<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../index.html">GreenGrass</a></li></ul></div>
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">Specifications<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../spec/product.html">Project: GreenGrass</a></li><li><a href="../spec/mvp.html">GreenGrass MVP — Product Plan</a></li><li><a href="../spec/users.html">Users &amp; Roles</a></li><li><a href="../spec/workflows.html">Core Workflows</a></li><li><a href="../spec/geography.html">Target Geography</a></li><li><a href="../spec/security.html">Security &amp; Threat Model</a></li><li><a href="../spec/compliance.html">Compliance &amp; Legal Framework</a></li><li><a href="../spec/fundraising.html">Fundraising &amp; Payment Infrastructure</a></li><li><a href="../spec/integrations.html">External Integrations</a></li><li><a href="../spec/support.html">Tenant Support &amp; Onboarding</a></li><li><a href="../spec/gotv.html">Get Out The Vote &amp; Election Day Operations</a></li><li><a href="../spec/messaging.html">Internal Communications &amp; Notifications</a></li><li><a href="../spec/press.html">Press, Media &amp; Public Communications</a></li><li><a href="../spec/comms-intelligence.html">Comms Intelligence — Post-MVP Roadmap</a></li></ul></div>
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">Architecture<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../design/architecture/system.html">System Architecture</a></li></ul></div>
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">UX Design<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../design/ux/00-overview.html">UX Design Overview</a></li><li><a href="../design/ux/01-information-architecture/navigation-model.html">Navigation Model</a></li><li><a href="../design/ux/01-information-architecture/screen-inventory.html">Screen Inventory</a></li><li><a href="../design/ux/01-information-architecture/persona-views.html">Persona Views</a></li><li><a href="../design/ux/01-information-architecture/url-structure.html">URL Structure</a></li><li><a href="../design/ux/02-global-patterns/pattern-catalog.html">Pattern Catalog</a></li><li><a href="../design/ux/02-global-patterns/offline-sync-patterns.html">Offline &amp; Sync Patterns</a></li><li><a href="../design/ux/02-global-patterns/notification-patterns.html">Notification Patterns</a></li><li><a href="../design/ux/02-global-patterns/search-patterns.html">Search Patterns</a></li><li><a href="../design/ux/02-global-patterns/settings-help-patterns.html">Settings &amp; Help Patterns</a></li><li><a href="../design/ux/02-global-patterns/security-ux-patterns.html">Security UX Patterns</a></li><li><a href="../design/ux/03-design-system/foundations.html">Design System Foundations</a></li><li><a href="../design/ux/03-design-system/theming-strategy.html">Theming Strategy</a></li><li><a href="../design/ux/03-design-system/component-inventory.html">Component Inventory</a></li><li><a href="../design/ux/03-design-system/responsive-strategy.html">Responsive Strategy</a></li><li><a href="../design/ux/04-wireframes/index.html">Wireframes</a></li><li><a href="../design/ux/04-wireframes/navigation-shell/navigation-shell.html">Navigation Shell Wireframes</a></li><li><a href="../design/ux/04-wireframes/dashboards/dashboards.html">Dashboard Wireframes</a></li><li><a href="../design/ux/04-wireframes/field-mode/field-mode.html">Field Mode Wireframes</a></li><li><a href="../design/ux/04-wireframes/onboarding/onboarding.html">Onboarding Wireframes</a></li><li><a href="../design/ux/04-wireframes/messaging/messaging.html">Messaging Wireframes</a></li><li><a href="../design/ux/04-wireframes/supporter/supporter-portal.html">Supporter Portal Wireframes</a></li><li><a href="../design/ux/04-wireframes/alliance/alliance.html">Alliance Wireframes</a></li><li><a href="../design/ux/04-wireframes/crm/crm.html">CRM / People Wireframes</a></li><li><a href="../design/ux/04-wireframes/field-ops/field-ops.html">Field Operations (Admin) Wireframes</a></li><li><a href="../design/ux/04-wireframes/fundraising/fundraising.html">Fundraising Wireframes</a></li><li><a href="../design/ux/04-wireframes/communications/communications.html">Communications Wireframes</a></li><li><a href="../design/ux/04-wireframes/social-media/social-media.html">Social Media Wireframes</a></li><li><a href="../design/ux/04-wireframes/events/events.html">Events Wireframes</a></li><li><a href="../design/ux/04-wireframes/press/press.html">Press &amp; Media Wireframes</a></li><li><a href="../design/ux/04-wireframes/activism/activism.html">Activism &amp; Engagement Campaign Wireframes</a></li><li><a href="../design/ux/04-wireframes/gotv/gotv.html">GOTV Admin Wireframes</a></li><li><a href="../design/ux/04-wireframes/settings/settings.html">Settings &amp; Admin Wireframes</a></li><li><a href="../design/ux/04-wireframes/auth/auth.html">Authentication Wireframes</a></li><li><a href="../design/ux/04-wireframes/profile/profile.html">User Profile Wireframes</a></li><li><a href="../design/ux/04-wireframes/help/help.html">Support &amp; Help Wireframes</a></li><li><a href="../design/ux/04-wireframes/public/public.html">Public Pages Wireframes</a></li><li><a href="../design/ux/04-wireframes/audit.html">Wireframe Audit Report</a></li></ul></div>
+<div class="nav-section open"><button type="button" class="nav-section-title" aria-expanded="true">Decisions<span class="chev" aria-hidden="true"></span></button><ul><li><a href="./001-platform-architecture.html">ADR-001: Platform Architecture &amp; Deployment</a></li><li><a href="./002-security-threat-model.html">ADR-002: Security &amp; Threat Model</a></li><li><a href="./003-identity-access-organization.html">ADR-003: Identity, Access &amp; Organization</a></li><li><a href="./004-data-model-integrity.html">ADR-004: Data Model &amp; Integrity</a></li><li><a href="./005-offline-first-sync.html">ADR-005: Offline-First &amp; Sync</a></li><li><a href="./006-field-operations-gotv.html">ADR-006: Field Operations &amp; GOTV</a></li><li><a href="./007-fundraising-payments.html">ADR-007: Fundraising &amp; Payments</a></li><li><a href="./008-communications-messaging.html">ADR-008: Communications &amp; Messaging</a></li><li><a href="./009-compliance-legal.html">ADR-009: Compliance &amp; Legal Framework</a></li><li><a href="./010-internationalization-localization.html">ADR-010: Internationalization &amp; Localization</a></li><li><a href="./011-design-system-ux.html">ADR-011: Design System &amp; UX Foundations</a></li><li><a href="./012-external-integrations.html">ADR-012: External Integrations</a></li><li><a href="./013-analytics-ai.html">ADR-013: Analytics &amp; AI</a></li><li><a href="./014-volunteer-onboarding.html">ADR-014: Volunteer &amp; Onboarding</a></li><li><a href="./015-product-scope.html">ADR-015: Product Scope Boundaries</a></li><li><a href="./016-cross-cutting-resolutions.html">ADR-016: Cross-Cutting Resolutions</a></li><li><a href="./017-sharing-contract-trust-model.html">ADR-017: The Sharing Contract as Universal Trust Primitive</a></li><li><a href="./018-ai-agent-posture.html">ADR-018: AI Agent Posture</a></li><li><a href="./019-central-services-and-metered-billing.html">ADR-019: Central Services &amp; Metered Billing</a></li><li><a href="./020-central-service-line-up-and-builders.html" aria-current="page" class="active">ADR-020: Central Service Line-up &amp; Builders</a></li><li><a href="./ux-decisions.html">UX Decisions — Wireframe Phase</a></li></ul></div>
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">Diary<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../diary/index.html">Project Diary</a></li><li><a href="../diary/01-from-description-to-specification.html">Entry 1: From Description to Specification</a></li><li><a href="../diary/02-the-architecture-session.html">Entry 2: The Architecture Session</a></li><li><a href="../diary/03-information-architecture.html">Entry 3: Information Architecture</a></li><li><a href="../diary/04-design-system-and-wireframes.html">Entry 4: The Design System and Wireframes</a></li><li><a href="../diary/05-the-wireframe-audit.html">Entry 5: The Wireframe Audit</a></li><li><a href="../diary/06-resolving-the-open-questions.html">Entry 6: Resolving the Open Questions</a></li><li><a href="../diary/07-reconciling-the-architecture.html">Entry 7: Reconciling the Architecture</a></li><li><a href="../diary/08-housekeeping.html">Diary Entry 8: Housekeeping</a></li><li><a href="../diary/09-the-documentation-website.html">Diary Entry 9: The Documentation Website</a></li><li><a href="../diary/10-the-spanish-edition.html">Diary Entry 10: The Spanish Edition</a></li><li><a href="../diary/11-translating-the-rest.html">Diary Entry 11: Translating the Rest</a></li><li><a href="../diary/12-the-agent-question.html">Diary Entry 12: The Agent Question</a></li><li><a href="../diary/13-services-a-la-carte.html">Diary Entry 13: Services à la Carte</a></li></ul></div>
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">Project &amp; Internal<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../claude/MEMORY.html">Memory</a></li><li><a href="../claude/SKILLS.html">Skills</a></li><li><a href="../CLAUDE.html">GreenGrass</a></li></ul></div>
+    </nav>
+  </aside>
+  <main id="content" class="content">
+    <nav class="breadcrumb" aria-label="Breadcrumb">Decisions</nav>
+    <article class="prose">
+<h1 id="adr-020-central-service-line-up-builders" tabindex="-1"><a class="heading-anchor" href="#adr-020-central-service-line-up-builders" aria-hidden="true">#</a> ADR-020: Central Service Line-up &amp; Builders</h1>
+<p><strong>Status:</strong> Accepted
+<strong>Date:</strong> 2026-09-28
+<strong>Sources:</strong> <code>spec/comms-intelligence.md</code>, <code>spec/press.md</code>, <code>design/architecture/system.md</code>, <code>decisions/013-analytics-ai.md</code>, <code>decisions/015-product-scope.md</code>, <code>decisions/016-cross-cutting-resolutions.md</code>, <code>decisions/018-ai-agent-posture.md</code>, <code>decisions/019-central-services-and-metered-billing.md</code></p>
+<h2 id="context" tabindex="-1"><a class="heading-anchor" href="#context" aria-hidden="true">#</a> Context</h2>
+<p><a href="./019-central-services-and-metered-billing.html">ADR-019</a> gave central services a home: a catalogue, per-tenant entitlements, metering, execution for one tenant per call, and nothing retained between calls. It named the kinds of capability that would live there and left the line-up itself for later. The alliance services board recorded in <a href="../diary/13-services-a-la-carte.html">diary entry 13</a> draws four services, with mutual suppression consulted before every send: Capture, Analysis, Builders and outbound dispatch.</p>
+<p>Three of the four already exist in the corpus under other names. Capture is the automated media monitoring that <a href="../spec/comms-intelligence.html#9-the-iterations">comms-intelligence.md § 9. The iterations</a> sequences as Iteration 3 and <a href="./015-product-scope.html#deferred-automated-media-monitoring">ADR-015</a> defers. Analysis is the dossier work of Iterations 4 to 6, plus analysis of published electoral results. Outbound dispatch is the channel transport <a href="../design/architecture/system.html#communication-infrastructure">system.md § Communication Infrastructure</a> already specifies, and which ADR-019 lists as a central service.</p>
+<p>Builders is the new one. The corpus has accepted exactly one generation feature: <a href="./013-analytics-ai.html#ai-generated-custom-messaging-for-activism">ADR-013 § AI-generated custom messaging for activism</a>, where a supporter reviews, edits and approves a drafted message before it is sent. The board's Builders service drafts text, images and video for campaign staff. <a href="./016-cross-cutting-resolutions.html">ADR-016</a> #25 kept video creation outside the platform. And <a href="./018-ai-agent-posture.html">ADR-018</a> gates any AI capability with wide read scope, tool authority, autonomous action or broad credentials until its review is accepted.</p>
+<h3 id="conflicts-this-adr-resolves" tabindex="-1"><a class="heading-anchor" href="#conflicts-this-adr-resolves" aria-hidden="true">#</a> Conflicts this ADR resolves</h3>
+<ol>
+<li><strong><a href="./015-product-scope.html#deferred-automated-media-monitoring">ADR-015 § Deferred: automated media monitoring</a></strong> defers monitoring &quot;as a dedicated product initiative&quot;. Capture specifies it.</li>
+<li><strong><a href="./016-cross-cutting-resolutions.html">ADR-016</a> #25</strong> decides that TikTok video creation is &quot;external only; upload finished videos&quot;. The board puts video in Builders.</li>
+</ol>
+<h2 id="decision" tabindex="-1"><a class="heading-anchor" href="#decision" aria-hidden="true">#</a> Decision</h2>
+<h3 id="four-central-services" tabindex="-1"><a class="heading-anchor" href="#four-central-services" aria-hidden="true">#</a> Four central services</h3>
+<table>
+<thead>
+<tr>
+<th>Service</th>
+<th>What it does</th>
+<th>What it works on</th>
+<th>Where output lands</th>
+<th>When</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Capture</strong></td>
+<td>Collects published press, broadcast (TV, radio and podcasts, transcribed), public social accounts and published polls</td>
+<td>Public sources. The corpus may be shared within a country; queries against it are tenant-scoped</td>
+<td>The tenant's monitoring inbox</td>
+<td>Comms intelligence Iteration 3, gated on Iteration 0</td>
+</tr>
+<tr>
+<td><strong>Analysis</strong></td>
+<td>Electoral analysis over published results; delivery of opposition research and self-vetting findings</td>
+<td>Published results, which share like the capture corpus. Research, which never shares</td>
+<td>The tenant. Research lands in the compartment its contract names</td>
+<td>Research: Iterations 4 to 6, gates unchanged. Electoral analysis: not yet scheduled</td>
+</tr>
+<tr>
+<td><strong>Builders</strong></td>
+<td>Drafts text, images and video from a brief a person supplies</td>
+<td>Only what the invoking person hands it</td>
+<td>A draft inside the tenant</td>
+<td>Text: new Iteration 7. Images and video: proposed, see below</td>
+</tr>
+<tr>
+<td><strong>Channel transport</strong></td>
+<td>Sends email, SMS and WhatsApp, and distributes to social accounts</td>
+<td>The tenant's own messages</td>
+<td>The recipient</td>
+<td>Already specified; mutual suppression runs before every send</td>
+</tr>
+</tbody>
+</table>
+<p>Every one of them runs under ADR-019 without exception: an entitlement per tenant, one tenant per call, nothing retained, metered supplier costs passed through at cost.</p>
+<p><strong>Alternatives considered:</strong> A separate &quot;monitoring platform&quot; outside the central-service model was rejected because it would need its own isolation and billing story, and ADR-019 already supplies both. Folding electoral analysis into Capture was rejected because it produces analysis rather than a corpus, and the difference decides where output lands.</p>
+<h3 id="capture-automated-media-monitoring-moves-from-deferred-to-specified" tabindex="-1"><a class="heading-anchor" href="#capture-automated-media-monitoring-moves-from-deferred-to-specified" aria-hidden="true">#</a> Capture: automated media monitoring moves from deferred to specified</h3>
+<p>ADR-015 deferred automated monitoring until it could be a dedicated product initiative. <a href="../spec/comms-intelligence.html">comms-intelligence.md</a> is that initiative, and ADR-019 gives it an architectural home. It is now specified as the Capture service. <strong>The build stays gated on Iteration 0</strong>, the corpus probe at <a href="../spec/comms-intelligence.html#74-the-corpus-probe-run-it-early-it-costs-three-weeks">comms-intelligence.md § 7.4 The corpus probe — run it early, it costs three weeks</a>, and the kill criterion stands: under 30% reachable coverage in Brazil drops the service.</p>
+<ul>
+<li><strong>Published sources only.</strong> Closed messaging groups are never captured, as a commitment rather than a limitation (<a href="../spec/comms-intelligence.html#72-the-news-does-not-move-through-the-web">comms-intelligence.md § 7.2 The news does not move through the web</a>). Social capture means public accounts.</li>
+<li><strong>Broadcast needs transcription.</strong> That is the cost line §7.2 names. Where a transcription supplier bills per minute, it is a metered cost and passes through at cost.</li>
+<li><strong>Published polls are public data. A tenant's own polling is not.</strong> Polls a campaign commissions are tenant data. They stay in the tenant and never enter the shared corpus.</li>
+</ul>
+<h3 id="analysis-shared-where-the-data-is-public-compartmented-where-it-is-not" tabindex="-1"><a class="heading-anchor" href="#analysis-shared-where-the-data-is-public-compartmented-where-it-is-not" aria-hidden="true">#</a> Analysis: shared where the data is public, compartmented where it is not</h3>
+<p>Electoral analysis over published results carries no personal data and no contract, and shares within a country like the capture corpus. Opposition research and self-vetting findings are delivered into the requesting tenant's compartment under <a href="../spec/comms-intelligence.html#8-the-doctrine">comms-intelligence.md § 8. The doctrine</a>. Iterations 4, 5 and 6, their order and their gates are unchanged: no dossier work before the compartmentation primitive, and no opposition research before legal review in each jurisdiction. Electoral analysis is a catalogue entry without a scheduled iteration. When it is built is an open product question, recorded in <a href="../spec/comms-intelligence.html#12-open-questions">comms-intelligence.md § 12. Open questions</a>.</p>
+<h3 id="builders-text-accepted-images-and-video-proposed" tabindex="-1"><a class="heading-anchor" href="#builders-text-accepted-images-and-video-proposed" aria-hidden="true">#</a> Builders: text accepted, images and video proposed</h3>
+<p>Every builder, whatever it produces, works inside the same bounds:</p>
+<ul>
+<li><strong>A person invokes it with a brief.</strong> Nothing triggers a builder in the background.</li>
+<li><strong>It reads only what that person hands it:</strong> the brief, the talking points they select, the assets they attach. It has no read path into contacts, voter records, messages, donations or compartments.</li>
+<li><strong>It returns a draft, never a send.</strong> The draft lands in the tenant marked as generated and enters the approval workflows that already apply to that kind of content (<a href="./016-cross-cutting-resolutions.html">ADR-016</a> #22 for social posts). A builder holds no credential to channel transport. Output reaches a recipient only through a person's send action.</li>
+<li><strong>It keeps the guardrails of ADR-013:</strong> no facts, statistics or claims that are not in the source material.</li>
+<li><strong>Its cost is metered.</strong> Inference and generation charges pass through at cost under ADR-019. Under BYOM (<a href="./016-cross-cutting-resolutions.html">ADR-016</a> §38) the tenant's own provider bills the tenant directly, and nothing passes through.</li>
+</ul>
+<p>Within these bounds a builder has none of the four properties ADR-018 gates on: its read scope is one brief, it invokes no platform operation, it changes nothing without a person, and its credential is scoped to one service.</p>
+<p><strong>Text builders are accepted.</strong> They are ADR-013's shape extended from supporters to staff: a draft from supplied material, reviewed, edited and approved by a person before anything happens.</p>
+<p><strong>Image and video builders are proposed, not accepted.</strong> They get catalogue entries, and those entries cannot be enabled until ADR-018 is accepted with its item 6, the human-gate principle, answered. The bounds above are necessary for them and not sufficient. Synthetic images and video of identifiable people are the sharpest misuse of generation in an electoral product, and disclosure rules for synthetic political media differ across the target jurisdictions. Two questions are recorded for the review and not decided here: whether a builder may ever depict a real, identifiable person, and what labelling a generated image or video must carry when published.</p>
+<p><strong>Alternatives considered:</strong> Accepting all three builders now was rejected because it would decide the human-gate principle for the highest-risk media before the review that exists to state it. Leaving Builders out of the line-up entirely was rejected because text drafting is the same shape as a feature already accepted, and holding it back would gate something ADR-018 does not gate.</p>
+<h3 id="adr-016-25-editing-stays-external-generation-is-a-separate-question" tabindex="-1"><a class="heading-anchor" href="#adr-016-25-editing-stays-external-generation-is-a-separate-question" aria-hidden="true">#</a> ADR-016 #25: editing stays external; generation is a separate question</h3>
+<p>#25 decided against in-platform video <em>editing</em> (timeline editors, effects, transitions, music licensing) on grounds of scope. That stands: GreenGrass does not build a video editor. Generating a video from a brief is a different capability with a different cost: a supplier call, not an editor. It is proposed above and gated. Until it is accepted, #25 applies to all video, and campaigns upload finished files. If the video builder is accepted, its output is a finished file that enters the composer exactly as #25 describes: upload, scheduling, caption writing, approval and analytics.</p>
+<h3 id="channel-transport" tabindex="-1"><a class="heading-anchor" href="#channel-transport" aria-hidden="true">#</a> Channel transport</h3>
+<p>Nothing about channel transport changes. It is named here as the fourth service so the line-up is complete. Per-message charges from SMS and WhatsApp gateways pass through at cost; self-hosted email is flat cost to GreenGrass and has no metered plane. Mutual suppression runs before every send, as the third layer at <a href="../design/architecture/system.html#cross-channel-orchestration-engine">system.md § Cross-channel orchestration engine</a>. A send is always a person's action or a schedule a person set.</p>
+<h3 id="housekeeping-amendment-banners" tabindex="-1"><a class="heading-anchor" href="#housekeeping-amendment-banners" aria-hidden="true">#</a> Housekeeping: amendment banners</h3>
+<p>This ADR adds an <strong>Amended by</strong> line to <a href="./015-product-scope.html">ADR-015</a> for automated media monitoring and extends the one on <a href="./016-cross-cutting-resolutions.html">ADR-016</a> to cover #25.</p>
+<h2 id="consequences" tabindex="-1"><a class="heading-anchor" href="#consequences" aria-hidden="true">#</a> Consequences</h2>
+<p><strong>Benefits:</strong></p>
+<ul>
+<li>The four services on the board map onto one architecture and one roadmap. No new spec document, no parallel plan</li>
+<li>Media monitoring, parked in March with a note to come back, has a specification and a gate</li>
+<li>Text drafting for staff ships on the same terms as a feature already accepted, without waiting for a review it does not need</li>
+<li>The highest-risk generation, images and video of people, waits for the review built to decide it</li>
+</ul>
+<p><strong>Costs:</strong></p>
+<ul>
+<li>Capture carries ongoing corpus operations and transcription costs that no estimate included before comms intelligence</li>
+<li>A builder that reads only what it is handed produces weaker drafts than one that could read the CRM. That is the price of staying outside the ADR-018 gate, and it is paid on purpose</li>
+<li>Electoral analysis is named and unscheduled, which leaves a catalogue entry without a delivery date</li>
+</ul>
+<p><strong>Constraints:</strong></p>
+<ul>
+<li>Every service in the line-up is bound by ADR-019: per-tenant execution, nothing retained, metering at cost</li>
+<li>Capture's build is gated on Iteration 0; its sources are published only, never closed messaging</li>
+<li>Iterations 4 to 6 and their gates are unchanged</li>
+<li>No builder has send authority, background triggers, or read access beyond its brief</li>
+<li>Image and video builders cannot be enabled until ADR-018 is accepted with item 6 answered</li>
+</ul>
+<p><strong>Related ADRs:</strong> <a href="./013-analytics-ai.html">ADR-013</a> (the accepted shape text builders extend), <a href="./015-product-scope.html">ADR-015</a> (amended — automated media monitoring moves from deferred to specified), <a href="./016-cross-cutting-resolutions.html">ADR-016</a> (amended — #25 holds for editing, generation proposed; #22 approval applies to builder drafts; §38 BYOM), <a href="./018-ai-agent-posture.html">ADR-018</a> (image and video builders wait on item 6; the gate is unchanged), <a href="./019-central-services-and-metered-billing.html">ADR-019</a> (the model every service in the line-up runs under)</p>
+
+    </article>
+  </main>
+  <div class="toc-rail"><nav class="toc" aria-label="On this page"><div class="toc-label">On this page</div><ul><li class="toc-2"><a href="#context"># Context</a></li><li class="toc-3"><a href="#conflicts-this-adr-resolves"># Conflicts this ADR resolves</a></li><li class="toc-2"><a href="#decision"># Decision</a></li><li class="toc-3"><a href="#four-central-services"># Four central services</a></li><li class="toc-3"><a href="#capture-automated-media-monitoring-moves-from-deferred-to-specified"># Capture: automated media monitoring moves from deferred to specified</a></li><li class="toc-3"><a href="#analysis-shared-where-the-data-is-public-compartmented-where-it-is-not"># Analysis: shared where the data is public, compartmented where it is not</a></li><li class="toc-3"><a href="#builders-text-accepted-images-and-video-proposed"># Builders: text accepted, images and video proposed</a></li><li class="toc-3"><a href="#adr-016-25-editing-stays-external-generation-is-a-separate-question"># ADR-016 #25: editing stays external; generation is a separate question</a></li><li class="toc-3"><a href="#channel-transport"># Channel transport</a></li><li class="toc-3"><a href="#housekeeping-amendment-banners"># Housekeeping: amendment banners</a></li><li class="toc-2"><a href="#consequences"># Consequences</a></li></ul></nav></div>
+</div>
+<script src="../assets/search.js" defer></script>
+<script src="../assets/app.js" defer></script>
+</body>
+</html>
