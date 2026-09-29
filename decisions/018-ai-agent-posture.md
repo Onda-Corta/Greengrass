@@ -152,6 +152,8 @@ A prototype conversation, shared alongside the alliance services board and mappe
 - **Citations mandatory:** talking points cite the knowledge-base passages they rest on, under the provenance rule at [comms-intelligence.md § 8.2 Provenance is mandatory](../spec/comms-intelligence.md#82-provenance-is-mandatory).
 - **A path without the agent:** staff can draft the same pieces and the candidate can approve them in the content pipeline's own screens.
 
+**A pitch runs it.** [pitch.md](../spec/pitch.md) documents a working demonstration of this example, built outside the corpus to open the door with candidacies. It runs on the prototyping side of the gate and inside the bounds above, and it accepts nothing here.
+
 ### Questions recorded by later ADRs
 
 - **From ADR-020:** whether an image or video builder may ever depict a real, identifiable person, and what identification as generated content a published image or video must carry. These belong under item 6 and, for disclosure, under item 2's compliance section.

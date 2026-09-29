@@ -42,9 +42,9 @@ npm run serve    # serve docs/ on port 8000
 
 ### Languages
 
-The site is bilingual. Available in Spanish: the 14 specification documents, the system
+The site is bilingual. Available in Spanish: the 15 specification documents, the system
 architecture, the 21 ADRs plus the UX decisions record, and the 15 UX documents
-that aren't wireframes — 52 documents in
+that aren't wireframes — 53 documents in
 all. The 24 wireframe documents and the project diary are still English only. An
 **EN / ES** switch sits in the top-right of the header on every page; pages that aren't
 translated still show it, dimmed, pointing at the Spanish home page, so the Spanish
@@ -96,9 +96,10 @@ If you're new to the project, read the specs in this order:
 12. **[`spec/messaging.md`](spec/messaging.md)** — Internal communications, notifications, E2E encryption.
 13. **[`spec/press.md`](spec/press.md)** — Press, media, social media, public profiles, endorsements.
 14. **[`spec/comms-intelligence.md`](spec/comms-intelligence.md)** — Post-MVP roadmap: media intelligence, fact check, media map, candidate vetting and opposition research, sequenced as iterations.
-15. **[`design/architecture/system.md`](design/architecture/system.md)** — System architecture, data model, infrastructure.
-16. **[`design/ux/00-overview.md`](design/ux/00-overview.md)** — UX design overview with reading order for all 38 UX documents.
-17. **[`decisions/`](decisions/)** — 21 Architecture Decision Records extracting and formalizing decisions from all spec and design documents.
+15. **[`spec/pitch.md`](spec/pitch.md)** — Pre-MVP pitch: a working demonstration of a candidate approving the day's posts over WhatsApp, for opening the door with real candidacies. Its code lives in the separate `greengrass-demo` repository, and it accepts nothing in ADR-018.
+16. **[`design/architecture/system.md`](design/architecture/system.md)** — System architecture, data model, infrastructure.
+17. **[`design/ux/00-overview.md`](design/ux/00-overview.md)** — UX design overview with reading order for all 38 UX documents.
+18. **[`decisions/`](decisions/)** — 21 Architecture Decision Records extracting and formalizing decisions from all spec and design documents.
 
 ## Project Structure
 
@@ -121,7 +122,8 @@ GreenGrass/
 │   ├── gotv.md                    # GOTV and election day operations
 │   ├── messaging.md               # Internal communications
 │   ├── press.md                   # Press, media, public communications
-│   └── comms-intelligence.md      # Post-MVP roadmap: comms intelligence
+│   ├── comms-intelligence.md      # Post-MVP roadmap: comms intelligence
+│   └── pitch.md                   # Pre-MVP pitch: the WhatsApp approval demo
 ├── design/
 │   ├── ux/                        # UX design artifacts
 │   │   ├── 00-overview.md         # Reading order and glossary

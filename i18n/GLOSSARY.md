@@ -1033,3 +1033,35 @@ Fijados antes de traducir la sección nueva de la ADR-018.
 | it speaks first | **habla primero** | El agente inicia la conversación sin que nadie se lo pida. |
 | business-initiated message (WhatsApp) | **mensaje que inicia la empresa** | Fuera de la ventana de 24 horas, solo con plantilla aprobada. |
 | changes after approval | **cambios después de la aprobación** | |
+
+---
+
+# Términos añadidos para la presentación pre-MVP
+
+Fijados al redactar `spec/pitch.md`, que se escribió primero en español y después se llevó al inglés.
+
+## Presentación y demostración
+
+| Inglés | Español | Nota |
+|---|---|---|
+| pitch (a una candidatura) | **presentación** | No *propuesta*: esa es el `pitch` a la prensa en `press.md`, y además choca con la *propuesta en revisión* de la ADR-018, que es otra cosa y sigue sin aceptarse. El archivo se llama `pitch.md`. |
+| pre-MVP | **pre-MVP** | Como `MVP`, se mantiene. |
+| demo / demonstration | **demostración** | *Una demostración que funciona.* No *demo* en prosa. |
+| rehearsal | **ensayo** | |
+| pack (la carpeta de cada candidatura) | **carpeta de candidatura** / **carpeta** | No *paquete*, que ya es `bundle`. En los bloques de código, `packs/`, `pack.yaml`, `pack:new` y `pack:check` no se traducen. |
+| brand (identidad del partido o de la Alianza) | **identidad visual** | Como `branding`. En los bloques de código, `brands/` no se traduce. |
+| artwork (las piezas gráficas) | **arte** / **artes** | Como en el prototipo: *revisó los artes*. |
+| artwork template / template set | **plantilla de arte** / **juego de plantillas de arte** | Siempre con *de arte*: *plantilla* sola ya es de rol, de WhatsApp y `headcount`. |
+| frame (mockup de cada red) | **mockup de la red** | `mockup` se mantiene. |
+| type-only (variante) | **de solo tipografía** | |
+| photo library | **banco de fotos** | |
+| contact sheet | **hoja de contactos** | Término de fotografía. |
+| demo clock | **reloj de demostración** | |
+| simulated publisher | **publicador simulado** | |
+| staff screen | **pantalla del equipo** | |
+| conversation mirror | **espejo de la conversación** | |
+| Start day (botón) | **Iniciar día** | Texto del botón; en el inglés se glosa como *Start day*. |
+| display name (WhatsApp) | **nombre visible** | |
+| routed by sender | **enrutado por remitente** | |
+| simplified (estado en la tabla de real/simulado) | **simplificado** | Entre *real* y *simulado*: funciona de verdad, pero con menos que el producto. |
+| on the safe side of the gate | **del lado seguro del punto de decisión** | Del lado de la experimentación, según la ADR-018. |

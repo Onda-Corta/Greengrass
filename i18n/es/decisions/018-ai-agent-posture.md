@@ -152,6 +152,8 @@ Una conversación de prototipo, compartida junto con el tablero de servicios de 
 - **Citas obligatorias:** los puntos de mensaje citan los pasajes de la base de conocimiento en que se apoyan, según la regla de procedencia de [comms-intelligence.md § 8.2 La procedencia es obligatoria](../spec/comms-intelligence.md#82-la-procedencia-es-obligatoria).
 - **Un camino sin el agente:** el equipo puede redactar las mismas piezas y el candidato puede aprobarlas en las pantallas propias del flujo de contenido.
 
+**Una presentación lo corre.** [pitch.md](../spec/pitch.md) documenta una demostración que funciona de este ejemplo, construida fuera del corpus para abrirle la puerta a GreenGrass con candidaturas. Corre del lado de la experimentación del punto de decisión y dentro de los límites de arriba, y no acepta nada de lo que hay aquí.
+
 ### Preguntas anotadas por ADR posteriores
 
 - **De la ADR-020:** si un constructor de imágenes o de video puede retratar alguna vez a una persona real e identificable, y qué identificación como contenido generado debe llevar una imagen o un video generado cuando se publica. Corresponden al punto 6 y, en lo que toca a la divulgación, a la sección de cumplimiento del punto 2.
