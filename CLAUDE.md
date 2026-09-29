@@ -32,6 +32,7 @@ GreenGrass/
 │       ├── decisions/             # The 21 ADRs + ux-decisions, in Spanish
 │       └── design/                # Architecture + the 15 non-wireframe UX docs
 ├── spec/                          # Product specifications (15 docs)
+│   ├── pitch.md                   # Pre-MVP pitch: the WhatsApp approval demo
 │   ├── product.md                 # High-level product description
 │   ├── mvp.md                     # MVP product plan and pilot design
 │   ├── users.md                   # User personas and roles
@@ -45,8 +46,7 @@ GreenGrass/
 │   ├── gotv.md                    # GOTV and election day operations
 │   ├── messaging.md               # Internal communications and notifications
 │   ├── press.md                   # Press, media, and public communications
-│   ├── comms-intelligence.md      # Post-MVP roadmap: comms intelligence
-│   └── pitch.md                   # Pre-MVP pitch: the WhatsApp approval demo
+│   └── comms-intelligence.md      # Post-MVP roadmap: comms intelligence
 ├── design/
 │   ├── ux/                        # UX design artifacts (38 docs)
 │   │   ├── 00-overview.md         # Reading order and glossary
