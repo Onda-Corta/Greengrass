@@ -6,7 +6,7 @@ GreenGrass reúne en un solo lugar un gestor de relaciones con constituyentes (C
 
 ## Qué está en español y qué no
 
-En español está casi todo: las 15 especificaciones de producto, la arquitectura del sistema, los 21 ADR más el registro de decisiones de UX y los 15 documentos de diseño de UX que no son wireframes. Cincuenta y tres documentos.
+En español está casi todo: las 16 especificaciones de producto, la arquitectura del sistema, los 21 ADR más el registro de decisiones de UX y los 15 documentos de diseño de UX que no son wireframes. Cincuenta y cuatro documentos.
 
 Falta una cosa, y es grande: los 24 documentos de wireframes —240 pantallas, más de la mitad de todo lo que hay escrito en este proyecto— siguen solo en inglés, igual que el diario. Si sigues un enlace a un wireframe desde una página en español, vas a terminar en inglés. No está roto: es lo que todavía no se ha traducido. El botón **EN**, arriba a la derecha, te lleva a la documentación completa en cualquier momento.
 
@@ -24,26 +24,27 @@ Las especificaciones de producto, los artefactos de diseño de UX y los document
 
 ### Empieza por el producto
 
-1. **[pitch.md](spec/pitch.md)** — Empieza aquí. Presentación pre-MVP: una demostración que funciona, en la que una candidata aprueba por WhatsApp las piezas del día, para abrirle la puerta a GreenGrass con candidaturas reales. Su código vive aparte, en el repositorio `greengrass-demo`, y no acepta nada de la ADR-018.
-2. **[product.md](spec/product.md)** — Descripción general del producto, usuarios objetivo, conjunto de funcionalidades centrales.
-3. **[mvp.md](spec/mvp.md)** — Plan de producto del MVP: el fideicomiso de datos de la coalición, y el piloto diseñado para probar el supuesto más riesgoso del proyecto.
-4. **[users.md](spec/users.md)** — Arquetipos de usuario, roles, modelo de permisos.
-5. **[workflows.md](spec/workflows.md)** — 12 flujos de trabajo centrales: trabajo de campo, inscripción de votantes, recaudación de fondos, eventos, comunicaciones y más.
-6. **[geography.md](spec/geography.md)** — Países objetivo, estrategia de localización, secuencia de despliegue.
-7. **[security.md](spec/security.md)** — Modelo de amenazas, seguridad en 5 niveles, arquitectura de cifrado, autenticación.
-8. **[compliance.md](spec/compliance.md)** — Ley electoral, protección de datos y financiamiento de campañas en los 5 países.
-9. **[fundraising.md](spec/fundraising.md)** — Procesamiento de pagos, tipos de donación, recaudación en alianza, experiencia del donante.
-10. **[integrations.md](spec/integrations.md)** — Sistemas externos: GIS y mapas, SMS, WhatsApp, telefonía, observabilidad.
-11. **[support.md](spec/support.md)** — Superficie de soporte a las organizaciones, asistentes de puesta en marcha, base de conocimiento, modelo de acompañamiento.
-12. **[gotv.md](spec/gotv.md)** — GOTV (Get Out The Vote — movilización del voto) y operaciones del día de elecciones.
-13. **[messaging.md](spec/messaging.md)** — Comunicaciones internas, notificaciones, cifrado de extremo a extremo.
-14. **[press.md](spec/press.md)** — Prensa, medios, redes sociales, perfiles públicos, respaldos.
-15. **[comms-intelligence.md](spec/comms-intelligence.md)** — Hoja de ruta post-MVP: inteligencia de medios, verificación de datos, mapa de medios, evaluación de candidaturas e investigación de oposición, ordenadas por iteraciones.
+1. **[pitch.md](spec/pitch.md)** — Empieza aquí. Presentación pre-MVP: un asistente de campaña en WhatsApp redacta las piezas del día y la candidata aprueba cada una. Escrita para leerse sola, para las candidaturas.
+2. **[demo.md](spec/demo.md)** — Especificación de la demostración de aprobación de campaña: la misma demostración completa, y cómo encaja con GreenGrass y la ADR-018. Su código vive aparte, en el repositorio `greengrass-demo`, y no acepta nada de la ADR-018.
+3. **[product.md](spec/product.md)** — Descripción general del producto, usuarios objetivo, conjunto de funcionalidades centrales.
+4. **[mvp.md](spec/mvp.md)** — Plan de producto del MVP: el fideicomiso de datos de la coalición, y el piloto diseñado para probar el supuesto más riesgoso del proyecto.
+5. **[users.md](spec/users.md)** — Arquetipos de usuario, roles, modelo de permisos.
+6. **[workflows.md](spec/workflows.md)** — 12 flujos de trabajo centrales: trabajo de campo, inscripción de votantes, recaudación de fondos, eventos, comunicaciones y más.
+7. **[geography.md](spec/geography.md)** — Países objetivo, estrategia de localización, secuencia de despliegue.
+8. **[security.md](spec/security.md)** — Modelo de amenazas, seguridad en 5 niveles, arquitectura de cifrado, autenticación.
+9. **[compliance.md](spec/compliance.md)** — Ley electoral, protección de datos y financiamiento de campañas en los 5 países.
+10. **[fundraising.md](spec/fundraising.md)** — Procesamiento de pagos, tipos de donación, recaudación en alianza, experiencia del donante.
+11. **[integrations.md](spec/integrations.md)** — Sistemas externos: GIS y mapas, SMS, WhatsApp, telefonía, observabilidad.
+12. **[support.md](spec/support.md)** — Superficie de soporte a las organizaciones, asistentes de puesta en marcha, base de conocimiento, modelo de acompañamiento.
+13. **[gotv.md](spec/gotv.md)** — GOTV (Get Out The Vote — movilización del voto) y operaciones del día de elecciones.
+14. **[messaging.md](spec/messaging.md)** — Comunicaciones internas, notificaciones, cifrado de extremo a extremo.
+15. **[press.md](spec/press.md)** — Prensa, medios, redes sociales, perfiles públicos, respaldos.
+16. **[comms-intelligence.md](spec/comms-intelligence.md)** — Hoja de ruta post-MVP: inteligencia de medios, verificación de datos, mapa de medios, evaluación de candidaturas e investigación de oposición, ordenadas por iteraciones.
 
 ### Después, cómo está construida
 
-16. **[system.md](design/architecture/system.md)** — La arquitectura del sistema completa: topología, modelo de datos, cifrado, sincronización, conservación de datos, stack tecnológico.
-17. **[00-overview.md](design/ux/00-overview.md)** — Puerta de entrada al diseño de UX: orden de lectura, glosario y las convenciones que sigue el resto.
+17. **[system.md](design/architecture/system.md)** — La arquitectura del sistema completa: topología, modelo de datos, cifrado, sincronización, conservación de datos, stack tecnológico.
+18. **[00-overview.md](design/ux/00-overview.md)** — Puerta de entrada al diseño de UX: orden de lectura, glosario y las convenciones que sigue el resto.
 
 ### Y por qué está construida así
 
