@@ -6,7 +6,7 @@ GreenGrass reúne en un solo lugar un gestor de relaciones con constituyentes (C
 
 ## Qué está en español y qué no
 
-En español está casi todo: las 14 especificaciones de producto, la arquitectura del sistema, los 21 ADR más el registro de decisiones de UX y los 15 documentos de diseño de UX que no son wireframes. Cincuenta y dos documentos.
+En español está casi todo: las 15 especificaciones de producto, la arquitectura del sistema, los 21 ADR más el registro de decisiones de UX y los 15 documentos de diseño de UX que no son wireframes. Cincuenta y tres documentos.
 
 Falta una cosa, y es grande: los 24 documentos de wireframes —240 pantallas, más de la mitad de todo lo que hay escrito en este proyecto— siguen solo en inglés, igual que el diario. Si sigues un enlace a un wireframe desde una página en español, vas a terminar en inglés. No está roto: es lo que todavía no se ha traducido. El botón **EN**, arriba a la derecha, te lleva a la documentación completa en cualquier momento.
 
@@ -38,11 +38,12 @@ Las especificaciones de producto, los artefactos de diseño de UX y los document
 12. **[messaging.md](spec/messaging.md)** — Comunicaciones internas, notificaciones, cifrado de extremo a extremo.
 13. **[press.md](spec/press.md)** — Prensa, medios, redes sociales, perfiles públicos, respaldos.
 14. **[comms-intelligence.md](spec/comms-intelligence.md)** — Hoja de ruta post-MVP: inteligencia de medios, verificación de datos, mapa de medios, evaluación de candidaturas e investigación de oposición, ordenadas por iteraciones.
+15. **[pitch.md](spec/pitch.md)** — Presentación pre-MVP: una demostración que funciona, en la que una candidata aprueba por WhatsApp las piezas del día, para abrirle la puerta a GreenGrass con candidaturas reales. Su código vive aparte, en el repositorio `greengrass-demo`, y no acepta nada de la ADR-018.
 
 ### Después, cómo está construida
 
-15. **[system.md](design/architecture/system.md)** — La arquitectura del sistema completa: topología, modelo de datos, cifrado, sincronización, conservación de datos, stack tecnológico.
-16. **[00-overview.md](design/ux/00-overview.md)** — Puerta de entrada al diseño de UX: orden de lectura, glosario y las convenciones que sigue el resto.
+16. **[system.md](design/architecture/system.md)** — La arquitectura del sistema completa: topología, modelo de datos, cifrado, sincronización, conservación de datos, stack tecnológico.
+17. **[00-overview.md](design/ux/00-overview.md)** — Puerta de entrada al diseño de UX: orden de lectura, glosario y las convenciones que sigue el resto.
 
 ### Y por qué está construida así
 
