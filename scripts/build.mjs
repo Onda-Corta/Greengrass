@@ -7,7 +7,7 @@
 // All asset/navigation links are RELATIVE so the site works at file://, on a local
 // server, and at https://<user>.github.io/<repo>/ without any base-path config.
 
-import { promises as fs } from 'node:fs';
+import { promises as fs, existsSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { createMarkdown, scrapeHeadings } from './lib/headings.mjs';
@@ -156,7 +156,7 @@ function extractTitle(source, fallbackName) {
 // Each entry: { title, match(relMd) -> bool, order(relMd) -> sortable }
 // ---------------------------------------------------------------------------
 const SPEC_ORDER = [
-  'pitch', 'product', 'mvp', 'users', 'workflows', 'geography', 'security', 'compliance',
+  'pitch', 'demo', 'product', 'mvp', 'users', 'workflows', 'geography', 'security', 'compliance',
   'fundraising', 'integrations', 'support', 'gotv', 'messaging', 'press', 'comms-intelligence',
 ];
 const WIREFRAME_ORDER = [
@@ -445,6 +445,7 @@ async function main() {
   // Pass C: rewrite links, assemble pages, write files.
   let unresolved = 0;
   const searchIndex = [];
+  const images = new Set(); // repo-relative paths of images pages point at
 
   for (const ctx of ctxs) {
     // A translated page may link to a document that has no translation yet;
@@ -538,8 +539,24 @@ async function main() {
         return `href="${relPath}${anchorPart}"`;
       });
 
+      // Images resolve against the source file's real location, so one path
+      // works on GitHub and here: a Spanish page reaches an English-tree image
+      // with ../../../spec/... . The file is copied into docs/ at its repo path.
+      // A missing image fails the build, like a broken link.
+      const withImages = rewritten.replace(/<img([^>]*?) src="([^"]*)"/g, (full, pre, src) => {
+        if (/^(https?:|data:|\/\/)/i.test(src)) return full;
+        const repoPath = path.posix.normalize(path.posix.join(path.posix.dirname(d.relMd), decodeURI(src)));
+        if (repoPath.startsWith('..') || !existsSync(path.join(ROOT, repoPath))) {
+          console.warn(`  ! missing image in ${d.relMd}: "${src}"`);
+          unresolved++;
+          return full;
+        }
+        images.add(repoPath);
+        return `<img${pre} src="${relHref(fromOut, repoPath)}"`;
+      });
+
       // External links get target/rel.
-      const finalContent = rewritten.replace(
+      const finalContent = withImages.replace(
         /<a href="(https?:[^"]+)"/g,
         '<a href="$1" target="_blank" rel="noopener noreferrer"'
       );
@@ -558,6 +575,11 @@ async function main() {
         text: d.plainText.slice(0, 1400),
       });
     }
+  }
+
+  for (const img of images) {
+    await fs.mkdir(path.join(OUT, path.dirname(img)), { recursive: true });
+    await fs.copyFile(path.join(ROOT, img), path.join(OUT, img));
   }
 
   // Assets + search index + .nojekyll.

@@ -10,7 +10,7 @@ GreenGrass is a custom platform for managing grassroots political elections in t
 
 All spec and design work is done. One cross-cutting question is open and gates production: the corpus decided AI five times as bounded features and never asked what changes if AI agents operate throughout the product. `decisions/018-ai-agent-posture.md` is `Proposed` — the first non-accepted ADR — and lists what the review must resolve. Do not add agent-shaped capability (cross-feature read scope, tool authority, autonomous action, broad credentials) to the spec or to an implementation without resolving it first. `decisions/019-central-services-and-metered-billing.md` (accepted) adds central services, a service catalogue with per-tenant entitlements, and metered pass-through billing at cost with no margin; it supplies mechanisms ADR-018 can build on and does not resolve it. `decisions/020-central-service-line-up-and-builders.md` (accepted) names the four central services and accepts text builders only; image and video builders are proposed and cannot be enabled until ADR-018 is accepted. `decisions/021-content-approval-pipeline.md` (accepted) generalizes post approval into a content pipeline reviewed in rounds. GreenGrass is not a tool for managing content creators: a creator program ADR-021 first specified was withdrawn, so do not reintroduce creator rosters, tiers, dispatch to creators or a creator inbox. ADR-018 now carries the board's per-tenant agent harness and, as its worked example, a candidate approving the day's posts over WhatsApp, as the proposal under review. That section is a proposal, not a decision: do not treat anything in it as accepted.
 
-`spec/pitch.md` documents a pre-MVP pitch: a working demonstration of that WhatsApp flow, run with real candidates holding the phone, built to open the door with candidacies. Its code lives in a separate repository, `greengrass-demo`, never in this one. It is a pitch, not specified capability, and it accepts nothing in ADR-018. It stays on the prototyping side of the gate by holding no voter, donor or member records and publishing nothing; keep it there. Everything candidate-specific in the demo is folder data (one folder per candidacy, visual identities and artwork template sets swapped separately), so the demo must never hard-code a candidate.
+`spec/demo.md` (Campaign Approval Demo Spec) documents a pre-MVP pitch: a working demonstration of that WhatsApp flow, run with real candidates holding the phone, built to open the door with candidacies. Its code lives in a separate repository, `greengrass-demo`, never in this one. It is a pitch, not specified capability, and it accepts nothing in ADR-018. It stays on the prototyping side of the gate by holding no voter, donor or member records and publishing nothing; keep it there. Everything candidate-specific in the demo is folder data (one folder per candidacy, visual identities and artwork template sets swapped separately), so the demo must never hard-code a candidate. `spec/pitch.md` (Pre-MVP Pitch) describes the same demonstration standalone, for candidacies: no GreenGrass, ADR or architecture vocabulary. Keep it that way, and keep it consistent with `demo.md`.
 
 Completed phases:
 1. **Product definition** — 12 spec documents covering product, users, workflows, security, compliance, etc.
@@ -28,11 +28,12 @@ GreenGrass/
 │   ├── GLOSSARY.md                # Canonical ES terminology (not published)
 │   └── es/                        # Spanish mirror of the English tree
 │       ├── README.md              # Spanish home page
-│       ├── spec/                  # The 15 specs, in Spanish
+│       ├── spec/                  # The 16 specs, in Spanish
 │       ├── decisions/             # The 21 ADRs + ux-decisions, in Spanish
 │       └── design/                # Architecture + the 15 non-wireframe UX docs
-├── spec/                          # Product specifications (15 docs)
-│   ├── pitch.md                   # Pre-MVP pitch: the WhatsApp approval demo
+├── spec/                          # Product specifications (16 docs)
+│   ├── pitch.md                   # Pre-MVP pitch: standalone, for candidacies
+│   ├── demo.md                    # Campaign Approval Demo Spec
 │   ├── product.md                 # High-level product description
 │   ├── mvp.md                     # MVP product plan and pilot design
 │   ├── users.md                   # User personas and roles
@@ -72,7 +73,7 @@ The Markdown sources are canonical. `docs/` is generated from them by `npm run b
 The site is bilingual. English sources live at the repo root; Spanish lives under
 `i18n/es/`, mirroring the English path exactly (`spec/product.md` ->
 `i18n/es/spec/product.md`) and building to `docs/es/`. An EN/ES switch in the site
-header moves between them. Translated so far: the 15 specs, the system architecture,
+header moves between them. Translated so far: the 16 specs, the system architecture,
 the 21 ADRs plus `ux-decisions.md`, and the 15 non-wireframe UX documents. Still English only: the 24
 wireframe documents under `design/ux/04-wireframes/` and the project diary — the
 switch on those pages is styled as a fallback and goes to the Spanish home page.

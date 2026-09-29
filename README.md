@@ -42,9 +42,9 @@ npm run serve    # serve docs/ on port 8000
 
 ### Languages
 
-The site is bilingual. Available in Spanish: the 15 specification documents, the system
+The site is bilingual. Available in Spanish: the 16 specification documents, the system
 architecture, the 21 ADRs plus the UX decisions record, and the 15 UX documents
-that aren't wireframes — 53 documents in
+that aren't wireframes — 54 documents in
 all. The 24 wireframe documents and the project diary are still English only. An
 **EN / ES** switch sits in the top-right of the header on every page; pages that aren't
 translated still show it, dimmed, pointing at the Spanish home page, so the Spanish
@@ -82,24 +82,25 @@ The project defines custom skills in `.claude/SKILLS.md`:
 
 If you're new to the project, read the specs in this order:
 
-1. **[`spec/pitch.md`](spec/pitch.md)** — Start here. Pre-MVP pitch: a working demonstration of a candidate approving the day's posts over WhatsApp, for opening the door with real candidacies. Its code lives in the separate `greengrass-demo` repository, and it accepts nothing in ADR-018.
-2. **[`spec/product.md`](spec/product.md)** — High-level product description, target users, core feature set.
-3. **[`spec/mvp.md`](spec/mvp.md)** — MVP product plan: the coalition data trust, and the pilot designed to test the project's riskiest assumption.
-4. **[`spec/users.md`](spec/users.md)** — User personas, roles, permissions model.
-5. **[`spec/workflows.md`](spec/workflows.md)** — 12 core workflows: canvassing, voter registration, fundraising, events, communications, and more.
-6. **[`spec/geography.md`](spec/geography.md)** — Target countries, localization strategy, rollout sequence.
-7. **[`spec/security.md`](spec/security.md)** — Threat model, 5-tier security, encryption architecture, auth.
-8. **[`spec/compliance.md`](spec/compliance.md)** — Election law, data protection, campaign finance across all 5 countries.
-9. **[`spec/fundraising.md`](spec/fundraising.md)** — Payment processing, donation types, alliance fundraising, donor experience.
-10. **[`spec/integrations.md`](spec/integrations.md)** — External systems: GIS/mapping, SMS, WhatsApp, telephony, observability.
-11. **[`spec/support.md`](spec/support.md)** — Tenant support surface, onboarding wizards, knowledge base, concierge model.
-12. **[`spec/gotv.md`](spec/gotv.md)** — Get Out The Vote and election day operations.
-13. **[`spec/messaging.md`](spec/messaging.md)** — Internal communications, notifications, E2E encryption.
-14. **[`spec/press.md`](spec/press.md)** — Press, media, social media, public profiles, endorsements.
-15. **[`spec/comms-intelligence.md`](spec/comms-intelligence.md)** — Post-MVP roadmap: media intelligence, fact check, media map, candidate vetting and opposition research, sequenced as iterations.
-16. **[`design/architecture/system.md`](design/architecture/system.md)** — System architecture, data model, infrastructure.
-17. **[`design/ux/00-overview.md`](design/ux/00-overview.md)** — UX design overview with reading order for all 38 UX documents.
-18. **[`decisions/`](decisions/)** — 21 Architecture Decision Records extracting and formalizing decisions from all spec and design documents.
+1. **[`spec/pitch.md`](spec/pitch.md)** — Start here. Pre-MVP pitch: a campaign assistant on WhatsApp drafts the day's posts and the candidate approves each one. Written to stand on its own, for candidacies.
+2. **[`spec/demo.md`](spec/demo.md)** — Campaign Approval Demo Spec: the same demonstration in full, and how it sits against GreenGrass and ADR-018. Its code lives in the separate `greengrass-demo` repository, and it accepts nothing in ADR-018.
+3. **[`spec/product.md`](spec/product.md)** — High-level product description, target users, core feature set.
+4. **[`spec/mvp.md`](spec/mvp.md)** — MVP product plan: the coalition data trust, and the pilot designed to test the project's riskiest assumption.
+5. **[`spec/users.md`](spec/users.md)** — User personas, roles, permissions model.
+6. **[`spec/workflows.md`](spec/workflows.md)** — 12 core workflows: canvassing, voter registration, fundraising, events, communications, and more.
+7. **[`spec/geography.md`](spec/geography.md)** — Target countries, localization strategy, rollout sequence.
+8. **[`spec/security.md`](spec/security.md)** — Threat model, 5-tier security, encryption architecture, auth.
+9. **[`spec/compliance.md`](spec/compliance.md)** — Election law, data protection, campaign finance across all 5 countries.
+10. **[`spec/fundraising.md`](spec/fundraising.md)** — Payment processing, donation types, alliance fundraising, donor experience.
+11. **[`spec/integrations.md`](spec/integrations.md)** — External systems: GIS/mapping, SMS, WhatsApp, telephony, observability.
+12. **[`spec/support.md`](spec/support.md)** — Tenant support surface, onboarding wizards, knowledge base, concierge model.
+13. **[`spec/gotv.md`](spec/gotv.md)** — Get Out The Vote and election day operations.
+14. **[`spec/messaging.md`](spec/messaging.md)** — Internal communications, notifications, E2E encryption.
+15. **[`spec/press.md`](spec/press.md)** — Press, media, social media, public profiles, endorsements.
+16. **[`spec/comms-intelligence.md`](spec/comms-intelligence.md)** — Post-MVP roadmap: media intelligence, fact check, media map, candidate vetting and opposition research, sequenced as iterations.
+17. **[`design/architecture/system.md`](design/architecture/system.md)** — System architecture, data model, infrastructure.
+18. **[`design/ux/00-overview.md`](design/ux/00-overview.md)** — UX design overview with reading order for all 38 UX documents.
+19. **[`decisions/`](decisions/)** — 21 Architecture Decision Records extracting and formalizing decisions from all spec and design documents.
 
 ## Project Structure
 
@@ -109,7 +110,8 @@ GreenGrass/
 ├── .claude/
 │   └── SKILLS.md                  # Project-specific Claude skills
 ├── spec/
-│   ├── pitch.md                   # Pre-MVP pitch: the WhatsApp approval demo
+│   ├── pitch.md                   # Pre-MVP pitch: standalone, for candidacies
+│   ├── demo.md                    # Campaign Approval Demo Spec
 │   ├── product.md                 # High-level product description
 │   ├── mvp.md                     # MVP product plan and pilot design
 │   ├── users.md                   # User personas and roles
