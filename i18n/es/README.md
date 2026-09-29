@@ -24,21 +24,21 @@ Las especificaciones de producto, los artefactos de diseño de UX y los document
 
 ### Empieza por el producto
 
-1. **[product.md](spec/product.md)** — Empieza aquí. Descripción general del producto, usuarios objetivo, conjunto de funcionalidades centrales.
-2. **[mvp.md](spec/mvp.md)** — Plan de producto del MVP: el fideicomiso de datos de la coalición, y el piloto diseñado para probar el supuesto más riesgoso del proyecto.
-3. **[users.md](spec/users.md)** — Arquetipos de usuario, roles, modelo de permisos.
-4. **[workflows.md](spec/workflows.md)** — 12 flujos de trabajo centrales: trabajo de campo, inscripción de votantes, recaudación de fondos, eventos, comunicaciones y más.
-5. **[geography.md](spec/geography.md)** — Países objetivo, estrategia de localización, secuencia de despliegue.
-6. **[security.md](spec/security.md)** — Modelo de amenazas, seguridad en 5 niveles, arquitectura de cifrado, autenticación.
-7. **[compliance.md](spec/compliance.md)** — Ley electoral, protección de datos y financiamiento de campañas en los 5 países.
-8. **[fundraising.md](spec/fundraising.md)** — Procesamiento de pagos, tipos de donación, recaudación en alianza, experiencia del donante.
-9. **[integrations.md](spec/integrations.md)** — Sistemas externos: GIS y mapas, SMS, WhatsApp, telefonía, observabilidad.
-10. **[support.md](spec/support.md)** — Superficie de soporte a las organizaciones, asistentes de puesta en marcha, base de conocimiento, modelo de acompañamiento.
-11. **[gotv.md](spec/gotv.md)** — GOTV (Get Out The Vote — movilización del voto) y operaciones del día de elecciones.
-12. **[messaging.md](spec/messaging.md)** — Comunicaciones internas, notificaciones, cifrado de extremo a extremo.
-13. **[press.md](spec/press.md)** — Prensa, medios, redes sociales, perfiles públicos, respaldos.
-14. **[comms-intelligence.md](spec/comms-intelligence.md)** — Hoja de ruta post-MVP: inteligencia de medios, verificación de datos, mapa de medios, evaluación de candidaturas e investigación de oposición, ordenadas por iteraciones.
-15. **[pitch.md](spec/pitch.md)** — Presentación pre-MVP: una demostración que funciona, en la que una candidata aprueba por WhatsApp las piezas del día, para abrirle la puerta a GreenGrass con candidaturas reales. Su código vive aparte, en el repositorio `greengrass-demo`, y no acepta nada de la ADR-018.
+1. **[pitch.md](spec/pitch.md)** — Empieza aquí. Presentación pre-MVP: una demostración que funciona, en la que una candidata aprueba por WhatsApp las piezas del día, para abrirle la puerta a GreenGrass con candidaturas reales. Su código vive aparte, en el repositorio `greengrass-demo`, y no acepta nada de la ADR-018.
+2. **[product.md](spec/product.md)** — Descripción general del producto, usuarios objetivo, conjunto de funcionalidades centrales.
+3. **[mvp.md](spec/mvp.md)** — Plan de producto del MVP: el fideicomiso de datos de la coalición, y el piloto diseñado para probar el supuesto más riesgoso del proyecto.
+4. **[users.md](spec/users.md)** — Arquetipos de usuario, roles, modelo de permisos.
+5. **[workflows.md](spec/workflows.md)** — 12 flujos de trabajo centrales: trabajo de campo, inscripción de votantes, recaudación de fondos, eventos, comunicaciones y más.
+6. **[geography.md](spec/geography.md)** — Países objetivo, estrategia de localización, secuencia de despliegue.
+7. **[security.md](spec/security.md)** — Modelo de amenazas, seguridad en 5 niveles, arquitectura de cifrado, autenticación.
+8. **[compliance.md](spec/compliance.md)** — Ley electoral, protección de datos y financiamiento de campañas en los 5 países.
+9. **[fundraising.md](spec/fundraising.md)** — Procesamiento de pagos, tipos de donación, recaudación en alianza, experiencia del donante.
+10. **[integrations.md](spec/integrations.md)** — Sistemas externos: GIS y mapas, SMS, WhatsApp, telefonía, observabilidad.
+11. **[support.md](spec/support.md)** — Superficie de soporte a las organizaciones, asistentes de puesta en marcha, base de conocimiento, modelo de acompañamiento.
+12. **[gotv.md](spec/gotv.md)** — GOTV (Get Out The Vote — movilización del voto) y operaciones del día de elecciones.
+13. **[messaging.md](spec/messaging.md)** — Comunicaciones internas, notificaciones, cifrado de extremo a extremo.
+14. **[press.md](spec/press.md)** — Prensa, medios, redes sociales, perfiles públicos, respaldos.
+15. **[comms-intelligence.md](spec/comms-intelligence.md)** — Hoja de ruta post-MVP: inteligencia de medios, verificación de datos, mapa de medios, evaluación de candidaturas e investigación de oposición, ordenadas por iteraciones.
 
 ### Después, cómo está construida
 

@@ -82,21 +82,21 @@ The project defines custom skills in `.claude/SKILLS.md`:
 
 If you're new to the project, read the specs in this order:
 
-1. **[`spec/product.md`](spec/product.md)** — Start here. High-level product description, target users, core feature set.
-2. **[`spec/mvp.md`](spec/mvp.md)** — MVP product plan: the coalition data trust, and the pilot designed to test the project's riskiest assumption.
-3. **[`spec/users.md`](spec/users.md)** — User personas, roles, permissions model.
-4. **[`spec/workflows.md`](spec/workflows.md)** — 12 core workflows: canvassing, voter registration, fundraising, events, communications, and more.
-5. **[`spec/geography.md`](spec/geography.md)** — Target countries, localization strategy, rollout sequence.
-6. **[`spec/security.md`](spec/security.md)** — Threat model, 5-tier security, encryption architecture, auth.
-7. **[`spec/compliance.md`](spec/compliance.md)** — Election law, data protection, campaign finance across all 5 countries.
-8. **[`spec/fundraising.md`](spec/fundraising.md)** — Payment processing, donation types, alliance fundraising, donor experience.
-9. **[`spec/integrations.md`](spec/integrations.md)** — External systems: GIS/mapping, SMS, WhatsApp, telephony, observability.
-10. **[`spec/support.md`](spec/support.md)** — Tenant support surface, onboarding wizards, knowledge base, concierge model.
-11. **[`spec/gotv.md`](spec/gotv.md)** — Get Out The Vote and election day operations.
-12. **[`spec/messaging.md`](spec/messaging.md)** — Internal communications, notifications, E2E encryption.
-13. **[`spec/press.md`](spec/press.md)** — Press, media, social media, public profiles, endorsements.
-14. **[`spec/comms-intelligence.md`](spec/comms-intelligence.md)** — Post-MVP roadmap: media intelligence, fact check, media map, candidate vetting and opposition research, sequenced as iterations.
-15. **[`spec/pitch.md`](spec/pitch.md)** — Pre-MVP pitch: a working demonstration of a candidate approving the day's posts over WhatsApp, for opening the door with real candidacies. Its code lives in the separate `greengrass-demo` repository, and it accepts nothing in ADR-018.
+1. **[`spec/pitch.md`](spec/pitch.md)** — Start here. Pre-MVP pitch: a working demonstration of a candidate approving the day's posts over WhatsApp, for opening the door with real candidacies. Its code lives in the separate `greengrass-demo` repository, and it accepts nothing in ADR-018.
+2. **[`spec/product.md`](spec/product.md)** — High-level product description, target users, core feature set.
+3. **[`spec/mvp.md`](spec/mvp.md)** — MVP product plan: the coalition data trust, and the pilot designed to test the project's riskiest assumption.
+4. **[`spec/users.md`](spec/users.md)** — User personas, roles, permissions model.
+5. **[`spec/workflows.md`](spec/workflows.md)** — 12 core workflows: canvassing, voter registration, fundraising, events, communications, and more.
+6. **[`spec/geography.md`](spec/geography.md)** — Target countries, localization strategy, rollout sequence.
+7. **[`spec/security.md`](spec/security.md)** — Threat model, 5-tier security, encryption architecture, auth.
+8. **[`spec/compliance.md`](spec/compliance.md)** — Election law, data protection, campaign finance across all 5 countries.
+9. **[`spec/fundraising.md`](spec/fundraising.md)** — Payment processing, donation types, alliance fundraising, donor experience.
+10. **[`spec/integrations.md`](spec/integrations.md)** — External systems: GIS/mapping, SMS, WhatsApp, telephony, observability.
+11. **[`spec/support.md`](spec/support.md)** — Tenant support surface, onboarding wizards, knowledge base, concierge model.
+12. **[`spec/gotv.md`](spec/gotv.md)** — Get Out The Vote and election day operations.
+13. **[`spec/messaging.md`](spec/messaging.md)** — Internal communications, notifications, E2E encryption.
+14. **[`spec/press.md`](spec/press.md)** — Press, media, social media, public profiles, endorsements.
+15. **[`spec/comms-intelligence.md`](spec/comms-intelligence.md)** — Post-MVP roadmap: media intelligence, fact check, media map, candidate vetting and opposition research, sequenced as iterations.
 16. **[`design/architecture/system.md`](design/architecture/system.md)** — System architecture, data model, infrastructure.
 17. **[`design/ux/00-overview.md`](design/ux/00-overview.md)** — UX design overview with reading order for all 38 UX documents.
 18. **[`decisions/`](decisions/)** — 21 Architecture Decision Records extracting and formalizing decisions from all spec and design documents.
@@ -109,6 +109,7 @@ GreenGrass/
 ├── .claude/
 │   └── SKILLS.md                  # Project-specific Claude skills
 ├── spec/
+│   ├── pitch.md                   # Pre-MVP pitch: the WhatsApp approval demo
 │   ├── product.md                 # High-level product description
 │   ├── mvp.md                     # MVP product plan and pilot design
 │   ├── users.md                   # User personas and roles
@@ -122,8 +123,7 @@ GreenGrass/
 │   ├── gotv.md                    # GOTV and election day operations
 │   ├── messaging.md               # Internal communications
 │   ├── press.md                   # Press, media, public communications
-│   ├── comms-intelligence.md      # Post-MVP roadmap: comms intelligence
-│   └── pitch.md                   # Pre-MVP pitch: the WhatsApp approval demo
+│   └── comms-intelligence.md      # Post-MVP roadmap: comms intelligence
 ├── design/
 │   ├── ux/                        # UX design artifacts
 │   │   ├── 00-overview.md         # Reading order and glossary
