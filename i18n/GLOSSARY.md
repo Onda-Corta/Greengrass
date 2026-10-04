@@ -1065,3 +1065,24 @@ Fijados al redactar `spec/pitch.md`, que se escribió primero en español y desp
 | routed by sender | **enrutado por remitente** | |
 | simplified (estado en la tabla de real/simulado) | **simplificado** | Entre *real* y *simulado*: funciona de verdad, pero con menos que el producto. |
 | on the safe side of the gate | **del lado seguro del punto de decisión** | Del lado de la experimentación, según la ADR-018. |
+
+## Revisión de la presentación (Telegram, titulares, registro en vivo)
+
+Fijados al revisar `spec/pitch.md` y `spec/demo.md` el 2026-10-04, tras el plan de trabajo del repositorio de la demostración.
+
+| Inglés | Español | Nota |
+|---|---|---|
+| principal (a quien sirve el agente: `person` o `committee`) | **titular** | No *principal*, que ya es *primary* en infraestructura. En el código, `principal`, `person` y `committee` no se traducen. En `demo.md` se glosa una vez como «titular (`principal` en el código)». |
+| committee (regional) | **comité regional** / **comité** | Aprobadora con nombre: **presidenta** del comité. |
+| seeded (principal) | **precargado** | |
+| shared link / start code | **enlace compartido** / **código de inicio** | |
+| registration (open / closed) | **registro** (abierto / cerrado) | Es el alta de una persona en la demostración, no el *registro* de actividad. |
+| ledger | **libro de registro** | |
+| inbox (de la pantalla del equipo) | **bandeja** | |
+| activity stream | **flujo de actividad** | |
+| take over (a thread) | **tomar el control** (de un hilo) | |
+| kill switch | **interruptor de emergencia** | |
+| asset builder | **constructor de recursos** | No es el *constructor de imágenes* de la ADR-020: no genera nada. |
+| inline keyboard (Telegram) | **teclado integrado** | |
+| demo output / demo mark | **salida de demostración** / **marca de demostración** | La marca la pone el arnés, nunca el modelo. |
+| stand-in (Telegram por WhatsApp) | **sustituto** | |

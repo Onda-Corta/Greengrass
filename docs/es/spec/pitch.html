@@ -45,24 +45,25 @@
     <nav class="breadcrumb" aria-label="Ruta de navegación">Especificaciones</nav>
     <article class="prose">
 <h1 id="presentación-pre-mvp" tabindex="-1"><a class="heading-anchor" href="#presentación-pre-mvp" aria-hidden="true">#</a> Presentación pre-MVP</h1>
-<p><strong>Un asistente de campaña en WhatsApp que redacta las piezas del día, y una candidata que las aprueba una por una</strong></p>
-<p>Redactado: 2026-09-29</p>
+<p><strong>Un asistente de campaña en Telegram que redacta las piezas del día, y una persona que las aprueba una por una</strong></p>
+<p>Redactado: 2026-09-29
+Revisado: 2026-10-04</p>
 <hr>
 <h2 id="la-idea" tabindex="-1"><a class="heading-anchor" href="#la-idea" aria-hidden="true">#</a> La idea</h2>
-<p>Cada mañana una campaña tiene que decidir qué va a decir ese día y convertirlo en piezas para redes. Eso cuesta horas del equipo y una candidata a la que es difícil encontrar.</p>
-<p>El Agente de Campaña hace la redacción. La candidata decide desde su propio teléfono, en WhatsApp, donde ya pasa el día. No instala nada ni aprende una pantalla nueva.</p>
+<p>Cada mañana una campaña tiene que decidir qué va a decir ese día y convertirlo en piezas para redes. Eso cuesta horas del equipo y una candidata, o una presidenta de comité, a la que es difícil encontrar.</p>
+<p>El Agente de Campaña hace la redacción. La persona para quien trabaja decide desde su propio teléfono, en un chat. No aprende una pantalla nueva. La demostración corre en Telegram, una aplicación gratuita; en <a href="#qu%C3%A9-no-es">qué no es</a> se explica por qué.</p>
+<p>Trabaja para una <strong>candidata</strong>, cuyas piezas se redactan en primera persona, o para un <strong>comité regional</strong>, cuyas piezas se redactan con la voz del comité, sin nombre ni foto personal, y las aprueba su presidenta.</p>
 <h2 id="cómo-va-una-mañana" tabindex="-1"><a class="heading-anchor" href="#cómo-va-una-mañana" aria-hidden="true">#</a> Cómo va una mañana</h2>
-<p>Las capturas son del prototipo, tal como la candidata lo ve en su teléfono.</p>
+<p>Las capturas son de un prototipo anterior del mismo flujo, tal como se veía en un teléfono. Ese prototipo corría en WhatsApp y la demostración corre en Telegram, así que el chat que rodea las tarjetas es distinto. Las tarjetas y los botones son los mismos.</p>
 <ol>
 <li>
-<p>El Agente de Campaña le escribe a la candidata por WhatsApp y le pregunta en qué se enfocan hoy.</p>
+<p>El Agente de Campaña le escribe a la persona en el chat y le pregunta en qué se enfocan hoy.</p>
 </li>
 <li>
-<p>La candidata contesta con una nota de voz: el tema, el tono, lo que tiene en agenda.</p>
-<img src="../../spec/img/pitch/01-morning.jpg" alt="El Agente de Campaña saluda al candidato; él contesta con una nota de voz sobre la falta de agua y una entrevista de radio" width="360">
+<p>Ella contesta con un mensaje de texto: el tema, el tono, lo que tiene en agenda. Lo puede escribir o dictar con el teclado del propio teléfono. Una nota de voz recibe una respuesta de una línea que pide el texto.</p>
 </li>
 <li>
-<p>El agente le devuelve los puntos de mensaje en un PDF, sacados solo de lo que la candidata ya ha dicho en público. Cada punto cita de dónde sale. Donde falta un dato, el agente deja un hueco a la vista en vez de inventarlo.</p>
+<p>El agente le devuelve los puntos de mensaje en un PDF, sacados solo de lo que la persona ya ha dicho en público. Cada punto cita de dónde sale. Donde falta un dato, el agente deja un hueco a la vista en vez de inventarlo.</p>
 <img src="../../spec/img/pitch/02-talking-points.jpg" alt="Un PDF de puntos de mensaje con tres mensajes cortos; el tercero deja un hueco [PROPUESTA] donde falta un dato" width="360">
 </li>
 <li>
@@ -70,50 +71,58 @@
 <img src="../../spec/img/pitch/04-four-posts.jpg" alt="Cuatro tarjetas lado a lado: una pieza para X, una para Facebook, una para Instagram y una historia de Instagram, cada una con los botones Aprobado, Pedir cambios y Descartar" width="720">
 </li>
 <li>
-<p>La candidata toca un botón en cada tarjeta.</p>
+<p>La persona toca un botón en cada tarjeta. Pedir cambios exige un comentario, para que el equipo sepa qué cambiar.</p>
 <img src="../../spec/img/pitch/03-approve.jpg" alt="El candidato toca Aprobado en la pieza 1 de 4, para X" width="360">
 </li>
 <li>
-<p>El equipo de campaña, desde una pantalla en una computadora, puede pedir cambios. La candidata también, por texto o por nota de voz. El agente manda versiones nuevas, y cada versión nueva necesita una aprobación nueva.</p>
-<img src="../../spec/img/pitch/05-changes.jpg" alt="El agente avisa que el equipo pidió cambios en dos piezas y manda la versión 2 de la pieza para X, que el candidato aprueba" width="360">
+<p>El equipo de campaña, desde una pantalla en una computadora, ve el pedido y escribe la versión nueva. También puede editar cualquier pieza por su cuenta. La versión nueva llega al chat como una tarjeta nueva, y necesita una aprobación nueva.</p>
 </li>
 <li>
 <p>A su hora, cada pieza aprobada sale. Una versión que nadie aprobó no sale.</p>
 <img src="../../spec/img/pitch/06-scheduled.jpg" alt="El candidato aprueba la versión 2 de la pieza para Facebook; el agente confirma que hay cuatro piezas programadas para hoy" width="360">
 </li>
 <li>
-<p>La pantalla del equipo guarda el registro completo: cada versión, quién aprobó cuál y lo que costó cada paso.</p>
+<p>La pantalla del equipo guarda el registro completo: cada conversación, cada versión, quién aprobó cuál y lo que costó cada paso.</p>
 </li>
 </ol>
 <h2 id="la-regla" tabindex="-1"><a class="heading-anchor" href="#la-regla" aria-hidden="true">#</a> La regla</h2>
 <p>Nada sale sin que una persona con nombre apruebe esa versión exacta. Cambiar una pieza anula su aprobación.</p>
 <h2 id="la-demostración" tabindex="-1"><a class="heading-anchor" href="#la-demostración" aria-hidden="true">#</a> La demostración</h2>
-<p>Dura unos quince minutos y hacen falta dos personas. La candidata sostiene su propio teléfono. Alguien opera la pantalla del equipo en una computadora que el público puede ver.</p>
+<p>Dura unos quince minutos. Alguien narra, alguien sostiene el teléfono y alguien opera la pantalla del equipo en una computadora que el público puede ver.</p>
+<ol>
+<li><strong>Una mañana ensayada.</strong> Recorremos la mañana de Juan Dalmau, cuya campaña ha dado su visto bueno. El tema es la salud, el Plan Universal de Salud. Las piezas se arman solo con sus declaraciones públicas, cada una con su fuente, y los puntos de mensaje muestran los huecos donde no ha dicho nada.</li>
+<li><strong>Le toca a usted.</strong> Todas las personas en la sala abren un mismo enlace en su propio teléfono y contestan unas preguntas: si trabajan para un comité o para la campaña de un candidato, y su nombre, cargo y región (o el nombre y el cargo al que aspira el candidato). Pueden añadir un tema. Reciben su propia mañana, y su conversación aparece en la pantalla del equipo junto a las demás.</li>
+</ol>
 <ul>
-<li><strong>Real:</strong> la conversación de WhatsApp, la transcripción de la voz, la redacción, los puntos de mensaje, los artes y las aprobaciones.</li>
-<li><strong>Simulado:</strong> la publicación y el calendario de la candidata. Un reloj de demostración adelanta el día, y ninguna pieza llega a una cuenta real.</li>
-<li><strong>Sin imágenes hechas con IA.</strong> Los artes salen de plantillas, de las fotos de la propia campaña y de su identidad visual.</li>
+<li><strong>Real:</strong> la conversación de Telegram, la redacción, los puntos de mensaje, los artes y las aprobaciones.</li>
+<li><strong>Simulado:</strong> la publicación y la agenda. Un reloj de demostración adelanta el día, y ninguna pieza llega a una cuenta real.</li>
+<li><strong>Sin imágenes hechas con IA.</strong> Los artes salen de plantillas y, cuando la persona las tiene, de las fotos de la propia campaña.</li>
+<li><strong>Marcado como demostración, en todas partes.</strong> Cada imagen de pieza, el PDF, cada mensaje del chat y la pantalla del equipo lo dicen. La marca la pone el sistema, no la IA, así que nada de lo que alguien escriba puede quitarla.</li>
 </ul>
 <h2 id="qué-protege" tabindex="-1"><a class="heading-anchor" href="#qué-protege" aria-hidden="true">#</a> Qué protege</h2>
 <ul>
 <li><strong>Ningún dato de votantes, donantes ni afiliados.</strong> No hay listas de contactos, y no se carga ninguna.</li>
 <li><strong>No publica nada.</strong> No tiene acceso a ninguna cuenta de redes sociales.</li>
-<li><strong>El único dato personal es el de la candidata:</strong> sus mensajes, sus notas de voz y las fotos que aporta la campaña. Se le dice antes que su voz pasa por un servicio de transcripción y sus mensajes por un proveedor de modelos de IA.</li>
-<li><strong>Todo se borra al terminar</strong>, salvo que la campaña pida quedarse con el registro.</li>
-<li><strong>Cada campaña va aparte.</strong> Nada de una aparece en la demostración de otra.</li>
+<li><strong>El único dato personal es el de la propia persona:</strong> lo que escribe en el chat y lo que dice de sí misma al registrarse. En el primer mensaje se le dice que esto es una demostración y que lo que escriba pasa por un proveedor de modelos de IA.</li>
+<li><strong>Nunca inventa una cita.</strong> Si de un candidato solo sabe lo que ha dicho en público, o lo que la persona le cuenta, las piezas no llevan palabras ni posturas que no se le dieron. Donde no tiene nada, muestra un hueco.</li>
+<li><strong>Todo se borra el mismo día</strong>, al terminar la sesión. El primer mensaje lo dice.</li>
+<li><strong>Cada persona va aparte.</strong> Lo que una persona escribe y recibe nunca lo ve otra, aunque la pantalla del equipo muestre a todas.</li>
+<li><strong>El registro está controlado.</strong> El enlace se comparte solo con las personas en la sala. El registro se abre y se cierra desde la pantalla del equipo, el código del enlace cambia después, y hay un tope de personas y de costo por persona. Un interruptor de emergencia detiene a la vez todas las llamadas a la IA.</li>
 </ul>
 <h2 id="qué-aporta-cada-campaña" tabindex="-1"><a class="heading-anchor" href="#qué-aporta-cada-campaña" aria-hidden="true">#</a> Qué aporta cada campaña</h2>
+<p>Nada de antemano, para la parte en vivo. Telegram en el teléfono y unas respuestas al abrir el enlace.</p>
+<p>Para una mañana ensayada propia, que solo hacemos con una campaña que ha dado su visto bueno:</p>
 <ul>
 <li>Entre cinco y diez fotos que la campaña tenga derecho a usar.</li>
 <li>Su identidad visual, o el permiso para usar la de su partido.</li>
 <li>Sus cuentas públicas en cada red.</li>
-<li>Tres a cinco temas, con lo que la candidata ya ha dicho en público sobre cada uno.</li>
-<li>El número de WhatsApp de la candidata y su visto bueno.</li>
+<li>Tres a cinco temas, con lo que la persona ya ha dicho en público sobre cada uno.</li>
+<li>Su cuenta de Telegram y su visto bueno.</li>
 <li>Una hora de alguien del equipo para ensayar.</li>
 </ul>
 <h2 id="qué-no-es" tabindex="-1"><a class="heading-anchor" href="#qué-no-es" aria-hidden="true">#</a> Qué no es</h2>
 <ul>
-<li><strong>No está atada a WhatsApp.</strong> La demostración usa WhatsApp porque es donde ya están las candidaturas. En producción es muy probable que haga falta otro canal: los términos comerciales de WhatsApp prohíben la actividad de partidos políticos.</li>
+<li><strong>No está atada a Telegram.</strong> La demostración usa Telegram porque se puede montar en minutos, sin verificación de negocio. Las campañas viven en WhatsApp, pero los términos comerciales de WhatsApp prohíben la actividad de partidos políticos. El canal de producción se decide con cada campaña.</li>
 <li><strong>Todavía no es un producto.</strong> Si una campaña quiere seguir usándolo al día siguiente, la respuesta honesta es <em>todavía no</em>.</li>
 <li><strong>No prueba lo que costaría.</strong> Enseña lo que cuesta una mañana, no lo que pagaría una campaña.</li>
 </ul>

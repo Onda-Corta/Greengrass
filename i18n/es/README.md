@@ -24,8 +24,8 @@ Las especificaciones de producto, los artefactos de diseño de UX y los document
 
 ### Empieza por el producto
 
-1. **[pitch.md](spec/pitch.md)** — Empieza aquí. Presentación pre-MVP: un asistente de campaña en WhatsApp redacta las piezas del día y la candidata aprueba cada una. Escrita para leerse sola, para las candidaturas.
-2. **[demo.md](spec/demo.md)** — Especificación de la demostración de aprobación de campaña: la misma demostración completa, y cómo encaja con GreenGrass y la ADR-018. Su código vive aparte, en el repositorio `greengrass-demo`, y no acepta nada de la ADR-018.
+1. **[pitch.md](spec/pitch.md)** — Empieza aquí. Presentación pre-MVP: un asistente de campaña en Telegram redacta las piezas del día y la candidata, o la presidenta de un comité, aprueba cada una. Escrita para leerse sola, para las candidaturas.
+2. **[demo.md](spec/demo.md)** — Especificación de la demostración de aprobación de campaña: la misma demostración completa, y cómo encaja con GreenGrass y la ADR-018. Su código vive aparte, en el repositorio privado `Onda-Corta/campaign-agent-demo`, y no acepta nada de la ADR-018.
 3. **[product.md](spec/product.md)** — Descripción general del producto, usuarios objetivo, conjunto de funcionalidades centrales.
 4. **[mvp.md](spec/mvp.md)** — Plan de producto del MVP: el fideicomiso de datos de la coalición, y el piloto diseñado para probar el supuesto más riesgoso del proyecto.
 5. **[users.md](spec/users.md)** — Arquetipos de usuario, roles, modelo de permisos.
