@@ -82,8 +82,8 @@ The project defines custom skills in `.claude/SKILLS.md`:
 
 If you're new to the project, read the specs in this order:
 
-1. **[`spec/pitch.md`](spec/pitch.md)** — Start here. Pre-MVP pitch: a campaign assistant on WhatsApp drafts the day's posts and the candidate approves each one. Written to stand on its own, for candidacies.
-2. **[`spec/demo.md`](spec/demo.md)** — Campaign Approval Demo Spec: the same demonstration in full, and how it sits against GreenGrass and ADR-018. Its code lives in the separate `greengrass-demo` repository, and it accepts nothing in ADR-018.
+1. **[`spec/pitch.md`](spec/pitch.md)** — Start here. Pre-MVP pitch: a campaign assistant on Telegram drafts the day's posts and the candidate, or a committee president, approves each one. Written to stand on its own, for candidacies.
+2. **[`spec/demo.md`](spec/demo.md)** — Campaign Approval Demo Spec: the same demonstration in full, and how it sits against GreenGrass and ADR-018. Its code lives in the separate, private `Onda-Corta/campaign-agent-demo` repository, and it accepts nothing in ADR-018.
 3. **[`spec/product.md`](spec/product.md)** — High-level product description, target users, core feature set.
 4. **[`spec/mvp.md`](spec/mvp.md)** — MVP product plan: the coalition data trust, and the pilot designed to test the project's riskiest assumption.
 5. **[`spec/users.md`](spec/users.md)** — User personas, roles, permissions model.
