@@ -1086,3 +1086,21 @@ Fijados al revisar `spec/pitch.md` y `spec/demo.md` el 2026-10-04, tras el plan 
 | inline keyboard (Telegram) | **teclado integrado** | |
 | demo output / demo mark | **salida de demostración** / **marca de demostración** | La marca la pone el arnés, nunca el modelo. |
 | stand-in (Telegram por WhatsApp) | **sustituto** | |
+
+## Revisión de la presentación (el código de la demostración y el constructor de recursos)
+
+Fijados al revisar `spec/pitch.md` y `spec/demo.md` el 2026-10-06, tras el código del repositorio de la demostración y su decisión de construir ahí el constructor de recursos. Desde esta revisión el saludo de las 5:30 lo dispara el reloj de demostración, así que **Iniciar día** ya no aparece en la demostración salvo para nombrar la revisión anterior.
+
+| Inglés | Español | Nota |
+|---|---|---|
+| key messages | **mensajes clave** | Los tres que el agente manda en el chat antes del PDF. Distintos de los *puntos de mensaje* (`talking points`), que van en el PDF. |
+| layout (del constructor de recursos) | **composición** | No *diseño*, que es el trabajo de quien diseña, ni *plantilla*, que ya está tomada. |
+| placeholder layout | **composición provisional** | |
+| redesign | **rediseño** | |
+| brand kit | **kit de marca** | Una tinta, una familia tipográfica y un logotipo por juego de plantillas de arte. |
+| headless browser | **navegador sin interfaz** | |
+| mock (builder) | **simulación** | Ya usado en la revisión del 2026-10-04 para el *mock* del constructor de recursos. |
+| published / held (al final de la mañana) | **publicada** / **retenida** | Estados finales de una pieza a las 7:18. |
+| reset (al final de la sesión) | **reinicio** | El botón se llama *Reiniciar la demo*; en prosa, *el reinicio*. |
+| retry | **reintentar** / **reintento** | |
+| stalled (hilo) | **atascado** | |

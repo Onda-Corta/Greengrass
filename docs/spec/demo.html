@@ -49,10 +49,11 @@
 <h1 id="campaign-approval-demo-spec" tabindex="-1"><a class="heading-anchor" href="#campaign-approval-demo-spec" aria-hidden="true">#</a> Campaign Approval Demo Spec</h1>
 <p><strong>A working demonstration, to open the door for GreenGrass with real candidacies and regional committees</strong></p>
 <p>Status: a pitch, not a specification. Nothing it describes is accepted, and <a href="../decisions/018-ai-agent-posture.html">ADR-018</a> remains proposed.
-Code: in a separate private repository, <code>Onda-Corta/campaign-agent-demo</code>. It is not GreenGrass code. At the time of this revision it holds a work plan and no application code.
+Code: in a separate private repository, <code>Onda-Corta/campaign-agent-demo</code>. It is not GreenGrass code. At the time of this revision it holds working code for most of its work plan: the bot and registration, the drafting, the approvals, the team's screen, the demo clock, the guardrails and the reset. The asset builder is being built there now, and a mock draws the artwork until it is ready.
 Standalone version, for candidacies: <a href="./pitch.html">pitch.md</a>.
 Drafted: 2026-09-29
-Revised: 2026-10-04, to match the demo repository's work plan (Telegram, principals, live registration)</p>
+Revised: 2026-10-04, to match the demo repository's work plan (Telegram, principals, live registration)
+Revised: 2026-10-06, to match the code in the demo repository and its decision to build the asset builder itself</p>
 <hr>
 <h2 id="1-what-it-is-for" tabindex="-1"><a class="heading-anchor" href="#1-what-it-is-for" aria-hidden="true">#</a> 1. What it is for</h2>
 <p>GreenGrass has a complete specification and nothing it can show. You do not sell a candidate on 21 ADRs. You sell them on something that happens on their own phone.</p>
@@ -76,46 +77,46 @@ Revised: 2026-10-04, to match the demo repository's work plan (Telegram, princip
 <p><a href="../decisions/018-ai-agent-posture.html#the-review-is-a-precondition-on-production-not-on-prototyping">ADR-018 § The review is a precondition on production, not on prototyping</a> draws the line at production and at any deployment holding real voter, donor or member records. The pitch stays on this side of it:</p>
 <ul>
 <li><strong>It holds no voter, donor or member records.</strong> There is no CRM, no list, and none is loaded.</li>
-<li><strong>The only real personal data is each person's own:</strong> their messages, what they say about themselves when they register (name, role, region, or the candidate's name and office), and the photos a campaign supplies. They give them knowingly, in the demonstration. The first message says it is a demo, that everything is deleted at the end, and that nothing is published. They are told that their messages pass through a model provider. In GreenGrass that would be their own organization's BYOM provider. Telegram also carries the conversation, which is one more provider to name in that message.</li>
-<li><strong>Everything is deleted the same day</strong>, at the end of the session, by a reset script that leaves only the seeded principal. The earlier plan let a campaign ask to keep its record; that exception is gone.</li>
+<li><strong>The only real personal data is each person's own:</strong> their messages, what they say about themselves when they register (name, role, region, or the candidate's name and office), and the photos a campaign supplies. They give them knowingly, in the demonstration. The first message says it is a demo, that everything is deleted at the end of the session, and that nothing is published. It also says that what they write goes through a model: an open-weight model that runs on Cloudflare. In GreenGrass that would be their own organization's BYOM provider. Telegram also carries the conversation, which is one more provider to name in that message.</li>
+<li><strong>Everything is deleted the same day</strong>, at the end of the session, by a reset: a button on the team's screen, or one command. It closes registration under a new start code, deletes the messages from the Telegram chats themselves, wipes the ledger of everything but the seeded principal, and empties the store of generated artwork and PDFs. Telegram lets a bot delete a message only within 48 hours of sending it, which is one more reason to run the reset the same day; anything it cannot delete is reported. The model recordings it keeps are of the seeded principal's morning only, so they hold nothing a visitor wrote. The earlier plan let a campaign ask to keep its record; that exception is gone.</li>
 <li><strong>It does not publish.</strong> There are no social media credentials anywhere in the system, and the simulated publisher refuses any output not flagged as demo output.</li>
 <li><strong>Everything it generates is marked as demo output</strong>, on every surface: the artwork, the PDF, each chat message, the team's screen and the ledger. The mark comes from the harness, never from the model, so a prompt cannot remove it. This matters more now that visitors can name real candidates when they register.</li>
-<li><strong>It never invents a quote.</strong> For a candidacy whose only source is what a visitor typed, the output carries no words or positions that were not given. Gaps are shown, not filled.</li>
+<li><strong>It never invents a quote.</strong> A reply from the model is checked before anything reaches the chat: a quote has to appear word for word in a public statement that someone checked by eye against its source, a figure has to appear in the folder or in the principal's message, and every source has to be in the principal's own folder. A reply that fails goes back to the model with the problems listed, up to three times, and then the morning fails instead of going out. For a candidacy whose only source is what a visitor typed, the output carries no words or positions that were not given. Gaps are shown, not filled.</li>
 </ul>
 <p>Three things would take it across the line, and none is done while ADR-018 remains proposed: loading a contact list, connecting a real social media account, or anyone continuing to use it day to day after the pitch. If a candidacy asks to keep the tool, the honest answer is <em>not yet</em>, and the invitation is to the pilot.</p>
 <h2 id="4-the-script" tabindex="-1"><a class="heading-anchor" href="#4-the-script" aria-hidden="true">#</a> 4. The script</h2>
-<p>It takes about fifteen minutes, and publication times run on a demo clock. In the earlier prototype the morning ran from 5:30 to 7:18, and the clock compresses that span. Three roles are needed on the day: whoever narrates, whoever holds the phone for the seeded principal, and whoever runs the team's screen on a computer the audience can see. Who takes each is not yet decided (§13).</p>
+<p>It takes about fifteen minutes, in eight segments: the problem, the proposal and the rule, the seeded principal's morning, the room joining, what the demonstration does not do (told while the room's mornings are being drafted), what came back to one visitor, the ask, and the close. The run of show, with what each person does and says, is in the demo repository at <code>docs/run-of-show.md</code>. The morning runs on a demo clock from 5:30 to 7:18. For the seeded morning the clock runs at real speed and the team's screen skips it forward to each beat, so the whole morning takes about five minutes and the clock never gets ahead of what is being said. Three roles are needed on the day: whoever narrates, whoever holds the phone for the seeded principal, and whoever runs the team's screen and the clock on a computer the audience can see. Who takes each is not yet decided (§13).</p>
 <h3 id="before-it-starts" tabindex="-1"><a class="heading-anchor" href="#before-it-starts" aria-hidden="true">#</a> Before it starts</h3>
 <ol>
-<li>The seeded principal opens the bot and presses <code>/start</code>. On Telegram a bot cannot write first until the person has done that once, so this records their opt-in. No window or approved template is involved.</li>
-<li>The day before, someone rehearses the run on the seeded principal's folder (§8). A recorded fallback exists for it (§5).</li>
+<li>The seeded principal's phone opens the bot and presses <code>/start</code>. On Telegram a bot cannot write first until the person has done that once, so this records their opt-in. No window or approved template is involved. Until the candidate's own phone is used, a phone of the team's stands in for it, and the narrator says so.</li>
+<li>Someone rehearses the run on the seeded principal's folder (§8), and its model calls are recorded so the morning can be replayed (§5). Before the doors open, the reset runs, the seeded principal's calls are set to replay, the clock stands at 5:30, and the cost caps and the kill switch are checked.</li>
 </ol>
 <h3 id="the-rehearsed-morning" tabindex="-1"><a class="heading-anchor" href="#the-rehearsed-morning" aria-hidden="true">#</a> The rehearsed morning</h3>
 <ol start="3">
-<li>On the team's screen, a person taps <strong>Start day</strong>. The Campaign Agent greets the principal by name and asks what to focus on today. The earlier prototype had the agent write at 5:30 by itself; the demonstration keeps a person in that role (§7 point 2).</li>
-<li>The principal answers with a text message: the topic, the tone, and whatever is on the agenda, typed or dictated with the phone's own keyboard. In the seeded morning the topic is health, the Plan Universal de Salud. A voice note gets a one-line reply asking for text. Voice-note transcription was dropped: phones already dictate, and it is not what the demonstration sells.</li>
-<li>The agent drafts talking points from the principal's folder and sends them as a PDF, with a summary of three short messages. Each point cites the public statement it rests on. Where the folder lacks a fact, the agent leaves a visible gap instead of inventing one. That is <a href="../decisions/013-analytics-ai.html">ADR-013</a>'s guardrail, and it is worth pointing out aloud. For the seeded morning the gaps are real ones, such as the federal funding the plan would replace.</li>
-<li>The agent recommends four pieces: X, Facebook, an Instagram post and an Instagram story. Each arrives as its own card: an image with the mockup of how it would look on the network, the piece number, the network, the time it would go out, and three buttons: <strong>Aprobado</strong>, <strong>Pedir cambios</strong> and <strong>Descartar</strong>.</li>
-<li>The principal taps a button on each card. The card edits itself in place to show the decision, and the agent confirms how many were approved.</li>
+<li>On the team's screen, the operator starts the demo clock. At 5:30 on that clock the Campaign Agent writes first to the seeded principal: good morning, the day's agenda from the folder (marked as simulated), and what to focus on today. Only the seeded principal gets this greeting; visitors write first. The previous revision of this spec had a person tap <strong>Start day</strong> instead; the demo repository chose the clock (§7 point 2).</li>
+<li>The principal answers with a text message: the topic, the tone, and whatever is on the agenda, typed or dictated with the phone's own keyboard. In the seeded morning the topic is health, the Plan Universal de Salud. A message too short to work from gets a request for more, and a voice note gets a one-line reply asking for text. Voice-note transcription was dropped: phones already dictate, and it is not what the demonstration sells. While the model works, the agent says it needs a moment.</li>
+<li>The agent sends three key messages in the chat, then talking points drafted from the principal's folder, as a PDF. Each point cites the public statement it rests on, with its outlet and date. Where the folder lacks a fact, the agent leaves a visible gap instead of inventing one. That is <a href="../decisions/013-analytics-ai.html">ADR-013</a>'s guardrail, and it is worth pointing out aloud. For the seeded morning the gaps are real ones, such as the Medicaid fiscal cliff in 2027, on which the candidate has said nothing in public.</li>
+<li>The agent recommends four pieces: X, Facebook, an Instagram post and an Instagram story. Each arrives as its own card: the piece's artwork, the network, the version, the headline on the artwork, the post's copy, and three buttons: <strong>Aprobado</strong>, <strong>Pedir cambios</strong> and <strong>Descartar</strong>.</li>
+<li>The principal taps a button on each card. The card edits itself in place to show the decision, with the approver's name and the time: &quot;Aprobada por Juan Dalmau · 6:46 a. m.&quot;. While the morning runs on the demo clock, the time on the card is the clock's; the ledger keeps the real one.</li>
 </ol>
 <h3 id="the-round-of-changes" tabindex="-1"><a class="heading-anchor" href="#the-round-of-changes" aria-hidden="true">#</a> The round of changes</h3>
 <ol start="8">
-<li>When the principal taps <strong>Pedir cambios</strong>, the agent asks what they would change and takes their next message as the comment. The comment is required, as in the <a href="../decisions/021-content-approval-pipeline.html#the-content-pipeline-generalizes-post-approval">content pipeline</a>: &quot;shorter and tied to the interview&quot;, &quot;a different photo&quot;. The request lands on the team's screen and opens a new round, and the piece's earlier approval is void.</li>
-<li>On the team's screen, someone writes the new version and sends it. It arrives in the principal's chat as a new card, which they approve there. The team can also edit a piece on its own initiative; that voids the approval in the same way.</li>
+<li>When the principal taps <strong>Pedir cambios</strong>, the agent asks what they would change and takes their next message as the comment. The comment is required, as in the <a href="../decisions/021-content-approval-pipeline.html#the-content-pipeline-generalizes-post-approval">content pipeline</a>: in the seeded morning, &quot;say that today at 10 I'm visiting the CDT&quot;. Until the comment arrives nothing is recorded, and the principal can still approve or discard instead. The request then lands on the team's screen and opens a new round.</li>
+<li>On the team's screen, someone writes the new version, starting from the latest one and held to the same length limits as the model's copy, and sends it. It arrives in the principal's chat as a new card that names who wrote it and quotes the change asked for, and the older cards are rewritten as replaced, without buttons. The principal approves it there. The team can also edit a piece on its own initiative; a new version voids any earlier approval. The team writes every new version: the agent does not offer a redraft.</li>
 </ol>
 <h3 id="the-room-joins" tabindex="-1"><a class="heading-anchor" href="#the-room-joins" aria-hidden="true">#</a> The room joins</h3>
 <ol start="10">
-<li>Everyone else opens one shared link, <code>t.me/&lt;bot&gt;?start=&lt;code&gt;</code>. The first question is whether they work for a committee or for a candidate's campaign. Then name, role and region for a committee, or the candidate's name and office for a campaign, and an optional theme. That creates a principal of the chosen kind from a template (§8), with the person as its approver; for a candidate's campaign the visitor stands in for the candidate. They then run their own morning, steps 3 to 9, unscripted. Opening the link again resumes, and never creates a duplicate.</li>
+<li>Everyone else opens one shared link, <code>t.me/&lt;bot&gt;?start=&lt;code&gt;</code>. The first question is whether they work for a committee or for a candidate's campaign. Then name, role and region for a committee, or the candidate's name and office for a campaign, and an optional theme. That creates a principal of the chosen kind from a template (§8), with the person as its approver; for a candidate's campaign the visitor stands in for the candidate. They then write their own morning message and run steps 4 to 9, unscripted, with live model calls. Opening the link again resumes, and never creates a duplicate. Once the cap on visitors is reached, the next one is told the demo is full, and nothing is stored.</li>
 </ol>
 <h3 id="close" tabindex="-1"><a class="heading-anchor" href="#close" aria-hidden="true">#</a> Close</h3>
 <ol start="11">
-<li>The demo clock moves forward. The simulated publisher marks each approved piece as published at its time, and the agent tells the principal as each one goes out. If a new version was left unapproved, it is held, and the screen shows it.</li>
-<li>The team's screen shows what the audience did not see on their phones, in four views:
+<li>The demo clock reaches 7:18 and the simulated publisher settles every open piece: <strong>published</strong> if a named person approved its latest version and that approval still stands, <strong>held</strong> otherwise, with the reason. Both are final. Publishing is a row in the ledger and nothing more: no network, no account and no chat message. The rehearsed morning leaves one piece unapproved on purpose, so a held piece is seen.</li>
+<li>The team's screen shows what the audience did not see on their phones:
 <ul>
-<li>An <strong>inbox</strong> of every open thread, across committees and candidates, each with its principal, its kind, its state (awaiting the principal, awaiting the team, approved, held), its last activity and an unread badge, sorted by urgency and updating live.</li>
+<li>The <strong>threads</strong> across committees and candidates, grouped by who has to act (the team, the agent, the principal, or no one), most urgent first. Each names its principal and kind, says who it waits on and since when, and is marked when something new happened on it. A thread that has waited on the agent for more than ninety seconds is marked as stalled.</li>
 <li>A <strong>stream</strong> per principal: everything that principal did and everything done for them, filterable by principal.</li>
-<li>A <strong>thread detail</strong>: the conversation, each piece's rounds side by side, who approved which version, and what each call cost, passed through at cost. The team can take over a thread when the model stalls.</li>
-<li>The <strong>controls</strong>: registration open or closed, the start code, a cap on principals and on cost, a kill switch, and a list of self-registered principals that can be removed.</li>
+<li>A <strong>thread detail</strong>. For a piece: its versions side by side, who wrote each, every decision on it, the morning it came from with its sources and gaps, and what each call cost, model and builder, passed through at cost. For a conversation: the chat, where the team can write to the principal, retry a morning that failed, take the thread over when the model stalls, set that principal's own cost cap, or remove a visitor.</li>
+<li>The <strong>controls</strong>: registration open or closed, the shared link and its code, the cap on visitors and on cost with what has been spent, a kill switch for every model call, the reset, and the clock, on a panel of its own.</li>
 </ul>
 </li>
 </ol>
@@ -132,17 +133,22 @@ Revised: 2026-10-04, to match the demo repository's work plan (Telegram, princip
 <tr>
 <td>Telegram conversation, cards and buttons</td>
 <td>Real</td>
-<td>Telegram Bot API, with inline keyboards. Each piece is a card with the image and three buttons, which edits in place after a tap</td>
+<td>Telegram Bot API, with inline keyboards. Each piece is a card with its artwork and three buttons, which edits in place after a tap</td>
 </tr>
 <tr>
-<td>Talking points and piece copy</td>
+<td>Key messages, talking points and piece copy</td>
 <td>Real</td>
-<td>An open-weight model on Workers AI, with structured output and validation, over the principal's folder</td>
+<td>GLM-5.3, an open-weight model on Workers AI picked by a bake-off, with structured output, checks on quotes, figures and sources, and up to three calls, over the principal's folder</td>
 </tr>
 <tr>
 <td>Talking points PDF and the four artworks</td>
 <td>Real</td>
-<td>A separate asset builder, from templates, behind an agreed interface. No image is generated</td>
+<td>An asset builder inside the demo's own code: layouts drawn with an open-source engine and painted in a headless browser, with a brand kit per template set. No image is generated. A mock draws them until the builder is ready (§8)</td>
+</tr>
+<tr>
+<td>Photos on the artwork</td>
+<td>Not yet</td>
+<td>Every artwork goes without a photo for now. Adding the campaign's photos is optional work before the pitch (§13)</td>
 </tr>
 <tr>
 <td>Versions, approvals, audit and cost per call</td>
@@ -167,12 +173,12 @@ Revised: 2026-10-04, to match the demo repository's work plan (Telegram, princip
 <tr>
 <td>The principal's agenda</td>
 <td>Simulated</td>
-<td>Read from the principal's folder</td>
+<td>Read from the principal's folder, and marked as simulated wherever it is shown</td>
 </tr>
 <tr>
 <td>Scheduling and publishing</td>
 <td>Simulated</td>
-<td>A demo clock compresses 5:30 to 7:18; the simulated publisher takes only approved, demo-flagged versions. Nothing reaches a social network</td>
+<td>A demo clock runs 5:30 to 7:18; at 7:18 the simulated publisher publishes approved, demo-flagged versions and holds the rest. Nothing reaches a social network</td>
 </tr>
 <tr>
 <td>The organization's own business number</td>
@@ -182,11 +188,11 @@ Revised: 2026-10-04, to match the demo repository's work plan (Telegram, princip
 <tr>
 <td>Who approved</td>
 <td>Simulated</td>
-<td>Telegram shows no phone number, so the approver is a Telegram display name mapped to a named person in the folder</td>
+<td>The approver is whoever holds the Telegram account tied to the principal. The name on the card and in the ledger comes from the folder (the candidate, or the committee's president), never from Telegram</td>
 </tr>
 </tbody>
 </table>
-<p>There is also a <strong>fallback</strong>: every model call can be recorded and replayed, so the scripted morning survives a provider failure. It covers the rehearsed run only. For live visitors a failed call gets a short reply in the chat (&quot;dame un momento&quot;), and the team's screen has a retry button and the option to take over the thread.</p>
+<p>There are <strong>fallbacks</strong>. Every model call can be recorded and replayed, so the scripted morning survives a provider failure; it covers the rehearsed run only, and the seeded morning replays its recording on the day. For live visitors a failed call gets a short reply in the chat, and the team's screen has a retry button and the option to take over the thread. If the asset builder's browser fails, the mock draws the artwork. If one artwork still fails, its card goes out as text; if the PDF fails, it is left out and the cards still go.</p>
 <h2 id="6-how-it-maps-onto-greengrass" tabindex="-1"><a class="heading-anchor" href="#6-how-it-maps-onto-greengrass" aria-hidden="true">#</a> 6. How it maps onto GreenGrass</h2>
 <p>Every part of the pitch corresponds to something the specification already names, and in two cases to something still proposed.</p>
 <table>
@@ -214,8 +220,8 @@ Revised: 2026-10-04, to match the demo repository's work plan (Telegram, princip
 <td>The difference is what ADR-018 decides</td>
 </tr>
 <tr>
-<td>The asset builder and its templates</td>
-<td>None. They compose assets the campaign already has and generate nothing, so they are not the image builder</td>
+<td>The asset builder, its layouts and brand kits</td>
+<td>None. It sets an approved headline, a name and a date over a campaign's colours, type and logotype, and generates nothing, so it is not the image builder. It is the demo's own code, not a GreenGrass component</td>
 <td>Outside the gate</td>
 </tr>
 <tr>
@@ -257,27 +263,27 @@ Revised: 2026-10-04, to match the demo repository's work plan (Telegram, princip
 <tbody>
 <tr>
 <td>1. Read scope</td>
-<td>Each conversation's agent reads that principal's messages and its folder: strategy, public statements, agenda. It reads nothing of any other principal's. There are no contacts, voter records or donations to read: none exist in the pitch. The team's screen sees everyone by design, and a visitor's text never overrides the folder rules or reaches another principal's data, which is tested with two simultaneous principals</td>
+<td>Each conversation's agent reads that principal's messages and its folder: strategy, public statements, agenda. It reads nothing of any other principal's. There are no contacts, voter records or donations to read: none exist in the pitch. The team's screen sees everyone by design. A visitor's message is fenced off in the prompt as material, not instructions, and a reply that cites anything outside that principal's folder is rejected. Tests run two principals at once, including a visitor who tries to make the agent copy the seeded principal's folder, and check that neither prompt, chat nor card reaches the other's</td>
 </tr>
 <tr>
 <td>2. It speaks first</td>
-<td>No. A person taps <strong>Start day</strong>, and the conversation is open because the principal pressed <code>/start</code> or opened the link first. The version in which the agent writes on its own at a set time is not demonstrated. Whether the work plan keeps this reading is an open question (§13)</td>
+<td>In one narrow case. At 5:30 on the demo clock the agent writes first to the seeded principal, with the agenda and a question. The clock is started by a person on the team's screen, the conversation was opened by the principal pressing <code>/start</code>, and visitors always write first. So the agent speaks at a set time, but only on a clock someone starts, to someone who opted in, in a staged run. The previous revision of this spec kept a person tapping <strong>Start day</strong> in that role; the demo repository chose the clock. Whether a bound like this is enough is the review's question</td>
 </tr>
 <tr>
 <td>3. Generated images</td>
-<td>None. The artwork comes from templates and, where there are any, the campaign's real photos, used with its permission. A committee principal has no personal name or photo at all. The identifiable-person question is left untouched for the review</td>
+<td>None. The artwork is laid out from a brand kit, with the approved headline on it, and for now it carries no photos. If photos are added, they are the campaign's real photos, used with its permission. A committee principal has no personal name or photo at all. The identifiable-person question is left untouched for the review</td>
 </tr>
 <tr>
 <td>4. Who dispatches</td>
-<td>The agent places the approved version in the schedule, and nothing more. The simulated publisher only takes approved versions. The agent holds no credential to publish, and in the pitch none exists. That shows the proposed answer — the tap on Aprobado counts as the principal's send — without deciding it</td>
+<td>The agent places the approved version in the schedule, and nothing more. The simulated publisher only takes approved versions: the database refuses a published row unless the version is the latest one and its approval stands. The agent holds no credential to publish, and in the pitch none exists. That shows the proposed answer — the tap on Aprobado counts as the principal's send — without deciding it</td>
 </tr>
 <tr>
 <td>5. Changes after approval</td>
-<td>A new version voids the earlier approval, and an approval is tied to one exact version. If it is not approved by its time, it does not go out. The pitch can leave one version unapproved on purpose so that this is seen</td>
+<td>A new version voids the earlier approval, and an approval is tied to one exact version. If it is not approved by its time, it does not go out. The rehearsed morning leaves one piece unapproved on purpose, and the publisher holds it</td>
 </tr>
 <tr>
 <td>6. Audit</td>
-<td>Each approval records a named person as the actor, the agent as the channel, and the exact version. For a committee the actor is its president, a named role. It is a draft of the &quot;on behalf of&quot; relation, not the audit model the review has to define</td>
+<td>Each approval records the named person from the principal's folder as the actor, the Telegram account that tapped, the time, the agent as the channel, and the exact version. For a committee the actor is its president, a named role. It is a draft of the &quot;on behalf of&quot; relation, not the audit model the review has to define</td>
 </tr>
 </tbody>
 </table>
@@ -287,24 +293,32 @@ Revised: 2026-10-04, to match the demo repository's work plan (Telegram, princip
 <p>A typed loader validates each folder. A folder holds:</p>
 <ul>
 <li>The principal's kind, <code>person</code> or <code>committee</code>, which changes only the voice and the identity: first person for a candidate, an institutional voice for a committee, never an invented personal quote.</li>
-<li>A biography or description; for a committee, its region, and a named approver, the president.</li>
+<li>A biography or description, each fact with its source; for a committee, its region, and a named approver, the president.</li>
 <li>Its public accounts on each network.</li>
-<li>Three to five themes.</li>
-<li>The agenda, which stands in for a calendar.</li>
-<li>A public-statements file, with a source URL for every claim. This is what lets the demonstration show &quot;cite only what is in the folder, show the gaps&quot;. For the seeded principal it is built from sourced research, and every verbatim quote is checked by eye against its source before it goes into seed data.</li>
-<li>A photo manifest, five to ten photos with captions. For a committee, photos of the region and its events rather than of a person.</li>
-<li>The look and identity the asset builder uses.</li>
+<li>One to five themes.</li>
+<li>The agenda, which stands in for a calendar and is marked as simulated.</li>
+<li>A public-statements file, with a source URL for every claim. Each statement is marked as verbatim, which may be quoted, or as a paraphrase, which is never turned into a quote. This is what lets the demonstration show &quot;cite only what is in the folder, show the gaps&quot;. For the seeded principal it is built from sourced research, and every verbatim quote is checked by eye against its source before it can be quoted.</li>
+<li>The gaps: facts the folder does not have, shown in the PDF and never filled in.</li>
+<li>A photo manifest, up to ten photos with captions. For a committee, photos of the region and its events rather than of a person.</li>
+<li>Which template set the asset builder uses, and optionally an accent colour.</li>
 </ul>
 <p>Phone numbers, bot tokens and provider keys never go in the folder; they go in the deployment's configuration.</p>
 <h3 id="the-seeded-principal-and-the-two-templates" tabindex="-1"><a class="heading-anchor" href="#the-seeded-principal-and-the-two-templates" aria-hidden="true">#</a> The seeded principal and the two templates</h3>
 <p>There is one seeded principal, <strong>Juan Dalmau</strong> (<code>person</code>). His campaign has agreed. His morning is about health, and its content comes only from his public statements, each with its source. There are no other seeded principals, and the earlier plan for a first round of four candidacies is replaced by this.</p>
-<p>Everyone else gets a principal from one of two folder templates, <strong>committee</strong> or <strong>candidate's campaign</strong>, filled in from the registration answers. The templates are the product surface for visitors, who give almost no material, so they carry sensible default themes and show gaps instead of inventing. For a candidate's campaign the only source is what the visitor says, so the output never invents quotes or positions for the named candidate.</p>
+<p>Everyone else gets a principal from one of two folder templates, <strong>committee</strong> or <strong>candidate's campaign</strong>, filled in from the registration answers. The templates are the product surface for visitors, who give almost no material, so they carry sensible default themes and show gaps instead of inventing. Both templates hold no public statements, and their gaps say so. For a candidate's campaign the only source is what the visitor says, so the output never invents quotes or positions for the named candidate.</p>
 <h3 id="artwork-templates" tabindex="-1"><a class="heading-anchor" href="#artwork-templates" aria-hidden="true">#</a> Artwork templates</h3>
-<p>The artwork comes from a separate asset builder, built outside this repository from the Alianza's templates and reached through an agreed interface. Its request carries the piece copy, the format (X, Facebook, Instagram post, Instagram story or PDF), a photo, the principal's identity, a flag <code>demo: true</code> and a <code>demo_label</code>. It rejects any request without the flag. Its templates work with or without a person's name and photo.</p>
+<p>The artwork and the PDF come from an asset builder that, since 2026-10-06, the demo repository builds itself, as part of the same application. An earlier plan had it built separately, outside that repository, behind an agreed interface; the interface stays, now between the two halves of the application. Its request carries the headline and copy, the format (X, Facebook, Instagram post, Instagram story or PDF), a photo, the principal's identity, a flag <code>demo: true</code> and a <code>demo_label</code>. It rejects any request without the flag. It works with or without a person's name and photo.</p>
+<p>The builder has a fixed half and a replaceable half. The fixed half is built once: the interface, the renderer, the demo mark, the checks, the fallback and a preview page where every sample is painted in every format. The replaceable half is the look: the layouts, the formats and their sizes, the brand kits and the body of the PDF. The artwork, layouts and formats are expected to be redesigned, so nothing in the fixed half depends on a particular layout or size. The first layout is a placeholder, adapted from an existing open-source design for social-media cards, so real artwork reaches the cards before the redesign; whether the redesign lands before the pitch is open (§13).</p>
+<ul>
+<li><strong>The engine.</strong> The artwork is drawn with the engine of an open-source social-card project, <code>tarjetas-sociales</code>: a scene painter, text fitting that finds the largest size that fits and flags overflow, and a contrast audit. Each artwork is a scene painted on a canvas in a headless browser that stays warm between renders; the PDF is HTML printed by the same browser. Fonts are bundled with the application, never fetched while rendering.</li>
+<li><strong>The demo mark</strong> is added by the harness after the layout composes the scene, inside the format's safe zones, so no layout, current or redesigned, can drop it. The page refuses to paint a scene without it, and the contrast audit checks it like any other text. The PDF carries a demo header and footer on every page and a line saying its content is generated and unverified.</li>
+<li><strong>The brand kits.</strong> One per template set, candidacy and committee: one ink, one font family and a logotype. The team's designer supplies them; until then, a default typeface and inks.</li>
+<li><strong>What goes on an artwork.</strong> The approved headline, the principal's name and role (or the committee and its region), the morning's date and the handle when there is one. The post's copy stays off the image. A headline that does not fit is flagged instead of drawn over the rest.</li>
+</ul>
 <h3 id="one-shared-bot-routed-by-sender" tabindex="-1"><a class="heading-anchor" href="#one-shared-bot-routed-by-sender" aria-hidden="true">#</a> One shared bot, routed by sender</h3>
 <p>In GreenGrass each organization has its own WhatsApp Business account (<a href="./integrations.html#whatsapp-business-api">integrations.md § WhatsApp Business API</a>). The pitch uses one Telegram bot for everyone and identifies each person by their Telegram user, the first time they open the link. Each person becomes their own principal, and the conversation is routed to its folder. One team's screen sees them all, so isolation between principals is a property of what each prompt is given, not of separate screens.</p>
 <h3 id="controlling-who-gets-in" tabindex="-1"><a class="heading-anchor" href="#controlling-who-gets-in" aria-hidden="true">#</a> Controlling who gets in</h3>
-<p>The link can be forwarded, so control is operational and sits with the operator: registration is closed except during the session, the start code rotates afterwards, cost is capped per principal and overall, the number of principals is capped (for example at 25), and a global kill switch stops all model calls within one request. A sender who is unknown while registration is closed, or who has the wrong code, gets one polite &quot;demo cerrada&quot; reply, and nothing is stored.</p>
+<p>The link can be forwarded, so control is operational and sits with the operator: registration is closed except during the session, the start code rotates afterwards, cost is capped per principal and overall, the number of principals is capped (25 by default), and a global kill switch stops the next model call, including the next call of a morning already being drafted. A sender who is unknown while registration is closed, or who has the wrong code, gets one polite &quot;demo cerrada&quot; reply, and nothing is stored.</p>
 <h2 id="9-the-audience" tabindex="-1"><a class="heading-anchor" href="#9-the-audience" aria-hidden="true">#</a> 9. The audience</h2>
 <p>The first plan was a round of four candidacies from the pilot's two parties, one folder each. The current plan replaces it with one room: a narrated morning for one candidate, then the regional committee presidents and any campaign staff present registering themselves.</p>
 <p>The seeded candidate is a Puerto Rico candidate and the language is Spanish throughout, so the round tests swapping the principal and its kind but not the language. Changing language is provided for, as a new set of the agent's messages and button labels, and is not exercised.</p>
@@ -314,7 +328,7 @@ Revised: 2026-10-04, to match the demo repository's work plan (Telegram, princip
 <p>For a rehearsed morning of its own, which is only done with a campaign that has agreed to it:</p>
 <ul>
 <li>Five to ten photos the campaign has the right to use, with a word or two on what each shows.</li>
-<li>Its visual identity, or permission to use its party's or the Alianza's.</li>
+<li>Its visual identity (a colour, a typeface it may use on the web, and its logo), or permission to use its party's or the Alianza's.</li>
 <li>Its public accounts on each network.</li>
 <li>Three to five topics, with what the person has already said publicly on each: the platform, press releases, interviews. The folder is built from that alone, and every talking point cites it.</li>
 <li>Their Telegram account, kept outside the folder.</li>
@@ -324,32 +338,33 @@ Revised: 2026-10-04, to match the demo repository's work plan (Telegram, princip
 <h2 id="11-what-the-pitch-does-not-prove" tabindex="-1"><a class="heading-anchor" href="#11-what-the-pitch-does-not-prove" aria-hidden="true">#</a> 11. What the pitch does not prove</h2>
 <ul>
 <li><strong>That ADR-018's bounds are enough.</strong> It applies them in the narrowest case possible: one conversation per principal, no voter data, no real publishing. The review still has to decide read scope, the threat model, audit, offline and the BYOM screen.</li>
-<li><strong>Anything about the image builder.</strong> The artwork templates generate no images, on purpose.</li>
+<li><strong>Anything about the image builder.</strong> The asset builder generates no images, on purpose.</li>
+<li><strong>That the agent never misstates a position.</strong> The checks catch invented quotes, figures, sources and links. They cannot catch an invented argument in the principal's voice that the folder does not support; the bake-off produced one. Approval is the safeguard: nothing goes out until a named person approves that exact version, and the talking points carry their sources so the person can check.</li>
 <li><strong>That the knowledge base scales.</strong> A few documents fit whole in the prompt. A real knowledge base needs retrieval, and with it read-scope questions that do not come up here.</li>
 <li><strong>Anything about WhatsApp or Meta onboarding.</strong> Telegram removes business verification, the display-name review and the 24-hour window, which are the slow and constraining parts (<a href="./integrations.html#whatsapp-business-api">integrations.md § WhatsApp Business API</a>). The pitch says nothing about how they go.</li>
 <li><strong>That the agent holds up against a hostile or careless visitor.</strong> The room is invited, the registration is gated and the costs are capped. That is a test of a friendly room, not of an open one.</li>
 <li><strong>That people will adopt it.</strong> A candidate or a president liking it in a demonstration does not mean their campaign will use it every day.</li>
-<li><strong>What it would cost.</strong> The costs the team's screen shows are real but cover one morning. They give an order of magnitude, not a price.</li>
+<li><strong>What it would cost.</strong> The costs the team's screen shows are real but cover one morning: about a cent and a half of model time for the seeded morning and about half a cent for a visitor's. They give an order of magnitude, not a price.</li>
 </ul>
 <h2 id="12-how-it-is-built" tabindex="-1"><a class="heading-anchor" href="#12-how-it-is-built" aria-hidden="true">#</a> 12. How it is built</h2>
-<p>A TypeScript application on Cloudflare Workers, with D1 as the ledger and R2 for the asset builder's images and PDFs, and an open-weight model on Workers AI. The model is picked by a short bake-off between Kimi K2.6, GLM-5.3 and DeepSeek V4 Pro, with Kimi K2.6 if there is no clear winner. This is not the stack decided in <a href="../design/architecture/system.html">system.md</a>: the demonstration is throwaway, and D1 was chosen partly to get hands-on with it. D1 has no realtime feed, so the team's screen short-polls it every second or two.</p>
-<p>The harness receives the Telegram webhook, checks its secret token, handles each update once, acknowledges at once and does the work after, and holds the routing, the registration, the approval state machine, the demo clock and the simulated publisher. The ledger holds principals, pieces, versions, approvals tied to an exact version, cost events and the message log, all flagged as demo.</p>
+<p>A TypeScript application on Cloudflare Workers, with D1 as the ledger and R2 for the generated images and PDFs. The model is GLM-5.3, an open-weight model on Workers AI, run with low reasoning. A short bake-off picked it over Kimi K2.6 and DeepSeek V4 Pro: it wrote the best Spanish copy, returned valid structured output on the first call, and took 13 to 60 seconds per morning. This is not the stack decided in <a href="../design/architecture/system.html">system.md</a>: the demonstration is throwaway, and D1 was chosen partly to get hands-on with it. D1 has no realtime feed, so the team's screen short-polls it every two seconds.</p>
+<p>The harness receives the Telegram webhook, checks its secret token, handles each update once, acknowledges at once and does the work after, and holds the routing, the registration, the approval state machine, the demo clock and the simulated publisher. A morning takes longer to draft than a webhook may run, so it goes through a queue. The ledger holds principals, pieces, versions, approvals tied to an exact version, publications, cost events and the message log, all flagged as demo. The asset builder is part of the same application: a single long-lived worker keeps one headless browser warm and opens a tab per render, in Cloudflare Browser Rendering.</p>
 <p>The work plan, with owners, dependencies and cut lines, is in the demo repository at <code>docs/work-plan.md</code>. The target is a clean fifteen-minute run by Monday, 2026-10-12. The order:</p>
 <ol>
 <li>Decisions: stack, model, channel wording, principals, registration, retention.</li>
 <li>Foundations: the ledger schema, the asset builder's interface with a mock, the folder format and its content, the webhook, the registration flow and the channel client. The bot itself is a fifteen-minute manual setup.</li>
 <li>The loop: the text builder, the recorded fallback and the story of the seeded morning.</li>
 <li>The approval state machine, then the integration with the real asset builder.</li>
-<li>The team's screen, the demo clock, the reset script and the live-visitor guardrails.</li>
+<li>The team's screen, the demo clock, the reset and the live-visitor guardrails.</li>
 <li>A first end-to-end run, then fixes, a timed dry run, a dress rehearsal with fixed roles and a clean run from the reset state, with a screen recording as a backup.</li>
 </ol>
-<p>If time slips, the cuts go in this order: the team's screen is reduced to the inbox and thread detail, the round of changes to one piece, the Instagram story to a static mock, and a late asset builder to one template reused. If a second kind of principal is not ready, the demonstration runs one kind live and shows the other from the recording. If open registration is not solid, the operator creates each president's principal in advance.</p>
+<p>At the time of this revision steps 1 to 3 and 5 are done, and step 4 is done except the real asset builder. What remains is that builder (the pipeline, the placeholder layout, the PDF and, optionally, photos), making it the default instead of the mock, the brand kits, the redesign if it is done before the pitch, and step 6.</p>
+<p>If time slips, the cuts go in this order: the team's screen is reduced to the inbox and thread detail, the round of changes to one piece, the Instagram story to a static mock, and a late asset builder to the placeholder layout without photos, then to the mock. A redesign that is not ready leaves the placeholder layout. If a second kind of principal is not ready, the demonstration runs one kind live and shows the other from the recording. If open registration is not solid, the operator creates each president's principal in advance.</p>
 <h2 id="13-open-questions" tabindex="-1"><a class="heading-anchor" href="#13-open-questions" aria-hidden="true">#</a> 13. Open questions</h2>
 <ol>
-<li><strong>Roles on the day.</strong> Who narrates, who holds the phone and who runs the team's screen, and whether the asset builder's author is available the weekend before.</li>
-<li><strong>The asset builder's interface document.</strong> It has to land in the demo repository before the contract and its mock can be written against it.</li>
-<li><strong>Start day.</strong> Whether the greeting is triggered by a person, as this spec holds, or by the demo clock at 5:30. The work plan says only that the greeting becomes a bot-initiated message once the recipient has pressed <code>/start</code>. A timer would be the autonomous-action case that §7 point 2 keeps out.</li>
-<li><strong>Who writes the new version.</strong> The work plan says the team writes and sends it, and also lists &quot;v2 generation&quot; under the approval state machine. Whether the agent offers a redraft for the team to edit is undecided.</li>
+<li><strong>Roles on the day.</strong> Who narrates, who holds the phone and who runs the team's screen, and whether the team's designer is available the weekend before for the slides and a review of the artwork.</li>
+<li><strong>The redesign.</strong> The first layout is a placeholder. Whether the artwork, the layouts and the formats are redesigned before 2026-10-12 or after the pitch is not decided. The rest of the asset builder does not change either way.</li>
+<li><strong>Photos.</strong> Whether the artwork carries the campaign's photos at the pitch. For now every artwork goes without one, and adding them is optional work. A demonstration without photos still shows the flow, but looks less like what a campaign posts.</li>
 <li><strong>Recordings.</strong> A recording of the pitch carries a real person's voice or words saying things an agent drafted. It is not shown to another campaign without that person's written permission. The backup screen recording carries the same demo marking.</li>
 <li><strong>What to offer whoever says yes.</strong> The answer to &quot;I want to use it tomorrow&quot; is the pilot, and the pilot waits on the ADR-018 review for anything agent-shaped. That has to be said well, and before anyone asks.</li>
 <li><strong>What a committee maps to.</strong> The specification has no regional-committee organization type (§6). Whether a committee is a campaign under a party or something new is not decided here.</li>
