@@ -4,6 +4,40 @@
 
 ## *por Pablo Defendini y Giovanni Collazo — 22 de noviembre de 2024*
 
+# La dirección a noviembre de 2026
+
+*Agregado el 2026-11-13. Este es el documento más antiguo del repositorio, y todo lo que hay debajo de esta sección es la descripción tal como se escribió en 2024, con ediciones posteriores. Se deja como está, porque todos los demás documentos se construyeron sobre ella. Esta sección dice qué cambió. Donde las dos no coincidan, vale esta sección.*
+
+**Lo que el proyecto construye ahora es una infraestructura de servicios compartidos para organizaciones, no un producto todo en uno.** La infraestructura gira entorno a un producto central (Core), con un catálogo de módulos que cada cliente activa individualmente. Algunos de esos módulos son: monitoreo de radio y TV; monitoreo de redes; resumen de prensa; constructor de artes publicitarios; análisis electoral; manejo de crisis; encuestas y sondeos; distribución de contenido; operaciones de calle; manejo de eventos y voluntarios; recaudación y pagos; etc.
+
+**Esa infraestructura se le ofrece a nuestros clientes por dos carriles, diferenciados a nivel de marca y producto:**
+
+- **Carril político.** 'Greengrass', manejado por Blimp.io y Onda Corta, es la plataforma para movimientos comunitarios, sindicatos y partidos políticos. Sus primeros clientes son el PIP, el Movimiento Victoria Ciudadana (MVC), y la Alianza de País. A estos clientes se les cobra al costo, más la comisión que cubre el costo de vender.
+- **Carril comercial.** Basecamp (PR Media/Relacionistas.app), manejado por R&R y Onda Corta es la plataforma para publicistas, relacionistas públicos, agencias y otras empresas comerciales. Su primer cliente es la Asociación de Publicistas, y se le cobra el costo más un margen de 30% para la dueña del producto, más la comisión de la Comercializadora.
+- **Módulos compartidos.** Todos los módulos del catálogo pueden correr dentro de cualquiera de los dos productos, aunque algunos módulos no son útiles para ambos carriles: la inteligencia electoral, por ejemplo, es solo del carril político. Cada cliente corre su propia instancia, con sus propios datos y sus propias cuentas.
+- **Carriles independientes.** Un carril no espera por el otro. El trabajo con el PIP y el MVC no depende de lo que termine siendo la herramienta de la Asociación de Publicistas, ni al revés. Cuando un carril mejora un módulo compartido, la mejora le llega también al otro.
+
+<!-- REVISIT: «la dueña del producto» (the product's owner) y «la Comercializadora» se usan tal como se dieron y no están definidas en ninguna parte. Ver la ADR-026. -->
+
+**«Greengrass» nombra ahora el producto político, no la infraestructura.** El Core todavía no tiene nombre propio. En el resto de este documento, y en todos los documentos escritos antes de noviembre de 2026, «GreenGrass» quiere decir la plataforma entera.
+
+**Tres superficies.** El Core es headless (sin interfaz propia: todo es primero una operación de la API). Un UI de chat está pensado para cargar entre el 70 y el 80 % del trabajo diario del equipo, un UI de administración el resto, que es lo complejo, y la app de campo se queda como la superficie para el trabajo que se hace sin conexión.
+
+**Lo que ningún competidor integra:** el padrón electoral, las herramientas de campo sin conexión y las herramientas para coaliciones de partidos. Siguen en el centro del producto político.
+
+**Trabaja con lo que las organizaciones ya usan.** El CRM sincroniza en los dos sentidos con herramientas de terceros, empezando por NationBuilder y empezando por CSV.
+
+| Qué dice esta sección | Dónde queda registrado | Situación |
+|---|---|---|
+| Core, módulos y carriles | [ADR-022](../decisions/022-core-modules-and-lanes.md) | Propuesta. Los dos carriles, el CRM dentro del Core y una instancia por cliente están decididos |
+| Un Core headless, chat, administración y campo | [ADR-023](../decisions/023-surfaces-chat-admin-field.md) | Propuesta. El chat espera a la revisión de la [ADR-018](../decisions/018-ai-agent-posture.md), en los dos carriles |
+| Un bus de eventos entre instancias | [ADR-024](../decisions/024-event-bus-as-federation.md) | Propuesta |
+| Cada cliente guarda sus propias cuentas | [ADR-025](../decisions/025-identity-per-client.md) | Aceptada |
+| Los precios | [ADR-026](../decisions/026-two-lane-pricing.md) | Aceptada; las definiciones que necesitan están abiertas |
+| Sincronización con CRM de terceros | [ADR-027](../decisions/027-third-party-crm-sync-and-connectors.md) | Propuesta. NationBuilder por CSV está decidido |
+
+**Qué del original ya no vale.** Tres cosas de más abajo quedan sin efecto y están marcadas donde aparecen: «todo en uno» y «ventanilla única» como forma del producto; «una tarifa fija»; y los modelos de ingresos del final del documento. Todo lo demás de aquí abajo se lee como una descripción del carril político.
+
 # Resumen ejecutivo
 
 Los movimientos progresistas y de izquierda funcionan con poco dinero, herramientas viejas y un montón de servicios sueltos que no se hablan entre sí — un problema en todas partes, y más agudo en el Sur Global. **GreenGrass** mete en una sola plataforma lo que una campaña de base del Sur Global realmente tiene que hacer: organizar gente, alcanzarla por los canales que usa y guardar suficientes datos para decidir dónde va el esfuerzo de la próxima semana. Tiene un precio pensado para campañas con muy poco dinero, está construida para los celulares y las conexiones que ya tienen, y está traducida a los idiomas en los que organizan. La idea es reducir la cantidad de herramientas que una campaña tiene que mantener a flote y darle más tiempo de contacto con la gente a la que quiere llegar.
@@ -20,6 +54,8 @@ Las campañas políticas progresistas en países del Sur Global enfrentan retos 
 Existen plataformas como NationBuilder, Action Network y Mobilize, pero están diseñadas para mercados desarrollados y sus precios suelen quedar fuera del alcance de las campañas progresistas del Sur Global.
 
 # Proyecto: GreenGrass
+
+<!-- REVISIT: «todo en uno», «ventanilla única» y «una tarifa fija», en el párrafo de abajo, quedan sin efecto por la dirección de noviembre de 2026 que abre este documento: el producto es un Core con módulos que un cliente activa uno por uno (ADR-022), y el precio es el costo más la regla de cada carril (ADR-026). El párrafo se deja como está. -->
 
 **Proyecto: GreenGrass** es una plataforma tecnológica de campaña todo en uno, hecha a la medida de lo que necesitan las campañas de base en países del Sur Global. La intención es que sea una ventanilla única —con una tarifa fija— para que campañas y organizaciones usen el servicio sin depender de servicios ni costos adicionales (con la excepción de costos variables inevitables como los envíos de SMS, que el proveedor normalmente cobra por volumen).
 
@@ -105,6 +141,8 @@ GreenGrass se construye con un modelo de código abierto, salvo donde razones de
 * Montar una red de soporte local, con acuerdos que den capacitación y atención al cliente en las regiones clave.
 
 ## Posibles modelos de ingresos
+
+<!-- REVISIT: queda sin efecto por la ADR-026. El precio es ahora una regla del carril: al costo, más una comisión, en el carril político; al costo, más un margen de 30 %, más una comisión, en el carril comercial. Si el plan freemium de abajo sobrevive queda abierto allí. La lista se deja como está. -->
 
 * Plan freemium: acceso básico a las funcionalidades centrales, para que las campañas pequeñas arranquen gratis.
 * Niveles de suscripción: planes pagos con funcionalidades adicionales, pensados para campañas medianas y grandes. Explícitamente no es un modelo de precio por usuario ni ligado a ninguna otra medida de escala, aunque igual hay que pensar en alguna estructura de ingresos que acompañe la escala para manejar los costos operativos crecientes.
