@@ -73,7 +73,7 @@ Lo decidido es la forma: una asociación de agencias es una alianza de partidos 
 1. **¿El bus reemplaza la capa central de federación?** Hay que acordarlo antes de que esta ADR pueda aceptarse.
 2. **La comprobación de NATS** marcada *Verificar* arriba.
 3. **La alianza como cliente completo o como organización ligera.** Es el conflicto 2 de arriba. La lectura que se propone aquí es que «ligera» quiere decir con pocos módulos activados.
-4. **Un ejercicio de comprobación.** La dirección propone una prueba técnica en el carril político con una exportación real del MVC: el CSV de ida y vuelta de la ADR-027, y después la supresión mutua entre dos instancias sobre el bus. No tiene fecha.
+4. **Un ejercicio de comprobación.** La dirección propone una prueba técnica en el carril político con una exportación real del MVC: el CSV de ida y vuelta de la [ADR-027](027-third-party-crm-sync-and-connectors.md), y después la supresión mutua entre dos instancias sobre el bus. No tiene fecha.
 
 ### Orden interno: avisos de enmienda
 
@@ -101,4 +101,4 @@ Esta ADR le agrega a la [ADR-001](001-platform-architecture.md) una línea de **
 - Un miembro que no responde nunca es un veto
 - Hasta que esta ADR se acepte, el diseño especificado es la capa de federación de `system.md`
 
-**ADR relacionadas:** [ADR-001](001-platform-architecture.md) (enmienda propuesta: la capa central del modelo de federación; el aislamiento por instancia no cambia), [ADR-017](017-sharing-contract-trust-model.md) (el contrato filtra toda exportación), [ADR-019](019-central-services-and-metered-billing.md) (los eventos de uso van por el mismo flujo; `alliance_pays`; la supresión mutua), [ADR-022](022-core-modules-and-lanes.md) (los eventos son del Core; el Fideicomiso de coalición es un módulo para los dos carriles), [ADR-025](025-identity-per-client.md) (no hay identidad compartida con la que hacer coincidir a las personas), ADR-027 (el proceso de conectores queda detrás del bus)
+**ADR relacionadas:** [ADR-001](001-platform-architecture.md) (enmienda propuesta: la capa central del modelo de federación; el aislamiento por instancia no cambia), [ADR-017](017-sharing-contract-trust-model.md) (el contrato filtra toda exportación), [ADR-019](019-central-services-and-metered-billing.md) (los eventos de uso van por el mismo flujo; `alliance_pays`; la supresión mutua), [ADR-022](022-core-modules-and-lanes.md) (los eventos son del Core; el Fideicomiso de coalición es un módulo para los dos carriles), [ADR-025](025-identity-per-client.md) (no hay identidad compartida con la que hacer coincidir a las personas), [ADR-027](027-third-party-crm-sync-and-connectors.md) (el proceso de conectores queda detrás del bus)

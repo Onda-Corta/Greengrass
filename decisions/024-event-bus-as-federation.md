@@ -73,7 +73,7 @@ What is decided is the shape: an association of agencies is an alliance of parti
 1. **Does the bus replace the central federation layer?** This has to be agreed before this ADR can be accepted.
 2. **The NATS check** marked *Verify* above.
 3. **The alliance as a full client or a lightweight tenant.** Conflict 2 above. The reading proposed here is that "lightweight" means few modules enabled.
-4. **A proving exercise.** The direction proposes a political-lane spike with a real MVC export: the CSV round trip of ADR-027, then mutual suppression between two instances over the bus. It is not scheduled.
+4. **A proving exercise.** The direction proposes a political-lane spike with a real MVC export: the CSV round trip of [ADR-027](027-third-party-crm-sync-and-connectors.md), then mutual suppression between two instances over the bus. It is not scheduled.
 
 ### Housekeeping: amendment banners
 
@@ -101,4 +101,4 @@ This ADR adds an **Amendment proposed by** line to [ADR-001](001-platform-archit
 - An unanswered member is never a veto
 - Until this ADR is accepted, the federation layer in `system.md` is the specified design
 
-**Related ADRs:** [ADR-001](001-platform-architecture.md) (amendment proposed: the federation model's central layer; instance isolation unchanged), [ADR-017](017-sharing-contract-trust-model.md) (the contract filters every export), [ADR-019](019-central-services-and-metered-billing.md) (usage events on the same stream; `alliance_pays`; mutual suppression), [ADR-022](022-core-modules-and-lanes.md) (events are Core; Coalition Trust is a module for both lanes), [ADR-025](025-identity-per-client.md) (no shared identity to match people through), ADR-027 (the connector worker sits behind the bus)
+**Related ADRs:** [ADR-001](001-platform-architecture.md) (amendment proposed: the federation model's central layer; instance isolation unchanged), [ADR-017](017-sharing-contract-trust-model.md) (the contract filters every export), [ADR-019](019-central-services-and-metered-billing.md) (usage events on the same stream; `alliance_pays`; mutual suppression), [ADR-022](022-core-modules-and-lanes.md) (events are Core; Coalition Trust is a module for both lanes), [ADR-025](025-identity-per-client.md) (no shared identity to match people through), [ADR-027](027-third-party-crm-sync-and-connectors.md) (the connector worker sits behind the bus)

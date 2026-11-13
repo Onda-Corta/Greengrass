@@ -3,6 +3,7 @@
 **Estado:** Aceptada
 **Fecha:** 2026-03-03
 **Fuentes:** `spec/workflows.md`, `spec/integrations.md`
+**Enmendada por:** [ADR-027](027-third-party-crm-sync-and-connectors.md) (Propuesta) — un requisito de esa ADR está decidido: el CRM del Core sincroniza en los dos sentidos con herramientas de terceros, NationBuilder primero y por CSV primero. Eso reemplaza el camino de una sola vía, «guías de migración + importación genérica», decidido en [integrations.md § Migración desde otras plataformas](../spec/integrations.md#migración-desde-otras-plataformas); esta ADR nunca decidió la migración. La sincronización continua por API y Parsons como capa de conectores están propuestas, no aceptadas. Las decisiones de más abajo no cambian.
 
 ## Contexto
 
