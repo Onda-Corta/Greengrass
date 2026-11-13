@@ -245,9 +245,40 @@ The platform must handle messy real-world data files from diverse sources.
 
 ### Migration from Other Platforms
 
+**Amended by [ADR-027](../decisions/027-third-party-crm-sync-and-connectors.md).** This section decided a one-way path. An organization no longer has to leave the tool it runs: see [Third-Party CRM Sync](#third-party-crm-sync) below. The original decision is kept here, and still describes what an organization gets if it does choose to move.
+
 Campaigns switching to GreenGrass from other tools (NationBuilder, NGP VAN, Action Network, CiviCRM, etc.) need migration support.
 
 **DECIDED: Migration guides + generic import.** Detailed documentation for migrating from common campaign platforms (NationBuilder, NGP VAN, Action Network, CiviCRM) — what to export, how to map fields, what to watch out for. Plus the generic smart-mapping import tools. If a particular source platform becomes a dominant migration path, a dedicated importer can be built later.
+
+### Third-Party CRM Sync
+
+**DECIDED: the core CRM syncs both ways with third-party tools, NationBuilder first and by CSV first.** Victoria Ciudadana runs NationBuilder ([mvp.md § MVC — Movimiento Victoria Ciudadana](mvp.md#mvc-movimiento-victoria-ciudadana)). With sync, an organization can keep NationBuilder as its system of record and add modules beside it. The rest of this section is the design [ADR-027](../decisions/027-third-party-crm-sync-and-connectors.md) proposes for that requirement, and it is not accepted.
+
+**Phase A — the CSV round trip.**
+
+- **In:** import NationBuilder's people export through the [Import Pipeline](#import-pipeline). Its field names are stable, from `nationbuilder_id` to `mobile_opt_in`. Map them once and save the mapping.
+- **Out:** export changes as a CSV NationBuilder can import, keyed by `nationbuilder_id`.
+- **Cadence:** whatever the organization works at.
+- This needs no API access, no OAuth app, and no ongoing credentials stored in the instance.
+
+**Phase B — API sync (proposed).** The same mapping, run continuously through a connector, by webhooks or polling with incremental cursors.
+
+**Rules for both phases (proposed).** They live in the core CRM, not in the connector.
+
+| Rule | What it says |
+|---|---|
+| Identity crosswalk | Each person has an external-ID map. Inbound records go through suggest-and-confirm dedup. Sync never merges people on its own |
+| System of record per field | The organization chooses, per field, which side wins, once, when it connects |
+| Conflicts | Kept on both sides and flagged for a person, as merge-and-flag does for offline sync |
+| Consent | An opt-out or `do_not_contact` crosses both ways and the most restrictive value wins. An opt-in never overrides a newer opt-out |
+| Field scope | Deny by default. `support_level`, `tags` and encrypted fields stay out unless switched on. A synced field never enters a coalition's shared view by arriving |
+| The perimeter | Data sent to the outside tool leaves the BYOK boundary and needs the same acknowledgement BYOM requires. Outside Puerto Rico, [compliance.md § Cross-Border Data Transfers](compliance.md#cross-border-data-transfers) applies |
+| Audit | Every sync batch is an audit entry, with the connector as the actor |
+
+**Connectors (proposed).** Sync is a core CRM capability exposed through connectors. A connector is a link to an outside tool; it is enabled per organization and is not a module. The proposal is to build connectors on Parsons, Movement Co-op's open-source Python library, which already connects to much of the US left's stack. It would be the interoperability layer for the US left and Puerto Rico, not the whole connector story: Brazil, Thailand, India and Lebanon need connectors it does not have.
+
+**Verify** before any of the Parsons proposal is relied on: that Parsons has a NationBuilder connector, and what it covers; Parsons' licence; NationBuilder's API rate limits and webhook coverage.
 
 ## Monitoring & Observability
 
@@ -336,6 +367,7 @@ The platform emits webhook events for key actions. Tenants configure webhook end
 - Mapping: chosen provider with offline tile support
 - Geocoding: for voter file processing and address validation
 - Data import: CSV/Excel with column mapping for voter files
+- NationBuilder CSV round trip: import of its people export and export back, keyed by `nationbuilder_id` ([Third-Party CRM Sync](#third-party-crm-sync)). Required to bring in MVC
 - FEC API: for compliance report filing (if building FEC reporting for alpha)
 - Public API: REST + webhooks operational
 
