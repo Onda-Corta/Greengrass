@@ -3,6 +3,7 @@
 **Status:** Accepted
 **Date:** 2026-03-03
 **Sources:** `design/architecture/system.md`, `spec/users.md`, `spec/workflows.md`, `spec/product.md`
+**Amendment proposed by:** [ADR-024](024-event-bus-as-federation.md) (Proposed) — the central federation layer that mediates cross-tenant flow would be replaced by contract-filtered event exports between instances, and an alliance would be a client like any other, with its own instance. Nothing below changes until ADR-024 is accepted. Single-tenant isolation is reaffirmed by [ADR-022](022-core-modules-and-lanes.md) and is not in question.
 
 ## Context
 

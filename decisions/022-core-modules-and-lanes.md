@@ -37,7 +37,7 @@ Following [ADR-016](016-cross-cutting-resolutions.md), [ADR-017](017-sharing-con
 2. **[ADR-019 § Two kinds of capability: internal modules and central services](019-central-services-and-metered-billing.md#two-kinds-of-capability-internal-modules-and-central-services)** uses "internal module" to mean code that runs inside the tenant. That describes where code runs, not what a client enables. The term has to change before "module" can mean the product unit.
 3. **The corpus as a whole is written for political clients only.** Threat tiers ([security.md § Threat Actors](../spec/security.md#threat-actors)), election law ([compliance.md](../spec/compliance.md)) and the voter file ([integrations.md § Voter File Integration](../spec/integrations.md#voter-file-integration)) are written as properties of the platform. With a commercial lane they become policy of the political lane.
 4. **[security.md § GreenGrass Team Access](../spec/security.md#greengrass-team-access)** assumes one platform team with administrative access. Two lanes are run by different companies, and a commercial agency may work for a political client's opponent.
-5. **[users.md § Organization Hierarchy](../spec/users.md#organization-hierarchy)** makes an alliance a "lightweight tenant" that does not replicate the full platform stack. In this direction an alliance is a client like any other, with its own instance. ADR-024 takes this up.
+5. **[users.md § Organization Hierarchy](../spec/users.md#organization-hierarchy)** makes an alliance a "lightweight tenant" that does not replicate the full platform stack. In this direction an alliance is a client like any other, with its own instance. [ADR-024](024-event-bus-as-federation.md) takes this up.
 6. **[ADR-020 § Four central services](020-central-service-line-up-and-builders.md#four-central-services)** and [comms-intelligence.md](../spec/comms-intelligence.md) specify one media monitor. The catalogue below lists three monitoring modules. They draw on the one Capture service, so this is packaging and the architecture is unchanged.
 7. **[ADR-015](015-product-scope.md)** fixed the product's scope boundaries. The catalogue names two modules, Crisis management and Polls & surveys, that no document specifies.
 
@@ -113,7 +113,7 @@ Every instance gets all of this, always. The Core is headless: each item is an A
 | Content | Content store, versioned assets, approval pipeline in rounds | [ADR-021](021-content-approval-pipeline.md) |
 | Delivery | Channel transport with consent checks, frequency caps, the quiet window and mutual suppression | [system.md § Cross-channel orchestration engine](../design/architecture/system.md#cross-channel-orchestration-engine), [ADR-016](016-cross-cutting-resolutions.md) §2, [ADR-019](019-central-services-and-metered-billing.md) |
 | Commerce | Catalogue, entitlements, metering | [ADR-019](019-central-services-and-metered-billing.md) |
-| Events | The per-client event stream and the bus (ADR-024) | [system.md § Analytics Architecture](../design/architecture/system.md#analytics-architecture) |
+| Events | The per-client event stream and the bus ([ADR-024](024-event-bus-as-federation.md)) | [system.md § Analytics Architecture](../design/architecture/system.md#analytics-architecture) |
 | Lane configuration | Brand, vocabulary, catalogue visibility, price rules, policy defaults | New, above |
 | Plumbing | Integration hub and connectors, AI abstraction (BYOM), localization, offline sync engine, public API and webhooks | [system.md](../design/architecture/system.md), [ADR-005](005-offline-first-sync.md), [ADR-010](010-internationalization-localization.md), [ADR-016](016-cross-cutting-resolutions.md) §38 |
 
@@ -141,7 +141,7 @@ Every module ships a manifest that declares:
 
 - **Data:** schema extensions to Core entities, its own tables, retention classes.
 - **Dependencies:** the modules it requires, and what happens to its data when it is disabled.
-- **Events:** the events it publishes and consumes on the bus (ADR-024).
+- **Events:** the events it publishes and consumes on the bus ([ADR-024](024-event-bus-as-federation.md)).
 - **Access:** the role templates and permissions it contributes ([ADR-003](003-identity-access-organization.md)).
 - **Surfaces:** its chat operations, each marked read or write, with the confirmation card for writes; its admin screens and navigation entries; its field capabilities and offline behaviour ([ADR-023](023-surfaces-chat-admin-field.md)).
 - **Services:** the central services it calls, and so the entitlements it needs.
@@ -172,7 +172,7 @@ Proposed. The names are the product side's. Every module can run in either produ
 | Street operations | Political | Voter File, offline engine | Field, admin | Canvassing, voter registration, GOTV |
 | Voter File | Political | Core CRM | Admin | Recommended as a module, not decided (above) |
 | Electoral analysis | Political | Analysis, Voter File, geography | Admin, chat | Not yet scheduled ([ADR-020](020-central-service-line-up-and-builders.md)) |
-| Coalition Trust | Both | CRM, bus, mutual suppression | Admin, chat | The MVP ([mvp.md](../spec/mvp.md)). Alliances of parties; associations of agencies (ADR-024) |
+| Coalition Trust | Both | CRM, bus, mutual suppression | Admin, chat | The MVP ([mvp.md](../spec/mvp.md)). Alliances of parties; associations of agencies ([ADR-024](024-event-bus-as-federation.md)) |
 | Opposition research & vetting | Political | Analysis, compartments | Admin | Compartments; legal review per country |
 | Activism | Political | CRM, text builder | Public pages, admin | None |
 
@@ -224,4 +224,4 @@ A proposed ADR amends nothing until it is accepted. This ADR adds an **Amendment
 - The [ADR-018](018-ai-agent-posture.md) gate applies to the whole Core, so to both lanes ([ADR-023](023-surfaces-chat-admin-field.md))
 - Nothing marked proposed, recommended or open in this ADR may be built on as if it were decided
 
-**Related ADRs:** [ADR-001](001-platform-architecture.md) (one instance per client, reaffirmed), [ADR-015](015-product-scope.md) (amendment proposed: the catalogue names modules outside its scope list), [ADR-017](017-sharing-contract-trust-model.md) (contracts are Core), [ADR-018](018-ai-agent-posture.md) (the manifest declares each module's standing against the gate), [ADR-019](019-central-services-and-metered-billing.md) (amendment proposed: "internal module" becomes "in-tenant component"; catalogue, entitlements and metering are Core), [ADR-020](020-central-service-line-up-and-builders.md) (amendment proposed: one media monitor is packaged as three modules; the four services are unchanged), [ADR-021](021-content-approval-pipeline.md) (the content pipeline is Core), [ADR-023](023-surfaces-chat-admin-field.md) (surfaces), ADR-024 (the bus; alliances and associations), ADR-025 (identity per client), ADR-026 (prices), ADR-027 (sync and connectors)
+**Related ADRs:** [ADR-001](001-platform-architecture.md) (one instance per client, reaffirmed), [ADR-015](015-product-scope.md) (amendment proposed: the catalogue names modules outside its scope list), [ADR-017](017-sharing-contract-trust-model.md) (contracts are Core), [ADR-018](018-ai-agent-posture.md) (the manifest declares each module's standing against the gate), [ADR-019](019-central-services-and-metered-billing.md) (amendment proposed: "internal module" becomes "in-tenant component"; catalogue, entitlements and metering are Core), [ADR-020](020-central-service-line-up-and-builders.md) (amendment proposed: one media monitor is packaged as three modules; the four services are unchanged), [ADR-021](021-content-approval-pipeline.md) (the content pipeline is Core), [ADR-023](023-surfaces-chat-admin-field.md) (surfaces), [ADR-024](024-event-bus-as-federation.md) (the bus; alliances and associations), ADR-025 (identity per client), ADR-026 (prices), ADR-027 (sync and connectors)
