@@ -6,6 +6,8 @@ A comprehensive catalog of every distinct screen in the platform, organized by f
 
 This inventory is derived from the 12 spec documents and the navigation model. It serves as the master reference for wireframing, route planning, and implementation scoping.
 
+**Note added 2026-11-13.** [ADR-023](../../../decisions/023-surfaces-chat-admin-field.md), which is proposed, describes three surfaces: chat, an admin UI and the field app. Most of the 240 screens here would survive as the admin UI, and the field screens as the field app. The inventory needs each screen tagged by surface, and by the module that contributes it ([ADR-022](../../../decisions/022-core-modules-and-lanes.md), proposed). That tagging is not done here. It is not mechanical: whether a screen stays primary, becomes secondary because its job moves to chat, or belongs to the field app is a judgement per screen, and the module boundaries it depends on are not yet accepted. It is recorded as follow-up work. No screen is added, removed or redrawn by this note.
+
 ## Reading the Table
 
 - **Screen ID** — unique identifier for cross-referencing (format: `AREA-NNN`)
