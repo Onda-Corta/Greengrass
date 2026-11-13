@@ -329,6 +329,8 @@ Cada organización elige su nivel al momento del aprovisionamiento. Se admite su
 
 **DECIDIDO:** acceso silencioso. El Administrador de la plataforma puede leer los datos de una organización para dar soporte y depurar, sin avisarle a la organización. Todo acceso queda en el registro de auditoría inmutable de Administrador de la plataforma. Es el enfoque operativo estándar: mantiene el soporte rápido y sin trabas durante los incidentes.
 
+<!-- REVISIT: esta sección supone un solo equipo de plataforma. La plataforma se vende ahora por dos carriles que manejan empresas distintas (ADR-022, propuesta), y una agencia comercial puede trabajar para el adversario de un cliente político. La ADR-022 propone que los operadores estén separados por carril, y que los operadores de un carril administren solo las instancias de ese carril. Cómo se define el acceso de Onda Corta a los dos carriles, y qué se les dice a los clientes políticos, está abierto. Queda como está hasta que eso se decida. -->
+
 ### Respuesta a incidentes
 
 **DECIDIDO:** notificación rápida; ante la duda, velocidad antes que exhaustividad.

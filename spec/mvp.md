@@ -4,6 +4,7 @@
 
 Pilot pair: MVC and PIP (Puerto Rico)
 Drafted: 2026-08-19
+Cross-reference added 2026-11-13: in the terms of [ADR-022](../decisions/022-core-modules-and-lanes.md), the pilot is the Core plus the Coalition Trust module, in the political lane. Nothing in this plan changes.
 
 ---
 

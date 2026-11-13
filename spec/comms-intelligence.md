@@ -281,6 +281,8 @@ Ordered by dependency, not by appeal. Each releases only when its gate passes.
 - **Builders is Iteration 7**, off the main line (§9.1).
 - **Channel transport is already specified** in the platform's communication infrastructure, with mutual suppression before every send. The iterations add nothing to it.
 
+**In the module catalogue, the one media monitor is three modules** ([ADR-022 § The module catalogue](../decisions/022-core-modules-and-lanes.md#the-module-catalogue), proposed). Radio & TV monitoring, Social monitoring and Press summary are what a client would enable. All three draw on the one Capture service, so this is packaging: Iteration 3 still builds one service, behind the same corpus probe. A fourth catalogue module, **Crisis management**, is the claims-ledger workflow of §5.2: an attack surfaces in monitoring, becomes a claim, gets sourced and adjudicated, and the answer becomes a talking point. It is named in the catalogue and not yet specified. The catalogue also proposes that two of the three primitives in §5 are Core: the actor graph extends the Core CRM and the claims ledger extends the Core content store. **The gates and the iterations in this document are unchanged.**
+
 ### 9.1 Why this order
 
 **Iteration 1 first because it needs nothing.** Talking points and the claims ledger require no new access-control primitive, no ingestion pipeline, and no legal review. They extend a screen that is already wireframed. It is the fastest path from the MVP gate to something a campaign uses daily.

@@ -329,6 +329,8 @@ Tenants select their tier at provisioning time. Tier upgrades are supported with
 
 **DECIDED:** Silent access. Platform Admin can read tenant data for support and debugging without tenant notification. All access is logged in the immutable Platform Admin audit trail. Standard operational approach — keeps support fast and unblocked during incidents.
 
+<!-- REVISIT: this section assumes one platform team. The platform is now sold through two lanes run by different companies (ADR-022, proposed), and a commercial agency may work for a political client's opponent. ADR-022 proposes that operators are separated by lane, with a lane's operators administering only that lane's instances. How Onda Corta's access across both lanes is defined, and what political clients are told, are open. Left as written until that is decided. -->
+
 ### Incident Response
 
 **DECIDED:** Fast notification, err on the side of speed over completeness.
