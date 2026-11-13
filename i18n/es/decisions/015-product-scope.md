@@ -4,6 +4,7 @@
 **Fecha:** 2026-03-03
 **Fuentes:** `spec/workflows.md`, `spec/fundraising.md`, `spec/gotv.md`, `spec/messaging.md`, `spec/press.md`
 **Enmendada por:** [ADR-020](020-central-service-line-up-and-builders.md) — el monitoreo automatizado de medios pasa de aplazado a especificado, como el servicio central de captura. Su construcción sigue condicionada al sondeo de corpus, la Iteración 0 de [comms-intelligence.md § 9. Las iteraciones](../spec/comms-intelligence.md#9-las-iteraciones). El resto de esta ADR no cambia.
+**Enmienda propuesta por:** [ADR-022](022-core-modules-and-lanes.md) (Propuesta) — el producto pasa a ser un Core con un catálogo de módulos. El monitoreo automatizado de medios se ofrecería como tres módulos sobre el único servicio de captura, y el catálogo nombra dos módulos que esta ADR nunca incluyó en el alcance, Manejo de crisis y Encuestas y sondeos, que todavía están sin especificar. Nada de lo que sigue cambia hasta que se acepte la ADR-022.
 
 ## Contexto
 

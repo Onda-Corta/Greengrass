@@ -3,6 +3,7 @@
 **Estado:** Aceptada
 **Fecha:** 2026-09-28
 **Fuentes:** `spec/comms-intelligence.md`, `spec/press.md`, `design/architecture/system.md`, `decisions/013-analytics-ai.md`, `decisions/015-product-scope.md`, `decisions/016-cross-cutting-resolutions.md`, `decisions/018-ai-agent-posture.md`, `decisions/019-central-services-and-metered-billing.md`
+**Enmienda propuesta por:** [ADR-022](022-core-modules-and-lanes.md) (Propuesta) — los cuatro servicios centrales no cambian. El catálogo del que compra un cliente listaría módulos construidos sobre ellos: la captura se vendería como tres módulos de monitoreo (radio y TV, redes, resumen de prensa), y los constructores serían la base de un módulo, el Constructor de artes publicitarios. Los puntos de decisión y las iteraciones no cambian.
 
 ## Contexto
 

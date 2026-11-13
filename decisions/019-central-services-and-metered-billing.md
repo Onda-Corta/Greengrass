@@ -3,6 +3,7 @@
 **Status:** Accepted
 **Date:** 2026-09-28
 **Sources:** `spec/fundraising.md`, `spec/product.md`, `spec/users.md`, `spec/mvp.md`, `spec/comms-intelligence.md`, `spec/workflows.md`, `design/architecture/system.md`
+**Amendment proposed by:** [ADR-022](022-core-modules-and-lanes.md) (Proposed) — "internal module" below would be renamed "in-tenant component", so that "module" can mean the unit a client enables from the catalogue. The distinction this ADR draws is unchanged; only the name moves.
 
 ## Context
 
