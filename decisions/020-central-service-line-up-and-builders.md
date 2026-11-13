@@ -3,6 +3,8 @@
 **Status:** Accepted
 **Date:** 2026-09-28
 **Sources:** `spec/comms-intelligence.md`, `spec/press.md`, `design/architecture/system.md`, `decisions/013-analytics-ai.md`, `decisions/015-product-scope.md`, `decisions/016-cross-cutting-resolutions.md`, `decisions/018-ai-agent-posture.md`, `decisions/019-central-services-and-metered-billing.md`
+**Amended by:** [ADR-026](026-two-lane-pricing.md) — "passed through at cost" below describes what the Core meters. What a client pays is that cost plus its lane's price rule.
+**Amendment proposed by:** [ADR-022](022-core-modules-and-lanes.md) (Proposed) — the four central services are unchanged. The catalogue a client buys from would list modules built on them: Capture would be sold as three monitoring modules (radio & TV, social, press summary), and Builders would underlie an Ad-art builder module. Gates and iterations are unchanged.
 
 ## Context
 

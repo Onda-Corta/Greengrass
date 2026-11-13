@@ -4,6 +4,10 @@
 
 GreenGrass es una plataforma federada y de organización única para la gestión de campañas políticas de base. Este documento define la arquitectura del sistema — cómo encajan los componentes, cómo fluyen los datos y cómo la infraestructura sostiene los requisitos de producto definidos en los documentos de especificación.
 
+**Nota de lectura, añadida el 2026-11-13.** La dirección del producto cambió después de que se escribió este documento, y seis ADR registran el cambio. Dos están aceptadas y aquí aparecen como estructura: la identidad es por cliente (la [ADR-025](../../decisions/025-identity-per-client.md)) y el precio es una regla del carril (la [ADR-026](../../decisions/026-two-lane-pricing.md)). Cuatro están propuestas y aquí aparecen solo en secciones marcadas como propuestas: el Core, los módulos y los carriles (la [ADR-022](../../decisions/022-core-modules-and-lanes.md)), las superficies (la [ADR-023](../../decisions/023-surfaces-chat-admin-field.md)), el bus de eventos (la [ADR-024](../../decisions/024-event-bus-as-federation.md)) y la sincronización con terceros (la [ADR-027](../../decisions/027-third-party-crm-sync-and-connectors.md)). En este documento, «GreenGrass» es la infraestructura. Una *organización*, aquí, es lo que esas ADR llaman la *instancia de un cliente*.
+
+<!-- REVISIT: este documento describe la plataforma como hecha «para la gestión de campañas políticas de base». Con la ADR-022, la infraestructura sirve a dos carriles, el político y el comercial, y las partes de este documento que son solo políticas (el padrón electoral, el día de elecciones, el cumplimiento del financiamiento de campañas) pasan a ser política del carril político. El texto queda como está hasta que se acepte la ADR-022. -->
+
 ### Impulsores de la arquitectura
 
 Estas decisiones de producto (tomadas en las especificaciones) son las que más pesan en la arquitectura:
@@ -16,7 +20,7 @@ Estas decisiones de producto (tomadas en las especificaciones) son las que más 
 6. **Prioridad móvil** — la interfaz principal es un celular, no una computadora de escritorio
 7. **RTL y multilingüe desde el primer día** — la arquitectura tiene que soportar texto bidireccional y localización de contenido
 8. **Registro de auditoría completo** — cada modificación de datos queda registrada
-9. **Identidad federada** — una identidad de plataforma, perfiles por organización
+9. **Identidad por cliente** — cada instancia corre su propio servicio de identidad y guarda sus propias cuentas (la [ADR-025](../../decisions/025-identity-per-client.md)). Reemplaza al impulsor original, «identidad federada: una identidad de plataforma, perfiles por organización»
 10. **Analítica en tiempo real para las operaciones activas** — los paneles del día de campo y del día de elecciones se actualizan en vivo
 
 ---
@@ -27,12 +31,12 @@ Estas decisiones de producto (tomadas en las especificaciones) son las que más 
 ┌──────────────────────────────────────────────────────────────────┐
 │                        CAPA DE PLATAFORMA                        │
 │                                                                  │
-│  ┌───────────────┐  ┌─────────────────────┐  ┌────────────────┐  │
-│  │  Servicio de  │  │  Servicio de        │  │  Admin. de la  │  │
-│  │  identidad    │  │  aprovisionamiento  │  │  plataforma    │  │
-│  └──────┬────────┘  └──────┬──────────────┘  └────────────────┘  │
-│         │                  │                                     │
-│  ┌──────┴──────────────────┴──────────────────────────────────┐  │
+│                     ┌─────────────────────┐  ┌────────────────┐  │
+│                     │  Servicio de        │  │  Admin. de la  │  │
+│                     │  aprovisionamiento  │  │  plataforma    │  │
+│                     └──────┬──────────────┘  └────────────────┘  │
+│                            │                                     │
+│  ┌─────────────────────────┴──────────────────────────────────┐  │
 │  │   Catálogo de servicios · Derechos de uso · Medición       │  │
 │  │   (qué existe, quién lo activó, qué costó — solo           │  │
 │  │    metadatos; ADR-019)                                     │  │
@@ -61,6 +65,8 @@ Estas decisiones de producto (tomadas en las especificaciones) son las que más 
     │  │  Caché   │  │   │  │  Caché   │  │
     │  ├──────────┤  │   │  ├──────────┤  │
     │  │   Cola   │  │   │  │   Cola   │  │
+    │  ├──────────┤  │   │  ├──────────┤  │
+    │  │ Identidad│  │   │  │ Identidad│  │
     │  └──────────┘  │   │  └──────────┘  │
     │                │   │                │
     └────────────────┘   └────────────────┘
@@ -68,13 +74,76 @@ Estas decisiones de producto (tomadas en las especificaciones) son las que más 
 
 ### Arquitectura de tres capas:
 
-1. **Capa de plataforma** — servicios compartidos que existen fuera de cualquier organización: identidad, aprovisionamiento, administración de la plataforma, facturación. Es la única capa que ve a través de las organizaciones.
+1. **Capa de plataforma** — servicios compartidos que existen fuera de cualquier organización: aprovisionamiento, administración de la plataforma, facturación. Es la única capa que ve a través de las organizaciones. La identidad ya no está aquí: cada organización corre su propio servicio de identidad (la [ADR-025](../../decisions/025-identity-per-client.md)).
 
 2. **Capa de federación** — media las interacciones entre organizaciones: coordinación de alianzas, gestión de recursos compartidos, deduplicación entre organizaciones, orquestación de campañas conjuntas. Opera sobre reglas de intercambio explícitas y nunca tiene acceso general a los datos de una organización.
 
 3. **Capa de organización** — una instancia de aplicación completa y aislada por cada entidad soberana (partido, organización o candidatura). Cada organización tiene su propio servidor de aplicación, base de datos, caché y cola de trabajos. Ninguna organización puede ver los datos de otra salvo a través de las reglas de intercambio de la capa de federación.
 
 **Los servicios centrales no son una cuarta capa.** Son capacidades alojadas en la plataforma que una organización activa desde el catálogo y que se ejecutan por organización, bajo sus llaves y sus contratos, sin conservar nada entre llamadas ([ADR-019](../../decisions/019-central-services-and-metered-billing.md)). El catálogo, los derechos de uso y la medición que los rigen son componentes de la capa de plataforma que guardan solo metadatos. Ver [Arquitectura de servicios centrales](#arquitectura-de-servicios-centrales).
+
+### Propuesto: el bus de eventos en lugar de la capa de federación
+
+Propuesto en la [ADR-024](../../decisions/024-event-bus-as-federation.md), y no aceptado. Mientras no se acepte, la capa de federación de arriba es el diseño especificado.
+
+```
+┌─────────────┐  exportaciones filtradas  ┌─────────────┐
+│  MIEMBRO A  │  por contrato y cifradas  │  MIEMBRO B  │
+│  instancia  │───────────┐   ┌───────────│  instancia  │
+│  + flujo    │           ▼   ▼           │  + flujo    │
+└─────────────┘      ┌─────────────┐      └─────────────┘
+       ▲             │   ALIANZA   │             ▲
+       │             │  instancia  │             │
+       └─────────────│  + flujo    │─────────────┘
+   publica de vuelta └─────────────┘ publica de vuelta
+   (campañas conjuntas, solicitudes de supresión, puntos de mensaje compartidos)
+
+   Cualquier retransmisor que opere GreenGrass ve metadatos de enrutamiento, nunca contenido.
+```
+
+- **El flujo de eventos de cada instancia se vuelve su columna vertebral de integración.** El flujo que hoy alimenta la analítica ([Arquitectura de analítica](#arquitectura-de-analítica)) llevaría los eventos de dominio del Core y de cada módulo: `person.created`, `consent.changed`, `interaction.recorded`, `donation.received`, `content.approved`.
+- **La federación pasa a ser exportaciones entre instancias.** Cada organización exporta un subconjunto de su flujo a las instancias con las que tiene contratos de intercambio. La exportación se filtra en el origen, campo por campo y denegado por defecto, y va cifrada con las llaves del contrato, que están en manos de los miembros.
+- **Una alianza es una tercera instancia que se suscribe.** No tiene una capa propia. Una asociación de agencias en el carril comercial tiene la misma forma; esa parte está decidida.
+- **Ningún componente central guarda ni media datos entre organizaciones.** La capa de plataforma se quedaría con el aprovisionamiento, el catálogo, los derechos de uso, la medición y cualquier retransmisor.
+
+**Verificar:** que NATS permite exportar e importar flujos entre cuentas y nodos hoja, sobre clústeres separados y nubes separadas. Todavía no está confirmado.
+
+---
+
+## Core, módulos y carriles
+
+Propuesto en la [ADR-022](../../decisions/022-core-modules-and-lanes.md), y no aceptado, salvo donde una línea dice *decidido*. Esta sección es un resumen; el registro es la ADR.
+
+### El Core
+
+El Core es lo que toda instancia tiene siempre, en los dos carriles. Es headless (sin interfaz propia: todo es primero una operación de la API): cada elemento es una API con eventos, y nunca depende de un módulo.
+
+| Grupo | Contenido |
+|---|---|
+| Confianza | Niveles de aislamiento, identidad y passkeys (por cliente, decidido), llaves y BYOK, contratos de intercambio, el registro de auditoría |
+| Datos: el CRM | Personas y la lista única, tipos de registro, consentimiento, deduplicación, segmentos, importación y exportación, sincronización con terceros. *El CRM es parte del Core: decidido* |
+| Contenido | Almacén de contenido, recursos versionados, flujo de aprobación por rondas |
+| Entrega | Transporte por canal con verificación de consentimiento, topes de frecuencia, la ventana de silencio y la supresión mutua |
+| Comercio | Catálogo, derechos de uso, medición de uso |
+| Eventos | El flujo de eventos de cada cliente y el bus |
+| Configuración de carril | Marca, vocabulario, qué muestra el catálogo, reglas de precio, políticas por defecto |
+| Infraestructura común | Centro de integraciones y conectores, abstracción de IA (BYOM), localización, motor de sincronización sin conexión, API pública y webhooks |
+
+Si el padrón electoral está en el Core es una pregunta abierta. La recomendación es que pase a ser un módulo del carril político. Mientras no se decida, el [Modelo de datos](#modelo-de-datos) queda como está escrito, con los datos de votantes incluidos.
+
+### Módulos
+
+Un módulo es la unidad que un cliente activa desde el catálogo. Está hecho de componentes de instancia, de llamadas a servicios centrales, o de las dos cosas. Cada módulo trae un manifiesto que declara sus datos, sus dependencias, sus eventos, su acceso, sus superficies, sus servicios, su perímetro y su situación frente a la [ADR-018](../../decisions/018-ai-agent-posture.md). Los módulos propios van en la imagen de despliegue y se activan por derecho de uso; no hay despliegues por módulo, así que la [Arquitectura de la organización](#arquitectura-de-la-organización) no cambia. Los módulos los construye primero GreenGrass, y el contrato se diseña para que más adelante puedan construirlos terceros aprobados (decidido).
+
+«Componente de instancia» es el nombre nuevo que se propone para lo que [Módulos internos y servicios centrales](#módulos-internos-y-servicios-centrales) llama módulo interno.
+
+### Carriles
+
+Un carril es un producto y una marca sobre el Core: Greengrass para los clientes políticos, Basecamp para los comerciales (decidido). Un carril es configuración sobre una sola base de código, nunca una bifurcación. La configuración de carril fija la marca, el vocabulario, qué módulos muestra el catálogo, las reglas de precio (la [ADR-026](../../decisions/026-two-lane-pricing.md)) y las políticas por defecto: los valores de seguridad por defecto, los paquetes de cumplimiento, el punto de decisión de la IA. Cada carril fija las versiones del Core y de los módulos que corre y actualiza a su propio ritmo. Los operadores están separados por carril; cómo se define el acceso de Onda Corta a los dos está abierto.
+
+### Superficies
+
+Propuesto en la [ADR-023](../../decisions/023-surfaces-chat-admin-field.md). Toda superficie llama a la [API pública](#api-pública): un UI de chat, una UI de administración y la app de campo. La app de campo sigue siendo la superficie sin conexión ([Arquitectura sin conexión](#arquitectura-sin-conexión)). La superficie de chat está condicionada por la ADR-018 en los dos carriles (decidido) y no aparece en este documento como estructura.
 
 ---
 
@@ -92,6 +161,7 @@ Cada organización es un despliegue de aplicación autocontenido:
 | Cola de trabajos | Tareas asíncronas: envíos de correo, despacho de SMS, importaciones de datos, procesamiento de sincronización |
 | Almacenamiento de objetos | Cargas de archivos, medios, archivos de exportación, instantáneas de copia de seguridad |
 | Índice de búsqueda | Búsqueda de texto completo en registros del CRM, comunicaciones y notas |
+| Servicio de identidad | Las cuentas, las credenciales, las sesiones y la recuperación propias de la organización (la [ADR-025](../../decisions/025-identity-per-client.md)) |
 
 ### Niveles de aislamiento
 
@@ -153,20 +223,9 @@ Los OA pueden exportar la configuración de su organización como una instantán
 
 ### Entidades a nivel de plataforma (compartidas entre organizaciones)
 
-```
-PlatformIdentity
-├── id (UUID)
-├── primary_phone (E.164, cifrado)
-├── primary_email (cifrado)
-├── name
-├── language_preference
-├── communication_preferences (consentimiento por canal y por finalidad)
-├── passkey_credentials[]
-├── trusted_contacts[] → PlatformIdentity
-├── tenant_memberships[] → TenantProfile
-├── created_at
-└── updated_at
+La identidad ya no es una entidad a nivel de plataforma. `PlatformIdentity`, que encabezaba esta lista, queda reemplazada por `Account` en [Entidades a nivel de organización](#entidades-a-nivel-de-organización-base-de-datos-por-organización) (la [ADR-025](../../decisions/025-identity-per-client.md)). La capa de plataforma no guarda ningún registro de una persona.
 
+```
 TenantRegistration
 ├── id (UUID)
 ├── entity_type (alliance | party_org | candidate)
@@ -200,7 +259,7 @@ ServiceCatalogueEntry
 ├── countries[] (dónde se ofrece)
 ├── hosting_tiers[] (standard | enhanced | maximum | self_hosted)
 ├── supplier (quién factura el costo variable; nulo si no hay)
-├── unit, unit_price_passthrough (el precio del proveedor, sin margen)
+├── unit, unit_price_passthrough (el precio del proveedor: el costo medido. La regla de precio de cada carril se aplica encima — ADR-026)
 ├── allocation_method (per_tenant | published_allocation — para proveedores que facturan en conjunto)
 ├── data_leaves_perimeter (booleano — dispara la aceptación de la frontera de cifrado)
 └── updated_at
@@ -214,14 +273,14 @@ Entitlement
 ├── spend_cap (soft_warning, hard_stop — en la moneda de facturación de la organización)
 ├── billed_to → TenantRegistration (la propia organización, o la alianza bajo alliance_pays)
 ├── status (enabled | suspended_by_cap | disabled)
-├── enabled_by → PlatformIdentity
+├── enabled_by (una Account en la instancia propia de la organización, que aquí se guarda como referencia)
 └── created_at
 
 UsageEvent (solo metadatos — sin contenido; nivel de conservación del registro de auditoría)
 ├── id (UUID)
 ├── tenant → TenantRegistration
 ├── entitlement → Entitlement
-├── actor (PlatformIdentity, o un tipo de actor no humano cuando la ADR-018 defina uno)
+├── actor (una Account en la instancia propia de la organización, o un tipo de actor no humano cuando la ADR-018 defina uno)
 ├── contract_reference (el contrato de intercambio bajo el que corrió la llamada, si lo hay)
 ├── units, quantity
 ├── supplier_cost, currency
@@ -232,9 +291,21 @@ UsageEvent (solo metadatos — sin contenido; nivel de conservación del registr
 ### Entidades a nivel de organización (base de datos por organización)
 
 ```
+Account (una por cada persona que inicia sesión en esta organización — antes de la ADR-025 era PlatformIdentity, una entidad a nivel de plataforma)
+├── id (UUID)
+├── primary_phone (E.164, cifrado)
+├── primary_email (cifrado)
+├── name
+├── language_preference
+├── communication_preferences (consentimiento por canal y por finalidad)
+├── passkey_credentials[]
+├── trusted_contacts[] → Account
+├── created_at
+└── updated_at
+
 Person (el registro de la lista única)
 ├── id (UUID)
-├── platform_identity_id → PlatformIdentity (nullable — no todo el mundo tiene inicio de sesión)
+├── account_id → Account (nullable — no todo el mundo tiene inicio de sesión)
 ├── name, address, phone, email (algunos cifrados a nivel de aplicación)
 ├── record_types[] (voter | donor | volunteer | supporter | contact | candidate | staff)
 ├── voter_data
@@ -444,28 +515,29 @@ Los segmentos dinámicos se recalculan por dos disparadores: **al acceder** (cua
 
 ## Arquitectura de identidad y autenticación
 
-### Servicio de identidad de la plataforma
+### Servicio de identidad (uno por instancia)
 
-El servicio de identidad es un componente compartido de la plataforma, separado de cualquier organización:
+(Decidido en la [ADR-025](../../decisions/025-identity-per-client.md), que deja sin efecto el servicio de identidad compartido de la plataforma que esta sección especificó primero.)
+
+La instancia de cada organización corre su propio servicio de identidad y guarda sus propias cuentas. No hay ningún componente de identidad fuera de las instancias:
 
 ```
 ┌───────────────────────────────────────────┐
-│           Servicio de identidad           │
+│   Servicio de identidad (por instancia)   │
 │                                           │
 │  ┌────────────────┐ ┌──────────────────┐  │
-│  │  Almacén de    │ │  Federación de   │  │
-│  │  credenciales  │ │  perfiles        │  │
-│  │  (passkeys,    │ │  (membresías de  │  │
-│  │   OTP, etc.)   │ │   organización)  │  │
+│  │  Almacén de    │ │  Gestor de       │  │
+│  │  credenciales  │ │  sesiones        │  │
+│  │  (passkeys,    │ │                  │  │
+│  │   OTP, etc.)   │ │                  │  │
 │  └────────────────┘ └──────────────────┘  │
-│  ┌────────────────┐ ┌──────────────────┐  │
-│  │  Gestor de     │ │  Servicio de     │  │
-│  │  sesiones      │ │  recuperación    │  │
-│  └────────────────┘ └──────────────────┘  │
+│  ┌─────────────────────────────────────┐  │
+│  │      Servicio de recuperación       │  │
+│  └─────────────────────────────────────┘  │
 └───────────────────────────────────────────┘
 ```
 
-**Almacén de credenciales:** Llaves públicas de los passkeys, hashes de correo y contraseña (argon2id), tokens de enlace mágico, semillas de OTP, secretos TOTP. Nunca guarda credenciales en texto plano. Separado de las bases de datos de las organizaciones.
+**Almacén de credenciales:** Llaves públicas de los passkeys, hashes de correo y contraseña (argon2id), tokens de enlace mágico, semillas de OTP, secretos TOTP. Nunca guarda credenciales en texto plano. Vive dentro de la instancia, aparte de las tablas del CRM de la organización.
 
 **Niveles de método de autenticación** (decidido en [ADR-016 §57–60](../../decisions/016-cross-cutting-resolutions.md)):
 
@@ -478,25 +550,25 @@ El servicio de identidad es un componente compartido de la plataforma, separado 
 
 La pantalla de inicio de sesión detecta automáticamente el soporte de WebAuthn. Los dispositivos por debajo del umbral de passkey reciben autenticación por enlace mágico de forma automática — nadie tiene que decidir nada.
 
-**Federación de perfiles:** Mapea una identidad de plataforma con sus perfiles por organización. Cuando alguien inicia sesión, el servicio de identidad determina a qué organizaciones pertenece y a cuál dirigirla (o presenta un selector de organización si hay varias).
+**Sin federación de perfiles.** El diseño original mapeaba una identidad de plataforma con un perfil en cada organización a la que pertenecía la persona, y le mostraba un selector de organización a quien estuviera en más de una. Eso ya no existe. Una cuenta pertenece a una sola instancia. Una persona que trabaja en dos organizaciones tiene dos cuentas e inicia sesión en cada una en su propia dirección.
 
 **Gestor de sesiones:** Emite y valida los tokens de sesión. Aplica la duración de sesión según el rol (decidido en users.md). Maneja la revocación remota — cuando un Coordinador de voluntarios revoca una sesión, el gestor invalida el token de inmediato.
 
 **Servicio de recuperación:** Maneja el flujo de recuperación por contactos de confianza. Enruta las solicitudes de recuperación a los contactos designados. Emite flujos de configuración de credenciales nuevas después de una recuperación aprobada.
 
-**Recuperación del OA — el problema del arranque** (decidido en [ADR-016 §59](../../decisions/016-cross-cutting-resolutions.md)): Cuando el primer OA no tiene contactos de confianza que respondan por él, aplica la recuperación asistida por la plataforma. El OA contacta al soporte de GreenGrass, que verifica su identidad por el canal de registro original (correo de alta, método de pago en archivo). Tras la verificación empieza un **período de espera de recuperación de 72 horas** — más largo que las 24 horas de la vía verificada entre pares, porque aquí no hay verificación entre pares. Durante el período de espera, todos los contactos de correo de la organización reciben una notificación. Es deliberadamente lenta y visible — es la vía de recuperación de mayor riesgo.
+**Recuperación del OA — el problema del arranque** (decidido en [ADR-016 §59](../../decisions/016-cross-cutting-resolutions.md)): Cuando el primer OA no tiene contactos de confianza que respondan por él, aplica la recuperación asistida. Con la [ADR-025](../../decisions/025-identity-per-client.md) es un procedimiento del operador de la instancia, no de un equipo de soporte de toda la plataforma que trabaja contra un servicio compartido; nada más cambia. El OA contacta al operador, que verifica su identidad por el canal de registro original (correo de alta, método de pago en archivo). Tras la verificación empieza un **período de espera de recuperación de 72 horas** — más largo que las 24 horas de la vía verificada entre pares, porque aquí no hay verificación entre pares. Durante el período de espera, todos los contactos de correo de la organización reciben una notificación. Es deliberadamente lenta y visible — es la vía de recuperación de mayor riesgo.
 
-**DECIDIDO:** Principal centralizado en la jurisdicción de constitución, con réplicas de lectura por país.
+**DECIDIDO:** Un servicio de identidad por instancia (la [ADR-025](../../decisions/025-identity-per-client.md)). Los datos de identidad viven donde vive el resto de los datos de la organización, en el país que ella eligió, y los cubren el mismo nivel de aislamiento y las mismas llaves.
 
-- **Principal:** Los datos de identidad autoritativos viven en la jurisdicción de constitución (Estonia/Suiza). Todas las escrituras (creación de cuentas, cambios de credenciales, recuperación) van al principal. Protegido por el marco legal más fuerte disponible.
-- **Réplicas de lectura:** Cada país con infraestructura de organizaciones tiene una réplica local para validar autenticación y sesiones con baja latencia. La replicación es de consistencia eventual con un retraso corto (segundos).
-- **Conmutación ante fallos:** Si el principal no está accesible, las réplicas de lectura pueden seguir validando las sesiones existentes (tokens en caché). La creación de cuentas y los cambios de credenciales quedan en cola hasta que el principal se recupere.
+Esto deja sin efecto la decisión anterior, que se conserva aquí para que el cambio de rumbo quede a la vista: *un principal centralizado en la jurisdicción de constitución (Estonia/Suiza) que recibía todas las escrituras, una réplica de lectura en cada país para validar con baja latencia, y conmutación a las sesiones en caché cuando el principal no estaba accesible.* Nada de eso se construye.
+
+El inicio de sesión único entre una alianza y sus miembros no es parte de este diseño. Si más adelante se quiere, sería una confianza opcional entre instancias.
 
 ### Flujo de autenticación
 
 ```
-1. La persona entra a la app (subdominio de la organización o página de inicio de sesión)
-2. El servicio de identidad presenta las opciones de autenticación (passkey, enlace mágico, OTP, contraseña)
+1. La persona entra a la dirección propia de la organización (subdominio de la organización o dominio propio)
+2. El servicio de identidad de la organización presenta las opciones de autenticación (passkey, enlace mágico, OTP, contraseña)
 3. La persona se autentica:
    a. Passkey: desafío WebAuthn → biometría del dispositivo → respuesta firmada → verificada
    b. Enlace mágico: se envía el correo → la persona hace clic → token verificado
@@ -505,9 +577,9 @@ La pantalla de inicio de sesión detecta automáticamente el soporte de WebAuthn
 4. El servicio de identidad emite el token de sesión:
    a. Token de acceso (de corta duración, JWT u opaco)
    b. Token de refresco (de mayor duración, guardado en el servidor)
-   c. El token incluye: platform_identity_id, tenant_id, role_template_ids, scope_ids
+   c. El token incluye: account_id, tenant_id, role_template_ids, scope_ids
 5. Se dirige a la persona a la aplicación de la organización
-6. La aplicación de la organización valida el token con el servicio de identidad en cada solicitud
+6. La aplicación de la organización valida el token con su propio servicio de identidad en cada solicitud
 ```
 
 ### Autenticación en modo de campo
@@ -545,6 +617,8 @@ Los cambios de configuración rutinarios no requieren la aprobación de dos OA.
 ## Arquitectura de cifrado
 
 ### Jerarquía de llaves
+
+<!-- REVISIT: la jerarquía de abajo todavía muestra una «Llave de cifrado del servicio de identidad» bajo la Llave maestra de la plataforma, que cifra «los datos de identidad de plataforma». Con la ADR-025 no hay datos de identidad de plataforma: las cuentas viven en cada instancia, bajo las llaves de esa organización. También muestra una «Llave de la capa de federación», que la ADR-024 quitaría si se acepta. El diagrama queda como está hasta que se concilie la jerarquía de llaves. -->
 
 ```
 Llave maestra de la plataforma (en poder de GreenGrass, respaldada por HSM)
@@ -889,6 +963,8 @@ Formulario de donación → Enrutador de pagos → Adaptador de proveedor → Pr
 
 El mismo patrón modular que en comunicaciones — una interfaz común con adaptadores por proveedor:
 
+**Una sola capa de pagos, para los dos carriles** (decidido; registrado en la [ADR-022 § El catálogo de módulos](../../decisions/022-core-modules-and-lanes.md#el-catálogo-de-módulos)). Estos adaptadores son la capa de pagos compartida del módulo Recaudación y pagos. En el carril comercial el módulo es esta capa: la integración con ATH Móvil y con otros servicios de micropagos y de pagos en línea, como Stripe. El manejo de donaciones — límites de contribución, informes de financiamiento de campañas, repartos de alianza — es configuración del carril político encima de ella.
+
 | Adaptador | Países | Tipo |
 |---------|-----------|------|
 | Stripe | Global (alternativa de reserva) | Tarjetas, algunos métodos locales |
@@ -945,6 +1021,8 @@ Las pantallas de eventos muestran los ingresos por entradas como métrica, pero 
                                │ (de solo adición)  │     │ por lotes    │──→ Reportes históricos
                                └────────────────────┘     └──────────────┘
 ```
+
+**Propuesto:** la [ADR-024](../../decisions/024-event-bus-as-federation.md) haría de este flujo de eventos por organización la columna vertebral de integración de la instancia, que llevaría los eventos de dominio del Core y de cada módulo, y el medio por el que viajan las exportaciones filtradas por contrato entre instancias. Ver [Propuesto: el bus de eventos en lugar de la capa de federación](#propuesto-el-bus-de-eventos-en-lugar-de-la-capa-de-federación). No aceptado.
 
 ### Cadena en tiempo real (operaciones activas)
 
@@ -1041,6 +1119,8 @@ Las organizaciones miembro de una alianza pueden aportar conductores a una bolsa
 - **El soporte de RTL está diseñado desde el primer día.** Toda la maquetación tiene que usar propiedades lógicas (start/end), no físicas (left/right). Nada de RTL como añadido posterior.
 - **Externalización de cadenas:** Todas las cadenas de la interfaz en archivos de idioma, nunca escritas a mano en el código. ICU MessageFormat para plurales, género y formatos complejos.
 - **Negociación de idioma:** Preferencia de idioma de la identidad de plataforma → idioma por defecto de la organización → idioma del navegador → inglés como último recurso.
+
+<!-- REVISIT: «preferencia de idioma de la identidad de plataforma» es anterior a la ADR-025. La preferencia vive ahora en la cuenta de la persona, en la instancia propia de la organización. Queda como está, a la espera de la revisión de conciliación que nombra la ADR-025. -->
 
 ### Modelo de datos de la localización de contenido
 
@@ -1204,6 +1284,23 @@ Escalamiento de las alertas:
 
 La pantalla de detalle de la integración muestra una línea de tiempo de estado (últimos 30 días) para que el OA distinga los problemas intermitentes de los fallos sostenidos.
 
+### Sincronización del CRM con terceros y conectores
+
+(De la [ADR-027](../../decisions/027-third-party-crm-sync-and-connectors.md), que está propuesta. Un requisito de ella está decidido.)
+
+**Decidido:** el CRM del Core se sincroniza en los dos sentidos con herramientas de terceros, empezando por NationBuilder y empezando por CSV. La Fase A es un CSV de ida y vuelta: importar la exportación de personas de NationBuilder por la cadena de importación que ya existe, con un mapeo de campos guardado, y exportar los cambios en un CSV que NationBuilder pueda importar, con `nationbuilder_id` como llave. No necesita acceso a la API ni credenciales guardadas.
+
+**Propuesto:**
+
+- **Las reglas de sincronización viven en el CRM del Core, no en un conector:** un mapa de identificadores externos por persona, deduplicación de sugerir y confirmar para los registros que entran, un sistema de referencia elegido por campo, conflictos que se conservan en los dos lados y se marcan, consentimiento donde gana el valor más restrictivo, y campos incluidos con denegación por defecto. Cada lote de sincronización es una entrada de auditoría con el conector como actor.
+- **Fase B, sincronización por API:** el mismo mapeo, corrido de forma continua a través de un conector, por webhooks o por sondeo periódico con cursores incrementales.
+- **Un proceso de conectores.** Los conectores se construirían sobre Parsons, una librería de Python, que correría como un contenedor aparte en cada instancia. El proceso consume del flujo de eventos de la organización y publica en él, y nunca toca la base de datos directamente. Tiene solo la credencial de su propio conector, que obtiene de Vault, y corre en un entorno restringido, con las versiones fijadas y copia guardada de las dependencias.
+- **Un conector no es un módulo.** Se cataloga y se activa por organización en el centro de integraciones, como cualquier integración.
+
+**Verificar:** que Parsons tiene un conector de NationBuilder, y qué cubre; la licencia de Parsons; los límites de solicitudes de la API de NationBuilder y qué cubren sus webhooks. Nada de esto está confirmado.
+
+Los datos que se envían a un CRM externo salen del perímetro de cifrado y exigen la misma aceptación explícita que BYOM ([Arquitectura BYOM](#arquitectura-byom)).
+
 ### API pública
 
 **DECIDIDO:** REST + webhooks. API pública desde el primer día.
@@ -1222,6 +1319,8 @@ Es un compromiso central con el modelo de soberanía — quien puede construir s
 (Decidido en la [ADR-019](../../decisions/019-central-services-and-metered-billing.md))
 
 ### Módulos internos y servicios centrales
+
+**Enmendado por la [ADR-026](../../decisions/026-two-lane-pricing.md):** las dos últimas oraciones de este párrafo describen el modelo de ingresos que decidió la ADR-019, que queda sin efecto. El Core sigue midiendo el costo del proveedor de cada llamada a un servicio central. Lo que paga un cliente es ese costo más la regla de precio de su carril: una comisión en el carril político; un margen de 30 % y una comisión en el carril comercial. **Propuesto por la [ADR-022](../../decisions/022-core-modules-and-lanes.md):** «módulo interno» pasaría a llamarse «componente de instancia», para que «módulo» pueda nombrar la unidad que un cliente activa. Ver [Core, módulos y carriles](#core-módulos-y-carriles).
 
 Cada capacidad es una de dos cosas. Un **módulo interno** corre dentro de la instancia de la organización sobre sus propios datos: CRM, operaciones de campo, GOTV, recaudación de fondos, eventos, mensajería interna, redacción de comunicaciones. Activar uno por organización es activar funcionalidades por configuración dentro de una instalación de organización única; nada del aislamiento cambia. Un **servicio central** es una capacidad alojada en la plataforma que una organización activa desde el catálogo: captura de medios desde fuentes públicas, análisis electoral, entrega de investigación de la oposición, generación de texto, imagen y video, transporte por canal, y la verificación de supresión mutua del piloto. Los módulos internos los cubre la suscripción fija. Los servicios centrales cargan costos que a GreenGrass misma le facturan por unidad, y que se trasladan a la organización al costo, sin margen ([fundraising.md § Modelo de ingresos de la plataforma](../../spec/fundraising.md#modelo-de-ingresos-de-la-plataforma)).
 
@@ -1338,6 +1437,7 @@ Estas decisiones están profundamente entrelazadas. La sección de recomendació
 | Gestión de secretos | HashiCorp Vault | Llaves de cifrado por organización, credenciales de API, rotación de secretos. |
 | Orquestación de contenedores | Kubernetes (independiente del proveedor de nube) | Despliegue de contenedores por organización en todos los países. K8s gestionado donde lo haya, autogestionado donde haga falta. GKE no. |
 | IaC | Terraform / OpenTofu | Infraestructura como código para aprovisionar la infraestructura de las organizaciones en distintos proveedores y países. |
+| Proceso de conectores (propuesto, [ADR-027](../../decisions/027-third-party-crm-sync-and-connectors.md)) | Python, con Parsons | No aceptado. Un contenedor aparte por organización para los conectores con terceros, aislado detrás del flujo de eventos para que el backend en TypeScript siga siendo el único código que toca la base de datos. A la espera de verificar el conector de NationBuilder de Parsons y su licencia. |
 
 ### Hoja de ruta de iOS nativo
 
@@ -1368,7 +1468,6 @@ País A (p. ej., EE. UU./Puerto Rico)      País B (p. ej., Brasil)
 │  └────────┘                       │     │  └────────┘                       │
 │                                   │     │                                   │
 │  Servicios de plataforma (locales)│     │  Servicios de plataforma (locales)│
-│  - Réplica de identidad           │     │  - Réplica de identidad           │
 │  - Agente de aprovisionamiento    │     │  - Agente de aprovisionamiento    │
 │  - Monitoreo                      │     │  - Monitoreo                      │
 └───────────────────────────────────┘     └───────────────────────────────────┘
@@ -1380,7 +1479,6 @@ País A (p. ej., EE. UU./Puerto Rico)      País B (p. ej., Brasil)
                         │  (jurisdicción de           │
                         │   constitución)             │
                         │                             │
-                        │  - Identidad principal      │
                         │  - Capa de federación       │
                         │  - Admin. de la plataforma  │
                         │  - Facturación              │
@@ -1388,6 +1486,8 @@ País A (p. ej., EE. UU./Puerto Rico)      País B (p. ej., Brasil)
                         │    aprovisionamiento        │
                         └─────────────────────────────┘
 ```
+
+La identidad ya no aparece en este diagrama: no hay principal de identidad ni réplica por país, porque cada organización corre su propio servicio de identidad (la [ADR-025](../../decisions/025-identity-per-client.md)). La capa de federación se queda en el diagrama hasta que se decida la [ADR-024](../../decisions/024-event-bus-as-federation.md).
 
 ### Despliegue autoalojado
 
@@ -1412,7 +1512,7 @@ Para las organizaciones autoalojadas, GreenGrass entrega:
 ## Preguntas abiertas — todas resueltas
 
 1. ~~Orquestación de contenedores~~ → Kubernetes, independiente del proveedor de nube, sin GKE
-2. ~~Ubicación del servicio de identidad~~ → Principal centralizado + réplicas de lectura por país
+2. ~~Ubicación del servicio de identidad~~ → ~~Principal centralizado + réplicas de lectura por país~~ → **Un servicio de identidad por instancia**, según la [ADR-025](../../decisions/025-identity-per-client.md). Deja sin efecto el principal centralizado.
 3. ~~Datos geográficos~~ → Precargados + importación + aporte de la comunidad
 4. ~~Cifrado buscable~~ → Índice ciego para los identificadores, descifrado en lectura para notas y puntajes
 5. ~~Rotación de llaves~~ → Decide la organización, con orientación firme
@@ -1426,4 +1526,7 @@ Para las organizaciones autoalojadas, GreenGrass entrega:
 13. ~~URL de las organizaciones~~ → Subdominio por defecto + soporte de dominio propio
 14. ~~Conservación de datos~~ → Escalonada (operativa / cumplimiento / auditoría / reversión de importaciones), según la [ADR-016 §4](../../decisions/016-cross-cutting-resolutions.md). Deja sin efecto la política uniforme de 10 años de la ADR-004.
 15. ~~89 preguntas abiertas de los wireframes~~ → Todas resueltas, según la [ADR-016](../../decisions/016-cross-cutting-resolutions.md)
-16. ~~Capacidades compartidas y costo por uso~~ → Servicios centrales ejecutados por organización, con traslado al costo medido por uso y sin margen, según la [ADR-019](../../decisions/019-central-services-and-metered-billing.md). Enmienda el modelo de ingresos solo fijo de la ADR-007.
+16. ~~Capacidades compartidas y costo por uso~~ → Servicios centrales ejecutados por organización, con traslado al costo medido por uso y sin margen, según la [ADR-019](../../decisions/019-central-services-and-metered-billing.md). Enmienda el modelo de ingresos solo fijo de la ADR-007. La parte de «sin margen» queda sin efecto por el punto 17.
+17. ~~Precios con un carril comercial~~ → El precio es una regla del carril encima del costo medido: al costo más una comisión en el carril político, al costo más un margen de 30 % más una comisión en el carril comercial, según la [ADR-026](../../decisions/026-two-lane-pricing.md). Sus definiciones quedan abiertas ahí.
+
+**Reabierto por la dirección de noviembre de 2026, y sin resolver.** Cuatro ADR propuestas traen preguntas abiertas que tocan este documento: si el bus de eventos reemplaza la capa de federación (la [ADR-024](../../decisions/024-event-bus-as-federation.md)); si el padrón electoral sale del Core, y cómo se llama el Core (la [ADR-022](../../decisions/022-core-modules-and-lanes.md)); la superficie de chat, que espera por la [ADR-018](../../decisions/018-ai-agent-posture.md) (la [ADR-023](../../decisions/023-surfaces-chat-admin-field.md)); y Parsons como capa de conectores (la [ADR-027](../../decisions/027-third-party-crm-sync-and-connectors.md)).

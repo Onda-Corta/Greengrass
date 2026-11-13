@@ -4,6 +4,40 @@
 
 ## *by Pablo Defendini & Giovanni Collazo — 22 november 2024*
 
+# The direction as of November 2026
+
+*Added 2026-11-13. This is the oldest document in the repository, and everything below this section is the description as it was written in 2024, with later edits. It is kept as written, because every other document was built on it. This section says what has changed. Where the two disagree, this section is current.*
+
+**What the project builds is now shared infrastructure for organizations, not one all-in-one product.** The infrastructure turns on a central product, the Core, with a catalogue of modules that each client enables individually. Some of those modules are: radio and TV monitoring; social monitoring; press summary; ad-art builder; electoral analysis; crisis management; polls and surveys; content distribution; street operations; event and volunteer management; fundraising and payments.
+
+**It reaches clients through two lanes, each with its own brand and product.**
+
+- **The political lane.** *Greengrass*, run by Blimp.io and Onda Corta, is the platform for community movements, unions and political parties. Its first clients are the PIP, the Movimiento Victoria Ciudadana (MVC) and the Alianza de País. These clients are charged at cost, plus a commission that covers the cost of selling.
+- **The commercial lane.** *Basecamp* (PR Media / Relacionistas.app), run by R&R and Onda Corta, is the platform for advertisers, public relations professionals, agencies and other commercial businesses. Its first client is the Asociación de Publicistas. It is charged cost, plus a 30% margin for the product's owner, plus the Comercializadora's commission.
+- **Shared modules.** Every module in the catalogue can run in either product, though some are not useful in both lanes: electoral intelligence, for example, belongs to the political lane only. Each client runs its own instance, with its own data and its own accounts.
+- **Independent lanes.** A lane does not wait for the other. The work with the PIP and the MVC does not depend on what the Asociación de Publicistas' tool turns out to be, or the reverse. When one lane improves a shared module, the improvement reaches the other too.
+
+<!-- REVISIT: "the product's owner" (la dueña del producto) and "the Comercializadora" are used as given and defined nowhere. See ADR-026. -->
+
+**"Greengrass" now names the political product, not the infrastructure.** The Core does not yet have a name of its own. In the rest of this document, and in every document written before November 2026, "GreenGrass" means the whole platform.
+
+**Three surfaces.** The Core is headless: everything it does is an API operation first. A chat UI is meant to carry 70 to 80% of daily staff work, an admin UI the complex rest, and the field app stays as the surface for work done without a connection.
+
+**What no competitor integrates:** the voter file, offline field tools, and tools for coalitions of parties. These stay at the centre of the political product.
+
+**It works with what organizations already run.** The CRM syncs both ways with third-party tools, starting with NationBuilder and starting with CSV.
+
+| What this section says | Where it is recorded | Standing |
+|---|---|---|
+| Core, modules and lanes | [ADR-022](../decisions/022-core-modules-and-lanes.md) | Proposed. The two lanes, the CRM in the Core and one instance per client are decided |
+| A headless Core, chat, admin and field | [ADR-023](../decisions/023-surfaces-chat-admin-field.md) | Proposed. The chat waits on the [ADR-018](../decisions/018-ai-agent-posture.md) review, in both lanes |
+| An event bus between instances | [ADR-024](../decisions/024-event-bus-as-federation.md) | Proposed |
+| Each client holds its own accounts | [ADR-025](../decisions/025-identity-per-client.md) | Accepted |
+| The prices | [ADR-026](../decisions/026-two-lane-pricing.md) | Accepted; the definitions they need are open |
+| Sync with third-party CRMs | [ADR-027](../decisions/027-third-party-crm-sync-and-connectors.md) | Proposed. NationBuilder by CSV is decided |
+
+**What in the original no longer holds.** Three things below are superseded and are marked where they appear: "all-in-one" and "one-stop-shop" as the shape of the product; "one set fee"; and the revenue models at the end of the document. Read everything else below as a description of the political lane.
+
 # Executive Summary
 
 Progressive/left-wing movements run on limited money, aging tools, and a scatter of disconnected services that don't talk to each other — a problem everywhere, and sharper in the global south. **GreenGrass** puts what a grassroots campaign in the Global South actually has to do into one platform: organize people, reach them on the channels they use, and keep enough data to decide where the next week of effort goes. It is priced for campaigns with very little money, built for the phones and connections they already have, and translated into the languages they organize in. The point is to cut the number of tools a campaign has to hold together and give it more time in contact with the people it is trying to reach.
@@ -20,6 +54,8 @@ Progressive political campaigns in Global South countries face unique challenges
 While platforms like NationBuilder, Action Network, and Mobilize exist, they are designed for developed markets and often priced out of reach for progressive campaigns in the Global South.
 
 # Project: GreenGrass
+
+<!-- REVISIT: "all-in-one", "one-stop-shop" and "one set fee" in the paragraph below are superseded by the November 2026 direction at the top of this document: the product is a Core with modules a client enables one at a time (ADR-022), and the price is cost plus each lane's rule (ADR-026). The paragraph is left as written. -->
 
 **Project: GreenGrass** is an all-in-one campaign technology platform tailored specifically for the needs of grassroots campaigns in countries in the Global South. It’s intended to be a one-stop-shop—with one set fee—so that campaigns and organizations can use the service without having to depend on additional services or costs (with the exception of unavoidable variable costs such as SMS sends, which are usually billed by volume by the supplier).
 
@@ -105,6 +141,8 @@ GreenGrass is built using an Open Source model, except where security or technic
 * Implement a local support network with partnerships to provide training and customer service in key regions.
 
 ## Possible Revenue Models
+
+<!-- REVISIT: superseded by ADR-026. Pricing is now a lane rule: cost plus a commission in the political lane; cost plus a 30% margin plus a commission in the commercial lane. Whether the freemium plan below survives is open there. The list is left as written. -->
 
 * Freemium Plan: Basic access to core features, allowing small campaigns to get started for free.  
 * Subscription Tiers: Paid plans with additional features designed for mid-sized and large campaigns. Explicitly not a per-user, or other scale-based pricing model, although we should still think about some kind of scale-based revenue structure in order to manage growing operating costs.  

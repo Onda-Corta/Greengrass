@@ -4,6 +4,7 @@
 
 Par piloto: MVC y PIP (Puerto Rico)
 Redactado: 2026-08-19
+Referencia cruzada añadida el 2026-11-13: en los términos de la [ADR-022](../decisions/022-core-modules-and-lanes.md), el piloto es el Core más el módulo Fideicomiso de coalición, en el carril político. Nada de este plan cambia.
 
 ---
 

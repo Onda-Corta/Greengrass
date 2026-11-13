@@ -3,7 +3,7 @@
 **Estado:** Aceptada
 **Fecha:** 2026-03-03
 **Fuentes:** `spec/fundraising.md`, `spec/workflows.md`
-**Enmendada por:** [ADR-019](019-central-services-and-metered-billing.md) — el modelo de ingresos gana un segundo plano de facturación, medido por uso, para los servicios centrales, trasladado al costo y sin margen. «Planes fijos, no por uso», más abajo, describe ahora solo el plano de la suscripción.
+**Enmendada por:** [ADR-019](019-central-services-and-metered-billing.md) — el modelo de ingresos gana un segundo plano de facturación, medido por uso, para los servicios centrales, trasladado al costo y sin margen. «Planes fijos, no por uso», más abajo, describe ahora solo el plano de la suscripción. [ADR-026](026-two-lane-pricing.md) — el precio es ahora una regla del carril: al costo, más una comisión, en el carril político; al costo, más un margen de 30 %, más una comisión, en el carril comercial. «Los ingresos vienen por completo de las suscripciones a la plataforma (planes fijos, no por uso)», más abajo, queda sin efecto. La cero comisión de la plataforma sobre las donaciones se mantiene.
 
 ## Contexto
 

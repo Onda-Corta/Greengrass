@@ -4,9 +4,11 @@ Una plataforma para manejar elecciones políticas de base en el Sur Global.
 
 GreenGrass reúne en un solo lugar un gestor de relaciones con constituyentes (CRM), una base de datos de votantes, herramientas de recaudación de fondos, una suite de comunicaciones y analítica de datos. Está pensada para contextos de recursos limitados, conectividad intermitente, poblaciones multilingües y estructuras de organización descentralizadas.
 
+Desde noviembre de 2026, lo que el proyecto construye es una infraestructura de servicios compartidos para organizaciones: un producto central (Core) y un catálogo de módulos que cada cliente activa individualmente, ofrecida por dos carriles. **Greengrass** nombra ahora el producto del carril político —movimientos comunitarios, sindicatos y partidos—, no la infraestructura; **Basecamp** es el producto del carril comercial. La mayoría de los documentos de aquí se escribieron antes del cambio: dicen «GreenGrass» para la plataforma entera y siguen describiendo ese producto, que hoy es el del carril político.
+
 ## Qué está en español y qué no
 
-En español está casi todo: las 16 especificaciones de producto, la arquitectura del sistema, los 21 ADR más el registro de decisiones de UX y los 15 documentos de diseño de UX que no son wireframes. Cincuenta y cuatro documentos.
+En español está casi todo: las 16 especificaciones de producto, la arquitectura del sistema, los 27 ADR más el registro de decisiones de UX y los 15 documentos de diseño de UX que no son wireframes. Sesenta documentos.
 
 Falta una cosa, y es grande: los 24 documentos de wireframes —240 pantallas, más de la mitad de todo lo que hay escrito en este proyecto— siguen solo en inglés, igual que el diario. Si sigues un enlace a un wireframe desde una página en español, vas a terminar en inglés. No está roto: es lo que todavía no se ha traducido. El botón **EN**, arriba a la derecha, te lleva a la documentación completa en cualquier momento.
 
@@ -16,9 +18,14 @@ Puerto Rico (alfa), Brasil, Tailandia, India y Líbano — cada uno con su propi
 
 ## Estado del proyecto
 
-**Fase actual: especificación y diseño (completa)**
+**Fase actual: especificación y diseño — reabierta por un cambio de dirección del producto; una revisión sigue condicionando la producción**
 
-Las especificaciones de producto, los artefactos de diseño de UX y los documentos de arquitectura están terminados. El proyecto está listo para pasar a implementación.
+Las especificaciones de producto, los artefactos de diseño de UX y los documentos de arquitectura estaban terminados en octubre de 2026. En noviembre cambió la dirección: una infraestructura compartida, con un Core y módulos, que se ofrece por dos carriles, Greengrass y Basecamp. Seis ADR registran el cambio.
+
+- **Dos están aceptadas** y dejan sin efecto decisiones anteriores: la [ADR-025](decisions/025-identity-per-client.md) (cada cliente guarda sus propias cuentas) y la [ADR-026](decisions/026-two-lane-pricing.md) (el precio es una regla de cada carril; las definiciones que necesita siguen abiertas).
+- **Cuatro están propuestas:** la [ADR-022](decisions/022-core-modules-and-lanes.md), la [ADR-023](decisions/023-surfaces-chat-admin-field.md), la [ADR-024](decisions/024-event-bus-as-federation.md) y la [ADR-027](decisions/027-third-party-crm-sync-and-connectors.md). Cada una dice qué de lo que contiene ya está decidido y qué no. Lo propuesto no se lee como resuelto.
+
+La revisión de la [ADR-018](decisions/018-ai-agent-posture.md), sobre los agentes de IA, sigue condicionando la producción, y ahora para los dos carriles: ninguno de los dos productos saca el chat a producción antes de que se acepte.
 
 ## Orden de lectura
 
@@ -48,7 +55,7 @@ Las especificaciones de producto, los artefactos de diseño de UX y los document
 
 ### Y por qué está construida así
 
-Los 21 ADR registran cada decisión de arquitectura, con su contexto, sus alternativas descartadas y lo que cuesta cada una.
+Los 27 ADR registran cada decisión de arquitectura, con su contexto, sus alternativas descartadas y lo que cuesta cada una. De la ADR-022 a la ADR-027 registran la dirección de noviembre de 2026; empieza por la ADR-022.
 
 - **[ADR-001](decisions/001-platform-architecture.md)** — Arquitectura y despliegue de la plataforma
 - **[ADR-002](decisions/002-security-threat-model.md)** — Seguridad y modelo de amenazas
@@ -71,6 +78,12 @@ Los 21 ADR registran cada decisión de arquitectura, con su contexto, sus altern
 - **[ADR-019](decisions/019-central-services-and-metered-billing.md)** — Servicios centrales y facturación medida
 - **[ADR-020](decisions/020-central-service-line-up-and-builders.md)** — Los cuatro servicios centrales y los constructores
 - **[ADR-021](decisions/021-content-approval-pipeline.md)** — Flujo de aprobación de contenido
+- **[ADR-022](decisions/022-core-modules-and-lanes.md)** — Core, módulos y carriles (propuesta)
+- **[ADR-023](decisions/023-surfaces-chat-admin-field.md)** — Superficies: un Core headless, chat, administración y campo (propuesta)
+- **[ADR-024](decisions/024-event-bus-as-federation.md)** — El bus de eventos como federación (propuesta)
+- **[ADR-025](decisions/025-identity-per-client.md)** — Identidad por cliente
+- **[ADR-026](decisions/026-two-lane-pricing.md)** — Precios por carril
+- **[ADR-027](decisions/027-third-party-crm-sync-and-connectors.md)** — Sincronización del CRM con terceros y conectores (propuesta)
 - **[ux-decisions.md](decisions/ux-decisions.md)** — Decisiones de UX de la fase de wireframes
 
 ### El diseño en detalle

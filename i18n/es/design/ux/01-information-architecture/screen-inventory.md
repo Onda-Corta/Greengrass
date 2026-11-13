@@ -6,6 +6,8 @@ Un catálogo completo de todas las pantallas distintas de la plataforma, organiz
 
 Este inventario se deriva de los 12 documentos de especificación y del modelo de navegación. Sirve de referencia maestra para el trabajo de wireframes, la planificación de rutas y la definición del alcance de la implementación.
 
+**Nota añadida el 2026-11-13.** La [ADR-023](../../../decisions/023-surfaces-chat-admin-field.md), que está propuesta, describe tres superficies: el chat, una UI de administración y la app de campo. La mayoría de las 240 pantallas de aquí sobreviviría como la UI de administración, y las pantallas de campo como la app de campo. El inventario necesita que cada pantalla quede clasificada por superficie, y por el módulo que la aporta (la [ADR-022](../../../decisions/022-core-modules-and-lanes.md), propuesta). Esa clasificación no se hace aquí. No es mecánica: si una pantalla sigue siendo principal, pasa a segundo plano porque su trabajo se muda al chat, o pertenece a la app de campo es un juicio pantalla por pantalla, y los límites entre módulos de los que depende todavía no están aceptados. Queda anotada como trabajo pendiente. Esta nota no añade, quita ni vuelve a dibujar ninguna pantalla.
+
 ## Cómo leer la tabla
 
 - **ID de pantalla** — identificador único para las referencias cruzadas (formato: `AREA-NNN`)

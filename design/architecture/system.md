@@ -4,6 +4,10 @@
 
 GreenGrass is a single-tenant, federated platform for grassroots political campaign management. This document defines the system architecture — how the components fit together, how data flows, and how the infrastructure supports the product requirements defined in the spec documents.
 
+**Reading note, added 2026-11-13.** The product direction changed after this document was written, and six ADRs record the change. Two are accepted and are reflected here as structure: identity is per client ([ADR-025](../../decisions/025-identity-per-client.md)) and pricing is a lane rule ([ADR-026](../../decisions/026-two-lane-pricing.md)). Four are proposed and appear here only in sections marked as proposals: the Core, modules and lanes ([ADR-022](../../decisions/022-core-modules-and-lanes.md)), surfaces ([ADR-023](../../decisions/023-surfaces-chat-admin-field.md)), the event bus ([ADR-024](../../decisions/024-event-bus-as-federation.md)) and third-party sync ([ADR-027](../../decisions/027-third-party-crm-sync-and-connectors.md)). "GreenGrass" in this document means the infrastructure. A *tenant* here is what those ADRs call a *client's instance*.
+
+<!-- REVISIT: this document describes the platform as "for grassroots political campaign management". Under ADR-022 the infrastructure serves two lanes, political and commercial, and the political-only parts of this document (the voter file, election day, campaign-finance compliance) become policy of the political lane. The text is left as written until ADR-022 is accepted. -->
+
 ### Architectural Drivers
 
 These product decisions (from the specs) have the strongest influence on architecture:
@@ -16,7 +20,7 @@ These product decisions (from the specs) have the strongest influence on archite
 6. **Mobile-first** — the primary interface is a phone, not a desktop
 7. **RTL and multilingual from day one** — architecture must support bidirectional text and content localization
 8. **Full audit trail** — every data mutation is logged
-9. **Federated identity** — one platform identity, per-tenant profiles
+9. **Identity per client** — each instance runs its own identity service and holds its own accounts ([ADR-025](../../decisions/025-identity-per-client.md)). This replaces the original driver, "federated identity: one platform identity, per-tenant profiles"
 10. **Real-time analytics for active operations** — field day and election day dashboards update live
 
 ---
@@ -27,12 +31,12 @@ These product decisions (from the specs) have the strongest influence on archite
 ┌─────────────────────────────────────────────────────────┐
 │                   PLATFORM LAYER                         │
 │                                                          │
-│  ┌──────────────┐  ┌──────────────┐  ┌───────────────┐  │
-│  │   Identity    │  │  Provisioning │  │   Platform    │  │
-│  │   Service     │  │  Service      │  │   Admin       │  │
-│  └──────┬───────┘  └──────┬───────┘  └───────────────┘  │
-│         │                 │                               │
-│  ┌──────┴─────────────────┴──────────────────────────┐   │
+│                    ┌──────────────┐  ┌───────────────┐  │
+│                    │  Provisioning │  │   Platform    │  │
+│                    │  Service      │  │   Admin       │  │
+│                    └──────┬───────┘  └───────────────┘  │
+│                           │                               │
+│  ┌────────────────────────┴──────────────────────────┐   │
 │  │   Service Catalogue · Entitlements · Metering       │   │
 │  │   (what exists, who enabled it, what it cost —      │   │
 │  │    metadata only; ADR-019)                          │   │
@@ -61,6 +65,8 @@ These product decisions (from the specs) have the strongest influence on archite
     │  │Cache │  │     │  │Cache │  │
     │  ├──────┤  │     │  ├──────┤  │
     │  │Queue │  │     │  │Queue │  │
+    │  ├──────┤  │     │  ├──────┤  │
+    │  │Ident.│  │     │  │Ident.│  │
     │  └──────┘  │     │  └──────┘  │
     │            │     │            │
     └────────────┘     └────────────┘
@@ -68,13 +74,76 @@ These product decisions (from the specs) have the strongest influence on archite
 
 ### Three-layer architecture:
 
-1. **Platform layer** — shared services that exist outside any tenant: identity, provisioning, platform admin, billing. This is the only layer that sees across tenants.
+1. **Platform layer** — shared services that exist outside any tenant: provisioning, platform admin, billing. This is the only layer that sees across tenants. Identity is no longer here: each tenant runs its own identity service ([ADR-025](../../decisions/025-identity-per-client.md)).
 
 2. **Federation layer** — mediates cross-tenant interactions: alliance coordination, shared resource management, dedup across orgs, joint campaign orchestration. Operates on explicit sharing rules, never has blanket access to tenant data.
 
 3. **Tenant layer** — one complete, isolated application instance per sovereign entity (party, org, or candidate). Each tenant has its own application server, database, cache, and job queue. No tenant can see another tenant's data except through the federation layer's sharing rules.
 
 **Central services are not a fourth layer.** They are platform-hosted capabilities that a tenant enables from the catalogue and that execute per tenant, under that tenant's keys and contracts, retaining nothing between calls ([ADR-019](../../decisions/019-central-services-and-metered-billing.md)). The catalogue, entitlements and metering that govern them are platform-layer components holding metadata only. See [Central Services Architecture](#central-services-architecture).
+
+### Proposed: the event bus in place of the federation layer
+
+Proposed in [ADR-024](../../decisions/024-event-bus-as-federation.md), and not accepted. Until it is, the federation layer above is the specified design.
+
+```
+┌─────────────┐   contract-filtered,   ┌─────────────┐
+│  MEMBER A   │   encrypted exports    │  MEMBER B   │
+│  instance   │─────────┐    ┌─────────│  instance   │
+│  + stream   │         ▼    ▼         │  + stream   │
+└─────────────┘     ┌─────────────┐    └─────────────┘
+       ▲            │  ALLIANCE   │           ▲
+       │            │  instance   │           │
+       └────────────│  + stream   │───────────┘
+    publishes back  └─────────────┘  publishes back
+   (joint campaigns, suppression requests, shared talking points)
+
+   Any relay GreenGrass operates sees routing metadata, never content.
+```
+
+- **Each instance's event stream becomes its integration spine.** The stream that today feeds analytics ([Analytics Architecture](#analytics-architecture)) would carry the domain events of the Core and of every module: `person.created`, `consent.changed`, `interaction.recorded`, `donation.received`, `content.approved`.
+- **Federation becomes exports between instances.** Each organization exports a subset of its stream to the instances it has sharing contracts with. The export is filtered at the source, field by field and deny by default, and encrypted under the contract's keys, which the members hold.
+- **An alliance is a third instance that subscribes.** It has no layer of its own. An association of agencies in the commercial lane has the same shape; that part is decided.
+- **No central component holds or mediates cross-organization data.** The platform layer would keep provisioning, the catalogue, entitlements, metering and any relay.
+
+**Verify:** that NATS supports exporting and importing streams across accounts and leaf nodes over separate clusters and separate clouds. This is not yet confirmed.
+
+---
+
+## Core, Modules and Lanes
+
+Proposed in [ADR-022](../../decisions/022-core-modules-and-lanes.md), and not accepted, except where a line says *decided*. This section is a summary; the ADR is the record.
+
+### The Core
+
+The Core is what every instance always has, in both lanes. It is headless: each item is an API with events, and it never depends on a module.
+
+| Group | Contents |
+|---|---|
+| Trust | Isolation tiers, identity and passkeys (per client, decided), keys and BYOK, sharing contracts, the audit log |
+| Data: the CRM | People and the omni-list, record types, consent, dedup, segments, import and export, third-party sync. *The CRM is part of the Core: decided* |
+| Content | Content store, versioned assets, approval pipeline in rounds |
+| Delivery | Channel transport with consent checks, frequency caps, the quiet window and mutual suppression |
+| Commerce | Catalogue, entitlements, metering |
+| Events | The per-client event stream and the bus |
+| Lane configuration | Brand, vocabulary, catalogue visibility, price rules, policy defaults |
+| Plumbing | Integration hub and connectors, AI abstraction (BYOM), localization, offline sync engine, public API and webhooks |
+
+Whether the voter file is in the Core is open. The recommendation is that it becomes a political-lane module. Until that is decided, the [Data Model](#data-model) stands as written, voter data included.
+
+### Modules
+
+A module is the unit a client enables from the catalogue. It is made of in-tenant components, central-service calls, or both. Each module ships a manifest declaring its data, dependencies, events, access, surfaces, services, perimeter and standing against [ADR-018](../../decisions/018-ai-agent-posture.md). First-party modules ship in the deployment image and are switched on by entitlement; there are no per-module deployments, so [Tenant Architecture](#tenant-architecture) is unchanged. Modules are built by GreenGrass first, with the contract designed so vetted partners can build later (decided).
+
+"In-tenant component" is the proposed new name for what [Internal modules and central services](#internal-modules-and-central-services) calls an internal module.
+
+### Lanes
+
+A lane is a product and brand on the Core: Greengrass for political clients, Basecamp for commercial ones (decided). A lane is configuration over one codebase, never a fork. Lane configuration sets the brand, the vocabulary, which modules the catalogue shows, the price rules ([ADR-026](../../decisions/026-two-lane-pricing.md)) and the policy defaults: security defaults, compliance packs, the AI gate. Each lane pins the versions of the Core and modules it runs and upgrades on its own schedule. Operators are separated by lane; how Onda Corta's access across both is defined is open.
+
+### Surfaces
+
+Proposed in [ADR-023](../../decisions/023-surfaces-chat-admin-field.md). Every surface calls the [Public API](#public-api): a chat UI, an admin UI and the field app. The field app stays the offline surface ([Offline Architecture](#offline-architecture)). The chat surface is gated by ADR-018 in both lanes (decided) and does not appear in this document as structure.
 
 ---
 
@@ -92,6 +161,7 @@ Each tenant is a self-contained application deployment:
 | Job queue | Async tasks: email sends, SMS dispatch, data imports, sync processing |
 | Object storage | File uploads, media, export files, backup snapshots |
 | Search index | Full-text search across CRM records, comms, notes |
+| Identity service | The tenant's own accounts, credentials, sessions and recovery ([ADR-025](../../decisions/025-identity-per-client.md)) |
 
 ### Isolation tiers
 
@@ -153,20 +223,9 @@ OAs can export their tenant settings as a JSON snapshot for documentation, backu
 
 ### Platform-level entities (shared across tenants)
 
-```
-PlatformIdentity
-├── id (UUID)
-├── primary_phone (E.164, encrypted)
-├── primary_email (encrypted)
-├── name
-├── language_preference
-├── communication_preferences (per-channel, per-purpose consent)
-├── passkey_credentials[]
-├── trusted_contacts[] → PlatformIdentity
-├── tenant_memberships[] → TenantProfile
-├── created_at
-└── updated_at
+Identity is no longer a platform-level entity. `PlatformIdentity`, which headed this list, is replaced by `Account` under [Tenant-level entities](#tenant-level-entities-per-tenant-database) ([ADR-025](../../decisions/025-identity-per-client.md)). The platform layer holds no record of a person.
 
+```
 TenantRegistration
 ├── id (UUID)
 ├── entity_type (alliance | party_org | candidate)
@@ -200,7 +259,7 @@ ServiceCatalogueEntry
 ├── countries[] (where it is offered)
 ├── hosting_tiers[] (standard | enhanced | maximum | self_hosted)
 ├── supplier (who bills the variable cost; null if none)
-├── unit, unit_price_passthrough (the supplier's price, no margin)
+├── unit, unit_price_passthrough (the supplier's price: the metered cost. Each lane's price rule is applied on top of it — ADR-026)
 ├── allocation_method (per_tenant | published_allocation — for suppliers that bill in aggregate)
 ├── data_leaves_perimeter (boolean — triggers the encryption-boundary acknowledgement)
 └── updated_at
@@ -214,14 +273,14 @@ Entitlement
 ├── spend_cap (soft_warning, hard_stop — in the tenant's billing currency)
 ├── billed_to → TenantRegistration (the tenant itself, or the alliance under alliance_pays)
 ├── status (enabled | suspended_by_cap | disabled)
-├── enabled_by → PlatformIdentity
+├── enabled_by (an Account in the tenant's own instance, held here as a reference)
 └── created_at
 
 UsageEvent (metadata only — no content; audit-trail retention tier)
 ├── id (UUID)
 ├── tenant → TenantRegistration
 ├── entitlement → Entitlement
-├── actor (PlatformIdentity, or a non-human actor type once ADR-018 defines one)
+├── actor (an Account in the tenant's own instance, or a non-human actor type once ADR-018 defines one)
 ├── contract_reference (the sharing contract the call ran under, if any)
 ├── units, quantity
 ├── supplier_cost, currency
@@ -232,9 +291,21 @@ UsageEvent (metadata only — no content; audit-trail retention tier)
 ### Tenant-level entities (per-tenant database)
 
 ```
+Account (one per person who logs in to this tenant — was PlatformIdentity, a platform-level entity, before ADR-025)
+├── id (UUID)
+├── primary_phone (E.164, encrypted)
+├── primary_email (encrypted)
+├── name
+├── language_preference
+├── communication_preferences (per-channel, per-purpose consent)
+├── passkey_credentials[]
+├── trusted_contacts[] → Account
+├── created_at
+└── updated_at
+
 Person (the omni-list record)
 ├── id (UUID)
-├── platform_identity_id → PlatformIdentity (nullable — not everyone has a login)
+├── account_id → Account (nullable — not everyone has a login)
 ├── name, address, phone, email (some encrypted at application level)
 ├── record_types[] (voter | donor | volunteer | supporter | contact | candidate | staff)
 ├── voter_data
@@ -444,28 +515,29 @@ Dynamic segments recalculate on two triggers: **on access** (when a user views t
 
 ## Identity & Authentication Architecture
 
-### Platform identity service
+### Identity service (one per instance)
 
-The identity service is a shared platform component, separate from any tenant:
+(Decided in [ADR-025](../../decisions/025-identity-per-client.md), which supersedes the shared platform identity service this section first specified.)
+
+Each tenant's instance runs its own identity service and holds its own accounts. There is no identity component outside the instances:
 
 ```
 ┌─────────────────────────────────────┐
-│         Identity Service             │
+│   Identity Service (per instance)    │
 │                                      │
 │  ┌─────────────┐ ┌───────────────┐  │
-│  │  Credential  │ │   Profile     │  │
-│  │  Store       │ │   Federation  │  │
-│  │  (passkeys,  │ │   (tenant     │  │
-│  │   OTP, etc.) │ │   memberships)│  │
+│  │  Credential  │ │   Session     │  │
+│  │  Store       │ │   Manager     │  │
+│  │  (passkeys,  │ │               │  │
+│  │   OTP, etc.) │ │               │  │
 │  └─────────────┘ └───────────────┘  │
-│  ┌─────────────┐ ┌───────────────┐  │
-│  │  Session     │ │   Recovery    │  │
-│  │  Manager     │ │   Service     │  │
-│  └─────────────┘ └───────────────┘  │
+│  ┌─────────────────────────────────┐ │
+│  │        Recovery Service         │ │
+│  └─────────────────────────────────┘ │
 └─────────────────────────────────────┘
 ```
 
-**Credential store:** Passkey public keys, email/password hashes (argon2id), magic link tokens, OTP seeds, TOTP secrets. Never stores plaintext credentials. Separate from tenant databases.
+**Credential store:** Passkey public keys, email/password hashes (argon2id), magic link tokens, OTP seeds, TOTP secrets. Never stores plaintext credentials. Held inside the instance, apart from the tenant's CRM tables.
 
 **Authentication method tiers** (decided in [ADR-016 §57–60](../../decisions/016-cross-cutting-resolutions.md)):
 
@@ -478,25 +550,25 @@ The identity service is a shared platform component, separate from any tenant:
 
 The login screen auto-detects WebAuthn support. Devices below the passkey threshold get magic link authentication automatically — no user decision needed.
 
-**Profile federation:** Maps a platform identity to its per-tenant profiles. When a user logs in, the identity service determines which tenants they belong to and which tenant to route them to (or presents a tenant selector if multiple).
+**No profile federation.** The original design mapped one platform identity to a profile in each tenant a person belonged to, and showed a tenant selector to anyone in more than one. That is gone. An account belongs to one instance. A person who works in two organizations has two accounts and logs in to each at its own address.
 
 **Session manager:** Issues and validates session tokens. Enforces role-based session duration (decided in users.md). Handles remote revocation — when a Volunteer Coordinator revokes a session, the session manager invalidates the token immediately.
 
 **Recovery service:** Manages trusted contact recovery flow. Routes recovery requests to designated contacts. Issues new credential setup flows after approved recovery.
 
-**OA recovery — bootstrap problem** (decided in [ADR-016 §59](../../decisions/016-cross-cutting-resolutions.md)): When the first OA has no trusted contacts to vouch for them, platform-assisted recovery applies. The OA contacts GreenGrass support, who verify identity through the original registration channel (signup email, payment method on file). After verification, a **72-hour cooling-off recovery** begins — longer than the standard 24-hour peer-verified path because there is no peer verification. During cooling-off, all org email contacts receive a notification. This is intentionally slow and visible — it's the highest-risk recovery path.
+**OA recovery — bootstrap problem** (decided in [ADR-016 §59](../../decisions/016-cross-cutting-resolutions.md)): When the first OA has no trusted contacts to vouch for them, assisted recovery applies. Under [ADR-025](../../decisions/025-identity-per-client.md) it is a procedure of the instance's operator, not of a platform-wide support team working against a shared service; nothing else about it changes. The OA contacts the operator, who verifies identity through the original registration channel (signup email, payment method on file). After verification, a **72-hour cooling-off recovery** begins — longer than the standard 24-hour peer-verified path because there is no peer verification. During cooling-off, all org email contacts receive a notification. This is intentionally slow and visible — it's the highest-risk recovery path.
 
-**DECIDED:** Centralized primary in the incorporation jurisdiction with read replicas per country.
+**DECIDED:** One identity service per instance ([ADR-025](../../decisions/025-identity-per-client.md)). Identity data lives where the rest of the tenant's data lives, in the country the tenant chose, and is covered by the same isolation tier and the same keys.
 
-- **Primary:** Authoritative identity data lives in the incorporation jurisdiction (Estonia/Switzerland). All writes (account creation, credential changes, recovery) go to the primary. Protected by the strongest legal framework available.
-- **Read replicas:** Each country with tenant infrastructure gets a local replica for low-latency auth validation and session checks. Replication is eventual-consistency with short lag (seconds).
-- **Failover:** If the primary is unreachable, read replicas can continue to validate existing sessions (cached tokens). New account creation and credential changes queue until the primary recovers.
+This supersedes the earlier decision, kept here so the reversal is visible: *a centralized primary in the incorporation jurisdiction (Estonia/Switzerland) taking all writes, a read replica in each country for low-latency validation, and failover to cached sessions when the primary was unreachable.* None of that is built.
+
+Single sign-on across an alliance and its members is not part of this design. If it is wanted later, it would be an opt-in trust between instances.
 
 ### Authentication flow
 
 ```
-1. User navigates to app (tenant subdomain or login page)
-2. Identity service presents auth options (passkey, magic link, OTP, password)
+1. User navigates to the tenant's own address (tenant subdomain or custom domain)
+2. The tenant's identity service presents auth options (passkey, magic link, OTP, password)
 3. User authenticates:
    a. Passkey: WebAuthn challenge → device biometric → signed response → verified
    b. Magic link: email sent → user clicks → token verified
@@ -505,9 +577,9 @@ The login screen auto-detects WebAuthn support. Devices below the passkey thresh
 4. Identity service issues session token:
    a. Access token (short-lived, JWT or opaque)
    b. Refresh token (longer-lived, stored server-side)
-   c. Token includes: platform_identity_id, tenant_id, role_template_ids, scope_ids
+   c. Token includes: account_id, tenant_id, role_template_ids, scope_ids
 5. User routed to tenant application
-6. Tenant application validates token with identity service on each request
+6. Tenant application validates token with its own identity service on each request
 ```
 
 ### Field mode authentication
@@ -545,6 +617,8 @@ Routine settings changes do not require two-OA approval.
 ## Encryption Architecture
 
 ### Key hierarchy
+
+<!-- REVISIT: the hierarchy below still shows an "Identity Service Encryption Key" under the Platform Master Key, encrypting "platform identity data". Under ADR-025 there is no platform identity data: accounts live in each instance, under that tenant's keys. It also shows a "Federation Layer Key", which ADR-024 would remove if accepted. The diagram is left as written until the key hierarchy is reconciled. -->
 
 ```
 Platform Master Key (held by GreenGrass, HSM-backed)
@@ -887,6 +961,8 @@ Donation Form → Payment Router → Provider Adapter → Payment Processor
 
 Same modular pattern as communications — a common interface with per-provider adapters:
 
+**One payment layer, both lanes** (decided, recorded in [ADR-022 § The module catalogue](../../decisions/022-core-modules-and-lanes.md#the-module-catalogue)). These adapters are the shared payment layer of the Fundraising & payments module. In the commercial lane the module is this layer: integration with ATH Móvil and other micropayment and online payment services such as Stripe. Donation handling — contribution limits, campaign-finance reporting, alliance splits — is political-lane configuration on top of it.
+
 | Adapter | Countries | Type |
 |---------|-----------|------|
 | Stripe | Global (fallback) | Cards, some local methods |
@@ -943,6 +1019,8 @@ Event screens display ticket revenue as a metric but link to the fundraising sys
                    │ (append-only) │     │ Processor    │──→ Historical Reports
                    └──────────────┘     └──────────────┘
 ```
+
+**Proposed:** [ADR-024](../../decisions/024-event-bus-as-federation.md) would make this per-tenant event stream the instance's integration spine, carrying the domain events of the Core and every module, and the carrier of contract-filtered exports between instances. See [Proposed: the event bus in place of the federation layer](#proposed-the-event-bus-in-place-of-the-federation-layer). Not accepted.
 
 ### Real-time pipeline (active operations)
 
@@ -1039,6 +1117,8 @@ Alliance members can contribute drivers to a shared pool for election day rides-
 - **RTL support designed in from day one.** All layout must use logical properties (start/end) not physical (left/right). No RTL as an afterthought.
 - **String externalization:** All UI strings in locale files, never hardcoded. ICU MessageFormat for pluralization, gender, and complex formatting.
 - **Locale negotiation:** User's platform identity language preference → tenant default language → browser language → English fallback.
+
+<!-- REVISIT: "platform identity language preference" predates ADR-025. The preference now lives on the person's account in the tenant's own instance. Left as written pending the reconciliation pass ADR-025 names. -->
 
 ### Content localization data model
 
@@ -1200,6 +1280,23 @@ Alert escalation:
 
 The integration detail screen shows a health timeline (last 30 days) so the OA can distinguish intermittent issues from sustained failures.
 
+### Third-party CRM sync and connectors
+
+(From [ADR-027](../../decisions/027-third-party-crm-sync-and-connectors.md), which is proposed. One requirement in it is decided.)
+
+**Decided:** the core CRM syncs both ways with third-party tools, NationBuilder first and by CSV first. Phase A is a CSV round trip: import NationBuilder's people export through the existing import pipeline with a saved field mapping, and export changes as a CSV NationBuilder can import, keyed by `nationbuilder_id`. It needs no API access and no stored credentials.
+
+**Proposed:**
+
+- **The sync rules live in the core CRM, not in a connector:** an external-ID map per person, suggest-and-confirm dedup on inbound records, a system of record chosen per field, conflicts kept on both sides and flagged, consent where the most restrictive value wins, and field scope that is deny by default. Every sync batch is an audit entry with the connector as the actor.
+- **Phase B, API sync:** the same mapping run continuously through a connector, by webhooks or polling with incremental cursors.
+- **A connector worker.** Connectors would be built on Parsons, a Python library, running as a separate worker container in each instance. The worker consumes from and publishes to the tenant's event stream and never touches the database directly. It holds only its own connector's credential, fetched from Vault, and runs sandboxed with pinned, vendored dependencies.
+- **A connector is not a module.** It is catalogued and enabled per tenant in the integration hub, like any integration.
+
+**Verify:** that Parsons has a NationBuilder connector and what it covers; Parsons' licence; NationBuilder's API rate limits and webhook coverage. None of these is confirmed.
+
+Data sent to an outside CRM leaves the encryption perimeter and needs the same acknowledgement as BYOM ([BYOM architecture](#byom-architecture)).
+
 ### Public API
 
 **DECIDED:** REST + webhooks. Public API from day one.
@@ -1218,6 +1315,8 @@ This is a core commitment to the sovereignty model — tenants who can build on 
 (Decided in [ADR-019](../../decisions/019-central-services-and-metered-billing.md))
 
 ### Internal modules and central services
+
+**Amended by [ADR-026](../../decisions/026-two-lane-pricing.md):** the last two sentences of this paragraph describe the revenue model ADR-019 decided, which is superseded. The Core still meters the supplier cost of every central-service call. What a client pays is that cost plus its lane's price rule: a commission in the political lane; a 30% margin and a commission in the commercial lane. **Proposed by [ADR-022](../../decisions/022-core-modules-and-lanes.md):** "internal module" would be renamed "in-tenant component", so that "module" can mean the unit a client enables. See [Core, Modules and Lanes](#core-modules-and-lanes).
 
 Every capability is one of two things. An **internal module** runs inside the tenant instance on the tenant's own data: CRM, field operations, GOTV, fundraising, events, internal messaging, outreach composition. Enabling one per tenant is feature flagging inside a single-tenant deployment; nothing about tenant isolation changes. A **central service** is a platform-hosted capability a tenant enables from the catalogue: media capture over public sources, electoral analysis, opposition research delivery, text, image and video generation, channel transport, and the pilot's mutual suppression check. Internal modules are covered by the flat subscription. Central services carry costs that GreenGrass is itself billed for by the unit, which pass through to the tenant at cost, with no margin ([fundraising.md § Platform Revenue Model](../../spec/fundraising.md#platform-revenue-model)).
 
@@ -1334,6 +1433,7 @@ These choices are deeply interrelated. The recommendation section below proposes
 | Secrets management | HashiCorp Vault | Per-tenant encryption keys, API credentials, secrets rotation. |
 | Container orchestration | Kubernetes (cloud-agnostic) | Per-tenant container deployment across countries. Managed K8s where available, self-managed where needed. No GKE. |
 | IaC | Terraform / OpenTofu | Infrastructure as code for provisioning tenant infrastructure across providers and countries. |
+| Connector worker (proposed, [ADR-027](../../decisions/027-third-party-crm-sync-and-connectors.md)) | Python, with Parsons | Not accepted. A separate container per tenant for third-party connectors, isolated behind the event stream so the TypeScript backend stays the only code that touches the database. Pending verification of Parsons' NationBuilder connector and licence. |
 
 ### Native iOS roadmap
 
@@ -1364,7 +1464,6 @@ Country A (e.g., US/Puerto Rico)          Country B (e.g., Brazil)
 │  └────────┘               │             │  └────────┘               │
 │                            │             │                            │
 │  Platform Services (local) │             │  Platform Services (local) │
-│  - Identity replica        │             │  - Identity replica        │
 │  - Provisioning agent      │             │  - Provisioning agent      │
 │  - Monitoring              │             │  - Monitoring              │
 └──────────────────────────┘             └──────────────────────────┘
@@ -1376,7 +1475,6 @@ Country A (e.g., US/Puerto Rico)          Country B (e.g., Brazil)
                    │  (incorporation       │
                    │   jurisdiction)       │
                    │                       │
-                   │  - Identity primary   │
                    │  - Federation layer   │
                    │  - Platform Admin     │
                    │  - Billing            │
@@ -1384,6 +1482,8 @@ Country A (e.g., US/Puerto Rico)          Country B (e.g., Brazil)
                    │    orchestrator       │
                    └──────────────────────┘
 ```
+
+Identity no longer appears in this diagram: there is no identity primary and no per-country replica, since each tenant runs its own identity service ([ADR-025](../../decisions/025-identity-per-client.md)). The federation layer stays in the diagram until [ADR-024](../../decisions/024-event-bus-as-federation.md) is decided.
 
 ### Self-hosted deployment
 
@@ -1408,7 +1508,7 @@ For self-hosted tenants, GreenGrass provides:
 ## Open Questions — All Resolved
 
 1. ~~Container orchestration~~ → Kubernetes, cloud-agnostic, no GKE
-2. ~~Identity service location~~ → Centralized primary + per-country read replicas
+2. ~~Identity service location~~ → ~~Centralized primary + per-country read replicas~~ → **One identity service per instance**, per [ADR-025](../../decisions/025-identity-per-client.md). Supersedes the centralized primary.
 3. ~~Geographic data~~ → Pre-loaded + import + community contribution
 4. ~~Searchable encryption~~ → Blind index for identifiers, decrypt-on-read for notes/scores
 5. ~~Key rotation~~ → Tenant decides with strong guidance
@@ -1422,4 +1522,7 @@ For self-hosted tenants, GreenGrass provides:
 13. ~~Tenant URLs~~ → Subdomain default + custom domain support
 14. ~~Data retention~~ → Tiered (operational/compliance/audit/import rollback) per [ADR-016 §4](../../decisions/016-cross-cutting-resolutions.md). Supersedes ADR-004's uniform 10-year policy.
 15. ~~89 wireframe open questions~~ → All resolved per [ADR-016](../../decisions/016-cross-cutting-resolutions.md)
-16. ~~Shared capabilities and usage-based cost~~ → Central services executed per tenant, with metered pass-through at cost and no margin, per [ADR-019](../../decisions/019-central-services-and-metered-billing.md). Amends the flat-only revenue model in ADR-007.
+16. ~~Shared capabilities and usage-based cost~~ → Central services executed per tenant, with metered pass-through at cost and no margin, per [ADR-019](../../decisions/019-central-services-and-metered-billing.md). Amends the flat-only revenue model in ADR-007. The "no margin" part is superseded by item 17.
+17. ~~Pricing with a commercial lane~~ → Pricing is a lane rule on top of the metered cost: cost plus a commission in the political lane, cost plus a 30% margin plus a commission in the commercial lane, per [ADR-026](../../decisions/026-two-lane-pricing.md). Its definitions are open there.
+
+**Reopened by the November 2026 direction, and not resolved.** Four proposed ADRs carry open questions that touch this document: whether the event bus replaces the federation layer ([ADR-024](../../decisions/024-event-bus-as-federation.md)); whether the voter file leaves the Core, and what the Core is called ([ADR-022](../../decisions/022-core-modules-and-lanes.md)); the chat surface, which waits on [ADR-018](../../decisions/018-ai-agent-posture.md) ([ADR-023](../../decisions/023-surfaces-chat-admin-field.md)); and Parsons as the connector layer ([ADR-027](../../decisions/027-third-party-crm-sync-and-connectors.md)).

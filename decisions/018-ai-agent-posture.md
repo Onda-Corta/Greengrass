@@ -2,8 +2,8 @@
 
 **Status:** Proposed
 **Date:** 2026-09-07
-**Updated:** 2026-09-28 — the proposal under review added; later the same day its worked example was replaced by the WhatsApp approval flow. Status unchanged: nothing in it is accepted.
-**Sources:** `spec/security.md`, `spec/compliance.md`, `spec/fundraising.md`, `spec/gotv.md`, `spec/comms-intelligence.md`, `design/architecture/system.md`, `decisions/019-central-services-and-metered-billing.md`, `decisions/020-central-service-line-up-and-builders.md`, `decisions/021-content-approval-pipeline.md`, `design/ux/04-wireframes/content-ops/content-ops.md`
+**Updated:** 2026-09-28 — the proposal under review added; later the same day its worked example was replaced by the WhatsApp approval flow. Status unchanged: nothing in it is accepted. 2026-11-13 — the gate recorded as applying to the whole Core, in both lanes; the chat as the person's hands added to the proposal under review. Status unchanged.
+**Sources:** `spec/security.md`, `spec/compliance.md`, `spec/fundraising.md`, `spec/gotv.md`, `spec/comms-intelligence.md`, `design/architecture/system.md`, `decisions/019-central-services-and-metered-billing.md`, `decisions/020-central-service-line-up-and-builders.md`, `decisions/021-content-approval-pipeline.md`, `decisions/022-core-modules-and-lanes.md`, `decisions/023-surfaces-chat-admin-field.md`, `decisions/026-two-lane-pricing.md`, `design/ux/04-wireframes/content-ops/content-ops.md`
 
 ## Context
 
@@ -64,6 +64,10 @@ Anything beyond them is gated. Specifically, a capability is gated if it has any
 
 Nothing here restricts experimentation against synthetic data in a development environment. The gate is on production and on any deployment holding real voter, donor or member records. The distinction matters because the pilot is the first place the two converge.
 
+### The gate applies to the whole Core, in both lanes
+
+Added 2026-11-13, and decided in [ADR-023 § The ADR-018 gate binds the whole Core](023-surfaces-chat-admin-field.md#the-adr-018-gate-binds-the-whole-core). The platform is now a Core sold through two lanes, a political product and a commercial one ([ADR-022](022-core-modules-and-lanes.md)). This review applies to the Core, and so to both. Neither product ships a chat surface, or any other gated capability, to production before this ADR is accepted. What can ship before it is what the gate never covered: the admin UI, the field app, and any module with none of the four properties above.
+
 ## What this ADR must resolve
 
 Acceptance requires an answer to each of the following, recorded here or in the document named.
@@ -116,7 +120,7 @@ Three properties of the drawing matter to the review:
 
 For three of the review's eight items, and for one of its four gating properties, the drawing and the three new ADRs supply a proposed answer. Each is for the review to accept, amend or reject.
 
-- **Item 5, cost.** ADR-019's metered plane: inference and generation costs pass through to the tenant at cost, with no margin; under BYOM the tenant's own provider bills the tenant directly. What the platform default tier includes, and whether the free plan carries any metered allowance, stays open, as ADR-019 recorded.
+- **Item 5, cost.** ADR-019's metered plane: inference and generation costs pass through to the tenant at cost, with no margin; under BYOM the tenant's own provider bills the tenant directly. What the platform default tier includes, and whether the free plan carries any metered allowance, stays open, as ADR-019 recorded. *Amended by [ADR-026](026-two-lane-pricing.md): the metering still answers this item, but "at cost, with no margin" no longer describes what a client pays. Each lane adds its own price rule to the metered cost, and what "cost" includes is open there.*
 - **Credential breadth.** ADR-019's entitlements: one credential per tenant per central service. An agent acting for a tenant could hold no credential to a service the tenant has not enabled, and every call it made would be a metered usage event with an actor. This bounds what the harness can *call*. It does not bound what it can *read* inside its own tenant, which is the open question below.
 - **Item 6, the human gate.** The proposed principle is *machine proposes, human disposes*, and the drawing supplies its first enumerated form: **no agent dispatches.** An agent holds no credential to channel transport or to builder dispatch, and nothing it produces reaches a recipient except through a person's send. ADR-020 and ADR-021 already apply this to builders and to the content pipeline; the proposal extends it to every agent. The remaining forms and their exceptions are for the review to enumerate.
 - **Item 7, compartmented data.** The proposed answer: an agent reads compartmented data only under the contract of the person who invoked it, and never more than that person could read. Research delivered by the Analysis service lands in the compartment its contract names (ADR-019), and an agent invoked by someone outside that compartment cannot see it. The proposal also rules out background reads of compartmented data entirely. A read on someone's behalf is logged as that person's read, through the agent, under [ADR-017 § Observability: a distinction in the metadata ladder, not a new rung](017-sharing-contract-trust-model.md#observability-a-distinction-in-the-metadata-ladder-not-a-new-rung).
@@ -128,6 +132,26 @@ The drawing is silent on four items and makes one of them sharper.
 - **Read scope.** This is the central decision the review has to make. The worked example below reads the candidate's own message, the strategy documents, the knowledge base and the candidate's calendar, and stops short of voter records. The harness as drawn reads strategy, knowledge base, geo data and the whole CRM, support scores included. The review has to decide, per source, how far an agent may read.
 - **Item 2, automated decision-making and profiling.** The arrow from the CRM into the agents means an agent reading support scores for identifiable voters. That is exactly the case item 2 names, and the drawing makes it concrete rather than hypothetical.
 - **Item 1, the threat model; item 3, the audit model; item 4, offline; item 8, the BYOM settings screen.** Unanswered. The on-behalf-of relation proposed under item 7 is a start on item 3, not an answer to it.
+
+### The chat as the person's hands
+
+Added 2026-11-13. Like everything in this section, it is a proposal for the review to accept, amend or reject.
+
+[ADR-023](023-surfaces-chat-admin-field.md) proposes a headless Core with a chat surface meant to carry 70 to 80% of daily staff work. That chat reads across features, holds credentials and invokes operations. It is the agent this ADR gates, at the scale of the whole product and not of one feature.
+
+The position ADR-023 sends to this review is that the chat is the person's hands, not a second actor:
+
+- **It acts under the invoking person's own role, scopes and sharing contracts.** A chat user can do nothing they could not do in the admin UI.
+- **Every write is confirmed by the person with a tap on a card.** Reads need no confirmation; writes always do.
+- **It never acts in the background.** A scheduled briefing is a schedule a person set, as [ADR-020](020-central-service-line-up-and-builders.md) already allows for sends.
+- **The audit log records the person as the actor and the chat as the channel.**
+- **Modules declare their chat operations in a manifest,** including which ones are writes ([ADR-022 § The module contract](022-core-modules-and-lanes.md#the-module-contract)). The model chooses among declared operations and cannot invent new ones.
+
+**What it would answer, if accepted.** Read scope: the person's scope. Tool authority: declared operations only. Autonomous action: none without confirmation. The audit actor under item 3: the person, with the chat as the channel.
+
+**How it differs from the harness as drawn.** The harness reads four sources in its own right. The chat reads what the person who invoked it may read, when they ask, and nothing otherwise. That bounds the chat by the person and not by the feature. For a person with a wide role the person's scope is wide, support scores included, so item 2 is as concrete under this position as the harness made it.
+
+**What it does not answer.** Prompt injection from content the chat reads, such as a monitored article or an inbound message, which belongs to item 1. Items 2, 4 and 8. And the retention of prompts and responses under item 3.
 
 ### Worked example: approving the day's posts over WhatsApp
 
@@ -177,4 +201,4 @@ A prototype conversation, shared alongside the alliance services board and mappe
 - Tenant ownership of credentials ([integrations.md § Integration Principles](../spec/integrations.md#integration-principles)) applies to model providers as it does to every other integration
 - This ADR adds no new capability and reverses no accepted decision. It records a gate and the questions behind it
 
-**Related ADRs:** [ADR-002](002-security-threat-model.md) (threat model to extend), [ADR-004](004-data-model-integrity.md) (audit trail to extend), [ADR-005](005-offline-first-sync.md) (offline constraint), [ADR-009](009-compliance-legal.md) (automated filtering refused), [ADR-010](010-internationalization-localization.md) (AI translation with review), [ADR-012](012-external-integrations.md) (no third-party visibility precedent), [ADR-013](013-analytics-ai.md) (AI messaging; model choice superseded), [ADR-014](014-volunteer-onboarding.md) (AI concierge), [ADR-016](016-cross-cutting-resolutions.md) (BYOM §38, rule-based reallocation §49, tiered retention §4), [ADR-017](017-sharing-contract-trust-model.md) (contracts govern every boundary), [ADR-019](019-central-services-and-metered-billing.md) (cost item and credential boundary proposed), [ADR-020](020-central-service-line-up-and-builders.md) (text builders accepted outside the gate; image and video wait on item 6), [ADR-021](021-content-approval-pipeline.md) (the content pipeline an agent's pieces would enter; its WhatsApp approval question points here)
+**Related ADRs:** [ADR-002](002-security-threat-model.md) (threat model to extend), [ADR-004](004-data-model-integrity.md) (audit trail to extend), [ADR-005](005-offline-first-sync.md) (offline constraint), [ADR-009](009-compliance-legal.md) (automated filtering refused), [ADR-010](010-internationalization-localization.md) (AI translation with review), [ADR-012](012-external-integrations.md) (no third-party visibility precedent), [ADR-013](013-analytics-ai.md) (AI messaging; model choice superseded), [ADR-014](014-volunteer-onboarding.md) (AI concierge), [ADR-016](016-cross-cutting-resolutions.md) (BYOM §38, rule-based reallocation §49, tiered retention §4), [ADR-017](017-sharing-contract-trust-model.md) (contracts govern every boundary), [ADR-019](019-central-services-and-metered-billing.md) (cost item and credential boundary proposed), [ADR-020](020-central-service-line-up-and-builders.md) (text builders accepted outside the gate; image and video wait on item 6), [ADR-021](021-content-approval-pipeline.md) (the content pipeline an agent's pieces would enter; its WhatsApp approval question points here), [ADR-022](022-core-modules-and-lanes.md) (the Core and its two lanes; a module's manifest declares its standing against the gate), [ADR-023](023-surfaces-chat-admin-field.md) (the gate binds the whole Core; the chat position proposed to this review), [ADR-026](026-two-lane-pricing.md) (the cost item: metering stands, "no margin" does not)

@@ -245,9 +245,40 @@ La plataforma tiene que lidiar con archivos de datos reales y desordenados que v
 
 ### Migración desde otras plataformas
 
+**Enmendado por la [ADR-027](../decisions/027-third-party-crm-sync-and-connectors.md).** Esta sección decidió un camino de una sola vía. Una organización ya no tiene que dejar la herramienta que usa: ver [Sincronización del CRM con herramientas de terceros](#sincronización-del-crm-con-herramientas-de-terceros) más abajo. La decisión original se conserva aquí, y sigue describiendo lo que recibe una organización que sí decide mudarse.
+
 Las campañas que se pasan a GreenGrass desde otras herramientas (NationBuilder, NGP VAN, Action Network, CiviCRM, etc.) necesitan apoyo para migrar.
 
 **DECIDIDO: guías de migración + importación genérica.** Documentación detallada para migrar desde las plataformas de campaña más comunes (NationBuilder, NGP VAN, Action Network, CiviCRM): qué exportar, cómo mapear los campos, a qué prestarle atención. Más las herramientas genéricas de importación con mapeo inteligente. Si alguna plataforma de origen se convierte en la ruta de migración dominante, después se puede construir un importador dedicado.
+
+### Sincronización del CRM con herramientas de terceros
+
+**DECIDIDO: el CRM del Core sincroniza en los dos sentidos con herramientas de terceros, NationBuilder primero y por CSV primero.** Victoria Ciudadana usa NationBuilder ([mvp.md § MVC — Movimiento Victoria Ciudadana](mvp.md#mvc-movimiento-victoria-ciudadana)). Con sincronización, una organización puede dejar a NationBuilder como su sistema de referencia y sumar módulos al lado. El resto de esta sección es el diseño que la [ADR-027](../decisions/027-third-party-crm-sync-and-connectors.md) propone para ese requisito, y no está aceptado.
+
+**Fase A — el CSV de ida y vuelta.**
+
+- **De entrada:** importar la exportación de personas de NationBuilder por el [Flujo de importación](#flujo-de-importación). Sus nombres de campo son estables, de `nationbuilder_id` a `mobile_opt_in`. Se mapean una vez y el mapeo se guarda.
+- **De salida:** exportar los cambios como un CSV que NationBuilder pueda importar, con `nationbuilder_id` como llave.
+- **Ritmo:** el que lleve la organización.
+- Esto no necesita acceso a la API, ni una app de OAuth, ni credenciales permanentes guardadas en la instancia.
+
+**Fase B — sincronización por API (propuesta).** El mismo mapeo, corriendo de forma continua a través de un conector, por webhooks o por sondeo periódico con cursores incrementales.
+
+**Reglas para las dos fases (propuestas).** Viven en el CRM del Core, no en el conector.
+
+| Regla | Qué dice |
+|---|---|
+| Correspondencia de identidades | Cada persona tiene un mapa de identificadores externos. Los registros que entran pasan por la deduplicación de sugerir y confirmar. La sincronización nunca fusiona personas por su cuenta |
+| Sistema de referencia por campo | La organización elige, campo por campo, qué lado prevalece, una sola vez, cuando se conecta |
+| Conflictos | Se conservan en los dos lados y se marcan para que los vea una persona, como hace fusionar y marcar en la sincronización sin conexión |
+| Consentimiento | Una baja o un `do_not_contact` cruza en los dos sentidos y gana el valor más restrictivo. Un consentimiento expreso nunca pasa por encima de una baja más reciente |
+| Campos incluidos | Denegado por defecto. `support_level`, `tags` y los campos cifrados quedan fuera salvo que se activen. Un campo sincronizado nunca entra en la vista compartida de una coalición por el hecho de llegar |
+| El perímetro | Los datos que se mandan a la herramienta externa salen de la frontera de BYOK y necesitan la misma aceptación explícita que exige BYOM. Fuera de Puerto Rico aplica [compliance.md § Transferencias transfronterizas de datos](compliance.md#transferencias-transfronterizas-de-datos) |
+| Auditoría | Cada lote de sincronización es una entrada de auditoría, con el conector como actor |
+
+**Conectores (propuestos).** La sincronización es una capacidad del CRM del Core que se expone a través de conectores. Un conector es un enlace con una herramienta externa; se activa por organización y no es un módulo. La propuesta es construir los conectores sobre Parsons, la biblioteca de Python de código abierto de Movement Co-op, que ya se conecta con buena parte de las herramientas de la izquierda de Estados Unidos. Sería la capa de interoperabilidad para la izquierda de Estados Unidos y Puerto Rico, no toda la historia de los conectores: Brasil, Tailandia, India y Líbano necesitan conectores que Parsons no tiene.
+
+**Verificar** antes de apoyarse en cualquier parte de la propuesta de Parsons: que Parsons tiene un conector de NationBuilder, y qué cubre; la licencia de Parsons; los límites de solicitudes de la API de NationBuilder y qué cubren sus webhooks.
 
 ## Monitoreo y observabilidad
 
@@ -336,6 +367,7 @@ La plataforma emite eventos de webhook para las acciones clave. Cada organizaci�
 - Mapas: el proveedor elegido, con soporte de teselas sin conexión
 - Geocodificación: para procesar el padrón y validar direcciones
 - Importación de datos: CSV/Excel con mapeo de columnas para padrones
+- CSV de ida y vuelta con NationBuilder: importación de su exportación de personas y exportación de regreso, con `nationbuilder_id` como llave ([Sincronización del CRM con herramientas de terceros](#sincronización-del-crm-con-herramientas-de-terceros)). Requisito para traer al MVC
 - FEC API: para radicar reportes de cumplimiento (si se construye el reporte a la FEC para el alfa)
 - API pública: REST + webhooks operativos
 

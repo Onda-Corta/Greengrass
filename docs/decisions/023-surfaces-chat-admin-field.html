@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en" data-base="../" data-no-results="No results for">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ADR-023: Surfaces — a Headless Core, Chat, Admin &amp; Field · GreenGrass</title>
+<meta name="description" content="ADR-023: Surfaces — a Headless Core, Chat, Admin &amp; Field — GreenGrass spec &amp; design documentation.">
+<link rel="alternate" hreflang="en" href="./023-surfaces-chat-admin-field.html">
+<link rel="alternate" hreflang="es" href="../es/decisions/023-surfaces-chat-admin-field.html">
+<link rel="alternate" hreflang="x-default" href="./023-surfaces-chat-admin-field.html">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%232563eb'/%3E%3Cstop offset='1' stop-color='%2316a34a'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='32' height='32' rx='7' fill='url(%23g)'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="../assets/styles.css">
+</head>
+<body>
+<a class="skip-link" href="#content">Skip to content</a>
+<header class="site-header">
+  <button type="button" class="menu-toggle" aria-label="Toggle navigation" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+  <a class="brand" href="../index.html">
+    <span class="brand-mark" aria-hidden="true"></span>
+    <span class="brand-text"><strong>GreenGrass</strong><small>Spec &amp; Design</small></span>
+  </a>
+  <div class="search">
+    <input type="search" id="search-input" placeholder="Search docs…" autocomplete="off" aria-label="Search documentation">
+    <div id="search-results" class="search-results" hidden></div>
+  </div>
+  <nav class="lang-switch" aria-label="Language"><span class="lang-opt active" aria-current="true">EN</span><a class="lang-opt" href="../es/decisions/023-surfaces-chat-admin-field.html" hreflang="es" lang="es" title="Ver esta página en español">ES</a></nav>
+  <button type="button" class="theme-toggle" aria-label="Toggle dark mode" title="Toggle dark mode">
+    <span class="theme-icon" aria-hidden="true"></span>
+  </button>
+</header>
+<div class="layout">
+  <div class="sidebar-backdrop" hidden></div>
+  <aside class="sidebar" aria-label="Documentation navigation">
+    <nav class="nav">
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">Home<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../index.html">GreenGrass</a></li></ul></div>
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">Specifications<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../spec/pitch.html">Pre-MVP Pitch</a></li><li><a href="../spec/demo.html">Campaign Approval Demo Spec</a></li><li><a href="../spec/product.html">Project: GreenGrass</a></li><li><a href="../spec/mvp.html">GreenGrass MVP — Product Plan</a></li><li><a href="../spec/users.html">Users &amp; Roles</a></li><li><a href="../spec/workflows.html">Core Workflows</a></li><li><a href="../spec/geography.html">Target Geography</a></li><li><a href="../spec/security.html">Security &amp; Threat Model</a></li><li><a href="../spec/compliance.html">Compliance &amp; Legal Framework</a></li><li><a href="../spec/fundraising.html">Fundraising &amp; Payment Infrastructure</a></li><li><a href="../spec/integrations.html">External Integrations</a></li><li><a href="../spec/support.html">Tenant Support &amp; Onboarding</a></li><li><a href="../spec/gotv.html">Get Out The Vote &amp; Election Day Operations</a></li><li><a href="../spec/messaging.html">Internal Communications &amp; Notifications</a></li><li><a href="../spec/press.html">Press, Media &amp; Public Communications</a></li><li><a href="../spec/comms-intelligence.html">Comms Intelligence — Post-MVP Roadmap</a></li></ul></div>
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">Architecture<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../design/architecture/system.html">System Architecture</a></li></ul></div>
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">UX Design<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../design/ux/00-overview.html">UX Design Overview</a></li><li><a href="../design/ux/01-information-architecture/navigation-model.html">Navigation Model</a></li><li><a href="../design/ux/01-information-architecture/screen-inventory.html">Screen Inventory</a></li><li><a href="../design/ux/01-information-architecture/persona-views.html">Persona Views</a></li><li><a href="../design/ux/01-information-architecture/url-structure.html">URL Structure</a></li><li><a href="../design/ux/02-global-patterns/pattern-catalog.html">Pattern Catalog</a></li><li><a href="../design/ux/02-global-patterns/offline-sync-patterns.html">Offline &amp; Sync Patterns</a></li><li><a href="../design/ux/02-global-patterns/notification-patterns.html">Notification Patterns</a></li><li><a href="../design/ux/02-global-patterns/search-patterns.html">Search Patterns</a></li><li><a href="../design/ux/02-global-patterns/settings-help-patterns.html">Settings &amp; Help Patterns</a></li><li><a href="../design/ux/02-global-patterns/security-ux-patterns.html">Security UX Patterns</a></li><li><a href="../design/ux/03-design-system/foundations.html">Design System Foundations</a></li><li><a href="../design/ux/03-design-system/theming-strategy.html">Theming Strategy</a></li><li><a href="../design/ux/03-design-system/component-inventory.html">Component Inventory</a></li><li><a href="../design/ux/03-design-system/responsive-strategy.html">Responsive Strategy</a></li><li><a href="../design/ux/04-wireframes/index.html">Wireframes</a></li><li><a href="../design/ux/04-wireframes/navigation-shell/navigation-shell.html">Navigation Shell Wireframes</a></li><li><a href="../design/ux/04-wireframes/dashboards/dashboards.html">Dashboard Wireframes</a></li><li><a href="../design/ux/04-wireframes/field-mode/field-mode.html">Field Mode Wireframes</a></li><li><a href="../design/ux/04-wireframes/onboarding/onboarding.html">Onboarding Wireframes</a></li><li><a href="../design/ux/04-wireframes/messaging/messaging.html">Messaging Wireframes</a></li><li><a href="../design/ux/04-wireframes/supporter/supporter-portal.html">Supporter Portal Wireframes</a></li><li><a href="../design/ux/04-wireframes/alliance/alliance.html">Alliance Wireframes</a></li><li><a href="../design/ux/04-wireframes/crm/crm.html">CRM / People Wireframes</a></li><li><a href="../design/ux/04-wireframes/field-ops/field-ops.html">Field Operations (Admin) Wireframes</a></li><li><a href="../design/ux/04-wireframes/fundraising/fundraising.html">Fundraising Wireframes</a></li><li><a href="../design/ux/04-wireframes/communications/communications.html">Communications Wireframes</a></li><li><a href="../design/ux/04-wireframes/social-media/social-media.html">Social Media Wireframes</a></li><li><a href="../design/ux/04-wireframes/events/events.html">Events Wireframes</a></li><li><a href="../design/ux/04-wireframes/press/press.html">Press &amp; Media Wireframes</a></li><li><a href="../design/ux/04-wireframes/activism/activism.html">Activism &amp; Engagement Campaign Wireframes</a></li><li><a href="../design/ux/04-wireframes/gotv/gotv.html">GOTV Admin Wireframes</a></li><li><a href="../design/ux/04-wireframes/settings/settings.html">Settings &amp; Admin Wireframes</a></li><li><a href="../design/ux/04-wireframes/auth/auth.html">Authentication Wireframes</a></li><li><a href="../design/ux/04-wireframes/profile/profile.html">User Profile Wireframes</a></li><li><a href="../design/ux/04-wireframes/help/help.html">Support &amp; Help Wireframes</a></li><li><a href="../design/ux/04-wireframes/public/public.html">Public Pages Wireframes</a></li><li><a href="../design/ux/04-wireframes/audit.html">Wireframe Audit Report</a></li><li><a href="../design/ux/04-wireframes/content-ops/content-ops.html">Content Operations Wireframes</a></li></ul></div>
+<div class="nav-section open"><button type="button" class="nav-section-title" aria-expanded="true">Decisions<span class="chev" aria-hidden="true"></span></button><ul><li><a href="./001-platform-architecture.html">ADR-001: Platform Architecture &amp; Deployment</a></li><li><a href="./002-security-threat-model.html">ADR-002: Security &amp; Threat Model</a></li><li><a href="./003-identity-access-organization.html">ADR-003: Identity, Access &amp; Organization</a></li><li><a href="./004-data-model-integrity.html">ADR-004: Data Model &amp; Integrity</a></li><li><a href="./005-offline-first-sync.html">ADR-005: Offline-First &amp; Sync</a></li><li><a href="./006-field-operations-gotv.html">ADR-006: Field Operations &amp; GOTV</a></li><li><a href="./007-fundraising-payments.html">ADR-007: Fundraising &amp; Payments</a></li><li><a href="./008-communications-messaging.html">ADR-008: Communications &amp; Messaging</a></li><li><a href="./009-compliance-legal.html">ADR-009: Compliance &amp; Legal Framework</a></li><li><a href="./010-internationalization-localization.html">ADR-010: Internationalization &amp; Localization</a></li><li><a href="./011-design-system-ux.html">ADR-011: Design System &amp; UX Foundations</a></li><li><a href="./012-external-integrations.html">ADR-012: External Integrations</a></li><li><a href="./013-analytics-ai.html">ADR-013: Analytics &amp; AI</a></li><li><a href="./014-volunteer-onboarding.html">ADR-014: Volunteer &amp; Onboarding</a></li><li><a href="./015-product-scope.html">ADR-015: Product Scope Boundaries</a></li><li><a href="./016-cross-cutting-resolutions.html">ADR-016: Cross-Cutting Resolutions</a></li><li><a href="./017-sharing-contract-trust-model.html">ADR-017: The Sharing Contract as Universal Trust Primitive</a></li><li><a href="./018-ai-agent-posture.html">ADR-018: AI Agent Posture</a></li><li><a href="./019-central-services-and-metered-billing.html">ADR-019: Central Services &amp; Metered Billing</a></li><li><a href="./020-central-service-line-up-and-builders.html">ADR-020: Central Service Line-up &amp; Builders</a></li><li><a href="./021-content-approval-pipeline.html">ADR-021: Content Approval Pipeline</a></li><li><a href="./022-core-modules-and-lanes.html">ADR-022: Core, Modules &amp; Lanes</a></li><li><a href="./023-surfaces-chat-admin-field.html" aria-current="page" class="active">ADR-023: Surfaces — a Headless Core, Chat, Admin &amp; Field</a></li><li><a href="./024-event-bus-as-federation.html">ADR-024: The Event Bus as Federation</a></li><li><a href="./025-identity-per-client.html">ADR-025: Identity per Client</a></li><li><a href="./026-two-lane-pricing.html">ADR-026: Two-Lane Pricing</a></li><li><a href="./027-third-party-crm-sync-and-connectors.html">ADR-027: Third-Party CRM Sync &amp; Connectors</a></li><li><a href="./ux-decisions.html">UX Decisions — Wireframe Phase</a></li></ul></div>
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">Diary<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../diary/index.html">Project Diary</a></li><li><a href="../diary/01-from-description-to-specification.html">Entry 1: From Description to Specification</a></li><li><a href="../diary/02-the-architecture-session.html">Entry 2: The Architecture Session</a></li><li><a href="../diary/03-information-architecture.html">Entry 3: Information Architecture</a></li><li><a href="../diary/04-design-system-and-wireframes.html">Entry 4: The Design System and Wireframes</a></li><li><a href="../diary/05-the-wireframe-audit.html">Entry 5: The Wireframe Audit</a></li><li><a href="../diary/06-resolving-the-open-questions.html">Entry 6: Resolving the Open Questions</a></li><li><a href="../diary/07-reconciling-the-architecture.html">Entry 7: Reconciling the Architecture</a></li><li><a href="../diary/08-housekeeping.html">Diary Entry 8: Housekeeping</a></li><li><a href="../diary/09-the-documentation-website.html">Diary Entry 9: The Documentation Website</a></li><li><a href="../diary/10-the-spanish-edition.html">Diary Entry 10: The Spanish Edition</a></li><li><a href="../diary/11-translating-the-rest.html">Diary Entry 11: Translating the Rest</a></li><li><a href="../diary/12-the-agent-question.html">Diary Entry 12: The Agent Question</a></li><li><a href="../diary/13-services-a-la-carte.html">Diary Entry 13: Services à la Carte</a></li><li><a href="../diary/14-the-proposal-under-review.html">Diary Entry 14: The Proposal Under Review</a></li><li><a href="../diary/15-not-a-creator-tool.html">Diary Entry 15: Not a Creator Tool</a></li><li><a href="../diary/16-the-pitch.html">Diary Entry 16: The Pitch</a></li><li><a href="../diary/17-two-lanes.html">Diary Entry 17: Two Lanes</a></li></ul></div>
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">Project &amp; Internal<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../claude/MEMORY.html">Memory</a></li><li><a href="../claude/SKILLS.html">Skills</a></li><li><a href="../CLAUDE.html">GreenGrass</a></li></ul></div>
+    </nav>
+  </aside>
+  <main id="content" class="content">
+    <nav class="breadcrumb" aria-label="Breadcrumb">Decisions</nav>
+    <article class="prose">
+<h1 id="adr-023-surfaces-a-headless-core-chat-admin-field" tabindex="-1"><a class="heading-anchor" href="#adr-023-surfaces-a-headless-core-chat-admin-field" aria-hidden="true">#</a> ADR-023: Surfaces — a Headless Core, Chat, Admin &amp; Field</h1>
+<p><strong>Status:</strong> Proposed
+<strong>Date:</strong> 2026-11-13
+<strong>Sources:</strong> <code>spec/pitch.md</code>, <code>spec/demo.md</code>, <code>design/architecture/system.md</code>, <code>design/ux/01-information-architecture/navigation-model.md</code>, <code>design/ux/01-information-architecture/screen-inventory.md</code>, <code>decisions/005-offline-first-sync.md</code>, <code>decisions/018-ai-agent-posture.md</code>, <code>decisions/019-central-services-and-metered-billing.md</code>, <code>decisions/020-central-service-line-up-and-builders.md</code>, <code>decisions/022-core-modules-and-lanes.md</code></p>
+<h2 id="context" tabindex="-1"><a class="heading-anchor" href="#context" aria-hidden="true">#</a> Context</h2>
+<p>The UX corpus draws one application. <a href="../design/ux/01-information-architecture/navigation-model.html">navigation-model.md</a> organizes every feature into one shell, and <a href="../design/ux/01-information-architecture/screen-inventory.html">screen-inventory.md</a> catalogues 240 screens inside it.</p>
+<p>The new direction is a headless Core (<a href="./022-core-modules-and-lanes.html">ADR-022</a>). Everything the platform does is an API operation first. A chat UI is meant to carry 70 to 80% of daily staff work, an admin UI carries the complex rest, and the field app stays as the offline surface.</p>
+<p>The architecture already allows this. <a href="../design/architecture/system.html#public-api">system.md § Public API</a> commits that the public API is the same API the frontend consumes, with &quot;no private backdoors&quot;. That commitment is what makes a headless Core possible: every surface is an API consumer, and none is privileged.</p>
+<p>What the architecture does not allow yet is the chat. A chat that does most of the daily work reads across features, holds credentials and invokes operations. That is the agent <a href="./018-ai-agent-posture.html">ADR-018</a> gates. This is the largest consequence of the new direction, and this ADR faces it directly: it records one decision about the gate, and sends one proposal into the review.</p>
+<p>This ADR is <code>Proposed</code>. One thing in it is decided, and is marked.</p>
+<h3 id="conflicts-this-adr-resolves" tabindex="-1"><a class="heading-anchor" href="#conflicts-this-adr-resolves" aria-hidden="true">#</a> Conflicts this ADR resolves</h3>
+<ol>
+<li><strong><a href="./018-ai-agent-posture.html#no-agent-capability-reaches-production-until-this-adr-is-accepted">ADR-018 § No agent capability reaches production until this ADR is accepted</a></strong> gates exactly the agent a chat-first surface implies. The gate stands. This ADR does not resolve it, and says what waits behind it.</li>
+<li><strong><a href="./005-offline-first-sync.html">ADR-005</a></strong> makes offline-first operation the basis of field work. Chat needs connectivity and a model call by construction, as ADR-018 already says of every agent-mediated feature.</li>
+<li><strong><a href="../design/ux/01-information-architecture/navigation-model.html">navigation-model.md</a></strong> and <strong><a href="../design/ux/01-information-architecture/screen-inventory.html">screen-inventory.md</a></strong> assume every feature exists in one UI for every organization.</li>
+<li><strong><a href="../spec/pitch.html">pitch.md</a></strong> and <strong><a href="../spec/demo.html">demo.md</a></strong> show the approval flow on WhatsApp in the prototype and on Telegram in the demonstration, because WhatsApp's business terms bar political parties. Neither names a default channel for the product.</li>
+</ol>
+<h2 id="decision" tabindex="-1"><a class="heading-anchor" href="#decision" aria-hidden="true">#</a> Decision</h2>
+<h3 id="a-headless-core-and-three-surfaces" tabindex="-1"><a class="heading-anchor" href="#a-headless-core-and-three-surfaces" aria-hidden="true">#</a> A headless Core and three surfaces</h3>
+<p>Proposed.</p>
+<p>Headless means every surface calls the same public API. A surface is where a person does the work, and there are three.</p>
+<table>
+<thead>
+<tr>
+<th>Chat (target: 70 to 80% of daily work)</th>
+<th>Admin UI</th>
+<th>Field app</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Approving content, as in the demonstration</td>
+<td>Imports and column mapping</td>
+<td>Canvassing</td>
+</tr>
+<tr>
+<td>Questions: &quot;how many doors yesterday in Carolina?&quot;</td>
+<td>Sharing contracts and coalition setup</td>
+<td>Voter registration</td>
+</tr>
+<tr>
+<td>Drafting with a builder</td>
+<td>Key ceremonies, BYOK, security settings</td>
+<td>Event check-in</td>
+</tr>
+<tr>
+<td>Notifications and daily briefings</td>
+<td>Turf cutting and maps</td>
+<td>Poll-watcher results</td>
+</tr>
+<tr>
+<td>Simple record updates: &quot;mark Ana as volunteer&quot;</td>
+<td>Segment building</td>
+<td></td>
+</tr>
+<tr>
+<td>Media monitor digest</td>
+<td>Dedup review at scale</td>
+<td></td>
+</tr>
+<tr>
+<td>Fundraising totals, RSVP counts</td>
+<td>Compliance reports and filings</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>The GOTV war room</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>Module and connector settings</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>The 70 to 80% figure is staff and candidate work, not field work.</p>
+<p>Each module declares in its manifest what it puts on each surface (<a href="./022-core-modules-and-lanes.html#the-module-contract">ADR-022 § The module contract</a>).</p>
+<p><strong>Alternatives considered:</strong> Chat as the only surface was rejected because two of the three things no competitor integrates, the voter file and offline field tools, are not chat-shaped, and the design has to accept that.</p>
+<h3 id="the-field-app-stays-as-the-offline-surface" tabindex="-1"><a class="heading-anchor" href="#the-field-app-stays-as-the-offline-surface" aria-hidden="true">#</a> The field app stays, as the offline surface</h3>
+<p>Proposed, and it reaffirms <a href="./005-offline-first-sync.html">ADR-005</a>.</p>
+<p>Offline field tools are one of the things no competitor integrates. Chat cannot be the surface for work done without signal. The field app remains the third surface, with the sync engine, the on-device storage and the conflict rules ADR-005 decided. Chat is not used for field work.</p>
+<h3 id="most-of-the-wireframes-survive-as-the-admin-ui" tabindex="-1"><a class="heading-anchor" href="#most-of-the-wireframes-survive-as-the-admin-ui" aria-hidden="true">#</a> Most of the wireframes survive as the admin UI</h3>
+<p>Proposed.</p>
+<p>Most of the 240 wireframed screens survive as the admin UI. The screen inventory needs re-tagging by surface, not redrawing. Screens whose job moves to chat, such as dashboards read daily, approval queues and notification centres, become secondary in the admin UI. Navigation is built from the modules a client has enabled, since each module contributes its own screens and navigation entries.</p>
+<p>The re-tagging is follow-up work. It needs a judgement per screen and is not done here. No wireframe is redrawn by this ADR.</p>
+<h3 id="the-adr-018-gate-binds-the-whole-core" tabindex="-1"><a class="heading-anchor" href="#the-adr-018-gate-binds-the-whole-core" aria-hidden="true">#</a> The ADR-018 gate binds the whole Core</h3>
+<p><strong>Decided.</strong> The ADR-018 review applies to the Core, and so to both lanes. Chat is a Core surface, so neither Greengrass nor Basecamp ships it to production before the review is accepted. ADR-018 stays <code>Proposed</code>.</p>
+<ul>
+<li><strong>This is the one place where the lanes are not independent.</strong> <a href="./022-core-modules-and-lanes.html#two-lanes-on-one-infrastructure">ADR-022 § Two lanes on one infrastructure</a> says a lane never waits for the other. Both wait for the review. It is on the critical path for both.</li>
+<li><strong>What can ship before the review:</strong> the admin UI, the field app, and any module that has none of the four gated properties.</li>
+<li><strong>Prototypes stay outside the gate,</strong> as <a href="./018-ai-agent-posture.html#the-review-is-a-precondition-on-production-not-on-prototyping">ADR-018 § The review is a precondition on production, not on prototyping</a> already says and <a href="../spec/demo.html">demo.md</a> relies on: anything that holds no real client records.</li>
+</ul>
+<p><strong>Alternatives considered:</strong> Applying the gate to the political lane only was rejected because the chat is a Core surface, and the Core is the same in both lanes.</p>
+<h3 id="the-chat-as-the-persons-hands" tabindex="-1"><a class="heading-anchor" href="#the-chat-as-the-persons-hands" aria-hidden="true">#</a> The chat as the person's hands</h3>
+<p>Proposed, as input to the ADR-018 review. Nothing here is accepted, and this ADR cannot be accepted for the chat surface before ADR-018 is.</p>
+<p>The position is that the chat is the person's hands, not a second actor:</p>
+<ul>
+<li><strong>It acts under the invoking person's own role, scopes and sharing contracts.</strong> A chat user can do nothing they could not do in the admin UI.</li>
+<li><strong>Every write is confirmed by the person with a tap on a card,</strong> as in the demonstration. Reads need no confirmation; writes always do.</li>
+<li><strong>It never acts in the background.</strong> A scheduled briefing is a schedule a person set, as <a href="./020-central-service-line-up-and-builders.html#channel-transport">ADR-020 § Channel transport</a> already allows for sends.</li>
+<li><strong>The audit log records the person as the actor and the chat as the channel.</strong> The demonstration already does this.</li>
+<li><strong>Modules declare their chat operations in the manifest,</strong> including which ones are writes. The model chooses among declared operations and cannot invent new ones.</li>
+</ul>
+<p>That position gives proposed answers to several ADR-018 items: read scope (the person's scope), tool authority (declared operations only), autonomy (none without confirmation) and the audit actor (person plus channel). It does not settle the review. Prompt injection from content the chat reads, such as a monitored article or an inbound message, is still unanswered.</p>
+<p>The position is recorded in <a href="./018-ai-agent-posture.html#the-proposal-under-review">ADR-018 § The proposal under review</a>, where the review will evaluate it beside the per-tenant harness already held there.</p>
+<h3 id="cost-and-channel" tabindex="-1"><a class="heading-anchor" href="#cost-and-channel" aria-hidden="true">#</a> Cost and channel</h3>
+<p>Two practical consequences, both open.</p>
+<ul>
+<li><strong>Cost.</strong> Chat is inference on every turn. Under <a href="./019-central-services-and-metered-billing.html">ADR-019</a> that is a metered cost, or the client's own bill under BYOM. When chat is the main surface, this cost is no longer marginal, and pricing has to account for it (<a href="./026-two-lane-pricing.html">ADR-026</a>).</li>
+<li><strong>Channel.</strong> The proposal is a default home for the chat inside the product's own app, with Telegram or Signal as options per client. WhatsApp should not be the assumed channel, since its business terms prohibit political party activity (<a href="../spec/pitch.html">pitch.md</a>).</li>
+</ul>
+<h3 id="open-questions" tabindex="-1"><a class="heading-anchor" href="#open-questions" aria-hidden="true">#</a> Open questions</h3>
+<ol>
+<li><strong>Is the chat as the person's hands the position to send into the ADR-018 review?</strong> It is recorded there as a proposal either way.</li>
+<li><strong>The default chat channel:</strong> in-app first, Telegram or Signal per client, WhatsApp not assumed.</li>
+<li><strong>Prompt injection</strong> from content the chat reads. Unanswered, and it belongs to ADR-018's item 1.</li>
+<li><strong>The Campaign Agent</strong> as this chat with content modules enabled (<a href="./022-core-modules-and-lanes.html#the-module-catalogue">ADR-022 § The module catalogue</a>). Recommended, not decided.</li>
+</ol>
+<h2 id="consequences" tabindex="-1"><a class="heading-anchor" href="#consequences" aria-hidden="true">#</a> Consequences</h2>
+<p><strong>Benefits:</strong></p>
+<ul>
+<li>Staff and candidates work where they already are, and the product does not have to win a place on their home screen</li>
+<li>Every capability exists as an API operation before it exists as a screen, which is what a partner module and a native app both need</li>
+<li>The 240 screens are kept; the work is re-tagging, not redrawing</li>
+<li>The agent question has one concrete position on the table for its largest case</li>
+</ul>
+<p><strong>Costs:</strong></p>
+<ul>
+<li>The main surface of both products waits for the ADR-018 review</li>
+<li>Inference becomes a cost of ordinary daily work</li>
+<li>Three surfaces have to stay consistent with each other, and the manifest is what keeps them so</li>
+<li>The navigation model and the screen inventory describe one application, and both need a pass before they describe three surfaces</li>
+</ul>
+<p><strong>Constraints:</strong></p>
+<ul>
+<li>No chat surface reaches production in either lane before ADR-018 is accepted</li>
+<li>The field app works without connectivity (<a href="./005-offline-first-sync.html">ADR-005</a>); no field task may depend on chat</li>
+<li>No surface is a privileged client of the Core: there is no internal-only API</li>
+<li>A chat user can do nothing they could not do in the admin UI</li>
+<li>The position on the chat is a proposal; nothing may be built on it for production</li>
+</ul>
+<p><strong>Related ADRs:</strong> <a href="./005-offline-first-sync.html">ADR-005</a> (the field app remains the offline surface), <a href="./011-design-system-ux.html">ADR-011</a> (the design system the admin UI and field app keep), <a href="./018-ai-agent-posture.html">ADR-018</a> (the gate binds the whole Core; the chat position is sent to its review), <a href="./019-central-services-and-metered-billing.html">ADR-019</a> (inference is a metered cost), <a href="./020-central-service-line-up-and-builders.html">ADR-020</a> (a send is a person's action or a schedule a person set), <a href="./022-core-modules-and-lanes.html">ADR-022</a> (the headless Core; the manifest declares each module's surfaces), <a href="./026-two-lane-pricing.html">ADR-026</a> (the cost of chat in the price)</p>
+
+    </article>
+  </main>
+  <div class="toc-rail"><nav class="toc" aria-label="On this page"><div class="toc-label">On this page</div><ul><li class="toc-2"><a href="#context"># Context</a></li><li class="toc-3"><a href="#conflicts-this-adr-resolves"># Conflicts this ADR resolves</a></li><li class="toc-2"><a href="#decision"># Decision</a></li><li class="toc-3"><a href="#a-headless-core-and-three-surfaces"># A headless Core and three surfaces</a></li><li class="toc-3"><a href="#the-field-app-stays-as-the-offline-surface"># The field app stays, as the offline surface</a></li><li class="toc-3"><a href="#most-of-the-wireframes-survive-as-the-admin-ui"># Most of the wireframes survive as the admin UI</a></li><li class="toc-3"><a href="#the-adr-018-gate-binds-the-whole-core"># The ADR-018 gate binds the whole Core</a></li><li class="toc-3"><a href="#the-chat-as-the-persons-hands"># The chat as the person's hands</a></li><li class="toc-3"><a href="#cost-and-channel"># Cost and channel</a></li><li class="toc-3"><a href="#open-questions"># Open questions</a></li><li class="toc-2"><a href="#consequences"># Consequences</a></li></ul></nav></div>
+</div>
+<script src="../assets/search.js" defer></script>
+<script src="../assets/app.js" defer></script>
+</body>
+</html>

@@ -4,18 +4,29 @@
 
 GreenGrass is a custom platform for managing grassroots political elections in the global south. It is designed around the realities of resource-constrained environments, intermittent connectivity, multilingual populations, and decentralized organizing structures.
 
+Since November 2026 the project builds shared infrastructure sold through two lanes: a headless Core plus a catalogue of modules each client enables individually. **Greengrass** is the political lane's product (Blimp.io and Onda Corta; first clients PIP, MVC and the Alianza de País). **Basecamp** (PR Media / Relacionistas.app) is the commercial lane's product (R&R and Onda Corta; first client the Asociación de Publicistas). "Greengrass" therefore names the political product, not the infrastructure, and the Core has no name of its own yet. Documents written before November 2026 say "GreenGrass" for the whole platform and are left as written.
+
 ## Project Phase
 
-**Current phase: Specification & Design (complete) — one review open before production**
+**Current phase: Specification & Design — reopened by a change of product direction; one review still gates production**
 
-All spec and design work is done. One cross-cutting question is open and gates production: the corpus decided AI five times as bounded features and never asked what changes if AI agents operate throughout the product. `decisions/018-ai-agent-posture.md` is `Proposed` — the first non-accepted ADR — and lists what the review must resolve. Do not add agent-shaped capability (cross-feature read scope, tool authority, autonomous action, broad credentials) to the spec or to an implementation without resolving it first. `decisions/019-central-services-and-metered-billing.md` (accepted) adds central services, a service catalogue with per-tenant entitlements, and metered pass-through billing at cost with no margin; it supplies mechanisms ADR-018 can build on and does not resolve it. `decisions/020-central-service-line-up-and-builders.md` (accepted) names the four central services and accepts text builders only; image and video builders are proposed and cannot be enabled until ADR-018 is accepted. `decisions/021-content-approval-pipeline.md` (accepted) generalizes post approval into a content pipeline reviewed in rounds. GreenGrass is not a tool for managing content creators: a creator program ADR-021 first specified was withdrawn, so do not reintroduce creator rosters, tiers, dispatch to creators or a creator inbox. ADR-018 now carries the board's per-tenant agent harness and, as its worked example, a candidate approving the day's posts over WhatsApp, as the proposal under review. That section is a proposal, not a decision: do not treat anything in it as accepted.
+The direction changed in November 2026 and ADRs 022 to 027 record it. Hold to what is decided and what is not:
+
+- **Accepted:** `decisions/025-identity-per-client.md` (each instance runs its own identity service and holds its own accounts; supersedes the shared platform identity service of ADR-003 and multi-org membership) and `decisions/026-two-lane-pricing.md` (political lane: cost plus a commission that covers the cost of selling; commercial lane: cost plus a 30% margin for the product's owner plus the Comercializadora's commission; supersedes the flat subscription and ADR-019's "no margin", and keeps ADR-019's metering, itemised statements, spend caps, nothing-enabled-by-default and `alliance_pays`).
+- **Proposed, with decided items inside:** `decisions/022-core-modules-and-lanes.md` (decided: the two lanes, the CRM in the Core, Fundraising & payments as one module with a shared payment layer, modules built by GreenGrass first), `decisions/023-surfaces-chat-admin-field.md` (decided: the ADR-018 gate binds the whole Core, so neither lane ships chat to production before that review is accepted), `decisions/024-event-bus-as-federation.md` (decided: the Asociación de Publicistas works exactly like the Alianza) and `decisions/027-third-party-crm-sync-and-connectors.md` (decided: NationBuilder sync is required, by CSV first).
+- **Open — do not settle these, and do not present a recommendation as a decision:** the chat acting only as the person ("the person's hands"), which is input to the ADR-018 review; the event bus replacing the federation layer; the voter file as a political-lane module outside the Core; the Campaign Agent as the chat with content modules enabled; Parsons as the connector layer; the pricing definitions in ADR-026 (what "cost" includes, how each commission is calculated, what the 30% applies to, how shared costs split, whether the free tier survives); a name for the Core; operator access by lane; the default chat channel; what happens to a disabled module's data; the trademark check on "Basecamp".
+- Facts marked **Verify:** (Parsons' NationBuilder connector and licence, NationBuilder's API, the NATS features the bus needs) are unverified. Do not assert them and do not drop the marker.
+- "The product's owner" (la dueña del producto) and "the Comercializadora" are undefined terms from the product side. Use them as given and keep their `REVISIT:` markers.
+- Crisis management and Polls & surveys are named in the module catalogue and specified nowhere. Do not write specs for them unasked.
+
+Before the change of direction, all spec and design work was done. One cross-cutting question is open and gates production: the corpus decided AI five times as bounded features and never asked what changes if AI agents operate throughout the product. `decisions/018-ai-agent-posture.md` is `Proposed` — the first non-accepted ADR — and lists what the review must resolve. Do not add agent-shaped capability (cross-feature read scope, tool authority, autonomous action, broad credentials) to the spec or to an implementation without resolving it first. `decisions/019-central-services-and-metered-billing.md` (accepted) adds central services, a service catalogue with per-tenant entitlements, and metered pass-through billing at cost with no margin; it supplies mechanisms ADR-018 can build on and does not resolve it. `decisions/020-central-service-line-up-and-builders.md` (accepted) names the four central services and accepts text builders only; image and video builders are proposed and cannot be enabled until ADR-018 is accepted. `decisions/021-content-approval-pipeline.md` (accepted) generalizes post approval into a content pipeline reviewed in rounds. GreenGrass is not a tool for managing content creators: a creator program ADR-021 first specified was withdrawn, so do not reintroduce creator rosters, tiers, dispatch to creators or a creator inbox. ADR-018 now carries the board's per-tenant agent harness and, as its worked example, a candidate approving the day's posts over WhatsApp, as the proposal under review. That section is a proposal, not a decision: do not treat anything in it as accepted.
 
 `spec/demo.md` (Campaign Approval Demo Spec) documents a pre-MVP pitch: a working demonstration of that approval flow, run with real candidates holding the phone, built to open the door with candidacies and regional committees. It runs on Telegram as a stand-in; WhatsApp's business terms bar political parties, so the production channel is decided with each campaign. Its code lives in a separate private repository, `Onda-Corta/campaign-agent-demo`, never in this one. It is a pitch, not specified capability, and it accepts nothing in ADR-018. It stays on the prototyping side of the gate by holding no voter, donor or member records and publishing nothing; keep it there. Everything candidate-specific in the demo is folder data (one folder per principal, a candidate or a regional committee, plus two folder templates that visitors fill in by registering through one shared link), so the demo must never hard-code a candidate. Everything it generates is marked as demo output, and everything is deleted the same day. `spec/pitch.md` (Pre-MVP Pitch) describes the same demonstration standalone, for candidacies: no GreenGrass, ADR or architecture vocabulary. Keep it that way, and keep it consistent with `demo.md`.
 
 Completed phases:
 1. **Product definition** — 12 spec documents covering product, users, workflows, security, compliance, etc.
 2. **UX design** — 38 documents: information architecture, global patterns, design system, 22 wireframes (240 screens)
-3. **Architecture** — system architecture document, 21 ADRs (20 accepted, 1 proposed) formalizing all decisions
+3. **Architecture** — system architecture document, 27 ADRs (22 accepted, 5 proposed) formalizing all decisions
 
 ## Project Structure
 
@@ -29,7 +40,7 @@ GreenGrass/
 │   └── es/                        # Spanish mirror of the English tree
 │       ├── README.md              # Spanish home page
 │       ├── spec/                  # The 16 specs, in Spanish
-│       ├── decisions/             # The 21 ADRs + ux-decisions, in Spanish
+│       ├── decisions/             # The 27 ADRs + ux-decisions, in Spanish
 │       └── design/                # Architecture + the 15 non-wireframe UX docs
 ├── spec/                          # Product specifications (16 docs)
 │   ├── pitch.md                   # Pre-MVP pitch: standalone, for candidacies
@@ -57,8 +68,8 @@ GreenGrass/
 │   │   └── 04-wireframes/         # 22 wireframe documents (240 screens)
 │   └── architecture/
 │       └── system.md              # System architecture and data model
-├── decisions/                     # Architecture Decision Records (21 ADRs)
-├── diary/                         # Project diary (15 entries)
+├── decisions/                     # Architecture Decision Records (27 ADRs)
+├── diary/                         # Project diary (17 entries)
 ├── scripts/build.mjs              # Documentation site generator (Node + markdown-it)
 ├── scripts/dev.sh                 # One-command local preview (install, build, serve)
 ├── site-assets/                   # Site styles + client-side scripts (search, nav)
@@ -74,7 +85,7 @@ The site is bilingual. English sources live at the repo root; Spanish lives unde
 `i18n/es/`, mirroring the English path exactly (`spec/product.md` ->
 `i18n/es/spec/product.md`) and building to `docs/es/`. An EN/ES switch in the site
 header moves between them. Translated so far: the 16 specs, the system architecture,
-the 21 ADRs plus `ux-decisions.md`, and the 15 non-wireframe UX documents. Still English only: the 24
+the 27 ADRs plus `ux-decisions.md`, and the 15 non-wireframe UX documents. Still English only: the 24
 wireframe documents under `design/ux/04-wireframes/` and the project diary — the
 switch on those pages is styled as a fallback and goes to the Spanish home page.
 

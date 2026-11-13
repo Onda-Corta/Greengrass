@@ -3,6 +3,7 @@
 **Status:** Accepted
 **Date:** 2026-03-03
 **Sources:** `spec/workflows.md`, `spec/integrations.md`
+**Amended by:** [ADR-027](027-third-party-crm-sync-and-connectors.md) (Proposed) — one requirement in it is decided: the core CRM syncs both ways with third-party tools, NationBuilder first and by CSV first. That replaces the one-way "migration guides + generic import" decided at [integrations.md § Migration from Other Platforms](../spec/integrations.md#migration-from-other-platforms); this ADR never decided migration itself. Continuous API sync and Parsons as the connector layer are proposed, not accepted. The decisions below are unchanged.
 
 ## Context
 

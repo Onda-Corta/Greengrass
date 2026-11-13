@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="es" data-base="../../" data-no-results="No hay resultados para">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ADR-022: Core, módulos y carriles · GreenGrass</title>
+<meta name="description" content="ADR-022: Core, módulos y carriles — Documentación de especificación y diseño de GreenGrass.">
+<link rel="alternate" hreflang="en" href="../../decisions/022-core-modules-and-lanes.html">
+<link rel="alternate" hreflang="es" href="./022-core-modules-and-lanes.html">
+<link rel="alternate" hreflang="x-default" href="../../decisions/022-core-modules-and-lanes.html">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%232563eb'/%3E%3Cstop offset='1' stop-color='%2316a34a'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='32' height='32' rx='7' fill='url(%23g)'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="../../assets/styles.css">
+</head>
+<body>
+<a class="skip-link" href="#content">Saltar al contenido</a>
+<header class="site-header">
+  <button type="button" class="menu-toggle" aria-label="Alternar navegación" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+  <a class="brand" href="../../es/index.html">
+    <span class="brand-mark" aria-hidden="true"></span>
+    <span class="brand-text"><strong>GreenGrass</strong><small>Especificación y diseño</small></span>
+  </a>
+  <div class="search">
+    <input type="search" id="search-input" placeholder="Buscar en la documentación…" autocomplete="off" aria-label="Buscar en la documentación">
+    <div id="search-results" class="search-results" hidden></div>
+  </div>
+  <nav class="lang-switch" aria-label="Idioma"><a class="lang-opt" href="../../decisions/022-core-modules-and-lanes.html" hreflang="en" lang="en" title="View this page in English">EN</a><span class="lang-opt active" aria-current="true">ES</span></nav>
+  <button type="button" class="theme-toggle" aria-label="Alternar modo oscuro" title="Alternar modo oscuro">
+    <span class="theme-icon" aria-hidden="true"></span>
+  </button>
+</header>
+<div class="layout">
+  <div class="sidebar-backdrop" hidden></div>
+  <aside class="sidebar" aria-label="Navegación de la documentación">
+    <nav class="nav">
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">Inicio<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../index.html">GreenGrass</a></li></ul></div>
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">Especificaciones<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../spec/pitch.html">Presentación pre-MVP</a></li><li><a href="../spec/demo.html">Especificación de la demostración de aprobación de campaña</a></li><li><a href="../spec/product.html">Proyecto: GreenGrass</a></li><li><a href="../spec/mvp.html">MVP de GreenGrass — plan de producto</a></li><li><a href="../spec/users.html">Usuarios y roles</a></li><li><a href="../spec/workflows.html">Flujos de trabajo principales</a></li><li><a href="../spec/geography.html">Geografía objetivo</a></li><li><a href="../spec/security.html">Seguridad y modelo de amenazas</a></li><li><a href="../spec/compliance.html">Cumplimiento y marco legal</a></li><li><a href="../spec/fundraising.html">Recaudación de fondos e infraestructura de pagos</a></li><li><a href="../spec/integrations.html">Integraciones externas</a></li><li><a href="../spec/support.html">Soporte y puesta en marcha de organizaciones</a></li><li><a href="../spec/gotv.html">GOTV y operaciones del día de elecciones</a></li><li><a href="../spec/messaging.html">Comunicaciones internas y notificaciones</a></li><li><a href="../spec/press.html">Prensa, medios y comunicaciones públicas</a></li><li><a href="../spec/comms-intelligence.html">Inteligencia de comunicaciones — hoja de ruta post-MVP</a></li></ul></div>
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">Arquitectura<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../design/architecture/system.html">Arquitectura del sistema</a></li></ul></div>
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">Diseño UX<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../design/ux/00-overview.html">Resumen del diseño de UX</a></li><li><a href="../design/ux/01-information-architecture/navigation-model.html">Modelo de navegación</a></li><li><a href="../design/ux/01-information-architecture/screen-inventory.html">Inventario de pantallas</a></li><li><a href="../design/ux/01-information-architecture/persona-views.html">Vistas por arquetipo</a></li><li><a href="../design/ux/01-information-architecture/url-structure.html">Estructura de URL</a></li><li><a href="../design/ux/02-global-patterns/pattern-catalog.html">Catálogo de patrones</a></li><li><a href="../design/ux/02-global-patterns/offline-sync-patterns.html">Patrones sin conexión y de sincronización</a></li><li><a href="../design/ux/02-global-patterns/notification-patterns.html">Patrones de notificaciones</a></li><li><a href="../design/ux/02-global-patterns/search-patterns.html">Patrones de búsqueda</a></li><li><a href="../design/ux/02-global-patterns/settings-help-patterns.html">Patrones de ajustes y ayuda</a></li><li><a href="../design/ux/02-global-patterns/security-ux-patterns.html">Patrones de UX de seguridad</a></li><li><a href="../design/ux/03-design-system/foundations.html">Fundamentos del sistema de diseño</a></li><li><a href="../design/ux/03-design-system/theming-strategy.html">Estrategia de temas</a></li><li><a href="../design/ux/03-design-system/component-inventory.html">Inventario de componentes</a></li><li><a href="../design/ux/03-design-system/responsive-strategy.html">Estrategia de diseño adaptable</a></li></ul></div>
+<div class="nav-section open"><button type="button" class="nav-section-title" aria-expanded="true">Decisiones<span class="chev" aria-hidden="true"></span></button><ul><li><a href="./001-platform-architecture.html">ADR-001: Arquitectura y despliegue de la plataforma</a></li><li><a href="./002-security-threat-model.html">ADR-002: Seguridad y modelo de amenazas</a></li><li><a href="./003-identity-access-organization.html">ADR-003: Identidad, acceso y organización</a></li><li><a href="./004-data-model-integrity.html">ADR-004: Modelo de datos e integridad</a></li><li><a href="./005-offline-first-sync.html">ADR-005: Prioridad sin conexión y sincronización</a></li><li><a href="./006-field-operations-gotv.html">ADR-006: Operaciones de campo y GOTV</a></li><li><a href="./007-fundraising-payments.html">ADR-007: Recaudación de fondos y pagos</a></li><li><a href="./008-communications-messaging.html">ADR-008: Comunicaciones y mensajería</a></li><li><a href="./009-compliance-legal.html">ADR-009: Cumplimiento y marco legal</a></li><li><a href="./010-internationalization-localization.html">ADR-010: Internacionalización y localización</a></li><li><a href="./011-design-system-ux.html">ADR-011: Sistema de diseño y fundamentos de UX</a></li><li><a href="./012-external-integrations.html">ADR-012: Integraciones externas</a></li><li><a href="./013-analytics-ai.html">ADR-013: Analítica e IA</a></li><li><a href="./014-volunteer-onboarding.html">ADR-014: Voluntariado e incorporación</a></li><li><a href="./015-product-scope.html">ADR-015: Límites del alcance del producto</a></li><li><a href="./016-cross-cutting-resolutions.html">ADR-016: Resoluciones transversales</a></li><li><a href="./017-sharing-contract-trust-model.html">ADR-017: El contrato de intercambio como primitiva universal de confianza</a></li><li><a href="./018-ai-agent-posture.html">ADR-018: Postura ante los agentes de IA</a></li><li><a href="./019-central-services-and-metered-billing.html">ADR-019: Servicios centrales y facturación medida</a></li><li><a href="./020-central-service-line-up-and-builders.html">ADR-020: Los cuatro servicios centrales y los constructores</a></li><li><a href="./021-content-approval-pipeline.html">ADR-021: Flujo de aprobación de contenido</a></li><li><a href="./022-core-modules-and-lanes.html" aria-current="page" class="active">ADR-022: Core, módulos y carriles</a></li><li><a href="./023-surfaces-chat-admin-field.html">ADR-023: Superficies — un Core headless, chat, administración y campo</a></li><li><a href="./024-event-bus-as-federation.html">ADR-024: El bus de eventos como federación</a></li><li><a href="./025-identity-per-client.html">ADR-025: Identidad por cliente</a></li><li><a href="./026-two-lane-pricing.html">ADR-026: Precios por carril</a></li><li><a href="./027-third-party-crm-sync-and-connectors.html">ADR-027: Sincronización del CRM con terceros y conectores</a></li><li><a href="./ux-decisions.html">Decisiones de UX — fase de wireframes</a></li></ul></div>
+    </nav>
+  </aside>
+  <main id="content" class="content">
+    <nav class="breadcrumb" aria-label="Ruta de navegación">Decisiones</nav>
+    <article class="prose">
+<h1 id="adr-022-core-módulos-y-carriles" tabindex="-1"><a class="heading-anchor" href="#adr-022-core-módulos-y-carriles" aria-hidden="true">#</a> ADR-022: Core, módulos y carriles</h1>
+<p><strong>Estado:</strong> Propuesta
+<strong>Fecha:</strong> 2026-11-13
+<strong>Fuentes:</strong> <code>spec/product.md</code>, <code>spec/users.md</code>, <code>spec/security.md</code>, <code>spec/comms-intelligence.md</code>, <code>spec/mvp.md</code>, <code>design/architecture/system.md</code>, <code>decisions/001-platform-architecture.md</code>, <code>decisions/015-product-scope.md</code>, <code>decisions/017-sharing-contract-trust-model.md</code>, <code>decisions/019-central-services-and-metered-billing.md</code>, <code>decisions/020-central-service-line-up-and-builders.md</code>, <code>decisions/021-content-approval-pipeline.md</code></p>
+<h2 id="contexto" tabindex="-1"><a class="heading-anchor" href="#contexto" aria-hidden="true">#</a> Contexto</h2>
+<p><a href="../spec/product.html">product.md</a> describe un producto todo en uno: un CRM, una base de datos de votantes, recaudación de fondos, comunicaciones y analítica en un solo paquete, para campañas políticas de base. Cada documento posterior se construyó sobre esa forma, y sobre el supuesto de que el cliente es político.</p>
+<p>La dirección cambió. Las piezas se quedan y la forma no. Lo que el proyecto construye es una infraestructura de servicios compartidos para organizaciones: un producto central (Core), y un catálogo de módulos que cada cliente activa individualmente. Esa infraestructura se ofrece por dos carriles, diferenciados a nivel de marca y producto. Greengrass es el político. Basecamp es el comercial. Por eso «Greengrass» nombra ahora el producto político, no la infraestructura.</p>
+<p>El corpus ya tiene la mayoría de las piezas que esto necesita. La <a href="./001-platform-architecture.html#arquitectura-de-organizaci%C3%B3n-%C3%BAnica-con-aislamiento-por-niveles">ADR-001</a> decidió un despliegue por organización, y esta ADR lo reafirma. La <a href="./019-central-services-and-metered-billing.html">ADR-019</a> les dio a las capacidades compartidas una casa, un catálogo y derechos de uso por organización. La <a href="./017-sharing-contract-trust-model.html">ADR-017</a> le dio a cada frontera un solo mecanismo de confianza. Lo que al corpus le falta es el vocabulario, el límite del Core, un contrato para los módulos y un lugar para una segunda clase de cliente.</p>
+<p>Esta ADR está <code>Propuesta</code> porque dos cosas de las que depende siguen abiertas: dónde vive el padrón electoral y cómo se llama el Core. También registra varias cosas que quien dirige el producto ya decidió. La tabla de abajo dice cuál es cuál, y cada sección lo repite. Nada de lo que está marcado como propuesto o abierto puede leerse como resuelto.</p>
+<table>
+<thead>
+<tr>
+<th>Punto</th>
+<th>Situación</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Dos carriles sobre una misma infraestructura, como se describe en <a href="#dos-carriles-sobre-una-misma-infraestructura">Dos carriles sobre una misma infraestructura</a></td>
+<td>Decidido</td>
+</tr>
+<tr>
+<td>Cada cliente corre su propia instancia, con sus propios datos y sus propias cuentas</td>
+<td>Decidido (<a href="./001-platform-architecture.html">ADR-001</a>, <a href="./025-identity-per-client.html">ADR-025</a>)</td>
+</tr>
+<tr>
+<td>El CRM es parte del Core</td>
+<td>Decidido</td>
+</tr>
+<tr>
+<td>Recaudación y pagos es un solo módulo con una capa de pagos compartida</td>
+<td>Decidido</td>
+</tr>
+<tr>
+<td>Los módulos los construye primero GreenGrass; el contrato de módulo se diseña para que terceros aprobados puedan construir después</td>
+<td>Decidido</td>
+</tr>
+<tr>
+<td>El vocabulario, incluido el cambio de nombre del «módulo interno» de la ADR-019</td>
+<td>Propuesto</td>
+</tr>
+<tr>
+<td>Qué contiene el Core, más allá del CRM</td>
+<td>Propuesto</td>
+</tr>
+<tr>
+<td>Qué le exigen los carriles al diseño</td>
+<td>Propuesto</td>
+</tr>
+<tr>
+<td>El contrato de módulo y el catálogo de módulos</td>
+<td>Propuesto</td>
+</tr>
+<tr>
+<td>El padrón electoral como módulo del carril político, fuera del Core</td>
+<td>Recomendado, no decidido</td>
+</tr>
+<tr>
+<td>El Agente de Campaña como el chat con los módulos de contenido activados, no como módulo</td>
+<td>Recomendado, no decidido</td>
+</tr>
+<tr>
+<td>Un nombre para el Core; el acceso de los operadores por carril; los datos de un módulo desactivado; el nombre «Basecamp»</td>
+<td>Abierto</td>
+</tr>
+</tbody>
+</table>
+<h3 id="conflictos-que-resuelve-esta-adr" tabindex="-1"><a class="heading-anchor" href="#conflictos-que-resuelve-esta-adr" aria-hidden="true">#</a> Conflictos que resuelve esta ADR</h3>
+<p>Siguiendo a la <a href="./016-cross-cutting-resolutions.html">ADR-016</a>, a la <a href="./017-sharing-contract-trust-model.html">ADR-017</a> y a la <a href="./019-central-services-and-metered-billing.html">ADR-019</a>, los conflictos con el corpus existente se nombran aquí. Los que dependen de un punto decidido se resuelven abajo. Los que dependen de uno propuesto o abierto se nombran y se dejan en pie.</p>
+<ol>
+<li><strong><a href="../spec/product.html">product.md</a></strong> describe un producto todo en uno y usa «GreenGrass» para la plataforma entera. El producto es ahora un Core con módulos, y Greengrass es uno de los dos productos construidos sobre él.</li>
+<li><strong><a href="./019-central-services-and-metered-billing.html#dos-clases-de-capacidad-m%C3%B3dulos-internos-y-servicios-centrales">ADR-019 § Dos clases de capacidad: módulos internos y servicios centrales</a></strong> usa «módulo interno» para el código que corre dentro de la organización. Eso describe dónde corre el código, no qué activa un cliente. El término tiene que cambiar antes de que «módulo» pueda nombrar la unidad de producto.</li>
+<li><strong>El corpus entero está escrito solo para clientes políticos.</strong> Los niveles de amenaza (<a href="../spec/security.html#actores-de-amenaza">security.md § Actores de amenaza</a>), la ley electoral (<a href="../spec/compliance.html">compliance.md</a>) y el padrón electoral (<a href="../spec/integrations.html#integraci%C3%B3n-del-padr%C3%B3n-electoral">integrations.md § Integración del padrón electoral</a>) están escritos como propiedades de la plataforma. Con un carril comercial pasan a ser política del carril político.</li>
+<li><strong><a href="../spec/security.html#acceso-del-equipo-de-greengrass">security.md § Acceso del equipo de GreenGrass</a></strong> supone un solo equipo de plataforma con acceso administrativo. Los dos carriles los manejan empresas distintas, y una agencia comercial puede trabajar para el oponente de un cliente político.</li>
+<li><strong><a href="../spec/users.html#jerarqu%C3%ADa-organizativa">users.md § Jerarquía organizativa</a></strong> hace de la alianza una «organización ligera» que no replica el conjunto completo de la plataforma. En esta dirección una alianza es un cliente como cualquier otro, con su propia instancia. La <a href="./024-event-bus-as-federation.html">ADR-024</a> se ocupa de esto.</li>
+<li><strong><a href="./020-central-service-line-up-and-builders.html#cuatro-servicios-centrales">ADR-020 § Cuatro servicios centrales</a></strong> y <a href="../spec/comms-intelligence.html">comms-intelligence.md</a> especifican un solo monitor de medios. El catálogo de abajo lista tres módulos de monitoreo. Los tres se apoyan en el único servicio de captura, así que esto es empaquetado y la arquitectura no cambia.</li>
+<li><strong><a href="./015-product-scope.html">ADR-015</a></strong> fijó los límites del alcance del producto. El catálogo nombra dos módulos, Manejo de crisis y Encuestas y sondeos, que ningún documento especifica.</li>
+</ol>
+<h2 id="decisión" tabindex="-1"><a class="heading-anchor" href="#decisión" aria-hidden="true">#</a> Decisión</h2>
+<h3 id="vocabulario" tabindex="-1"><a class="heading-anchor" href="#vocabulario" aria-hidden="true">#</a> Vocabulario</h3>
+<p>Propuesto.</p>
+<table>
+<thead>
+<tr>
+<th>Término</th>
+<th>Significado</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Core</strong></td>
+<td>Lo que toda instancia tiene siempre, en los dos carriles. Headless (sin interfaz propia: todo es primero una operación de la API), neutral respecto al carril, y nunca dependiente de un módulo. Necesita un nombre propio, ahora que Greengrass es un carril.</td>
+</tr>
+<tr>
+<td><strong>Carril</strong></td>
+<td>Un producto y una marca construidos sobre el Core: Greengrass (político) o Basecamp (comercial). Configuración, no una bifurcación.</td>
+</tr>
+<tr>
+<td><strong>Cliente</strong></td>
+<td>Una organización que contrata el producto de un carril. El corpus dice <em>organización</em> (<code>tenant</code>); las dos palabras nombran lo mismo desde dos lados.</td>
+</tr>
+<tr>
+<td><strong>Instancia</strong></td>
+<td>El despliegue propio de un cliente: su propia base de datos, su aplicación y sus llaves, como decidió la <a href="./001-platform-architecture.html#arquitectura-de-organizaci%C3%B3n-%C3%BAnica-con-aislamiento-por-niveles">ADR-001</a>.</td>
+</tr>
+<tr>
+<td><strong>Módulo</strong></td>
+<td>La unidad que un cliente activa y que lista el catálogo. Compartido por los dos carriles salvo que esté marcado como de un solo carril. Lo describe un manifiesto. Está hecho de componentes de instancia, de llamadas a servicios centrales, o de las dos cosas.</td>
+</tr>
+<tr>
+<td><strong>Componente de instancia</strong></td>
+<td>Código que corre dentro de la instancia del cliente. Es el «módulo interno» de la ADR-019, con otro nombre.</td>
+</tr>
+<tr>
+<td><strong>Servicio central</strong></td>
+<td>Código que corre del lado de la plataforma para un cliente por llamada y no conserva nada (<a href="./019-central-services-and-metered-billing.html">ADR-019</a>): captura, análisis, constructores y transporte por canal (<a href="./020-central-service-line-up-and-builders.html">ADR-020</a>). Sin cambios.</td>
+</tr>
+<tr>
+<td><strong>Superficie</strong></td>
+<td>Donde una persona hace el trabajo: el chat, la UI de administración o la app de campo (<a href="./023-surfaces-chat-admin-field.html">ADR-023</a>).</td>
+</tr>
+<tr>
+<td><strong>Conector</strong></td>
+<td>Un enlace con una herramienta externa, como NationBuilder. Vive en el centro de integraciones y no es un módulo (<a href="./027-third-party-crm-sync-and-connectors.html">ADR-027</a>).</td>
+</tr>
+</tbody>
+</table>
+<p>Un ejemplo desarrollado. Monitoreo de radio y TV es un módulo. Está hecho del servicio central de captura con transcripción, una bandeja de monitoreo dentro de la instancia, los registros de medios y periodistas en el CRM del Core, y un resumen en el chat.</p>
+<p>Los documentos escritos antes de esta ADR que dicen «módulo interno» se leen como «componente de instancia». No se reescriben uno por uno; la <a href="./019-central-services-and-metered-billing.html">ADR-019</a> y <a href="../design/architecture/system.html#arquitectura-de-servicios-centrales">system.md § Arquitectura de servicios centrales</a> llevan una nota.</p>
+<!-- REVISIT: la descripción de los dos carriles escribe «Greengrass»; todos los documentos anteriores escriben «GreenGrass», y con ese nombre se refieren a la plataforma entera. Esta ADR usa «Greengrass» para el producto del carril político y deja los documentos anteriores como están. Hasta que el Core tenga nombre propio, «GreenGrass» en un documento anterior significa la infraestructura. -->
+<p><strong>Alternativas consideradas:</strong> Se descartó mantener «módulo interno» y buscar otra palabra para lo que un cliente activa, porque <em>módulo</em> es la palabra con la que se vende el catálogo, y un término que significa una cosa en la lista de precios y otra en la arquitectura termina leyéndose mal.</p>
+<h3 id="dos-carriles-sobre-una-misma-infraestructura" tabindex="-1"><a class="heading-anchor" href="#dos-carriles-sobre-una-misma-infraestructura" aria-hidden="true">#</a> Dos carriles sobre una misma infraestructura</h3>
+<p>Decidido.</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Carril político</th>
+<th>Carril comercial</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Producto</td>
+<td>Greengrass</td>
+<td>Basecamp (PR Media/Relacionistas.app)</td>
+</tr>
+<tr>
+<td>Manejado por</td>
+<td><a href="http://Blimp.io" target="_blank" rel="noopener noreferrer">Blimp.io</a> y Onda Corta</td>
+<td>R&amp;R y Onda Corta</td>
+</tr>
+<tr>
+<td>Para</td>
+<td>Movimientos comunitarios, sindicatos y partidos políticos</td>
+<td>Publicistas, relacionistas públicos, agencias y otras empresas comerciales</td>
+</tr>
+<tr>
+<td>Primeros clientes</td>
+<td>PIP, MVC, Alianza de País</td>
+<td>Asociación de Publicistas</td>
+</tr>
+<tr>
+<td>Precio</td>
+<td>Al costo, más la comisión que cubre el costo de vender</td>
+<td>El costo, más un margen de 30 % para la dueña del producto, más la comisión de la Comercializadora</td>
+</tr>
+</tbody>
+</table>
+<!-- REVISIT: «la dueña del producto» (the product's owner) y «la Comercializadora» se usan tal como las dio quien dirige el producto, sin definición. Las dos necesitan una. Ver la ADR-026. -->
+<ul>
+<li><strong>Módulos compartidos.</strong> Todos los módulos del catálogo pueden correr dentro de cualquiera de los dos productos, aunque algunos módulos no son útiles para ambos carriles: la inteligencia electoral, por ejemplo, es solo del carril político.</li>
+<li><strong>Una instancia por cliente.</strong> Cada cliente corre su propia instancia, con sus propios datos y sus propias cuentas.</li>
+<li><strong>Carriles independientes.</strong> Un carril no espera por el otro. El trabajo con el PIP y el MVC no depende de lo que termine siendo la herramienta de la Asociación de Publicistas, ni al revés.</li>
+<li><strong>Mejoras compartidas.</strong> Cuando un carril mejora un módulo compartido, la mejora le llega también al otro.</li>
+</ul>
+<p>Los precios se deciden en la <a href="./026-two-lane-pricing.html">ADR-026</a>.</p>
+<h3 id="qué-le-exigen-los-carriles-al-diseño" tabindex="-1"><a class="heading-anchor" href="#qué-le-exigen-los-carriles-al-diseño" aria-hidden="true">#</a> Qué le exigen los carriles al diseño</h3>
+<p>Propuesto. Esto es lo que hace falta para que las cuatro afirmaciones de arriba se sostengan a la vez.</p>
+<ul>
+<li><strong>Un carril es configuración sobre una sola base de código, nunca una bifurcación.</strong> Un carril fija su marca, su vocabulario, qué módulos muestra su catálogo, sus reglas de precio y sus políticas: los valores de seguridad por defecto, los paquetes de cumplimiento, el punto de decisión de la IA.</li>
+<li><strong>El Core es neutral respecto al carril.</strong> Nada electoral vive en él. La consecuencia principal es el padrón electoral, más abajo.</li>
+<li><strong>Cada carril tiene su propio tren de versiones.</strong> Un carril fija las versiones del Core y de los módulos que corre y actualiza a su ritmo, así que nunca espera. Una mejora entra al módulo compartido, y el otro carril la recibe en su próxima actualización. El contrato de módulo tiene versiones, y un cambio incompatible necesita un plazo de retirada.</li>
+<li><strong>Una necesidad propia de un carril entra al módulo compartido</strong> como configuración o como punto de extensión. Si no cabe, se vuelve un módulo de un solo carril.</li>
+<li><strong>Los operadores están separados por carril.</strong> El modelo de amenazas de un cliente político incluye a los oponentes políticos (<a href="../spec/security.html#actores-de-amenaza">security.md § Actores de amenaza</a>), y una agencia comercial puede trabajar para uno. Los operadores de un carril solo pueden administrar las instancias de ese carril. Los registros de consultas contra los servicios compartidos siguen acotados al cliente y son invisibles de un carril al otro; la ADR-019 ya exige la primera mitad. Onda Corta está en los dos carriles, así que su acceso tiene que definirse de forma explícita. A los clientes políticos hay que decirles que la misma infraestructura atiende a clientes comerciales. Los detalles quedan abiertos, más abajo.</li>
+<li><strong>El corpus público compartido es la principal economía.</strong> La radio, la TV, la prensa y las cuentas públicas de redes se capturan una vez y sirven a los dos carriles. Solo se comparten datos públicos, como ya dispone la <a href="./019-central-services-and-metered-billing.html#los-servicios-centrales-se-ejecutan-por-organizaci%C3%B3n-y-no-conservan-nada">ADR-019 § Los servicios centrales se ejecutan por organización y no conservan nada</a>.</li>
+<li><strong>El precio es una regla del carril, no del Core</strong> (<a href="./026-two-lane-pricing.html">ADR-026</a>).</li>
+</ul>
+<p><strong>Alternativas consideradas:</strong> Se descartó una bifurcación de la base de código por carril porque rompe la promesa de que una mejora en un carril le llega al otro, y duplica el costo de cada corrección de seguridad.</p>
+<h3 id="qué-contiene-el-core" tabindex="-1"><a class="heading-anchor" href="#qué-contiene-el-core" aria-hidden="true">#</a> Qué contiene el Core</h3>
+<p>Toda instancia recibe todo esto, siempre. El Core es headless: cada elemento es una API con eventos, y no tiene pantallas propias más allá de las que la UI de administración necesita para configurarlo.</p>
+<table>
+<thead>
+<tr>
+<th>Grupo</th>
+<th>Contenido</th>
+<th>Ya decidido en</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Confianza</td>
+<td>Niveles de aislamiento, identidad y passkeys (un servicio de identidad por cliente, <a href="./025-identity-per-client.html">ADR-025</a>), llaves y BYOK, contratos de intercambio, el registro de auditoría</td>
+<td><a href="./001-platform-architecture.html">ADR-001</a>, <a href="./002-security-threat-model.html">ADR-002</a>, <a href="./003-identity-access-organization.html">ADR-003</a>, <a href="./017-sharing-contract-trust-model.html">ADR-017</a></td>
+</tr>
+<tr>
+<td>Datos: el CRM</td>
+<td>Las personas y la lista única, tipos de registro, consentimiento por canal y por finalidad, deduplicación con sugerir y confirmar, segmentos, importación y exportación, sincronización con terceros (<a href="./027-third-party-crm-sync-and-connectors.html">ADR-027</a>)</td>
+<td><a href="../spec/users.html">users.md</a>, <a href="./004-data-model-integrity.html">ADR-004</a></td>
+</tr>
+<tr>
+<td>Contenido</td>
+<td>Almacén de contenido, recursos versionados, flujo de aprobación por rondas</td>
+<td><a href="./021-content-approval-pipeline.html">ADR-021</a></td>
+</tr>
+<tr>
+<td>Entrega</td>
+<td>Transporte por canal con verificación de consentimiento, topes de frecuencia, la ventana de silencio y la supresión mutua</td>
+<td><a href="../design/architecture/system.html#motor-de-orquestaci%C3%B3n-entre-canales">system.md § Motor de orquestación entre canales</a>, <a href="./016-cross-cutting-resolutions.html">ADR-016</a> §2, <a href="./019-central-services-and-metered-billing.html">ADR-019</a></td>
+</tr>
+<tr>
+<td>Comercio</td>
+<td>Catálogo, derechos de uso, medición de uso</td>
+<td><a href="./019-central-services-and-metered-billing.html">ADR-019</a></td>
+</tr>
+<tr>
+<td>Eventos</td>
+<td>El flujo de eventos de cada cliente y el bus (<a href="./024-event-bus-as-federation.html">ADR-024</a>)</td>
+<td><a href="../design/architecture/system.html#arquitectura-de-anal%C3%ADtica">system.md § Arquitectura de analítica</a></td>
+</tr>
+<tr>
+<td>Configuración de carril</td>
+<td>Marca, vocabulario, visibilidad del catálogo, reglas de precio, políticas por defecto</td>
+<td>Nuevo, arriba</td>
+</tr>
+<tr>
+<td>Infraestructura común</td>
+<td>Centro de integraciones y conectores, abstracción de IA (BYOM), localización, motor de sincronización sin conexión, API pública y webhooks</td>
+<td><a href="../design/architecture/system.html">system.md</a>, <a href="./005-offline-first-sync.html">ADR-005</a>, <a href="./010-internationalization-localization.html">ADR-010</a>, <a href="./016-cross-cutting-resolutions.html">ADR-016</a> §38</td>
+</tr>
+</tbody>
+</table>
+<p><strong>El CRM es parte del Core. Decidido.</strong> Un solo registro por persona, el consentimiento y la deduplicación sostienen casi todos los módulos. Mantenerlos en el Core es también lo que garantiza que la baja de una persona valga en todas partes dentro de una instancia. Un módulo que no usa el CRM, como el Agente de Campaña de la demostración (<a href="../spec/demo.html">demo.md</a>), corre igual; el CRM simplemente está vacío.</p>
+<p><strong>Dos primitivas de la inteligencia de comunicaciones resultan ser del Core. Propuesto.</strong> <a href="../spec/comms-intelligence.html#5-siete-funcionalidades-son-tres-primitivas">comms-intelligence.md § 5. Siete funcionalidades son tres primitivas</a> nombra tres. El grafo de actores (medios, propiedad, periodistas, analistas) son entidades y relaciones del CRM, así que extiende el CRM del Core. El libro de afirmaciones (afirmación, fuentes, estado de verificación, respuesta aprobada) es una pieza de contenido, así que extiende el almacén de contenido del Core. Solo el expediente compartimentado es propio de un módulo, y su mecanismo de acceso son los contratos de la ADR-017, que son del Core.</p>
+<p>El resto de la tabla está propuesto. La identidad por cliente se decide en la <a href="./025-identity-per-client.html">ADR-025</a>.</p>
+<p><strong>Alternativas consideradas:</strong> Se consideró y se descartó hacer del CRM un módulo. Casi todos los módulos dependerían entonces de él, y cada módulo tendría que hacer valer el consentimiento por su cuenta, que es como una baja se respeta en un sitio y se ignora en otro.</p>
+<h3 id="el-padrón-electoral-recomendado-como-módulo-del-carril-político-no-decidido" tabindex="-1"><a class="heading-anchor" href="#el-padrón-electoral-recomendado-como-módulo-del-carril-político-no-decidido" aria-hidden="true">#</a> El padrón electoral: recomendado como módulo del carril político, no decidido</h3>
+<p>Un primer borrador de esta dirección puso el padrón electoral en el Core. El modelo de dos carriles revierte eso. El Core tiene que ser neutral respecto al carril, y un padrón electoral no le dice nada a una agencia de publicidad.</p>
+<p>La recomendación es que el padrón electoral se vuelva un módulo del carril político, Padrón electoral, que extiende el CRM del Core y que Greengrass puede activar por defecto. Operaciones de calle, el análisis electoral y el solapamiento entre miembros de una coalición se construyen sobre él. Sigue siendo una de las tres cosas que ningún competidor integra, junto con las herramientas de campo sin conexión y las herramientas para coaliciones de partidos. Pertenecería al producto Greengrass, no al Core compartido.</p>
+<p>Esto no está decidido. Hasta que lo esté, nada se mueve: el modelo de datos de <a href="../design/architecture/system.html#modelo-de-datos">system.md § Modelo de datos</a> y el manejo del padrón en <a href="../spec/integrations.html#integraci%C3%B3n-del-padr%C3%B3n-electoral">integrations.md § Integración del padrón electoral</a> quedan como están escritos.</p>
+<h3 id="el-contrato-de-módulo" tabindex="-1"><a class="heading-anchor" href="#el-contrato-de-módulo" aria-hidden="true">#</a> El contrato de módulo</h3>
+<p>Propuesto, salvo donde se indica.</p>
+<p>Todo módulo trae un manifiesto que declara:</p>
+<ul>
+<li><strong>Datos:</strong> las extensiones de esquema a las entidades del Core, sus propias tablas, las clases de conservación.</li>
+<li><strong>Dependencias:</strong> los módulos que requiere, y qué pasa con sus datos cuando se desactiva.</li>
+<li><strong>Eventos:</strong> los eventos que publica y consume en el bus (<a href="./024-event-bus-as-federation.html">ADR-024</a>).</li>
+<li><strong>Acceso:</strong> las plantillas de rol y los permisos que aporta (<a href="./003-identity-access-organization.html">ADR-003</a>).</li>
+<li><strong>Superficies:</strong> sus operaciones de chat, cada una marcada como de lectura o de escritura, con la tarjeta de confirmación para las escrituras; sus pantallas de administración y sus entradas de navegación; sus capacidades de campo y su comportamiento sin conexión (<a href="./023-surfaces-chat-admin-field.html">ADR-023</a>).</li>
+<li><strong>Servicios:</strong> los servicios centrales a los que llama, y por lo tanto los derechos de uso que necesita.</li>
+<li><strong>Perímetro:</strong> qué datos salen de la frontera de cifrado, y qué niveles de aislamiento y jurisdicciones admite.</li>
+<li><strong>Situación frente a la ADR-018:</strong> alcance de lectura, capacidad de invocar herramientas, autonomía y amplitud de credenciales, las cuatro características que la <a href="./018-ai-agent-posture.html#ninguna-capacidad-de-agente-llega-a-producci%C3%B3n-hasta-que-se-acepte-esta-adr">ADR-018</a> condiciona.</li>
+</ul>
+<p><strong>Entrega.</strong> Los módulos propios vienen en la imagen de despliegue y se activan por derecho de uso. La ADR-001 no cambia: no hay despliegues por módulo.</p>
+<p><strong>Quién construye. Decidido.</strong> Los módulos los construye primero GreenGrass. El contrato se diseña para que terceros aprobados puedan construir después. Para eso hacen falta cuatro cosas que tienen que ser ciertas desde el principio: paridad de la API, a la que <a href="../design/architecture/system.html#api-p%C3%BAblica">system.md § API pública</a> ya se compromete; el manifiesto; paquetes de módulo firmados; y ninguna API de uso solo interno. Un proceso de revisión para los módulos de terceros puede esperar.</p>
+<p>Qué pasa con los datos de un módulo cuando se desactiva queda abierto, más abajo.</p>
+<h3 id="el-catálogo-de-módulos" tabindex="-1"><a class="heading-anchor" href="#el-catálogo-de-módulos" aria-hidden="true">#</a> El catálogo de módulos</h3>
+<p>Propuesto. Los nombres son de quien dirige el producto. Todos los módulos pueden correr en cualquiera de los dos productos; la columna Carriles dice dónde son útiles.</p>
+<table>
+<thead>
+<tr>
+<th>Módulo</th>
+<th>Carriles</th>
+<th>Se apoya en</th>
+<th>Superficies principales</th>
+<th>Punto de decisión o nota</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Monitoreo de radio y TV</td>
+<td>Los dos</td>
+<td>Captura (medios de difusión, transcritos), grafo de actores</td>
+<td>Chat (resumen), administración</td>
+<td>Sondeo de corpus de la Iteración 0; la transcripción es un costo medido</td>
+</tr>
+<tr>
+<td>Monitoreo de redes</td>
+<td>Los dos</td>
+<td>Captura (cuentas públicas)</td>
+<td>Chat, administración</td>
+<td>Sondeo de corpus de la Iteración 0; solo cuentas públicas</td>
+</tr>
+<tr>
+<td>Resumen de prensa</td>
+<td>Los dos</td>
+<td>Captura (prensa), constructor de texto</td>
+<td>Chat (resumen diario)</td>
+<td>Sondeo de corpus de la Iteración 0</td>
+</tr>
+<tr>
+<td>Constructor de artes publicitarios</td>
+<td>Los dos</td>
+<td>Constructores, flujo de contenido, plantillas de identidad visual</td>
+<td>Chat, administración</td>
+<td>Las composiciones con plantilla están bien, como en la demostración; las imágenes generadas esperan a la <a href="./018-ai-agent-posture.html">ADR-018</a></td>
+</tr>
+<tr>
+<td>Distribución de contenido</td>
+<td>Los dos</td>
+<td>Transporte por canal, flujo de contenido, CRM</td>
+<td>Chat, administración</td>
+<td>El contacto de la especificación, más prensa y redes</td>
+</tr>
+<tr>
+<td>Manejo de crisis</td>
+<td>Los dos</td>
+<td>Módulos de monitoreo, libro de afirmaciones, puntos de mensaje</td>
+<td>Chat, administración</td>
+<td>Nombrado, todavía sin especificar</td>
+</tr>
+<tr>
+<td>Encuestas y sondeos</td>
+<td>Los dos</td>
+<td>CRM, transporte por canal</td>
+<td>Administración, chat</td>
+<td>Nombrado, todavía sin especificar</td>
+</tr>
+<tr>
+<td>Manejo de eventos y voluntarios</td>
+<td>Los dos</td>
+<td>CRM</td>
+<td>Chat, administración, campo (registro de entrada)</td>
+<td>El voluntariado es sobre todo una necesidad política</td>
+</tr>
+<tr>
+<td>Recaudación y pagos</td>
+<td>Los dos</td>
+<td>CRM, adaptadores de pago</td>
+<td>Administración, chat (totales)</td>
+<td>Capa de pagos compartida; las reglas de donación son configuración del carril político</td>
+</tr>
+<tr>
+<td>Operaciones de calle</td>
+<td>Político</td>
+<td>Padrón electoral, motor sin conexión</td>
+<td>Campo, administración</td>
+<td>Trabajo de campo, inscripción de votantes, GOTV</td>
+</tr>
+<tr>
+<td>Padrón electoral</td>
+<td>Político</td>
+<td>CRM del Core</td>
+<td>Administración</td>
+<td>Recomendado como módulo, no decidido (arriba)</td>
+</tr>
+<tr>
+<td>Análisis electoral</td>
+<td>Político</td>
+<td>Análisis, Padrón electoral, geografía</td>
+<td>Administración, chat</td>
+<td>Sin iteración asignada (<a href="./020-central-service-line-up-and-builders.html">ADR-020</a>)</td>
+</tr>
+<tr>
+<td>Fideicomiso de coalición</td>
+<td>Los dos</td>
+<td>CRM, bus, supresión mutua</td>
+<td>Administración, chat</td>
+<td>El MVP (<a href="../spec/mvp.html">mvp.md</a>). Alianzas de partidos; asociaciones de agencias (<a href="./024-event-bus-as-federation.html">ADR-024</a>)</td>
+</tr>
+<tr>
+<td>Investigación de la oposición e investigación propia</td>
+<td>Político</td>
+<td>Análisis, compartimentos</td>
+<td>Administración</td>
+<td>Compartimentos; revisión legal por país</td>
+</tr>
+<tr>
+<td>Activismo</td>
+<td>Político</td>
+<td>CRM, constructor de texto</td>
+<td>Páginas públicas, administración</td>
+<td>Ninguno</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong>El único monitor de medios de la especificación son aquí tres módulos.</strong> Los tres se apoyan en el único servicio de captura, así que es una decisión de empaquetado. La arquitectura de la ADR-020 no cambia, y los tres siguen detrás del sondeo de corpus, la Iteración 0 de <a href="../spec/comms-intelligence.html#9-las-iteraciones">comms-intelligence.md § 9. Las iteraciones</a>.</li>
+<li><strong>Manejo de crisis es el flujo de trabajo del libro de afirmaciones</strong> de <a href="../spec/comms-intelligence.html#52-el-libro-de-afirmaciones">comms-intelligence.md § 5.2 El libro de afirmaciones</a>: un ataque aparece en el monitoreo, se vuelve una afirmación, se documenta con fuentes y se adjudica, y la respuesta se vuelve un punto de mensaje. La especificación tiene la primitiva y ningún módulo con este nombre.</li>
+<li><strong>Encuestas y sondeos no tiene especificación alguna.</strong> La ADR-020 da una regla que hay que conservar: las encuestas propias de un cliente son datos suyos y nunca entran al corpus compartido.</li>
+<li><strong>Recaudación y pagos es un solo módulo con una capa de pagos compartida. Decidido.</strong> En el carril comercial significa integración con ATH Móvil y otros servicios de micropagos y de pagos en línea, como Stripe. Esos son los adaptadores de pago que <a href="../design/architecture/system.html#patr%C3%B3n-de-adaptadores-de-pago">system.md § Patrón de adaptadores de pago</a> ya especifica, así que los dos carriles comparten los adaptadores. El carril político añade encima el manejo de donaciones: límites de contribución, reportes de financiamiento de campaña y repartos de la alianza (<a href="../spec/fundraising.html">fundraising.md</a>, <a href="../spec/compliance.html">compliance.md</a>).</li>
+<li><strong>El Agente de Campaña no es un módulo. Recomendado, no decidido.</strong> Si el chat actúa como la persona (<a href="./023-surfaces-chat-admin-field.html">ADR-023</a>), el agente de la demostración es ese chat con los módulos de contenido activados.</li>
+</ul>
+<p><strong>Nombrados, todavía sin especificar.</strong> Manejo de crisis y Encuestas y sondeos están en el catálogo y no están especificados en ninguna parte. Esta ADR no los especifica. Cada uno necesita su propia especificación antes de construirse.</p>
+<h3 id="preguntas-abiertas" tabindex="-1"><a class="heading-anchor" href="#preguntas-abiertas" aria-hidden="true">#</a> Preguntas abiertas</h3>
+<p>Ninguna de estas se resuelve aquí. Donde la dirección tiene una recomendación, se da como tal.</p>
+<ol>
+<li><strong>Un nombre para el Core</strong>, ahora que Greengrass es un carril. También dónde vive su especificación: hoy todo está en el repositorio de Greengrass.</li>
+<li><strong>El padrón electoral</strong> como módulo del carril político, no como parte del Core. Recomendado arriba.</li>
+<li><strong>El Agente de Campaña</strong> como el chat con los módulos de contenido activados, no como módulo. Recomendado arriba.</li>
+<li><strong>Los datos de un módulo desactivado:</strong> se conservan en solo lectura, se exportan, o se purgan según el calendario de conservación operativa.</li>
+<li><strong>El acceso de los operadores por carril,</strong> incluido el acceso de Onda Corta a los dos, y qué se les dice a los clientes políticos.</li>
+<li><strong>El nombre «Basecamp».</strong> Es también el producto de gestión de proyectos de 37signals, en la misma categoría amplia de software. Necesita una verificación de marca registrada antes de aparecer en nada público.</li>
+<li><strong>Definiciones.</strong> «La dueña del producto» y «la Comercializadora» se usan tal como se dieron y no están definidas en ninguna parte.</li>
+</ol>
+<h3 id="orden-interno-avisos-de-enmienda" tabindex="-1"><a class="heading-anchor" href="#orden-interno-avisos-de-enmienda" aria-hidden="true">#</a> Orden interno: avisos de enmienda</h3>
+<p>Una ADR propuesta no enmienda nada hasta que se acepta. Esta ADR añade una línea <strong>Enmienda propuesta por</strong> a la <a href="./019-central-services-and-metered-billing.html">ADR-019</a>, por el vocabulario, y a la <a href="./015-product-scope.html">ADR-015</a> y la <a href="./020-central-service-line-up-and-builders.html">ADR-020</a>, por el catálogo. Cada una dice que la ADR sobre la que está queda como está escrita hasta que esta se acepte.</p>
+<h2 id="consecuencias" tabindex="-1"><a class="heading-anchor" href="#consecuencias" aria-hidden="true">#</a> Consecuencias</h2>
+<p><strong>Beneficios:</strong></p>
+<ul>
+<li>El producto se puede vender de módulo en módulo, a un cliente que conserva las herramientas que ya tiene</li>
+<li>Una segunda clase de cliente paga por el mismo Core, el mismo corpus de captura y los mismos módulos</li>
+<li>«Módulo» significa una sola cosa en el catálogo, en la lista de precios y en la arquitectura</li>
+<li>El Core tiene un límite, así que una capacidad nueva tiene una regla que dice adónde va</li>
+<li>Un tercero podría construir un módulo más adelante sin cambiar la arquitectura</li>
+</ul>
+<p><strong>Costos:</strong></p>
+<ul>
+<li>El documento más antiguo del repositorio ya no describe el producto, y cada documento escrito para clientes políticos necesita que sus partes políticas queden marcadas como política del carril</li>
+<li>Dos trenes de versiones, dos grupos de operadores y una sola base de código son más difíciles de manejar que uno de cada uno</li>
+<li>Un Core neutral respecto al carril es una restricción sobre cada cambio futuro al Core: nada electoral puede entrar en él</li>
+<li>Si el padrón electoral se mueve, el modelo de datos y tres especificaciones cambian con él</li>
+<li>Dos módulos del catálogo tienen nombre y no tienen especificación</li>
+</ul>
+<p><strong>Restricciones:</strong></p>
+<ul>
+<li>La <a href="./001-platform-architecture.html">ADR-001</a> no cambia: una instancia por cliente, sin despliegues por módulo</li>
+<li>Las reglas de la <a href="./019-central-services-and-metered-billing.html">ADR-019</a> para los servicios centrales no cambian: un cliente por llamada, nada conservado, solo se comparten datos públicos</li>
+<li>El Core nunca depende de un módulo</li>
+<li>Un carril es configuración, nunca una bifurcación</li>
+<li>El punto de decisión de la <a href="./018-ai-agent-posture.html">ADR-018</a> aplica a todo el Core, y por lo tanto a los dos carriles (<a href="./023-surfaces-chat-admin-field.html">ADR-023</a>)</li>
+<li>Nada de lo que esta ADR marca como propuesto, recomendado o abierto puede usarse como base para construir como si estuviera decidido</li>
+</ul>
+<p><strong>ADR relacionadas:</strong> <a href="./001-platform-architecture.html">ADR-001</a> (una instancia por cliente, reafirmada), <a href="./015-product-scope.html">ADR-015</a> (enmienda propuesta: el catálogo nombra módulos fuera de su lista de alcance), <a href="./017-sharing-contract-trust-model.html">ADR-017</a> (los contratos son del Core), <a href="./018-ai-agent-posture.html">ADR-018</a> (el manifiesto declara la situación de cada módulo frente al punto de decisión), <a href="./019-central-services-and-metered-billing.html">ADR-019</a> (enmienda propuesta: «módulo interno» pasa a ser «componente de instancia»; el catálogo, los derechos de uso y la medición de uso son del Core), <a href="./020-central-service-line-up-and-builders.html">ADR-020</a> (enmienda propuesta: el único monitor de medios se empaqueta como tres módulos; los cuatro servicios no cambian), <a href="./021-content-approval-pipeline.html">ADR-021</a> (el flujo de contenido es del Core), <a href="./023-surfaces-chat-admin-field.html">ADR-023</a> (superficies), <a href="./024-event-bus-as-federation.html">ADR-024</a> (el bus; alianzas y asociaciones), <a href="./025-identity-per-client.html">ADR-025</a> (identidad por cliente), <a href="./026-two-lane-pricing.html">ADR-026</a> (precios), <a href="./027-third-party-crm-sync-and-connectors.html">ADR-027</a> (sincronización y conectores)</p>
+
+    </article>
+  </main>
+  <div class="toc-rail"><nav class="toc" aria-label="En esta página"><div class="toc-label">En esta página</div><ul><li class="toc-2"><a href="#contexto"># Contexto</a></li><li class="toc-3"><a href="#conflictos-que-resuelve-esta-adr"># Conflictos que resuelve esta ADR</a></li><li class="toc-2"><a href="#decisión"># Decisión</a></li><li class="toc-3"><a href="#vocabulario"># Vocabulario</a></li><li class="toc-3"><a href="#dos-carriles-sobre-una-misma-infraestructura"># Dos carriles sobre una misma infraestructura</a></li><li class="toc-3"><a href="#qué-le-exigen-los-carriles-al-diseño"># Qué le exigen los carriles al diseño</a></li><li class="toc-3"><a href="#qué-contiene-el-core"># Qué contiene el Core</a></li><li class="toc-3"><a href="#el-padrón-electoral-recomendado-como-módulo-del-carril-político-no-decidido"># El padrón electoral: recomendado como módulo del carril político, no decidido</a></li><li class="toc-3"><a href="#el-contrato-de-módulo"># El contrato de módulo</a></li><li class="toc-3"><a href="#el-catálogo-de-módulos"># El catálogo de módulos</a></li><li class="toc-3"><a href="#preguntas-abiertas"># Preguntas abiertas</a></li><li class="toc-3"><a href="#orden-interno-avisos-de-enmienda"># Orden interno: avisos de enmienda</a></li><li class="toc-2"><a href="#consecuencias"># Consecuencias</a></li></ul></nav></div>
+</div>
+<script src="../../assets/search.js" defer></script>
+<script src="../../assets/app.js" defer></script>
+</body>
+</html>

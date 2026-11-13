@@ -13,7 +13,7 @@ The product description states "explicit login access for *everyone*" — this m
 
 ## Organizations
 
-Each GreenGrass tenant is an **organization**. An organization could be:
+Each GreenGrass tenant is an **organization**. In the terms of [ADR-022](../decisions/022-core-modules-and-lanes.md), an organization is a *client*, and its tenant is its own *instance*: its own data and its own accounts. An organization could be:
 
 - A political campaign (candidate running for office)
 - A political party (ongoing entity managing multiple campaigns)
@@ -62,6 +62,8 @@ Party (sovereign)
 - **Alliances are lightweight tenants** with their own operational capabilities: staff accounts, volunteer pools, member/supporter data, joint campaigns, and billing for shared costs. They do not replicate the full platform stack (full CRM, fundraising tools, comms suite) — member entities retain those independently.
 - **Standalone operation** is always supported. Any entity can operate without affiliations.
 
+<!-- REVISIT: "Alliances are lightweight tenants" above. The November 2026 direction says an alliance is a client like any other, with its own instance, and that an association of agencies in the commercial lane works exactly like an alliance. ADR-024 (proposed) names the conflict and proposes that "lightweight" means few modules enabled. Left as written until ADR-024 is decided. -->
+
 ### Cross-org sharing within alliances
 
 Alliances enable cooperation at defined boundaries. Member orgs choose what to share:
@@ -72,7 +74,7 @@ Alliances enable cooperation at defined boundaries. Member orgs choose what to s
 
 | Resource | Description | Sovereignty note |
 |----------|-------------|-----------------|
-| Volunteer pools | Volunteers available for assignment to any member campaign | Volunteer's platform identity stays with them; assignment history is logged per-tenant |
+| Volunteer pools | Volunteers available for assignment to any member campaign | Volunteer's platform identity stays with them; assignment history is logged per-tenant. *REVISIT: there is no platform identity since [ADR-025](../decisions/025-identity-per-client.md); a shared volunteer has an account in each instance they work in* |
 | Voter contact data | Canvassing results shared to avoid duplicate door knocks | Org chooses which contact data to surface; internal tags/scores stay private unless explicitly shared |
 | Event infrastructure | Joint rallies, shared RSVP lists, coordinated event scheduling | Event ownership stays with creating org; RSVPs flow to all co-hosting orgs |
 | Fundraising | Joint fundraising pages with configurable donation splits | Each org's financial records remain sovereign; split rules defined at campaign level |
@@ -87,9 +89,36 @@ Alliances enable cooperation at defined boundaries. Member orgs choose what to s
 - **Audited.** All sharing grants, revocations, and cross-org data access are logged.
 - **Respects person-level consent.** If a supporter has opted out of data sharing in their platform preferences, their record is excluded from shared resources regardless of org-level settings.
 
+<!-- REVISIT: "their platform preferences" predates ADR-025. There are no platform-level preferences any more: an opt-out of data sharing is recorded in each instance that holds the person, and the rule above applies per instance. A single opt-out that binds every organization at once has no home yet; ADR-025 records it as open. -->
+
 ### Multi-org membership
 
-**DECIDED:** Platform identity with federated profiles.
+**DECIDED:** Identity is per client. Each organization's instance holds its own accounts ([ADR-025](../decisions/025-identity-per-client.md)).
+
+A person who works in more than one organization has **one account in each**. A staff member of both the PIP and the Alianza logs in to each at its own address, with its own credentials. There is no login that spans organizations and no tenant selector. Each instance knows only its own people.
+
+**What an instance holds about a person.** The split between what is the person's and what is the organization's still describes the record. Both sides now live in the same instance:
+
+| The person's, held in their account in this instance | The organization's |
+|---|---|
+| Auth credentials (login, 2FA) | Role and permissions within that org |
+| Name, contact info, language preference | Volunteer hours, shift history |
+| Communication opt-in/opt-out preferences | Canvassing assignments and field notes |
+| Their donations to this organization | Internal tags, scores, segments |
+| Account preferences | Staff notes about the person |
+| | Task and event assignments |
+
+**Across organizations.** Nothing sits above the instances to say that two accounts are the same person. Coordination that needs it runs on sharing contracts between instances: mutual suppression, for example, matches on a blind index keyed per alliance contract and held by the members ([system.md § Cross-channel orchestration engine](../design/architecture/system.md#cross-channel-orchestration-engine)).
+
+**Not replaced.** Three things the earlier design gave have no replacement yet, and ADR-025 records them as open: a donor's own record across organizations, an identity that outlives the organization it was created in, and a single opt-out of data sharing that binds every organization at once.
+
+**Single sign-on** across an alliance and its members is not part of this design. If it is wanted later, it can be added as an opt-in trust between instances.
+
+#### The decision this replaces
+
+Kept so the reversal is visible. Until 2026-11-13 this section read as follows, and [ADR-003](../decisions/003-identity-access-organization.md) and the architecture were built on it.
+
+*DECIDED: Platform identity with federated profiles.*
 
 A person has **one platform-level identity** and **one profile per tenant** they belong to. The platform knows it's the same person (enabling dedup and cross-org coordination at the alliance level), but each tenant only sees its own data about that person.
 
@@ -417,9 +446,9 @@ The product description specifies "explicit login access for everyone, with easy
 
 ## Open Questions
 
-1. ~~**Multi-org membership**~~ — **RESOLVED.** Federated profiles. See Multi-org membership section above.
+1. ~~**Multi-org membership**~~ — **RESOLVED**, then reversed. First resolved as federated profiles; superseded by [ADR-025](../decisions/025-identity-per-client.md): identity is per client. See Multi-org membership section above.
 2. ~~**Organization hierarchy**~~ — **RESOLVED.** Multi-level federation of sovereign entities. See Organization Hierarchy section above.
-3. ~~**Role transitions**~~ — **RESOLVED.** Templates are additive. Transitioning from supporter to volunteer to staff means adding templates, not replacing them. All prior activity history carries forward on the platform identity. Approval gates are role-appropriate: a supporter can self-promote to volunteer (sign up for a shift), but staff roles require Org Admin to grant.
+3. ~~**Role transitions**~~ — **RESOLVED.** Templates are additive. Transitioning from supporter to volunteer to staff means adding templates, not replacing them. All prior activity history carries forward on the platform identity (since [ADR-025](../decisions/025-identity-per-client.md): on the person's account in that organization's instance). Approval gates are role-appropriate: a supporter can self-promote to volunteer (sign up for a shift), but staff roles require Org Admin to grant.
 4. ~~**Data visibility across roles**~~ — **RESOLVED.** Per-tenant configuration, private by default. Each org decides its own visibility rules (e.g., whether volunteers can see co-volunteers on a shift, whether donor names are shown publicly). The platform defaults to minimal visibility — orgs must opt in to more open settings. This accounts for the range of political safety contexts across deployments.
 5. ~~**Delegation**~~ — **RESOLVED.** Two mechanisms:
    - **Time-bound delegation:** Org Admin can grant temporary elevated access to another user with an explicit expiration date. Access automatically revokes when the period ends. Covers leave, travel, emergencies.

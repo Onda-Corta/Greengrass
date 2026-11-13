@@ -1,8 +1,8 @@
 # GreenGrass
 
-A platform for managing grassroots political elections in the global south.
+Shared infrastructure for organizations: a headless Core, and a catalogue of modules each client enables individually. It is sold through two lanes. **Greengrass** is the political product, for community movements, unions and political parties. **Basecamp** is the commercial product, for advertisers, PR professionals and agencies. Each client runs its own instance, with its own data and its own accounts.
 
-GreenGrass combines a Constituent Relationship Manager (CRM), voter database, fundraising tools, communication suite, and data analytics into a single platform designed for resource-constrained environments, intermittent connectivity, multilingual populations, and decentralized organizing structures.
+This repository began as the specification of GreenGrass, a single platform for managing grassroots political elections in the global south: a CRM, voter database, fundraising tools, communication suite and data analytics, designed for resource-constrained environments, intermittent connectivity, multilingual populations and decentralized organizing structures. Most of the documents here still describe that product, and they now describe the political lane. "Greengrass" names that product; the infrastructure under both lanes does not yet have a name of its own. The change of direction is recorded in ADRs 022 to 027 and in [diary entry 17](diary/17-two-lanes.md).
 
 ## Target Markets
 
@@ -10,9 +10,20 @@ Puerto Rico (alpha), Brazil, Thailand, India, and Lebanon — each with distinct
 
 ## Project Status
 
-**Current phase: Specification & Design (complete) — one review open before production**
+**Current phase: Specification & Design — reopened by a change of product direction; one review still gates production**
 
-All product specifications, UX design artifacts, and architecture documents are complete.
+The product specifications, UX design artifacts and architecture documents were complete as of October 2026. In November 2026 the product direction changed, and six ADRs record it. Two are accepted and reverse earlier decisions. Four are proposed, and the documents they would change are amended only where something is already decided.
+
+| ADR | What it covers | Status |
+|---|---|---|
+| [ADR-022](decisions/022-core-modules-and-lanes.md) | Core, modules and lanes | Proposed. Decided within it: the two lanes, the CRM in the Core, one module for fundraising and payments |
+| [ADR-023](decisions/023-surfaces-chat-admin-field.md) | A headless Core with chat, admin and field surfaces | Proposed. Decided within it: the ADR-018 gate binds the whole Core, in both lanes |
+| [ADR-024](decisions/024-event-bus-as-federation.md) | The event bus in place of the federation layer | Proposed. Decided within it: an association of agencies works exactly like an alliance of parties |
+| [ADR-025](decisions/025-identity-per-client.md) | Identity per client | Accepted. Supersedes the shared platform identity service and multi-org membership |
+| [ADR-026](decisions/026-two-lane-pricing.md) | Two-lane pricing | Accepted. Supersedes the flat subscription and "no margin on metered costs". The definitions the prices need are open |
+| [ADR-027](decisions/027-third-party-crm-sync-and-connectors.md) | Third-party CRM sync and connectors | Proposed. Decided within it: NationBuilder sync, by CSV first |
+
+See [diary entry 17](diary/17-two-lanes.md) for what changed, what was reversed and what is still open.
 
 One question remains open and gates production rather than implementation. The corpus decided AI five times, feature by feature, and never asked what changes if AI agents operate throughout the product. The threat model, the compliance framework and the audit model contain effectively no treatment of a non-human actor. [ADR-018](decisions/018-ai-agent-posture.md) records this as the project's first `Proposed` decision: the five accepted AI features ship as specified, and anything with broader read scope, tool authority or autonomous action waits for the review. See [diary entry 12](diary/12-the-agent-question.md).
 
@@ -43,8 +54,8 @@ npm run serve    # serve docs/ on port 8000
 ### Languages
 
 The site is bilingual. Available in Spanish: the 16 specification documents, the system
-architecture, the 21 ADRs plus the UX decisions record, and the 15 UX documents
-that aren't wireframes — 54 documents in
+architecture, the 27 ADRs plus the UX decisions record, and the 15 UX documents
+that aren't wireframes — 60 documents in
 all. The 24 wireframe documents and the project diary are still English only. An
 **EN / ES** switch sits in the top-right of the header on every page; pages that aren't
 translated still show it, dimmed, pointing at the Spanish home page, so the Spanish
@@ -100,7 +111,7 @@ If you're new to the project, read the specs in this order:
 16. **[`spec/comms-intelligence.md`](spec/comms-intelligence.md)** — Post-MVP roadmap: media intelligence, fact check, media map, candidate vetting and opposition research, sequenced as iterations.
 17. **[`design/architecture/system.md`](design/architecture/system.md)** — System architecture, data model, infrastructure.
 18. **[`design/ux/00-overview.md`](design/ux/00-overview.md)** — UX design overview with reading order for all 38 UX documents.
-19. **[`decisions/`](decisions/)** — 21 Architecture Decision Records extracting and formalizing decisions from all spec and design documents.
+19. **[`decisions/`](decisions/)** — 27 Architecture Decision Records extracting and formalizing decisions from all spec and design documents. ADRs 022 to 027 record the November 2026 direction; read [ADR-022](decisions/022-core-modules-and-lanes.md) first.
 
 ## Project Structure
 
@@ -143,8 +154,14 @@ GreenGrass/
 │   ├── 018-ai-agent-posture.md    # Proposed — AI agent review gates production
 │   ├── 019-central-services-and-metered-billing.md  # Central services, metered pass-through at cost
 │   ├── 020-central-service-line-up-and-builders.md  # Capture, Analysis, Builders, transport
-│   └── 021-content-approval-pipeline.md  # Content pipeline, review in rounds
-├── diary/                         # Project diary (15 entries)
+│   ├── 021-content-approval-pipeline.md  # Content pipeline, review in rounds
+│   ├── 022-core-modules-and-lanes.md  # Proposed — Core, modules, two lanes
+│   ├── 023-surfaces-chat-admin-field.md  # Proposed — headless Core; chat, admin, field
+│   ├── 024-event-bus-as-federation.md  # Proposed — the bus in place of the federation layer
+│   ├── 025-identity-per-client.md  # Identity per client; supersedes platform identity
+│   ├── 026-two-lane-pricing.md    # Pricing as a lane rule; supersedes flat and no-margin
+│   └── 027-third-party-crm-sync-and-connectors.md  # Proposed — NationBuilder sync, connectors
+├── diary/                         # Project diary (17 entries)
 ├── scripts/
 │   ├── build.mjs                  # Documentation site generator
 │   └── dev.sh                     # One-command local preview (install, build, serve)

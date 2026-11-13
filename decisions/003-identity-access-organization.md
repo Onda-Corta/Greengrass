@@ -3,6 +3,7 @@
 **Status:** Accepted
 **Date:** 2026-03-03
 **Sources:** `spec/users.md`, `spec/workflows.md`
+**Amended by:** [ADR-025](025-identity-per-client.md) — identity is per client. Each instance runs its own identity service and holds its own accounts. "Federated identity with per-tenant profiles" and "Platform identity vs. person-owned data split" below are superseded as a platform-level design: there is no platform-level identity, a person in two organizations has two accounts, and there is no tenant selector. Role templates, scoping, alliance sharing, volunteer approval and governance models are unchanged.
 
 ## Context
 

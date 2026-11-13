@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en" data-base="../" data-no-results="No results for">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ADR-026: Two-Lane Pricing · GreenGrass</title>
+<meta name="description" content="ADR-026: Two-Lane Pricing — GreenGrass spec &amp; design documentation.">
+<link rel="alternate" hreflang="en" href="./026-two-lane-pricing.html">
+<link rel="alternate" hreflang="es" href="../es/decisions/026-two-lane-pricing.html">
+<link rel="alternate" hreflang="x-default" href="./026-two-lane-pricing.html">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%232563eb'/%3E%3Cstop offset='1' stop-color='%2316a34a'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='32' height='32' rx='7' fill='url(%23g)'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="../assets/styles.css">
+</head>
+<body>
+<a class="skip-link" href="#content">Skip to content</a>
+<header class="site-header">
+  <button type="button" class="menu-toggle" aria-label="Toggle navigation" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+  <a class="brand" href="../index.html">
+    <span class="brand-mark" aria-hidden="true"></span>
+    <span class="brand-text"><strong>GreenGrass</strong><small>Spec &amp; Design</small></span>
+  </a>
+  <div class="search">
+    <input type="search" id="search-input" placeholder="Search docs…" autocomplete="off" aria-label="Search documentation">
+    <div id="search-results" class="search-results" hidden></div>
+  </div>
+  <nav class="lang-switch" aria-label="Language"><span class="lang-opt active" aria-current="true">EN</span><a class="lang-opt" href="../es/decisions/026-two-lane-pricing.html" hreflang="es" lang="es" title="Ver esta página en español">ES</a></nav>
+  <button type="button" class="theme-toggle" aria-label="Toggle dark mode" title="Toggle dark mode">
+    <span class="theme-icon" aria-hidden="true"></span>
+  </button>
+</header>
+<div class="layout">
+  <div class="sidebar-backdrop" hidden></div>
+  <aside class="sidebar" aria-label="Documentation navigation">
+    <nav class="nav">
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">Home<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../index.html">GreenGrass</a></li></ul></div>
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">Specifications<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../spec/pitch.html">Pre-MVP Pitch</a></li><li><a href="../spec/demo.html">Campaign Approval Demo Spec</a></li><li><a href="../spec/product.html">Project: GreenGrass</a></li><li><a href="../spec/mvp.html">GreenGrass MVP — Product Plan</a></li><li><a href="../spec/users.html">Users &amp; Roles</a></li><li><a href="../spec/workflows.html">Core Workflows</a></li><li><a href="../spec/geography.html">Target Geography</a></li><li><a href="../spec/security.html">Security &amp; Threat Model</a></li><li><a href="../spec/compliance.html">Compliance &amp; Legal Framework</a></li><li><a href="../spec/fundraising.html">Fundraising &amp; Payment Infrastructure</a></li><li><a href="../spec/integrations.html">External Integrations</a></li><li><a href="../spec/support.html">Tenant Support &amp; Onboarding</a></li><li><a href="../spec/gotv.html">Get Out The Vote &amp; Election Day Operations</a></li><li><a href="../spec/messaging.html">Internal Communications &amp; Notifications</a></li><li><a href="../spec/press.html">Press, Media &amp; Public Communications</a></li><li><a href="../spec/comms-intelligence.html">Comms Intelligence — Post-MVP Roadmap</a></li></ul></div>
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">Architecture<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../design/architecture/system.html">System Architecture</a></li></ul></div>
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">UX Design<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../design/ux/00-overview.html">UX Design Overview</a></li><li><a href="../design/ux/01-information-architecture/navigation-model.html">Navigation Model</a></li><li><a href="../design/ux/01-information-architecture/screen-inventory.html">Screen Inventory</a></li><li><a href="../design/ux/01-information-architecture/persona-views.html">Persona Views</a></li><li><a href="../design/ux/01-information-architecture/url-structure.html">URL Structure</a></li><li><a href="../design/ux/02-global-patterns/pattern-catalog.html">Pattern Catalog</a></li><li><a href="../design/ux/02-global-patterns/offline-sync-patterns.html">Offline &amp; Sync Patterns</a></li><li><a href="../design/ux/02-global-patterns/notification-patterns.html">Notification Patterns</a></li><li><a href="../design/ux/02-global-patterns/search-patterns.html">Search Patterns</a></li><li><a href="../design/ux/02-global-patterns/settings-help-patterns.html">Settings &amp; Help Patterns</a></li><li><a href="../design/ux/02-global-patterns/security-ux-patterns.html">Security UX Patterns</a></li><li><a href="../design/ux/03-design-system/foundations.html">Design System Foundations</a></li><li><a href="../design/ux/03-design-system/theming-strategy.html">Theming Strategy</a></li><li><a href="../design/ux/03-design-system/component-inventory.html">Component Inventory</a></li><li><a href="../design/ux/03-design-system/responsive-strategy.html">Responsive Strategy</a></li><li><a href="../design/ux/04-wireframes/index.html">Wireframes</a></li><li><a href="../design/ux/04-wireframes/navigation-shell/navigation-shell.html">Navigation Shell Wireframes</a></li><li><a href="../design/ux/04-wireframes/dashboards/dashboards.html">Dashboard Wireframes</a></li><li><a href="../design/ux/04-wireframes/field-mode/field-mode.html">Field Mode Wireframes</a></li><li><a href="../design/ux/04-wireframes/onboarding/onboarding.html">Onboarding Wireframes</a></li><li><a href="../design/ux/04-wireframes/messaging/messaging.html">Messaging Wireframes</a></li><li><a href="../design/ux/04-wireframes/supporter/supporter-portal.html">Supporter Portal Wireframes</a></li><li><a href="../design/ux/04-wireframes/alliance/alliance.html">Alliance Wireframes</a></li><li><a href="../design/ux/04-wireframes/crm/crm.html">CRM / People Wireframes</a></li><li><a href="../design/ux/04-wireframes/field-ops/field-ops.html">Field Operations (Admin) Wireframes</a></li><li><a href="../design/ux/04-wireframes/fundraising/fundraising.html">Fundraising Wireframes</a></li><li><a href="../design/ux/04-wireframes/communications/communications.html">Communications Wireframes</a></li><li><a href="../design/ux/04-wireframes/social-media/social-media.html">Social Media Wireframes</a></li><li><a href="../design/ux/04-wireframes/events/events.html">Events Wireframes</a></li><li><a href="../design/ux/04-wireframes/press/press.html">Press &amp; Media Wireframes</a></li><li><a href="../design/ux/04-wireframes/activism/activism.html">Activism &amp; Engagement Campaign Wireframes</a></li><li><a href="../design/ux/04-wireframes/gotv/gotv.html">GOTV Admin Wireframes</a></li><li><a href="../design/ux/04-wireframes/settings/settings.html">Settings &amp; Admin Wireframes</a></li><li><a href="../design/ux/04-wireframes/auth/auth.html">Authentication Wireframes</a></li><li><a href="../design/ux/04-wireframes/profile/profile.html">User Profile Wireframes</a></li><li><a href="../design/ux/04-wireframes/help/help.html">Support &amp; Help Wireframes</a></li><li><a href="../design/ux/04-wireframes/public/public.html">Public Pages Wireframes</a></li><li><a href="../design/ux/04-wireframes/audit.html">Wireframe Audit Report</a></li><li><a href="../design/ux/04-wireframes/content-ops/content-ops.html">Content Operations Wireframes</a></li></ul></div>
+<div class="nav-section open"><button type="button" class="nav-section-title" aria-expanded="true">Decisions<span class="chev" aria-hidden="true"></span></button><ul><li><a href="./001-platform-architecture.html">ADR-001: Platform Architecture &amp; Deployment</a></li><li><a href="./002-security-threat-model.html">ADR-002: Security &amp; Threat Model</a></li><li><a href="./003-identity-access-organization.html">ADR-003: Identity, Access &amp; Organization</a></li><li><a href="./004-data-model-integrity.html">ADR-004: Data Model &amp; Integrity</a></li><li><a href="./005-offline-first-sync.html">ADR-005: Offline-First &amp; Sync</a></li><li><a href="./006-field-operations-gotv.html">ADR-006: Field Operations &amp; GOTV</a></li><li><a href="./007-fundraising-payments.html">ADR-007: Fundraising &amp; Payments</a></li><li><a href="./008-communications-messaging.html">ADR-008: Communications &amp; Messaging</a></li><li><a href="./009-compliance-legal.html">ADR-009: Compliance &amp; Legal Framework</a></li><li><a href="./010-internationalization-localization.html">ADR-010: Internationalization &amp; Localization</a></li><li><a href="./011-design-system-ux.html">ADR-011: Design System &amp; UX Foundations</a></li><li><a href="./012-external-integrations.html">ADR-012: External Integrations</a></li><li><a href="./013-analytics-ai.html">ADR-013: Analytics &amp; AI</a></li><li><a href="./014-volunteer-onboarding.html">ADR-014: Volunteer &amp; Onboarding</a></li><li><a href="./015-product-scope.html">ADR-015: Product Scope Boundaries</a></li><li><a href="./016-cross-cutting-resolutions.html">ADR-016: Cross-Cutting Resolutions</a></li><li><a href="./017-sharing-contract-trust-model.html">ADR-017: The Sharing Contract as Universal Trust Primitive</a></li><li><a href="./018-ai-agent-posture.html">ADR-018: AI Agent Posture</a></li><li><a href="./019-central-services-and-metered-billing.html">ADR-019: Central Services &amp; Metered Billing</a></li><li><a href="./020-central-service-line-up-and-builders.html">ADR-020: Central Service Line-up &amp; Builders</a></li><li><a href="./021-content-approval-pipeline.html">ADR-021: Content Approval Pipeline</a></li><li><a href="./022-core-modules-and-lanes.html">ADR-022: Core, Modules &amp; Lanes</a></li><li><a href="./023-surfaces-chat-admin-field.html">ADR-023: Surfaces — a Headless Core, Chat, Admin &amp; Field</a></li><li><a href="./024-event-bus-as-federation.html">ADR-024: The Event Bus as Federation</a></li><li><a href="./025-identity-per-client.html">ADR-025: Identity per Client</a></li><li><a href="./026-two-lane-pricing.html" aria-current="page" class="active">ADR-026: Two-Lane Pricing</a></li><li><a href="./027-third-party-crm-sync-and-connectors.html">ADR-027: Third-Party CRM Sync &amp; Connectors</a></li><li><a href="./ux-decisions.html">UX Decisions — Wireframe Phase</a></li></ul></div>
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">Diary<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../diary/index.html">Project Diary</a></li><li><a href="../diary/01-from-description-to-specification.html">Entry 1: From Description to Specification</a></li><li><a href="../diary/02-the-architecture-session.html">Entry 2: The Architecture Session</a></li><li><a href="../diary/03-information-architecture.html">Entry 3: Information Architecture</a></li><li><a href="../diary/04-design-system-and-wireframes.html">Entry 4: The Design System and Wireframes</a></li><li><a href="../diary/05-the-wireframe-audit.html">Entry 5: The Wireframe Audit</a></li><li><a href="../diary/06-resolving-the-open-questions.html">Entry 6: Resolving the Open Questions</a></li><li><a href="../diary/07-reconciling-the-architecture.html">Entry 7: Reconciling the Architecture</a></li><li><a href="../diary/08-housekeeping.html">Diary Entry 8: Housekeeping</a></li><li><a href="../diary/09-the-documentation-website.html">Diary Entry 9: The Documentation Website</a></li><li><a href="../diary/10-the-spanish-edition.html">Diary Entry 10: The Spanish Edition</a></li><li><a href="../diary/11-translating-the-rest.html">Diary Entry 11: Translating the Rest</a></li><li><a href="../diary/12-the-agent-question.html">Diary Entry 12: The Agent Question</a></li><li><a href="../diary/13-services-a-la-carte.html">Diary Entry 13: Services à la Carte</a></li><li><a href="../diary/14-the-proposal-under-review.html">Diary Entry 14: The Proposal Under Review</a></li><li><a href="../diary/15-not-a-creator-tool.html">Diary Entry 15: Not a Creator Tool</a></li><li><a href="../diary/16-the-pitch.html">Diary Entry 16: The Pitch</a></li><li><a href="../diary/17-two-lanes.html">Diary Entry 17: Two Lanes</a></li></ul></div>
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">Project &amp; Internal<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../claude/MEMORY.html">Memory</a></li><li><a href="../claude/SKILLS.html">Skills</a></li><li><a href="../CLAUDE.html">GreenGrass</a></li></ul></div>
+    </nav>
+  </aside>
+  <main id="content" class="content">
+    <nav class="breadcrumb" aria-label="Breadcrumb">Decisions</nav>
+    <article class="prose">
+<h1 id="adr-026-two-lane-pricing" tabindex="-1"><a class="heading-anchor" href="#adr-026-two-lane-pricing" aria-hidden="true">#</a> ADR-026: Two-Lane Pricing</h1>
+<p><strong>Status:</strong> Accepted
+<strong>Date:</strong> 2026-11-13
+<strong>Sources:</strong> <code>spec/product.md</code>, <code>spec/fundraising.md</code>, <code>design/architecture/system.md</code>, <code>decisions/007-fundraising-payments.md</code>, <code>decisions/018-ai-agent-posture.md</code>, <code>decisions/019-central-services-and-metered-billing.md</code>, <code>decisions/022-core-modules-and-lanes.md</code>, <code>decisions/023-surfaces-chat-admin-field.md</code></p>
+<h2 id="context" tabindex="-1"><a class="heading-anchor" href="#context" aria-hidden="true">#</a> Context</h2>
+<p>The corpus has decided pricing twice. <a href="../spec/fundraising.html#platform-revenue-model">fundraising.md § Platform Revenue Model</a> and <a href="./007-fundraising-payments.html#zero-platform-fee-on-donations">ADR-007 § Zero platform fee on donations</a> decided flat subscription tiers, not tied to any usage metric. <a href="./019-central-services-and-metered-billing.html#two-billing-planes-and-no-margin-on-the-second">ADR-019 § Two billing planes, and no margin on the second</a> kept the subscription and added a second plane beside it: metered third-party costs passed through at cost, with no margin, so that revenue came from the subscription alone.</p>
+<p>The two-lane model (<a href="./022-core-modules-and-lanes.html">ADR-022</a>) states the prices in different terms, and the product side has decided that those prices override the spec.</p>
+<p>This ADR is <code>Accepted</code>. The prices are decided. Several definitions the prices need are not, and they are listed as open in <a href="#definitions-still-needed">Definitions still needed</a>. They are gaps, not objections, and nothing in this ADR fills them.</p>
+<h3 id="conflicts-this-adr-resolves" tabindex="-1"><a class="heading-anchor" href="#conflicts-this-adr-resolves" aria-hidden="true">#</a> Conflicts this ADR resolves</h3>
+<p>This ADR reverses accepted decisions. The conflicts are named so that the reversal is visible.</p>
+<ol>
+<li><strong><a href="../spec/fundraising.html#platform-revenue-model">fundraising.md § Platform Revenue Model</a></strong> decides a flat subscription &quot;not tied to donation volume, user count, or any usage metric&quot;. Superseded.</li>
+<li><strong><a href="./007-fundraising-payments.html#zero-platform-fee-on-donations">ADR-007 § Zero platform fee on donations</a></strong> says revenue comes &quot;entirely from platform subscriptions (flat tiers, not usage-based)&quot;. That sentence is superseded. The decision the section is named for, that the platform takes no cut of donations, is not among the things the new prices override.</li>
+<li><strong><a href="./019-central-services-and-metered-billing.html#two-billing-planes-and-no-margin-on-the-second">ADR-019 § Two billing planes, and no margin on the second</a></strong> says &quot;GreenGrass takes no margin on metered costs&quot; and &quot;GreenGrass's revenue comes from the subscription alone&quot;. Both superseded.</li>
+<li><strong>ADR-019's own reasoning.</strong> It rejected a margin on pass-through &quot;because it gives GreenGrass an incentive to push consumption, the incentive ADR-007 refused for donations&quot;. The commercial lane's price contains a margin. This ADR does not answer that argument. It records that the decision was taken with the argument on the table.</li>
+<li><strong><a href="./019-central-services-and-metered-billing.html#deferred-a-metered-allowance-in-the-free-tier">ADR-019 § Deferred: a metered allowance in the free tier</a></strong> and <a href="../spec/product.html">product.md</a> assume a free or very-low-cost plan exists. Whether it survives is now open.</li>
+<li><strong><a href="./018-ai-agent-posture.html#what-the-proposal-answers">ADR-018 § What the proposal answers</a></strong> holds ADR-019's pass-through &quot;at cost, with no margin&quot; as the proposed answer to its cost item. The metering still answers it. The &quot;no margin&quot; does not hold in the commercial lane.</li>
+</ol>
+<h2 id="decision" tabindex="-1"><a class="heading-anchor" href="#decision" aria-hidden="true">#</a> Decision</h2>
+<h3 id="the-prices" tabindex="-1"><a class="heading-anchor" href="#the-prices" aria-hidden="true">#</a> The prices</h3>
+<table>
+<thead>
+<tr>
+<th>Lane</th>
+<th>Price</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Political (Greengrass)</td>
+<td>Cost, plus a commission that covers the cost of selling</td>
+</tr>
+<tr>
+<td>Commercial (Basecamp)</td>
+<td>Cost, plus a 30% margin for the product's owner, plus the Comercializadora's commission</td>
+</tr>
+</tbody>
+</table>
+<!-- REVISIT: "the product's owner" (la dueña del producto) and "the Comercializadora" are used as the product side gave them. Neither is defined anywhere in the corpus. Both need a definition before a price can be computed. -->
+<p>These prices override the spec. Where ADR-007, ADR-019 and <code>fundraising.md</code> say otherwise, they are superseded:</p>
+<ul>
+<li>The flat subscription &quot;not tied to any usage metric&quot; (<a href="../spec/fundraising.html#platform-revenue-model">fundraising.md § Platform Revenue Model</a>, ADR-007).</li>
+<li>&quot;GreenGrass takes no margin on metered costs&quot; and &quot;revenue comes from the subscription alone&quot; (ADR-019).</li>
+</ul>
+<p><strong>Alternatives considered:</strong> The model this replaces, a flat subscription with metered costs passed through at no margin, is recorded in ADR-019 with its reasoning. No other alternative is on record. The prices were set by the product side together with the two-lane model.</p>
+<h3 id="pricing-is-a-lane-rule-not-a-core-rule" tabindex="-1"><a class="heading-anchor" href="#pricing-is-a-lane-rule-not-a-core-rule" aria-hidden="true">#</a> Pricing is a lane rule, not a Core rule</h3>
+<p>The Core meters cost only. ADR-019's usage events already carry the supplier cost of each call, and that does not change. Each lane applies its own price rule on top of the metered cost. A lane's price rule is part of its configuration (<a href="./022-core-modules-and-lanes.html#what-the-lanes-require-of-the-design">ADR-022 § What the lanes require of the design</a>).</p>
+<p>A client's statement should show cost, margin and commission as separate lines. That keeps ADR-019's transparency in both lanes: a client can always see what a thing cost and what was added to it.</p>
+<h3 id="what-stays-from-adr-019" tabindex="-1"><a class="heading-anchor" href="#what-stays-from-adr-019" aria-hidden="true">#</a> What stays from ADR-019</h3>
+<p>The new prices need these, and they are unchanged:</p>
+<ul>
+<li><strong>Per-call metering of supplier cost.</strong> Every call to a central service emits a usage event with the supplier cost.</li>
+<li><strong>Itemised statements.</strong></li>
+<li><strong>Spend caps,</strong> with a soft warning and a hard stop.</li>
+<li><strong>Nothing enabled by default.</strong></li>
+<li><strong>The <code>alliance_pays</code> billing mode.</strong> An alliance, or an association (<a href="./024-event-bus-as-federation.html#the-same-shape-in-the-commercial-lane">ADR-024 § The same shape in the commercial lane</a>), can pay its members' costs. Paying is not seeing.</li>
+</ul>
+<p>Everything in ADR-019 that is not about the price is also unchanged: central services, per-client execution, nothing retained, the catalogue and entitlements, availability by isolation tier.</p>
+<h3 id="definitions-still-needed" tabindex="-1"><a class="heading-anchor" href="#definitions-still-needed" aria-hidden="true">#</a> Definitions still needed</h3>
+<p>Open. The prices cannot be computed until each of these has an answer, and this ADR does not supply one.</p>
+<ol>
+<li><strong>What &quot;cost&quot; includes.</strong> Metered supplier charges only, or also a share of hosting and of building and running the Core and the modules?</li>
+<li><strong>How each commission is calculated.</strong> A fixed fee or a percentage, and of what.</li>
+<li><strong>What the 30% applies to.</strong> The whole bill, or only part of it.</li>
+<li><strong>How shared costs are split between lanes.</strong> The capture corpus serves both.</li>
+<li><strong>Whether the free tier survives.</strong> <a href="../spec/product.html">product.md</a> promised a freemium plan, and ADR-019 deferred the question of a metered allowance inside it.</li>
+<li><strong>Who &quot;the product's owner&quot; and &quot;the Comercializadora&quot; are.</strong></li>
+</ol>
+<p>Two further points follow from the gaps and are recorded so they are not lost:</p>
+<ul>
+<li><strong>Donations.</strong> ADR-007's zero platform fee on donations stands. If a commission is defined as a percentage, its base has to be stated, and a base that includes donation volume would reverse ADR-007 and needs to say so.</li>
+<li><strong>Chat.</strong> If chat becomes the main surface, inference is a cost of ordinary daily work (<a href="./023-surfaces-chat-admin-field.html#cost-and-channel">ADR-023 § Cost and channel</a>). Whatever &quot;cost&quot; is defined to include has to account for it.</li>
+</ul>
+<h3 id="housekeeping-amendment-banners" tabindex="-1"><a class="heading-anchor" href="#housekeeping-amendment-banners" aria-hidden="true">#</a> Housekeeping: amendment banners</h3>
+<p>This ADR extends the <strong>Amended by</strong> line on <a href="./007-fundraising-payments.html">ADR-007</a> and adds one to <a href="./019-central-services-and-metered-billing.html">ADR-019</a> and to <a href="./020-central-service-line-up-and-builders.html">ADR-020</a>, whose services are described as passing costs through &quot;at cost&quot;.</p>
+<h2 id="consequences" tabindex="-1"><a class="heading-anchor" href="#consequences" aria-hidden="true">#</a> Consequences</h2>
+<p><strong>Benefits:</strong></p>
+<ul>
+<li>Each lane has a stated price, and the two can differ without a second codebase or a second metering pipeline</li>
+<li>The price is built on a number the Core already measures, the supplier cost of each call</li>
+<li>Cost, margin and commission are visible to the client as separate lines</li>
+<li>An association can pay for its member agencies with the mechanism already built for alliances</li>
+</ul>
+<p><strong>Costs:</strong></p>
+<ul>
+<li>Two accepted pricing decisions are reversed within seven weeks of the second one</li>
+<li>The predictability argument for a flat fee is gone: a client's bill now moves with its use</li>
+<li>The commercial lane earns from consumption, the incentive ADR-019 set out to avoid, and nothing here replaces that safeguard</li>
+<li>The prices cannot be quoted until six definitions exist</li>
+<li>The accessibility principle, a free or very-low-cost plan that is genuinely usable, has no stated place in the new model</li>
+</ul>
+<p><strong>Constraints:</strong></p>
+<ul>
+<li>The Core meters cost and nothing else; no lane's price rule lives in the Core</li>
+<li>A statement shows cost separately from anything added to it</li>
+<li>Nothing is enabled by default, and every metered service has a spend cap</li>
+<li>ADR-007's zero platform fee on donations stands unless a later decision reverses it by name</li>
+<li>None of the open definitions may be assumed in a quote, a contract or an implementation</li>
+</ul>
+<p><strong>Related ADRs:</strong> <a href="./007-fundraising-payments.html">ADR-007</a> (amended: &quot;revenue comes entirely from platform subscriptions&quot; superseded; zero platform fee on donations stands), <a href="./018-ai-agent-posture.html">ADR-018</a> (its cost item: metering still answers it, &quot;no margin&quot; no longer holds in the commercial lane), <a href="./019-central-services-and-metered-billing.html">ADR-019</a> (amended: the two billing planes and &quot;no margin&quot; superseded; metering, statements, spend caps and <code>alliance_pays</code> kept), <a href="./020-central-service-line-up-and-builders.html">ADR-020</a> (amended: &quot;at cost&quot; is what the Core meters, not what a client pays), <a href="./022-core-modules-and-lanes.html">ADR-022</a> (the two lanes; price rules are lane configuration), <a href="./023-surfaces-chat-admin-field.html">ADR-023</a> (the cost of chat), <a href="./024-event-bus-as-federation.html">ADR-024</a> (an association pays as an alliance does)</p>
+
+    </article>
+  </main>
+  <div class="toc-rail"><nav class="toc" aria-label="On this page"><div class="toc-label">On this page</div><ul><li class="toc-2"><a href="#context"># Context</a></li><li class="toc-3"><a href="#conflicts-this-adr-resolves"># Conflicts this ADR resolves</a></li><li class="toc-2"><a href="#decision"># Decision</a></li><li class="toc-3"><a href="#the-prices"># The prices</a></li><li class="toc-3"><a href="#pricing-is-a-lane-rule-not-a-core-rule"># Pricing is a lane rule, not a Core rule</a></li><li class="toc-3"><a href="#what-stays-from-adr-019"># What stays from ADR-019</a></li><li class="toc-3"><a href="#definitions-still-needed"># Definitions still needed</a></li><li class="toc-3"><a href="#housekeeping-amendment-banners"># Housekeeping: amendment banners</a></li><li class="toc-2"><a href="#consequences"># Consequences</a></li></ul></nav></div>
+</div>
+<script src="../assets/search.js" defer></script>
+<script src="../assets/app.js" defer></script>
+</body>
+</html>

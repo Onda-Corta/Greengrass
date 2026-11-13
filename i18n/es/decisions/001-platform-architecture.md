@@ -3,6 +3,7 @@
 **Estado:** Aceptada
 **Fecha:** 2026-03-03
 **Fuentes:** `design/architecture/system.md`, `spec/users.md`, `spec/workflows.md`, `spec/product.md`
+**Enmienda propuesta por:** [ADR-024](024-event-bus-as-federation.md) (Propuesta) — la capa central de federación que media el flujo entre organizaciones se reemplazaría por exportaciones de eventos filtradas por contrato entre instancias, y una alianza sería un cliente como cualquier otro, con su propia instancia. Nada de lo que sigue cambia hasta que se acepte la ADR-024. El aislamiento de organización única lo reafirma la [ADR-022](022-core-modules-and-lanes.md) y no está en cuestión.
 
 ## Contexto
 

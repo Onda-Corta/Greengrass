@@ -3,7 +3,7 @@
 **Status:** Accepted
 **Date:** 2026-03-03
 **Sources:** `spec/fundraising.md`, `spec/workflows.md`
-**Amended by:** [ADR-019](019-central-services-and-metered-billing.md) — the revenue model gains a second, metered billing plane for central services, passed through at cost with no margin. "Flat tiers, not usage-based" below now describes the subscription plane only.
+**Amended by:** [ADR-019](019-central-services-and-metered-billing.md) — the revenue model gains a second, metered billing plane for central services, passed through at cost with no margin. "Flat tiers, not usage-based" below now describes the subscription plane only. [ADR-026](026-two-lane-pricing.md) — pricing is now a lane rule: cost plus a commission in the political lane, cost plus a 30% margin plus a commission in the commercial lane. "Revenue comes entirely from platform subscriptions (flat tiers, not usage-based)" below is superseded. Zero platform fee on donations stands.
 
 ## Context
 

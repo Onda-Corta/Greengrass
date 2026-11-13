@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="es" data-base="../../" data-no-results="No hay resultados para">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ADR-027: Sincronización del CRM con terceros y conectores · GreenGrass</title>
+<meta name="description" content="ADR-027: Sincronización del CRM con terceros y conectores — Documentación de especificación y diseño de GreenGrass.">
+<link rel="alternate" hreflang="en" href="../../decisions/027-third-party-crm-sync-and-connectors.html">
+<link rel="alternate" hreflang="es" href="./027-third-party-crm-sync-and-connectors.html">
+<link rel="alternate" hreflang="x-default" href="../../decisions/027-third-party-crm-sync-and-connectors.html">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%232563eb'/%3E%3Cstop offset='1' stop-color='%2316a34a'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='32' height='32' rx='7' fill='url(%23g)'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="../../assets/styles.css">
+</head>
+<body>
+<a class="skip-link" href="#content">Saltar al contenido</a>
+<header class="site-header">
+  <button type="button" class="menu-toggle" aria-label="Alternar navegación" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+  <a class="brand" href="../../es/index.html">
+    <span class="brand-mark" aria-hidden="true"></span>
+    <span class="brand-text"><strong>GreenGrass</strong><small>Especificación y diseño</small></span>
+  </a>
+  <div class="search">
+    <input type="search" id="search-input" placeholder="Buscar en la documentación…" autocomplete="off" aria-label="Buscar en la documentación">
+    <div id="search-results" class="search-results" hidden></div>
+  </div>
+  <nav class="lang-switch" aria-label="Idioma"><a class="lang-opt" href="../../decisions/027-third-party-crm-sync-and-connectors.html" hreflang="en" lang="en" title="View this page in English">EN</a><span class="lang-opt active" aria-current="true">ES</span></nav>
+  <button type="button" class="theme-toggle" aria-label="Alternar modo oscuro" title="Alternar modo oscuro">
+    <span class="theme-icon" aria-hidden="true"></span>
+  </button>
+</header>
+<div class="layout">
+  <div class="sidebar-backdrop" hidden></div>
+  <aside class="sidebar" aria-label="Navegación de la documentación">
+    <nav class="nav">
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">Inicio<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../index.html">GreenGrass</a></li></ul></div>
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">Especificaciones<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../spec/pitch.html">Presentación pre-MVP</a></li><li><a href="../spec/demo.html">Especificación de la demostración de aprobación de campaña</a></li><li><a href="../spec/product.html">Proyecto: GreenGrass</a></li><li><a href="../spec/mvp.html">MVP de GreenGrass — plan de producto</a></li><li><a href="../spec/users.html">Usuarios y roles</a></li><li><a href="../spec/workflows.html">Flujos de trabajo principales</a></li><li><a href="../spec/geography.html">Geografía objetivo</a></li><li><a href="../spec/security.html">Seguridad y modelo de amenazas</a></li><li><a href="../spec/compliance.html">Cumplimiento y marco legal</a></li><li><a href="../spec/fundraising.html">Recaudación de fondos e infraestructura de pagos</a></li><li><a href="../spec/integrations.html">Integraciones externas</a></li><li><a href="../spec/support.html">Soporte y puesta en marcha de organizaciones</a></li><li><a href="../spec/gotv.html">GOTV y operaciones del día de elecciones</a></li><li><a href="../spec/messaging.html">Comunicaciones internas y notificaciones</a></li><li><a href="../spec/press.html">Prensa, medios y comunicaciones públicas</a></li><li><a href="../spec/comms-intelligence.html">Inteligencia de comunicaciones — hoja de ruta post-MVP</a></li></ul></div>
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">Arquitectura<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../design/architecture/system.html">Arquitectura del sistema</a></li></ul></div>
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">Diseño UX<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../design/ux/00-overview.html">Resumen del diseño de UX</a></li><li><a href="../design/ux/01-information-architecture/navigation-model.html">Modelo de navegación</a></li><li><a href="../design/ux/01-information-architecture/screen-inventory.html">Inventario de pantallas</a></li><li><a href="../design/ux/01-information-architecture/persona-views.html">Vistas por arquetipo</a></li><li><a href="../design/ux/01-information-architecture/url-structure.html">Estructura de URL</a></li><li><a href="../design/ux/02-global-patterns/pattern-catalog.html">Catálogo de patrones</a></li><li><a href="../design/ux/02-global-patterns/offline-sync-patterns.html">Patrones sin conexión y de sincronización</a></li><li><a href="../design/ux/02-global-patterns/notification-patterns.html">Patrones de notificaciones</a></li><li><a href="../design/ux/02-global-patterns/search-patterns.html">Patrones de búsqueda</a></li><li><a href="../design/ux/02-global-patterns/settings-help-patterns.html">Patrones de ajustes y ayuda</a></li><li><a href="../design/ux/02-global-patterns/security-ux-patterns.html">Patrones de UX de seguridad</a></li><li><a href="../design/ux/03-design-system/foundations.html">Fundamentos del sistema de diseño</a></li><li><a href="../design/ux/03-design-system/theming-strategy.html">Estrategia de temas</a></li><li><a href="../design/ux/03-design-system/component-inventory.html">Inventario de componentes</a></li><li><a href="../design/ux/03-design-system/responsive-strategy.html">Estrategia de diseño adaptable</a></li></ul></div>
+<div class="nav-section open"><button type="button" class="nav-section-title" aria-expanded="true">Decisiones<span class="chev" aria-hidden="true"></span></button><ul><li><a href="./001-platform-architecture.html">ADR-001: Arquitectura y despliegue de la plataforma</a></li><li><a href="./002-security-threat-model.html">ADR-002: Seguridad y modelo de amenazas</a></li><li><a href="./003-identity-access-organization.html">ADR-003: Identidad, acceso y organización</a></li><li><a href="./004-data-model-integrity.html">ADR-004: Modelo de datos e integridad</a></li><li><a href="./005-offline-first-sync.html">ADR-005: Prioridad sin conexión y sincronización</a></li><li><a href="./006-field-operations-gotv.html">ADR-006: Operaciones de campo y GOTV</a></li><li><a href="./007-fundraising-payments.html">ADR-007: Recaudación de fondos y pagos</a></li><li><a href="./008-communications-messaging.html">ADR-008: Comunicaciones y mensajería</a></li><li><a href="./009-compliance-legal.html">ADR-009: Cumplimiento y marco legal</a></li><li><a href="./010-internationalization-localization.html">ADR-010: Internacionalización y localización</a></li><li><a href="./011-design-system-ux.html">ADR-011: Sistema de diseño y fundamentos de UX</a></li><li><a href="./012-external-integrations.html">ADR-012: Integraciones externas</a></li><li><a href="./013-analytics-ai.html">ADR-013: Analítica e IA</a></li><li><a href="./014-volunteer-onboarding.html">ADR-014: Voluntariado e incorporación</a></li><li><a href="./015-product-scope.html">ADR-015: Límites del alcance del producto</a></li><li><a href="./016-cross-cutting-resolutions.html">ADR-016: Resoluciones transversales</a></li><li><a href="./017-sharing-contract-trust-model.html">ADR-017: El contrato de intercambio como primitiva universal de confianza</a></li><li><a href="./018-ai-agent-posture.html">ADR-018: Postura ante los agentes de IA</a></li><li><a href="./019-central-services-and-metered-billing.html">ADR-019: Servicios centrales y facturación medida</a></li><li><a href="./020-central-service-line-up-and-builders.html">ADR-020: Los cuatro servicios centrales y los constructores</a></li><li><a href="./021-content-approval-pipeline.html">ADR-021: Flujo de aprobación de contenido</a></li><li><a href="./022-core-modules-and-lanes.html">ADR-022: Core, módulos y carriles</a></li><li><a href="./023-surfaces-chat-admin-field.html">ADR-023: Superficies — un Core headless, chat, administración y campo</a></li><li><a href="./024-event-bus-as-federation.html">ADR-024: El bus de eventos como federación</a></li><li><a href="./025-identity-per-client.html">ADR-025: Identidad por cliente</a></li><li><a href="./026-two-lane-pricing.html">ADR-026: Precios por carril</a></li><li><a href="./027-third-party-crm-sync-and-connectors.html" aria-current="page" class="active">ADR-027: Sincronización del CRM con terceros y conectores</a></li><li><a href="./ux-decisions.html">Decisiones de UX — fase de wireframes</a></li></ul></div>
+    </nav>
+  </aside>
+  <main id="content" class="content">
+    <nav class="breadcrumb" aria-label="Ruta de navegación">Decisiones</nav>
+    <article class="prose">
+<h1 id="adr-027-sincronización-del-crm-con-terceros-y-conectores" tabindex="-1"><a class="heading-anchor" href="#adr-027-sincronización-del-crm-con-terceros-y-conectores" aria-hidden="true">#</a> ADR-027: Sincronización del CRM con terceros y conectores</h1>
+<p><strong>Estado:</strong> Propuesta
+<strong>Fecha:</strong> 2026-11-13
+<strong>Fuentes:</strong> <code>spec/integrations.md</code>, <code>spec/mvp.md</code>, <code>spec/compliance.md</code>, <code>design/architecture/system.md</code>, <code>decisions/002-security-threat-model.md</code>, <code>decisions/004-data-model-integrity.md</code>, <code>decisions/005-offline-first-sync.md</code>, <code>decisions/012-external-integrations.md</code>, <code>decisions/017-sharing-contract-trust-model.md</code>, <code>decisions/022-core-modules-and-lanes.md</code>, <code>decisions/024-event-bus-as-federation.md</code></p>
+<h2 id="contexto" tabindex="-1"><a class="heading-anchor" href="#contexto" aria-hidden="true">#</a> Contexto</h2>
+<p><a href="../spec/integrations.html#migraci%C3%B3n-desde-otras-plataformas">integrations.md § Migración desde otras plataformas</a> decidió cómo llega una organización desde otra herramienta: guías de migración más la importación genérica. Es un camino de una sola vía. Da por sentado que la organización deja la herramienta que tenía.</p>
+<p>Victoria Ciudadana corre NationBuilder (<a href="../spec/mvp.html#mvc-movimiento-victoria-ciudadana">mvp.md § MVC — Movimiento Victoria Ciudadana</a>). Sin sincronización, adoptar la plataforma significa dejar NationBuilder, que es la mudanza que el MVP evitó a propósito. Con sincronización, una organización puede mantener NationBuilder como su sistema de referencia y sumarle módulos al lado, empezando por las herramientas de coalición. «Sin mudanza» pasa a ser una posición de producto, no solo un atajo del piloto.</p>
+<p>La dirección también propone Parsons, la librería de Python de Movement Co-op, como capa de conectores, por la interoperabilidad con las herramientas que la izquierda de Estados Unidos ya corre y por la visibilidad entre quienes las corren.</p>
+<p>Esta ADR está <code>Propuesta</code>. Un requisito en ella está decidido, y va marcado: la sincronización con NationBuilder, empezando por un CSV de ida y vuelta. La sincronización por API y Parsons están propuestos, y tres datos en los que se apoyan todavía no están verificados.</p>
+<h3 id="conflictos-que-resuelve-esta-adr" tabindex="-1"><a class="heading-anchor" href="#conflictos-que-resuelve-esta-adr" aria-hidden="true">#</a> Conflictos que resuelve esta ADR</h3>
+<ol>
+<li><strong><a href="../spec/integrations.html#migraci%C3%B3n-desde-otras-plataformas">integrations.md § Migración desde otras plataformas</a></strong> decide «guías de migración + importación genérica», en una sola vía. La sincronización va en las dos.</li>
+<li><strong>La <a href="./012-external-integrations.html">ADR-012</a></strong> es la estrategia de integraciones, y no tiene ninguna decisión sobre otras plataformas de campaña. La decisión sobre la migración vive solo en <code>integrations.md</code>. La ADR-012 recibe un aviso para que quien lea la ADR de integraciones encuentre esta.</li>
+<li><strong><a href="../design/architecture/system.html#stack-tecnol%C3%B3gico">system.md § Stack tecnológico</a></strong> decide un backend en TypeScript. Parsons es Python.</li>
+<li><strong><a href="../spec/mvp.html#1-contexto">mvp.md § 1. Contexto</a></strong> describe la plataforma completa como una que «le pide a un partido político migrar todo lo que hace a una herramienta nueva». Con sincronización ya no hace falta.</li>
+</ol>
+<h2 id="decisión" tabindex="-1"><a class="heading-anchor" href="#decisión" aria-hidden="true">#</a> Decisión</h2>
+<h3 id="la-sincronización-con-nationbuilder-es-un-requisito-empezando-por-csv" tabindex="-1"><a class="heading-anchor" href="#la-sincronización-con-nationbuilder-es-un-requisito-empezando-por-csv" aria-hidden="true">#</a> La sincronización con NationBuilder es un requisito, empezando por CSV</h3>
+<p><strong>Decidido.</strong> El CRM del Core se sincroniza en las dos direcciones con herramientas de terceros. NationBuilder va primero, y el CSV va primero, para traer al MVC.</p>
+<p>La sincronización con NationBuilder es una prioridad del carril político. Las reglas de sincronización y los conectores viven en el Core, así que el carril comercial los recibe para sus propias herramientas sin trabajo adicional.</p>
+<h3 id="fase-a-el-csv-de-ida-y-vuelta" tabindex="-1"><a class="heading-anchor" href="#fase-a-el-csv-de-ida-y-vuelta" aria-hidden="true">#</a> Fase A: el CSV de ida y vuelta</h3>
+<p>Decidido como requisito. Los detalles de abajo son el diseño que se propone para cumplirlo.</p>
+<ul>
+<li><strong>De entrada:</strong> importar la exportación de personas de NationBuilder. <code>mvp.md</code> ya lista sus nombres de campo estables, de <code>nationbuilder_id</code> a <code>mobile_opt_in</code>. Esos campos se mapean una vez y el mapeo se guarda.</li>
+<li><strong>De salida:</strong> exportar los cambios como un CSV que NationBuilder pueda importar, con <code>nationbuilder_id</code> como clave.</li>
+<li><strong>Ritmo:</strong> el que lleve la organización. Es lo que el MVP ya da por sentado.</li>
+<li><strong>Sin acceso permanente:</strong> esto no necesita acceso a la API, ni una aplicación OAuth, ni credenciales guardadas de forma continua en la instancia.</li>
+</ul>
+<p>La Fase A amplía el flujo de importación y los formatos de exportación que <code>integrations.md</code> ya especifica. Lo nuevo es que los dos forman un par: un mapeo guardado, un identificador externo y una exportación que la otra herramienta puede volver a leer.</p>
+<h3 id="fase-b-sincronización-por-api" tabindex="-1"><a class="heading-anchor" href="#fase-b-sincronización-por-api" aria-hidden="true">#</a> Fase B: sincronización por API</h3>
+<p>Propuesto.</p>
+<p>El mismo mapeo, corriendo de forma continua a través de un conector, con webhooks o con sondeo periódico y cursores incrementales. Las reglas de la Fase A pasan sin cambios.</p>
+<h3 id="las-reglas-viven-en-el-crm-del-core-no-en-el-conector" tabindex="-1"><a class="heading-anchor" href="#las-reglas-viven-en-el-crm-del-core-no-en-el-conector" aria-hidden="true">#</a> Las reglas viven en el CRM del Core, no en el conector</h3>
+<p>Propuesto. Aplican a las dos fases.</p>
+<ul>
+<li><strong>Correspondencia de identidades.</strong> Cada persona tiene un mapa de identificadores externos (<code>nationbuilder_id</code> ↔ el ID propio de la persona). Los registros que entran pasan por la deduplicación de sugerir y confirmar (<a href="./004-data-model-integrity.html#deduplicaci%C3%B3n-con-sugerir-y-confirmar">ADR-004 § Deduplicación con sugerir y confirmar</a>). La sincronización nunca fusiona personas por su cuenta.</li>
+<li><strong>Sistema de referencia por campo.</strong> La organización elige, campo por campo, qué lado prevalece. Lo fija una vez, cuando se conecta.</li>
+<li><strong>Los conflictos se guardan en los dos lados y se marcan para que una persona los vea,</strong> como ya hace fusionar y marcar en la sincronización sin conexión (<a href="./005-offline-first-sync.html">ADR-005</a>).</li>
+<li><strong>El consentimiento es asimétrico.</strong> Una baja o un <code>do_not_contact</code> cruza en las dos direcciones y gana el valor más restrictivo, sin importar de quién sea el campo. Un consentimiento expreso nunca pasa por encima de una baja más reciente.</li>
+<li><strong>Los campos incluidos son con denegación por defecto.</strong> <code>support_level</code>, <code>tags</code> y los campos cifrados se quedan fuera a menos que se activen. Los campos que entran por sincronización siguen sujetos a los contratos de intercambio: llegar por sincronización nunca pone un campo en la vista compartida de una coalición (<a href="./017-sharing-contract-trust-model.html">ADR-017</a>).</li>
+<li><strong>El perímetro.</strong> Los datos que se envían a NationBuilder salen de la frontera de BYOK. Eso exige la misma aceptación explícita que exige BYOM (<a href="../design/architecture/system.html#arquitectura-byom">system.md § Arquitectura BYOM</a>). Para el alfa de Puerto Rico, el alojamiento de NationBuilder en Estados Unidos es la misma jurisdicción, así que ahí la residencia de datos es una pregunta menor. En Brasil o en India no lo es, y aplica <a href="../spec/compliance.html#transferencias-transfronterizas-de-datos">compliance.md § Transferencias transfronterizas de datos</a>.</li>
+<li><strong>Auditoría.</strong> Cada lote de sincronización es una entrada de auditoría, con el conector como actor.</li>
+</ul>
+<p><strong>Alternativas consideradas:</strong> Se descartó dejar las reglas en los scripts de cada conector, porque entonces cada conector volvería a implementar de otra manera la correspondencia de identidades, qué lado prevalece por campo, la precedencia del consentimiento y el manejo de conflictos, y el consentimiento es la única regla que no puede variar según la herramienta.</p>
+<h3 id="la-sincronización-no-es-un-módulo" tabindex="-1"><a class="heading-anchor" href="#la-sincronización-no-es-un-módulo" aria-hidden="true">#</a> La sincronización no es un módulo</h3>
+<p>Propuesto.</p>
+<p>La sincronización es una capacidad del CRM del Core que se expone a través de conectores. Un conector es un enlace con una herramienta externa; vive en el centro de integraciones (<a href="../design/architecture/system.html#arquitectura-de-integraciones">system.md § Arquitectura de integraciones</a>) y no es un módulo (<a href="./022-core-modules-and-lanes.html#vocabulario">ADR-022 § Vocabulario</a>). Los conectores se catalogan y se activan por organización, igual que las integraciones.</p>
+<h3 id="parsons-como-capa-de-conectores" tabindex="-1"><a class="heading-anchor" href="#parsons-como-capa-de-conectores" aria-hidden="true">#</a> Parsons como capa de conectores</h3>
+<p>Propuesto, a la espera de las comprobaciones de abajo.</p>
+<p>Por qué encaja:</p>
+<ul>
+<li>Es de código abierto y está hecho para organizaciones progresistas.</li>
+<li>Ya se conecta con buena parte de las herramientas de la izquierda de Estados Unidos: VAN/EveryAction, ActBlue, Action Network, Mobilize, Google Sheets y almacenes de datos.</li>
+<li>Aportarle un conector a Parsons haría de la plataforma un destino en las cadenas de procesamiento de otras organizaciones. Eso es visibilidad de verdad, no una frase de mercadeo.</li>
+</ul>
+<p>Para qué hay que prepararse:</p>
+<ul>
+<li><strong>Stack.</strong> El backend decidido es TypeScript. Parsons es Python. Correría como un contenedor aparte, el proceso de conectores, en cada instancia, consumiendo del bus de eventos y publicando en él (<a href="./024-event-bus-as-federation.html">ADR-024</a>). El bus es lo que hace limpia la separación de lenguajes: el proceso nunca toca la base de datos directamente.</li>
+<li><strong>Por lotes frente a sincronización.</strong> Parsons es una librería de ETL hecha para trabajos por lotes. Eso le sirve a la Fase A y a las sincronizaciones programadas. Las reglas de dos direcciones de arriba tienen que vivir en el CRM del Core, no en scripts de Parsons.</li>
+<li><strong>Alcance.</strong> Sus conectores son en gran parte de Estados Unidos. Brasil, Tailandia, India y Líbano van a necesitar conectores que Parsons no tiene. Parsons es la capa de interoperabilidad para la izquierda de Estados Unidos y para Puerto Rico, no toda la historia de los conectores.</li>
+<li><strong>Modelo de amenazas.</strong> Un árbol grande de dependencias de Python es una superficie de ataque de la cadena de suministro bajo la <a href="./002-security-threat-model.html">ADR-002</a>. Hay que fijar las versiones y guardar copia de las dependencias. El proceso corre en un entorno restringido y tiene solo la credencial de su propio conector, que saca de Vault.</li>
+</ul>
+<p><strong>Verificar antes de comprometerse.</strong> Nada de esto se afirma aquí:</p>
+<ul>
+<li><strong>Verificar:</strong> que Parsons tiene un conector de NationBuilder, y qué cubre: solo personas, o también donaciones y eventos.</li>
+<li><strong>Verificar:</strong> la licencia de Parsons.</li>
+<li><strong>Verificar:</strong> los límites de solicitudes de la API de NationBuilder y qué cubren sus webhooks, para la Fase B.</li>
+</ul>
+<p><strong>Alternativas consideradas:</strong> Escribir cada conector en TypeScript dentro de la aplicación era lo que el stack daba por defecto. Parsons se propone en su lugar por los conectores que ya tiene y por el lugar que da entre las organizaciones que lo usan. Ninguno de los dos argumentos se sostiene si las comprobaciones de arriba fallan.</p>
+<h3 id="preguntas-abiertas" tabindex="-1"><a class="heading-anchor" href="#preguntas-abiertas" aria-hidden="true">#</a> Preguntas abiertas</h3>
+<ol>
+<li><strong>Parsons:</strong> adoptarlo como capa de conectores para la izquierda de Estados Unidos y para Puerto Rico, después de la verificación de arriba.</li>
+<li><strong>Los tres puntos marcados <em>Verificar</em>.</strong></li>
+<li><strong>Un ejercicio de comprobación.</strong> La dirección propone una prueba técnica en el carril político con una exportación real del MVC: el CSV de ida y vuelta de la Fase A con Parsons, y después la supresión mutua entre dos instancias sobre el bus (<a href="./024-event-bus-as-federation.html">ADR-024</a>). No tiene fecha.</li>
+<li><strong>El piloto.</strong> <a href="../spec/mvp.html">mvp.md</a> especifica el piloto como de solo ingesta. Si la mitad de salida de la Fase A entra al piloto no se decide aquí, y el plan del piloto no cambia.</li>
+</ol>
+<h3 id="orden-interno-avisos-de-enmienda" tabindex="-1"><a class="heading-anchor" href="#orden-interno-avisos-de-enmienda" aria-hidden="true">#</a> Orden interno: avisos de enmienda</h3>
+<p>Esta ADR le agrega a la <a href="./012-external-integrations.html">ADR-012</a> una línea de <strong>Enmendada por</strong>, por el requisito decidido, que también anota lo que está propuesto.</p>
+<h2 id="consecuencias" tabindex="-1"><a class="heading-anchor" href="#consecuencias" aria-hidden="true">#</a> Consecuencias</h2>
+<p><strong>Beneficios:</strong></p>
+<ul>
+<li>Una organización puede adoptar la plataforma sin dejar la herramienta que corre hoy</li>
+<li>El MVC llega con sus datos de NationBuilder y sus marcas de consentimiento intactos, y puede mandar cambios de vuelta</li>
+<li>Un solo juego de reglas de sincronización les sirve a todos los conectores y a los dos carriles</li>
+<li>La Fase A no necesita credenciales ni API, así que puede existir antes que cualquier conector</li>
+<li>Si Parsons aguanta, la plataforma alcanza un conjunto de herramientas que de otro modo integraría una por una</li>
+</ul>
+<p><strong>Costos:</strong></p>
+<ul>
+<li>La sincronización en dos direcciones es más difícil que la importación en una: conflictos, qué lado prevalece por campo y un identificador externo en cada persona</li>
+<li>Un segundo lenguaje y un segundo entorno de ejecución en cada instancia, si se adopta Parsons</li>
+<li>Los datos que se envían a un CRM externo salen de la frontera de cifrado, y el cliente tiene que aceptarlo a sabiendas</li>
+<li>La propuesta de Parsons se apoya en tres datos sin verificar</li>
+</ul>
+<p><strong>Restricciones:</strong></p>
+<ul>
+<li>La sincronización nunca fusiona personas por su cuenta; la deduplicación es de sugerir y confirmar (<a href="./004-data-model-integrity.html">ADR-004</a>)</li>
+<li>Una baja siempre cruza, y gana el valor de consentimiento más restrictivo</li>
+<li>Los campos sensibles se quedan fuera de la sincronización a menos que se activen, y un campo sincronizado nunca entra a una vista compartida por el hecho de llegar</li>
+<li>Un conector tiene solo su propia credencial y nunca llega directamente a la base de datos</li>
+<li>Nada marcado <em>Verificar</em> se puede tratar como cierto</li>
+</ul>
+<p><strong>ADR relacionadas:</strong> <a href="./002-security-threat-model.html">ADR-002</a> (la superficie de ataque de la cadena de suministro del proceso de conectores), <a href="./004-data-model-integrity.html">ADR-004</a> (deduplicación de sugerir y confirmar; entradas de auditoría por lote), <a href="./005-offline-first-sync.html">ADR-005</a> (manejo de conflictos con fusionar y marcar), <a href="./012-external-integrations.html">ADR-012</a> (enmendada: la sincronización del CRM con herramientas de terceros entra a la estrategia de integraciones), <a href="./017-sharing-contract-trust-model.html">ADR-017</a> (los campos sincronizados siguen bajo los contratos de intercambio), <a href="./022-core-modules-and-lanes.html">ADR-022</a> (la sincronización es del Core; un conector no es un módulo), <a href="./024-event-bus-as-federation.html">ADR-024</a> (el proceso de conectores queda detrás del bus)</p>
+
+    </article>
+  </main>
+  <div class="toc-rail"><nav class="toc" aria-label="En esta página"><div class="toc-label">En esta página</div><ul><li class="toc-2"><a href="#contexto"># Contexto</a></li><li class="toc-3"><a href="#conflictos-que-resuelve-esta-adr"># Conflictos que resuelve esta ADR</a></li><li class="toc-2"><a href="#decisión"># Decisión</a></li><li class="toc-3"><a href="#la-sincronización-con-nationbuilder-es-un-requisito-empezando-por-csv"># La sincronización con NationBuilder es un requisito, empezando por CSV</a></li><li class="toc-3"><a href="#fase-a-el-csv-de-ida-y-vuelta"># Fase A: el CSV de ida y vuelta</a></li><li class="toc-3"><a href="#fase-b-sincronización-por-api"># Fase B: sincronización por API</a></li><li class="toc-3"><a href="#las-reglas-viven-en-el-crm-del-core-no-en-el-conector"># Las reglas viven en el CRM del Core, no en el conector</a></li><li class="toc-3"><a href="#la-sincronización-no-es-un-módulo"># La sincronización no es un módulo</a></li><li class="toc-3"><a href="#parsons-como-capa-de-conectores"># Parsons como capa de conectores</a></li><li class="toc-3"><a href="#preguntas-abiertas"># Preguntas abiertas</a></li><li class="toc-3"><a href="#orden-interno-avisos-de-enmienda"># Orden interno: avisos de enmienda</a></li><li class="toc-2"><a href="#consecuencias"># Consecuencias</a></li></ul></nav></div>
+</div>
+<script src="../../assets/search.js" defer></script>
+<script src="../../assets/app.js" defer></script>
+</body>
+</html>

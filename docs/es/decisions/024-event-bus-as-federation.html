@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="es" data-base="../../" data-no-results="No hay resultados para">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ADR-024: El bus de eventos como federación · GreenGrass</title>
+<meta name="description" content="ADR-024: El bus de eventos como federación — Documentación de especificación y diseño de GreenGrass.">
+<link rel="alternate" hreflang="en" href="../../decisions/024-event-bus-as-federation.html">
+<link rel="alternate" hreflang="es" href="./024-event-bus-as-federation.html">
+<link rel="alternate" hreflang="x-default" href="../../decisions/024-event-bus-as-federation.html">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%232563eb'/%3E%3Cstop offset='1' stop-color='%2316a34a'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='32' height='32' rx='7' fill='url(%23g)'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="../../assets/styles.css">
+</head>
+<body>
+<a class="skip-link" href="#content">Saltar al contenido</a>
+<header class="site-header">
+  <button type="button" class="menu-toggle" aria-label="Alternar navegación" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+  <a class="brand" href="../../es/index.html">
+    <span class="brand-mark" aria-hidden="true"></span>
+    <span class="brand-text"><strong>GreenGrass</strong><small>Especificación y diseño</small></span>
+  </a>
+  <div class="search">
+    <input type="search" id="search-input" placeholder="Buscar en la documentación…" autocomplete="off" aria-label="Buscar en la documentación">
+    <div id="search-results" class="search-results" hidden></div>
+  </div>
+  <nav class="lang-switch" aria-label="Idioma"><a class="lang-opt" href="../../decisions/024-event-bus-as-federation.html" hreflang="en" lang="en" title="View this page in English">EN</a><span class="lang-opt active" aria-current="true">ES</span></nav>
+  <button type="button" class="theme-toggle" aria-label="Alternar modo oscuro" title="Alternar modo oscuro">
+    <span class="theme-icon" aria-hidden="true"></span>
+  </button>
+</header>
+<div class="layout">
+  <div class="sidebar-backdrop" hidden></div>
+  <aside class="sidebar" aria-label="Navegación de la documentación">
+    <nav class="nav">
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">Inicio<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../index.html">GreenGrass</a></li></ul></div>
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">Especificaciones<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../spec/pitch.html">Presentación pre-MVP</a></li><li><a href="../spec/demo.html">Especificación de la demostración de aprobación de campaña</a></li><li><a href="../spec/product.html">Proyecto: GreenGrass</a></li><li><a href="../spec/mvp.html">MVP de GreenGrass — plan de producto</a></li><li><a href="../spec/users.html">Usuarios y roles</a></li><li><a href="../spec/workflows.html">Flujos de trabajo principales</a></li><li><a href="../spec/geography.html">Geografía objetivo</a></li><li><a href="../spec/security.html">Seguridad y modelo de amenazas</a></li><li><a href="../spec/compliance.html">Cumplimiento y marco legal</a></li><li><a href="../spec/fundraising.html">Recaudación de fondos e infraestructura de pagos</a></li><li><a href="../spec/integrations.html">Integraciones externas</a></li><li><a href="../spec/support.html">Soporte y puesta en marcha de organizaciones</a></li><li><a href="../spec/gotv.html">GOTV y operaciones del día de elecciones</a></li><li><a href="../spec/messaging.html">Comunicaciones internas y notificaciones</a></li><li><a href="../spec/press.html">Prensa, medios y comunicaciones públicas</a></li><li><a href="../spec/comms-intelligence.html">Inteligencia de comunicaciones — hoja de ruta post-MVP</a></li></ul></div>
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">Arquitectura<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../design/architecture/system.html">Arquitectura del sistema</a></li></ul></div>
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">Diseño UX<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../design/ux/00-overview.html">Resumen del diseño de UX</a></li><li><a href="../design/ux/01-information-architecture/navigation-model.html">Modelo de navegación</a></li><li><a href="../design/ux/01-information-architecture/screen-inventory.html">Inventario de pantallas</a></li><li><a href="../design/ux/01-information-architecture/persona-views.html">Vistas por arquetipo</a></li><li><a href="../design/ux/01-information-architecture/url-structure.html">Estructura de URL</a></li><li><a href="../design/ux/02-global-patterns/pattern-catalog.html">Catálogo de patrones</a></li><li><a href="../design/ux/02-global-patterns/offline-sync-patterns.html">Patrones sin conexión y de sincronización</a></li><li><a href="../design/ux/02-global-patterns/notification-patterns.html">Patrones de notificaciones</a></li><li><a href="../design/ux/02-global-patterns/search-patterns.html">Patrones de búsqueda</a></li><li><a href="../design/ux/02-global-patterns/settings-help-patterns.html">Patrones de ajustes y ayuda</a></li><li><a href="../design/ux/02-global-patterns/security-ux-patterns.html">Patrones de UX de seguridad</a></li><li><a href="../design/ux/03-design-system/foundations.html">Fundamentos del sistema de diseño</a></li><li><a href="../design/ux/03-design-system/theming-strategy.html">Estrategia de temas</a></li><li><a href="../design/ux/03-design-system/component-inventory.html">Inventario de componentes</a></li><li><a href="../design/ux/03-design-system/responsive-strategy.html">Estrategia de diseño adaptable</a></li></ul></div>
+<div class="nav-section open"><button type="button" class="nav-section-title" aria-expanded="true">Decisiones<span class="chev" aria-hidden="true"></span></button><ul><li><a href="./001-platform-architecture.html">ADR-001: Arquitectura y despliegue de la plataforma</a></li><li><a href="./002-security-threat-model.html">ADR-002: Seguridad y modelo de amenazas</a></li><li><a href="./003-identity-access-organization.html">ADR-003: Identidad, acceso y organización</a></li><li><a href="./004-data-model-integrity.html">ADR-004: Modelo de datos e integridad</a></li><li><a href="./005-offline-first-sync.html">ADR-005: Prioridad sin conexión y sincronización</a></li><li><a href="./006-field-operations-gotv.html">ADR-006: Operaciones de campo y GOTV</a></li><li><a href="./007-fundraising-payments.html">ADR-007: Recaudación de fondos y pagos</a></li><li><a href="./008-communications-messaging.html">ADR-008: Comunicaciones y mensajería</a></li><li><a href="./009-compliance-legal.html">ADR-009: Cumplimiento y marco legal</a></li><li><a href="./010-internationalization-localization.html">ADR-010: Internacionalización y localización</a></li><li><a href="./011-design-system-ux.html">ADR-011: Sistema de diseño y fundamentos de UX</a></li><li><a href="./012-external-integrations.html">ADR-012: Integraciones externas</a></li><li><a href="./013-analytics-ai.html">ADR-013: Analítica e IA</a></li><li><a href="./014-volunteer-onboarding.html">ADR-014: Voluntariado e incorporación</a></li><li><a href="./015-product-scope.html">ADR-015: Límites del alcance del producto</a></li><li><a href="./016-cross-cutting-resolutions.html">ADR-016: Resoluciones transversales</a></li><li><a href="./017-sharing-contract-trust-model.html">ADR-017: El contrato de intercambio como primitiva universal de confianza</a></li><li><a href="./018-ai-agent-posture.html">ADR-018: Postura ante los agentes de IA</a></li><li><a href="./019-central-services-and-metered-billing.html">ADR-019: Servicios centrales y facturación medida</a></li><li><a href="./020-central-service-line-up-and-builders.html">ADR-020: Los cuatro servicios centrales y los constructores</a></li><li><a href="./021-content-approval-pipeline.html">ADR-021: Flujo de aprobación de contenido</a></li><li><a href="./022-core-modules-and-lanes.html">ADR-022: Core, módulos y carriles</a></li><li><a href="./023-surfaces-chat-admin-field.html">ADR-023: Superficies — un Core headless, chat, administración y campo</a></li><li><a href="./024-event-bus-as-federation.html" aria-current="page" class="active">ADR-024: El bus de eventos como federación</a></li><li><a href="./025-identity-per-client.html">ADR-025: Identidad por cliente</a></li><li><a href="./026-two-lane-pricing.html">ADR-026: Precios por carril</a></li><li><a href="./027-third-party-crm-sync-and-connectors.html">ADR-027: Sincronización del CRM con terceros y conectores</a></li><li><a href="./ux-decisions.html">Decisiones de UX — fase de wireframes</a></li></ul></div>
+    </nav>
+  </aside>
+  <main id="content" class="content">
+    <nav class="breadcrumb" aria-label="Ruta de navegación">Decisiones</nav>
+    <article class="prose">
+<h1 id="adr-024-el-bus-de-eventos-como-federación" tabindex="-1"><a class="heading-anchor" href="#adr-024-el-bus-de-eventos-como-federación" aria-hidden="true">#</a> ADR-024: El bus de eventos como federación</h1>
+<p><strong>Estado:</strong> Propuesta
+<strong>Fecha:</strong> 2026-11-13
+<strong>Fuentes:</strong> <code>spec/users.md</code>, <code>spec/mvp.md</code>, <code>design/architecture/system.md</code>, <code>diary/13-services-a-la-carte.md</code>, <code>decisions/001-platform-architecture.md</code>, <code>decisions/017-sharing-contract-trust-model.md</code>, <code>decisions/019-central-services-and-metered-billing.md</code>, <code>decisions/022-core-modules-and-lanes.md</code></p>
+<h2 id="contexto" tabindex="-1"><a class="heading-anchor" href="#contexto" aria-hidden="true">#</a> Contexto</h2>
+<p><a href="../design/architecture/system.html#topolog%C3%ADa-del-sistema">system.md § Topología del sistema</a> dibuja tres capas. La del medio es una capa de federación que «media las interacciones entre organizaciones»: coordinación de alianzas, recursos compartidos, deduplicación entre organizaciones y campañas conjuntas. Opera sobre reglas de intercambio explícitas y, por diseño, nunca guarda datos de las organizaciones. Sigue siendo un componente central por el que pasa todo flujo entre organizaciones, y hay que confiarle ese flujo.</p>
+<p>Dos cosas del corpus apuntan a otra forma. Cada instancia ya corre su propio flujo de eventos en NATS JetStream, para la analítica (<a href="../design/architecture/system.html#arquitectura-de-anal%C3%ADtica">system.md § Arquitectura de analítica</a>). Y el tablero de servicios de la alianza que recoge la <a href="../../diary/13-services-a-la-carte.html">entrada 13 del diario</a> dibujó tres enclaves sellados —la alianza, el MVC y el PIP— con flujos entre ellos y nada en el medio que guarde datos.</p>
+<p>La nueva dirección lo dice sin rodeos: despliegues separados por organización, un bus de eventos entre ellos, y la alianza como una tercera organización que se suscribe.</p>
+<p>Esta ADR está <code>Propuesta</code>. Que el bus reemplace la capa de federación todavía no está acordado. Una cosa en ella sí está decidida, y va marcada: la Asociación de Publicistas funciona exactamente igual que la Alianza.</p>
+<h3 id="conflictos-que-resuelve-esta-adr" tabindex="-1"><a class="heading-anchor" href="#conflictos-que-resuelve-esta-adr" aria-hidden="true">#</a> Conflictos que resuelve esta ADR</h3>
+<ol>
+<li><strong><a href="../design/architecture/system.html#topolog%C3%ADa-del-sistema">system.md § Topología del sistema</a></strong> tiene una capa central de federación. Esta ADR propone reemplazarla por exportaciones de eventos entre instancias, filtradas por contrato.</li>
+<li><strong><a href="./001-platform-architecture.html#modelo-de-federaci%C3%B3n-en-vez-de-multiorganizaci%C3%B3n-monol%C3%ADtica">ADR-001 § Modelo de federación en vez de multiorganización monolítica</a></strong> y <strong><a href="../spec/users.html#jerarqu%C3%ADa-organizativa">users.md § Jerarquía organizativa</a></strong> hacen de la alianza una «organización cliente ligera, dedicada a la coordinación», que no replica toda la plataforma. En esta dirección la alianza es un cliente como cualquier otro, con su propia instancia. Bajo la <a href="./022-core-modules-and-lanes.html">ADR-022</a> las dos lecturas pueden encontrarse, porque una instancia con pocos módulos activados es una instancia ligera. Esa lectura se propone aquí; no está decidida.</li>
+<li><strong><a href="../design/architecture/system.html#motor-de-orquestaci%C3%B3n-entre-canales">system.md § Motor de orquestación entre canales</a></strong> especifica la supresión mutua como un servicio central que le pregunta a cada miembro y combina las marcas (<a href="./019-central-services-and-metered-billing.html">ADR-019</a>). Esta ADR la propone como solicitud y respuesta sobre el bus. Las reglas son las mismas; cambia lo que las transporta.</li>
+<li><strong><a href="../spec/users.html#pertenencia-a-varias-organizaciones">users.md § Pertenencia a varias organizaciones</a></strong> deja que «la capa de alianza» vea que una persona existe en varias organizaciones miembro. Sin capa central y sin identidad compartida (<a href="./025-identity-per-client.html">ADR-025</a>), esa visibilidad existe solo como un término de contrato entre instancias.</li>
+</ol>
+<h2 id="decisión" tabindex="-1"><a class="heading-anchor" href="#decisión" aria-hidden="true">#</a> Decisión</h2>
+<h3 id="dentro-de-una-organización-el-flujo-de-eventos-se-vuelve-la-columna-vertebral-de-integración" tabindex="-1"><a class="heading-anchor" href="#dentro-de-una-organización-el-flujo-de-eventos-se-vuelve-la-columna-vertebral-de-integración" aria-hidden="true">#</a> Dentro de una organización: el flujo de eventos se vuelve la columna vertebral de integración</h3>
+<p>Propuesto.</p>
+<p>El flujo de eventos de cada instancia deja de ser solo una cadena de procesamiento de analítica y pasa a ser la columna vertebral de integración de la instancia. El Core y los módulos publican eventos de dominio: <code>person.created</code>, <code>consent.changed</code>, <code>interaction.recorded</code>, <code>donation.received</code>, <code>content.approved</code>. Los módulos, los conectores y los paneles los consumen. El manifiesto de cada módulo dice qué publica y qué consume (<a href="./022-core-modules-and-lanes.html#el-contrato-de-m%C3%B3dulo">ADR-022 § El contrato de módulo</a>).</p>
+<p>Los eventos de uso ya viajan por este flujo (<a href="./019-central-services-and-metered-billing.html#el-cat%C3%A1logo-los-derechos-de-uso-y-la-medici%C3%B3n-viven-en-la-capa-de-plataforma">ADR-019 § El catálogo, los derechos de uso y la medición viven en la capa de plataforma</a>). En ellos no cambia nada.</p>
+<h3 id="entre-organizaciones-exportaciones-filtradas-por-contrato" tabindex="-1"><a class="heading-anchor" href="#entre-organizaciones-exportaciones-filtradas-por-contrato" aria-hidden="true">#</a> Entre organizaciones: exportaciones filtradas por contrato</h3>
+<p>Propuesto.</p>
+<p>Cada organización exporta un subconjunto filtrado de su flujo hacia las instancias con las que tiene contratos. La alianza es una tercera organización con su propia instancia. Se suscribe a las exportaciones de sus miembros y publica de vuelta: campañas conjuntas, solicitudes de supresión, puntos de mensaje compartidos.</p>
+<p>Las reglas que lo hacen seguro:</p>
+<ul>
+<li><strong>Filtrado en el origen.</strong> Lo que sale de una instancia lo decide el contrato de intercambio antes de publicarse, campo por campo y con denegación por defecto (<a href="./017-sharing-contract-trust-model.html">ADR-017</a>). Nada cruza en bruto para filtrarse después.</li>
+<li><strong>Opaco en tránsito.</strong> Las cargas van cifradas con las llaves del contrato, que están en manos de los miembros. Cualquier retransmisor que opere GreenGrass ve metadatos de enrutamiento, nunca contenido. Eso mantiene a la plataforma fuera de todo contrato, como exige <a href="./017-sharing-contract-trust-model.html#consecuencias">ADR-017 § Consecuencias</a>.</li>
+<li><strong>La revocación detiene la exportación.</strong> Los eventos ya entregados no se recuperan, que es la regla que ya tiene la ADR-017. Las dos partes ven quién cortó el acceso y cuándo.</li>
+<li><strong>El consentimiento viaja primero.</strong> Los eventos <code>consent.changed</code> cruzan todo contrato que cubra a la persona, antes que los demás eventos.</li>
+<li><strong>La supresión mutua es solicitud y respuesta sobre el bus.</strong> El cruce usa el segundo índice ciego, con llave del contrato de la alianza (<a href="../design/architecture/system.html#motor-de-orquestaci%C3%B3n-entre-canales">system.md § Motor de orquestación entre canales</a>). Un miembro que no responde no es un veto.</li>
+<li><strong>Los consumidores duraderos absorben las conexiones intermitentes.</strong> Una instancia que se queda sin conexión se pone al día desde donde se quedó.</li>
+</ul>
+<p><strong>Verificar:</strong> que NATS permite exportar e importar flujos entre cuentas y nodos hoja de la manera que esto necesita. La topología de despliegue es de clústeres separados, a veces en nubes separadas (<a href="./001-platform-architecture.html">ADR-001</a>), y hay que confirmar que funciona así antes de comprometer nada.</p>
+<p><strong>Alternativas consideradas:</strong> Se descartó mantener la capa central de federación y poner el bus a su lado, porque deja en pie la única pieza central a la que hay que confiarle el flujo entre organizaciones, que es justo lo que el bus quita. Se descartó exportar los eventos en bruto y filtrarlos en el receptor, o en un retransmisor, porque pone datos sin filtrar de un miembro fuera de su instancia, donde la parte que otorgó el contrato ya no puede hacerlo cumplir.</p>
+<h3 id="el-bus-reemplaza-la-capa-central-de-federación" tabindex="-1"><a class="heading-anchor" href="#el-bus-reemplaza-la-capa-central-de-federación" aria-hidden="true">#</a> El bus reemplaza la capa central de federación</h3>
+<p>Propuesto, y todavía sin acordar.</p>
+<p>La federación pasa a ser exportaciones de eventos entre instancias, filtradas por contrato, sin ningún componente central que guarde o medie datos entre organizaciones. Es una simplificación: quita la única pieza central a la que había que confiarle el flujo entre organizaciones. También es un cambio de arquitectura, y hasta que esta ADR se acepte sigue en pie la topología de tres capas de <a href="../design/architecture/system.html#topolog%C3%ADa-del-sistema">system.md § Topología del sistema</a>, con el bus dibujado al lado como propuesta.</p>
+<p>La capa de plataforma se queda con lo que no lleva datos de las organizaciones: el aprovisionamiento, el catálogo, los derechos de uso y la medición, y cualquier retransmisor, que solo ve metadatos de enrutamiento. La identidad sale de ella con la <a href="./025-identity-per-client.html">ADR-025</a>.</p>
+<h3 id="la-misma-forma-en-el-carril-comercial" tabindex="-1"><a class="heading-anchor" href="#la-misma-forma-en-el-carril-comercial" aria-hidden="true">#</a> La misma forma en el carril comercial</h3>
+<p><strong>Decidido.</strong> La Asociación de Publicistas funciona exactamente igual que la Alianza. Tiene su propia instancia, cada agencia miembro tiene la suya, y se conectan por contratos de intercambio y por el bus. No hace falta nada nuevo:</p>
+<ul>
+<li>El intercambio es con denegación por defecto y campo por campo, y cualquier miembro puede cortarlo por su cuenta (<a href="./017-sharing-contract-trust-model.html#t%C3%A9rminos-uniformes-en-cada-pelda%C3%B1o">ADR-017 § Términos uniformes en cada peldaño</a>).</li>
+<li>La Asociación puede pagar los costos medidos de sus miembros, con el modo de facturación <code>alliance_pays</code> que ya define <a href="./019-central-services-and-metered-billing.html#una-alianza-puede-pagar-por-sus-miembros-como-ajuste-de-la-puesta-en-marcha">ADR-019 § Una alianza puede pagar por sus miembros, como ajuste de la puesta en marcha</a>.</li>
+<li>El Fideicomiso de coalición es, por lo tanto, un módulo para los dos carriles (<a href="./022-core-modules-and-lanes.html#el-cat%C3%A1logo-de-m%C3%B3dulos">ADR-022 § El catálogo de módulos</a>).</li>
+</ul>
+<p>Lo decidido es la forma: una asociación de agencias es una alianza de partidos con otro nombre, y no recibe un mecanismo propio. Que la conexión entre instancias corra sobre el bus que se propone arriba o por la capa de federación tal como está especificada hoy depende de que esta ADR se acepte.</p>
+<h3 id="preguntas-abiertas" tabindex="-1"><a class="heading-anchor" href="#preguntas-abiertas" aria-hidden="true">#</a> Preguntas abiertas</h3>
+<ol>
+<li><strong>¿El bus reemplaza la capa central de federación?</strong> Hay que acordarlo antes de que esta ADR pueda aceptarse.</li>
+<li><strong>La comprobación de NATS</strong> marcada <em>Verificar</em> arriba.</li>
+<li><strong>La alianza como cliente completo o como organización ligera.</strong> Es el conflicto 2 de arriba. La lectura que se propone aquí es que «ligera» quiere decir con pocos módulos activados.</li>
+<li><strong>Un ejercicio de comprobación.</strong> La dirección propone una prueba técnica en el carril político con una exportación real del MVC: el CSV de ida y vuelta de la <a href="./027-third-party-crm-sync-and-connectors.html">ADR-027</a>, y después la supresión mutua entre dos instancias sobre el bus. No tiene fecha.</li>
+</ol>
+<h3 id="orden-interno-avisos-de-enmienda" tabindex="-1"><a class="heading-anchor" href="#orden-interno-avisos-de-enmienda" aria-hidden="true">#</a> Orden interno: avisos de enmienda</h3>
+<p>Esta ADR le agrega a la <a href="./001-platform-architecture.html">ADR-001</a> una línea de <strong>Enmienda propuesta por</strong>, por el modelo de federación. La ADR-001 queda como está escrita hasta que esta ADR se acepte.</p>
+<h2 id="consecuencias" tabindex="-1"><a class="heading-anchor" href="#consecuencias" aria-hidden="true">#</a> Consecuencias</h2>
+<p><strong>Beneficios:</strong></p>
+<ul>
+<li>Ningún componente central guarda ni media datos entre organizaciones, así que hay una cosa menos en la que confiar y una cosa menos que vulnerar</li>
+<li>El mecanismo que conecta a dos partidos conecta a una asociación con sus agencias, sin maquinaria nueva</li>
+<li>La plataforma queda fuera de todo contrato tanto en tránsito como en reposo</li>
+<li>La conectividad intermitente entre instancias la absorbe el flujo; no la maneja cada funcionalidad por su cuenta</li>
+<li>Los módulos, los conectores y los paneles se enteran de un cambio de una sola manera</li>
+</ul>
+<p><strong>Costos:</strong></p>
+<ul>
+<li>Un cambio de arquitectura sobre una topología ya decidida, con la migración de toda funcionalidad entre organizaciones a eventos</li>
+<li>Los esquemas de eventos se vuelven un contrato entre instancias que pueden correr versiones distintas (<a href="./022-core-modules-and-lanes.html#qu%C3%A9-le-exigen-los-carriles-al-dise%C3%B1o">ADR-022 § Qué le exigen los carriles al diseño</a>)</li>
+<li>Hacer cumplir el contrato en el origen significa que un error de filtrado es una fuga, el costo que la <a href="./017-sharing-contract-trust-model.html">ADR-017</a> ya nombra para los contratos</li>
+<li>La topología depende de funciones de NATS que todavía no están verificadas entre clústeres y nubes separados</li>
+</ul>
+<p><strong>Restricciones:</strong></p>
+<ul>
+<li>La plataforma nunca es parte de un contrato (<a href="./017-sharing-contract-trust-model.html">ADR-017</a>); un retransmisor nunca ve contenido</li>
+<li>De una instancia no sale nada que el contrato de intercambio no haya permitido, campo por campo, antes de publicarse</li>
+<li>El consentimiento de cada persona está por encima de los términos del contrato, y los cambios de consentimiento se entregan primero</li>
+<li>Un miembro que no responde nunca es un veto</li>
+<li>Hasta que esta ADR se acepte, el diseño especificado es la capa de federación de <code>system.md</code></li>
+</ul>
+<p><strong>ADR relacionadas:</strong> <a href="./001-platform-architecture.html">ADR-001</a> (enmienda propuesta: la capa central del modelo de federación; el aislamiento por instancia no cambia), <a href="./017-sharing-contract-trust-model.html">ADR-017</a> (el contrato filtra toda exportación), <a href="./019-central-services-and-metered-billing.html">ADR-019</a> (los eventos de uso van por el mismo flujo; <code>alliance_pays</code>; la supresión mutua), <a href="./022-core-modules-and-lanes.html">ADR-022</a> (los eventos son del Core; el Fideicomiso de coalición es un módulo para los dos carriles), <a href="./025-identity-per-client.html">ADR-025</a> (no hay identidad compartida con la que hacer coincidir a las personas), <a href="./027-third-party-crm-sync-and-connectors.html">ADR-027</a> (el proceso de conectores queda detrás del bus)</p>
+
+    </article>
+  </main>
+  <div class="toc-rail"><nav class="toc" aria-label="En esta página"><div class="toc-label">En esta página</div><ul><li class="toc-2"><a href="#contexto"># Contexto</a></li><li class="toc-3"><a href="#conflictos-que-resuelve-esta-adr"># Conflictos que resuelve esta ADR</a></li><li class="toc-2"><a href="#decisión"># Decisión</a></li><li class="toc-3"><a href="#dentro-de-una-organización-el-flujo-de-eventos-se-vuelve-la-columna-vertebral-de-integración"># Dentro de una organización: el flujo de eventos se vuelve la columna vertebral de integración</a></li><li class="toc-3"><a href="#entre-organizaciones-exportaciones-filtradas-por-contrato"># Entre organizaciones: exportaciones filtradas por contrato</a></li><li class="toc-3"><a href="#el-bus-reemplaza-la-capa-central-de-federación"># El bus reemplaza la capa central de federación</a></li><li class="toc-3"><a href="#la-misma-forma-en-el-carril-comercial"># La misma forma en el carril comercial</a></li><li class="toc-3"><a href="#preguntas-abiertas"># Preguntas abiertas</a></li><li class="toc-3"><a href="#orden-interno-avisos-de-enmienda"># Orden interno: avisos de enmienda</a></li><li class="toc-2"><a href="#consecuencias"># Consecuencias</a></li></ul></nav></div>
+</div>
+<script src="../../assets/search.js" defer></script>
+<script src="../../assets/app.js" defer></script>
+</body>
+</html>

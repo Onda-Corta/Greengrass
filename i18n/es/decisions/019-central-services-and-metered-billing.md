@@ -3,6 +3,8 @@
 **Estado:** Aceptada
 **Fecha:** 2026-09-28
 **Fuentes:** `spec/fundraising.md`, `spec/product.md`, `spec/users.md`, `spec/mvp.md`, `spec/comms-intelligence.md`, `spec/workflows.md`, `design/architecture/system.md`
+**Enmendada por:** [ADR-026](026-two-lane-pricing.md) — el precio es ahora una regla del carril. «Dos planos de facturación, y sin margen en el segundo», más abajo, queda sin efecto como modelo de ingresos: «GreenGrass no le carga margen a los costos medidos» y «Los ingresos de GreenGrass vienen únicamente de la suscripción» ya no valen. Se mantienen, porque los precios nuevos dependen de ellos: la medición por llamada del costo del proveedor, los estados de cuenta desglosados, los topes de gasto, nada activado por defecto y el modo de facturación `alliance_pays`. Todo lo de más abajo que no trata del precio no cambia.
+**Enmienda propuesta por:** [ADR-022](022-core-modules-and-lanes.md) (Propuesta) — el «módulo interno» de más abajo pasaría a llamarse «componente de instancia», para que «módulo» pueda nombrar la unidad que un cliente activa desde el catálogo. La distinción que traza esta ADR no cambia; solo se mueve el nombre.
 
 ## Contexto
 

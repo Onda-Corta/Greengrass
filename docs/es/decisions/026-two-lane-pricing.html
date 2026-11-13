@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="es" data-base="../../" data-no-results="No hay resultados para">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ADR-026: Precios por carril · GreenGrass</title>
+<meta name="description" content="ADR-026: Precios por carril — Documentación de especificación y diseño de GreenGrass.">
+<link rel="alternate" hreflang="en" href="../../decisions/026-two-lane-pricing.html">
+<link rel="alternate" hreflang="es" href="./026-two-lane-pricing.html">
+<link rel="alternate" hreflang="x-default" href="../../decisions/026-two-lane-pricing.html">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%232563eb'/%3E%3Cstop offset='1' stop-color='%2316a34a'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='32' height='32' rx='7' fill='url(%23g)'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="../../assets/styles.css">
+</head>
+<body>
+<a class="skip-link" href="#content">Saltar al contenido</a>
+<header class="site-header">
+  <button type="button" class="menu-toggle" aria-label="Alternar navegación" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+  <a class="brand" href="../../es/index.html">
+    <span class="brand-mark" aria-hidden="true"></span>
+    <span class="brand-text"><strong>GreenGrass</strong><small>Especificación y diseño</small></span>
+  </a>
+  <div class="search">
+    <input type="search" id="search-input" placeholder="Buscar en la documentación…" autocomplete="off" aria-label="Buscar en la documentación">
+    <div id="search-results" class="search-results" hidden></div>
+  </div>
+  <nav class="lang-switch" aria-label="Idioma"><a class="lang-opt" href="../../decisions/026-two-lane-pricing.html" hreflang="en" lang="en" title="View this page in English">EN</a><span class="lang-opt active" aria-current="true">ES</span></nav>
+  <button type="button" class="theme-toggle" aria-label="Alternar modo oscuro" title="Alternar modo oscuro">
+    <span class="theme-icon" aria-hidden="true"></span>
+  </button>
+</header>
+<div class="layout">
+  <div class="sidebar-backdrop" hidden></div>
+  <aside class="sidebar" aria-label="Navegación de la documentación">
+    <nav class="nav">
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">Inicio<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../index.html">GreenGrass</a></li></ul></div>
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">Especificaciones<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../spec/pitch.html">Presentación pre-MVP</a></li><li><a href="../spec/demo.html">Especificación de la demostración de aprobación de campaña</a></li><li><a href="../spec/product.html">Proyecto: GreenGrass</a></li><li><a href="../spec/mvp.html">MVP de GreenGrass — plan de producto</a></li><li><a href="../spec/users.html">Usuarios y roles</a></li><li><a href="../spec/workflows.html">Flujos de trabajo principales</a></li><li><a href="../spec/geography.html">Geografía objetivo</a></li><li><a href="../spec/security.html">Seguridad y modelo de amenazas</a></li><li><a href="../spec/compliance.html">Cumplimiento y marco legal</a></li><li><a href="../spec/fundraising.html">Recaudación de fondos e infraestructura de pagos</a></li><li><a href="../spec/integrations.html">Integraciones externas</a></li><li><a href="../spec/support.html">Soporte y puesta en marcha de organizaciones</a></li><li><a href="../spec/gotv.html">GOTV y operaciones del día de elecciones</a></li><li><a href="../spec/messaging.html">Comunicaciones internas y notificaciones</a></li><li><a href="../spec/press.html">Prensa, medios y comunicaciones públicas</a></li><li><a href="../spec/comms-intelligence.html">Inteligencia de comunicaciones — hoja de ruta post-MVP</a></li></ul></div>
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">Arquitectura<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../design/architecture/system.html">Arquitectura del sistema</a></li></ul></div>
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">Diseño UX<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../design/ux/00-overview.html">Resumen del diseño de UX</a></li><li><a href="../design/ux/01-information-architecture/navigation-model.html">Modelo de navegación</a></li><li><a href="../design/ux/01-information-architecture/screen-inventory.html">Inventario de pantallas</a></li><li><a href="../design/ux/01-information-architecture/persona-views.html">Vistas por arquetipo</a></li><li><a href="../design/ux/01-information-architecture/url-structure.html">Estructura de URL</a></li><li><a href="../design/ux/02-global-patterns/pattern-catalog.html">Catálogo de patrones</a></li><li><a href="../design/ux/02-global-patterns/offline-sync-patterns.html">Patrones sin conexión y de sincronización</a></li><li><a href="../design/ux/02-global-patterns/notification-patterns.html">Patrones de notificaciones</a></li><li><a href="../design/ux/02-global-patterns/search-patterns.html">Patrones de búsqueda</a></li><li><a href="../design/ux/02-global-patterns/settings-help-patterns.html">Patrones de ajustes y ayuda</a></li><li><a href="../design/ux/02-global-patterns/security-ux-patterns.html">Patrones de UX de seguridad</a></li><li><a href="../design/ux/03-design-system/foundations.html">Fundamentos del sistema de diseño</a></li><li><a href="../design/ux/03-design-system/theming-strategy.html">Estrategia de temas</a></li><li><a href="../design/ux/03-design-system/component-inventory.html">Inventario de componentes</a></li><li><a href="../design/ux/03-design-system/responsive-strategy.html">Estrategia de diseño adaptable</a></li></ul></div>
+<div class="nav-section open"><button type="button" class="nav-section-title" aria-expanded="true">Decisiones<span class="chev" aria-hidden="true"></span></button><ul><li><a href="./001-platform-architecture.html">ADR-001: Arquitectura y despliegue de la plataforma</a></li><li><a href="./002-security-threat-model.html">ADR-002: Seguridad y modelo de amenazas</a></li><li><a href="./003-identity-access-organization.html">ADR-003: Identidad, acceso y organización</a></li><li><a href="./004-data-model-integrity.html">ADR-004: Modelo de datos e integridad</a></li><li><a href="./005-offline-first-sync.html">ADR-005: Prioridad sin conexión y sincronización</a></li><li><a href="./006-field-operations-gotv.html">ADR-006: Operaciones de campo y GOTV</a></li><li><a href="./007-fundraising-payments.html">ADR-007: Recaudación de fondos y pagos</a></li><li><a href="./008-communications-messaging.html">ADR-008: Comunicaciones y mensajería</a></li><li><a href="./009-compliance-legal.html">ADR-009: Cumplimiento y marco legal</a></li><li><a href="./010-internationalization-localization.html">ADR-010: Internacionalización y localización</a></li><li><a href="./011-design-system-ux.html">ADR-011: Sistema de diseño y fundamentos de UX</a></li><li><a href="./012-external-integrations.html">ADR-012: Integraciones externas</a></li><li><a href="./013-analytics-ai.html">ADR-013: Analítica e IA</a></li><li><a href="./014-volunteer-onboarding.html">ADR-014: Voluntariado e incorporación</a></li><li><a href="./015-product-scope.html">ADR-015: Límites del alcance del producto</a></li><li><a href="./016-cross-cutting-resolutions.html">ADR-016: Resoluciones transversales</a></li><li><a href="./017-sharing-contract-trust-model.html">ADR-017: El contrato de intercambio como primitiva universal de confianza</a></li><li><a href="./018-ai-agent-posture.html">ADR-018: Postura ante los agentes de IA</a></li><li><a href="./019-central-services-and-metered-billing.html">ADR-019: Servicios centrales y facturación medida</a></li><li><a href="./020-central-service-line-up-and-builders.html">ADR-020: Los cuatro servicios centrales y los constructores</a></li><li><a href="./021-content-approval-pipeline.html">ADR-021: Flujo de aprobación de contenido</a></li><li><a href="./022-core-modules-and-lanes.html">ADR-022: Core, módulos y carriles</a></li><li><a href="./023-surfaces-chat-admin-field.html">ADR-023: Superficies — un Core headless, chat, administración y campo</a></li><li><a href="./024-event-bus-as-federation.html">ADR-024: El bus de eventos como federación</a></li><li><a href="./025-identity-per-client.html">ADR-025: Identidad por cliente</a></li><li><a href="./026-two-lane-pricing.html" aria-current="page" class="active">ADR-026: Precios por carril</a></li><li><a href="./027-third-party-crm-sync-and-connectors.html">ADR-027: Sincronización del CRM con terceros y conectores</a></li><li><a href="./ux-decisions.html">Decisiones de UX — fase de wireframes</a></li></ul></div>
+    </nav>
+  </aside>
+  <main id="content" class="content">
+    <nav class="breadcrumb" aria-label="Ruta de navegación">Decisiones</nav>
+    <article class="prose">
+<h1 id="adr-026-precios-por-carril" tabindex="-1"><a class="heading-anchor" href="#adr-026-precios-por-carril" aria-hidden="true">#</a> ADR-026: Precios por carril</h1>
+<p><strong>Estado:</strong> Aceptada
+<strong>Fecha:</strong> 2026-11-13
+<strong>Fuentes:</strong> <code>spec/product.md</code>, <code>spec/fundraising.md</code>, <code>design/architecture/system.md</code>, <code>decisions/007-fundraising-payments.md</code>, <code>decisions/018-ai-agent-posture.md</code>, <code>decisions/019-central-services-and-metered-billing.md</code>, <code>decisions/022-core-modules-and-lanes.md</code>, <code>decisions/023-surfaces-chat-admin-field.md</code></p>
+<h2 id="contexto" tabindex="-1"><a class="heading-anchor" href="#contexto" aria-hidden="true">#</a> Contexto</h2>
+<p>El corpus ha decidido los precios dos veces. <a href="../spec/fundraising.html#modelo-de-ingresos-de-la-plataforma">fundraising.md § Modelo de ingresos de la plataforma</a> y <a href="./007-fundraising-payments.html#cero-comisi%C3%B3n-de-la-plataforma-sobre-las-donaciones">ADR-007 § Cero comisión de la plataforma sobre las donaciones</a> decidieron niveles de suscripción fija, no atados a ninguna métrica de uso. <a href="./019-central-services-and-metered-billing.html#dos-planos-de-facturaci%C3%B3n-y-sin-margen-en-el-segundo">ADR-019 § Dos planos de facturación, y sin margen en el segundo</a> mantuvo la suscripción y le puso al lado un segundo plano: los costos medidos de terceros trasladados al costo, sin margen, de modo que los ingresos vinieran únicamente de la suscripción.</p>
+<p>El modelo de dos carriles (<a href="./022-core-modules-and-lanes.html">ADR-022</a>) enuncia los precios en otros términos, y quien dirige el producto decidió que esos precios prevalecen sobre la especificación.</p>
+<p>Esta ADR está <code>Aceptada</code>. Los precios están decididos. Varias definiciones que los precios necesitan no lo están, y aparecen como abiertas en <a href="#definiciones-que-todav%C3%ADa-faltan">Definiciones que todavía faltan</a>. Son vacíos, no objeciones, y nada en esta ADR los llena.</p>
+<h3 id="conflictos-que-resuelve-esta-adr" tabindex="-1"><a class="heading-anchor" href="#conflictos-que-resuelve-esta-adr" aria-hidden="true">#</a> Conflictos que resuelve esta ADR</h3>
+<p>Esta ADR revierte decisiones aceptadas. Los conflictos se nombran para que la reversión quede a la vista.</p>
+<ol>
+<li><strong><a href="../spec/fundraising.html#modelo-de-ingresos-de-la-plataforma">fundraising.md § Modelo de ingresos de la plataforma</a></strong> decide una suscripción fija, de niveles «no atados al volumen de donaciones, al número de usuarios ni a ninguna métrica de uso». Queda sin efecto.</li>
+<li><strong><a href="./007-fundraising-payments.html#cero-comisi%C3%B3n-de-la-plataforma-sobre-las-donaciones">ADR-007 § Cero comisión de la plataforma sobre las donaciones</a></strong> dice que los ingresos vienen «por completo de las suscripciones a la plataforma (planes fijos, no por uso)». Esa oración queda sin efecto. La decisión que le da nombre a la sección, que la plataforma no se queda con nada de las donaciones, no está entre las cosas que los nuevos precios dejan sin efecto.</li>
+<li><strong><a href="./019-central-services-and-metered-billing.html#dos-planos-de-facturaci%C3%B3n-y-sin-margen-en-el-segundo">ADR-019 § Dos planos de facturación, y sin margen en el segundo</a></strong> dice «GreenGrass no le carga margen a los costos medidos» y «Los ingresos de GreenGrass vienen únicamente de la suscripción». Las dos quedan sin efecto.</li>
+<li><strong>El razonamiento de la propia ADR-019.</strong> Descartó un margen sobre el traslado «porque le da a GreenGrass un incentivo para empujar el consumo, el incentivo que la ADR-007 rechazó para las donaciones». El precio del carril comercial contiene un margen. Esta ADR no responde a ese argumento. Deja constancia de que la decisión se tomó con el argumento a la vista.</li>
+<li><strong><a href="./019-central-services-and-metered-billing.html#diferido-una-asignaci%C3%B3n-medida-en-el-plan-gratuito">ADR-019 § Diferido: una asignación medida en el plan gratuito</a></strong> y <a href="../spec/product.html">product.md</a> dan por sentado que existe un plan gratuito o de muy bajo costo. Si sobrevive es ahora una pregunta abierta.</li>
+<li><strong><a href="./018-ai-agent-posture.html#lo-que-la-propuesta-responde">ADR-018 § Lo que la propuesta responde</a></strong> tiene el traslado de la ADR-019, «al costo, sin margen», como la respuesta propuesta a su punto sobre el costo. La medición lo sigue respondiendo. El «sin margen» no se sostiene en el carril comercial.</li>
+</ol>
+<h2 id="decisión" tabindex="-1"><a class="heading-anchor" href="#decisión" aria-hidden="true">#</a> Decisión</h2>
+<h3 id="los-precios" tabindex="-1"><a class="heading-anchor" href="#los-precios" aria-hidden="true">#</a> Los precios</h3>
+<table>
+<thead>
+<tr>
+<th>Carril</th>
+<th>Precio</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Político (Greengrass)</td>
+<td>Al costo, más la comisión que cubre el costo de vender</td>
+</tr>
+<tr>
+<td>Comercial (Basecamp)</td>
+<td>El costo, más un margen de 30 % para la dueña del producto, más la comisión de la Comercializadora</td>
+</tr>
+</tbody>
+</table>
+<!-- REVISIT: «la dueña del producto» (the product's owner) y «la Comercializadora» se usan tal como las dio quien dirige el producto. Ninguna de las dos está definida en ninguna parte del corpus. Las dos necesitan una definición antes de que se pueda calcular un precio. -->
+<p>Estos precios prevalecen sobre la especificación. Donde la ADR-007, la ADR-019 y <code>fundraising.md</code> dicen otra cosa, quedan sin efecto:</p>
+<ul>
+<li>La suscripción fija no atada «a ninguna métrica de uso» (<a href="../spec/fundraising.html#modelo-de-ingresos-de-la-plataforma">fundraising.md § Modelo de ingresos de la plataforma</a>, ADR-007).</li>
+<li>«GreenGrass no le carga margen a los costos medidos» y «los ingresos vienen únicamente de la suscripción» (ADR-019).</li>
+</ul>
+<p><strong>Alternativas consideradas:</strong> El modelo que esto reemplaza, una suscripción fija con los costos medidos trasladados sin margen, está registrado en la ADR-019 con su razonamiento. No consta ninguna otra alternativa. Los precios los fijó quien dirige el producto junto con el modelo de dos carriles.</p>
+<h3 id="el-precio-es-una-regla-del-carril-no-del-core" tabindex="-1"><a class="heading-anchor" href="#el-precio-es-una-regla-del-carril-no-del-core" aria-hidden="true">#</a> El precio es una regla del carril, no del Core</h3>
+<p>El Core mide solo el costo. Los eventos de uso de la ADR-019 ya llevan el costo del proveedor de cada llamada, y eso no cambia. Cada carril aplica su propia regla de precio encima del costo medido. La regla de precio de un carril es parte de su configuración (<a href="./022-core-modules-and-lanes.html#qu%C3%A9-le-exigen-los-carriles-al-dise%C3%B1o">ADR-022 § Qué le exigen los carriles al diseño</a>).</p>
+<p>El estado de cuenta de un cliente debería mostrar el costo, el margen y la comisión en líneas separadas. Eso mantiene la transparencia de la ADR-019 en los dos carriles: un cliente siempre puede ver cuánto costó algo y qué se le sumó.</p>
+<h3 id="qué-queda-de-la-adr-019" tabindex="-1"><a class="heading-anchor" href="#qué-queda-de-la-adr-019" aria-hidden="true">#</a> Qué queda de la ADR-019</h3>
+<p>Los nuevos precios necesitan esto, y no cambia:</p>
+<ul>
+<li><strong>La medición por llamada del costo del proveedor.</strong> Cada llamada a un servicio central emite un evento de uso con el costo del proveedor.</li>
+<li><strong>Los estados de cuenta desglosados.</strong></li>
+<li><strong>Los topes de gasto,</strong> con un aviso y un corte.</li>
+<li><strong>Nada viene activado por defecto.</strong></li>
+<li><strong>El modo de facturación <code>alliance_pays</code>.</strong> Una alianza, o una asociación (<a href="./024-event-bus-as-federation.html#la-misma-forma-en-el-carril-comercial">ADR-024 § La misma forma en el carril comercial</a>), puede pagar los costos de sus miembros. Pagar no es ver.</li>
+</ul>
+<p>Todo lo de la ADR-019 que no trata del precio tampoco cambia: los servicios centrales, la ejecución por cliente, que no se conserve nada, el catálogo y los derechos de uso, la disponibilidad por nivel de aislamiento.</p>
+<h3 id="definiciones-que-todavía-faltan" tabindex="-1"><a class="heading-anchor" href="#definiciones-que-todavía-faltan" aria-hidden="true">#</a> Definiciones que todavía faltan</h3>
+<p>Abierto. Los precios no se pueden calcular hasta que cada una de estas tenga respuesta, y esta ADR no da ninguna.</p>
+<ol>
+<li><strong>Qué incluye el «costo».</strong> ¿Solo los cargos medidos de los proveedores, o también una parte del alojamiento y de construir y operar el Core y los módulos?</li>
+<li><strong>Cómo se calcula cada comisión.</strong> Un monto fijo o un porcentaje, y de qué.</li>
+<li><strong>A qué se le aplica el 30 %.</strong> A toda la factura, o solo a una parte.</li>
+<li><strong>Cómo se reparten entre los carriles los costos compartidos.</strong> El corpus de captura les sirve a los dos.</li>
+<li><strong>Si el plan gratuito sobrevive.</strong> <a href="../spec/product.html">product.md</a> prometió un plan freemium, y la ADR-019 difirió la pregunta de una asignación medida dentro de él.</li>
+<li><strong>Quiénes son «la dueña del producto» y «la Comercializadora».</strong></li>
+</ol>
+<p>De esos vacíos se siguen dos puntos más, que se anotan para que no se pierdan:</p>
+<ul>
+<li><strong>Las donaciones.</strong> La cero comisión de la plataforma sobre las donaciones de la ADR-007 sigue en pie. Si una comisión se define como un porcentaje, hay que decir sobre qué base, y una base que incluya el volumen de donaciones revertiría la ADR-007 y tendría que decirlo.</li>
+<li><strong>El chat.</strong> Si el chat se vuelve la superficie principal, la inferencia es un costo del trabajo diario de siempre (<a href="./023-surfaces-chat-admin-field.html#costo-y-canal">ADR-023 § Costo y canal</a>). Lo que se defina que incluye el «costo» tiene que contemplarla.</li>
+</ul>
+<h3 id="orden-interno-avisos-de-enmienda" tabindex="-1"><a class="heading-anchor" href="#orden-interno-avisos-de-enmienda" aria-hidden="true">#</a> Orden interno: avisos de enmienda</h3>
+<p>Esta ADR amplía la línea de <strong>Enmendada por</strong> de la <a href="./007-fundraising-payments.html">ADR-007</a> y les agrega una a la <a href="./019-central-services-and-metered-billing.html">ADR-019</a> y a la <a href="./020-central-service-line-up-and-builders.html">ADR-020</a>, cuyos servicios se describen trasladando los costos «al costo».</p>
+<h2 id="consecuencias" tabindex="-1"><a class="heading-anchor" href="#consecuencias" aria-hidden="true">#</a> Consecuencias</h2>
+<p><strong>Beneficios:</strong></p>
+<ul>
+<li>Cada carril tiene un precio enunciado, y los dos pueden ser distintos sin una segunda base de código ni una segunda cadena de medición</li>
+<li>El precio se arma sobre un número que el Core ya mide, el costo del proveedor de cada llamada</li>
+<li>El cliente ve el costo, el margen y la comisión en líneas separadas</li>
+<li>Una asociación puede pagar por sus agencias miembro con el mecanismo que ya se construyó para las alianzas</li>
+</ul>
+<p><strong>Costos:</strong></p>
+<ul>
+<li>Se revierten dos decisiones de precios aceptadas, a menos de siete semanas de la segunda</li>
+<li>Se pierde el argumento de la previsibilidad a favor de una tarifa fija: la factura de un cliente ahora se mueve con su uso</li>
+<li>El carril comercial gana con el consumo, el incentivo que la ADR-019 se propuso evitar, y nada aquí reemplaza esa salvaguarda</li>
+<li>Los precios no se pueden cotizar hasta que existan seis definiciones</li>
+<li>El principio de accesibilidad, un plan gratuito o de muy bajo costo que de verdad se pueda usar, no tiene un lugar enunciado en el nuevo modelo</li>
+</ul>
+<p><strong>Restricciones:</strong></p>
+<ul>
+<li>El Core mide el costo y nada más; la regla de precio de ningún carril vive en el Core</li>
+<li>Un estado de cuenta muestra el costo separado de cualquier cosa que se le sume</li>
+<li>Nada viene activado por defecto, y todo servicio medido tiene un tope de gasto</li>
+<li>La cero comisión de la plataforma sobre las donaciones de la ADR-007 sigue en pie mientras una decisión posterior no la revierta por su nombre</li>
+<li>Ninguna de las definiciones abiertas se puede dar por sentada en una cotización, un contrato o una implementación</li>
+</ul>
+<p><strong>ADR relacionadas:</strong> <a href="./007-fundraising-payments.html">ADR-007</a> (enmendada: «los ingresos vienen por completo de las suscripciones a la plataforma» queda sin efecto; la cero comisión de la plataforma sobre las donaciones sigue en pie), <a href="./018-ai-agent-posture.html">ADR-018</a> (su punto sobre el costo: la medición lo sigue respondiendo, el «sin margen» ya no se sostiene en el carril comercial), <a href="./019-central-services-and-metered-billing.html">ADR-019</a> (enmendada: los dos planos de facturación y el «sin margen» quedan sin efecto; se mantienen la medición, los estados de cuenta, los topes de gasto y <code>alliance_pays</code>), <a href="./020-central-service-line-up-and-builders.html">ADR-020</a> (enmendada: «al costo» es lo que mide el Core, no lo que paga un cliente), <a href="./022-core-modules-and-lanes.html">ADR-022</a> (los dos carriles; las reglas de precio son configuración de carril), <a href="./023-surfaces-chat-admin-field.html">ADR-023</a> (el costo del chat), <a href="./024-event-bus-as-federation.html">ADR-024</a> (una asociación paga igual que una alianza)</p>
+
+    </article>
+  </main>
+  <div class="toc-rail"><nav class="toc" aria-label="En esta página"><div class="toc-label">En esta página</div><ul><li class="toc-2"><a href="#contexto"># Contexto</a></li><li class="toc-3"><a href="#conflictos-que-resuelve-esta-adr"># Conflictos que resuelve esta ADR</a></li><li class="toc-2"><a href="#decisión"># Decisión</a></li><li class="toc-3"><a href="#los-precios"># Los precios</a></li><li class="toc-3"><a href="#el-precio-es-una-regla-del-carril-no-del-core"># El precio es una regla del carril, no del Core</a></li><li class="toc-3"><a href="#qué-queda-de-la-adr-019"># Qué queda de la ADR-019</a></li><li class="toc-3"><a href="#definiciones-que-todavía-faltan"># Definiciones que todavía faltan</a></li><li class="toc-3"><a href="#orden-interno-avisos-de-enmienda"># Orden interno: avisos de enmienda</a></li><li class="toc-2"><a href="#consecuencias"># Consecuencias</a></li></ul></nav></div>
+</div>
+<script src="../../assets/search.js" defer></script>
+<script src="../../assets/app.js" defer></script>
+</body>
+</html>

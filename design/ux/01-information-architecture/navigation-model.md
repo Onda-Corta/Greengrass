@@ -4,6 +4,8 @@
 
 This document defines how GreenGrass organizes its feature surface into a navigable structure. It is the single most important information architecture document — every screen, wireframe, and component design depends on the navigation model.
 
+**Note added 2026-11-13.** This document describes one application in which every feature exists for every organization. Two proposed ADRs change that frame, and neither is accepted. Under [ADR-022](../../../decisions/022-core-modules-and-lanes.md) an organization enables modules one at a time, so navigation would be built from the modules it has enabled: each module contributes its own screens and navigation entries, and an entry for a module that is not enabled does not appear. Under [ADR-023](../../../decisions/023-surfaces-chat-admin-field.md) there are three surfaces, and this document becomes the navigation model of two of them: the admin UI and the field app. Work that moves to chat (dashboards read daily, approval queues, notification centres) would become secondary here. Nothing below has been redrawn. Rebuilding the navigation from enabled modules is follow-up work, and it waits for those ADRs.
+
 The core challenge: 9 distinct personas across radically different contexts share one application. A volunteer knocking doors on a low-end Android phone in rural India needs a completely different interface than an Org Admin configuring compliance settings on a desktop in Puerto Rico. The navigation model must serve both without compromise.
 
 ## Navigation Paradigm

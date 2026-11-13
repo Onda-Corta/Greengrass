@@ -1104,3 +1104,226 @@ Fijados al revisar `spec/pitch.md` y `spec/demo.md` el 2026-10-06, tras el códi
 | reset (al final de la sesión) | **reinicio** | El botón se llama *Reiniciar la demo*; en prosa, *el reinicio*. |
 | retry | **reintentar** / **reintento** | |
 | stalled (hilo) | **atascado** | |
+
+---
+
+# Términos añadidos para las ADR-022 a ADR-027 (Core, módulos, carriles, superficies, bus de eventos, identidad por cliente, precios por carril y sincronización con terceros)
+
+Fijados antes de traducir las seis ADR y las secciones que enmiendan. La descripción de los
+dos carriles la escribió en español quien dirige el producto, así que aquí manda su
+vocabulario: donde ese texto ya tiene una palabra, se usa esa y no otra.
+
+## Reglas resueltas
+
+- **`Greengrass` nombra ahora el producto del carril político, no la infraestructura.** El
+  corpus escribe `GreenGrass` en todas partes y con ese nombre se refería a la plataforma
+  entera. No se normaliza ni en un sentido ni en el otro: los documentos anteriores quedan
+  como están y la diferencia de grafía queda anotada como `REVISIT:` en la ADR-022, en los
+  dos idiomas. El Core todavía no tiene nombre propio.
+- **`la dueña del producto` y `la Comercializadora` se usan tal como las dio quien dirige
+  el producto, sin definirlas.** En inglés son *the product's owner* y *the
+  Comercializadora*. Cada documento que las usa las marca `REVISIT:` para pedir la
+  definición, en los dos idiomas. No se glosan, no se sustituyen por un nombre de empresa.
+- **`Verify:` es un marcador, como `REVISIT:`.** Señala un dato que el memo dio sin
+  comprobar (el conector de NationBuilder de Parsons y su licencia, la API de NationBuilder,
+  las funciones de NATS que necesita el bus). En español va **Verificar:**, en negrita, y
+  la frase que lo sigue se traduce. No se afirma como cierto y no se borra.
+- **Una ADR propuesta no enmienda: propone enmendar.** El aviso que una ADR `Propuesta`
+  pone sobre una ADR aceptada dice **Enmienda propuesta por:**, no *Enmendada por:*, y
+  aclara que nada cambia hasta que se acepte. *Enmendada por:* queda para las ADR aceptadas
+  y para lo que una ADR propuesta registra como ya decidido.
+- **`módulo interno` cambia de nombre.** La ADR-019 llamó *módulo interno* a lo que corre
+  dentro de la instancia. Desde la ADR-022 eso es un **componente de instancia**, y
+  *módulo* a secas es la unidad que un cliente activa. Los documentos anteriores a la
+  ADR-022 que dicen *módulo interno* se leen como *componente de instancia*.
+- **`Encuestas y sondeos` es el nombre de un módulo y va tal cual.** La regla de la ADR-020
+  (*nunca «sondeo»* para `poll`) sigue en pie en la prosa; el nombre del módulo es de quien
+  dirige el producto y no se toca.
+
+## Core, módulos y carriles
+
+| Inglés | Español | Nota |
+|---|---|---|
+| Core | **Core** / **producto central (Core)** | No se traduce. Masculino: *el Core*. La primera vez en cada documento, *el producto central (Core)*, como en el texto original. |
+| lane | **carril** | *Carril político*, *carril comercial*. Un carril es configuración sobre una sola base de código, nunca una bifurcación. |
+| lane-only (module) | **de un solo carril** | *Módulo de un solo carril.* |
+| lane-neutral | **neutral respecto al carril** | |
+| lane configuration / lane rule | **configuración de carril** / **regla del carril** | |
+| Greengrass (el producto) | **Greengrass** | Ver la regla de arriba. |
+| Basecamp (PR Media / Relacionistas.app) | **Basecamp (PR Media/Relacionistas.app)** | No se traduce. |
+| Blimp.io · Onda Corta · R&R · PIP · MVC · Alianza de País · Asociación de Publicistas | *(no se traducen)* | En inglés la Asociación y la Alianza también quedan en español. |
+| client | **cliente** | La organización que contrata el producto de un carril. `tenant → organización` no cambia; *cliente* se usa cuando lo que importa es la relación comercial. |
+| instance | **instancia** | *Cada cliente corre su propia instancia.* `deployment → despliegue` sigue en pie; en esta dirección las dos palabras nombran lo mismo. |
+| module | **módulo** | La unidad que un cliente activa y que lista el catálogo. |
+| module catalogue | **catálogo de módulos** | Distinto del *catálogo de servicios* de la ADR-019, que lista servicios centrales. |
+| shared module | **módulo compartido** | |
+| in-tenant component | **componente de instancia** | El *módulo interno* de la ADR-019, con otro nombre. No *componente* a secas, que es del sistema de diseño. |
+| module contract | **contrato de módulo** | Lo que todo módulo declara. No es un *contrato de intercambio*. |
+| manifest | **manifiesto** | *El manifiesto del módulo.* |
+| signed module package | **paquete de módulo firmado** | |
+| vetted partner | **tercero aprobado** | Quien podrá construir módulos más adelante. No *socio*, que ya es el de una coalición. |
+| first-party module | **módulo propio** | Construido por GreenGrass. |
+| release train | **tren de versiones** | Cada carril fija las versiones que corre y actualiza a su ritmo. |
+| to pin (a version) | **fijar** (una versión) | |
+| breaking change / deprecation window | **cambio incompatible** / **plazo de retirada** | |
+| extension point | **punto de extensión** | |
+| operator (de un carril) | **operador** | Quien administra las instancias de un carril. |
+| shared public corpus | **corpus público compartido** | |
+| named, not yet specified | **nombrado, todavía sin especificar** | Estado de los módulos que el catálogo nombra y ningún documento especifica. |
+| differentiator | **lo que ningún competidor tiene** | Se reformula. No *diferenciador*. |
+
+## Los módulos del catálogo
+
+Los nombres en español son los del texto original.
+
+| Inglés | Español |
+|---|---|
+| Radio & TV monitoring | **Monitoreo de radio y TV** |
+| Social monitoring | **Monitoreo de redes** |
+| Press summary | **Resumen de prensa** |
+| Ad-art builder | **Constructor de artes publicitarios** |
+| Electoral analysis | **Análisis electoral** |
+| Crisis management | **Manejo de crisis** |
+| Polls & surveys | **Encuestas y sondeos** |
+| Content distribution | **Distribución de contenido** |
+| Street operations | **Operaciones de calle** |
+| Events & volunteers | **Manejo de eventos y voluntarios** |
+| Fundraising & payments | **Recaudación y pagos** |
+| Voter File (el módulo) | **Padrón electoral** |
+| Coalition Trust | **Fideicomiso de coalición** |
+| Opposition research & vetting | **Investigación de la oposición e investigación propia** |
+| Activism | **Activismo** |
+
+## Superficies y chat
+
+| Inglés | Español | Nota |
+|---|---|---|
+| surface | **superficie** | Donde una persona hace el trabajo: el chat, la UI de administración o la app de campo. Ya fijado en el sistema de diseño; aquí es el mismo sentido. |
+| headless | **headless** | Se mantiene, como en el texto original. Primera aparición por documento: *headless (sin interfaz propia: todo es primero una operación de la API)*. El `headless browser → navegador sin interfaz` de la demostración no cambia. |
+| chat UI | **UI de chat** | Masculino, como en el original: *un UI de chat*. |
+| admin UI | **UI de administración** | |
+| field app | **app de campo** | La superficie sin conexión. El *modo de campo* es su modo de trabajo y sigue en pie. |
+| the person's hands | **las manos de la persona** | La posición propuesta: el chat no es un segundo actor. |
+| second actor | **segundo actor** | |
+| chat operation (read / write) | **operación de chat** (de lectura / de escritura) | |
+| declared operations | **operaciones declaradas** | Las que el manifiesto del módulo enumera. El modelo elige entre ellas y no inventa otras. |
+| confirmation card | **tarjeta de confirmación** | `card → tarjeta`. |
+| confirmed write | **escritura confirmada** | |
+| daily briefing | **resumen del día** | |
+| digest | **resumen** | *Resumen del monitoreo*, *resumen diario de prensa*. |
+| default chat channel | **canal de chat por defecto** | |
+| in-app chat | **chat dentro de la app** | |
+| to re-tag (screens by surface) | **reclasificar por superficie** | No *reetiquetar*: `tag → etiqueta` es del CRM. |
+
+## Bus de eventos
+
+| Inglés | Español | Nota |
+|---|---|---|
+| event bus / service bus | **bus de eventos** | *Service bus de eventos* en el original; en prosa, *bus de eventos*. |
+| integration spine | **columna vertebral de integración** | |
+| domain event | **evento de dominio** | Los nombres (`person.created`, `consent.changed`) son identificadores y no se traducen. |
+| to publish / to subscribe / subscriber | **publicar** / **suscribirse** / **suscriptor** | |
+| export / import (de un flujo de eventos) | **exportación** / **importación** | *Cada organización exporta un subconjunto filtrado de su flujo.* |
+| filtered at the source | **filtrado en el origen** | |
+| opaque in transit | **opaco en tránsito** | |
+| relay | **retransmisor** | Lo que GreenGrass opere entre instancias: ve metadatos de enrutamiento, nunca contenido. |
+| routing metadata | **metadatos de enrutamiento** | |
+| durable consumer | **consumidor duradero** | |
+| request and reply | **solicitud y respuesta** | |
+| to claw back | **recuperar** (lo ya entregado) | *Lo ya entregado no se recupera.* |
+| leaf node / account (NATS) | **nodo hoja** / **cuenta** | |
+
+## Identidad por cliente
+
+| Inglés | Español | Nota |
+|---|---|---|
+| identity per client | **identidad por cliente** | |
+| shared platform identity service | **servicio de identidad compartido de la plataforma** | Lo que la ADR-025 deja sin efecto. |
+| account | **cuenta** | *Sus propias cuentas.* |
+| tenant selector | **selector de organización** | Desaparece con la ADR-025. |
+| multi-org membership | **pertenencia a varias organizaciones** | |
+| single sign-on | **inicio de sesión único** | |
+| opt-in trust (entre instancias) | **confianza opcional entre instancias** | |
+| per-instance operator procedure | **procedimiento del operador de cada instancia** | |
+
+## Precios por carril
+
+| Inglés | Español | Nota |
+|---|---|---|
+| the product's owner | **la dueña del producto** | Ver la regla de arriba. |
+| the Comercializadora | **la Comercializadora** | Ver la regla de arriba. |
+| commission | **comisión** | En el carril político, *la comisión que cubre el costo de vender*; en el comercial, *la comisión de la Comercializadora*. La nota de la ADR-019 que reservaba *comisión* para las donaciones queda acotada: la de las donaciones sigue siendo *comisión de la plataforma sobre las donaciones*, y sigue en cero. |
+| cost of selling | **costo de vender** | |
+| margin | **margen** | Ya fijado. *Un margen de 30 %.* |
+| cost plus … | **al costo, más …** | *Se les cobra al costo, más la comisión que cubre el costo de vender.* |
+| price rule | **regla de precio** | La que cada carril aplica encima del costo medido. |
+| two-lane pricing | **precios por carril** | |
+| statement line | **línea del estado de cuenta** | Costo, margen y comisión van en líneas separadas. |
+| free tier | **plan gratuito** | Como en la ADR-019. |
+
+## Sincronización con terceros y conectores
+
+| Inglés | Español | Nota |
+|---|---|---|
+| third-party CRM sync | **sincronización del CRM con herramientas de terceros** | |
+| bidirectional sync | **sincronización bidireccional** | |
+| round trip (CSV) | **ida y vuelta** | *El CSV de ida y vuelta.* |
+| connector | **conector** | Un enlace con una herramienta externa, como NationBuilder. Vive en el centro de integraciones y no es un módulo. Un *adaptador* es la pieza de código por proveedor; el conector es lo que el cliente activa. |
+| connector layer | **capa de conectores** | |
+| connector worker | **proceso de conectores** | El contenedor de Python aparte. No *trabajador*. |
+| system of record | **sistema de referencia** | El que manda sobre un dato. No *sistema de registro*: `record` y `log` ya ocupan *registro*. |
+| which side wins (per field) | **qué lado prevalece** (por campo) | |
+| identity crosswalk / external-ID map | **correspondencia de identidades** / **mapa de identificadores externos** | |
+| incremental cursor | **cursor incremental** | |
+| the most restrictive value wins | **gana el valor más restrictivo** | |
+| field scope | **campos incluidos** | *Denegado por defecto.* No *ámbito*, que es de permisos. |
+| sync batch | **lote de sincronización** | |
+| ETL | **ETL** | Se mantiene. |
+| supply-chain surface | **superficie de ataque de la cadena de suministro** | |
+| to pin and vendor (dependencias) | **fijar las versiones y guardar copia de las dependencias** | |
+| sandboxed | **en un entorno restringido** | |
+| spike | **prueba técnica** | No *pico*. |
+| payment layer / shared payment layer | **capa de pagos** / **capa de pagos compartida** | |
+| micropayment | **micropago** | |
+| donation rules | **reglas de donación** | Configuración del carril político sobre la capa de pagos. |
+
+## Acuñados durante la traducción
+
+Los cuatro pases de traducción acuñaron estos términos. Donde dos pases eligieron palabras
+distintas, aquí queda la que ganó.
+
+| Inglés | Español | Nota |
+|---|---|---|
+| standing (de un punto: decidido, propuesto, abierto) | **situación** | *Situación frente a la ADR-018.* No *condición*. |
+| Delivery / Commerce / Plumbing (grupos del Core) | **Entrega** / **Comercio** / **Infraestructura común** | |
+| policy defaults / security defaults | **políticas por defecto** / **valores de seguridad por defecto** | |
+| compliance packs | **paquetes de cumplimiento** | |
+| deployment image | **imagen de despliegue** | |
+| packaging (cómo se vende el monitor) | **empaquetado** | |
+| price list | **lista de precios** | |
+| API parity / internal-only API | **paridad de la API** / **API de uso solo interno** | |
+| chat-first / chat-shaped | **donde el chat va primero** / **con forma de chat** | |
+| follow-up work | **trabajo pendiente** | |
+| reconciliation pass | **revisión de conciliación** | `reconciliation → conciliación`. No *pasada de reconciliación*. |
+| itemised statement | **estado de cuenta desglosado** | No *detallado*. |
+| rate limits (de una API) | **límites de solicitudes** | Ya fijado; no *límites de tasa*. |
+| explicit acknowledgement (salida del perímetro) | **aceptación explícita** | Como en la ADR-019. El *acuse de recibo* del glosario es el de un modal. |
+| trademark check | **verificación de marca registrada** | |
+| critical path | **ruta crítica** | |
+| proving exercise | **ejercicio de comprobación** | Junto a `spike → prueba técnica`. |
+| safeguard | **salvaguarda** | |
+| locked-out Org Admin | **Administrador de la organización que perdió el acceso** | |
+| cooling-off period | **período de espera** | Como en la ADR-016. |
+| to match (a una persona entre organizaciones) | **cruzar** / **el cruce** | Como en `system.md`. |
+| inbound / outbound (CSV) | **de entrada** / **de salida** | |
+| saved mapping | **mapeo guardado** | |
+| keyed by (`nationbuilder_id`) | **con … como clave** | |
+| cadence | **ritmo** | |
+| standing access | **acceso permanente** | |
+| data warehouse | **almacén de datos** | |
+| runtime | **entorno de ejecución** | |
+| to quote (un precio) | **cotizar** / **cotización** | |
+| "No migration" (posición de producto) | **«Sin mudanza»** | De `migration → mudanza desde otra plataforma`. |
+| kept so the reversal is visible | **se conserva para que el cambio de rumbo quede a la vista** | |
+| RESOLVED, then reversed | **RESUELTO, y después revertido** | |
+| becomes secondary (una pantalla) | **pasa a segundo plano** | |

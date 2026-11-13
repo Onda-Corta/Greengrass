@@ -250,6 +250,7 @@ GreenGrass acts as a data processor on behalf of tenants (data controllers). Eac
 Per-country data residency (already decided) minimizes cross-border transfer issues. However, transfers still occur:
 
 - **Platform identity data** lives in incorporation jurisdiction → read replicas in each country
+  - *Superseded by [ADR-025](../decisions/025-identity-per-client.md): identity is per client. There is no platform identity data, no primary in the incorporation jurisdiction and no replicas. A person's account lives in the tenant's own instance, in the tenant's chosen country, with the rest of the tenant's data.*
 - **Tenant data** stays in-country by default
 - **Alliance data sharing** may cross borders when alliance members are in different countries
 
