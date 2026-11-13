@@ -3,6 +3,7 @@
 **Estado:** Aceptada
 **Fecha:** 2026-03-03
 **Fuentes:** `spec/users.md`, `spec/workflows.md`
+**Enmendada por:** [ADR-025](025-identity-per-client.md) — la identidad es por cliente. Cada instancia corre su propio servicio de identidad y guarda sus propias cuentas. «Identidad federada con perfiles por organización» y «Reparto entre la identidad de plataforma y los datos que son de la persona», más abajo, quedan sin efecto como diseño a nivel de plataforma: no hay identidad a nivel de plataforma, una persona en dos organizaciones tiene dos cuentas y no hay selector de organización. Las plantillas de rol, los ámbitos, el intercambio en alianzas, la aprobación de voluntarios y los modelos de gobernanza no cambian.
 
 ## Contexto
 

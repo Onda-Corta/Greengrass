@@ -19,7 +19,7 @@ This ADR is `Proposed`. The bus replacing the federation layer is not yet agreed
 1. **[system.md § System Topology](../design/architecture/system.md#system-topology)** has a central federation layer. This ADR proposes to replace it with contract-filtered event exports between instances.
 2. **[ADR-001 § Federation model over monolithic multi-tenancy](001-platform-architecture.md#federation-model-over-monolithic-multi-tenancy)** and **[users.md § Organization Hierarchy](../spec/users.md#organization-hierarchy)** make an alliance a "lightweight coordination tenant" that does not replicate the full platform stack. In this direction the alliance is a client like any other, with its own instance. Under [ADR-022](022-core-modules-and-lanes.md) the two readings can meet, since an instance with few modules enabled is a light one. That reading is proposed here, not decided.
 3. **[system.md § Cross-channel orchestration engine](../design/architecture/system.md#cross-channel-orchestration-engine)** specifies mutual suppression as a central service that asks each member and combines the flags ([ADR-019](019-central-services-and-metered-billing.md)). This ADR proposes it as request and reply over the bus. The rules are the same; the carrier changes.
-4. **[users.md § Multi-org membership](../spec/users.md#multi-org-membership)** lets "the alliance layer" see that a person exists across member tenants. With no central layer and no shared identity (ADR-025), that visibility exists only as a contract term between instances.
+4. **[users.md § Multi-org membership](../spec/users.md#multi-org-membership)** lets "the alliance layer" see that a person exists across member tenants. With no central layer and no shared identity ([ADR-025](025-identity-per-client.md)), that visibility exists only as a contract term between instances.
 
 ## Decision
 
@@ -56,7 +56,7 @@ Proposed, and not yet agreed.
 
 Federation becomes contract-filtered event exports between instances, with no central component that holds or mediates cross-organization data. This is a simplification: it removes the one central piece that had to be trusted with cross-tenant flow. It is also an architectural change, and until this ADR is accepted the three-layer topology in [system.md § System Topology](../design/architecture/system.md#system-topology) stands, with the bus drawn beside it as a proposal.
 
-What the platform layer keeps is what does not carry organization data: provisioning, the catalogue, entitlements and metering, and any relay, which sees routing metadata only. Identity leaves it under ADR-025.
+What the platform layer keeps is what does not carry organization data: provisioning, the catalogue, entitlements and metering, and any relay, which sees routing metadata only. Identity leaves it under [ADR-025](025-identity-per-client.md).
 
 ### The same shape in the commercial lane
 
@@ -101,4 +101,4 @@ This ADR adds an **Amendment proposed by** line to [ADR-001](001-platform-archit
 - An unanswered member is never a veto
 - Until this ADR is accepted, the federation layer in `system.md` is the specified design
 
-**Related ADRs:** [ADR-001](001-platform-architecture.md) (amendment proposed: the federation model's central layer; instance isolation unchanged), [ADR-017](017-sharing-contract-trust-model.md) (the contract filters every export), [ADR-019](019-central-services-and-metered-billing.md) (usage events on the same stream; `alliance_pays`; mutual suppression), [ADR-022](022-core-modules-and-lanes.md) (events are Core; Coalition Trust is a module for both lanes), ADR-025 (no shared identity to match people through), ADR-027 (the connector worker sits behind the bus)
+**Related ADRs:** [ADR-001](001-platform-architecture.md) (amendment proposed: the federation model's central layer; instance isolation unchanged), [ADR-017](017-sharing-contract-trust-model.md) (the contract filters every export), [ADR-019](019-central-services-and-metered-billing.md) (usage events on the same stream; `alliance_pays`; mutual suppression), [ADR-022](022-core-modules-and-lanes.md) (events are Core; Coalition Trust is a module for both lanes), [ADR-025](025-identity-per-client.md) (no shared identity to match people through), ADR-027 (the connector worker sits behind the bus)

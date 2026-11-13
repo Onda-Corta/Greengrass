@@ -17,7 +17,7 @@ Esta ADR está `Propuesta` porque dos cosas de las que depende siguen abiertas: 
 | Punto | Situación |
 |---|---|
 | Dos carriles sobre una misma infraestructura, como se describe en [Dos carriles sobre una misma infraestructura](#dos-carriles-sobre-una-misma-infraestructura) | Decidido |
-| Cada cliente corre su propia instancia, con sus propios datos y sus propias cuentas | Decidido ([ADR-001](001-platform-architecture.md), ADR-025) |
+| Cada cliente corre su propia instancia, con sus propios datos y sus propias cuentas | Decidido ([ADR-001](001-platform-architecture.md), [ADR-025](025-identity-per-client.md)) |
 | El CRM es parte del Core | Decidido |
 | Recaudación y pagos es un solo módulo con una capa de pagos compartida | Decidido |
 | Los módulos los construye primero GreenGrass; el contrato de módulo se diseña para que terceros aprobados puedan construir después | Decidido |
@@ -108,7 +108,7 @@ Toda instancia recibe todo esto, siempre. El Core es headless: cada elemento es 
 
 | Grupo | Contenido | Ya decidido en |
 |---|---|---|
-| Confianza | Niveles de aislamiento, identidad y passkeys (un servicio de identidad por cliente, ADR-025), llaves y BYOK, contratos de intercambio, el registro de auditoría | [ADR-001](001-platform-architecture.md), [ADR-002](002-security-threat-model.md), [ADR-003](003-identity-access-organization.md), [ADR-017](017-sharing-contract-trust-model.md) |
+| Confianza | Niveles de aislamiento, identidad y passkeys (un servicio de identidad por cliente, [ADR-025](025-identity-per-client.md)), llaves y BYOK, contratos de intercambio, el registro de auditoría | [ADR-001](001-platform-architecture.md), [ADR-002](002-security-threat-model.md), [ADR-003](003-identity-access-organization.md), [ADR-017](017-sharing-contract-trust-model.md) |
 | Datos: el CRM | Las personas y la lista única, tipos de registro, consentimiento por canal y por finalidad, deduplicación con sugerir y confirmar, segmentos, importación y exportación, sincronización con terceros (ADR-027) | [users.md](../spec/users.md), [ADR-004](004-data-model-integrity.md) |
 | Contenido | Almacén de contenido, recursos versionados, flujo de aprobación por rondas | [ADR-021](021-content-approval-pipeline.md) |
 | Entrega | Transporte por canal con verificación de consentimiento, topes de frecuencia, la ventana de silencio y la supresión mutua | [system.md § Motor de orquestación entre canales](../design/architecture/system.md#motor-de-orquestación-entre-canales), [ADR-016](016-cross-cutting-resolutions.md) §2, [ADR-019](019-central-services-and-metered-billing.md) |
@@ -121,7 +121,7 @@ Toda instancia recibe todo esto, siempre. El Core es headless: cada elemento es 
 
 **Dos primitivas de la inteligencia de comunicaciones resultan ser del Core. Propuesto.** [comms-intelligence.md § 5. Siete funcionalidades son tres primitivas](../spec/comms-intelligence.md#5-siete-funcionalidades-son-tres-primitivas) nombra tres. El grafo de actores (medios, propiedad, periodistas, analistas) son entidades y relaciones del CRM, así que extiende el CRM del Core. El libro de afirmaciones (afirmación, fuentes, estado de verificación, respuesta aprobada) es una pieza de contenido, así que extiende el almacén de contenido del Core. Solo el expediente compartimentado es propio de un módulo, y su mecanismo de acceso son los contratos de la ADR-017, que son del Core.
 
-El resto de la tabla está propuesto. La identidad por cliente se decide en la ADR-025.
+El resto de la tabla está propuesto. La identidad por cliente se decide en la [ADR-025](025-identity-per-client.md).
 
 **Alternativas consideradas:** Se consideró y se descartó hacer del CRM un módulo. Casi todos los módulos dependerían entonces de él, y cada módulo tendría que hacer valer el consentimiento por su cuenta, que es como una baja se respeta en un sitio y se ignora en otro.
 
@@ -224,4 +224,4 @@ Una ADR propuesta no enmienda nada hasta que se acepta. Esta ADR añade una lín
 - El punto de decisión de la [ADR-018](018-ai-agent-posture.md) aplica a todo el Core, y por lo tanto a los dos carriles ([ADR-023](023-surfaces-chat-admin-field.md))
 - Nada de lo que esta ADR marca como propuesto, recomendado o abierto puede usarse como base para construir como si estuviera decidido
 
-**ADR relacionadas:** [ADR-001](001-platform-architecture.md) (una instancia por cliente, reafirmada), [ADR-015](015-product-scope.md) (enmienda propuesta: el catálogo nombra módulos fuera de su lista de alcance), [ADR-017](017-sharing-contract-trust-model.md) (los contratos son del Core), [ADR-018](018-ai-agent-posture.md) (el manifiesto declara la situación de cada módulo frente al punto de decisión), [ADR-019](019-central-services-and-metered-billing.md) (enmienda propuesta: «módulo interno» pasa a ser «componente de instancia»; el catálogo, los derechos de uso y la medición de uso son del Core), [ADR-020](020-central-service-line-up-and-builders.md) (enmienda propuesta: el único monitor de medios se empaqueta como tres módulos; los cuatro servicios no cambian), [ADR-021](021-content-approval-pipeline.md) (el flujo de contenido es del Core), [ADR-023](023-surfaces-chat-admin-field.md) (superficies), [ADR-024](024-event-bus-as-federation.md) (el bus; alianzas y asociaciones), ADR-025 (identidad por cliente), ADR-026 (precios), ADR-027 (sincronización y conectores)
+**ADR relacionadas:** [ADR-001](001-platform-architecture.md) (una instancia por cliente, reafirmada), [ADR-015](015-product-scope.md) (enmienda propuesta: el catálogo nombra módulos fuera de su lista de alcance), [ADR-017](017-sharing-contract-trust-model.md) (los contratos son del Core), [ADR-018](018-ai-agent-posture.md) (el manifiesto declara la situación de cada módulo frente al punto de decisión), [ADR-019](019-central-services-and-metered-billing.md) (enmienda propuesta: «módulo interno» pasa a ser «componente de instancia»; el catálogo, los derechos de uso y la medición de uso son del Core), [ADR-020](020-central-service-line-up-and-builders.md) (enmienda propuesta: el único monitor de medios se empaqueta como tres módulos; los cuatro servicios no cambian), [ADR-021](021-content-approval-pipeline.md) (el flujo de contenido es del Core), [ADR-023](023-surfaces-chat-admin-field.md) (superficies), [ADR-024](024-event-bus-as-federation.md) (el bus; alianzas y asociaciones), [ADR-025](025-identity-per-client.md) (identidad por cliente), ADR-026 (precios), ADR-027 (sincronización y conectores)
