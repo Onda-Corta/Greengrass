@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en" data-base="../" data-no-results="No results for">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ADR-027: Third-Party CRM Sync &amp; Connectors · GreenGrass</title>
+<meta name="description" content="ADR-027: Third-Party CRM Sync &amp; Connectors — GreenGrass spec &amp; design documentation.">
+<link rel="alternate" hreflang="en" href="./027-third-party-crm-sync-and-connectors.html">
+<link rel="alternate" hreflang="es" href="../es/decisions/027-third-party-crm-sync-and-connectors.html">
+<link rel="alternate" hreflang="x-default" href="./027-third-party-crm-sync-and-connectors.html">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%232563eb'/%3E%3Cstop offset='1' stop-color='%2316a34a'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='32' height='32' rx='7' fill='url(%23g)'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="../assets/styles.css">
+</head>
+<body>
+<a class="skip-link" href="#content">Skip to content</a>
+<header class="site-header">
+  <button type="button" class="menu-toggle" aria-label="Toggle navigation" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+  <a class="brand" href="../index.html">
+    <span class="brand-mark" aria-hidden="true"></span>
+    <span class="brand-text"><strong>GreenGrass</strong><small>Spec &amp; Design</small></span>
+  </a>
+  <div class="search">
+    <input type="search" id="search-input" placeholder="Search docs…" autocomplete="off" aria-label="Search documentation">
+    <div id="search-results" class="search-results" hidden></div>
+  </div>
+  <nav class="lang-switch" aria-label="Language"><span class="lang-opt active" aria-current="true">EN</span><a class="lang-opt" href="../es/decisions/027-third-party-crm-sync-and-connectors.html" hreflang="es" lang="es" title="Ver esta página en español">ES</a></nav>
+  <button type="button" class="theme-toggle" aria-label="Toggle dark mode" title="Toggle dark mode">
+    <span class="theme-icon" aria-hidden="true"></span>
+  </button>
+</header>
+<div class="layout">
+  <div class="sidebar-backdrop" hidden></div>
+  <aside class="sidebar" aria-label="Documentation navigation">
+    <nav class="nav">
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">Home<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../index.html">GreenGrass</a></li></ul></div>
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">Specifications<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../spec/pitch.html">Pre-MVP Pitch</a></li><li><a href="../spec/demo.html">Campaign Approval Demo Spec</a></li><li><a href="../spec/product.html">Project: GreenGrass</a></li><li><a href="../spec/mvp.html">GreenGrass MVP — Product Plan</a></li><li><a href="../spec/users.html">Users &amp; Roles</a></li><li><a href="../spec/workflows.html">Core Workflows</a></li><li><a href="../spec/geography.html">Target Geography</a></li><li><a href="../spec/security.html">Security &amp; Threat Model</a></li><li><a href="../spec/compliance.html">Compliance &amp; Legal Framework</a></li><li><a href="../spec/fundraising.html">Fundraising &amp; Payment Infrastructure</a></li><li><a href="../spec/integrations.html">External Integrations</a></li><li><a href="../spec/support.html">Tenant Support &amp; Onboarding</a></li><li><a href="../spec/gotv.html">Get Out The Vote &amp; Election Day Operations</a></li><li><a href="../spec/messaging.html">Internal Communications &amp; Notifications</a></li><li><a href="../spec/press.html">Press, Media &amp; Public Communications</a></li><li><a href="../spec/comms-intelligence.html">Comms Intelligence — Post-MVP Roadmap</a></li></ul></div>
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">Architecture<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../design/architecture/system.html">System Architecture</a></li></ul></div>
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">UX Design<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../design/ux/00-overview.html">UX Design Overview</a></li><li><a href="../design/ux/01-information-architecture/navigation-model.html">Navigation Model</a></li><li><a href="../design/ux/01-information-architecture/screen-inventory.html">Screen Inventory</a></li><li><a href="../design/ux/01-information-architecture/persona-views.html">Persona Views</a></li><li><a href="../design/ux/01-information-architecture/url-structure.html">URL Structure</a></li><li><a href="../design/ux/02-global-patterns/pattern-catalog.html">Pattern Catalog</a></li><li><a href="../design/ux/02-global-patterns/offline-sync-patterns.html">Offline &amp; Sync Patterns</a></li><li><a href="../design/ux/02-global-patterns/notification-patterns.html">Notification Patterns</a></li><li><a href="../design/ux/02-global-patterns/search-patterns.html">Search Patterns</a></li><li><a href="../design/ux/02-global-patterns/settings-help-patterns.html">Settings &amp; Help Patterns</a></li><li><a href="../design/ux/02-global-patterns/security-ux-patterns.html">Security UX Patterns</a></li><li><a href="../design/ux/03-design-system/foundations.html">Design System Foundations</a></li><li><a href="../design/ux/03-design-system/theming-strategy.html">Theming Strategy</a></li><li><a href="../design/ux/03-design-system/component-inventory.html">Component Inventory</a></li><li><a href="../design/ux/03-design-system/responsive-strategy.html">Responsive Strategy</a></li><li><a href="../design/ux/04-wireframes/index.html">Wireframes</a></li><li><a href="../design/ux/04-wireframes/navigation-shell/navigation-shell.html">Navigation Shell Wireframes</a></li><li><a href="../design/ux/04-wireframes/dashboards/dashboards.html">Dashboard Wireframes</a></li><li><a href="../design/ux/04-wireframes/field-mode/field-mode.html">Field Mode Wireframes</a></li><li><a href="../design/ux/04-wireframes/onboarding/onboarding.html">Onboarding Wireframes</a></li><li><a href="../design/ux/04-wireframes/messaging/messaging.html">Messaging Wireframes</a></li><li><a href="../design/ux/04-wireframes/supporter/supporter-portal.html">Supporter Portal Wireframes</a></li><li><a href="../design/ux/04-wireframes/alliance/alliance.html">Alliance Wireframes</a></li><li><a href="../design/ux/04-wireframes/crm/crm.html">CRM / People Wireframes</a></li><li><a href="../design/ux/04-wireframes/field-ops/field-ops.html">Field Operations (Admin) Wireframes</a></li><li><a href="../design/ux/04-wireframes/fundraising/fundraising.html">Fundraising Wireframes</a></li><li><a href="../design/ux/04-wireframes/communications/communications.html">Communications Wireframes</a></li><li><a href="../design/ux/04-wireframes/social-media/social-media.html">Social Media Wireframes</a></li><li><a href="../design/ux/04-wireframes/events/events.html">Events Wireframes</a></li><li><a href="../design/ux/04-wireframes/press/press.html">Press &amp; Media Wireframes</a></li><li><a href="../design/ux/04-wireframes/activism/activism.html">Activism &amp; Engagement Campaign Wireframes</a></li><li><a href="../design/ux/04-wireframes/gotv/gotv.html">GOTV Admin Wireframes</a></li><li><a href="../design/ux/04-wireframes/settings/settings.html">Settings &amp; Admin Wireframes</a></li><li><a href="../design/ux/04-wireframes/auth/auth.html">Authentication Wireframes</a></li><li><a href="../design/ux/04-wireframes/profile/profile.html">User Profile Wireframes</a></li><li><a href="../design/ux/04-wireframes/help/help.html">Support &amp; Help Wireframes</a></li><li><a href="../design/ux/04-wireframes/public/public.html">Public Pages Wireframes</a></li><li><a href="../design/ux/04-wireframes/audit.html">Wireframe Audit Report</a></li><li><a href="../design/ux/04-wireframes/content-ops/content-ops.html">Content Operations Wireframes</a></li></ul></div>
+<div class="nav-section open"><button type="button" class="nav-section-title" aria-expanded="true">Decisions<span class="chev" aria-hidden="true"></span></button><ul><li><a href="./001-platform-architecture.html">ADR-001: Platform Architecture &amp; Deployment</a></li><li><a href="./002-security-threat-model.html">ADR-002: Security &amp; Threat Model</a></li><li><a href="./003-identity-access-organization.html">ADR-003: Identity, Access &amp; Organization</a></li><li><a href="./004-data-model-integrity.html">ADR-004: Data Model &amp; Integrity</a></li><li><a href="./005-offline-first-sync.html">ADR-005: Offline-First &amp; Sync</a></li><li><a href="./006-field-operations-gotv.html">ADR-006: Field Operations &amp; GOTV</a></li><li><a href="./007-fundraising-payments.html">ADR-007: Fundraising &amp; Payments</a></li><li><a href="./008-communications-messaging.html">ADR-008: Communications &amp; Messaging</a></li><li><a href="./009-compliance-legal.html">ADR-009: Compliance &amp; Legal Framework</a></li><li><a href="./010-internationalization-localization.html">ADR-010: Internationalization &amp; Localization</a></li><li><a href="./011-design-system-ux.html">ADR-011: Design System &amp; UX Foundations</a></li><li><a href="./012-external-integrations.html">ADR-012: External Integrations</a></li><li><a href="./013-analytics-ai.html">ADR-013: Analytics &amp; AI</a></li><li><a href="./014-volunteer-onboarding.html">ADR-014: Volunteer &amp; Onboarding</a></li><li><a href="./015-product-scope.html">ADR-015: Product Scope Boundaries</a></li><li><a href="./016-cross-cutting-resolutions.html">ADR-016: Cross-Cutting Resolutions</a></li><li><a href="./017-sharing-contract-trust-model.html">ADR-017: The Sharing Contract as Universal Trust Primitive</a></li><li><a href="./018-ai-agent-posture.html">ADR-018: AI Agent Posture</a></li><li><a href="./019-central-services-and-metered-billing.html">ADR-019: Central Services &amp; Metered Billing</a></li><li><a href="./020-central-service-line-up-and-builders.html">ADR-020: Central Service Line-up &amp; Builders</a></li><li><a href="./021-content-approval-pipeline.html">ADR-021: Content Approval Pipeline</a></li><li><a href="./022-core-modules-and-lanes.html">ADR-022: Core, Modules &amp; Lanes</a></li><li><a href="./023-surfaces-chat-admin-field.html">ADR-023: Surfaces — a Headless Core, Chat, Admin &amp; Field</a></li><li><a href="./024-event-bus-as-federation.html">ADR-024: The Event Bus as Federation</a></li><li><a href="./025-identity-per-client.html">ADR-025: Identity per Client</a></li><li><a href="./026-two-lane-pricing.html">ADR-026: Two-Lane Pricing</a></li><li><a href="./027-third-party-crm-sync-and-connectors.html" aria-current="page" class="active">ADR-027: Third-Party CRM Sync &amp; Connectors</a></li><li><a href="./ux-decisions.html">UX Decisions — Wireframe Phase</a></li></ul></div>
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">Diary<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../diary/index.html">Project Diary</a></li><li><a href="../diary/01-from-description-to-specification.html">Entry 1: From Description to Specification</a></li><li><a href="../diary/02-the-architecture-session.html">Entry 2: The Architecture Session</a></li><li><a href="../diary/03-information-architecture.html">Entry 3: Information Architecture</a></li><li><a href="../diary/04-design-system-and-wireframes.html">Entry 4: The Design System and Wireframes</a></li><li><a href="../diary/05-the-wireframe-audit.html">Entry 5: The Wireframe Audit</a></li><li><a href="../diary/06-resolving-the-open-questions.html">Entry 6: Resolving the Open Questions</a></li><li><a href="../diary/07-reconciling-the-architecture.html">Entry 7: Reconciling the Architecture</a></li><li><a href="../diary/08-housekeeping.html">Diary Entry 8: Housekeeping</a></li><li><a href="../diary/09-the-documentation-website.html">Diary Entry 9: The Documentation Website</a></li><li><a href="../diary/10-the-spanish-edition.html">Diary Entry 10: The Spanish Edition</a></li><li><a href="../diary/11-translating-the-rest.html">Diary Entry 11: Translating the Rest</a></li><li><a href="../diary/12-the-agent-question.html">Diary Entry 12: The Agent Question</a></li><li><a href="../diary/13-services-a-la-carte.html">Diary Entry 13: Services à la Carte</a></li><li><a href="../diary/14-the-proposal-under-review.html">Diary Entry 14: The Proposal Under Review</a></li><li><a href="../diary/15-not-a-creator-tool.html">Diary Entry 15: Not a Creator Tool</a></li><li><a href="../diary/16-the-pitch.html">Diary Entry 16: The Pitch</a></li><li><a href="../diary/17-two-lanes.html">Diary Entry 17: Two Lanes</a></li></ul></div>
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">Project &amp; Internal<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../claude/MEMORY.html">Memory</a></li><li><a href="../claude/SKILLS.html">Skills</a></li><li><a href="../CLAUDE.html">GreenGrass</a></li></ul></div>
+    </nav>
+  </aside>
+  <main id="content" class="content">
+    <nav class="breadcrumb" aria-label="Breadcrumb">Decisions</nav>
+    <article class="prose">
+<h1 id="adr-027-third-party-crm-sync-connectors" tabindex="-1"><a class="heading-anchor" href="#adr-027-third-party-crm-sync-connectors" aria-hidden="true">#</a> ADR-027: Third-Party CRM Sync &amp; Connectors</h1>
+<p><strong>Status:</strong> Proposed
+<strong>Date:</strong> 2026-11-13
+<strong>Sources:</strong> <code>spec/integrations.md</code>, <code>spec/mvp.md</code>, <code>spec/compliance.md</code>, <code>design/architecture/system.md</code>, <code>decisions/002-security-threat-model.md</code>, <code>decisions/004-data-model-integrity.md</code>, <code>decisions/005-offline-first-sync.md</code>, <code>decisions/012-external-integrations.md</code>, <code>decisions/017-sharing-contract-trust-model.md</code>, <code>decisions/022-core-modules-and-lanes.md</code>, <code>decisions/024-event-bus-as-federation.md</code></p>
+<h2 id="context" tabindex="-1"><a class="heading-anchor" href="#context" aria-hidden="true">#</a> Context</h2>
+<p><a href="../spec/integrations.html#migration-from-other-platforms">integrations.md § Migration from Other Platforms</a> decided how an organization arrives from another tool: migration guides plus the generic import. That is a one-way path. It assumes the organization leaves the tool it had.</p>
+<p>Victoria Ciudadana runs NationBuilder (<a href="../spec/mvp.html#mvc-movimiento-victoria-ciudadana">mvp.md § MVC — Movimiento Victoria Ciudadana</a>). Without sync, adopting the platform means leaving NationBuilder, which is the migration the MVP deliberately avoided. With sync, an organization can keep NationBuilder as its system of record and add modules beside it, coalition tools first. &quot;No migration&quot; becomes a product position, not just a pilot shortcut.</p>
+<p>The direction also proposes Parsons, Movement Co-op's Python library, as the connector layer, for interoperability with the tools the US left already runs and visibility among the people who run them.</p>
+<p>This ADR is <code>Proposed</code>. One requirement in it is decided, and is marked: NationBuilder sync, starting with a CSV round trip. API sync and Parsons are proposed, and three facts they rest on are not yet verified.</p>
+<h3 id="conflicts-this-adr-resolves" tabindex="-1"><a class="heading-anchor" href="#conflicts-this-adr-resolves" aria-hidden="true">#</a> Conflicts this ADR resolves</h3>
+<ol>
+<li><strong><a href="../spec/integrations.html#migration-from-other-platforms">integrations.md § Migration from Other Platforms</a></strong> decides &quot;migration guides + generic import&quot;, one way. Sync is two ways.</li>
+<li><strong><a href="./012-external-integrations.html">ADR-012</a></strong> is the integration strategy, and it has no decision about other campaign platforms at all. The migration decision lives only in <code>integrations.md</code>. ADR-012 gets a banner so that a reader of the integration ADR finds this one.</li>
+<li><strong><a href="../design/architecture/system.html#technology-stack">system.md § Technology Stack</a></strong> decides a TypeScript backend. Parsons is Python.</li>
+<li><strong><a href="../spec/mvp.html#1-context">mvp.md § 1. Context</a></strong> describes the full platform as one that &quot;asks a political party to migrate everything it does onto a new tool&quot;. With sync it no longer has to.</li>
+</ol>
+<h2 id="decision" tabindex="-1"><a class="heading-anchor" href="#decision" aria-hidden="true">#</a> Decision</h2>
+<h3 id="nationbuilder-sync-is-required-starting-with-csv" tabindex="-1"><a class="heading-anchor" href="#nationbuilder-sync-is-required-starting-with-csv" aria-hidden="true">#</a> NationBuilder sync is required, starting with CSV</h3>
+<p><strong>Decided.</strong> The core CRM syncs both ways with third-party tools. NationBuilder comes first, and CSV comes first, to bring in MVC.</p>
+<p>NationBuilder sync is a political-lane priority. The sync rules and the connectors live in the Core, so the commercial lane gets them for its own tools without extra work.</p>
+<h3 id="phase-a-the-csv-round-trip" tabindex="-1"><a class="heading-anchor" href="#phase-a-the-csv-round-trip" aria-hidden="true">#</a> Phase A: the CSV round trip</h3>
+<p>Decided as a requirement. The details below are the proposed design for it.</p>
+<ul>
+<li><strong>In:</strong> import NationBuilder's people export. <code>mvp.md</code> already lists its stable field names, from <code>nationbuilder_id</code> to <code>mobile_opt_in</code>. Map those fields once and save the mapping.</li>
+<li><strong>Out:</strong> export changes as a CSV that NationBuilder can import, keyed by <code>nationbuilder_id</code>.</li>
+<li><strong>Cadence:</strong> whatever the organization works at. That is what the MVP assumes anyway.</li>
+<li><strong>No standing access:</strong> this needs no API access, no OAuth app, and no ongoing credentials stored in the instance.</li>
+</ul>
+<p>Phase A extends the import pipeline and the export formats <code>integrations.md</code> already specifies. What is new is that the two are a pair: a saved mapping, an external identifier, and an export that the other tool can read back.</p>
+<h3 id="phase-b-api-sync" tabindex="-1"><a class="heading-anchor" href="#phase-b-api-sync" aria-hidden="true">#</a> Phase B: API sync</h3>
+<p>Proposed.</p>
+<p>The same mapping, run continuously through a connector, using webhooks or polling with incremental cursors. Phase A's rules carry over unchanged.</p>
+<h3 id="the-rules-live-in-the-core-crm-not-in-the-connector" tabindex="-1"><a class="heading-anchor" href="#the-rules-live-in-the-core-crm-not-in-the-connector" aria-hidden="true">#</a> The rules live in the core CRM, not in the connector</h3>
+<p>Proposed. They apply to both phases.</p>
+<ul>
+<li><strong>Identity crosswalk.</strong> Each person has an external-ID map (<code>nationbuilder_id</code> ↔ the person's own ID). Inbound records go through suggest-and-confirm dedup (<a href="./004-data-model-integrity.html#suggest-and-confirm-deduplication">ADR-004 § Suggest-and-confirm deduplication</a>). Sync never merges people on its own.</li>
+<li><strong>System of record per field.</strong> The organization chooses, per field, which side wins. It sets this once, when it connects.</li>
+<li><strong>Conflicts are kept on both sides and flagged for a person,</strong> as merge-and-flag already does for offline sync (<a href="./005-offline-first-sync.html">ADR-005</a>).</li>
+<li><strong>Consent is asymmetric.</strong> An opt-out or <code>do_not_contact</code> crosses both ways and the most restrictive value wins, whoever owns the field. An opt-in never overrides a newer opt-out.</li>
+<li><strong>Field scope is deny by default.</strong> <code>support_level</code>, <code>tags</code> and encrypted fields stay out unless switched on. Fields synced in remain subject to sharing contracts: arriving through sync never puts a field in a coalition's shared view (<a href="./017-sharing-contract-trust-model.html">ADR-017</a>).</li>
+<li><strong>The perimeter.</strong> Data sent to NationBuilder leaves the BYOK boundary. That needs the same acknowledgement BYOM requires (<a href="../design/architecture/system.html#byom-architecture">system.md § BYOM architecture</a>). For the Puerto Rico alpha, NationBuilder's US hosting is the same jurisdiction, so residency is a light question there. In Brazil or India it is not, and <a href="../spec/compliance.html#cross-border-data-transfers">compliance.md § Cross-Border Data Transfers</a> applies.</li>
+<li><strong>Audit.</strong> Every sync batch is an audit entry, with the connector as the actor.</li>
+</ul>
+<p><strong>Alternatives considered:</strong> Keeping the rules in connector scripts was rejected because each connector would then reimplement the crosswalk, per-field ownership, consent precedence and conflict handling differently, and consent is the one rule that cannot be allowed to vary by tool.</p>
+<h3 id="sync-is-not-a-module" tabindex="-1"><a class="heading-anchor" href="#sync-is-not-a-module" aria-hidden="true">#</a> Sync is not a module</h3>
+<p>Proposed.</p>
+<p>Sync is a core CRM capability exposed through connectors. A connector is a link to an outside tool; it sits in the integration hub (<a href="../design/architecture/system.html#integration-architecture">system.md § Integration Architecture</a>) and is not a module (<a href="./022-core-modules-and-lanes.html#vocabulary">ADR-022 § Vocabulary</a>). Connectors are catalogued and enabled per organization, as integrations are.</p>
+<h3 id="parsons-as-the-connector-layer" tabindex="-1"><a class="heading-anchor" href="#parsons-as-the-connector-layer" aria-hidden="true">#</a> Parsons as the connector layer</h3>
+<p>Proposed, pending the checks below.</p>
+<p>Why it fits:</p>
+<ul>
+<li>It is open source and built for progressive organizations.</li>
+<li>It already connects to much of the US left's stack: VAN/EveryAction, ActBlue, Action Network, Mobilize, Google Sheets and data warehouses.</li>
+<li>Contributing a connector to Parsons would make the platform a destination in other organizations' pipelines. That is real visibility, not a marketing claim.</li>
+</ul>
+<p>What to plan for:</p>
+<ul>
+<li><strong>Stack.</strong> The decided backend is TypeScript. Parsons is Python. It would run as a separate connector worker container in each instance, consuming from and publishing to the event bus (<a href="./024-event-bus-as-federation.html">ADR-024</a>). The bus is what makes the language split clean: the worker never touches the database directly.</li>
+<li><strong>Batch versus sync.</strong> Parsons is an ETL library built for batch jobs. That suits Phase A and scheduled syncs. The two-way rules above have to live in the core CRM, not in Parsons scripts.</li>
+<li><strong>Reach.</strong> Its connectors are largely US-centric. Brazil, Thailand, India and Lebanon will need connectors Parsons does not have. Parsons is the interoperability layer for the US left and Puerto Rico, not the whole connector story.</li>
+<li><strong>Threat model.</strong> A large Python dependency tree is a supply-chain surface under <a href="./002-security-threat-model.html">ADR-002</a>. Pin and vendor dependencies. Run the worker sandboxed, holding only its own connector's credential, fetched from Vault.</li>
+</ul>
+<p><strong>Verify before committing.</strong> None of these is asserted here:</p>
+<ul>
+<li><strong>Verify:</strong> that Parsons has a NationBuilder connector, and what it covers: people only, or donations and events too.</li>
+<li><strong>Verify:</strong> Parsons' licence.</li>
+<li><strong>Verify:</strong> NationBuilder's API rate limits and webhook coverage, for Phase B.</li>
+</ul>
+<p><strong>Alternatives considered:</strong> Writing every connector in TypeScript inside the application was the default the stack implies. Parsons is proposed over it for the connectors it already has and for the standing it gives among the organizations that use it. Neither argument holds if the checks above fail.</p>
+<h3 id="open-questions" tabindex="-1"><a class="heading-anchor" href="#open-questions" aria-hidden="true">#</a> Open questions</h3>
+<ol>
+<li><strong>Parsons:</strong> adopt it as the connector layer for the US left and Puerto Rico, after the verification above.</li>
+<li><strong>The three <em>Verify</em> items.</strong></li>
+<li><strong>A proving exercise.</strong> The direction proposes a political-lane spike with a real MVC export: Phase A's CSV round trip with Parsons, then mutual suppression between two instances over the bus (<a href="./024-event-bus-as-federation.html">ADR-024</a>). It is not scheduled.</li>
+<li><strong>The pilot.</strong> <a href="../spec/mvp.html">mvp.md</a> specifies the pilot as ingest-only. Whether Phase A's outbound half joins the pilot is not decided here, and the pilot plan is unchanged.</li>
+</ol>
+<h3 id="housekeeping-amendment-banners" tabindex="-1"><a class="heading-anchor" href="#housekeeping-amendment-banners" aria-hidden="true">#</a> Housekeeping: amendment banners</h3>
+<p>This ADR adds an <strong>Amended by</strong> line to <a href="./012-external-integrations.html">ADR-012</a>, for the decided requirement, which also notes what is proposed.</p>
+<h2 id="consequences" tabindex="-1"><a class="heading-anchor" href="#consequences" aria-hidden="true">#</a> Consequences</h2>
+<p><strong>Benefits:</strong></p>
+<ul>
+<li>An organization can adopt the platform without leaving the tool it runs today</li>
+<li>MVC arrives with its NationBuilder data and its consent flags intact, and can send changes back</li>
+<li>One set of sync rules serves every connector and both lanes</li>
+<li>Phase A needs no credentials and no API, so it can exist before any connector does</li>
+<li>If Parsons holds up, the platform reaches a set of tools it would otherwise integrate one by one</li>
+</ul>
+<p><strong>Costs:</strong></p>
+<ul>
+<li>Two-way sync is harder than one-way import: conflicts, per-field ownership and an external identifier on every person</li>
+<li>A second language and a second runtime in every instance, if Parsons is adopted</li>
+<li>Data sent to an outside CRM leaves the encryption boundary, and the client has to accept that knowingly</li>
+<li>The Parsons proposal rests on three unverified facts</li>
+</ul>
+<p><strong>Constraints:</strong></p>
+<ul>
+<li>Sync never merges people on its own; dedup is suggest-and-confirm (<a href="./004-data-model-integrity.html">ADR-004</a>)</li>
+<li>An opt-out always crosses, and the most restrictive consent value wins</li>
+<li>Sensitive fields stay out of sync unless switched on, and a synced field never enters a shared view by arriving</li>
+<li>A connector holds only its own credential and never reaches the database directly</li>
+<li>Nothing marked <em>Verify</em> may be treated as true</li>
+</ul>
+<p><strong>Related ADRs:</strong> <a href="./002-security-threat-model.html">ADR-002</a> (supply-chain surface of the connector worker), <a href="./004-data-model-integrity.html">ADR-004</a> (suggest-and-confirm dedup; audit entries per batch), <a href="./005-offline-first-sync.html">ADR-005</a> (merge-and-flag conflict handling), <a href="./012-external-integrations.html">ADR-012</a> (amended: third-party CRM sync joins the integration strategy), <a href="./017-sharing-contract-trust-model.html">ADR-017</a> (synced fields stay under sharing contracts), <a href="./022-core-modules-and-lanes.html">ADR-022</a> (sync is Core; a connector is not a module), <a href="./024-event-bus-as-federation.html">ADR-024</a> (the connector worker sits behind the bus)</p>
+
+    </article>
+  </main>
+  <div class="toc-rail"><nav class="toc" aria-label="On this page"><div class="toc-label">On this page</div><ul><li class="toc-2"><a href="#context"># Context</a></li><li class="toc-3"><a href="#conflicts-this-adr-resolves"># Conflicts this ADR resolves</a></li><li class="toc-2"><a href="#decision"># Decision</a></li><li class="toc-3"><a href="#nationbuilder-sync-is-required-starting-with-csv"># NationBuilder sync is required, starting with CSV</a></li><li class="toc-3"><a href="#phase-a-the-csv-round-trip"># Phase A: the CSV round trip</a></li><li class="toc-3"><a href="#phase-b-api-sync"># Phase B: API sync</a></li><li class="toc-3"><a href="#the-rules-live-in-the-core-crm-not-in-the-connector"># The rules live in the core CRM, not in the connector</a></li><li class="toc-3"><a href="#sync-is-not-a-module"># Sync is not a module</a></li><li class="toc-3"><a href="#parsons-as-the-connector-layer"># Parsons as the connector layer</a></li><li class="toc-3"><a href="#open-questions"># Open questions</a></li><li class="toc-3"><a href="#housekeeping-amendment-banners"># Housekeeping: amendment banners</a></li><li class="toc-2"><a href="#consequences"># Consequences</a></li></ul></nav></div>
+</div>
+<script src="../assets/search.js" defer></script>
+<script src="../assets/app.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en" data-base="../" data-no-results="No results for">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ADR-022: Core, Modules &amp; Lanes · GreenGrass</title>
+<meta name="description" content="ADR-022: Core, Modules &amp; Lanes — GreenGrass spec &amp; design documentation.">
+<link rel="alternate" hreflang="en" href="./022-core-modules-and-lanes.html">
+<link rel="alternate" hreflang="es" href="../es/decisions/022-core-modules-and-lanes.html">
+<link rel="alternate" hreflang="x-default" href="./022-core-modules-and-lanes.html">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%232563eb'/%3E%3Cstop offset='1' stop-color='%2316a34a'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='32' height='32' rx='7' fill='url(%23g)'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="../assets/styles.css">
+</head>
+<body>
+<a class="skip-link" href="#content">Skip to content</a>
+<header class="site-header">
+  <button type="button" class="menu-toggle" aria-label="Toggle navigation" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+  <a class="brand" href="../index.html">
+    <span class="brand-mark" aria-hidden="true"></span>
+    <span class="brand-text"><strong>GreenGrass</strong><small>Spec &amp; Design</small></span>
+  </a>
+  <div class="search">
+    <input type="search" id="search-input" placeholder="Search docs…" autocomplete="off" aria-label="Search documentation">
+    <div id="search-results" class="search-results" hidden></div>
+  </div>
+  <nav class="lang-switch" aria-label="Language"><span class="lang-opt active" aria-current="true">EN</span><a class="lang-opt" href="../es/decisions/022-core-modules-and-lanes.html" hreflang="es" lang="es" title="Ver esta página en español">ES</a></nav>
+  <button type="button" class="theme-toggle" aria-label="Toggle dark mode" title="Toggle dark mode">
+    <span class="theme-icon" aria-hidden="true"></span>
+  </button>
+</header>
+<div class="layout">
+  <div class="sidebar-backdrop" hidden></div>
+  <aside class="sidebar" aria-label="Documentation navigation">
+    <nav class="nav">
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">Home<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../index.html">GreenGrass</a></li></ul></div>
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">Specifications<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../spec/pitch.html">Pre-MVP Pitch</a></li><li><a href="../spec/demo.html">Campaign Approval Demo Spec</a></li><li><a href="../spec/product.html">Project: GreenGrass</a></li><li><a href="../spec/mvp.html">GreenGrass MVP — Product Plan</a></li><li><a href="../spec/users.html">Users &amp; Roles</a></li><li><a href="../spec/workflows.html">Core Workflows</a></li><li><a href="../spec/geography.html">Target Geography</a></li><li><a href="../spec/security.html">Security &amp; Threat Model</a></li><li><a href="../spec/compliance.html">Compliance &amp; Legal Framework</a></li><li><a href="../spec/fundraising.html">Fundraising &amp; Payment Infrastructure</a></li><li><a href="../spec/integrations.html">External Integrations</a></li><li><a href="../spec/support.html">Tenant Support &amp; Onboarding</a></li><li><a href="../spec/gotv.html">Get Out The Vote &amp; Election Day Operations</a></li><li><a href="../spec/messaging.html">Internal Communications &amp; Notifications</a></li><li><a href="../spec/press.html">Press, Media &amp; Public Communications</a></li><li><a href="../spec/comms-intelligence.html">Comms Intelligence — Post-MVP Roadmap</a></li></ul></div>
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">Architecture<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../design/architecture/system.html">System Architecture</a></li></ul></div>
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">UX Design<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../design/ux/00-overview.html">UX Design Overview</a></li><li><a href="../design/ux/01-information-architecture/navigation-model.html">Navigation Model</a></li><li><a href="../design/ux/01-information-architecture/screen-inventory.html">Screen Inventory</a></li><li><a href="../design/ux/01-information-architecture/persona-views.html">Persona Views</a></li><li><a href="../design/ux/01-information-architecture/url-structure.html">URL Structure</a></li><li><a href="../design/ux/02-global-patterns/pattern-catalog.html">Pattern Catalog</a></li><li><a href="../design/ux/02-global-patterns/offline-sync-patterns.html">Offline &amp; Sync Patterns</a></li><li><a href="../design/ux/02-global-patterns/notification-patterns.html">Notification Patterns</a></li><li><a href="../design/ux/02-global-patterns/search-patterns.html">Search Patterns</a></li><li><a href="../design/ux/02-global-patterns/settings-help-patterns.html">Settings &amp; Help Patterns</a></li><li><a href="../design/ux/02-global-patterns/security-ux-patterns.html">Security UX Patterns</a></li><li><a href="../design/ux/03-design-system/foundations.html">Design System Foundations</a></li><li><a href="../design/ux/03-design-system/theming-strategy.html">Theming Strategy</a></li><li><a href="../design/ux/03-design-system/component-inventory.html">Component Inventory</a></li><li><a href="../design/ux/03-design-system/responsive-strategy.html">Responsive Strategy</a></li><li><a href="../design/ux/04-wireframes/index.html">Wireframes</a></li><li><a href="../design/ux/04-wireframes/navigation-shell/navigation-shell.html">Navigation Shell Wireframes</a></li><li><a href="../design/ux/04-wireframes/dashboards/dashboards.html">Dashboard Wireframes</a></li><li><a href="../design/ux/04-wireframes/field-mode/field-mode.html">Field Mode Wireframes</a></li><li><a href="../design/ux/04-wireframes/onboarding/onboarding.html">Onboarding Wireframes</a></li><li><a href="../design/ux/04-wireframes/messaging/messaging.html">Messaging Wireframes</a></li><li><a href="../design/ux/04-wireframes/supporter/supporter-portal.html">Supporter Portal Wireframes</a></li><li><a href="../design/ux/04-wireframes/alliance/alliance.html">Alliance Wireframes</a></li><li><a href="../design/ux/04-wireframes/crm/crm.html">CRM / People Wireframes</a></li><li><a href="../design/ux/04-wireframes/field-ops/field-ops.html">Field Operations (Admin) Wireframes</a></li><li><a href="../design/ux/04-wireframes/fundraising/fundraising.html">Fundraising Wireframes</a></li><li><a href="../design/ux/04-wireframes/communications/communications.html">Communications Wireframes</a></li><li><a href="../design/ux/04-wireframes/social-media/social-media.html">Social Media Wireframes</a></li><li><a href="../design/ux/04-wireframes/events/events.html">Events Wireframes</a></li><li><a href="../design/ux/04-wireframes/press/press.html">Press &amp; Media Wireframes</a></li><li><a href="../design/ux/04-wireframes/activism/activism.html">Activism &amp; Engagement Campaign Wireframes</a></li><li><a href="../design/ux/04-wireframes/gotv/gotv.html">GOTV Admin Wireframes</a></li><li><a href="../design/ux/04-wireframes/settings/settings.html">Settings &amp; Admin Wireframes</a></li><li><a href="../design/ux/04-wireframes/auth/auth.html">Authentication Wireframes</a></li><li><a href="../design/ux/04-wireframes/profile/profile.html">User Profile Wireframes</a></li><li><a href="../design/ux/04-wireframes/help/help.html">Support &amp; Help Wireframes</a></li><li><a href="../design/ux/04-wireframes/public/public.html">Public Pages Wireframes</a></li><li><a href="../design/ux/04-wireframes/audit.html">Wireframe Audit Report</a></li><li><a href="../design/ux/04-wireframes/content-ops/content-ops.html">Content Operations Wireframes</a></li></ul></div>
+<div class="nav-section open"><button type="button" class="nav-section-title" aria-expanded="true">Decisions<span class="chev" aria-hidden="true"></span></button><ul><li><a href="./001-platform-architecture.html">ADR-001: Platform Architecture &amp; Deployment</a></li><li><a href="./002-security-threat-model.html">ADR-002: Security &amp; Threat Model</a></li><li><a href="./003-identity-access-organization.html">ADR-003: Identity, Access &amp; Organization</a></li><li><a href="./004-data-model-integrity.html">ADR-004: Data Model &amp; Integrity</a></li><li><a href="./005-offline-first-sync.html">ADR-005: Offline-First &amp; Sync</a></li><li><a href="./006-field-operations-gotv.html">ADR-006: Field Operations &amp; GOTV</a></li><li><a href="./007-fundraising-payments.html">ADR-007: Fundraising &amp; Payments</a></li><li><a href="./008-communications-messaging.html">ADR-008: Communications &amp; Messaging</a></li><li><a href="./009-compliance-legal.html">ADR-009: Compliance &amp; Legal Framework</a></li><li><a href="./010-internationalization-localization.html">ADR-010: Internationalization &amp; Localization</a></li><li><a href="./011-design-system-ux.html">ADR-011: Design System &amp; UX Foundations</a></li><li><a href="./012-external-integrations.html">ADR-012: External Integrations</a></li><li><a href="./013-analytics-ai.html">ADR-013: Analytics &amp; AI</a></li><li><a href="./014-volunteer-onboarding.html">ADR-014: Volunteer &amp; Onboarding</a></li><li><a href="./015-product-scope.html">ADR-015: Product Scope Boundaries</a></li><li><a href="./016-cross-cutting-resolutions.html">ADR-016: Cross-Cutting Resolutions</a></li><li><a href="./017-sharing-contract-trust-model.html">ADR-017: The Sharing Contract as Universal Trust Primitive</a></li><li><a href="./018-ai-agent-posture.html">ADR-018: AI Agent Posture</a></li><li><a href="./019-central-services-and-metered-billing.html">ADR-019: Central Services &amp; Metered Billing</a></li><li><a href="./020-central-service-line-up-and-builders.html">ADR-020: Central Service Line-up &amp; Builders</a></li><li><a href="./021-content-approval-pipeline.html">ADR-021: Content Approval Pipeline</a></li><li><a href="./022-core-modules-and-lanes.html" aria-current="page" class="active">ADR-022: Core, Modules &amp; Lanes</a></li><li><a href="./023-surfaces-chat-admin-field.html">ADR-023: Surfaces — a Headless Core, Chat, Admin &amp; Field</a></li><li><a href="./024-event-bus-as-federation.html">ADR-024: The Event Bus as Federation</a></li><li><a href="./025-identity-per-client.html">ADR-025: Identity per Client</a></li><li><a href="./026-two-lane-pricing.html">ADR-026: Two-Lane Pricing</a></li><li><a href="./027-third-party-crm-sync-and-connectors.html">ADR-027: Third-Party CRM Sync &amp; Connectors</a></li><li><a href="./ux-decisions.html">UX Decisions — Wireframe Phase</a></li></ul></div>
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">Diary<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../diary/index.html">Project Diary</a></li><li><a href="../diary/01-from-description-to-specification.html">Entry 1: From Description to Specification</a></li><li><a href="../diary/02-the-architecture-session.html">Entry 2: The Architecture Session</a></li><li><a href="../diary/03-information-architecture.html">Entry 3: Information Architecture</a></li><li><a href="../diary/04-design-system-and-wireframes.html">Entry 4: The Design System and Wireframes</a></li><li><a href="../diary/05-the-wireframe-audit.html">Entry 5: The Wireframe Audit</a></li><li><a href="../diary/06-resolving-the-open-questions.html">Entry 6: Resolving the Open Questions</a></li><li><a href="../diary/07-reconciling-the-architecture.html">Entry 7: Reconciling the Architecture</a></li><li><a href="../diary/08-housekeeping.html">Diary Entry 8: Housekeeping</a></li><li><a href="../diary/09-the-documentation-website.html">Diary Entry 9: The Documentation Website</a></li><li><a href="../diary/10-the-spanish-edition.html">Diary Entry 10: The Spanish Edition</a></li><li><a href="../diary/11-translating-the-rest.html">Diary Entry 11: Translating the Rest</a></li><li><a href="../diary/12-the-agent-question.html">Diary Entry 12: The Agent Question</a></li><li><a href="../diary/13-services-a-la-carte.html">Diary Entry 13: Services à la Carte</a></li><li><a href="../diary/14-the-proposal-under-review.html">Diary Entry 14: The Proposal Under Review</a></li><li><a href="../diary/15-not-a-creator-tool.html">Diary Entry 15: Not a Creator Tool</a></li><li><a href="../diary/16-the-pitch.html">Diary Entry 16: The Pitch</a></li><li><a href="../diary/17-two-lanes.html">Diary Entry 17: Two Lanes</a></li></ul></div>
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">Project &amp; Internal<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../claude/MEMORY.html">Memory</a></li><li><a href="../claude/SKILLS.html">Skills</a></li><li><a href="../CLAUDE.html">GreenGrass</a></li></ul></div>
+    </nav>
+  </aside>
+  <main id="content" class="content">
+    <nav class="breadcrumb" aria-label="Breadcrumb">Decisions</nav>
+    <article class="prose">
+<h1 id="adr-022-core-modules-lanes" tabindex="-1"><a class="heading-anchor" href="#adr-022-core-modules-lanes" aria-hidden="true">#</a> ADR-022: Core, Modules &amp; Lanes</h1>
+<p><strong>Status:</strong> Proposed
+<strong>Date:</strong> 2026-11-13
+<strong>Sources:</strong> <code>spec/product.md</code>, <code>spec/users.md</code>, <code>spec/security.md</code>, <code>spec/comms-intelligence.md</code>, <code>spec/mvp.md</code>, <code>design/architecture/system.md</code>, <code>decisions/001-platform-architecture.md</code>, <code>decisions/015-product-scope.md</code>, <code>decisions/017-sharing-contract-trust-model.md</code>, <code>decisions/019-central-services-and-metered-billing.md</code>, <code>decisions/020-central-service-line-up-and-builders.md</code>, <code>decisions/021-content-approval-pipeline.md</code></p>
+<h2 id="context" tabindex="-1"><a class="heading-anchor" href="#context" aria-hidden="true">#</a> Context</h2>
+<p><a href="../spec/product.html">product.md</a> describes an all-in-one product: a CRM, a voter database, fundraising, communications and analytics in one package, for grassroots political campaigns. Every document since has built on that shape, and on the assumption that the client is political.</p>
+<p>The direction has changed. The parts stay and the shape does not. What the project builds is shared infrastructure for organizations: a central product, the Core, and a catalogue of modules that each client enables individually. That infrastructure is sold through two lanes, each with its own brand and product. Greengrass is the political one. Basecamp is the commercial one. &quot;Greengrass&quot; therefore now names the political product, not the infrastructure.</p>
+<p>The corpus already has most of the parts this needs. <a href="./001-platform-architecture.html#single-tenant-architecture-with-tiered-isolation">ADR-001</a> decided one deployment per organization, and this ADR reaffirms it. <a href="./019-central-services-and-metered-billing.html">ADR-019</a> gave shared capabilities a home, a catalogue and per-tenant entitlements. <a href="./017-sharing-contract-trust-model.html">ADR-017</a> gave every boundary one trust mechanism. What the corpus lacks is the vocabulary, the boundary of the Core, a contract for modules, and a place for a second kind of client.</p>
+<p>This ADR is <code>Proposed</code> because two things it depends on are open: where the voter file lives, and what the Core is called. It also records several things the product side has already decided. The table below says which is which, and every section repeats it. Nothing marked proposed or open may be read as settled.</p>
+<table>
+<thead>
+<tr>
+<th>Item</th>
+<th>Standing</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Two lanes on one infrastructure, as described in <a href="#two-lanes-on-one-infrastructure">Two lanes on one infrastructure</a></td>
+<td>Decided</td>
+</tr>
+<tr>
+<td>Each client runs its own instance, with its own data and its own accounts</td>
+<td>Decided (<a href="./001-platform-architecture.html">ADR-001</a>, <a href="./025-identity-per-client.html">ADR-025</a>)</td>
+</tr>
+<tr>
+<td>The CRM is part of the Core</td>
+<td>Decided</td>
+</tr>
+<tr>
+<td>Fundraising &amp; payments is one module with a shared payment layer</td>
+<td>Decided</td>
+</tr>
+<tr>
+<td>Modules are built by GreenGrass first; the module contract is designed so vetted partners can build later</td>
+<td>Decided</td>
+</tr>
+<tr>
+<td>The vocabulary, including the renaming of ADR-019's &quot;internal module&quot;</td>
+<td>Proposed</td>
+</tr>
+<tr>
+<td>What the Core contains, beyond the CRM</td>
+<td>Proposed</td>
+</tr>
+<tr>
+<td>What the lanes require of the design</td>
+<td>Proposed</td>
+</tr>
+<tr>
+<td>The module contract and the module catalogue</td>
+<td>Proposed</td>
+</tr>
+<tr>
+<td>The voter file as a political-lane module, outside the Core</td>
+<td>Recommended, not decided</td>
+</tr>
+<tr>
+<td>The Campaign Agent as the chat with content modules enabled, not a module</td>
+<td>Recommended, not decided</td>
+</tr>
+<tr>
+<td>A name for the Core; operator access by lane; a disabled module's data; the name &quot;Basecamp&quot;</td>
+<td>Open</td>
+</tr>
+</tbody>
+</table>
+<h3 id="conflicts-this-adr-resolves" tabindex="-1"><a class="heading-anchor" href="#conflicts-this-adr-resolves" aria-hidden="true">#</a> Conflicts this ADR resolves</h3>
+<p>Following <a href="./016-cross-cutting-resolutions.html">ADR-016</a>, <a href="./017-sharing-contract-trust-model.html">ADR-017</a> and <a href="./019-central-services-and-metered-billing.html">ADR-019</a>, the conflicts with the existing corpus are named here. Those that turn on a decided item are resolved below. Those that turn on a proposed or open one are named and left standing.</p>
+<ol>
+<li><strong><a href="../spec/product.html">product.md</a></strong> describes an all-in-one product and uses &quot;GreenGrass&quot; for the whole platform. The product is now a Core with modules, and Greengrass is one of two products built on it.</li>
+<li><strong><a href="./019-central-services-and-metered-billing.html#two-kinds-of-capability-internal-modules-and-central-services">ADR-019 § Two kinds of capability: internal modules and central services</a></strong> uses &quot;internal module&quot; to mean code that runs inside the tenant. That describes where code runs, not what a client enables. The term has to change before &quot;module&quot; can mean the product unit.</li>
+<li><strong>The corpus as a whole is written for political clients only.</strong> Threat tiers (<a href="../spec/security.html#threat-actors">security.md § Threat Actors</a>), election law (<a href="../spec/compliance.html">compliance.md</a>) and the voter file (<a href="../spec/integrations.html#voter-file-integration">integrations.md § Voter File Integration</a>) are written as properties of the platform. With a commercial lane they become policy of the political lane.</li>
+<li><strong><a href="../spec/security.html#greengrass-team-access">security.md § GreenGrass Team Access</a></strong> assumes one platform team with administrative access. Two lanes are run by different companies, and a commercial agency may work for a political client's opponent.</li>
+<li><strong><a href="../spec/users.html#organization-hierarchy">users.md § Organization Hierarchy</a></strong> makes an alliance a &quot;lightweight tenant&quot; that does not replicate the full platform stack. In this direction an alliance is a client like any other, with its own instance. <a href="./024-event-bus-as-federation.html">ADR-024</a> takes this up.</li>
+<li><strong><a href="./020-central-service-line-up-and-builders.html#four-central-services">ADR-020 § Four central services</a></strong> and <a href="../spec/comms-intelligence.html">comms-intelligence.md</a> specify one media monitor. The catalogue below lists three monitoring modules. They draw on the one Capture service, so this is packaging and the architecture is unchanged.</li>
+<li><strong><a href="./015-product-scope.html">ADR-015</a></strong> fixed the product's scope boundaries. The catalogue names two modules, Crisis management and Polls &amp; surveys, that no document specifies.</li>
+</ol>
+<h2 id="decision" tabindex="-1"><a class="heading-anchor" href="#decision" aria-hidden="true">#</a> Decision</h2>
+<h3 id="vocabulary" tabindex="-1"><a class="heading-anchor" href="#vocabulary" aria-hidden="true">#</a> Vocabulary</h3>
+<p>Proposed.</p>
+<table>
+<thead>
+<tr>
+<th>Term</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Core</strong></td>
+<td>What every instance always has, in both lanes. Headless, lane-neutral, and never dependent on a module. It needs a name of its own, now that Greengrass is a lane.</td>
+</tr>
+<tr>
+<td><strong>Lane</strong></td>
+<td>A product and brand built on the Core: Greengrass (political) or Basecamp (commercial). Configuration, not a fork.</td>
+</tr>
+<tr>
+<td><strong>Client</strong></td>
+<td>An organization that buys a lane's product. The corpus says <em>tenant</em>; the two words name the same thing from two sides.</td>
+</tr>
+<tr>
+<td><strong>Instance</strong></td>
+<td>A client's own deployment: its own database, application and keys, as <a href="./001-platform-architecture.html#single-tenant-architecture-with-tiered-isolation">ADR-001</a> decided.</td>
+</tr>
+<tr>
+<td><strong>Module</strong></td>
+<td>The unit a client enables and the catalogue lists. Shared by both lanes unless marked lane-only. Described by a manifest. Made of in-tenant components, central-service calls, or both.</td>
+</tr>
+<tr>
+<td><strong>In-tenant component</strong></td>
+<td>Code that runs inside the client's instance. This is ADR-019's &quot;internal module&quot;, renamed.</td>
+</tr>
+<tr>
+<td><strong>Central service</strong></td>
+<td>Code that runs platform-side for one client per call and keeps nothing (<a href="./019-central-services-and-metered-billing.html">ADR-019</a>): Capture, Analysis, Builders and channel transport (<a href="./020-central-service-line-up-and-builders.html">ADR-020</a>). Unchanged.</td>
+</tr>
+<tr>
+<td><strong>Surface</strong></td>
+<td>Where a person does the work: chat, admin UI or field app (<a href="./023-surfaces-chat-admin-field.html">ADR-023</a>).</td>
+</tr>
+<tr>
+<td><strong>Connector</strong></td>
+<td>A link to an outside tool such as NationBuilder. It sits in the integration hub and is not a module (<a href="./027-third-party-crm-sync-and-connectors.html">ADR-027</a>).</td>
+</tr>
+</tbody>
+</table>
+<p>A worked example. Radio &amp; TV monitoring is a module. It is made of the Capture central service with transcription, an in-tenant monitoring inbox, outlet and journalist records in the Core CRM, and a digest in chat.</p>
+<p>Documents written before this ADR that say &quot;internal module&quot; are read as &quot;in-tenant component&quot;. They are not rewritten one by one; <a href="./019-central-services-and-metered-billing.html">ADR-019</a> and <a href="../design/architecture/system.html#central-services-architecture">system.md § Central Services Architecture</a> carry a note.</p>
+<!-- REVISIT: the two-lane description writes "Greengrass"; every earlier document writes "GreenGrass", and means the whole platform by it. This ADR uses "Greengrass" for the political lane's product and leaves the earlier documents as they are. Until the Core has a name of its own, "GreenGrass" in an earlier document means the infrastructure. -->
+<p><strong>Alternatives considered:</strong> Keeping &quot;internal module&quot; and finding another word for what a client enables was rejected because <em>module</em> is the word the catalogue is sold in, and a term that means one thing in the price list and another in the architecture gets misread.</p>
+<h3 id="two-lanes-on-one-infrastructure" tabindex="-1"><a class="heading-anchor" href="#two-lanes-on-one-infrastructure" aria-hidden="true">#</a> Two lanes on one infrastructure</h3>
+<p>Decided.</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Political lane</th>
+<th>Commercial lane</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Product</td>
+<td>Greengrass</td>
+<td>Basecamp (PR Media / Relacionistas.app)</td>
+</tr>
+<tr>
+<td>Run by</td>
+<td><a href="http://Blimp.io" target="_blank" rel="noopener noreferrer">Blimp.io</a> and Onda Corta</td>
+<td>R&amp;R and Onda Corta</td>
+</tr>
+<tr>
+<td>For</td>
+<td>Community movements, unions, political parties</td>
+<td>Advertisers, PR professionals, agencies, other businesses</td>
+</tr>
+<tr>
+<td>First clients</td>
+<td>PIP, MVC, Alianza de País</td>
+<td>Asociación de Publicistas</td>
+</tr>
+<tr>
+<td>Price</td>
+<td>Cost, plus a commission that covers the cost of selling</td>
+<td>Cost, plus a 30% margin for the product's owner, plus the Comercializadora's commission</td>
+</tr>
+</tbody>
+</table>
+<!-- REVISIT: "the product's owner" (la dueña del producto) and "the Comercializadora" are used as the product side gave them, without a definition. Both need one. See ADR-026. -->
+<ul>
+<li><strong>Shared modules.</strong> Every module in the catalogue can run in either product, though some are useful in only one: electoral analysis is political only.</li>
+<li><strong>One instance per client.</strong> Each client runs its own instance, with its own data and its own accounts.</li>
+<li><strong>Independent lanes.</strong> A lane never waits for the other. The work with PIP and MVC does not depend on what the Asociación de Publicistas' tool turns out to be, or the reverse.</li>
+<li><strong>Shared improvements.</strong> When one lane improves a shared module, the improvement reaches the other.</li>
+</ul>
+<p>The prices are decided in <a href="./026-two-lane-pricing.html">ADR-026</a>.</p>
+<h3 id="what-the-lanes-require-of-the-design" tabindex="-1"><a class="heading-anchor" href="#what-the-lanes-require-of-the-design" aria-hidden="true">#</a> What the lanes require of the design</h3>
+<p>Proposed. These are what it takes for the four statements above to hold at once.</p>
+<ul>
+<li><strong>A lane is configuration over one codebase, never a fork.</strong> A lane sets its brand, its vocabulary, which modules its catalogue shows, its price rules, and its policies: security defaults, compliance packs, the AI gate.</li>
+<li><strong>The Core is lane-neutral.</strong> Nothing electoral lives in it. The main consequence is the voter file, below.</li>
+<li><strong>Each lane has its own release train.</strong> A lane pins the versions of the Core and modules it runs and upgrades on its own schedule, so it never waits. An improvement lands in the shared module, and the other lane receives it at its next upgrade. The module contract is versioned, and a breaking change needs a deprecation window.</li>
+<li><strong>A lane-specific need goes into the shared module</strong> as configuration or an extension point. If it cannot, it becomes a lane-only module.</li>
+<li><strong>Operators are separated by lane.</strong> A political client's threat model includes political opponents (<a href="../spec/security.html#threat-actors">security.md § Threat Actors</a>), and a commercial agency may work for one. A lane's operators can administer only that lane's instances. Query logs against shared services stay scoped to the client and are invisible across lanes; ADR-019 already requires the first half. Onda Corta sits in both lanes, so its access has to be defined explicitly. Political clients should be told that the same infrastructure serves commercial clients. The details are open, below.</li>
+<li><strong>The shared public corpus is the main economy.</strong> Radio, TV, press and public social accounts are captured once and serve both lanes. Only public data is shared, as <a href="./019-central-services-and-metered-billing.html#central-services-execute-per-tenant-and-retain-nothing">ADR-019 § Central services execute per tenant and retain nothing</a> already rules.</li>
+<li><strong>Pricing is a lane rule, not a Core rule</strong> (<a href="./026-two-lane-pricing.html">ADR-026</a>).</li>
+</ul>
+<p><strong>Alternatives considered:</strong> A fork of the codebase per lane was rejected because it breaks the promise that an improvement in one lane reaches the other, and it doubles the cost of every security fix.</p>
+<h3 id="what-the-core-contains" tabindex="-1"><a class="heading-anchor" href="#what-the-core-contains" aria-hidden="true">#</a> What the Core contains</h3>
+<p>Every instance gets all of this, always. The Core is headless: each item is an API with events, and has no screens of its own beyond what the admin UI needs to configure it.</p>
+<table>
+<thead>
+<tr>
+<th>Group</th>
+<th>Contents</th>
+<th>Already decided in</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Trust</td>
+<td>Isolation tiers, identity and passkeys (one identity service per client, <a href="./025-identity-per-client.html">ADR-025</a>), keys and BYOK, sharing contracts, the audit log</td>
+<td><a href="./001-platform-architecture.html">ADR-001</a>, <a href="./002-security-threat-model.html">ADR-002</a>, <a href="./003-identity-access-organization.html">ADR-003</a>, <a href="./017-sharing-contract-trust-model.html">ADR-017</a></td>
+</tr>
+<tr>
+<td>Data: the CRM</td>
+<td>People and the omni-list, record types, consent per channel and per purpose, dedup by suggest-and-confirm, segments, import and export, third-party sync (<a href="./027-third-party-crm-sync-and-connectors.html">ADR-027</a>)</td>
+<td><a href="../spec/users.html">users.md</a>, <a href="./004-data-model-integrity.html">ADR-004</a></td>
+</tr>
+<tr>
+<td>Content</td>
+<td>Content store, versioned assets, approval pipeline in rounds</td>
+<td><a href="./021-content-approval-pipeline.html">ADR-021</a></td>
+</tr>
+<tr>
+<td>Delivery</td>
+<td>Channel transport with consent checks, frequency caps, the quiet window and mutual suppression</td>
+<td><a href="../design/architecture/system.html#cross-channel-orchestration-engine">system.md § Cross-channel orchestration engine</a>, <a href="./016-cross-cutting-resolutions.html">ADR-016</a> §2, <a href="./019-central-services-and-metered-billing.html">ADR-019</a></td>
+</tr>
+<tr>
+<td>Commerce</td>
+<td>Catalogue, entitlements, metering</td>
+<td><a href="./019-central-services-and-metered-billing.html">ADR-019</a></td>
+</tr>
+<tr>
+<td>Events</td>
+<td>The per-client event stream and the bus (<a href="./024-event-bus-as-federation.html">ADR-024</a>)</td>
+<td><a href="../design/architecture/system.html#analytics-architecture">system.md § Analytics Architecture</a></td>
+</tr>
+<tr>
+<td>Lane configuration</td>
+<td>Brand, vocabulary, catalogue visibility, price rules, policy defaults</td>
+<td>New, above</td>
+</tr>
+<tr>
+<td>Plumbing</td>
+<td>Integration hub and connectors, AI abstraction (BYOM), localization, offline sync engine, public API and webhooks</td>
+<td><a href="../design/architecture/system.html">system.md</a>, <a href="./005-offline-first-sync.html">ADR-005</a>, <a href="./010-internationalization-localization.html">ADR-010</a>, <a href="./016-cross-cutting-resolutions.html">ADR-016</a> §38</td>
+</tr>
+</tbody>
+</table>
+<p><strong>The CRM is part of the Core. Decided.</strong> One person record, consent and dedup underlie nearly every module. Keeping them in the Core is also what guarantees that a person's opt-out holds everywhere inside an instance. A module that does not use the CRM, such as the demonstration's campaign agent (<a href="../spec/demo.html">demo.md</a>), still runs; the CRM is simply empty.</p>
+<p><strong>Two comms-intelligence primitives turn out to be Core. Proposed.</strong> <a href="../spec/comms-intelligence.html#5-seven-features-are-three-primitives">comms-intelligence.md § 5. Seven features are three primitives</a> names three. The actor graph (outlets, ownership, journalists, analysts) is CRM entities and relationships, so it extends the Core CRM. The claims ledger (claim, sources, verification status, approved response) is a content item, so it extends the Core content store. Only the compartmented dossier is module-specific, and its access machinery is ADR-017 contracts, which are Core.</p>
+<p>The rest of the table is proposed. Identity per client is decided in <a href="./025-identity-per-client.html">ADR-025</a>.</p>
+<p><strong>Alternatives considered:</strong> Making the CRM a module was considered and rejected. Nearly every module would then depend on it, and consent would have to be enforced by each module separately, which is how an opt-out gets honoured in one place and ignored in another.</p>
+<h3 id="the-voter-file-recommended-as-a-political-lane-module-not-decided" tabindex="-1"><a class="heading-anchor" href="#the-voter-file-recommended-as-a-political-lane-module-not-decided" aria-hidden="true">#</a> The voter file: recommended as a political-lane module, not decided</h3>
+<p>A first draft of this direction put the voter file in the Core. The two-lane model reverses that. The Core has to be lane-neutral, and a voter file means nothing to an advertising agency.</p>
+<p>The recommendation is that the voter file becomes a political-lane module, Voter File, which extends the Core CRM and which Greengrass can switch on by default. Street operations, electoral analysis and coalition overlap build on it. It remains one of the three things no competitor integrates, alongside offline field tools and tools for coalitions of parties. It would belong to the Greengrass product, not the shared Core.</p>
+<p>This is not decided. Until it is, nothing moves: the data model in <a href="../design/architecture/system.html#data-model">system.md § Data Model</a> and the voter-file handling in <a href="../spec/integrations.html#voter-file-integration">integrations.md § Voter File Integration</a> stand as written.</p>
+<h3 id="the-module-contract" tabindex="-1"><a class="heading-anchor" href="#the-module-contract" aria-hidden="true">#</a> The module contract</h3>
+<p>Proposed, except where marked.</p>
+<p>Every module ships a manifest that declares:</p>
+<ul>
+<li><strong>Data:</strong> schema extensions to Core entities, its own tables, retention classes.</li>
+<li><strong>Dependencies:</strong> the modules it requires, and what happens to its data when it is disabled.</li>
+<li><strong>Events:</strong> the events it publishes and consumes on the bus (<a href="./024-event-bus-as-federation.html">ADR-024</a>).</li>
+<li><strong>Access:</strong> the role templates and permissions it contributes (<a href="./003-identity-access-organization.html">ADR-003</a>).</li>
+<li><strong>Surfaces:</strong> its chat operations, each marked read or write, with the confirmation card for writes; its admin screens and navigation entries; its field capabilities and offline behaviour (<a href="./023-surfaces-chat-admin-field.html">ADR-023</a>).</li>
+<li><strong>Services:</strong> the central services it calls, and so the entitlements it needs.</li>
+<li><strong>Perimeter:</strong> what data leaves the encryption boundary, and which isolation tiers and jurisdictions it supports.</li>
+<li><strong>ADR-018 standing:</strong> read scope, tool authority, autonomy and credential breadth, the four properties <a href="./018-ai-agent-posture.html#no-agent-capability-reaches-production-until-this-adr-is-accepted">ADR-018</a> gates on.</li>
+</ul>
+<p><strong>Shipping.</strong> First-party modules ship in the deployment image and are switched on by entitlement. ADR-001 is unchanged: there are no per-module deployments.</p>
+<p><strong>Who builds. Decided.</strong> Modules are built by GreenGrass first. The contract is designed so that vetted partners can build later. That needs four things to be true from the start: API parity, which <a href="../design/architecture/system.html#public-api">system.md § Public API</a> already commits to; the manifest; signed module packages; and no internal-only API. A review process for partner modules can wait.</p>
+<p>What happens to a module's data when it is disabled is open, below.</p>
+<h3 id="the-module-catalogue" tabindex="-1"><a class="heading-anchor" href="#the-module-catalogue" aria-hidden="true">#</a> The module catalogue</h3>
+<p>Proposed. The names are the product side's. Every module can run in either product; the Lanes column says where it is useful.</p>
+<table>
+<thead>
+<tr>
+<th>Module</th>
+<th>Lanes</th>
+<th>Builds on</th>
+<th>Main surfaces</th>
+<th>Gate or note</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Radio &amp; TV monitoring</td>
+<td>Both</td>
+<td>Capture (broadcast, transcribed), actor graph</td>
+<td>Chat (digest), admin</td>
+<td>Iteration 0 probe; transcription is a metered cost</td>
+</tr>
+<tr>
+<td>Social monitoring</td>
+<td>Both</td>
+<td>Capture (public accounts)</td>
+<td>Chat, admin</td>
+<td>Iteration 0 probe; public accounts only</td>
+</tr>
+<tr>
+<td>Press summary</td>
+<td>Both</td>
+<td>Capture (press), text builder</td>
+<td>Chat (daily digest)</td>
+<td>Iteration 0 probe</td>
+</tr>
+<tr>
+<td>Ad-art builder</td>
+<td>Both</td>
+<td>Builders, content pipeline, brand templates</td>
+<td>Chat, admin</td>
+<td>Template layouts are fine, as in the demonstration; generated images wait on <a href="./018-ai-agent-posture.html">ADR-018</a></td>
+</tr>
+<tr>
+<td>Content distribution</td>
+<td>Both</td>
+<td>Channel transport, content pipeline, CRM</td>
+<td>Chat, admin</td>
+<td>The spec's outreach, plus press and social</td>
+</tr>
+<tr>
+<td>Crisis management</td>
+<td>Both</td>
+<td>Monitoring modules, claims ledger, talking points</td>
+<td>Chat, admin</td>
+<td>Named, not yet specified</td>
+</tr>
+<tr>
+<td>Polls &amp; surveys</td>
+<td>Both</td>
+<td>CRM, channel transport</td>
+<td>Admin, chat</td>
+<td>Named, not yet specified</td>
+</tr>
+<tr>
+<td>Events &amp; volunteers</td>
+<td>Both</td>
+<td>CRM</td>
+<td>Chat, admin, field (check-in)</td>
+<td>Volunteers are mostly a political need</td>
+</tr>
+<tr>
+<td>Fundraising &amp; payments</td>
+<td>Both</td>
+<td>CRM, payment adapters</td>
+<td>Admin, chat (totals)</td>
+<td>Shared payment layer; donation rules are political-lane configuration</td>
+</tr>
+<tr>
+<td>Street operations</td>
+<td>Political</td>
+<td>Voter File, offline engine</td>
+<td>Field, admin</td>
+<td>Canvassing, voter registration, GOTV</td>
+</tr>
+<tr>
+<td>Voter File</td>
+<td>Political</td>
+<td>Core CRM</td>
+<td>Admin</td>
+<td>Recommended as a module, not decided (above)</td>
+</tr>
+<tr>
+<td>Electoral analysis</td>
+<td>Political</td>
+<td>Analysis, Voter File, geography</td>
+<td>Admin, chat</td>
+<td>Not yet scheduled (<a href="./020-central-service-line-up-and-builders.html">ADR-020</a>)</td>
+</tr>
+<tr>
+<td>Coalition Trust</td>
+<td>Both</td>
+<td>CRM, bus, mutual suppression</td>
+<td>Admin, chat</td>
+<td>The MVP (<a href="../spec/mvp.html">mvp.md</a>). Alliances of parties; associations of agencies (<a href="./024-event-bus-as-federation.html">ADR-024</a>)</td>
+</tr>
+<tr>
+<td>Opposition research &amp; vetting</td>
+<td>Political</td>
+<td>Analysis, compartments</td>
+<td>Admin</td>
+<td>Compartments; legal review per country</td>
+</tr>
+<tr>
+<td>Activism</td>
+<td>Political</td>
+<td>CRM, text builder</td>
+<td>Public pages, admin</td>
+<td>None</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong>The spec's single media monitor is three modules here.</strong> All three draw on the one Capture service, so this is a packaging choice. The architecture in ADR-020 is unchanged, and all three stay behind the corpus probe, Iteration 0 of <a href="../spec/comms-intelligence.html#9-the-iterations">comms-intelligence.md § 9. The iterations</a>.</li>
+<li><strong>Crisis management is the claims-ledger workflow</strong> at <a href="../spec/comms-intelligence.html#52-the-claims-ledger">comms-intelligence.md § 5.2 The claims ledger</a>: an attack surfaces in monitoring, becomes a claim, gets sourced and adjudicated, and the answer becomes a talking point. The spec has the primitive and no module by this name.</li>
+<li><strong>Polls &amp; surveys has no spec at all.</strong> ADR-020 gives one rule to keep: a client's own polling is its own data and never enters the shared corpus.</li>
+<li><strong>Fundraising &amp; payments is one module with a shared payment layer. Decided.</strong> In the commercial lane it means integration with ATH Móvil and other micropayment and online payment services such as Stripe. Those are the payment adapters <a href="../design/architecture/system.html#payment-adapter-pattern">system.md § Payment adapter pattern</a> already specifies, so the adapters are shared by both lanes. The political lane adds donation handling on top: contribution limits, campaign-finance reporting and alliance splits (<a href="../spec/fundraising.html">fundraising.md</a>, <a href="../spec/compliance.html">compliance.md</a>).</li>
+<li><strong>The Campaign Agent is not a module. Recommended, not decided.</strong> If the chat acts as the person (<a href="./023-surfaces-chat-admin-field.html">ADR-023</a>), the agent of the demonstration is that chat with content modules enabled.</li>
+</ul>
+<p><strong>Named, not yet specified.</strong> Crisis management and Polls &amp; surveys are in the catalogue and specified nowhere. This ADR does not specify them. Each needs its own spec before it is built.</p>
+<h3 id="open-questions" tabindex="-1"><a class="heading-anchor" href="#open-questions" aria-hidden="true">#</a> Open questions</h3>
+<p>None of these is settled here. Where the direction has a recommendation, it is given as one.</p>
+<ol>
+<li><strong>A name for the Core</strong>, now that Greengrass is a lane. Also where its spec lives: today everything is in the Greengrass repository.</li>
+<li><strong>The voter file</strong> as a political-lane module, not part of the Core. Recommended above.</li>
+<li><strong>The Campaign Agent</strong> as the chat with content modules enabled, not a module. Recommended above.</li>
+<li><strong>A disabled module's data:</strong> kept read-only, exported, or purged on the operational retention schedule.</li>
+<li><strong>Operator access by lane,</strong> including Onda Corta's access across both, and what political clients are told.</li>
+<li><strong>The name &quot;Basecamp&quot;.</strong> It is also 37signals' project-management product, in the same broad category of software. It needs a trademark check before it goes on anything public.</li>
+<li><strong>Definitions.</strong> &quot;The product's owner&quot; and &quot;the Comercializadora&quot; are used as given and defined nowhere.</li>
+</ol>
+<h3 id="housekeeping-amendment-banners" tabindex="-1"><a class="heading-anchor" href="#housekeeping-amendment-banners" aria-hidden="true">#</a> Housekeeping: amendment banners</h3>
+<p>A proposed ADR amends nothing until it is accepted. This ADR adds an <strong>Amendment proposed by</strong> line to <a href="./019-central-services-and-metered-billing.html">ADR-019</a>, for the vocabulary, and to <a href="./015-product-scope.html">ADR-015</a> and <a href="./020-central-service-line-up-and-builders.html">ADR-020</a>, for the catalogue. Each says that the ADR it sits on stands as written until this one is accepted.</p>
+<h2 id="consequences" tabindex="-1"><a class="heading-anchor" href="#consequences" aria-hidden="true">#</a> Consequences</h2>
+<p><strong>Benefits:</strong></p>
+<ul>
+<li>The product can be sold a module at a time, to a client that keeps the tools it already has</li>
+<li>A second kind of client pays for the same Core, capture corpus and modules</li>
+<li>&quot;Module&quot; means one thing in the catalogue, the price list and the architecture</li>
+<li>The Core has a boundary, so a new capability has a rule for where it goes</li>
+<li>A partner could build a module later without a change to the architecture</li>
+</ul>
+<p><strong>Costs:</strong></p>
+<ul>
+<li>The oldest document in the repository no longer describes the product, and every document written for political clients needs its political parts marked as lane policy</li>
+<li>Two release trains, two operator groups and one codebase are harder to run than one of each</li>
+<li>A lane-neutral Core is a constraint on every future Core change: nothing electoral may go into it</li>
+<li>If the voter file moves, the data model and three specs change with it</li>
+<li>Two catalogue modules have a name and no specification</li>
+</ul>
+<p><strong>Constraints:</strong></p>
+<ul>
+<li><a href="./001-platform-architecture.html">ADR-001</a> is unchanged: one instance per client, no per-module deployments</li>
+<li><a href="./019-central-services-and-metered-billing.html">ADR-019</a>'s rules for central services are unchanged: one client per call, nothing retained, only public data shared</li>
+<li>The Core never depends on a module</li>
+<li>A lane is configuration, never a fork</li>
+<li>The <a href="./018-ai-agent-posture.html">ADR-018</a> gate applies to the whole Core, so to both lanes (<a href="./023-surfaces-chat-admin-field.html">ADR-023</a>)</li>
+<li>Nothing marked proposed, recommended or open in this ADR may be built on as if it were decided</li>
+</ul>
+<p><strong>Related ADRs:</strong> <a href="./001-platform-architecture.html">ADR-001</a> (one instance per client, reaffirmed), <a href="./015-product-scope.html">ADR-015</a> (amendment proposed: the catalogue names modules outside its scope list), <a href="./017-sharing-contract-trust-model.html">ADR-017</a> (contracts are Core), <a href="./018-ai-agent-posture.html">ADR-018</a> (the manifest declares each module's standing against the gate), <a href="./019-central-services-and-metered-billing.html">ADR-019</a> (amendment proposed: &quot;internal module&quot; becomes &quot;in-tenant component&quot;; catalogue, entitlements and metering are Core), <a href="./020-central-service-line-up-and-builders.html">ADR-020</a> (amendment proposed: one media monitor is packaged as three modules; the four services are unchanged), <a href="./021-content-approval-pipeline.html">ADR-021</a> (the content pipeline is Core), <a href="./023-surfaces-chat-admin-field.html">ADR-023</a> (surfaces), <a href="./024-event-bus-as-federation.html">ADR-024</a> (the bus; alliances and associations), <a href="./025-identity-per-client.html">ADR-025</a> (identity per client), <a href="./026-two-lane-pricing.html">ADR-026</a> (prices), <a href="./027-third-party-crm-sync-and-connectors.html">ADR-027</a> (sync and connectors)</p>
+
+    </article>
+  </main>
+  <div class="toc-rail"><nav class="toc" aria-label="On this page"><div class="toc-label">On this page</div><ul><li class="toc-2"><a href="#context"># Context</a></li><li class="toc-3"><a href="#conflicts-this-adr-resolves"># Conflicts this ADR resolves</a></li><li class="toc-2"><a href="#decision"># Decision</a></li><li class="toc-3"><a href="#vocabulary"># Vocabulary</a></li><li class="toc-3"><a href="#two-lanes-on-one-infrastructure"># Two lanes on one infrastructure</a></li><li class="toc-3"><a href="#what-the-lanes-require-of-the-design"># What the lanes require of the design</a></li><li class="toc-3"><a href="#what-the-core-contains"># What the Core contains</a></li><li class="toc-3"><a href="#the-voter-file-recommended-as-a-political-lane-module-not-decided"># The voter file: recommended as a political-lane module, not decided</a></li><li class="toc-3"><a href="#the-module-contract"># The module contract</a></li><li class="toc-3"><a href="#the-module-catalogue"># The module catalogue</a></li><li class="toc-3"><a href="#open-questions"># Open questions</a></li><li class="toc-3"><a href="#housekeeping-amendment-banners"># Housekeeping: amendment banners</a></li><li class="toc-2"><a href="#consequences"># Consequences</a></li></ul></nav></div>
+</div>
+<script src="../assets/search.js" defer></script>
+<script src="../assets/app.js" defer></script>
+</body>
+</html>
