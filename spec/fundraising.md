@@ -4,6 +4,8 @@
 
 This document specifies the fundraising capabilities and payment infrastructure for GreenGrass. It builds on decisions made in workflows.md (donation flows, alliance splits, analytics), compliance.md (foreign contribution blocking, campaign finance reporting, consent), geography.md (per-country payment methods), and system.md (payment adapter pattern, data model).
 
+**Two lanes, one payment layer.** The platform is now sold through two lanes ([ADR-022](../decisions/022-core-modules-and-lanes.md)). Fundraising & payments is one module with a shared payment layer. In the commercial lane it means integration with ATH Móvil and other micropayment and online payment services such as Stripe: the payment adapters of [Payment Processor Strategy](#payment-processor-strategy), which both lanes share. Everything this document says about donations, contribution limits, campaign-finance reporting and alliance splits is political-lane configuration on top of that layer. The document is otherwise written for the political lane, and is left as written.
+
 Fundraising is a core survival function for political campaigns. In the global south, payment infrastructure varies dramatically — from PIX in Brazil (instant, free, ubiquitous) to cash-heavy workflows in Lebanon (banking system in crisis). GreenGrass must handle all of this behind a consistent interface while ensuring every transaction is auditable, compliant, and attributable.
 
 ## Fundraising Philosophy
@@ -290,31 +292,45 @@ Already decided in workflows.md: real-time fundraising thermometer, Finance Dire
 
 ## Platform Revenue Model
 
-**DECIDED: Two billing planes — a flat subscription, and metered pass-through at cost.** Amended by [ADR-019](../decisions/019-central-services-and-metered-billing.md). The original decision read: flat subscription tiers, not tied to donation volume, user count, or any usage metric. That remains true of the subscription. It stopped being true of the whole model once the platform gained central services whose third-party costs cannot be made flat.
+**DECIDED: pricing is a lane rule, applied on top of metered cost** ([ADR-026](../decisions/026-two-lane-pricing.md)). This supersedes the two decisions this section held before it: the flat subscription, and the two billing planes of [ADR-019](../decisions/019-central-services-and-metered-billing.md).
 
-**Plane 1 — Flat subscription.** Fixed monthly/annual pricing based on plan (basic, professional, enterprise). Covers the tenant instance, every internal module the plan includes, and GreenGrass's own cost of building and operating central services. Predictable for campaigns, simple to understand, no surprises. A genuinely usable free or very-low-cost plan must exist for resource-constrained campaigns.
+| Lane | Price |
+|---|---|
+| Political (Greengrass) | Cost, plus a commission that covers the cost of selling |
+| Commercial (Basecamp) | Cost, plus a 30% margin for the product's owner, plus the Comercializadora's commission |
 
-**Plane 2 — Metered pass-through, at cost.** Central services ([ADR-019](../decisions/019-central-services-and-metered-billing.md)) carry variable costs that reach GreenGrass metered, billed by the unit, and that cannot be made flat: inference tokens from a model provider, per-message charges from SMS and WhatsApp gateways, per-generation charges from media generation providers, per-source fees from data suppliers, and infrastructure a cloud provider bills GreenGrass per unit to run the service. These pass through to the tenant that incurred them.
+<!-- REVISIT: "the product's owner" (la dueña del producto) and "the Comercializadora" are used as given and defined nowhere. See ADR-026. -->
 
-**GreenGrass takes no margin on metered costs.** The supplier's price is the tenant's price: no markup, no rounding up, no bundling into opaque units, no minimum spend. Where a supplier bills GreenGrass in aggregate rather than per tenant, the allocation method is published and the tenant pays its allocated share and nothing more. Where a supplier's terms make exact pass-through impossible, the closest achievable approximation is used and the deviation is documented in the service's catalogue entry. GreenGrass's revenue comes from the subscription alone, for the same reason it takes no cut of donations: the platform earns from platform quality, never from volume.
+**The Core meters cost only.** Every call to a central service emits a usage event with the supplier cost, as ADR-019 decided. Each lane applies its own price rule on top. A client's statement shows cost, margin and commission as separate lines.
 
-What is never metered: GreenGrass's own compute, storage and staff time when GreenGrass pays for them flat, as reserved capacity or salaries. Those are subscription costs. The test is whether GreenGrass itself receives a metered bill: when a cloud provider charges GreenGrass by the unit to run a service, that charge passes through at cost like any other. A service that generates no metered bill has no metered plane at all.
+**Kept from ADR-019,** because the new prices rely on it: per-call metering of supplier cost, itemised statements, spend caps with a soft warning and a hard stop, nothing enabled by default, and alliances paying for members.
 
-**Transparency obligations for metered services.** Nothing is enabled by default. Before enabling a service the tenant sees its unit price, the supplier it originates from, and a worked estimate. The tenant can set a spend cap per service, with a soft warning and a hard stop. A monthly statement itemizes every metered service by units and cost.
+**Alliances paying for members.** An alliance can absorb the metered costs of its members' use of central services. This is a setting on the affiliation, `member_pays` (default) or `alliance_pays`, chosen when the alliance is set up and shown to each member before it accepts affiliation ([workflows.md § 1. Tenant Onboarding](workflows.md#1-tenant-onboarding)). Changing it on a live affiliation requires the Org Admins of both sides, the same rule that governs donation split changes. Paying is not seeing: results land in the member tenant under the member's keys, and the alliance receives the statement, never the content. An association of agencies in the commercial lane can pay for its members the same way.
 
-**Alliances paying for members.** An alliance can absorb the metered costs of its members' use of central services. This is a setting on the affiliation, `member_pays` (default) or `alliance_pays`, chosen when the alliance is set up and shown to each member before it accepts affiliation ([workflows.md § 1. Tenant Onboarding](workflows.md#1-tenant-onboarding)). Changing it on a live affiliation requires the Org Admins of both sides, the same rule that governs donation split changes. Paying is not seeing: results land in the member tenant under the member's keys, and the alliance receives the statement, never the content.
+**Not decided.** ADR-026 lists the definitions the prices still need, and none of them is filled in here: what "cost" includes; how each commission is calculated; what the 30% applies to; how costs shared by both lanes are split; whether the free plan survives.
+
+**Zero platform fee on donations stands.** The new prices do not override it ([ADR-007 § Zero platform fee on donations](../decisions/007-fundraising-payments.md#zero-platform-fee-on-donations)). If a commission is ever defined as a percentage, its base has to be stated, and a base that includes donation volume would reverse that decision and has to say so.
+
+### The decisions this replaces
+
+Kept so the reversal is visible. Neither is in force.
+
+1. **Flat subscription (the original decision).** Flat subscription tiers, "not tied to donation volume, user count, or any usage metric". Fixed monthly or annual pricing by plan (basic, professional, enterprise), with a genuinely usable free or very-low-cost plan for resource-constrained campaigns.
+2. **Two billing planes (ADR-019, September 2026).** The flat subscription stayed as Plane 1 and covered the tenant instance, every internal module in the plan, and GreenGrass's own cost of building and operating central services. Plane 2 passed metered third-party costs through at cost: inference tokens, per-message gateway charges, per-generation charges, per-source data fees, and infrastructure billed to GreenGrass by the unit. "GreenGrass takes no margin on metered costs", and its revenue came "from the subscription alone".
 
 ### Pricing Principles (from product.md, to be preserved regardless of model)
 
-- **Not per-user pricing** — explicitly rejected. Campaigns shouldn't be penalized for having more volunteers.
-- **Not per-transaction pricing** — GreenGrass takes zero cut of donations (decided above).
-- **Accessible to resource-constrained campaigns** — free or very low-cost plan must exist and be genuinely usable, not hobbled.
-- **Transparent** — no hidden fees, no surprise charges.
-- **No margin on pass-through costs** — added by ADR-019. Variable third-party costs reach the tenant at cost. GreenGrass never earns from a tenant's consumption.
+The heading is the original one. After ADR-026 the list reads as follows.
+
+- **Not per-user pricing** — explicitly rejected. Campaigns shouldn't be penalized for having more volunteers. Not overridden by ADR-026.
+- **Not per-transaction pricing** — GreenGrass takes zero cut of donations (decided above). Not overridden by ADR-026.
+- **Accessible to resource-constrained campaigns** — free or very low-cost plan must exist and be genuinely usable, not hobbled. *Open:* whether the free plan survives is one of ADR-026's missing definitions.
+- **Transparent** — no hidden fees, no surprise charges. Kept: cost, margin and commission are separate lines on the statement.
+- ~~**No margin on pass-through costs**~~ — added by ADR-019, superseded by ADR-026. The commercial lane's price includes a 30% margin, and both lanes add a commission.
 
 ### Deferred: metered allowance in the free plan
 
-Whether the free or very-low-cost plan includes any metered allowance — a starting balance of central-service use, and if so how much and for which services — is deferred. The accessibility principle stands as written. This is recorded here so that it is not read as decided either way; the pilot should inform it.
+ADR-019 deferred whether the free or very-low-cost plan includes any metered allowance. ADR-026 opens the earlier question: whether there is a free plan at all. Both are open, and neither may be read as decided.
 
 ## Fraud Prevention
 

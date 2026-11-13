@@ -4,6 +4,8 @@
 
 Este documento especifica las capacidades de recaudación de fondos y la infraestructura de pagos de GreenGrass. Parte de las decisiones tomadas en workflows.md (flujos de donación, repartos entre alianzas, analítica), compliance.md (bloqueo de contribuciones extranjeras, reportes de financiamiento de campaña, consentimiento), geography.md (métodos de pago por país) y system.md (patrón de adaptador de pagos, modelo de datos).
 
+**Dos carriles, una sola capa de pagos.** La plataforma se vende ahora por dos carriles ([ADR-022](../decisions/022-core-modules-and-lanes.md)). Recaudación y pagos es un solo módulo con una capa de pagos compartida. En el carril comercial quiere decir integración con ATH Móvil y con otros servicios de micropagos y de pagos en línea, como Stripe: los adaptadores de pago de la [Estrategia de procesadores de pago](#estrategia-de-procesadores-de-pago), que comparten los dos carriles. Todo lo que este documento dice sobre donaciones, límites de contribución, reportes de financiamiento de campaña y repartos entre alianzas es configuración del carril político encima de esa capa. Por lo demás, el documento está escrito para el carril político, y se deja como está.
+
 Recaudar fondos es una función de supervivencia para cualquier campaña política. En el Sur Global la infraestructura de pagos varía muchísimo — desde PIX en Brasil (instantáneo, gratis, omnipresente) hasta flujos basados en efectivo en Líbano (con el sistema bancario en crisis). GreenGrass tiene que manejar todo eso detrás de una interfaz consistente, y que cada transacción quede auditable, en cumplimiento y atribuida.
 
 ## Filosofía de recaudación
@@ -290,31 +292,45 @@ Ya decidido en workflows.md: termómetro de recaudación en tiempo real, panel d
 
 ## Modelo de ingresos de la plataforma
 
-**DECIDIDO: dos planos de facturación — una suscripción fija y un traslado al costo, medido por uso.** Enmendado por la [ADR-019](../decisions/019-central-services-and-metered-billing.md). La decisión original decía: niveles de suscripción fija, no atados al volumen de donaciones, al número de usuarios ni a ninguna métrica de uso. Eso sigue siendo cierto para la suscripción. Dejó de serlo para el modelo entero cuando la plataforma ganó servicios centrales cuyos costos de terceros no se pueden volver fijos.
+**DECIDIDO: el precio es una regla del carril, aplicada encima del costo medido** ([ADR-026](../decisions/026-two-lane-pricing.md)). Esto deja sin efecto las dos decisiones que esta sección tuvo antes: la suscripción fija, y los dos planos de facturación de la [ADR-019](../decisions/019-central-services-and-metered-billing.md).
 
-**Plano 1 — Suscripción fija.** Precio mensual o anual fijo según el plan (básico, profesional, empresarial). Cubre la instancia de la organización, cada módulo interno que el plan incluya y el costo propio de GreenGrass por construir y operar los servicios centrales. Predecible para las campañas, simple de entender, sin sorpresas. Tiene que existir un plan gratuito o de costo muy bajo que sea genuinamente usable para campañas con pocos recursos.
+| Carril | Precio |
+|---|---|
+| Político (Greengrass) | Al costo, más la comisión que cubre el costo de vender |
+| Comercial (Basecamp) | El costo, más un margen de 30 % para la dueña del producto, más la comisión de la Comercializadora |
 
-**Plano 2 — Traslado al costo, medido por uso.** Los servicios centrales ([ADR-019](../decisions/019-central-services-and-metered-billing.md)) cargan costos variables que le llegan a GreenGrass medidos, facturados por unidad, y que no se pueden volver fijos: tokens de inferencia de un proveedor de modelos, cargos por mensaje de las pasarelas de SMS y de WhatsApp, cargos por generación de los proveedores de generación de medios, cuotas por fuente de los proveedores de datos, e infraestructura que un proveedor de nube le factura a GreenGrass por unidad para correr el servicio. Esos costos se trasladan a la organización que los generó.
+<!-- REVISIT: «la dueña del producto» (the product's owner) y «la Comercializadora» se usan tal como se dieron y no están definidas en ninguna parte. Ver la ADR-026. -->
 
-**GreenGrass no le carga margen a los costos medidos.** El precio del proveedor es el precio de la organización: sin recargo, sin redondeo hacia arriba, sin empaquetar en unidades opacas, sin consumo mínimo. Cuando un proveedor le factura a GreenGrass en conjunto y no por organización, el método de reparto se publica y la organización paga su parte y nada más. Cuando las condiciones de un proveedor hacen imposible el traslado exacto, se usa la aproximación más cercana alcanzable y la desviación queda documentada en la entrada del servicio en el catálogo. Los ingresos de GreenGrass vienen únicamente de la suscripción, por la misma razón por la que no se queda con nada de las donaciones: la plataforma gana por la calidad de la plataforma, nunca por el volumen.
+**El Core mide solo el costo.** Cada llamada a un servicio central emite un evento de uso con el costo del proveedor, como decidió la ADR-019. Cada carril aplica encima su propia regla de precio. El estado de cuenta de un cliente muestra el costo, el margen y la comisión en líneas separadas.
 
-Lo que nunca se mide: el cómputo, el almacenamiento y el tiempo del personal de GreenGrass cuando GreenGrass los paga fijos, como capacidad reservada o como salarios. Eso es costo de la suscripción. La prueba es si GreenGrass recibe ella misma una factura medida: cuando un proveedor de nube le cobra a GreenGrass por unidad por correr un servicio, ese cargo se traslada al costo como cualquier otro. Un servicio que no genera ninguna factura medida no tiene plano medido en absoluto.
+**Se mantiene de la ADR-019,** porque los precios nuevos dependen de ello: la medición por llamada del costo del proveedor, los estados de cuenta desglosados, los topes de gasto con un aviso y un corte, nada activado por defecto, y las alianzas que pagan por sus miembros.
 
-**Obligaciones de transparencia de los servicios medidos.** Nada viene activado por defecto. Antes de activar un servicio, la organización ve su precio unitario, el proveedor del que viene y una estimación con números. La organización puede fijar un tope de gasto por servicio, con un aviso y un corte. Un estado de cuenta mensual detalla cada servicio medido por unidades y por costo.
+**Alianzas que pagan por sus miembros.** Una alianza puede absorber los costos medidos que genera el uso de servicios centrales por parte de sus miembros. Es un ajuste de la afiliación, `member_pays` (por defecto) o `alliance_pays`, que se elige al poner en marcha la alianza y que cada miembro ve antes de aceptar la afiliación ([workflows.md § 1. Puesta en marcha de una organización](workflows.md#1-puesta-en-marcha-de-una-organización)). Cambiarlo en una afiliación activa requiere a los Administradores de la organización de los dos lados, la misma regla que rige los cambios en el reparto de donaciones. Pagar no es ver: los resultados aterrizan en la organización miembro bajo las llaves del miembro, y la alianza recibe el estado de cuenta, nunca el contenido. Una asociación de agencias en el carril comercial puede pagar por sus miembros de la misma manera.
 
-**Alianzas que pagan por sus miembros.** Una alianza puede absorber los costos medidos que genera el uso de servicios centrales por parte de sus miembros. Es un ajuste de la afiliación, `member_pays` (por defecto) o `alliance_pays`, que se elige al poner en marcha la alianza y que cada miembro ve antes de aceptar la afiliación ([workflows.md § 1. Puesta en marcha de una organización](workflows.md#1-puesta-en-marcha-de-una-organización)). Cambiarlo en una afiliación activa requiere a los Administradores de la organización de los dos lados, la misma regla que rige los cambios en el reparto de donaciones. Pagar no es ver: los resultados aterrizan en la organización miembro bajo las llaves del miembro, y la alianza recibe el estado de cuenta, nunca el contenido.
+**No decidido.** La ADR-026 enumera las definiciones que los precios todavía necesitan, y aquí no se llena ninguna: qué incluye el «costo»; cómo se calcula cada comisión; a qué se aplica el 30 %; cómo se reparten los costos que comparten los dos carriles; si el plan gratuito sobrevive.
+
+**La cero comisión de la plataforma sobre las donaciones se mantiene.** Los precios nuevos no la dejan sin efecto ([ADR-007 § Cero comisión de la plataforma sobre las donaciones](../decisions/007-fundraising-payments.md#cero-comisión-de-la-plataforma-sobre-las-donaciones)). Si alguna vez una comisión se define como un porcentaje, hay que decir sobre qué base, y una base que incluya el volumen de donaciones revertiría esa decisión y tiene que decirlo.
+
+### Las decisiones que esto reemplaza
+
+Se conservan para que el cambio de rumbo quede a la vista. Ninguna está en vigor.
+
+1. **Suscripción fija (la decisión original).** Niveles de suscripción fija, «no atados al volumen de donaciones, al número de usuarios ni a ninguna métrica de uso». Precio mensual o anual fijo según el plan (básico, profesional, empresarial), con un plan gratuito o de costo muy bajo que sea genuinamente usable para campañas con pocos recursos.
+2. **Dos planos de facturación (ADR-019, septiembre de 2026).** La suscripción fija quedó como Plano 1 y cubría la instancia de la organización, cada módulo interno que el plan incluyera y el costo propio de GreenGrass por construir y operar los servicios centrales. El Plano 2 trasladaba al costo los costos medidos de terceros: tokens de inferencia, cargos por mensaje de las pasarelas, cargos por generación, cuotas por fuente de datos, e infraestructura que le facturan a GreenGrass por unidad. «GreenGrass no le carga margen a los costos medidos», y sus ingresos venían «únicamente de la suscripción».
 
 ### Principios de precios (de product.md, se preservan sin importar el modelo)
 
-- **No es precio por usuario** — explícitamente rechazado. Una campaña no debería pagar más por tener más voluntarios.
-- **No es precio por transacción** — GreenGrass no se queda con nada de las donaciones (decidido arriba).
-- **Accesible para campañas con pocos recursos** — tiene que existir un plan gratuito o de costo muy bajo, y tiene que ser genuinamente usable, no una versión mutilada.
-- **Transparente** — sin cargos ocultos, sin cobros sorpresa.
-- **Sin margen sobre los costos trasladados** — añadido por la ADR-019. Los costos variables de terceros llegan a la organización al costo. GreenGrass nunca gana con el consumo de una organización.
+El encabezado es el original. Después de la ADR-026 la lista queda así.
+
+- **No es precio por usuario** — explícitamente rechazado. Una campaña no debería pagar más por tener más voluntarios. La ADR-026 no lo deja sin efecto.
+- **No es precio por transacción** — GreenGrass no se queda con nada de las donaciones (decidido arriba). La ADR-026 no lo deja sin efecto.
+- **Accesible para campañas con pocos recursos** — tiene que existir un plan gratuito o de costo muy bajo, y tiene que ser genuinamente usable, no una versión mutilada. *Abierto:* si el plan gratuito sobrevive es una de las definiciones que le faltan a la ADR-026.
+- **Transparente** — sin cargos ocultos, sin cobros sorpresa. Se mantiene: el costo, el margen y la comisión van en líneas separadas del estado de cuenta.
+- ~~**Sin margen sobre los costos trasladados**~~ — añadido por la ADR-019, queda sin efecto por la ADR-026. El precio del carril comercial incluye un margen de 30 %, y los dos carriles suman una comisión.
 
 ### Diferido: asignación medida en el plan gratuito
 
-Si el plan gratuito o de costo muy bajo incluye alguna asignación medida —un saldo inicial de uso de servicios centrales y, de ser así, cuánto y para qué servicios— queda diferido. El principio de accesibilidad se mantiene tal como está escrito. Queda registrado aquí para que no se lea como decidido en ningún sentido; el piloto debería informarlo.
+La ADR-019 dejó diferido si el plan gratuito o de costo muy bajo incluye alguna asignación medida. La ADR-026 abre la pregunta anterior: si hay un plan gratuito siquiera. Las dos están abiertas, y ninguna se puede leer como decidida.
 
 ## Prevención de fraude
 
