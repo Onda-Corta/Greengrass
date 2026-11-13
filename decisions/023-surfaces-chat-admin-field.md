@@ -93,7 +93,7 @@ The position is recorded in [ADR-018 § The proposal under review](018-ai-agent-
 
 Two practical consequences, both open.
 
-- **Cost.** Chat is inference on every turn. Under [ADR-019](019-central-services-and-metered-billing.md) that is a metered cost, or the client's own bill under BYOM. When chat is the main surface, this cost is no longer marginal, and pricing has to account for it (ADR-026).
+- **Cost.** Chat is inference on every turn. Under [ADR-019](019-central-services-and-metered-billing.md) that is a metered cost, or the client's own bill under BYOM. When chat is the main surface, this cost is no longer marginal, and pricing has to account for it ([ADR-026](026-two-lane-pricing.md)).
 - **Channel.** The proposal is a default home for the chat inside the product's own app, with Telegram or Signal as options per client. WhatsApp should not be the assumed channel, since its business terms prohibit political party activity ([pitch.md](../spec/pitch.md)).
 
 ### Open questions
@@ -124,4 +124,4 @@ Two practical consequences, both open.
 - A chat user can do nothing they could not do in the admin UI
 - The position on the chat is a proposal; nothing may be built on it for production
 
-**Related ADRs:** [ADR-005](005-offline-first-sync.md) (the field app remains the offline surface), [ADR-011](011-design-system-ux.md) (the design system the admin UI and field app keep), [ADR-018](018-ai-agent-posture.md) (the gate binds the whole Core; the chat position is sent to its review), [ADR-019](019-central-services-and-metered-billing.md) (inference is a metered cost), [ADR-020](020-central-service-line-up-and-builders.md) (a send is a person's action or a schedule a person set), [ADR-022](022-core-modules-and-lanes.md) (the headless Core; the manifest declares each module's surfaces), ADR-026 (the cost of chat in the price)
+**Related ADRs:** [ADR-005](005-offline-first-sync.md) (the field app remains the offline surface), [ADR-011](011-design-system-ux.md) (the design system the admin UI and field app keep), [ADR-018](018-ai-agent-posture.md) (the gate binds the whole Core; the chat position is sent to its review), [ADR-019](019-central-services-and-metered-billing.md) (inference is a metered cost), [ADR-020](020-central-service-line-up-and-builders.md) (a send is a person's action or a schedule a person set), [ADR-022](022-core-modules-and-lanes.md) (the headless Core; the manifest declares each module's surfaces), [ADR-026](026-two-lane-pricing.md) (the cost of chat in the price)

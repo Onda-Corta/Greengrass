@@ -3,6 +3,7 @@
 **Status:** Accepted
 **Date:** 2026-09-28
 **Sources:** `spec/fundraising.md`, `spec/product.md`, `spec/users.md`, `spec/mvp.md`, `spec/comms-intelligence.md`, `spec/workflows.md`, `design/architecture/system.md`
+**Amended by:** [ADR-026](026-two-lane-pricing.md) — pricing is now a lane rule. "Two billing planes, and no margin on the second" below is superseded as a revenue model: "GreenGrass takes no margin on metered costs" and "GreenGrass's revenue comes from the subscription alone" no longer hold. Kept, because the new prices rely on them: per-call metering of supplier cost, itemised statements, spend caps, nothing enabled by default, and the `alliance_pays` billing mode. Everything below that is not about the price is unchanged.
 **Amendment proposed by:** [ADR-022](022-core-modules-and-lanes.md) (Proposed) — "internal module" below would be renamed "in-tenant component", so that "module" can mean the unit a client enables from the catalogue. The distinction this ADR draws is unchanged; only the name moves.
 
 ## Context

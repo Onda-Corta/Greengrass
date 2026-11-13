@@ -86,7 +86,7 @@ Decided.
 - **Independent lanes.** A lane never waits for the other. The work with PIP and MVC does not depend on what the Asociación de Publicistas' tool turns out to be, or the reverse.
 - **Shared improvements.** When one lane improves a shared module, the improvement reaches the other.
 
-The prices are decided in ADR-026.
+The prices are decided in [ADR-026](026-two-lane-pricing.md).
 
 ### What the lanes require of the design
 
@@ -98,7 +98,7 @@ Proposed. These are what it takes for the four statements above to hold at once.
 - **A lane-specific need goes into the shared module** as configuration or an extension point. If it cannot, it becomes a lane-only module.
 - **Operators are separated by lane.** A political client's threat model includes political opponents ([security.md § Threat Actors](../spec/security.md#threat-actors)), and a commercial agency may work for one. A lane's operators can administer only that lane's instances. Query logs against shared services stay scoped to the client and are invisible across lanes; ADR-019 already requires the first half. Onda Corta sits in both lanes, so its access has to be defined explicitly. Political clients should be told that the same infrastructure serves commercial clients. The details are open, below.
 - **The shared public corpus is the main economy.** Radio, TV, press and public social accounts are captured once and serve both lanes. Only public data is shared, as [ADR-019 § Central services execute per tenant and retain nothing](019-central-services-and-metered-billing.md#central-services-execute-per-tenant-and-retain-nothing) already rules.
-- **Pricing is a lane rule, not a Core rule** (ADR-026).
+- **Pricing is a lane rule, not a Core rule** ([ADR-026](026-two-lane-pricing.md)).
 
 **Alternatives considered:** A fork of the codebase per lane was rejected because it breaks the promise that an improvement in one lane reaches the other, and it doubles the cost of every security fix.
 
@@ -224,4 +224,4 @@ A proposed ADR amends nothing until it is accepted. This ADR adds an **Amendment
 - The [ADR-018](018-ai-agent-posture.md) gate applies to the whole Core, so to both lanes ([ADR-023](023-surfaces-chat-admin-field.md))
 - Nothing marked proposed, recommended or open in this ADR may be built on as if it were decided
 
-**Related ADRs:** [ADR-001](001-platform-architecture.md) (one instance per client, reaffirmed), [ADR-015](015-product-scope.md) (amendment proposed: the catalogue names modules outside its scope list), [ADR-017](017-sharing-contract-trust-model.md) (contracts are Core), [ADR-018](018-ai-agent-posture.md) (the manifest declares each module's standing against the gate), [ADR-019](019-central-services-and-metered-billing.md) (amendment proposed: "internal module" becomes "in-tenant component"; catalogue, entitlements and metering are Core), [ADR-020](020-central-service-line-up-and-builders.md) (amendment proposed: one media monitor is packaged as three modules; the four services are unchanged), [ADR-021](021-content-approval-pipeline.md) (the content pipeline is Core), [ADR-023](023-surfaces-chat-admin-field.md) (surfaces), [ADR-024](024-event-bus-as-federation.md) (the bus; alliances and associations), [ADR-025](025-identity-per-client.md) (identity per client), ADR-026 (prices), ADR-027 (sync and connectors)
+**Related ADRs:** [ADR-001](001-platform-architecture.md) (one instance per client, reaffirmed), [ADR-015](015-product-scope.md) (amendment proposed: the catalogue names modules outside its scope list), [ADR-017](017-sharing-contract-trust-model.md) (contracts are Core), [ADR-018](018-ai-agent-posture.md) (the manifest declares each module's standing against the gate), [ADR-019](019-central-services-and-metered-billing.md) (amendment proposed: "internal module" becomes "in-tenant component"; catalogue, entitlements and metering are Core), [ADR-020](020-central-service-line-up-and-builders.md) (amendment proposed: one media monitor is packaged as three modules; the four services are unchanged), [ADR-021](021-content-approval-pipeline.md) (the content pipeline is Core), [ADR-023](023-surfaces-chat-admin-field.md) (surfaces), [ADR-024](024-event-bus-as-federation.md) (the bus; alliances and associations), [ADR-025](025-identity-per-client.md) (identity per client), [ADR-026](026-two-lane-pricing.md) (prices), ADR-027 (sync and connectors)

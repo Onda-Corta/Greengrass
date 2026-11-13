@@ -93,7 +93,7 @@ La posición queda registrada en [ADR-018 § La propuesta en revisión](018-ai-a
 
 Dos consecuencias prácticas, las dos abiertas.
 
-- **Costo.** El chat es inferencia en cada turno. Bajo la [ADR-019](019-central-services-and-metered-billing.md) eso es un costo medido, o la factura propia del cliente bajo BYOM. Cuando el chat es la superficie principal, este costo deja de ser marginal, y los precios tienen que contar con él (ADR-026).
+- **Costo.** El chat es inferencia en cada turno. Bajo la [ADR-019](019-central-services-and-metered-billing.md) eso es un costo medido, o la factura propia del cliente bajo BYOM. Cuando el chat es la superficie principal, este costo deja de ser marginal, y los precios tienen que contar con él ([ADR-026](026-two-lane-pricing.md)).
 - **Canal.** La propuesta es que el chat tenga por defecto su casa dentro de la app del propio producto, con Telegram o Signal como opciones por cliente. WhatsApp no debe ser el canal que se da por sentado, porque sus términos comerciales prohíben la actividad de partidos políticos ([pitch.md](../spec/pitch.md)).
 
 ### Preguntas abiertas
@@ -124,4 +124,4 @@ Dos consecuencias prácticas, las dos abiertas.
 - Quien usa el chat no puede hacer nada que no podría hacer en la UI de administración
 - La posición sobre el chat es una propuesta; nada puede construirse sobre ella para producción
 
-**ADR relacionadas:** [ADR-005](005-offline-first-sync.md) (la app de campo sigue siendo la superficie sin conexión), [ADR-011](011-design-system-ux.md) (el sistema de diseño que la UI de administración y la app de campo conservan), [ADR-018](018-ai-agent-posture.md) (el punto de decisión abarca todo el Core; la posición sobre el chat se manda a su revisión), [ADR-019](019-central-services-and-metered-billing.md) (la inferencia es un costo medido), [ADR-020](020-central-service-line-up-and-builders.md) (un envío es la acción de una persona o una programación que fijó una persona), [ADR-022](022-core-modules-and-lanes.md) (el Core headless; el manifiesto declara las superficies de cada módulo), ADR-026 (el costo del chat en el precio)
+**ADR relacionadas:** [ADR-005](005-offline-first-sync.md) (la app de campo sigue siendo la superficie sin conexión), [ADR-011](011-design-system-ux.md) (el sistema de diseño que la UI de administración y la app de campo conservan), [ADR-018](018-ai-agent-posture.md) (el punto de decisión abarca todo el Core; la posición sobre el chat se manda a su revisión), [ADR-019](019-central-services-and-metered-billing.md) (la inferencia es un costo medido), [ADR-020](020-central-service-line-up-and-builders.md) (un envío es la acción de una persona o una programación que fijó una persona), [ADR-022](022-core-modules-and-lanes.md) (el Core headless; el manifiesto declara las superficies de cada módulo), [ADR-026](026-two-lane-pricing.md) (el costo del chat en el precio)
