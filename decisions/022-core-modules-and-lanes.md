@@ -56,7 +56,7 @@ Proposed.
 | **Module** | The unit a client enables and the catalogue lists. Shared by both lanes unless marked lane-only. Described by a manifest. Made of in-tenant components, central-service calls, or both. |
 | **In-tenant component** | Code that runs inside the client's instance. This is ADR-019's "internal module", renamed. |
 | **Central service** | Code that runs platform-side for one client per call and keeps nothing ([ADR-019](019-central-services-and-metered-billing.md)): Capture, Analysis, Builders and channel transport ([ADR-020](020-central-service-line-up-and-builders.md)). Unchanged. |
-| **Surface** | Where a person does the work: chat, admin UI or field app (ADR-023). |
+| **Surface** | Where a person does the work: chat, admin UI or field app ([ADR-023](023-surfaces-chat-admin-field.md)). |
 | **Connector** | A link to an outside tool such as NationBuilder. It sits in the integration hub and is not a module (ADR-027). |
 
 A worked example. Radio & TV monitoring is a module. It is made of the Capture central service with transcription, an in-tenant monitoring inbox, outlet and journalist records in the Core CRM, and a digest in chat.
@@ -143,7 +143,7 @@ Every module ships a manifest that declares:
 - **Dependencies:** the modules it requires, and what happens to its data when it is disabled.
 - **Events:** the events it publishes and consumes on the bus (ADR-024).
 - **Access:** the role templates and permissions it contributes ([ADR-003](003-identity-access-organization.md)).
-- **Surfaces:** its chat operations, each marked read or write, with the confirmation card for writes; its admin screens and navigation entries; its field capabilities and offline behaviour (ADR-023).
+- **Surfaces:** its chat operations, each marked read or write, with the confirmation card for writes; its admin screens and navigation entries; its field capabilities and offline behaviour ([ADR-023](023-surfaces-chat-admin-field.md)).
 - **Services:** the central services it calls, and so the entitlements it needs.
 - **Perimeter:** what data leaves the encryption boundary, and which isolation tiers and jurisdictions it supports.
 - **ADR-018 standing:** read scope, tool authority, autonomy and credential breadth, the four properties [ADR-018](018-ai-agent-posture.md#no-agent-capability-reaches-production-until-this-adr-is-accepted) gates on.
@@ -180,7 +180,7 @@ Proposed. The names are the product side's. Every module can run in either produ
 - **Crisis management is the claims-ledger workflow** at [comms-intelligence.md § 5.2 The claims ledger](../spec/comms-intelligence.md#52-the-claims-ledger): an attack surfaces in monitoring, becomes a claim, gets sourced and adjudicated, and the answer becomes a talking point. The spec has the primitive and no module by this name.
 - **Polls & surveys has no spec at all.** ADR-020 gives one rule to keep: a client's own polling is its own data and never enters the shared corpus.
 - **Fundraising & payments is one module with a shared payment layer. Decided.** In the commercial lane it means integration with ATH Móvil and other micropayment and online payment services such as Stripe. Those are the payment adapters [system.md § Payment adapter pattern](../design/architecture/system.md#payment-adapter-pattern) already specifies, so the adapters are shared by both lanes. The political lane adds donation handling on top: contribution limits, campaign-finance reporting and alliance splits ([fundraising.md](../spec/fundraising.md), [compliance.md](../spec/compliance.md)).
-- **The Campaign Agent is not a module. Recommended, not decided.** If the chat acts as the person (ADR-023), the agent of the demonstration is that chat with content modules enabled.
+- **The Campaign Agent is not a module. Recommended, not decided.** If the chat acts as the person ([ADR-023](023-surfaces-chat-admin-field.md)), the agent of the demonstration is that chat with content modules enabled.
 
 **Named, not yet specified.** Crisis management and Polls & surveys are in the catalogue and specified nowhere. This ADR does not specify them. Each needs its own spec before it is built.
 
@@ -221,7 +221,7 @@ A proposed ADR amends nothing until it is accepted. This ADR adds an **Amendment
 - [ADR-019](019-central-services-and-metered-billing.md)'s rules for central services are unchanged: one client per call, nothing retained, only public data shared
 - The Core never depends on a module
 - A lane is configuration, never a fork
-- The [ADR-018](018-ai-agent-posture.md) gate applies to the whole Core, so to both lanes (ADR-023)
+- The [ADR-018](018-ai-agent-posture.md) gate applies to the whole Core, so to both lanes ([ADR-023](023-surfaces-chat-admin-field.md))
 - Nothing marked proposed, recommended or open in this ADR may be built on as if it were decided
 
-**Related ADRs:** [ADR-001](001-platform-architecture.md) (one instance per client, reaffirmed), [ADR-015](015-product-scope.md) (amendment proposed: the catalogue names modules outside its scope list), [ADR-017](017-sharing-contract-trust-model.md) (contracts are Core), [ADR-018](018-ai-agent-posture.md) (the manifest declares each module's standing against the gate), [ADR-019](019-central-services-and-metered-billing.md) (amendment proposed: "internal module" becomes "in-tenant component"; catalogue, entitlements and metering are Core), [ADR-020](020-central-service-line-up-and-builders.md) (amendment proposed: one media monitor is packaged as three modules; the four services are unchanged), [ADR-021](021-content-approval-pipeline.md) (the content pipeline is Core), ADR-023 (surfaces), ADR-024 (the bus; alliances and associations), ADR-025 (identity per client), ADR-026 (prices), ADR-027 (sync and connectors)
+**Related ADRs:** [ADR-001](001-platform-architecture.md) (one instance per client, reaffirmed), [ADR-015](015-product-scope.md) (amendment proposed: the catalogue names modules outside its scope list), [ADR-017](017-sharing-contract-trust-model.md) (contracts are Core), [ADR-018](018-ai-agent-posture.md) (the manifest declares each module's standing against the gate), [ADR-019](019-central-services-and-metered-billing.md) (amendment proposed: "internal module" becomes "in-tenant component"; catalogue, entitlements and metering are Core), [ADR-020](020-central-service-line-up-and-builders.md) (amendment proposed: one media monitor is packaged as three modules; the four services are unchanged), [ADR-021](021-content-approval-pipeline.md) (the content pipeline is Core), [ADR-023](023-surfaces-chat-admin-field.md) (surfaces), ADR-024 (the bus; alliances and associations), ADR-025 (identity per client), ADR-026 (prices), ADR-027 (sync and connectors)
