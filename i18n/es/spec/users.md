@@ -13,7 +13,7 @@ La descripción del producto pide "acceso explícito con cuenta propia para *tod
 
 ## Organizaciones
 
-En GreenGrass, cada unidad cliente es una **organización**. Una organización puede ser:
+En GreenGrass, cada unidad cliente es una **organización**. En los términos de la [ADR-022](../decisions/022-core-modules-and-lanes.md), una organización es un *cliente*, y su unidad cliente es su propia *instancia*: sus propios datos y sus propias cuentas. Una organización puede ser:
 
 - Una campaña política (una persona candidata a un cargo)
 - Un partido político (entidad permanente que maneja varias campañas)
@@ -62,6 +62,8 @@ Partido (soberano)
 - **Las alianzas son organizaciones ligeras** con capacidades operativas propias: cuentas de personal, bolsas de voluntarios, datos de miembros y simpatizantes, campañas conjuntas y facturación de los costos compartidos. No replican el conjunto completo de herramientas de la plataforma (CRM completo, herramientas de recaudación, suite de comunicaciones); esas siguen en manos de cada entidad miembro.
 - **Operar por cuenta propia** siempre es posible. Cualquier entidad puede funcionar sin afiliaciones.
 
+<!-- REVISIT: «Las alianzas son organizaciones ligeras», arriba. La dirección de noviembre de 2026 dice que una alianza es un cliente como cualquier otro, con su propia instancia, y que una asociación de agencias en el carril comercial funciona exactamente igual que una alianza. La ADR-024 (propuesta) nombra el conflicto y propone que «ligera» quiera decir pocos módulos activados. Se deja como está hasta que se decida la ADR-024. -->
+
 ### Intercambio entre organizaciones dentro de una alianza
 
 Las alianzas permiten cooperar en límites definidos. Cada organización miembro elige qué comparte:
@@ -72,7 +74,7 @@ Las alianzas permiten cooperar en límites definidos. Cada organización miembro
 
 | Recurso | Descripción | Nota sobre soberanía |
 |----------|-------------|-----------------|
-| Bolsas de voluntarios | Voluntarios disponibles para asignarse a cualquier campaña de un miembro | La identidad de plataforma del voluntario sigue siendo suya; el historial de asignaciones se registra por organización |
+| Bolsas de voluntarios | Voluntarios disponibles para asignarse a cualquier campaña de un miembro | La identidad de plataforma del voluntario sigue siendo suya; el historial de asignaciones se registra por organización. *REVISIT: no hay identidad de plataforma desde la [ADR-025](../decisions/025-identity-per-client.md); un voluntario compartido tiene una cuenta en cada instancia en la que trabaja* |
 | Datos de contacto con votantes | Resultados del trabajo de campo compartidos para no tocar dos veces la misma puerta | Cada organización elige qué datos de contacto expone; sus etiquetas y puntajes internos quedan privados salvo que los comparta explícitamente |
 | Infraestructura de eventos | Mítines conjuntos, listas de confirmación compartidas, calendarios coordinados | El evento sigue perteneciendo a la organización que lo creó; las confirmaciones llegan a todas las organizaciones coanfitrionas |
 | Recaudación de fondos | Páginas de recaudación conjunta con repartos de donaciones configurables | Los registros financieros de cada organización siguen siendo soberanos; las reglas de reparto se definen a nivel de campaña |
@@ -87,9 +89,36 @@ Las alianzas permiten cooperar en límites definidos. Cada organización miembro
 - **Auditado.** Toda concesión, toda revocación y todo acceso a datos entre organizaciones queda registrado.
 - **Respeta el consentimiento de cada persona.** Si un simpatizante se dio de baja del intercambio de datos en sus preferencias de plataforma, su registro queda fuera de los recursos compartidos sin importar la configuración de la organización.
 
+<!-- REVISIT: «sus preferencias de plataforma» es anterior a la ADR-025. Ya no hay preferencias a nivel de plataforma: la baja del intercambio de datos se registra en cada instancia que tiene a la persona, y la regla de arriba se aplica por instancia. Una sola baja que obligue a todas las organizaciones a la vez todavía no tiene dónde vivir; la ADR-025 la deja anotada como abierta. -->
+
 ### Pertenencia a varias organizaciones
 
-**DECIDIDO:** Identidad de plataforma con perfiles federados.
+**DECIDIDO:** La identidad es por cliente. La instancia de cada organización guarda sus propias cuentas ([ADR-025](../decisions/025-identity-per-client.md)).
+
+Una persona que trabaja en más de una organización tiene **una cuenta en cada una**. Alguien del personal del PIP y de la Alianza inicia sesión en cada una en su propia dirección, con sus propias credenciales. No hay un inicio de sesión que abarque varias organizaciones ni un selector de organización. Cada instancia conoce solo a su propia gente.
+
+**Qué guarda una instancia sobre una persona.** El reparto entre lo que es de la persona y lo que es de la organización sigue describiendo el registro. Los dos lados viven ahora en la misma instancia:
+
+| De la persona, guardado en su cuenta en esta instancia | De la organización |
+|---|---|
+| Credenciales de acceso (login, 2FA) | Rol y permisos dentro de esa organización |
+| Nombre, datos de contacto, idioma preferido | Horas de voluntariado, historial de turnos |
+| Preferencias de alta y baja en comunicaciones | Asignaciones de trabajo de campo y notas de campo |
+| Sus donaciones a esta organización | Etiquetas, puntajes y segmentos internos |
+| Preferencias de la cuenta | Notas del personal sobre la persona |
+| | Asignaciones de tareas y eventos |
+
+**Entre organizaciones.** No hay nada por encima de las instancias que diga que dos cuentas son la misma persona. La coordinación que lo necesite corre sobre contratos de intercambio entre instancias: la supresión mutua, por ejemplo, cruza sobre un índice ciego con llave por contrato de alianza, que guardan los miembros ([system.md § Motor de orquestación entre canales](../design/architecture/system.md#motor-de-orquestación-entre-canales)).
+
+**Sin reemplazo.** Tres cosas que daba el diseño anterior todavía no tienen reemplazo, y la ADR-025 las deja anotadas como abiertas: el registro propio de un donante a través de varias organizaciones, una identidad que sobreviva a la organización en la que se creó, y una sola baja del intercambio de datos que obligue a todas las organizaciones a la vez.
+
+**El inicio de sesión único** entre una alianza y sus miembros no es parte de este diseño. Si más adelante se quiere, se puede agregar como una confianza opcional entre instancias.
+
+#### La decisión que esto reemplaza
+
+Se conserva para que el cambio de rumbo quede a la vista. Hasta el 2026-11-13 esta sección decía lo que sigue, y la [ADR-003](../decisions/003-identity-access-organization.md) y la arquitectura se construyeron sobre eso.
+
+*DECIDIDO: Identidad de plataforma con perfiles federados.*
 
 Una persona tiene **una sola identidad a nivel de plataforma** y **un perfil por cada organización** a la que pertenece. La plataforma sabe que es la misma persona (lo que permite deduplicar y coordinar entre organizaciones al nivel de la alianza), pero cada organización solo ve sus propios datos sobre esa persona.
 
@@ -417,9 +446,9 @@ La descripción del producto especifica "acceso explícito con cuenta propia par
 
 ## Preguntas abiertas
 
-1. ~~**Pertenencia a varias organizaciones**~~ — **RESUELTO.** Perfiles federados. Ver la sección Pertenencia a varias organizaciones más arriba.
+1. ~~**Pertenencia a varias organizaciones**~~ — **RESUELTO**, y después revertido. Primero se resolvió como perfiles federados; queda sin efecto por la [ADR-025](../decisions/025-identity-per-client.md): la identidad es por cliente. Ver la sección Pertenencia a varias organizaciones más arriba.
 2. ~~**Jerarquía organizativa**~~ — **RESUELTO.** Federación multinivel de entidades soberanas. Ver la sección Jerarquía organizativa más arriba.
-3. ~~**Cambios de rol**~~ — **RESUELTO.** Las plantillas se suman. Pasar de simpatizante a voluntario y de ahí a personal significa agregar plantillas, no reemplazarlas. Todo el historial de actividad previo viaja con la identidad de plataforma. Las autorizaciones son proporcionales al rol: un simpatizante puede pasar solo a voluntario (apuntándose a un turno), pero los roles de personal los tiene que conceder el Administrador de la organización.
+3. ~~**Cambios de rol**~~ — **RESUELTO.** Las plantillas se suman. Pasar de simpatizante a voluntario y de ahí a personal significa agregar plantillas, no reemplazarlas. Todo el historial de actividad previo viaja con la identidad de plataforma (desde la [ADR-025](../decisions/025-identity-per-client.md): con la cuenta de la persona en la instancia de esa organización). Las autorizaciones son proporcionales al rol: un simpatizante puede pasar solo a voluntario (apuntándose a un turno), pero los roles de personal los tiene que conceder el Administrador de la organización.
 4. ~~**Visibilidad de datos entre roles**~~ — **RESUELTO.** Configuración por organización, privado por defecto. Cada organización decide sus propias reglas de visibilidad (por ejemplo, si los voluntarios ven a sus compañeros de turno, o si los nombres de los donantes se muestran públicamente). La plataforma arranca con la visibilidad mínima: para abrir más, la organización tiene que activarlo. Esto responde a la variedad de contextos de seguridad política entre despliegues.
 5. ~~**Delegación**~~ — **RESUELTO.** Dos mecanismos:
    - **Delegación con fecha de vencimiento:** El Administrador de la organización puede conceder acceso elevado temporal a otra persona con una fecha de expiración explícita. El acceso se revoca solo cuando termina el periodo. Cubre licencias, viajes y emergencias.

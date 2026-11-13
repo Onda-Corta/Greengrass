@@ -250,6 +250,7 @@ GreenGrass actúa como encargado del tratamiento por cuenta de las organizacione
 La residencia de datos por país (ya decidida) reduce al mínimo los problemas de transferencia transfronteriza. Aun así, hay transferencias:
 
 - **Los datos de identidad de la plataforma** viven en la jurisdicción de constitución → réplicas de lectura en cada país
+  - *Queda sin efecto por la [ADR-025](../decisions/025-identity-per-client.md): la identidad es por cliente. No hay datos de identidad de la plataforma, ni principal en la jurisdicción de constitución, ni réplicas. La cuenta de una persona vive en la instancia propia de la organización, en el país que la organización eligió, con el resto de sus datos.*
 - **Los datos de cada organización** se quedan en su país por defecto
 - **El intercambio de datos dentro de una alianza** puede cruzar fronteras cuando los miembros están en países distintos
 
