@@ -58,6 +58,12 @@ body { overflow: hidden; }
 .app.sb-overlay .sb { position: absolute; inset-block: 0; inset-inline-start: 0; z-index: calc(var(--z-overlay) + 1); box-shadow: var(--elevation-3); }
 .sb-scrim { z-index: var(--z-overlay); }
 
+/* Items not built yet: grayed out, still clickable (they open their "coming soon" page).
+   The page you are on keeps its normal highlight. */
+.is-soon:not([aria-current]), .is-soon:not([aria-current]) .icon,
+.sb-sec-head.is-soon, .sb-sec-head.is-soon .icon,
+.tabbar .bt.is-soon:not([aria-current]) { color: var(--color-text-tertiary); }
+
 /* ---------- Main: coming soon ---------- */
 .soon .empty { padding-block: var(--space-12); }
 .soon .empty h1 { overflow-wrap: anywhere; }
