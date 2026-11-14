@@ -6,7 +6,7 @@
 window.GG_DEMOS = {
   cliente: { nombre: 'Partido Verde', logo: '' },
   demos: [
-    { id: 'monitor', nombre: 'Monitor de difusión', corto: 'Monitor', name: 'Broadcast monitor', short: 'Monitor', icono: 'tv', url: '' },
-    { id: 'constructor', nombre: 'Constructor', corto: 'Constructor', name: 'Builder', short: 'Builder', icono: 'hammer', url: '' }
+    { id: 'monitor', nombre: 'Monitor de difusión', corto: 'Monitor', name: 'Broadcast monitor', short: 'Monitor', icono: 'tv', url: 'https://onda-corta-ui.onda-corta.workers.dev' },
+    { id: 'constructor', nombre: 'Constructor', corto: 'Constructor', name: 'Builder', short: 'Builder', icono: 'hammer', url: 'https://demo.ondacorta.net/operator' }
   ]
 };
