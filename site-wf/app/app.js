@@ -29,7 +29,7 @@
       toDark: 'Cambiar a modo oscuro', toLight: 'Cambiar a modo claro', darkMode: 'Modo oscuro', lightMode: 'Modo claro',
       account: 'Menú de la cuenta', user: 'Cuenta de demostración', role: 'Administración',
       customize: 'Personalizar cliente', online: 'Conectado', offline: 'Sin conexión',
-      soon: 'Esta sección estará disponible pronto.',
+      soon: 'Esta sección estará disponible pronto.', soonShort: 'próximamente',
       missingH: 'Falta la dirección del {n}', missingP: 'Pega la dirección donde ya funciona esta herramienta. Se guarda en este navegador y se carga aquí cada vez que la elijas.',
       addr: 'Dirección del {n}', load: 'Cargar', change: 'Cambiar dirección', reload: 'Recargar', newTab: 'Abrir en pestaña nueva',
       badUrl: 'Escribe una dirección completa que empiece por https:// o http://.',
@@ -49,7 +49,7 @@
       toDark: 'Switch to dark mode', toLight: 'Switch to light mode', darkMode: 'Dark mode', lightMode: 'Light mode',
       account: 'Account menu', user: 'Demo account', role: 'Administrator',
       customize: 'Customize client', online: 'Connected', offline: 'Offline',
-      soon: 'This section is coming soon.',
+      soon: 'This section is coming soon.', soonShort: 'coming soon',
       missingH: 'The {n} address is missing', missingP: 'Paste the address where this tool already runs. It is saved in this browser and loads here each time you choose it.',
       addr: '{n} address', load: 'Load', change: 'Change address', reload: 'Reload', newTab: 'Open in new tab',
       badUrl: 'Enter a full address that starts with https:// or http://.',
@@ -196,19 +196,20 @@
       s = '<nav class="sb" aria-label="' + esc(t('mainNav')) + '"><button class="btn btn-icon sb-toggle" type="button" data-act="toggle-sb" aria-label="' + esc(t('expand')) + '" aria-expanded="false">' + ic('chevrons-right', 'md') + '</button>';
       SECTIONS.forEach(function (sec) {
         var active = cur && cur.sec === sec;
-        s += '<button class="rail-item" type="button" data-fly="' + sec.id + '" aria-label="' + esc(L(sec)) + '" aria-controls="flyout" aria-expanded="false"' + (active ? ' aria-current="page"' : '') + '>' + ic(sec.icon, 'md') + '</button>';
+        var secSoon = sec.id !== 'demos';
+        s += '<button class="rail-item' + (secSoon ? ' is-soon' : '') + '" type="button" data-fly="' + sec.id + '" aria-label="' + esc(L(sec) + (secSoon ? ' (' + t('soonShort') + ')' : '')) + '" aria-controls="flyout" aria-expanded="false"' + (active ? ' aria-current="page"' : '') + '>' + ic(sec.icon, 'md') + '</button>';
         if (sec.id === 'demos') s += '<span class="rail-sep" aria-hidden="true"></span>';
       });
       s += '<div class="sb-foot rail-foot">' +
-        '<a class="rail-item" href="#/app/help" aria-label="' + esc(t('help')) + '" title="' + esc(t('help')) + '"' + (cur && cur.it.id === 'help' ? ' aria-current="page"' : '') + '>' + ic('circle-help', 'md') + '</a>' +
+        '<a class="rail-item is-soon" href="#/app/help" aria-label="' + esc(t('help') + ' (' + t('soonShort') + ')') + '" title="' + esc(t('help')) + '"' + (cur && cur.it.id === 'help' ? ' aria-current="page"' : '') + '>' + ic('circle-help', 'md') + '</a>' +
         '<button class="rail-item" type="button" data-act="lang" lang="' + t('otherLangCode') + '" aria-label="' + esc(t('otherLang')) + '" title="' + esc(t('otherLang')) + '">' + ic('globe', 'md') + '</button>' +
-        '<a class="rail-item" href="#/app/settings" aria-label="' + esc(t('settings')) + '" title="' + esc(t('settings')) + '"' + (cur && cur.it.id === 'settings' ? ' aria-current="page"' : '') + '>' + ic('settings', 'md') + '</a></div></nav>';
+        '<a class="rail-item is-soon" href="#/app/settings" aria-label="' + esc(t('settings') + ' (' + t('soonShort') + ')') + '" title="' + esc(t('settings')) + '"' + (cur && cur.it.id === 'settings' ? ' aria-current="page"' : '') + '>' + ic('settings', 'md') + '</a></div></nav>';
     } else {
       var open = openSet();
       s = '<nav class="sb" aria-label="' + esc(t('mainNav')) + '"><button class="btn btn-icon sb-toggle" type="button" data-act="toggle-sb" aria-label="' + esc(t('collapse')) + '" aria-expanded="true">' + ic('chevrons-left', 'md') + '</button>';
       SECTIONS.forEach(function (sec) {
         var isOpen = open.indexOf(sec.id) > -1;
-        s += '<div class="sb-sec' + (sec.id === 'demos' ? ' sb-demos' : '') + '"><button class="sb-sec-head" type="button" data-sec="' + sec.id + '" aria-expanded="' + isOpen + '"><span>' + esc(L(sec)) + '</span>' + ic(isOpen ? 'chevron-down' : 'chevron-right', 'sm') + '</button>';
+        s += '<div class="sb-sec' + (sec.id === 'demos' ? ' sb-demos' : '') + '"><button class="sb-sec-head' + (sec.id === 'demos' ? '' : ' is-soon') + '" type="button" data-sec="' + sec.id + '" aria-expanded="' + isOpen + '"><span>' + esc(L(sec)) + '</span>' + ic(isOpen ? 'chevron-down' : 'chevron-right', 'sm') + '</button>';
         if (isOpen) sec.items.forEach(function (it) { s += itemLink(sec, it, 'sb-item'); });
         s += '</div>';
       });
@@ -219,9 +220,12 @@
     if (state.sbOverlay && m === 'tablet') s += '<div class="scrim sb-scrim" data-act="close" aria-hidden="true"></div>';
     return s;
   }
+  // Only the demos work for now; every other item is grayed out and still opens its "coming soon" page.
+  function soonCls(it) { return it.demo ? '' : ' is-soon'; }
+  function soonSr(it) { return it.demo ? '' : '<span class="sr-only"> (' + esc(t('soonShort')) + ')</span>'; }
   function itemLink(sec, it, cls, extra) {
     var active = cur && cur.sec === sec && cur.it === it;
-    return '<a class="' + cls + '" href="' + href(sec, it) + '"' + (active ? ' aria-current="page"' : '') + (extra || '') + '>' + ic(it.icon, 'md') + '<span>' + esc(L(it)) + '</span></a>';
+    return '<a class="' + cls + soonCls(it) + '" href="' + href(sec, it) + '"' + (active ? ' aria-current="page"' : '') + (extra || '') + '>' + ic(it.icon, 'md') + '<span>' + esc(L(it)) + '</span>' + soonSr(it) + '</a>';
   }
 
   function tabbarHtml() {
@@ -231,7 +235,7 @@
       var x = find(tb[0], tb[1]);
       var sel = cur && cur.sec === x.sec && cur.it === x.it && state.overlay !== 'more';
       if (cur && cur.it === x.it) inTabs = true;
-      return '<a class="bt" href="' + href(x.sec, x.it) + '"' + (sel ? ' aria-current="page"' : '') + ' aria-label="' + esc(L(x.it)) + '">' + ic(x.it.icon, 'lg') + '<span aria-hidden="true">' + esc(short(x.it)) + '</span></a>';
+      return '<a class="bt' + soonCls(x.it) + '" href="' + href(x.sec, x.it) + '"' + (sel ? ' aria-current="page"' : '') + ' aria-label="' + esc(L(x.it) + (x.it.demo ? '' : ' (' + t('soonShort') + ')')) + '">' + ic(x.it.icon, 'lg') + '<span aria-hidden="true">' + esc(short(x.it)) + '</span></a>';
     }).join('');
     var moreSel = state.overlay === 'more' || !inTabs;
     s += '<button class="bt" type="button" data-act="more" aria-expanded="' + (state.overlay === 'more') + '"' + (moreSel ? ' aria-current="true"' : '') + '>' + ic('ellipsis', 'lg') + '<span>' + esc(t('more')) + '</span></button></nav>';
@@ -325,7 +329,7 @@
   function resultsHtml(list, prefix) {
     if (!list.length) return '<p class="search-empty" role="status">' + esc(t('noResults')) + '</p>';
     return '<ul class="results" id="' + prefix + '-list" role="listbox" aria-label="' + esc(t('searchLabel')) + '">' + list.map(function (x, i) {
-      return '<li role="presentation"><a class="' + (prefix === 'mq' ? 'm-item' : 'sb-item') + (i === state.qi ? ' is-active' : '') + '" id="' + prefix + '-opt-' + i + '" role="option" aria-selected="' + (i === state.qi) + '" href="' + href(x.sec, x.it) + '">' + ic(x.it.icon, 'md') + '<span>' + esc(L(x.it)) + '</span>' +
+      return '<li role="presentation"><a class="' + (prefix === 'mq' ? 'm-item' : 'sb-item') + soonCls(x.it) + (i === state.qi ? ' is-active' : '') + '" id="' + prefix + '-opt-' + i + '" role="option" aria-selected="' + (i === state.qi) + '" href="' + href(x.sec, x.it) + '">' + ic(x.it.icon, 'md') + '<span>' + esc(L(x.it)) + '</span>' + soonSr(x.it) +
         (x.sec.id !== 'app' ? '<span class="result-sec">' + esc(L(x.sec)) + '</span>' : '') + '</a></li>';
     }).join('') + '</ul>';
   }
