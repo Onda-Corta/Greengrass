@@ -1,7 +1,7 @@
 /* GreenGrass wireframe shell helpers (plain JS, no build). */
 (function () {
     var W = (window.WF = window.WF || {});
-    var esc = function (s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); };
+    var esc = function (s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#39;'); };
     W.esc = esc;
 
     // ---------------- Navigation per persona (navigation-model.md § Navigation Items Per Persona)

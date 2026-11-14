@@ -48,6 +48,7 @@
     <article class="prose">
 <h1 id="greengrass" tabindex="-1"><a class="heading-anchor" href="#greengrass" aria-hidden="true">#</a> GreenGrass</h1>
 <p>Shared infrastructure for organizations: a headless Core, and a catalogue of modules each client enables individually. It is sold through two lanes. <strong>Greengrass</strong> is the political product, for community movements, unions and political parties. <strong>Basecamp</strong> is the commercial product, for advertisers, PR professionals and agencies. Each client runs its own instance, with its own data and its own accounts.</p>
+<p><strong>Demo app:</strong> <a href="https://onda-corta.github.io/Greengrass/wf/app/" target="_blank" rel="noopener noreferrer">the navigation shell, working</a>, with two existing demo tools, the broadcast monitor and the builder, loaded inside it. Every other section says it is coming soon. It works on phones, tablets and desktops, in English and Spanish, in light and dark mode.</p>
 <p>This repository began as the specification of GreenGrass, a single platform for managing grassroots political elections in the global south: a CRM, voter database, fundraising tools, communication suite and data analytics, designed for resource-constrained environments, intermittent connectivity, multilingual populations and decentralized organizing structures. Most of the documents here still describe that product, and they now describe the political lane. &quot;Greengrass&quot; names that product; the infrastructure under both lanes does not yet have a name of its own. The change of direction is recorded in ADRs 022 to 027 and in <a href="./diary/17-two-lanes.html">diary entry 17</a>.</p>
 <h2 id="target-markets" tabindex="-1"><a class="heading-anchor" href="#target-markets" aria-hidden="true">#</a> Target Markets</h2>
 <p>Puerto Rico (alpha), Brazil, Thailand, India, and Lebanon — each with distinct electoral systems, languages, data protection laws, and infrastructure constraints.</p>
@@ -217,7 +218,7 @@ is scoped to the language you're reading.</p>
 │   ├── build.mjs                  # Documentation site generator
 │   └── dev.sh                     # One-command local preview (install, build, serve)
 ├── site-assets/                   # Site styles + client-side scripts (search, nav)
-├── site-wf/                       # Rendered wireframes (static HTML/CSS/JS), copied to docs/wf/
+├── site-wf/                       # Rendered wireframes + demo app (static HTML/CSS/JS), copied to docs/wf/
 ├── docs/                          # Generated documentation website (GitHub Pages)
 └── package.json                   # Build tooling (Node + markdown-it)
 </code></pre>

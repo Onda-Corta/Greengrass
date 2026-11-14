@@ -1,0 +1,119 @@
+/* GreenGrass demo app: the navigation shell, working.
+   Builds on ../assets/tokens.css and ../assets/wf.css; only what the working shell
+   needs beyond the wireframes lives here. Breakpoints follow navigation-shell.md
+   § Responsive Breakpoint Transitions: < 768 mobile (top bar + bottom tabs),
+   768–1023 tablet (icon rail, sidebar opens over the content), >= 1024 desktop
+   (persistent sidebar; collapsed by default below 1280). */
+
+:root[data-color-mode="dark"] { color-scheme: dark; }
+:root { color-scheme: light; }
+html, body { height: 100%; }
+body { overflow: hidden; }
+
+.app { height: 100vh; height: 100dvh; min-height: 0; overflow: hidden; }
+.body { position: relative; min-height: 0; overflow: hidden; }
+.main { overflow-y: auto; overscroll-behavior: contain; }
+.main:focus { outline: none; }
+
+/* ---------- Header ---------- */
+.hdr-menu, .hdr-title, .hdr-search { display: none; }
+.tenant { text-align: start; border-radius: var(--radius-md); padding-inline-end: var(--space-2); }
+.tenant:hover { background: var(--color-surface-sunken); }
+.tenant-name { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-width: 0; }
+.tenant-logo.has-img { background: var(--color-surface-raised); border: var(--border-width) solid var(--color-border); overflow: hidden; }
+.tenant-logo img { width: 100%; height: 100%; object-fit: contain; }
+.search-wrap { position: relative; width: 26rem; max-width: 40vw; }
+.hdr .search-wrap .input { width: 100%; max-width: none; }
+.input:focus-within { outline: var(--focus-ring-width) solid var(--color-border-focus); outline-offset: var(--focus-ring-offset); }
+.input input { flex: 1; min-width: 0; border: 0; background: none; font: inherit; color: var(--color-text); outline: none; padding: 0; min-height: var(--space-10); }
+.input input::placeholder { color: var(--color-text-secondary); }
+.input input::-webkit-search-cancel-button { display: none; }
+.pop { position: absolute; inset-block-start: calc(100% + var(--space-1)); z-index: var(--z-dropdown); padding: var(--space-2); box-shadow: var(--elevation-3); }
+.search-pop { inset-inline: 0; }
+.results { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: var(--space-0\.5); }
+.results .sb-item { width: 100%; }
+.results .sb-item.is-active { background: var(--color-surface-sunken); }
+.result-sec { margin-inline-start: auto; font-size: var(--text-xs); line-height: var(--text-xs-leading); color: var(--color-text-secondary); font-weight: var(--font-regular, 400); }
+.search-empty { padding: var(--space-2); font-size: var(--text-sm); color: var(--color-text-secondary); }
+.hdr-right { position: relative; }
+.user-pop { inset-inline-end: 0; width: 16rem; display: flex; flex-direction: column; gap: var(--space-0\.5); }
+.user-pop .who { display: flex; align-items: center; gap: var(--space-3); padding: var(--space-2); border-block-end: var(--border-width) solid var(--color-border); margin-block-end: var(--space-1); }
+.usermenu:hover { background: var(--color-surface-sunken); }
+
+/* ---------- Sidebar ---------- */
+.sb-slot { flex: none; display: flex; position: relative; }
+.sb { overflow-y: auto; overscroll-behavior: contain; }
+.sb-item, .m-item { width: 100%; text-align: start; }
+.sb-demos { padding-block-end: var(--space-3); margin-block-end: var(--space-2); border-block-end: var(--border-width) solid var(--color-border); }
+.sb-sec-head:hover { background: var(--color-surface-sunken); }
+.rail-item { flex: none; }
+.rail-item[aria-expanded="true"]:not([aria-current]) { background: var(--color-surface-sunken); }
+.rail-foot { width: 100%; align-items: center; }
+/* Collapsed-rail flyout: fixed, so the sidebar's scroll container can't clip it. */
+.flyout.fly { position: fixed; inset-inline-start: auto; inset-block-start: auto; width: max-content; min-width: 13rem; max-width: calc(100vw - var(--space-20)); max-height: calc(100vh - var(--space-4)); overflow-y: auto; }
+.flyout.fly[hidden] { display: none; }
+.flyout .sb-sec-head:hover { background: none; }
+/* Tablet: the expanded sidebar opens over the content; a rail-wide spacer keeps the page still. */
+.app.sb-overlay .sb-slot { width: var(--sidebar-width-collapsed); position: static; }
+.app.sb-overlay .sb { position: absolute; inset-block: 0; inset-inline-start: 0; z-index: calc(var(--z-overlay) + 1); box-shadow: var(--elevation-3); }
+.sb-scrim { z-index: var(--z-overlay); }
+
+/* ---------- Main: coming soon ---------- */
+.soon .empty { padding-block: var(--space-12); }
+.soon .empty h1 { overflow-wrap: anywhere; }
+
+/* ---------- Main: framed demo ---------- */
+.demo-view { flex: 1; display: flex; flex-direction: column; min-height: 0; }
+.demo-bar { flex: none; display: flex; align-items: center; justify-content: space-between; gap: var(--space-4); padding: var(--space-3) var(--space-6); border-block-end: var(--border-width) solid var(--color-border); background: var(--color-surface-raised); }
+.demo-bar .stack-2 { gap: var(--space-0\.5); min-width: 0; }
+.demo-addr { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 40rem; font-family: var(--font-mono); }
+.demo-frame { flex: 1; width: 100%; min-height: 0; border: 0; background: var(--color-surface-raised); }
+.demo-empty { margin: auto; max-width: 34rem; padding-inline: var(--space-4); }
+.demo-url { display: flex; gap: var(--space-2); width: 100%; }
+.demo-url .input { flex: 1; min-width: 0; }
+.field-error { color: var(--color-error); font-size: var(--text-sm); }
+
+/* ---------- Dialog (client name and logo) ---------- */
+.dialog { position: fixed; inset-block-start: 50%; inset-inline-start: 50%; transform: translate(-50%, -50%); width: min(32rem, calc(100vw - var(--space-8))); max-height: calc(100dvh - var(--space-8)); overflow-y: auto; padding: var(--space-6); z-index: calc(var(--z-overlay) + 1); box-shadow: var(--shadow-xl, var(--elevation-3)); }
+[dir="rtl"] .dialog { transform: translate(50%, -50%); }
+.dialog .input { width: 100%; }
+.dialog label.btn { cursor: pointer; }
+.scrim.fixed { position: fixed; }
+
+/* ---------- Overlays shared by all sizes ---------- */
+.drawer .empty { padding-block: var(--space-12); }
+.layer-full { position: absolute; inset: 0; z-index: var(--z-modal); }
+
+/* ---------- Mobile ---------- */
+.app > #tabbar { display: none; }
+@media (max-width: 767px) {
+  .hdr { gap: var(--space-1); padding-inline: var(--space-1); }
+  .hdr .tenant, .hdr .search-wrap, .hdr .sync, .hdr .usermenu { display: none; }
+  .hdr-menu, .hdr-search { display: inline-flex; }
+  .hdr-title { display: block; flex: 1; min-width: 0; font-size: var(--text-lg); line-height: var(--text-lg-leading); font-weight: var(--font-semibold); padding-inline: var(--space-1); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .hdr .btn-icon { width: var(--touch-target-min); min-height: var(--touch-target-min); }
+  .hdr-right { gap: 0; }
+  .sb-slot { display: none; }
+  .app > #tabbar { display: block; }
+  /* The wireframe pads the tab bar for a drawn home indicator; on a real phone only the safe area counts. */
+  .app .tabbar { padding-block-end: env(safe-area-inset-bottom); }
+  .tabbar .bt[aria-current] { color: var(--color-primary); border-block-start-color: var(--color-primary); font-weight: var(--font-semibold); }
+  .tabbar .bt { min-height: var(--tab-bar-height); color: var(--color-text-secondary); text-decoration: none; }
+  .tabbar .bt span { max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; padding-inline: var(--space-1); }
+  .main { background: var(--color-surface); }
+  .page { padding: var(--space-4); }
+  .crumbs { flex-wrap: wrap; }
+  .demo-bar { padding: var(--space-2) var(--space-2) var(--space-2) var(--space-4); gap: var(--space-2); }
+  .demo-bar h1 { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; }
+  .demo-bar .btn .btn-label { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; }
+  .demo-bar .btn { width: var(--touch-target-min); min-height: var(--touch-target-min); padding: 0; background: none; border-color: transparent; color: var(--color-text-secondary); }
+  .demo-bar .btn:hover { background: var(--color-surface-sunken); color: var(--color-text); }
+  .demo-bar .btn-group { flex-wrap: nowrap; gap: 0; }
+  .demo-url { flex-direction: column; }
+  .drawer { width: 100%; }
+  .m-full .m-search { padding: var(--space-2) var(--space-4); }
+  .m-full .input { min-height: var(--touch-target-min); }
+  .m-tenant { display: flex; align-items: center; gap: var(--space-3); padding: var(--space-3) var(--space-2) var(--space-4); border-block-end: var(--border-width) solid var(--color-border); width: 100%; text-align: start; }
+  .m-tenant .tenant-logo { width: var(--space-10); height: var(--space-10); }
+  .m-sep { border-block-start: var(--border-width) solid var(--color-border); margin-block: var(--space-2); }
+}
