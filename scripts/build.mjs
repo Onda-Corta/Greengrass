@@ -594,6 +594,14 @@ async function main() {
   );
   await fs.writeFile(path.join(OUT, '.nojekyll'), '', 'utf8');
 
+  // Rendered wireframes (site-wf/): static HTML/CSS/JS screens built from the design
+  // system and wireframe docs, served at /wf/. Copied as-is; no markdown involved.
+  const WF_SRC = path.join(ROOT, 'site-wf');
+  if (existsSync(WF_SRC)) {
+    await fs.cp(WF_SRC, path.join(OUT, 'wf'), { recursive: true });
+    console.log('Copied site-wf/ into docs/wf/');
+  }
+
   console.log(`\nBuilt ${allDocs.length} pages into docs/`);
   for (const ctx of ctxs) {
     const t = ctx.lang.ui.sections;
