@@ -2,6 +2,8 @@
 
 Shared infrastructure for organizations: a headless Core, and a catalogue of modules each client enables individually. It is sold through two lanes. **Greengrass** is the political product, for community movements, unions and political parties. **Basecamp** is the commercial product, for advertisers, PR professionals and agencies. Each client runs its own instance, with its own data and its own accounts.
 
+**Demo app:** [the navigation shell, working](https://onda-corta.github.io/Greengrass/wf/app/), with two existing demo tools, the broadcast monitor and the builder, loaded inside it. Every other section says it is coming soon. It works on phones, tablets and desktops, in English and Spanish, in light and dark mode.
+
 This repository began as the specification of GreenGrass, a single platform for managing grassroots political elections in the global south: a CRM, voter database, fundraising tools, communication suite and data analytics, designed for resource-constrained environments, intermittent connectivity, multilingual populations and decentralized organizing structures. Most of the documents here still describe that product, and they now describe the political lane. "Greengrass" names that product; the infrastructure under both lanes does not yet have a name of its own. The change of direction is recorded in ADRs 022 to 027 and in [diary entry 17](diary/17-two-lanes.md).
 
 ## Target Markets
@@ -166,7 +168,7 @@ GreenGrass/
 │   ├── build.mjs                  # Documentation site generator
 │   └── dev.sh                     # One-command local preview (install, build, serve)
 ├── site-assets/                   # Site styles + client-side scripts (search, nav)
-├── site-wf/                       # Rendered wireframes (static HTML/CSS/JS), copied to docs/wf/
+├── site-wf/                       # Rendered wireframes + demo app (static HTML/CSS/JS), copied to docs/wf/
 ├── docs/                          # Generated documentation website (GitHub Pages)
 └── package.json                   # Build tooling (Node + markdown-it)
 ```

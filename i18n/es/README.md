@@ -2,6 +2,8 @@
 
 Una plataforma para manejar elecciones políticas de base en el Sur Global.
 
+**Aplicación de demostración:** [el marco de navegación, funcionando](https://onda-corta.github.io/Greengrass/wf/app/?lang=es), con dos herramientas de demostración que ya existen, el monitor de difusión y el constructor, cargadas dentro. Las demás secciones indican que estarán disponibles pronto. Funciona en teléfonos, tabletas y computadoras, en español e inglés, en modo claro y oscuro.
+
 GreenGrass reúne en un solo lugar un gestor de relaciones con constituyentes (CRM), una base de datos de votantes, herramientas de recaudación de fondos, una suite de comunicaciones y analítica de datos. Está pensada para contextos de recursos limitados, conectividad intermitente, poblaciones multilingües y estructuras de organización descentralizadas.
 
 Desde noviembre de 2026, lo que el proyecto construye es una infraestructura de servicios compartidos para organizaciones: un producto central (Core) y un catálogo de módulos que cada cliente activa individualmente, ofrecida por dos carriles. **Greengrass** nombra ahora el producto del carril político —movimientos comunitarios, sindicatos y partidos—, no la infraestructura; **Basecamp** es el producto del carril comercial. La mayoría de los documentos de aquí se escribieron antes del cambio: dicen «GreenGrass» para la plataforma entera y siguen describiendo ese producto, que hoy es el del carril político.

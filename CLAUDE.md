@@ -73,7 +73,7 @@ GreenGrass/
 ├── scripts/build.mjs              # Documentation site generator (Node + markdown-it)
 ├── scripts/dev.sh                 # One-command local preview (install, build, serve)
 ├── site-assets/                   # Site styles + client-side scripts (search, nav)
-├── site-wf/                       # Rendered wireframes (static HTML/CSS/JS), copied to docs/wf/
+├── site-wf/                       # Rendered wireframes + demo app (static HTML/CSS/JS), copied to docs/wf/
 └── docs/                          # Generated documentation website (GitHub Pages)
 ```
 
