@@ -1,0 +1,244 @@
+/* GreenGrass design tokens — built from design/ux/03-design-system/foundations.md
+   and theming-strategy.md. Names and values are the spec's; values the spec leaves
+   open are marked "CHOICE:" and listed in site-wf/README.md. Never use raw values in
+   components: reference these custom properties. */
+
+:root {
+  /* ---------- Spacing (foundations.md § Spacing) ---------- */
+  --space-0: 0px;
+  --space-px: 1px;
+  --space-0\.5: 2px;
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --space-16: 64px;
+  --space-20: 80px;
+  --space-24: 96px;
+
+  /* Touch targets — named in decisions/ux-decisions.md § Decision 2.
+     REVISIT: foundations.md gives 44px (mobile) / 48px (field); ADR-011 gives
+     44px / 56px. These are the only named tokens, so they are used as written. */
+  --touch-target-min: 48px;
+  --touch-target-field: 56px;
+
+  /* ---------- Color: semantic tokens (foundations.md § Color) ---------- */
+  --color-surface: #ffffff;
+  --color-surface-raised: #ffffff;
+  --color-surface-sunken: #f8fafc;
+  --color-surface-overlay: rgba(0,0,0,0.5);
+
+  --color-text: #0f172a;
+  --color-text-secondary: #475569;
+  --color-text-tertiary: #94a3b8;
+  --color-text-inverse: #ffffff;
+
+  --color-primary: #2563eb;
+  --color-primary-hover: #1d4ed8;
+  --color-primary-active: #1e40af;
+  --color-primary-subtle: #eff6ff;
+  --color-on-primary: #ffffff;
+  --color-text-link: var(--color-primary);
+
+  --color-success: #16a34a;
+  --color-success-subtle: #f0fdf4;
+  --color-warning: #d97706;
+  --color-warning-subtle: #fffbeb;
+  --color-error: #dc2626;
+  --color-error-subtle: #fef2f2;
+  --color-info: #2563eb;
+  --color-info-subtle: #eff6ff;
+
+  --color-border: #e2e8f0;
+  --color-border-strong: #cbd5e1;
+  --color-border-focus: var(--color-primary);
+  --color-input-border: #cbd5e1;
+  --color-disabled: #f1f5f9;
+  --color-disabled-text: #94a3b8;
+
+  --color-sync-connected: #16a34a;
+  --color-sync-stale: #d97706;
+  --color-sync-offline: #94a3b8;
+  --color-sync-error: #dc2626;
+
+  /* CHOICE: the spec names chart-1..8 but leaves the palette open (REVISIT in
+     foundations.md). Okabe–Ito categorical palette, colourblind-safe, last slot slate. */
+  --color-chart-1: #0072b2;
+  --color-chart-2: #e69f00;
+  --color-chart-3: #009e73;
+  --color-chart-4: #cc79a7;
+  --color-chart-5: #56b4e9;
+  --color-chart-6: #d55e00;
+  --color-chart-7: #f0e442;
+  --color-chart-8: #475569;
+
+  /* ---------- Typography (foundations.md § Typography) ---------- */
+  --font-sans: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+               'Helvetica Neue', Arial, 'Noto Sans', sans-serif,
+               'Apple Color Emoji', 'Segoe UI Emoji', 'Noto Color Emoji';
+  --font-mono: ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, Consolas,
+               'DejaVu Sans Mono', monospace;
+
+  --text-xs: 12px;   --text-xs-leading: 16px;
+  --text-sm: 14px;   --text-sm-leading: 20px;
+  --text-base: 16px; --text-base-leading: 24px;
+  --text-lg: 18px;   --text-lg-leading: 28px;
+  --text-xl: 20px;   --text-xl-leading: 28px;
+  --text-2xl: 24px;  --text-2xl-leading: 32px;
+  --text-3xl: 30px;  --text-3xl-leading: 36px;
+  --text-4xl: 36px;  --text-4xl-leading: 40px;
+  --text-5xl: 48px;  --text-5xl-leading: 48px;
+  /* CHOICE: the spec gives each step a line height but no token name for it;
+     "--text-*-leading" is ours. */
+
+  --font-normal: 400;
+  --font-medium: 500;
+  --font-semibold: 600;
+  --font-bold: 700;
+
+  /* ---------- Grid & layout (foundations.md § Grid, navigation-shell.md) ---------- */
+  --sidebar-width: 272px; /* REVISIT: foundations.md and navigation-shell.md say 240px; widened so every label (e.g. “Recaudación de fondos”) fits on one line next to a scrollbar. */
+  --sidebar-width-collapsed: 64px; /* REVISIT: navigation-shell.md's Design Decisions table says 56px; its wireframe and foundations.md say 64px. */
+  --detail-panel-width: 380px;
+  --drawer-width: 380px;
+  --content-max-width: 1280px;
+  --grid-gap-desktop: var(--space-6);
+  --grid-gap-mobile: var(--space-4);
+  --header-height: 56px;   /* CHOICE: not specified */
+  --tab-bar-height: 56px;  /* navigation-shell.md § Bottom Tab Bar Anatomy */
+
+  /* ---------- Elevation ---------- */
+  --elevation-0: none;
+  --elevation-1: 0 1px 2px rgba(0,0,0,0.05);
+  --elevation-2: 0 2px 4px rgba(0,0,0,0.1);
+  --elevation-3: 0 4px 8px rgba(0,0,0,0.1);
+  --elevation-4: 0 8px 16px rgba(0,0,0,0.15);
+
+  /* ---------- Borders & radius ---------- */
+  --radius-none: 0px;
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 8px;
+  --radius-xl: 12px;
+  --radius-full: 9999px;
+  --border-width: 1px;          /* high contrast: 2px */
+  --focus-ring-width: 2px;      /* theming-strategy.md: 2px → 3px in high contrast */
+  --focus-ring-offset: 2px;
+
+  /* ---------- Iconography ---------- */
+  --icon-xs: 14px;
+  --icon-sm: 16px;
+  --icon-md: 20px;
+  --icon-lg: 24px;
+  --icon-xl: 32px;
+  --icon-2xl: 48px;
+  --icon-stroke: 1.5px;
+
+  /* ---------- Motion ---------- */
+  --duration-fast: 100ms;
+  --duration-normal: 200ms;
+  --duration-slow: 300ms;
+  --duration-slower: 500ms;
+  --easing-fast: ease-out;       /* CHOICE: easing token names are ours; values are the spec's */
+  --easing-normal: ease-in-out;
+  --easing-slow: ease-in-out;
+  --easing-slower: ease-in-out;
+
+  /* ---------- Z-index ---------- */
+  --z-base: 0;
+  --z-raised: 10;
+  --z-dropdown: 20;
+  --z-sidebar: 30;
+  --z-modal: 40;
+  --z-toast: 50;
+  --z-overlay: 60;
+  --z-panic: 100;
+
+  /* ---------- Breakpoints (responsive-strategy.md) — reference values;
+     media queries cannot read custom properties, so queries repeat them. ---------- */
+  --bp-sm: 640px;
+  --bp-md: 768px;
+  --bp-lg: 1024px;
+  --bp-xl: 1280px;
+  --bp-2xl: 1536px;
+
+  /* ---------- Density ---------- */
+  --row-height-compact: 36px;
+}
+
+/* Reduced motion is not optional (foundations.md § Motion Rules). */
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --duration-fast: 0ms; --duration-normal: 0ms;
+    --duration-slow: 0ms; --duration-slower: 0ms;
+  }
+}
+
+/* ---------- Tenant brand override (theming-strategy.md § Theme Token Override) ---------- */
+:root[data-theme="partido-verde"] {
+  --color-primary: #16a34a;
+  --color-primary-hover: #15803d;
+  --color-primary-active: #166534;
+  --color-primary-subtle: #f0fdf4;
+  /* REVISIT: the spec's example sets #ffffff, but white on #16a34a is 3.3:1 and the
+     spec's own rule switches on-primary to dark text below 4.5:1. The rule wins. */
+  --color-on-primary: #0f172a;
+  --color-text-link: #15803d; /* "darkened variant" rule for low-contrast link text */
+}
+
+/* ---------- Dark mode (theming-strategy.md § Dark Mode) ---------- */
+:root[data-color-mode="dark"] {
+  --color-surface: #0f172a;
+  --color-surface-raised: #1e293b;
+  --color-surface-sunken: #020617;
+  --color-text: #f1f5f9;
+  --color-text-secondary: #94a3b8;
+  --color-text-tertiary: #64748b;
+  --color-border: #334155;
+  --color-border-strong: #475569;
+  --color-input-border: #475569;
+  --color-disabled: #1e293b;
+  /* CHOICE: the spec says the primary "auto-lightens", status colours go "slightly
+     lighter", and primary-subtle becomes a near-black tint; these are our values. */
+  --color-primary: #60a5fa;
+  --color-primary-hover: #93c5fd;
+  --color-primary-active: #bfdbfe;
+  --color-primary-subtle: #172554;
+  --color-on-primary: #0f172a;
+  --color-text-inverse: #0f172a;
+  --color-success: #22c55e;  --color-success-subtle: #052e16;
+  --color-warning: #f59e0b;  --color-warning-subtle: #451a03;
+  --color-error: #f87171;    --color-error-subtle: #450a0a;
+  --color-info: #60a5fa;     --color-info-subtle: #172554;
+  --color-sync-connected: #22c55e;
+  --color-sync-stale: #f59e0b;
+  --color-sync-offline: #64748b;
+  --color-sync-error: #f87171;
+  --color-chart-1: #56b4e9;
+  --color-chart-8: #94a3b8;
+  --elevation-1: 0 1px 2px rgba(0,0,0,0.4);
+  --elevation-3: 0 4px 8px rgba(0,0,0,0.5);
+}
+
+/* ---------- High contrast (foundations.md § High Contrast Mode) ---------- */
+:root[data-high-contrast="true"] {
+  --color-text: #000000;
+  --color-text-secondary: #333333;
+  --color-surface: #ffffff;
+  --color-surface-raised: #ffffff;
+  --color-surface-sunken: #f5f5f5;
+  --border-width: 2px;
+  --focus-ring-width: 3px;
+  --focus-ring-offset: 2px;
+}
+
+/* ---------- Context: field mode (foundations.md density + type rules) ---------- */
+:root[data-context="field-mode"] {
+  --duration-normal: var(--duration-fast);
+  --duration-slow: var(--duration-fast);
+}

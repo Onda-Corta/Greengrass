@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Demos</title>
+<link rel="stylesheet" href="assets/tokens.css">
+<link rel="stylesheet" href="assets/wf.css">
+<style>
+  html, body { height: 100%; }
+  #root .app { height: 100vh; min-height: 0; overflow: hidden; }
+  #root .body { min-height: 0; overflow: hidden; }
+  #root .sb { overflow-y: auto; }
+  #root .main { min-height: 0; outline: none; }
+  .sb-demos { padding-block-end: var(--space-3); margin-block-end: var(--space-2); border-block-end: var(--border-width) solid var(--color-border); }
+  .tenant-logo.has-img { background: var(--color-surface-raised); border: var(--border-width) solid var(--color-border); overflow: hidden; }
+  .tenant-logo img { width: 100%; height: 100%; object-fit: contain; }
+  .demo-bar { display: flex; align-items: center; justify-content: space-between; gap: var(--space-4); padding: var(--space-3) var(--space-6); border-block-end: var(--border-width) solid var(--color-border); background: var(--color-surface-raised); }
+  .demo-addr { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 40rem; font-family: var(--font-mono); }
+  .demo-frame { flex: 1; width: 100%; border: 0; background: var(--color-surface-raised); }
+  .demo-empty { margin: auto; max-width: 34rem; }
+  .demo-url { display: flex; gap: var(--space-2); width: 100%; }
+  .demo-url .input { flex: 1; min-width: 0; font: inherit; }
+  .demo-dialog { position: fixed; inset-block-start: 50%; inset-inline-start: 50%; transform: translate(-50%, -50%); width: min(32rem, calc(100vw - var(--space-8))); padding: var(--space-6); z-index: var(--z-modal); box-shadow: var(--shadow-xl); }
+  .demo-dialog .input { font: inherit; width: 100%; }
+  .demo-dialog label.btn { cursor: pointer; }
+  .scrim { z-index: calc(var(--z-modal) - 1); }
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script src="assets/icons.js"></script>
+<script src="assets/wf.js"></script>
+<script src="assets/demos-config.js"></script>
+<script src="assets/demos.js"></script>
+</body>
+</html>
