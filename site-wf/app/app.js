@@ -359,6 +359,7 @@
     document.querySelector('.skip-link').inert = modal;
     renderSearchPop();
     if (state.overlay === 'search') renderMobileResults();
+    syncDemoContext();
   }
   // Header search results render on their own, so typing never re-renders the input.
   function renderSearchPop() {
@@ -401,6 +402,37 @@
     }
     opener = null;
   }
+
+  // ---------------------------------------------------------------- Demo context
+  // Tells the tool in the demo frame this app's colour mode, client brand and language, so it
+  // can match them: { type: 'greengrass:context', colorMode, theme, lang }. Sent when the frame
+  // loads, when colour mode or language changes, and in answer to its 'greengrass:ready'.
+  function frameOrigin(fr) { try { var o = new URL(fr.src).origin; return /^https?:/.test(o) ? o : ''; } catch (e) { return ''; } }
+  function demoContext() {
+    return { type: 'greengrass:context', colorMode: state.theme === 'dark' ? 'dark' : 'light', theme: document.documentElement.getAttribute('data-theme') || null, lang: state.lang === 'en' ? 'en' : 'es' };
+  }
+  function postContext(fr) {
+    var origin = frameOrigin(fr);
+    if (!origin || !fr.contentWindow) return;
+    var c = demoContext();
+    fr.contentWindow.postMessage(c, origin);
+    fr.__ggSent = c.colorMode + '|' + c.theme + '|' + c.lang;
+  }
+  // Called after every update(): posts only when what the frame was last told has changed.
+  function syncDemoContext() {
+    var fr = document.querySelector('.demo-frame'), c = demoContext();
+    if (fr && fr.__ggLoaded && fr.__ggSent !== c.colorMode + '|' + c.theme + '|' + c.lang) postContext(fr);
+  }
+  document.addEventListener('load', function (e) {
+    var fr = e.target;
+    if (!fr.classList || !fr.classList.contains('demo-frame') || !frameOrigin(fr)) return;
+    fr.__ggLoaded = true; postContext(fr);
+  }, true);
+  window.addEventListener('message', function (e) {
+    var fr = document.querySelector('.demo-frame');
+    if (!fr || e.source !== fr.contentWindow || !e.data || e.data.type !== 'greengrass:ready' || e.origin !== frameOrigin(fr)) return;
+    postContext(fr);
+  });
 
   // ---------------------------------------------------------------- Rail flyouts
   var fly = $('flyout'), flyFor = null, flyTimer = null;
