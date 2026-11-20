@@ -73,12 +73,19 @@ GreenGrass/
 ├── scripts/build.mjs              # Documentation site generator (Node + markdown-it)
 ├── scripts/dev.sh                 # One-command local preview (install, build, serve)
 ├── site-assets/                   # Site styles + client-side scripts (search, nav)
-├── site-wf/                       # Rendered wireframes + demo app (static HTML/CSS/JS), copied to docs/wf/
+├── site-wf/                       # Rendered wireframes (static HTML/CSS/JS), copied to docs/wf/
 └── docs/                          # Generated documentation website (GitHub Pages)
 ```
 
 The Markdown sources are canonical. `docs/` is generated from them by `npm run build`
 (see the README's "Documentation Website" section) and published to GitHub Pages.
+
+The demo app (the navigation shell, working, with the broadcast monitor and the builder
+loaded inside it) is not in this repository. It lives in the private repository
+`Onda-Corta/core-frame` and is served at https://core.ondacorta.net; `site-wf/app/` only
+forwards the old address there, so do not rebuild the app here. That repository carries
+copies of `site-wf/assets/tokens.css`, `wf.css` and `icons.js`; the ones here are the
+originals. `site-wf/demos.html` (`/wf/demos`) stays here and still frames both tools.
 
 ## Translations
 

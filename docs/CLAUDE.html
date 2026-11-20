@@ -109,11 +109,17 @@
 ├── scripts/build.mjs              # Documentation site generator (Node + markdown-it)
 ├── scripts/dev.sh                 # One-command local preview (install, build, serve)
 ├── site-assets/                   # Site styles + client-side scripts (search, nav)
-├── site-wf/                       # Rendered wireframes + demo app (static HTML/CSS/JS), copied to docs/wf/
+├── site-wf/                       # Rendered wireframes (static HTML/CSS/JS), copied to docs/wf/
 └── docs/                          # Generated documentation website (GitHub Pages)
 </code></pre>
 <p>The Markdown sources are canonical. <code>docs/</code> is generated from them by <code>npm run build</code>
 (see the README's &quot;Documentation Website&quot; section) and published to GitHub Pages.</p>
+<p>The demo app (the navigation shell, working, with the broadcast monitor and the builder
+loaded inside it) is not in this repository. It lives in the private repository
+<code>Onda-Corta/core-frame</code> and is served at <a href="https://core.ondacorta.net" target="_blank" rel="noopener noreferrer">https://core.ondacorta.net</a>; <code>site-wf/app/</code> only
+forwards the old address there, so do not rebuild the app here. That repository carries
+copies of <code>site-wf/assets/tokens.css</code>, <code>wf.css</code> and <code>icons.js</code>; the ones here are the
+originals. <code>site-wf/demos.html</code> (<code>/wf/demos</code>) stays here and still frames both tools.</p>
 <h2 id="translations" tabindex="-1"><a class="heading-anchor" href="#translations" aria-hidden="true">#</a> Translations</h2>
 <p>The site is bilingual. English sources live at the repo root; Spanish lives under
 <code>i18n/es/</code>, mirroring the English path exactly (<code>spec/product.md</code> -&gt;
