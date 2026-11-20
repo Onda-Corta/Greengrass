@@ -1,4 +1,4 @@
-/* Demostraciones que se cargan desde la barra lateral de /wf/demos y de la app de /wf/app.
+/* Demostraciones que se cargan desde la barra lateral de /wf/demos.
    nombre/corto en español, name/short en inglés; corto/short se usan en la barra inferior del móvil.
    Cambia aquí el cliente y las direcciones; también se pueden cambiar
    desde la propia pantalla (se guardan en el navegador) o con parámetros:
