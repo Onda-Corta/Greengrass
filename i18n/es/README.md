@@ -2,7 +2,7 @@
 
 Una plataforma para manejar elecciones políticas de base en el Sur Global.
 
-**Aplicación de demostración:** [el marco de navegación, funcionando](https://onda-corta.github.io/Greengrass/wf/app/?lang=es), con dos herramientas de demostración que ya existen, el monitor de difusión y el constructor, cargadas dentro. Las demás secciones indican que estarán disponibles pronto. Funciona en teléfonos, tabletas y computadoras, en español e inglés, en modo claro y oscuro.
+**Aplicación de demostración:** [el marco de navegación, funcionando](https://core.ondacorta.net/?lang=es), con dos herramientas de demostración que ya existen, el monitor de difusión y el constructor, cargadas dentro. Las demás secciones indican que estarán disponibles pronto. Funciona en teléfonos, tabletas y computadoras, en español e inglés, en modo claro y oscuro.
 
 GreenGrass reúne en un solo lugar un gestor de relaciones con constituyentes (CRM), una base de datos de votantes, herramientas de recaudación de fondos, una suite de comunicaciones y analítica de datos. Está pensada para contextos de recursos limitados, conectividad intermitente, poblaciones multilingües y estructuras de organización descentralizadas.
 
