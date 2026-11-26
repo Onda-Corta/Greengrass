@@ -1365,4 +1365,56 @@ Fijados antes de traducir la ADR-028 y `spec/coaching.md`.
 | standing local group | **grupo local estable** | El que un líder lleva durante meses. El corpus no tiene un rol para quien lo dirige. |
 | organizing craft / organizing knowledge | **el oficio de organizar** / **el conocimiento sobre organización** | |
 | sandbox (de otro producto) | **entorno de prueba** | |
+
+---
+
+# Términos añadidos para la revisión de la ADR-018
+
+Fijados antes de traducir la sección «La revisión» de la ADR-018, `spec/harness.md` y las
+enmiendas que la revisión deja en los demás documentos.
+
+## Reglas resueltas
+
+- **`persona` (del arnés) sí se dice persona.** La regla `persona → arquetipo` cubre los
+  arquetipos de usuario. La persona del arnés es otra cosa: un nombre, instrucciones,
+  contexto designado y un conjunto de operaciones declaradas. El chat es el caso general;
+  un coach es una persona con cero operaciones; el Agente de Campaña es el chat con los
+  módulos de contenido activados. Si en una misma frase choca con el arquetipo o con la
+  persona-que-es-gente, se glosa: *persona del arnés*.
+- **El `trigger` de auditoría es `disparador`.** Ya fijado en los rótulos repetidos
+  (`Trigger → Disparador`). El disparador registra a qué respondía el arnés: una petición
+  de una persona, un toque de confirmación o una programación que una persona fijó.
+- **`endpoint` se queda en inglés.** La ADR-018 en español ya dice *un endpoint externo*.
+  Masculino: *el endpoint*. Un *endpoint dentro de la frontera de cifrado* es el que puede
+  recibir datos compartimentados.
+
+## El arnés y el enrutador de modelos
+
+| Inglés | Español | Nota |
+|---|---|---|
+| provider policy | **política de proveedores** | La que configura cada organización: BYOM o el proveedor por defecto, y las reglas de enrutado. |
+| platform default (proveedor) | **proveedor por defecto de la plataforma** | Frente a BYOM. |
+| self-hosted model | **modelo autoalojado** | Como el nivel de aislamiento Autoalojado. |
+| data class | **clase de datos** | Pública, personal, compartimentada. |
+| routing rules | **reglas de enrutado** | Qué proveedor puede llevar qué clase. |
+| in-boundary (endpoint) | **dentro de la frontera de cifrado** | Como `encryption boundary → frontera de cifrado`, ya fijado frente a *perímetro de cifrado*. |
+| designated source | **fuente designada** | Lo que la organización designa para el arnés, por audiencia. |
+| designation | **designación** | Ya en uso (*documentos designados*); se formaliza. La designación es un acto del OA, registrado y auditable. |
+| persona (del arnés) | **persona** | Ver la regla resuelta arriba. |
+| standing requirements (de un proveedor) | **requisitos permanentes** | No entrenar con datos del cliente, conservación declarada, subencargado declarado. Distinto de `standing → situación` en las tablas de las ADR. |
+| metering (del enrutador) | **medición de uso** | Ya fijado. Cada llamada es un evento de uso con actor. |
+
+## La revisión
+
+| Inglés | Español | Nota |
+|---|---|---|
+| the review (de la ADR-018) | **la revisión** | *La revisión se celebró el 2026-11-26.* |
+| human gate | **compuerta humana** | Ya fijado en «principio de la compuerta humana». |
+| no non-human actor type | **ningún tipo de actor no humano** | La revisión responde con una negativa: el arnés nunca actúa; las personas actúan a través de él. |
+| channel (de auditoría) | **canal** | *La persona es el actor; el arnés es el canal.* Distinto del transporte por canal. |
+| trigger (de auditoría) | **disparador** | Ver la regla resuelta arriba. |
+| confused deputy | **delegado confundido** | Término de arte de seguridad. Glosa en la primera aparición: un atacante lo dirige, a través del contenido que lee, para que abuse del alcance de una persona legítima. |
+| untrusted content | **contenido no confiable** | *El contenido no confiable es dato, nunca instrucciones.* |
+| cross-border transfer | **transferencia transfronteriza** | Ya fijado. Un prompt con datos personales a un endpoint externo es una. |
+| standing document (de cumplimiento) | **documento permanente** | Lo que la organización recibe: el manejo de datos del arnés, legible por su oficial de cumplimiento. |
 | distributed-organizing product | **producto de organización distribuida** | |

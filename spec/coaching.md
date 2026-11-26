@@ -2,7 +2,7 @@
 
 **AI coaches for every role, built on what the organization says about itself**
 
-Status: proposed in [ADR-028](../decisions/028-coaching.md). Two things are decided: Coaching is part of the Core, and the name is *Coach* in English and in Spanish. Everything else here is proposed. Nothing here reaches production in either lane before the [ADR-018](../decisions/018-ai-agent-posture.md) review is accepted, and the parts listed under [What waits on the ADR-018 review](#what-waits-on-the-adr-018-review) are recorded, not specified.
+Status: proposed in [ADR-028](../decisions/028-coaching.md). Three things are decided: Coaching is part of the Core; the name is *Coach* in English and in Spanish; and the bounded coach — which never speaks first, never acts and never reads records — which the [ADR-018](../decisions/018-ai-agent-posture.md) review of 2026-11-26 found outside the gate and free to ship. Everything else here is proposed. The parts listed under [What waits on the ADR-018 review](#what-waits-on-the-adr-018-review) are answered by the review: permitted under the posture of [spec/harness.md](harness.md), each to be specified before it ships.
 Drafted: 2026-11-25
 
 ---
@@ -22,7 +22,7 @@ A coach helps a person with their own work. Three AI features sit beside it, and
 | For | Help with the platform | A draft from a brief | Doing the work | Thinking through the work |
 | Reads | The knowledge base and platform documentation | What the person hands it | What the person may read, when they ask | The conversation, attachments, and the context the organization designates |
 | Acts | No; escalates to a person | No; returns a draft | Yes; every write confirmed | No |
-| Where it is decided | [support.md § Onboarding Concierge](support.md#onboarding-concierge) | [ADR-020](../decisions/020-central-service-line-up-and-builders.md#builders-text-accepted-images-and-video-proposed) | [ADR-023](../decisions/023-surfaces-chat-admin-field.md#the-chat-as-the-persons-hands), proposed | This document, proposed |
+| Where it is decided | [support.md § Onboarding Concierge](support.md#onboarding-concierge) | [ADR-020](../decisions/020-central-service-line-up-and-builders.md#builders-text-accepted-images-and-video-proposed) | [ADR-023](../decisions/023-surfaces-chat-admin-field.md#the-chat-as-the-persons-hands), decided in the ADR-018 review | This document, proposed; the bounded coach decided |
 
 Typical questions for a coach:
 
@@ -71,8 +71,8 @@ Rules:
 - **Starting.** From a coach's page, from the coach box on a role's home page, or from a suggested starter.
 - **Input.** Typing, or a voice note transcribed in the person's language.
 - **Attachments.** A document or image the person adds becomes part of that conversation only.
-- **Past conversations.** A person can return to their own past conversations. How long they are kept, and whether anyone else can read them, is a question for the review.
-- **Sharing.** A share button sends a read-only copy of a conversation to someone else in the instance. What that does to retention and to the people named in it is a question for the review; until it is answered, sharing is drawn and not specified.
+- **Past conversations.** A person can return to their own past conversations. Conversations are kept under the Operational tier of [ADR-016](../decisions/016-cross-cutting-resolutions.md) §4 (90 days to 5 years, default 2). A conversation is private to its person: the Org Admin sees metadata — counts, cost — never content.
+- **Sharing.** A share button sends a read-only copy of a conversation to someone else in the instance, logged with the person who shared it. The copy is the recipient's, kept under the same tier.
 - **The notice.** Every conversation shows that coaches use AI and can make mistakes, and that important information should be checked before anyone acts on it.
 
 ## Grounding and citations
@@ -87,7 +87,7 @@ A coach states no fact, figure or claim about the organization that is not in th
 
 ## What a coach never does
 
-Until the ADR-018 review says otherwise:
+These bounds define the bounded coach, and they are decided. The review of 2026-11-26 permits more than them — a briefing a person schedules, declared operations confirmed with a card, record reads within the person's own scope — and each of those is specified before it ships, under the posture of [spec/harness.md](harness.md). Until then:
 
 - **It never speaks first.** No message, briefing or reminder arrives from a coach unless the person opened the conversation.
 - **It never acts.** It changes no record, creates no task, sends nothing to anyone. A draft leaves the conversation only when the person copies it, and then enters whatever approval that kind of content has.
@@ -104,9 +104,11 @@ Every turn is an inference call. It is metered under [ADR-019](../decisions/019-
 
 ## Offline
 
-A coach needs a connection. Without one, the coach page says so and offers the person's past conversations if they are kept on the device, which is itself a question for the review. No field task depends on a coach ([ADR-005](../decisions/005-offline-first-sync.md)).
+A coach needs a connection. Without one, the coach page says so and offers the person's past conversations where they are kept on the device. No field task depends on a coach ([ADR-005](../decisions/005-offline-first-sync.md)).
 
 ## What waits on the ADR-018 review
+
+*Answered 2026-11-26. The review permits each of the following under the posture — briefings as schedules a person set, acting as declared operations confirmed with a card, record reads within the invoking person's scope, coaches in the channels the default-channel decision allows. The answers are at [ADR-028 § The review's answers](../decisions/028-coaching.md#the-reviews-answers). None is yet specified for production; each needs its own specification before it ships. The section is kept as written.*
 
 The product that prompted this document does more than the bounds above allow. Each of these is recorded so the review sees all of it, and none is specified for production.
 
@@ -132,7 +134,7 @@ A coach in Telegram or Signal rather than in the app. This turns on the default 
 
 Briefings and recommended actions have a version outside the gate: counts and rules computed without a model and shown as an ordinary dashboard. That version needs a specification of standing local groups and the people who lead them, which the corpus does not have ([users.md § Volunteer Team Lead](users.md#volunteer-team-lead) is a role for one operation, not for a group over months).
 
-The twelve questions this sends to the review are listed in [ADR-028 § Questions sent to the ADR-018 review](../decisions/028-coaching.md#questions-sent-to-the-adr-018-review).
+The twelve questions this sent to the review are listed in [ADR-028 § Questions sent to the ADR-018 review](../decisions/028-coaching.md#questions-sent-to-the-adr-018-review) and answered in [§ The review's answers](../decisions/028-coaching.md#the-reviews-answers).
 
 ## Open questions
 

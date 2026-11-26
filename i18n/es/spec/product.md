@@ -23,7 +23,9 @@
 
 **Tres superficies.** El Core es headless (sin interfaz propia: todo es primero una operación de la API). Un UI de chat está pensado para cargar entre el 70 y el 80 % del trabajo diario del equipo, un UI de administración el resto, que es lo complejo, y la app de campo se queda como la superficie para el trabajo que se hace sin conexión.
 
-**El Coaching está en el Core.** Toda instancia tiene coaches de IA: uno por cada rol, y otros que escribe la organización, todos construidos sobre la misión, la voz y las salvaguardas que fija la organización. Como el chat, el coaching espera por la revisión de la ADR-018 antes de llegar a producción.
+**El Coaching está en el Core.** Toda instancia tiene coaches de IA: uno por cada rol, y otros que escribe la organización, todos construidos sobre la misión, la voz y las salvaguardas que fija la organización. El coach acotado —nunca habla primero, nunca actúa, nunca lee registros— está decidido y fuera del punto de decisión de la ADR-018; lo que más pueda hacer un coach está permitido por la revisión y se especifica pieza por pieza.
+
+**El Core es un arnés de agentes por cliente.** Toda capacidad de IA, el coaching y el chat incluidos, corre dentro de la postura que fijó la revisión de la ADR-018: el arnés actúa solo como las manos de una persona, y cada llamada a un modelo pasa por el enrutador de modelos de la propia organización bajo su política de proveedores ([harness.md](harness.md)).
 
 **Lo que ningún competidor integra:** el padrón electoral, las herramientas de campo sin conexión y las herramientas para coaliciones de partidos. Siguen en el centro del producto político.
 
@@ -37,7 +39,8 @@
 | Cada cliente guarda sus propias cuentas | [ADR-025](../decisions/025-identity-per-client.md) | Aceptada |
 | Los precios | [ADR-026](../decisions/026-two-lane-pricing.md) | Aceptada; las definiciones que necesitan están abiertas |
 | Sincronización con CRM de terceros | [ADR-027](../decisions/027-third-party-crm-sync-and-connectors.md) | Propuesta. NationBuilder por CSV está decidido |
-| Coaching | [ADR-028](../decisions/028-coaching.md), [coaching.md](coaching.md) | Propuesta. El Coaching en el Core y el nombre *Coach* están decididos; lo que puede hacer un coach espera por la revisión de la ADR-018 |
+| Coaching | [ADR-028](../decisions/028-coaching.md), [coaching.md](coaching.md) | Propuesta. El Coaching en el Core, el nombre *Coach* y el coach acotado están decididos; lo que más pueda hacer un coach está permitido por la revisión y se especifica pieza por pieza |
+| El arnés de agentes | [ADR-018 § The review](../decisions/018-ai-agent-posture.md#la-revisión), [harness.md](harness.md) | Aceptado el 2026-11-26. Uno por cliente; las manos de la persona; el enrutador de modelos y la política de proveedores |
 
 **Qué del original ya no vale.** Tres cosas de más abajo quedan sin efecto y están marcadas donde aparecen: «todo en uno» y «ventanilla única» como forma del producto; «una tarifa fija»; y los modelos de ingresos del final del documento. Todo lo demás de aquí abajo se lee como una descripción del carril político.
 

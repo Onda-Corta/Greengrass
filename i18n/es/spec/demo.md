@@ -2,7 +2,7 @@
 
 **Una demostración que funciona, para abrirle la puerta a GreenGrass con candidaturas y comités regionales reales**
 
-Estado: presentación, no especificación. Nada de lo que describe queda aceptado, y la [ADR-018](../decisions/018-ai-agent-posture.md) sigue propuesta.
+Estado: presentación, no especificación. La [ADR-018](../decisions/018-ai-agent-posture.md) está aceptada desde el 2026-11-26, y su ejemplo desarrollado —el flujo que esta presentación demuestra— pasó el punto de decisión como funcionalidad acotada. La presentación sigue siendo una presentación: no guarda registros, no publica nada, y no compromete a la plataforma con nada más allá de lo que la revisión decidió.
 Código: en un repositorio privado aparte, `Onda-Corta/campaign-agent-demo`. No es código de GreenGrass. En el momento de esta revisión contiene código que funciona para la mayor parte de su plan de trabajo: el bot y el registro, la redacción, las aprobaciones, la pantalla del equipo, el reloj de demostración, las protecciones y el reinicio. El constructor de recursos se está construyendo ahí ahora, y una simulación dibuja los artes hasta que esté listo.
 Versión independiente, para las candidaturas: [pitch.md](pitch.md).
 Redactado: 2026-09-29
@@ -23,13 +23,13 @@ Se escogió este flujo por tres razones:
 
 1. **Pasa en un chat, en su propio celular.** La presentación no le pide a nadie aprender una pantalla nueva. En los mercados objetivo la campaña corre por WhatsApp, y la demostración corre en Telegram como sustituto (§2), así que lo único que pide es una aplicación gratuita.
 2. **Enseña la regla que hace confiable a GreenGrass.** Nada sale sin que una persona con nombre apruebe esa versión exacta. En la presentación eso no es una promesa: se ve.
-3. **Le sirve a la revisión de la ADR-018.** Correr el ejemplo desarrollado con personas reales deja evidencia concreta sobre los seis lugares donde toca el punto de decisión (§7).
+3. **Le sirvió a la revisión de la ADR-018.** Correr el ejemplo desarrollado con personas reales dejó evidencia concreta sobre los seis lugares donde tocaba el punto de decisión (§7), que la revisión del 2026-11-26 resolvió.
 
 ## 2. Qué no es
 
 - **No es el MVP.** El [MVP](mvp.md) prueba si organizaciones políticas soberanas van a juntar sus datos. Esta presentación no prueba ese supuesto ni ningún otro: sirve para abrir la conversación. Las dos cosas no deben confundirse.
-- **No es código de GreenGrass.** Vive en `Onda-Corta/campaign-agent-demo`, fuera de este corpus. Nada de ese código pasa a la plataforma sin cruzar antes la revisión de la ADR-018.
-- **No acepta la ADR-018.** Corre dentro de los límites que la propuesta en revisión sugiere, y así los pone a prueba, pero no los decide. La ADR-018 sigue propuesta.
+- **No es código de GreenGrass.** Vive en `Onda-Corta/campaign-agent-demo`, fuera de este corpus. Nada de ese código pasa a la plataforma tal cual; el código de producción es código de la plataforma, escrito contra [spec/harness.md](harness.md).
+- **No se adelantó a la ADR-018.** Corrió dentro de los límites que la propuesta en revisión sugería, y así los puso a prueba. La revisión del 2026-11-26 aceptó la ADR-018 y pasó el ejemplo desarrollado como funcionalidad acotada ([ADR-018 § The review](../decisions/018-ai-agent-posture.md#la-revisión)).
 - **No publica nada.** Ninguna pieza llega a una cuenta real de X, Facebook ni Instagram.
 - **No ata a GreenGrass a Telegram ni a WhatsApp.** La demostración corre en Telegram porque no exige verificación de negocio, revisión del nombre visible ni plantillas aprobadas: un bot se monta en minutos. Los términos comerciales de WhatsApp prohíben la actividad de partidos políticos, así que la presentación tampoco promete WhatsApp. La fórmula en las láminas y en el guion es «la demostración corre en Telegram; el canal de producción se decide con cada campaña». La demostración mantiene el canal detrás de una interfaz delgada para poder añadir otro.
 
@@ -44,7 +44,7 @@ La [ADR-018 § La revisión condiciona la producción, no la experimentación](.
 - **Todo lo que genera lleva la marca de demostración**, en cada superficie: el arte, el PDF, cada mensaje del chat, la pantalla del equipo y el libro de registro. La marca la pone el arnés, nunca el modelo, así que ninguna instrucción puede quitarla. Importa más ahora que las personas invitadas pueden nombrar candidatos reales al registrarse.
 - **Nunca inventa una cita.** Cada respuesta del modelo se revisa antes de que algo llegue al chat: una cita tiene que aparecer palabra por palabra en una declaración pública que alguien revisó a ojo contra su fuente, una cifra tiene que aparecer en la carpeta o en el mensaje del titular, y cada fuente tiene que estar en la carpeta del propio titular. Una respuesta que falla vuelve al modelo con la lista de problemas, hasta tres veces, y después la mañana falla en vez de salir. En una candidatura cuya única fuente es lo que una persona escribió, la salida no lleva palabras ni posturas que no se le dieron. Los huecos se muestran, no se rellenan.
 
-Tres cosas la cruzarían al otro lado, y ninguna se hace mientras la ADR-018 siga propuesta: cargar una lista de contactos, conectar una cuenta real de redes sociales, o que alguien siga usándola en su día a día después de la presentación. Si una candidatura pide quedarse con la herramienta, la respuesta honesta es *todavía no*, y la invitación es al piloto.
+Tres cosas la cruzarían al otro lado, y ninguna se hace mientras la presentación siga siendo una presentación: cargar una lista de contactos, conectar una cuenta real de redes sociales, o que alguien siga usándola en su día a día después de la presentación. Si una candidatura pide quedarse con la herramienta, la respuesta honesta es *todavía no* —el uso en producción es uso de la plataforma, dentro de la postura de la ADR-018— y la invitación es al piloto.
 
 ## 4. El guion
 
@@ -112,13 +112,13 @@ Cada pieza de la presentación corresponde a algo que la especificación ya nomb
 | El constructor de recursos, sus composiciones y sus kits de marca | Ninguno. Pone un titular aprobado, un nombre y una fecha sobre los colores, la tipografía y el logotipo de una campaña, y no genera nada, así que no es el constructor de imágenes. Es código propio de la demostración, no un componente de GreenGrass | Fuera del punto de decisión |
 | Piezas, rondas, versiones y aprobaciones | El [flujo de contenido](../decisions/021-content-approval-pipeline.md#el-flujo-de-contenido-generaliza-la-aprobación-de-publicaciones): cada ronda se guarda y todo pedido de cambios lleva comentario | Aceptado |
 | Los eventos de uso con su costo | La medición de uso y el traslado al costo de la [ADR-019](../decisions/019-central-services-and-metered-billing.md#dos-planos-de-facturación-y-sin-margen-en-el-segundo) | Aceptado |
-| El registro de cada aprobación | La relación «en nombre de», propuesta para el punto 3 de la [ADR-018](../decisions/018-ai-agent-posture.md#qué-tiene-que-resolver-esta-adr) | Propuesto |
+| El registro de cada aprobación | Los campos de canal y disparador que la revisión le dio al registro de auditoría ([ADR-018 § The review](../decisions/018-ai-agent-posture.md#la-revisión)) | Aceptado |
 | El publicador simulado | El adaptador de redes sociales ([system.md § Redes sociales](../design/architecture/system.md#redes-sociales)), sin conectar | Aceptado, no usado |
-| El Agente de Campaña | El arnés de agentes de la ADR-018, reducido a una sola conversación por titular | Propuesto |
+| El Agente de Campaña | El chat con los módulos de contenido activados —una persona y un conjunto de módulos, no un módulo ([spec/harness.md § Personas](harness.md#personas)) | Aceptado |
 
 ## 7. Los seis puntos del ejemplo desarrollado, en la presentación
 
-El ejemplo desarrollado de la ADR-018 toca el punto de decisión en seis lugares. La presentación no decide ninguno. Lo que hace es escoger, en cada uno, el lado más conservador que todavía deja ver el flujo.
+El ejemplo desarrollado de la ADR-018 toca el punto de decisión en seis lugares. La presentación no decidió ninguno —la revisión del 2026-11-26 lo hizo, a favor del flujo ([ADR-018 § The proposals under review, resolved](../decisions/018-ai-agent-posture.md#las-propuestas-en-revisión-resueltas)). Lo que hizo la presentación fue escoger, en cada uno, el lado más conservador que todavía deja ver el flujo.
 
 | Punto | Qué hace la presentación |
 |---|---|
@@ -198,7 +198,7 @@ Para una mañana ensayada propia, que solo se hace con una campaña que ha dado 
 
 ## 11. Qué no prueba la presentación
 
-- **Que los límites de la ADR-018 bastan.** Los aplica en el caso más angosto posible: una conversación por titular, sin datos de votantes, sin publicación real. La revisión sigue teniendo que decidir el alcance de lectura, el modelo de amenazas, la auditoría, el trabajo sin conexión y la pantalla de BYOM.
+- **Que los límites aceptados bastan en la práctica.** La revisión decidió el alcance de lectura, el modelo de amenazas, la auditoría, el trabajo sin conexión y la pantalla de BYOM; la presentación aplicó los límites en el caso más angosto posible —una conversación por titular, sin datos de votantes, sin publicación real— y no prueba nada sobre los casos más anchos.
 - **Nada sobre el constructor de imágenes.** El constructor de recursos no genera imágenes, a propósito.
 - **Que el agente nunca tergiversa una postura.** Las revisiones atrapan citas, cifras, fuentes y enlaces inventados. No pueden atrapar un argumento inventado en la voz del titular que la carpeta no respalda; la prueba comparativa produjo uno. La salvaguarda es la aprobación: nada sale hasta que una persona con nombre aprueba esa versión exacta, y los puntos de mensaje llevan sus fuentes para que la persona pueda revisarlos.
 - **Que la base de conocimiento escala.** Unos pocos documentos caben enteros en el prompt. Una base real necesita recuperación, y con ella preguntas de alcance de lectura que aquí no aparecen.
@@ -232,5 +232,5 @@ Si el tiempo se acorta, los recortes van en este orden: la pantalla del equipo s
 2. **El rediseño.** La primera composición es provisional. Si los artes, las composiciones y los formatos se rediseñan antes del 2026-10-12 o después de la presentación no está decidido. El resto del constructor de recursos no cambia en ningún caso.
 3. **Las fotos.** Si los artes llevan las fotos de la campaña en la presentación. Por ahora ningún arte lleva foto, y añadirlas es trabajo opcional. Una demostración sin fotos igual enseña el flujo, pero se parece menos a lo que publica una campaña.
 4. **Las grabaciones.** Una grabación de la presentación tiene la voz o las palabras de una persona real diciendo cosas que redactó un agente. No se enseña a otra campaña sin su permiso por escrito. La grabación de pantalla de respaldo lleva la misma marca de demostración.
-5. **Qué se le ofrece a quien diga que sí.** La respuesta a «quiero usarlo mañana» es el piloto, y el piloto espera por la revisión de la ADR-018 para todo lo que tenga características de agente. Hace falta decir eso bien, y antes de que lo pregunten.
+5. **Qué se le ofrece a quien diga que sí.** La respuesta a «quiero usarlo mañana» es el piloto, y todo lo que tenga características de agente en el piloto corre dentro de la postura de la ADR-018. Hace falta decir eso bien, y antes de que lo pregunten.
 6. **A qué corresponde un comité.** La especificación no tiene un tipo de organización de comité regional (§6). Si un comité es una campaña bajo un partido o algo nuevo no se decide aquí.

@@ -2,6 +2,7 @@
 
 **Status:** Proposed
 **Date:** 2026-11-13
+**Updated:** 2026-11-26 — the [ADR-018](018-ai-agent-posture.md) review decided two items this ADR had open or recommended: the Core is a per-tenant agent harness with the chat as its primary interface ([spec/harness.md](../spec/harness.md)), and the Campaign Agent is that chat with content modules enabled. Both rows move to Decided below. Status unchanged: the voter file and a name for the Core are still open.
 **Sources:** `spec/product.md`, `spec/users.md`, `spec/security.md`, `spec/comms-intelligence.md`, `spec/mvp.md`, `design/architecture/system.md`, `decisions/001-platform-architecture.md`, `decisions/015-product-scope.md`, `decisions/017-sharing-contract-trust-model.md`, `decisions/019-central-services-and-metered-billing.md`, `decisions/020-central-service-line-up-and-builders.md`, `decisions/021-content-approval-pipeline.md`
 
 ## Context
@@ -20,6 +21,7 @@ This ADR is `Proposed` because two things it depends on are open: where the vote
 | Each client runs its own instance, with its own data and its own accounts | Decided ([ADR-001](001-platform-architecture.md), [ADR-025](025-identity-per-client.md)) |
 | The CRM is part of the Core | Decided |
 | Coaching is part of the Core | Decided ([ADR-028](028-coaching.md)) |
+| The Core is a per-tenant agent harness; the chat is its primary interface | Decided ([ADR-018 § The review](018-ai-agent-posture.md#the-review); [spec/harness.md](../spec/harness.md)) |
 | Fundraising & payments is one module with a shared payment layer | Decided |
 | Modules are built by GreenGrass first; the module contract is designed so vetted partners can build later | Decided |
 | The vocabulary, including the renaming of ADR-019's "internal module" | Proposed |
@@ -27,7 +29,7 @@ This ADR is `Proposed` because two things it depends on are open: where the vote
 | What the lanes require of the design | Proposed |
 | The module contract and the module catalogue | Proposed |
 | The voter file as a political-lane module, outside the Core | Recommended, not decided |
-| The Campaign Agent as the chat with content modules enabled, not a module | Recommended, not decided |
+| The Campaign Agent as the chat with content modules enabled, not a module | Decided ([ADR-018 § The review](018-ai-agent-posture.md#the-review)) |
 | A name for the Core; operator access by lane; a disabled module's data; the name "Basecamp" | Open |
 
 ### Conflicts this ADR resolves
@@ -116,6 +118,7 @@ Every instance gets all of this, always. The Core is headless: each item is an A
 | Commerce | Catalogue, entitlements, metering | [ADR-019](019-central-services-and-metered-billing.md) |
 | Events | The per-client event stream and the bus ([ADR-024](024-event-bus-as-federation.md)) | [system.md § Analytics Architecture](../design/architecture/system.md#analytics-architecture) |
 | Coaching | Role coaches, coaches the organization writes, the organization's context layer | [ADR-028](028-coaching.md) |
+| The agent harness | The per-tenant harness, its model router and personas; declared operations and the human gate | [ADR-018 § The review](018-ai-agent-posture.md#the-review); [spec/harness.md](../spec/harness.md) |
 | Lane configuration | Brand, vocabulary, catalogue visibility, price rules, policy defaults | New, above |
 | Plumbing | Integration hub and connectors, AI abstraction (BYOM), localization, offline sync engine, public API and webhooks | [system.md](../design/architecture/system.md), [ADR-005](005-offline-first-sync.md), [ADR-010](010-internationalization-localization.md), [ADR-016](016-cross-cutting-resolutions.md) §38 |
 
@@ -123,7 +126,7 @@ Every instance gets all of this, always. The Core is headless: each item is an A
 
 **Two comms-intelligence primitives turn out to be Core. Proposed.** [comms-intelligence.md § 5. Seven features are three primitives](../spec/comms-intelligence.md#5-seven-features-are-three-primitives) names three. The actor graph (outlets, ownership, journalists, analysts) is CRM entities and relationships, so it extends the Core CRM. The claims ledger (claim, sources, verification status, approved response) is a content item, so it extends the Core content store. Only the compartmented dossier is module-specific, and its access machinery is ADR-017 contracts, which are Core.
 
-The rest of the table is proposed. Identity per client is decided in [ADR-025](025-identity-per-client.md), and Coaching as part of the Core in [ADR-028](028-coaching.md), which leaves what a coach may do to the [ADR-018](018-ai-agent-posture.md) review.
+The rest of the table is proposed. Identity per client is decided in [ADR-025](025-identity-per-client.md), and Coaching as part of the Core in [ADR-028](028-coaching.md); what a coach may do is answered at [ADR-028 § The review's answers](028-coaching.md#the-reviews-answers).
 
 **Alternatives considered:** Making the CRM a module was considered and rejected. Nearly every module would then depend on it, and consent would have to be enforced by each module separately, which is how an opt-out gets honoured in one place and ignored in another.
 
@@ -148,7 +151,8 @@ Every module ships a manifest that declares:
 - **Surfaces:** its chat operations, each marked read or write, with the confirmation card for writes; its admin screens and navigation entries; its field capabilities and offline behaviour ([ADR-023](023-surfaces-chat-admin-field.md)).
 - **Services:** the central services it calls, and so the entitlements it needs.
 - **Perimeter:** what data leaves the encryption boundary, and which isolation tiers and jurisdictions it supports.
-- **ADR-018 standing:** read scope, tool authority, autonomy and credential breadth, the four properties [ADR-018](018-ai-agent-posture.md#no-agent-capability-reaches-production-until-this-adr-is-accepted) gates on.
+- **Harness:** the personas it contributes, the context sources it offers for designation, and the data classes its operations touch, so the [model router](../spec/harness.md#the-model-router) can route them.
+- **ADR-018 standing:** read scope, tool authority, autonomy and credential breadth, the four properties [ADR-018](018-ai-agent-posture.md#no-agent-capability-reaches-production-until-this-adr-is-accepted) gates on — declared against the posture the review set ([ADR-018 § The review](018-ai-agent-posture.md#the-review)). A module inside the posture needs no further review; anything beyond it is a new ADR.
 
 **Shipping.** First-party modules ship in the deployment image and are switched on by entitlement. ADR-001 is unchanged: there are no per-module deployments.
 
@@ -165,7 +169,7 @@ Proposed. The names are the product side's. Every module can run in either produ
 | Radio & TV monitoring | Both | Capture (broadcast, transcribed), actor graph | Chat (digest), admin | Iteration 0 probe; transcription is a metered cost |
 | Social monitoring | Both | Capture (public accounts) | Chat, admin | Iteration 0 probe; public accounts only |
 | Press summary | Both | Capture (press), text builder | Chat (daily digest) | Iteration 0 probe |
-| Ad-art builder | Both | Builders, content pipeline, brand templates | Chat, admin | Template layouts are fine, as in the demonstration; generated images wait on [ADR-018](018-ai-agent-posture.md) |
+| Ad-art builder | Both | Builders, content pipeline, brand templates | Chat, admin | Template layouts are fine, as in the demonstration; generated images carry the review's two conditions ([ADR-020](020-central-service-line-up-and-builders.md)) |
 | Content distribution | Both | Channel transport, content pipeline, CRM | Chat, admin | The spec's outreach, plus press and social |
 | Crisis management | Both | Monitoring modules, claims ledger, talking points | Chat, admin | Named, not yet specified |
 | Polls & surveys | Both | CRM, channel transport | Admin, chat | Named, not yet specified |
@@ -182,7 +186,7 @@ Proposed. The names are the product side's. Every module can run in either produ
 - **Crisis management is the claims-ledger workflow** at [comms-intelligence.md § 5.2 The claims ledger](../spec/comms-intelligence.md#52-the-claims-ledger): an attack surfaces in monitoring, becomes a claim, gets sourced and adjudicated, and the answer becomes a talking point. The spec has the primitive and no module by this name.
 - **Polls & surveys has no spec at all.** ADR-020 gives one rule to keep: a client's own polling is its own data and never enters the shared corpus.
 - **Fundraising & payments is one module with a shared payment layer. Decided.** In the commercial lane it means integration with ATH Móvil and other micropayment and online payment services such as Stripe. Those are the payment adapters [system.md § Payment adapter pattern](../design/architecture/system.md#payment-adapter-pattern) already specifies, so the adapters are shared by both lanes. The political lane adds donation handling on top: contribution limits, campaign-finance reporting and alliance splits ([fundraising.md](../spec/fundraising.md), [compliance.md](../spec/compliance.md)).
-- **The Campaign Agent is not a module. Recommended, not decided.** If the chat acts as the person ([ADR-023](023-surfaces-chat-admin-field.md)), the agent of the demonstration is that chat with content modules enabled.
+- **The Campaign Agent is not a module. Decided in the [ADR-018](018-ai-agent-posture.md) review.** The agent of the demonstration is the chat with content modules enabled: a persona and a module set, not a module ([spec/harness.md § Personas](../spec/harness.md#personas)).
 
 **Named, not yet specified.** Crisis management and Polls & surveys are in the catalogue and specified nowhere. This ADR does not specify them. Each needs its own spec before it is built.
 
@@ -192,11 +196,10 @@ None of these is settled here. Where the direction has a recommendation, it is g
 
 1. **A name for the Core**, now that Greengrass is a lane. Also where its spec lives: today everything is in the Greengrass repository.
 2. **The voter file** as a political-lane module, not part of the Core. Recommended above.
-3. **The Campaign Agent** as the chat with content modules enabled, not a module. Recommended above.
-4. **A disabled module's data:** kept read-only, exported, or purged on the operational retention schedule.
-5. **Operator access by lane,** including Onda Corta's access across both, and what political clients are told.
-6. **The name "Basecamp".** It is also 37signals' project-management product, in the same broad category of software. It needs a trademark check before it goes on anything public.
-7. **Definitions.** "The product's owner" and "the Comercializadora" are used as given and defined nowhere.
+3. **A disabled module's data:** kept read-only, exported, or purged on the operational retention schedule.
+4. **Operator access by lane,** including Onda Corta's access across both, and what political clients are told.
+5. **The name "Basecamp".** It is also 37signals' project-management product, in the same broad category of software. It needs a trademark check before it goes on anything public.
+6. **Definitions.** "The product's owner" and "the Comercializadora" are used as given and defined nowhere.
 
 ### Housekeeping: amendment banners
 
@@ -223,7 +226,7 @@ A proposed ADR amends nothing until it is accepted. This ADR adds an **Amendment
 - [ADR-019](019-central-services-and-metered-billing.md)'s rules for central services are unchanged: one client per call, nothing retained, only public data shared
 - The Core never depends on a module
 - A lane is configuration, never a fork
-- The [ADR-018](018-ai-agent-posture.md) gate applies to the whole Core, so to both lanes ([ADR-023](023-surfaces-chat-admin-field.md))
+- The [ADR-018](018-ai-agent-posture.md) posture applies to the whole Core, so to both lanes: the gate decided in [ADR-023](023-surfaces-chat-admin-field.md) was discharged by the review, and the posture it set ([ADR-018 § The review](018-ai-agent-posture.md#the-review)) binds every module's manifest
 - Nothing marked proposed, recommended or open in this ADR may be built on as if it were decided
 
 **Related ADRs:** [ADR-001](001-platform-architecture.md) (one instance per client, reaffirmed), [ADR-015](015-product-scope.md) (amendment proposed: the catalogue names modules outside its scope list), [ADR-017](017-sharing-contract-trust-model.md) (contracts are Core), [ADR-018](018-ai-agent-posture.md) (the manifest declares each module's standing against the gate), [ADR-019](019-central-services-and-metered-billing.md) (amendment proposed: "internal module" becomes "in-tenant component"; catalogue, entitlements and metering are Core), [ADR-020](020-central-service-line-up-and-builders.md) (amendment proposed: one media monitor is packaged as three modules; the four services are unchanged), [ADR-021](021-content-approval-pipeline.md) (the content pipeline is Core), [ADR-023](023-surfaces-chat-admin-field.md) (surfaces), [ADR-024](024-event-bus-as-federation.md) (the bus; alliances and associations), [ADR-025](025-identity-per-client.md) (identity per client), [ADR-026](026-two-lane-pricing.md) (prices), [ADR-027](027-third-party-crm-sync-and-connectors.md) (sync and connectors), [ADR-028](028-coaching.md) (Coaching is part of the Core)

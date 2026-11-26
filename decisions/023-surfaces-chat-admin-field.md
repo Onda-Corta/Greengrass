@@ -2,6 +2,7 @@
 
 **Status:** Proposed
 **Date:** 2026-11-13
+**Updated:** 2026-11-26 — the [ADR-018](018-ai-agent-posture.md) review accepted the chat as the person's hands, decided the default channel, and answered all five open questions below. Status unchanged: the three-surface split and the wireframe re-tagging are still proposed.
 **Sources:** `spec/pitch.md`, `spec/demo.md`, `design/architecture/system.md`, `design/ux/01-information-architecture/navigation-model.md`, `design/ux/01-information-architecture/screen-inventory.md`, `decisions/005-offline-first-sync.md`, `decisions/018-ai-agent-posture.md`, `decisions/019-central-services-and-metered-billing.md`, `decisions/020-central-service-line-up-and-builders.md`, `decisions/022-core-modules-and-lanes.md`
 
 ## Context
@@ -14,7 +15,7 @@ The architecture already allows this. [system.md § Public API](../design/archit
 
 What the architecture does not allow yet is the chat. A chat that does most of the daily work reads across features, holds credentials and invokes operations. That is the agent [ADR-018](018-ai-agent-posture.md) gates. This is the largest consequence of the new direction, and this ADR faces it directly: it records one decision about the gate, and sends one proposal into the review.
 
-This ADR is `Proposed`. One thing in it is decided, and is marked.
+This ADR is `Proposed`. Its decided items are marked; the ADR-018 review of 2026-11-26 added several.
 
 ### Conflicts this ADR resolves
 
@@ -65,7 +66,7 @@ The re-tagging is follow-up work. It needs a judgement per screen and is not don
 
 ### The ADR-018 gate binds the whole Core
 
-**Decided.** The ADR-018 review applies to the Core, and so to both lanes. Chat is a Core surface, so neither Greengrass nor Basecamp ships it to production before the review is accepted. ADR-018 stays `Proposed`.
+**Decided.** The ADR-018 review applies to the Core, and so to both lanes. Chat is a Core surface, so neither Greengrass nor Basecamp ships it to production before the review is accepted. *Discharged 2026-11-26: the review accepted ADR-018. What binds both lanes now is the posture it set ([ADR-018 § The review](018-ai-agent-posture.md#the-review)).*
 
 - **This is the one place where the lanes are not independent.** [ADR-022 § Two lanes on one infrastructure](022-core-modules-and-lanes.md#two-lanes-on-one-infrastructure) says a lane never waits for the other. Both wait for the review. It is on the critical path for both.
 - **What can ship before the review:** the admin UI, the field app, and any module that has none of the four gated properties.
@@ -75,7 +76,7 @@ The re-tagging is follow-up work. It needs a judgement per screen and is not don
 
 ### The chat as the person's hands
 
-Proposed, as input to the ADR-018 review. Nothing here is accepted, and this ADR cannot be accepted for the chat surface before ADR-018 is.
+**Decided 2026-11-26 in the ADR-018 review** ([ADR-018 § The review](018-ai-agent-posture.md#the-review)). The position below is adopted as written, and the chat is the harness's primary interface ([spec/harness.md](../spec/harness.md)).
 
 The position is that the chat is the person's hands, not a second actor:
 
@@ -91,18 +92,20 @@ The position is recorded in [ADR-018 § The proposal under review](018-ai-agent-
 
 ### Cost and channel
 
-Two practical consequences, both open.
+Two practical consequences. The channel is decided; the cost is open.
 
-- **Cost.** Chat is inference on every turn. Under [ADR-019](019-central-services-and-metered-billing.md) that is a metered cost, or the client's own bill under BYOM. When chat is the main surface, this cost is no longer marginal, and pricing has to account for it ([ADR-026](026-two-lane-pricing.md)).
-- **Channel.** The proposal is a default home for the chat inside the product's own app, with Telegram or Signal as options per client. WhatsApp should not be the assumed channel, since its business terms prohibit political party activity ([pitch.md](../spec/pitch.md)).
+- **Cost.** Chat is inference on every turn. Under [ADR-019](019-central-services-and-metered-billing.md) that is a metered cost, or the client's own bill under BYOM. When chat is the main surface, this cost is no longer marginal, and pricing has to account for it ([ADR-026](026-two-lane-pricing.md)). The review recorded this: the lane price rules treat inference as a line item, not a rounding error ([ADR-018 § The review](018-ai-agent-posture.md#the-review)).
+- **Channel. Decided 2026-11-26 in the review.** The chat's default home is inside the product's own app, with Telegram or Signal as options per client. WhatsApp is never the assumed channel, since its business terms prohibit political party activity ([pitch.md](../spec/pitch.md)).
 
 ### Open questions
 
-1. **Is the chat as the person's hands the position to send into the ADR-018 review?** It is recorded there as a proposal either way.
-2. **The default chat channel:** in-app first, Telegram or Signal per client, WhatsApp not assumed.
-3. **Prompt injection** from content the chat reads. Unanswered, and it belongs to ADR-018's item 1.
-4. **The Campaign Agent** as this chat with content modules enabled ([ADR-022 § The module catalogue](022-core-modules-and-lanes.md#the-module-catalogue)). Recommended, not decided.
-5. **Coaches and the chat.** [ADR-028](028-coaching.md) puts Coaching in the Core and asks the ADR-018 review whether a coach is this chat with a role's instructions and no operations, or a surface of its own. Unanswered.
+All five were answered by the ADR-018 review on 2026-11-26.
+
+1. **Is the chat as the person's hands the position to send into the ADR-018 review?** Yes — the review adopted it.
+2. **The default chat channel:** in-app first, Telegram or Signal per client, WhatsApp never assumed. Decided, above.
+3. **Prompt injection** from content the chat reads. Answered in [security.md § Prompt injection](../spec/security.md#prompt-injection): untrusted content is data, never instructions; injection can propose, never dispose.
+4. **The Campaign Agent** as this chat with content modules enabled. Decided: a persona and a module set, not a module ([spec/harness.md § Personas](../spec/harness.md#personas)).
+5. **Coaches and the chat.** A coach is a harness persona — instructions, designated context and a declared operation set — not a surface of its own ([ADR-028 § The review's answers](028-coaching.md#the-reviews-answers)).
 
 ## Consequences
 
@@ -119,10 +122,9 @@ Two practical consequences, both open.
 - The navigation model and the screen inventory describe one application, and both need a pass before they describe three surfaces
 
 **Constraints:**
-- No chat surface reaches production in either lane before ADR-018 is accepted
+- The chat is bound by the ADR-018 posture: declared operations only, every write confirmed, the person's own scope ([ADR-018 § The review](018-ai-agent-posture.md#the-review))
 - The field app works without connectivity ([ADR-005](005-offline-first-sync.md)); no field task may depend on chat
 - No surface is a privileged client of the Core: there is no internal-only API
 - A chat user can do nothing they could not do in the admin UI
-- The position on the chat is a proposal; nothing may be built on it for production
 
 **Related ADRs:** [ADR-005](005-offline-first-sync.md) (the field app remains the offline surface), [ADR-011](011-design-system-ux.md) (the design system the admin UI and field app keep), [ADR-018](018-ai-agent-posture.md) (the gate binds the whole Core; the chat position is sent to its review), [ADR-019](019-central-services-and-metered-billing.md) (inference is a metered cost), [ADR-020](020-central-service-line-up-and-builders.md) (a send is a person's action or a schedule a person set), [ADR-022](022-core-modules-and-lanes.md) (the headless Core; the manifest declares each module's surfaces), [ADR-026](026-two-lane-pricing.md) (the cost of chat in the price), [ADR-028](028-coaching.md) (coaches, which share the chat's shape and its gate)

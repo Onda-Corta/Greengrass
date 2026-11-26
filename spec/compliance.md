@@ -364,6 +364,18 @@ Each jurisdiction has different reporting requirements. The platform needs a rep
 
 **DECIDED: Disclose inability + challenge.** GreenGrass responds that it does not possess the decryption keys and cannot comply, directing the authority to the tenant. Additionally, GreenGrass actively challenges the demand's legal basis even though compliance is technically impossible — to establish precedent, signal commitment to users, and contribute to the broader legal ecosystem around encryption rights. The tenant is notified unless prohibited by a gag order. All demands and responses are included in the annual transparency report.
 
+### Automated processing and the harness
+
+Added 2026-11-26, decided in the [ADR-018](../decisions/018-ai-agent-posture.md) review. This section covers the agent harness ([spec/harness.md](harness.md)): GDPR Article 22 and LGPD Article 20, the status of support scores, prompt data as a cross-border transfer, and model providers as sub-processors.
+
+**No solely automated significant decisions.** The platform makes no decision with legal or similarly significant effect about a person, and the harness keeps it so: every write is confirmed by a person, nothing reaches a recipient except through a person's send or a schedule a person set, and every action traces to a person in the audit log. Support scores are profiling that predates the harness: they are computed by rules, read only under the invoking person's scope, and the lawful-basis and Article 22 / Article 20 analysis rests with the tenant as data controller, as it does for the rest of the CRM. The platform, as processor, supplies the means to stay short of the line: the human gate, provenance for model output, and deletion and export that extend to prompt and response bodies. [ADR-009](../decisions/009-compliance-legal.md)'s refusal of automated content filtering stands untouched.
+
+**A prompt carrying personal data to an external endpoint is a cross-border transfer**, under the same rules as every other transfer this chapter covers. The tenant's data-class routing rules in the model router ([spec/harness.md § The model router](harness.md#the-model-router)) are the tenant's transfer decisions expressed as configuration: which classes may cross, to which endpoints, under which residency rules. The router enforces them, and the audit trail records provider, model and policy version per call — the tenant's transfer log. Compartmented data never crosses. The configuration-time warning is the plain-language disclosure that the transfer exists.
+
+**Model providers are sub-processors.** The platform's DPA and sub-processor list name the platform-default providers. A BYOM provider is the tenant's own sub-processor, disclosed by the tenant, with the platform supplying the description of which data classes reach it under the tenant's routing rules. Standing requirements for any provider: no training on tenant prompts or data, and declared retention limits.
+
+**What the tenant receives:** a standing document of the harness's data handling — the read-scope rules, the routing rules, retention, and the human-gate guarantees — written for a compliance officer and readable by an electoral authority.
+
 ## Compliance Infrastructure
 
 ### Compliance Configuration per Tenant

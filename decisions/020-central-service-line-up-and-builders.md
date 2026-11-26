@@ -5,6 +5,7 @@
 **Sources:** `spec/comms-intelligence.md`, `spec/press.md`, `design/architecture/system.md`, `decisions/013-analytics-ai.md`, `decisions/015-product-scope.md`, `decisions/016-cross-cutting-resolutions.md`, `decisions/018-ai-agent-posture.md`, `decisions/019-central-services-and-metered-billing.md`
 **Amended by:** [ADR-026](026-two-lane-pricing.md) — "passed through at cost" below describes what the Core meters. What a client pays is that cost plus its lane's price rule.
 **Amendment proposed by:** [ADR-022](022-core-modules-and-lanes.md) (Proposed) — the four central services are unchanged. The catalogue a client buys from would list modules built on them: Capture would be sold as three monitoring modules (radio & TV, social, press summary), and Builders would underlie an Ad-art builder module. Gates and iterations are unchanged.
+**Updated:** 2026-11-26 — the [ADR-018](018-ai-agent-posture.md) review accepted image and video builders outside the gate, on the same terms as text builders, with two conditions: documented consent for depicting a real, identifiable person, and provenance metadata plus visible disclosure on published generated media. The two questions this ADR recorded are answered.
 
 ## Context
 
@@ -60,7 +61,7 @@ Within these bounds a builder has none of the four properties ADR-018 gates on: 
 
 **Text builders are accepted.** They are ADR-013's shape extended from supporters to staff: a draft from supplied material, reviewed, edited and approved by a person before anything happens.
 
-**Image and video builders are proposed, not accepted.** They get catalogue entries, and those entries cannot be enabled until ADR-018 is accepted with its item 6, the human-gate principle, answered. The bounds above are necessary for them and not sufficient. Synthetic images and video of identifiable people are the sharpest misuse of generation in an electoral product, and disclosure rules for synthetic political media differ across the target jurisdictions. Two questions are recorded for the review and not decided here: whether a builder may ever depict a real, identifiable person, and what labelling a generated image or video must carry when published.
+**Image and video builders, proposed here, are accepted — the [ADR-018](018-ai-agent-posture.md) review, 2026-11-26.** They are mechanically identical to text builders — a person invokes, reads what they hand it, a draft returns, nothing sends — so they are outside the gate on the same terms, and their catalogue entries can be enabled. The two questions this section recorded are answered with two conditions. A builder may depict a real, identifiable person only with that person's documented consent, recorded and attached to the asset. Published generated media carries provenance metadata — generated, model, date — and a visible disclosure wherever it shows a real person or the law requires; a lane may require more. The bounds above are unchanged: necessary, and the review found them sufficient.
 
 **Alternatives considered:** Accepting all three builders now was rejected because it would decide the human-gate principle for the highest-risk media before the review that exists to state it. Leaving Builders out of the line-up entirely was rejected because text drafting is the same shape as a feature already accepted, and holding it back would gate something ADR-018 does not gate.
 
@@ -94,6 +95,6 @@ This ADR adds an **Amended by** line to [ADR-015](015-product-scope.md) for auto
 - Capture's build is gated on Iteration 0; its sources are published only, never closed messaging
 - Iterations 4 to 6 and their gates are unchanged
 - No builder has send authority, background triggers, or read access beyond its brief
-- Image and video builders cannot be enabled until ADR-018 is accepted with item 6 answered
+- Image and video builders carry the review's two conditions: documented consent for depicting a real, identifiable person, and provenance metadata plus visible disclosure on published generated media
 
 **Related ADRs:** [ADR-013](013-analytics-ai.md) (the accepted shape text builders extend), [ADR-015](015-product-scope.md) (amended — automated media monitoring moves from deferred to specified), [ADR-016](016-cross-cutting-resolutions.md) (amended — #25 holds for editing, generation proposed; #22 approval applies to builder drafts; §38 BYOM), [ADR-018](018-ai-agent-posture.md) (image and video builders wait on item 6; the gate is unchanged), [ADR-019](019-central-services-and-metered-billing.md) (the model every service in the line-up runs under)

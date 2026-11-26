@@ -3,6 +3,7 @@
 **Estado:** Aceptada
 **Fecha:** 2026-03-03
 **Fuentes:** `spec/security.md`, `spec/compliance.md`, `spec/workflows.md`, `spec/users.md`, `design/architecture/system.md`
+**Enmendada por:** [ADR-018](018-ai-agent-posture.md) § The review — el registro de auditoría gana un canal y un disparador para las acciones mediadas por el arnés; el actor siempre es una persona, y no existe ningún tipo de actor no humano.
 
 ## Contexto
 
@@ -15,6 +16,8 @@ GreenGrass maneja datos políticamente sensibles —registros de contacto con vo
 Todo cambio de datos queda registrado: quién, qué, cuándo y desde dónde. Esto incluye ediciones en el CRM, transacciones financieras, cambios de permisos, inicios de sesión, exportaciones de datos, fusiones de registros, acciones masivas y eventos de sesión. El registro de auditoría es inmutable: ningún usuario puede modificar ni borrar una entrada, ni siquiera el Administrador de la plataforma. Un registro de auditoría aparte, el del Administrador de la plataforma, recoge todas las acciones del equipo de GreenGrass.
 
 La conservación del registro de auditoría es de 10 años en todos lados, igualando el requisito libanés para registros comerciales, el más largo entre los países objetivo. Una sola regla en todas partes elimina el riesgo de borrado prematuro por una lógica de conservación específica por jurisdicción mal implementada.
+
+Para las acciones mediadas por el arnés de agentes ([spec/harness.md](../spec/harness.md), decidido en la revisión de la [ADR-018](018-ai-agent-posture.md)), la entrada también registra el **canal** —el chat, un coach nombrado, un constructor— y el **disparador**: la petición de una persona, un toque de confirmación o una programación que una persona fijó. El actor siempre es una persona; no existe ningún tipo de actor no humano. Los cuerpos de prompts y respuestas se conservan bajo el nivel Operacional de la [ADR-016](016-cross-cutting-resolutions.md) §4, y los metadatos de la llamada —proveedor, modelo, tokens, costo, operación, referencia de confirmación— bajo el nivel de registro de auditoría.
 
 **Alternativas consideradas:** Se descartaron los períodos de conservación por jurisdicción porque almacenar datos de eventos estructurados es barato frente al riesgo de cumplimiento que supone equivocarse con la conservación de cada jurisdicción.
 

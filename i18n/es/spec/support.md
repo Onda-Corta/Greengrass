@@ -151,7 +151,7 @@ Para tareas de configuración complejas que el autoservicio no alcanza a resolve
 
 **DECIDIDO: IA primero, con escalamiento a humanos.** Un acompañante de IA (chat dentro de la plataforma) atiende el primer contacto, guía por las tareas comunes de configuración y responde las preguntas estándar. Disponible 24/7 y multilingüe. Cuando la IA no puede resolver, o la organización lo pide, escala a un especialista humano. Las personas se concentran en los casos límite, las preguntas jurisdiccionales complejas y la configuración de alto riesgo (manejo de llaves BYOK, despliegue autoalojado). Escala sin perder calidad en los problemas difíciles.
 
-El acompañante ayuda con la plataforma. La ayuda con el propio trabajo de organización de una persona le toca a un coach ([coaching.md](coaching.md)), que está propuesto y espera por la revisión de la ADR-018. La regla de anclaje del acompañante no cambia.
+El acompañante ayuda con la plataforma. La ayuda con el propio trabajo de organización de una persona le toca a un coach ([coaching.md](coaching.md)) —el coach acotado está decidido y fuera del punto de decisión de la ADR-018; el resto está propuesto. La regla de anclaje del acompañante no cambia.
 
 **Alcance del acompañamiento — tareas complejas que se benefician de soporte guiado:**
 

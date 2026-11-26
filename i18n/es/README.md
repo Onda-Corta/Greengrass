@@ -10,7 +10,7 @@ Desde noviembre de 2026, lo que el proyecto construye es una infraestructura de 
 
 ## Qué está en español y qué no
 
-En español está casi todo: las 17 especificaciones de producto, la arquitectura del sistema, los 28 ADR más el registro de decisiones de UX y los 15 documentos de diseño de UX que no son wireframes. Sesenta y dos documentos.
+En español está casi todo: las 18 especificaciones de producto, la arquitectura del sistema, los 28 ADR más el registro de decisiones de UX y los 15 documentos de diseño de UX que no son wireframes. Sesenta y tres documentos.
 
 Falta una cosa, y es grande: los 24 documentos de wireframes —240 pantallas, más de la mitad de todo lo que hay escrito en este proyecto— siguen solo en inglés, igual que el diario. Si sigues un enlace a un wireframe desde una página en español, vas a terminar en inglés. No está roto: es lo que todavía no se ha traducido. El botón **EN**, arriba a la derecha, te lleva a la documentación completa en cualquier momento.
 
@@ -20,16 +20,16 @@ Puerto Rico (alfa), Brasil, Tailandia, India y Líbano — cada uno con su propi
 
 ## Estado del proyecto
 
-**Fase actual: especificación y diseño — reabierta por un cambio de dirección del producto; una revisión sigue condicionando la producción**
+**Fase actual: especificación y diseño — reabierta por un cambio de dirección del producto; la revisión de la ADR-018 está hecha, y su postura gobierna lo que sale a producción**
 
 Las especificaciones de producto, los artefactos de diseño de UX y los documentos de arquitectura estaban terminados en octubre de 2026. En noviembre cambió la dirección: una infraestructura compartida, con un Core y módulos, que se ofrece por dos carriles, Greengrass y Basecamp. Seis ADR registran el cambio.
 
 - **Dos están aceptadas** y dejan sin efecto decisiones anteriores: la [ADR-025](decisions/025-identity-per-client.md) (cada cliente guarda sus propias cuentas) y la [ADR-026](decisions/026-two-lane-pricing.md) (el precio es una regla de cada carril; las definiciones que necesita siguen abiertas).
 - **Cuatro están propuestas:** la [ADR-022](decisions/022-core-modules-and-lanes.md), la [ADR-023](decisions/023-surfaces-chat-admin-field.md), la [ADR-024](decisions/024-event-bus-as-federation.md) y la [ADR-027](decisions/027-third-party-crm-sync-and-connectors.md). Cada una dice qué de lo que contiene ya está decidido y qué no. Lo propuesto no se lee como resuelto.
 
-La revisión de la [ADR-018](decisions/018-ai-agent-posture.md), sobre los agentes de IA, sigue condicionando la producción, y ahora para los dos carriles: ninguno de los dos productos saca el chat a producción antes de que se acepte.
+La revisión de la [ADR-018](decisions/018-ai-agent-posture.md), sobre los agentes de IA, se celebró el 2026-11-26, y la ADR está aceptada. La respuesta: **el Core es un arnés de agentes por cliente**. El arnés actúa solo como las manos de la persona —el alcance de la propia persona, operaciones declaradas en los manifiestos de los módulos, cada escritura confirmada, nada se despacha salvo por una persona— y cada llamada a un modelo pasa por el enrutador de modelos del propio cliente, bajo su política de proveedores: BYOM, un modelo autoalojado o el proveedor por defecto de la plataforma, con reglas de enrutado por clase de datos. El mecanismo está especificado en [spec/harness.md](spec/harness.md); el registro de la revisión está en [ADR-018 § The review](decisions/018-ai-agent-posture.md#la-revisión).
 
-Después llegó la [ADR-028](decisions/028-coaching.md): el Coaching, coaches de IA para cada rol construidos sobre una capa de contexto que fija la organización, es parte del Core. Eso y el nombre *Coach* están decididos; el resto es una propuesta, y lo que pueda hacer un coach más allá de leer la conversación espera por la revisión de la ADR-018.
+Después llegó la [ADR-028](decisions/028-coaching.md): el Coaching, coaches de IA para cada rol construidos sobre una capa de contexto que fija la organización, es parte del Core. Eso, el nombre *Coach* y el coach acotado están decididos; el resto es una propuesta, y lo que pueda hacer un coach más allá de la forma acotada está permitido por la revisión y se especifica pieza por pieza.
 
 ## Orden de lectura
 
@@ -51,12 +51,13 @@ Después llegó la [ADR-028](decisions/028-coaching.md): el Coaching, coaches de
 14. **[messaging.md](spec/messaging.md)** — Comunicaciones internas, notificaciones, cifrado de extremo a extremo.
 15. **[press.md](spec/press.md)** — Prensa, medios, redes sociales, perfiles públicos, respaldos.
 16. **[comms-intelligence.md](spec/comms-intelligence.md)** — Hoja de ruta post-MVP: inteligencia de medios, verificación de datos, mapa de medios, evaluación de candidaturas e investigación de oposición, ordenadas por iteraciones.
-17. **[coaching.md](spec/coaching.md)** — Coaching: coaches de IA para cada rol, la capa de contexto de la organización, y lo que espera por la ADR-018. Propuesto.
+17. **[coaching.md](spec/coaching.md)** — Coaching: coaches de IA para cada rol y la capa de contexto de la organización. Propuesto; el coach acotado, decidido.
+18. **[harness.md](spec/harness.md)** — El arnés de agentes: uno por cliente, el enrutador de modelos y la política de proveedores, la compuerta humana, el alcance de lectura, las personas del arnés. Aceptado en la revisión de la ADR-018.
 
 ### Después, cómo está construida
 
-18. **[system.md](design/architecture/system.md)** — La arquitectura del sistema completa: topología, modelo de datos, cifrado, sincronización, conservación de datos, stack tecnológico.
-19. **[00-overview.md](design/ux/00-overview.md)** — Puerta de entrada al diseño de UX: orden de lectura, glosario y las convenciones que sigue el resto.
+19. **[system.md](design/architecture/system.md)** — La arquitectura del sistema completa: topología, modelo de datos, cifrado, sincronización, conservación de datos, stack tecnológico.
+20. **[00-overview.md](design/ux/00-overview.md)** — Puerta de entrada al diseño de UX: orden de lectura, glosario y las convenciones que sigue el resto.
 
 ### Y por qué está construida así
 
@@ -79,7 +80,7 @@ Los 28 ADR registran cada decisión de arquitectura, con su contexto, sus altern
 - **[ADR-015](decisions/015-product-scope.md)** — Límites del alcance del producto
 - **[ADR-016](decisions/016-cross-cutting-resolutions.md)** — Resoluciones transversales: las 89 preguntas abiertas de la fase de wireframes, resueltas
 - **[ADR-017](decisions/017-sharing-contract-trust-model.md)** — El contrato de intercambio como primitiva universal de confianza
-- **[ADR-018](decisions/018-ai-agent-posture.md)** — Postura ante los agentes de IA (propuesta)
+- **[ADR-018](decisions/018-ai-agent-posture.md)** — Postura ante los agentes de IA (aceptada)
 - **[ADR-019](decisions/019-central-services-and-metered-billing.md)** — Servicios centrales y facturación medida
 - **[ADR-020](decisions/020-central-service-line-up-and-builders.md)** — Los cuatro servicios centrales y los constructores
 - **[ADR-021](decisions/021-content-approval-pipeline.md)** — Flujo de aprobación de contenido

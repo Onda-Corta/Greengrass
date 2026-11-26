@@ -1,8 +1,8 @@
 # ADR-018: Postura ante los agentes de IA
 
-**Estado:** Propuesta
+**Estado:** Aceptada
 **Fecha:** 2026-09-07
-**Actualizada:** 2026-09-28 — se agrega la propuesta en revisión; más tarde ese mismo día, su ejemplo desarrollado se reemplaza por el flujo de aprobación por WhatsApp. El estado no cambia: nada de lo que contiene está aceptado. 2026-11-13 — se deja anotado que el punto de decisión abarca todo el Core, en los dos carriles; se agrega a la propuesta en revisión el chat como las manos de la persona. El estado no cambia. 2026-11-25 — se anotan las preguntas de la ADR-028 (Coaching). El estado no cambia.
+**Actualizada:** 2026-09-28 — se agrega la propuesta en revisión; más tarde ese mismo día, su ejemplo desarrollado se reemplaza por el flujo de aprobación por WhatsApp. El estado no cambia: nada de lo que contiene está aceptado. 2026-11-13 — se deja anotado que el punto de decisión abarca todo el Core, en los dos carriles; se agrega a la propuesta en revisión el chat como las manos de la persona. El estado no cambia. 2026-11-25 — se anotan las preguntas de la ADR-028 (Coaching). El estado no cambia. 2026-11-26 — se celebra la revisión. Esta ADR queda aceptada, con sus ocho puntos resueltos y sus propuestas zanjadas como registra [§ La revisión](#la-revisión). El mecanismo que la revisión especifica vive en `spec/harness.md`.
 **Fuentes:** `spec/security.md`, `spec/compliance.md`, `spec/fundraising.md`, `spec/gotv.md`, `spec/comms-intelligence.md`, `design/architecture/system.md`, `decisions/019-central-services-and-metered-billing.md`, `decisions/020-central-service-line-up-and-builders.md`, `decisions/021-content-approval-pipeline.md`, `decisions/022-core-modules-and-lanes.md`, `decisions/023-surfaces-chat-admin-field.md`, `decisions/026-two-lane-pricing.md`, `decisions/028-coaching.md`, `design/ux/04-wireframes/content-ops/content-ops.md`
 
 ## Contexto
@@ -19,7 +19,7 @@ Cada una es sólida por separado. Ninguna hace la pregunta de fondo: qué cambia
 
 Esa pregunta no está hecha, y los documentos que tendrían que responderla callan. [security.md § Actores de amenaza](../spec/security.md#actores-de-amenaza) y la [ADR-002](002-security-threat-model.md) no mencionan la IA ni una sola vez. [compliance.md § Acuerdos de tratamiento de datos](../spec/compliance.md#acuerdos-de-tratamiento-de-datos) contiene la única mención a la IA de todo el marco de cumplimiento, y es como obligación de declarar subencargados.
 
-Mientras tanto, la puerta ya está abierta. [integrations.md § Principios de integración](../spec/integrations.md#principios-de-integración) establece que «las organizaciones traen sus propias llaves de API y sus propias cuentas de servicios externos», y [system.md § Arquitectura BYOM](../design/architecture/system.md#arquitectura-byom) ya admite que los datos del prompt en BYOM «salen de su frontera de cifrado». La plataforma tiene la fontanería para los agentes y no tiene la postura.
+Mientras tanto, la puerta ya está abierta. [integrations.md § Principios de integración](../spec/integrations.md#principios-de-integración) establece que «las organizaciones traen sus propias llaves de API y sus propias cuentas de servicios externos», y [system.md § El arnés y el enrutador de modelos](../design/architecture/system.md#el-arnés-y-el-enrutador-de-modelos) ya admite que los datos del prompt en BYOM «salen de su frontera de cifrado». La plataforma tiene la fontanería para los agentes y no tiene la postura.
 
 ### Vacíos que esta ADR nombra
 
@@ -49,6 +49,8 @@ Al armar esta ADR aparecieron tres contradicciones. Siguiendo la práctica estab
 
 ### Ninguna capacidad de agente llega a producción hasta que se acepte esta ADR
 
+*Desactivado el 2026-11-26: esta ADR está aceptada. El propósito del punto de decisión está cumplido. Las cuatro propiedades de abajo siguen siendo la prueba contra la que se mide toda capacidad nueva —ahora contra la postura de [§ La revisión](#la-revisión), declarada en el manifiesto de cada módulo.*
+
 Las cinco decisiones enumeradas arriba salen tal como están especificadas. Son acotadas, están revisadas y este punto de decisión no las toca.
 
 Todo lo que vaya más allá queda condicionado. En concreto, una capacidad queda condicionada si tiene alguna de estas características:
@@ -70,7 +72,7 @@ Agregado el 2026-11-13, y decidido en [ADR-023 § El punto de decisión de la AD
 
 ## Qué tiene que resolver esta ADR
 
-Aceptarla exige una respuesta a cada uno de estos puntos, registrada aquí o en el documento que se nombra.
+Aceptarla exige una respuesta a cada uno de estos puntos, registrada aquí o en el documento que se nombra. **Resueltos el 2026-11-26** — la respuesta de cada punto está en [§ Los ocho puntos, respondidos](#los-ocho-puntos-respondidos).
 
 1. **Extensión del modelo de amenazas** — un actor no humano en [security.md § Actores de amenaza](../spec/security.md#actores-de-amenaza), que cubra la inyección de prompts, la exfiltración de modelo y el problema de concentración del principio 8 de [security.md § Principios de seguridad](../spec/security.md#principios-de-seguridad).
 2. **Decisiones automatizadas y elaboración de perfiles** — una sección nueva en [compliance.md § Requisitos transversales de cumplimiento](../spec/compliance.md#requisitos-transversales-de-cumplimiento) que cubra el artículo 22 del RGPD, el artículo 20 de la LGPD, el estatus de los puntajes de apoyo y los datos del prompt como transferencia internacional.
@@ -79,11 +81,11 @@ Aceptarla exige una respuesta a cada uno de estos puntos, registrada aquí o en 
 5. **Costo** — conciliación del costo por token de inferencia con [fundraising.md § Modelo de ingresos de la plataforma](../spec/fundraising.md#modelo-de-ingresos-de-la-plataforma), incluido quién paga bajo BYOM y qué pasa en el nivel con modelo por defecto de la plataforma.
 6. **El principio de la compuerta humana** — elevar *la máquina propone, la persona dispone* a principio transversal enunciado, con sus excepciones enumeradas en lugar de quedar implícitas.
 7. **Datos compartimentados** — si un agente puede llegar a leer datos regidos por un contrato de intercambio bajo la [ADR-017](017-sharing-contract-trust-model.md), dado que la plataforma nunca es parte de un contrato.
-8. **Pantalla de configuración de BYOM** — la pantalla a la que la [ADR-016](016-cross-cutting-resolutions.md) ya se comprometió, incorporada a los wireframes y al inventario de pantallas, con la advertencia sobre la frontera de cifrado ya especificada en [system.md § Arquitectura BYOM](../design/architecture/system.md#arquitectura-byom).
+8. **Pantalla de configuración de BYOM** — la pantalla a la que la [ADR-016](016-cross-cutting-resolutions.md) ya se comprometió, incorporada a los wireframes y al inventario de pantallas, con la advertencia sobre la frontera de cifrado ya especificada en [system.md § El arnés y el enrutador de modelos](../design/architecture/system.md#el-arnés-y-el-enrutador-de-modelos).
 
 ## La propuesta en revisión
 
-Todo lo que contiene esta sección es una propuesta para que la revisión la evalúe. Nada está aceptado, nada aparece como estructura en el documento de arquitectura, y el punto de decisión de arriba no cambia.
+Todo lo que contiene esta sección era una propuesta para que la revisión la evaluara. *Resuelta el 2026-11-26 — la revisión aceptó la tesis, acotada como registra [§ La revisión](#la-revisión). La sección se conserva tal como se escribió, como registro de lo que se evaluó.*
 
 ### Qué cambió desde que se abrió la revisión
 
@@ -180,8 +182,105 @@ Una conversación de prototipo, compartida junto con el tablero de servicios de 
 
 ### Preguntas anotadas por ADR posteriores
 
+*Respondidas el 2026-11-26: las dos de la ADR-020 en [§ Las propuestas en revisión, resueltas](#las-propuestas-en-revisión-resueltas); las doce de la ADR-028 en [ADR-028 § The review's answers](028-coaching.md#las-respuestas-de-la-revisión).*
+
 - **De la ADR-020:** si un constructor de imágenes o de video puede retratar alguna vez a una persona real e identificable, y qué identificación como contenido generado debe llevar una imagen o un video generado cuando se publica. Corresponden al punto 6 y, en lo que toca a la divulgación, a la sección de cumplimiento del punto 2.
 - **De la ADR-028:** doce preguntas sobre los coaches, enumeradas en [ADR-028 § Questions sent to the ADR-018 review](028-coaching.md#preguntas-enviadas-a-la-revisión-de-la-adr-018). La primera decide si un coach que lee solo la conversación, los adjuntos y los documentos que una organización designó para él queda fuera del punto de decisión. Las demás tratan de leer registros, hablar de personas con nombre, actuar, los resúmenes del día, la conservación, la inyección de prompts, el trabajo sin conexión, el costo, los contratos, el proveedor del modelo y si un coach es el chat. El Coaching es parte del Core, así que el punto de decisión lo abarca en los dos carriles.
+
+## La revisión
+
+Celebrada el 2026-11-26, después de que el cambio de dirección de noviembre zanjara lo que la revisión necesitaba delante: dos carriles, un Core headless y el chat propuesto como superficie principal. La revisión aceptó esta ADR y respondió sus ocho puntos. Esta sección registra lo que se decidió y lo que queda abierto; el mecanismo está especificado en [spec/harness.md](../spec/harness.md).
+
+### La tesis: el Core es un arnés de agentes por cliente
+
+Decidido.
+
+- **El Core es un arnés de agentes por cliente.** Un arnés por instancia, dentro del enclave de la propia organización; nunca de varias organizaciones ([ADR-025](025-identity-per-client.md)). Lee fuentes designadas, solo tiene las credenciales para las que la organización tiene derechos de uso ([ADR-019](019-central-services-and-metered-billing.md)), y llega a la acción solo a través de operaciones declaradas en los manifiestos de los módulos ([ADR-022 § El contrato de módulo](022-core-modules-and-lanes.md#el-contrato-de-módulo)). Las cinco funcionalidades de IA aceptadas quedan como configuraciones acotadas del arnés, con sus límites sin cambiar.
+- **El chat es la interfaz principal del arnés, y actúa como las manos de la persona.** Se adopta la posición que propuso la [ADR-023](023-surfaces-chat-admin-field.md): el arnés actúa con el rol, los ámbitos y los contratos de intercambio de la propia persona que lo invoca; las lecturas no necesitan confirmación, las escrituras siempre; nunca actúa en segundo plano; el registro de auditoría anota a la persona como actor y al chat como canal; el modelo elige solo entre operaciones declaradas y no puede inventar otras.
+- ***La máquina propone, la persona dispone* es un principio transversal enunciado.** Sus formas: (a) **ningún agente despacha** —nada llega a un destinatario salvo por el envío de una persona o una programación que una persona fijó; (b) **cada escritura la confirma la persona** en el momento en que ocurre; (c) **las excepciones se enumeran**, no se dejan implícitas —las compuertas humanas de las cinco funcionalidades aceptadas son la enumeración.
+
+Una capacidad que se mantiene dentro de esta postura —el alcance de la persona, operaciones declaradas, escrituras confirmadas, credenciales con derecho de uso, el enrutador de modelos de más abajo— no necesita ninguna revisión más. Cualquier cosa más allá es una ADR nueva.
+
+### Alcance de lectura
+
+Decidido, por fuente. La pregunta central que esta ADR dejaba abierta.
+
+- **Lecturas interactivas: el alcance de la persona que lo invoca.** El arnés lee lo que esa persona puede leer, en el momento en que lo pide —el CRM, los puntajes de apoyo, los totales de donaciones, todo lo que su rol y sus contratos incluyen. Esto deja sin efecto el «lee cuatro fuentes por cuenta propia» del dibujo: el arnés no tiene alcance de lectura propio. Una persona cuyo rol incluye los puntajes de apoyo puede preguntarle al arnés por ellos, lo que vuelve concreto el punto 2; recibe su respuesta de cumplimiento más abajo, no una prohibición de lectura.
+- **Fuentes designadas: un acto de la organización, no de una persona.** La organización designa los corpus en los que el arnés se puede anclar sin importar el alcance de quien lo invoca —los documentos de estrategia, la base de conocimiento, la capa de contexto ([ADR-028](028-coaching.md)), los datos geográficos— por audiencia: para toda la organización, por rol, por coach. La designación es un acto del OA, registrado, y la lista completa está en un solo lugar que el cliente puede auditar.
+- **Datos compartimentados.** Responde el punto 7: el arnés lee datos compartimentados solo bajo el contrato de intercambio de la persona que lo invocó, nunca más de lo que esa persona podría leer, y nunca en segundo plano. Una lectura en nombre de alguien se registra como lectura de esa persona a través del arnés —la distinción dentro de la escala de metadatos que aporta [ADR-017 § Observabilidad](017-sharing-contract-trust-model.md#observabilidad-una-distinción-dentro-de-la-escala-de-metadatos-no-un-peldaño-nuevo), no un peldaño nuevo. La regla de la vía de lectura de superusuario prohibida de [comms-intelligence.md § 8.5](../spec/comms-intelligence.md#85-acceso-y-retención) vincula al arnés de forma absoluta, operadores y soporte incluidos.
+- **Lecturas en segundo plano: solo para programaciones que una persona fijó.** Un resumen del día o un resumen puede prepararse en segundo plano, leyendo solo fuentes designadas y lo que la persona suscriptora puede leer, evaluado bajo su alcance en el momento de la preparación. Nunca datos compartimentados. Cada lectura en segundo plano se remonta a una programación que una persona fijó —la primera forma de la compuerta humana aplicada a las lecturas.
+- **Exclusiones y la regla entre organizaciones.** El arnés nunca lee credenciales, llaves ni secretos; los mensajes privados de una persona que no están dirigidos a quien lo invoca ni compartidos con ella; nada que la política de un carril marque como prohibido. Y nunca se mete en la instancia de otra organización. El material entre organizaciones llega solo como eventos filtrados por contrato en el bus ([ADR-024](024-event-bus-as-federation.md)) —filtrado en el origen, campo por campo, denegación por defecto— y una vez entregado queda en esta instancia bajo el contrato con el que llegó, leído solo bajo la regla de datos compartimentados de arriba. El arnés de una alianza lee la propia instancia de la alianza, nunca el enclave de un miembro; no se dibuja ningún arnés por encima de los miembros. Los manifiestos siguen declarando el alcance de lectura de cada módulo como exige la [ADR-022](022-core-modules-and-lanes.md); estas son las reglas contra las que se miden esas declaraciones.
+
+### Soberanía de proveedores: el enrutador de modelos
+
+Decidido.
+
+- **Un enrutador de modelos por organización es el único camino a un modelo.** Cada llamada a un modelo —chat, coaches, constructores, traducción, concierge— pasa por el enrutador de esa organización. Ninguna funcionalidad llama directamente a un proveedor. El enrutador guarda la política de proveedores de la organización, elige proveedor y modelo en cada llamada, y cada llamada es un evento de uso medido con un actor ([ADR-019](019-central-services-and-metered-billing.md)).
+- **La política de proveedores es por organización.** BYOM sigue en pie ([ADR-016](016-cross-cutting-resolutions.md) §38) y llega a cualquier endpoint que la organización nombre, incluido un modelo autoalojado, así que la inferencia puede quedarse por completo dentro de la infraestructura propia de la organización. El proveedor por defecto de la plataforma se mide y se cobra según la regla del carril ([ADR-026](026-two-lane-pricing.md)). Reglas de enrutado por clase de datos: la organización, con los valores por defecto que pone el carril, dice qué proveedores pueden llevar qué clases —el material de corpus público puede ir a una API externa; los prompts con datos personales solo a proveedores que cumplen las reglas de residencia de la organización; los datos compartimentados nunca salen de la frontera de cifrado de la organización y solo llegan a endpoints dentro de esa frontera.
+- **Requisitos permanentes para cualquier proveedor,** BYOM o de la plataforma: no entrenar con los prompts ni los datos de la organización; límites de conservación declarados; declarado como subencargado donde la ley lo exija; y la advertencia de la frontera de cifrado de [system.md § El arnés y el enrutador de modelos](../design/architecture/system.md#el-arnés-y-el-enrutador-de-modelos) mostrada al configurar, en lenguaje llano.
+- **La pantalla de ajustes existe.** Responde el punto 8: una pantalla en la UI de administración —una pantalla SET nueva, con su entrada en el inventario de pantallas y su wireframe— para proveedores, credenciales, reglas de enrutado por clase de datos, la advertencia de la frontera y la medición actual. Las credenciales viven en el almacén de llaves de la organización como cualquier otra credencial propia.
+
+### Auditoría
+
+Decidido. Responde el punto 3.
+
+- **Persona = actor, arnés = canal; nunca se añade un tipo de actor no humano.** Cada lectura y escritura mediada por el arnés registra a la persona como actor, al componente del arnés como canal (el chat, un coach nombrado, un constructor), la operación del manifiesto invocada, y para las escrituras la referencia de confirmación. La revisión responde al tipo de actor no humano del punto con una negativa: el arnés nunca actúa, las personas actúan a través de él. El visor de auditoría de [settings.md § SET-018](../design/ux/04-wireframes/settings/settings.md#set-018-audit-trail-viewer) gana una faceta de canal.
+- **«En nombre de» es un campo de disparador,** no una relación nueva: cada entrada registra a qué respondía el arnés —la petición de una persona, un toque de confirmación o una programación que una persona fijó. Un resumen del día programado registra a la persona suscriptora como actor, al arnés como canal y a su programación como disparador.
+- **Los prompts y las respuestas caen en los niveles existentes de la [ADR-016](016-cross-cutting-resolutions.md) §4; sin nivel nuevo.** Los cuerpos van al nivel Operacional (configurable por el OA entre 90 días y 5 años, 2 años por defecto, purgados como los cuerpos de mensajes). Los metadatos de la llamada van al nivel de registro de auditoría, indefinidos: quién preguntó, canal, proveedor y modelo, versión de la política del enrutador, tokens y costo, operación, referencia de confirmación. La conservación del lado del proveedor está acotada por los requisitos permanentes de arriba.
+- **La promesa de explicabilidad de la ADR-016 §49 queda enmendada.** Las sugerencias basadas en reglas siguen mostrando su regla y sus entradas. La salida de un modelo muestra procedencia en su lugar: las fuentes designadas y el contexto en que se apoyó, la operación, el modelo y el proveedor, y citas donde afirma hechos —[comms-intelligence.md § 8.2](../spec/comms-intelligence.md#82-la-procedencia-es-obligatoria). El personal siempre puede ver en qué se apoyó, nunca una cadena de razonamiento ficticia.
+
+### El modelo de amenazas
+
+Decidido. Responde el punto 1; especificado en [security.md § The agent harness](../spec/security.md#el-arnés-de-agentes) y [§ Prompt injection](../spec/security.md#inyección-de-prompts).
+
+- **El arnés es una superficie de ataque, no un principal.** Entra al modelo de amenazas como el delegado confundido: un atacante lo dirige, a través del contenido que lee, para que abuse del alcance de una persona legítima, o engaña a una persona para que confirme una mala acción. Nunca es un actor confiable —no tiene alcance propio.
+- **La inyección de prompts es una amenaza nombrada, con contramedidas arquitectónicas.** Vectores: artículos y publicaciones monitoreados, mensajes y correos entrantes, importaciones de CSV, páginas web y eventos del bus de contrapartes —un dato entregado bajo contrato es adversarial si la otra organización está comprometida. Contramedidas: el contenido no confiable es dato, nunca instrucciones; la inyección puede proponer, nunca disponer —un arnés dirigido sigue teniendo solo operaciones declaradas, y cada escritura necesita un toque, con la tarjeta de confirmación mostrando la operación y su destino en lenguaje llano; los intentos quedan registrados.
+- **La exfiltración de modelo está acotada por el enrutado, no por la vigilancia.** Las reglas por clase de datos hacen que los datos compartimentados nunca lleguen a un endpoint externo y que los datos personales solo lleguen a proveedores que cumplen las reglas de residencia; un arnés dirigido no puede exfiltrar lo que no puede enrutar. Las credenciales de proveedor de la organización están en su almacén de llaves.
+- **El problema de concentración está diseñado para no existir.** El principio 8 sigue en pie porque el arnés no es una credencial, una llave ni una persona, y no tiene ninguna: un derecho de uso por organización y por servicio, sin alcance de lectura propio, sin alcance entre organizaciones, sin vía de despacho.
+
+### Cumplimiento
+
+Decidido. Responde el punto 2; especificado en [compliance.md § Automated processing and the harness](../spec/compliance.md#procesamiento-automatizado-y-el-arnés).
+
+- **La plataforma no toma decisiones significativas únicamente automatizadas, y el arnés lo mantiene así.** Los puntajes de apoyo son elaboración de perfiles anterior al arnés: calculados por reglas, leídos solo bajo el alcance de quien lo invoca, con la base jurídica y el análisis del artículo 22 del RGPD / artículo 20 de la LGPD a cargo de la organización como responsable del tratamiento. La plataforma garantiza, como encargada: las personas deciden; cada acción se remonta a una persona; la procedencia es inspeccionable; la supresión y la exportación llegan a los cuerpos de prompts y respuestas. El rechazo del filtrado automático de contenido de la [ADR-009](009-compliance-legal.md) sigue intacto.
+- **Un prompt que lleva datos personales a un endpoint externo es una transferencia transfronteriza, y el enrutado es el mecanismo de cumplimiento.** Las reglas por clase de datos son las decisiones de transferencia de la organización expresadas como configuración; el enrutador las hace cumplir; el registro de auditoría anota proveedor, modelo y versión de la política en cada llamada —el registro de transferencias de la organización. Los datos compartimentados nunca cruzan. La advertencia al configurar es la declaración en lenguaje llano de que la transferencia existe.
+- **Los proveedores de modelos son subencargados del tratamiento.** El DPA y la lista de subencargados de la plataforma nombran a los proveedores por defecto; un proveedor BYOM es subencargado de la propia organización, declarado por ella. Las organizaciones reciben un documento permanente del manejo de datos del arnés: las reglas de alcance de lectura, el enrutado, la conservación y las garantías de la compuerta humana, legible por sus oficiales de cumplimiento y por las autoridades electorales.
+
+### Sin conexión y costo
+
+Decidido. Responde los puntos 4 y 5.
+
+- **Ningún paso del arnés está en un camino que deba funcionar sin conexión.** Trabajo de campo, inscripción de votantes, registro de entrada a eventos, resultados de observadores electorales, sincronización: los caminos de la [ADR-005](005-offline-first-sync.md) no tienen ningún paso mediado por el arnés. Un manifiesto no puede declarar una capacidad de campo que dependa de una llamada a un modelo.
+- **La indisponibilidad degrada de forma explícita.** Las superficies del arnés dicen claramente «necesita conexión»; las conversaciones en caché siguen legibles; la UI de administración y la app de campo no se ven afectadas. No existen escrituras en cola por diseño —cada escritura se confirma en vivo, así que no hay nada que encolar. Un resumen programado que falta está visiblemente ausente, no en silencio.
+- **Costo: resuelto por la [ADR-026](026-two-lane-pricing.md).** La inferencia es un evento de uso medido, con precio según la regla de cada carril; con BYOM el proveedor le factura directamente a la organización. Con el chat como superficie principal, la inferencia es un costo del trabajo diario ordinario, no uno marginal —las reglas de precio de los carriles la tratan como una línea del estado de cuenta. Lo que queda —qué incluye el «costo», las comisiones, lo que incluye el plan por defecto de la plataforma, el plan gratuito— sigue abierto en la ADR-026, que es donde le toca.
+
+### Los ocho puntos, respondidos
+
+| # | Punto | Respuesta |
+|---|---|---|
+| 1 | Extensión del modelo de amenazas | El arnés entra en [security.md § The agent harness](../spec/security.md#el-arnés-de-agentes) como superficie de ataque, no como principal; la inyección de prompts queda nombrada con contramedidas arquitectónicas; la concentración está diseñada para no existir |
+| 2 | Decisiones automatizadas y elaboración de perfiles | [compliance.md § Automated processing and the harness](../spec/compliance.md#procesamiento-automatizado-y-el-arnés): sin decisiones significativas únicamente automatizadas; los puntajes de apoyo quedan como análisis de la organización como responsable; los prompts son transferencias, enrutados y registrados |
+| 3 | Modelo de auditoría | Persona = actor, arnés = canal; un campo de disparador, no una relación nueva; prompts y respuestas en los niveles existentes de la [ADR-016](016-cross-cutting-resolutions.md) §4; la promesa de §49 enmendada a procedencia |
+| 4 | Postura sin conexión | Ningún paso del arnés en un camino sin conexión; degradación explícita de «necesita conexión»; sin escrituras en cola |
+| 5 | Costo | Resuelto por la [ADR-026](026-two-lane-pricing.md): medido bajo [ADR-019](019-central-services-and-metered-billing.md), precio por regla del carril, BYOM facturado directo; la aritmética sigue abierta en la ADR-026 |
+| 6 | El principio de la compuerta humana | Enunciado: ningún agente despacha; cada escritura confirmada en el momento en que ocurre; excepciones enumeradas |
+| 7 | Datos compartimentados | Solo bajo el contrato de la persona que lo invoca, nunca más de lo que ella podría leer, nunca en segundo plano, registrado como lectura suya |
+| 8 | Pantalla de configuración de BYOM | Debida: una pantalla SET nueva, con su entrada en el inventario y su wireframe, con la advertencia de la frontera y la medición |
+
+### Las propuestas en revisión, resueltas
+
+- **El arnés por organización, tal como está dibujado,** queda aceptado, acotado por la posición de las manos de la persona. Dos de las tres propiedades del dibujo se mantienen: el arnés es por organización, y los agentes alimentan a personas mientras solo las personas despachan. La tercera no: el arnés no lee ninguna fuente por cuenta propia —lee lo que la persona que lo invoca puede leer, más lo que la organización designó.
+- **El chat como las manos de la persona** queda aceptado, como registra la tesis de arriba.
+- **El ejemplo desarrollado pasa el punto de decisión** como funcionalidad acotada bajo sus límites enunciados. Sus seis lugares de contacto: (1) su alcance de lectura es una designación válida más los mensajes del propio candidato; (2) hablar primero es una programación que el candidato fijó, y la regla de plantillas de WhatsApp no cambia; (3) las imágenes generadas siguen la respuesta sobre constructores de imágenes de abajo; (4) el toque del candidato en Aprobado es el envío de esa persona, y el agente solo coloca la pieza en la programación; (5) una versión nueva anula la aprobación, y el agente queda atado —si no está aprobada a su hora, la pieza no sale; (6) cada aprobación registra al candidato como actor y al agente como canal.
+- **Las dos preguntas de la ADR-020 quedan respondidas.** Los constructores de imágenes y de video son mecánicamente idénticos a los de texto —los invoca una persona, leen lo que ella les entrega, devuelven un borrador, nada envían— así que quedan fuera del punto de decisión y aceptados en los mismos términos. Un constructor puede retratar a una persona real e identificable solo con el consentimiento documentado de esa persona, registrado y adjunto al recurso. Los medios generados que se publican llevan metadatos de procedencia —generado, modelo, fecha— y una identificación visible como contenido generado donde muestren a una persona real o la ley lo exija; un carril puede exigir más.
+- **Las doce preguntas de la ADR-028 quedan respondidas** en [ADR-028 § The review's answers](028-coaching.md#las-respuestas-de-la-revisión). La que sostiene las demás: leer los documentos de contexto que una organización designó para un coach no es alcance de lectura más amplio que una sola funcionalidad, porque la designación es un acto deliberado y registrado de la organización. El coach acotado no tiene ninguna de las cuatro propiedades condicionadas y puede salir.
+
+### Lo que queda abierto
+
+- **La aritmética de los precios.** Qué incluye el «costo», cómo se calcula cada comisión, qué incluye el plan por defecto de la plataforma, si algún plan gratuito lleva saldo medido —preguntas abiertas de la [ADR-026](026-two-lane-pricing.md), que es donde les toca.
+- **Las dos preguntas de producto de la ADR-028.** Quién puede escribir un coach —ahora también una pregunta de seguridad, porque las instrucciones escritas por la organización son confiables por designación— y quién escribe y mantiene el conocimiento sobre organización del que se nutren los coaches.
+- **Las pantallas debidas.** La pantalla de ajustes de proveedores (punto 8), la faceta de canal del visor de auditoría, y las entradas en el inventario de pantallas y en los wireframes que las dos necesitan.
+- **Las preguntas abiertas de la ADR-022** quedan intactas: un nombre para el Core, el acceso de operadores por carril, el bus de eventos en lugar de la capa de federación, el padrón electoral como módulo del carril político, Parsons como capa de conectores, y qué pasa con los datos de un módulo desactivado.
 
 ## Consecuencias
 

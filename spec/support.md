@@ -151,7 +151,7 @@ For complex setup tasks that self-service can't fully handle.
 
 **DECIDED: AI-first with human escalation.** AI concierge (in-platform chat) handles first contact, guides through common setup tasks, answers standard questions. Available 24/7, multilingual. When the AI can't resolve or the tenant requests it, escalates to a human specialist. Humans focus on edge cases, complex jurisdictional questions, and high-stakes setup (BYOK key management, self-hosted deployment). Scales while maintaining quality for the hard problems.
 
-The concierge helps with the platform. Help with a person's own organizing work belongs to a coach ([coaching.md](coaching.md)), which is proposed and waits on the ADR-018 review. The concierge's grounding rule does not change.
+The concierge helps with the platform. Help with a person's own organizing work belongs to a coach ([coaching.md](coaching.md)) — the bounded coach is decided and outside the ADR-018 gate; the rest is proposed. The concierge's grounding rule does not change.
 
 **Concierge scope — complex tasks that benefit from guided support:**
 
