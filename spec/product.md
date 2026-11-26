@@ -23,6 +23,8 @@
 
 **Three surfaces.** The Core is headless: everything it does is an API operation first. A chat UI is meant to carry 70 to 80% of daily staff work, an admin UI the complex rest, and the field app stays as the surface for work done without a connection.
 
+**Coaching is in the Core.** Every instance has AI coaches: one for each role, and others the organization writes, all built on the mission, voice and guardrails the organization sets. Like the chat, coaching waits on the ADR-018 review before it reaches production.
+
 **What no competitor integrates:** the voter file, offline field tools, and tools for coalitions of parties. These stay at the centre of the political product.
 
 **It works with what organizations already run.** The CRM syncs both ways with third-party tools, starting with NationBuilder and starting with CSV.
@@ -35,6 +37,7 @@
 | Each client holds its own accounts | [ADR-025](../decisions/025-identity-per-client.md) | Accepted |
 | The prices | [ADR-026](../decisions/026-two-lane-pricing.md) | Accepted; the definitions they need are open |
 | Sync with third-party CRMs | [ADR-027](../decisions/027-third-party-crm-sync-and-connectors.md) | Proposed. NationBuilder by CSV is decided |
+| Coaching | [ADR-028](../decisions/028-coaching.md), [coaching.md](coaching.md) | Proposed. Coaching in the Core and the name *Coach* are decided; what a coach may do waits on the ADR-018 review |
 
 **What in the original no longer holds.** Three things below are superseded and are marked where they appear: "all-in-one" and "one-stop-shop" as the shape of the product; "one set fee"; and the revenue models at the end of the document. Read everything else below as a description of the political lane.
 

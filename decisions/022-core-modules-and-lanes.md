@@ -19,6 +19,7 @@ This ADR is `Proposed` because two things it depends on are open: where the vote
 | Two lanes on one infrastructure, as described in [Two lanes on one infrastructure](#two-lanes-on-one-infrastructure) | Decided |
 | Each client runs its own instance, with its own data and its own accounts | Decided ([ADR-001](001-platform-architecture.md), [ADR-025](025-identity-per-client.md)) |
 | The CRM is part of the Core | Decided |
+| Coaching is part of the Core | Decided ([ADR-028](028-coaching.md)) |
 | Fundraising & payments is one module with a shared payment layer | Decided |
 | Modules are built by GreenGrass first; the module contract is designed so vetted partners can build later | Decided |
 | The vocabulary, including the renaming of ADR-019's "internal module" | Proposed |
@@ -114,6 +115,7 @@ Every instance gets all of this, always. The Core is headless: each item is an A
 | Delivery | Channel transport with consent checks, frequency caps, the quiet window and mutual suppression | [system.md § Cross-channel orchestration engine](../design/architecture/system.md#cross-channel-orchestration-engine), [ADR-016](016-cross-cutting-resolutions.md) §2, [ADR-019](019-central-services-and-metered-billing.md) |
 | Commerce | Catalogue, entitlements, metering | [ADR-019](019-central-services-and-metered-billing.md) |
 | Events | The per-client event stream and the bus ([ADR-024](024-event-bus-as-federation.md)) | [system.md § Analytics Architecture](../design/architecture/system.md#analytics-architecture) |
+| Coaching | Role coaches, coaches the organization writes, the organization's context layer | [ADR-028](028-coaching.md) |
 | Lane configuration | Brand, vocabulary, catalogue visibility, price rules, policy defaults | New, above |
 | Plumbing | Integration hub and connectors, AI abstraction (BYOM), localization, offline sync engine, public API and webhooks | [system.md](../design/architecture/system.md), [ADR-005](005-offline-first-sync.md), [ADR-010](010-internationalization-localization.md), [ADR-016](016-cross-cutting-resolutions.md) §38 |
 
@@ -121,7 +123,7 @@ Every instance gets all of this, always. The Core is headless: each item is an A
 
 **Two comms-intelligence primitives turn out to be Core. Proposed.** [comms-intelligence.md § 5. Seven features are three primitives](../spec/comms-intelligence.md#5-seven-features-are-three-primitives) names three. The actor graph (outlets, ownership, journalists, analysts) is CRM entities and relationships, so it extends the Core CRM. The claims ledger (claim, sources, verification status, approved response) is a content item, so it extends the Core content store. Only the compartmented dossier is module-specific, and its access machinery is ADR-017 contracts, which are Core.
 
-The rest of the table is proposed. Identity per client is decided in [ADR-025](025-identity-per-client.md).
+The rest of the table is proposed. Identity per client is decided in [ADR-025](025-identity-per-client.md), and Coaching as part of the Core in [ADR-028](028-coaching.md), which leaves what a coach may do to the [ADR-018](018-ai-agent-posture.md) review.
 
 **Alternatives considered:** Making the CRM a module was considered and rejected. Nearly every module would then depend on it, and consent would have to be enforced by each module separately, which is how an opt-out gets honoured in one place and ignored in another.
 
@@ -224,4 +226,4 @@ A proposed ADR amends nothing until it is accepted. This ADR adds an **Amendment
 - The [ADR-018](018-ai-agent-posture.md) gate applies to the whole Core, so to both lanes ([ADR-023](023-surfaces-chat-admin-field.md))
 - Nothing marked proposed, recommended or open in this ADR may be built on as if it were decided
 
-**Related ADRs:** [ADR-001](001-platform-architecture.md) (one instance per client, reaffirmed), [ADR-015](015-product-scope.md) (amendment proposed: the catalogue names modules outside its scope list), [ADR-017](017-sharing-contract-trust-model.md) (contracts are Core), [ADR-018](018-ai-agent-posture.md) (the manifest declares each module's standing against the gate), [ADR-019](019-central-services-and-metered-billing.md) (amendment proposed: "internal module" becomes "in-tenant component"; catalogue, entitlements and metering are Core), [ADR-020](020-central-service-line-up-and-builders.md) (amendment proposed: one media monitor is packaged as three modules; the four services are unchanged), [ADR-021](021-content-approval-pipeline.md) (the content pipeline is Core), [ADR-023](023-surfaces-chat-admin-field.md) (surfaces), [ADR-024](024-event-bus-as-federation.md) (the bus; alliances and associations), [ADR-025](025-identity-per-client.md) (identity per client), [ADR-026](026-two-lane-pricing.md) (prices), [ADR-027](027-third-party-crm-sync-and-connectors.md) (sync and connectors)
+**Related ADRs:** [ADR-001](001-platform-architecture.md) (one instance per client, reaffirmed), [ADR-015](015-product-scope.md) (amendment proposed: the catalogue names modules outside its scope list), [ADR-017](017-sharing-contract-trust-model.md) (contracts are Core), [ADR-018](018-ai-agent-posture.md) (the manifest declares each module's standing against the gate), [ADR-019](019-central-services-and-metered-billing.md) (amendment proposed: "internal module" becomes "in-tenant component"; catalogue, entitlements and metering are Core), [ADR-020](020-central-service-line-up-and-builders.md) (amendment proposed: one media monitor is packaged as three modules; the four services are unchanged), [ADR-021](021-content-approval-pipeline.md) (the content pipeline is Core), [ADR-023](023-surfaces-chat-admin-field.md) (surfaces), [ADR-024](024-event-bus-as-federation.md) (the bus; alliances and associations), [ADR-025](025-identity-per-client.md) (identity per client), [ADR-026](026-two-lane-pricing.md) (prices), [ADR-027](027-third-party-crm-sync-and-connectors.md) (sync and connectors), [ADR-028](028-coaching.md) (Coaching is part of the Core)

@@ -102,6 +102,7 @@ Dos consecuencias prácticas, las dos abiertas.
 2. **El canal de chat por defecto:** primero el chat dentro de la app, Telegram o Signal por cliente, WhatsApp no se da por sentado.
 3. **La inyección de prompts** desde el contenido que el chat lee. Sin respuesta, y le corresponde al punto 1 de la ADR-018.
 4. **El Agente de Campaña** como este chat con los módulos de contenido activados ([ADR-022 § El catálogo de módulos](022-core-modules-and-lanes.md#el-catálogo-de-módulos)). Recomendado, no decidido.
+5. **Los coaches y el chat.** La [ADR-028](028-coaching.md) pone el Coaching en el Core y le pregunta a la revisión de la ADR-018 si un coach es este chat con las instrucciones de un rol y sin operaciones, o una superficie propia. Sin respuesta.
 
 ## Consecuencias
 
@@ -124,4 +125,4 @@ Dos consecuencias prácticas, las dos abiertas.
 - Quien usa el chat no puede hacer nada que no podría hacer en la UI de administración
 - La posición sobre el chat es una propuesta; nada puede construirse sobre ella para producción
 
-**ADR relacionadas:** [ADR-005](005-offline-first-sync.md) (la app de campo sigue siendo la superficie sin conexión), [ADR-011](011-design-system-ux.md) (el sistema de diseño que la UI de administración y la app de campo conservan), [ADR-018](018-ai-agent-posture.md) (el punto de decisión abarca todo el Core; la posición sobre el chat se manda a su revisión), [ADR-019](019-central-services-and-metered-billing.md) (la inferencia es un costo medido), [ADR-020](020-central-service-line-up-and-builders.md) (un envío es la acción de una persona o una programación que fijó una persona), [ADR-022](022-core-modules-and-lanes.md) (el Core headless; el manifiesto declara las superficies de cada módulo), [ADR-026](026-two-lane-pricing.md) (el costo del chat en el precio)
+**ADR relacionadas:** [ADR-005](005-offline-first-sync.md) (la app de campo sigue siendo la superficie sin conexión), [ADR-011](011-design-system-ux.md) (el sistema de diseño que la UI de administración y la app de campo conservan), [ADR-018](018-ai-agent-posture.md) (el punto de decisión abarca todo el Core; la posición sobre el chat se manda a su revisión), [ADR-019](019-central-services-and-metered-billing.md) (la inferencia es un costo medido), [ADR-020](020-central-service-line-up-and-builders.md) (un envío es la acción de una persona o una programación que fijó una persona), [ADR-022](022-core-modules-and-lanes.md) (el Core headless; el manifiesto declara las superficies de cada módulo), [ADR-026](026-two-lane-pricing.md) (el costo del chat en el precio), [ADR-028](028-coaching.md) (los coaches, que tienen la forma del chat y su mismo punto de decisión)

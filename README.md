@@ -27,6 +27,8 @@ The product specifications, UX design artifacts and architecture documents were 
 
 See [diary entry 17](diary/17-two-lanes.md) for what changed, what was reversed and what is still open.
 
+[ADR-028](decisions/028-coaching.md) followed: Coaching, AI coaches for every role built on a context layer the organization sets, is part of the Core. That and the name *Coach* are decided; the rest is proposed, and what a coach may do beyond reading the conversation waits on the ADR-018 review.
+
 One question remains open and gates production rather than implementation. The corpus decided AI five times, feature by feature, and never asked what changes if AI agents operate throughout the product. The threat model, the compliance framework and the audit model contain effectively no treatment of a non-human actor. [ADR-018](decisions/018-ai-agent-posture.md) records this as the project's first `Proposed` decision: the five accepted AI features ship as specified, and anything with broader read scope, tool authority or autonomous action waits for the review. See [diary entry 12](diary/12-the-agent-question.md).
 
 The first decision taken since that gate opened is [ADR-019](decisions/019-central-services-and-metered-billing.md): shared capabilities get a home as central services executed per tenant, and the flat pricing model gains a second plane that passes third-party costs through at cost, with no margin. It supplies mechanisms the ADR-018 review can use and resolves nothing that review must decide. See [diary entry 13](diary/13-services-a-la-carte.md). [ADR-020](decisions/020-central-service-line-up-and-builders.md) names the four central services (Capture, Analysis, Builders, channel transport) and sequences them into the comms intelligence roadmap: text builders are accepted, while image and video builders wait for the ADR-018 review. [ADR-021](decisions/021-content-approval-pipeline.md) generalizes post approval into a content pipeline reviewed in rounds, each round kept and every revision request commented; a creator program it first specified was withdrawn the same day, because GreenGrass is not a tool for managing content creators. ADR-018 itself now carries the board's per-tenant agent harness as the proposal under review, with proposed answers for cost, credential breadth, the human gate and compartmented data, and a worked example in which a candidate approves the day's posts over WhatsApp. It remains `Proposed`, and read scope is the question it most needs to settle. See [diary entry 14](diary/14-the-proposal-under-review.md) and [diary entry 15](diary/15-not-a-creator-tool.md).
@@ -55,9 +57,9 @@ npm run serve    # serve docs/ on port 8000
 
 ### Languages
 
-The site is bilingual. Available in Spanish: the 16 specification documents, the system
-architecture, the 27 ADRs plus the UX decisions record, and the 15 UX documents
-that aren't wireframes — 60 documents in
+The site is bilingual. Available in Spanish: the 17 specification documents, the system
+architecture, the 28 ADRs plus the UX decisions record, and the 15 UX documents
+that aren't wireframes — 62 documents in
 all. The 24 wireframe documents and the project diary are still English only. An
 **EN / ES** switch sits in the top-right of the header on every page; pages that aren't
 translated still show it, dimmed, pointing at the Spanish home page, so the Spanish
@@ -111,9 +113,10 @@ If you're new to the project, read the specs in this order:
 14. **[`spec/messaging.md`](spec/messaging.md)** — Internal communications, notifications, E2E encryption.
 15. **[`spec/press.md`](spec/press.md)** — Press, media, social media, public profiles, endorsements.
 16. **[`spec/comms-intelligence.md`](spec/comms-intelligence.md)** — Post-MVP roadmap: media intelligence, fact check, media map, candidate vetting and opposition research, sequenced as iterations.
-17. **[`design/architecture/system.md`](design/architecture/system.md)** — System architecture, data model, infrastructure.
-18. **[`design/ux/00-overview.md`](design/ux/00-overview.md)** — UX design overview with reading order for all 38 UX documents.
-19. **[`decisions/`](decisions/)** — 27 Architecture Decision Records extracting and formalizing decisions from all spec and design documents. ADRs 022 to 027 record the November 2026 direction; read [ADR-022](decisions/022-core-modules-and-lanes.md) first.
+17. **[`spec/coaching.md`](spec/coaching.md)** — Coaching: AI coaches for every role, the organization's context layer, and what waits on ADR-018. Proposed.
+18. **[`design/architecture/system.md`](design/architecture/system.md)** — System architecture, data model, infrastructure.
+19. **[`design/ux/00-overview.md`](design/ux/00-overview.md)** — UX design overview with reading order for all 38 UX documents.
+20. **[`decisions/`](decisions/)** — 28 Architecture Decision Records extracting and formalizing decisions from all spec and design documents. ADRs 022 to 027 record the November 2026 direction; read [ADR-022](decisions/022-core-modules-and-lanes.md) first.
 
 ## Project Structure
 
@@ -138,7 +141,8 @@ GreenGrass/
 │   ├── gotv.md                    # GOTV and election day operations
 │   ├── messaging.md               # Internal communications
 │   ├── press.md                   # Press, media, public communications
-│   └── comms-intelligence.md      # Post-MVP roadmap: comms intelligence
+│   ├── comms-intelligence.md      # Post-MVP roadmap: comms intelligence
+│   └── coaching.md                # Coaching: AI coaches per role (proposed)
 ├── design/
 │   ├── ux/                        # UX design artifacts
 │   │   ├── 00-overview.md         # Reading order and glossary
@@ -162,8 +166,9 @@ GreenGrass/
 │   ├── 024-event-bus-as-federation.md  # Proposed — the bus in place of the federation layer
 │   ├── 025-identity-per-client.md  # Identity per client; supersedes platform identity
 │   ├── 026-two-lane-pricing.md    # Pricing as a lane rule; supersedes flat and no-margin
-│   └── 027-third-party-crm-sync-and-connectors.md  # Proposed — NationBuilder sync, connectors
-├── diary/                         # Project diary (17 entries)
+│   ├── 027-third-party-crm-sync-and-connectors.md  # Proposed — NationBuilder sync, connectors
+│   └── 028-coaching.md            # Proposed — Coaching in the Core
+├── diary/                         # Project diary (18 entries)
 ├── scripts/
 │   ├── build.mjs                  # Documentation site generator
 │   └── dev.sh                     # One-command local preview (install, build, serve)

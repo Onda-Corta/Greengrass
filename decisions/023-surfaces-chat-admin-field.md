@@ -102,6 +102,7 @@ Two practical consequences, both open.
 2. **The default chat channel:** in-app first, Telegram or Signal per client, WhatsApp not assumed.
 3. **Prompt injection** from content the chat reads. Unanswered, and it belongs to ADR-018's item 1.
 4. **The Campaign Agent** as this chat with content modules enabled ([ADR-022 § The module catalogue](022-core-modules-and-lanes.md#the-module-catalogue)). Recommended, not decided.
+5. **Coaches and the chat.** [ADR-028](028-coaching.md) puts Coaching in the Core and asks the ADR-018 review whether a coach is this chat with a role's instructions and no operations, or a surface of its own. Unanswered.
 
 ## Consequences
 
@@ -124,4 +125,4 @@ Two practical consequences, both open.
 - A chat user can do nothing they could not do in the admin UI
 - The position on the chat is a proposal; nothing may be built on it for production
 
-**Related ADRs:** [ADR-005](005-offline-first-sync.md) (the field app remains the offline surface), [ADR-011](011-design-system-ux.md) (the design system the admin UI and field app keep), [ADR-018](018-ai-agent-posture.md) (the gate binds the whole Core; the chat position is sent to its review), [ADR-019](019-central-services-and-metered-billing.md) (inference is a metered cost), [ADR-020](020-central-service-line-up-and-builders.md) (a send is a person's action or a schedule a person set), [ADR-022](022-core-modules-and-lanes.md) (the headless Core; the manifest declares each module's surfaces), [ADR-026](026-two-lane-pricing.md) (the cost of chat in the price)
+**Related ADRs:** [ADR-005](005-offline-first-sync.md) (the field app remains the offline surface), [ADR-011](011-design-system-ux.md) (the design system the admin UI and field app keep), [ADR-018](018-ai-agent-posture.md) (the gate binds the whole Core; the chat position is sent to its review), [ADR-019](019-central-services-and-metered-billing.md) (inference is a metered cost), [ADR-020](020-central-service-line-up-and-builders.md) (a send is a person's action or a schedule a person set), [ADR-022](022-core-modules-and-lanes.md) (the headless Core; the manifest declares each module's surfaces), [ADR-026](026-two-lane-pricing.md) (the cost of chat in the price), [ADR-028](028-coaching.md) (coaches, which share the chat's shape and its gate)

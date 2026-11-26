@@ -1327,3 +1327,42 @@ distintas, aquí queda la que ganó.
 | kept so the reversal is visible | **se conserva para que el cambio de rumbo quede a la vista** | |
 | RESOLVED, then reversed | **RESUELTO, y después revertido** | |
 | becomes secondary (una pantalla) | **pasa a segundo plano** | |
+
+---
+
+# Términos añadidos para la ADR-028 (Coaching)
+
+Fijados antes de traducir la ADR-028 y `spec/coaching.md`.
+
+## Reglas resueltas
+
+- **`Coach` y `Coaching` no se traducen.** Lo decidió quien dirige el producto: *Coach* en
+  inglés y en español. Masculino: *el coach*, *los coaches*, *el Coaching* (la capacidad del
+  Core). Nunca *eCoach*, que es el término de otro producto. Tampoco *asistente* (es
+  `wizard`), *agente* (es el agente de IA de la ADR-018), *concierge* (es el de soporte) ni
+  *entrenador*.
+- **`Coaching` con mayúscula nombra la capacidad del Core;** *coach* con minúscula, cada uno
+  de los asistentes. Igual que en inglés.
+
+## Coaching
+
+| Inglés | Español | Nota |
+|---|---|---|
+| Coach / Coaching | **coach** / **Coaching** | Ver la regla de arriba. |
+| role coach | **coach del rol** | Uno por cada plantilla de rol, salvo Simpatizante. |
+| coach the organization writes / written coach | **coach que escribe la organización** / **coach escrito** | |
+| bounded coach | **coach acotado** | El que lee solo la conversación, los adjuntos y el contexto designado. |
+| context layer (the organization's) | **capa de contexto** (de la organización) | Misión, voz, salvaguardas y documentos de contexto. |
+| context document | **documento de contexto** | |
+| to designate (a document as coach context) | **designar** | *Los documentos que la organización designó para ese coach.* |
+| mission and voice | **misión y voz** | |
+| suggested starter | **inicio sugerido** | Los mensajes que se muestran antes del primero, como *Un grupo está atascado*. |
+| past conversations | **conversaciones anteriores** | |
+| the notice (that coaches use AI) | **el aviso** | *El aviso de que los coaches usan IA y pueden equivocarse.* |
+| briefing | **resumen del día** | Como `daily briefing`, ya fijado. |
+| recommended action | **acción recomendada** | |
+| Add task / Reach out (botones) | ***Añadir tarea*** / ***Contactar*** | Rótulos de la demostración que se vio; van en cursiva. |
+| standing local group | **grupo local estable** | El que un líder lleva durante meses. El corpus no tiene un rol para quien lo dirige. |
+| organizing craft / organizing knowledge | **el oficio de organizar** / **el conocimiento sobre organización** | |
+| sandbox (de otro producto) | **entorno de prueba** | |
+| distributed-organizing product | **producto de organización distribuida** | |

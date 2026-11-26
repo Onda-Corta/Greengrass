@@ -13,7 +13,7 @@ Since November 2026 the project builds shared infrastructure sold through two la
 The direction changed in November 2026 and ADRs 022 to 027 record it. Hold to what is decided and what is not:
 
 - **Accepted:** `decisions/025-identity-per-client.md` (each instance runs its own identity service and holds its own accounts; supersedes the shared platform identity service of ADR-003 and multi-org membership) and `decisions/026-two-lane-pricing.md` (political lane: cost plus a commission that covers the cost of selling; commercial lane: cost plus a 30% margin for the product's owner plus the Comercializadora's commission; supersedes the flat subscription and ADR-019's "no margin", and keeps ADR-019's metering, itemised statements, spend caps, nothing-enabled-by-default and `alliance_pays`).
-- **Proposed, with decided items inside:** `decisions/022-core-modules-and-lanes.md` (decided: the two lanes, the CRM in the Core, Fundraising & payments as one module with a shared payment layer, modules built by GreenGrass first), `decisions/023-surfaces-chat-admin-field.md` (decided: the ADR-018 gate binds the whole Core, so neither lane ships chat to production before that review is accepted), `decisions/024-event-bus-as-federation.md` (decided: the Asociación de Publicistas works exactly like the Alianza) and `decisions/027-third-party-crm-sync-and-connectors.md` (decided: NationBuilder sync is required, by CSV first).
+- **Proposed, with decided items inside:** `decisions/022-core-modules-and-lanes.md` (decided: the two lanes, the CRM in the Core, Fundraising & payments as one module with a shared payment layer, modules built by GreenGrass first), `decisions/023-surfaces-chat-admin-field.md` (decided: the ADR-018 gate binds the whole Core, so neither lane ships chat to production before that review is accepted), `decisions/024-event-bus-as-federation.md` (decided: the Asociación de Publicistas works exactly like the Alianza) `decisions/027-third-party-crm-sync-and-connectors.md` (decided: NationBuilder sync is required, by CSV first) and `decisions/028-coaching.md` (decided: Coaching is part of the Core, and the name is *Coach* in English and in Spanish, never "eCoach"; who may write a coach and who maintains the organizing knowledge coaches draw on are open). `spec/coaching.md` specifies the bounded coach only: a coach that reads only the conversation, attachments and designated context, never speaks first, never acts and never reads records. Briefings, recommended actions, acting from a coach and reading records are recorded there as waiting on ADR-018, not specified; do not specify them before the review.
 - **Open — do not settle these, and do not present a recommendation as a decision:** the chat acting only as the person ("the person's hands"), which is input to the ADR-018 review; the event bus replacing the federation layer; the voter file as a political-lane module outside the Core; the Campaign Agent as the chat with content modules enabled; Parsons as the connector layer; the pricing definitions in ADR-026 (what "cost" includes, how each commission is calculated, what the 30% applies to, how shared costs split, whether the free tier survives); a name for the Core; operator access by lane; the default chat channel; what happens to a disabled module's data; the trademark check on "Basecamp".
 - Facts marked **Verify:** (Parsons' NationBuilder connector and licence, NationBuilder's API, the NATS features the bus needs) are unverified. Do not assert them and do not drop the marker.
 - "The product's owner" (la dueña del producto) and "the Comercializadora" are undefined terms from the product side. Use them as given and keep their `REVISIT:` markers.
@@ -26,7 +26,7 @@ Before the change of direction, all spec and design work was done. One cross-cut
 Completed phases:
 1. **Product definition** — 12 spec documents covering product, users, workflows, security, compliance, etc.
 2. **UX design** — 38 documents: information architecture, global patterns, design system, 22 wireframes (240 screens)
-3. **Architecture** — system architecture document, 27 ADRs (22 accepted, 5 proposed) formalizing all decisions
+3. **Architecture** — system architecture document, 28 ADRs (22 accepted, 6 proposed) formalizing all decisions
 
 ## Project Structure
 
@@ -39,10 +39,10 @@ GreenGrass/
 │   ├── GLOSSARY.md                # Canonical ES terminology (not published)
 │   └── es/                        # Spanish mirror of the English tree
 │       ├── README.md              # Spanish home page
-│       ├── spec/                  # The 16 specs, in Spanish
-│       ├── decisions/             # The 27 ADRs + ux-decisions, in Spanish
+│       ├── spec/                  # The 17 specs, in Spanish
+│       ├── decisions/             # The 28 ADRs + ux-decisions, in Spanish
 │       └── design/                # Architecture + the 15 non-wireframe UX docs
-├── spec/                          # Product specifications (16 docs)
+├── spec/                          # Product specifications (17 docs)
 │   ├── pitch.md                   # Pre-MVP pitch: standalone, for candidacies
 │   ├── demo.md                    # Campaign Approval Demo Spec
 │   ├── product.md                 # High-level product description
@@ -58,7 +58,8 @@ GreenGrass/
 │   ├── gotv.md                    # GOTV and election day operations
 │   ├── messaging.md               # Internal communications and notifications
 │   ├── press.md                   # Press, media, and public communications
-│   └── comms-intelligence.md      # Post-MVP roadmap: comms intelligence
+│   ├── comms-intelligence.md      # Post-MVP roadmap: comms intelligence
+│   └── coaching.md                # Coaching: AI coaches per role (proposed)
 ├── design/
 │   ├── ux/                        # UX design artifacts (38 docs)
 │   │   ├── 00-overview.md         # Reading order and glossary
@@ -68,7 +69,7 @@ GreenGrass/
 │   │   └── 04-wireframes/         # 22 wireframe documents (240 screens)
 │   └── architecture/
 │       └── system.md              # System architecture and data model
-├── decisions/                     # Architecture Decision Records (27 ADRs)
+├── decisions/                     # Architecture Decision Records (28 ADRs)
 ├── diary/                         # Project diary (17 entries)
 ├── scripts/build.mjs              # Documentation site generator (Node + markdown-it)
 ├── scripts/dev.sh                 # One-command local preview (install, build, serve)
@@ -92,8 +93,8 @@ originals. `site-wf/demos.html` (`/wf/demos`) stays here and still frames both t
 The site is bilingual. English sources live at the repo root; Spanish lives under
 `i18n/es/`, mirroring the English path exactly (`spec/product.md` ->
 `i18n/es/spec/product.md`) and building to `docs/es/`. An EN/ES switch in the site
-header moves between them. Translated so far: the 16 specs, the system architecture,
-the 27 ADRs plus `ux-decisions.md`, and the 15 non-wireframe UX documents. Still English only: the 24
+header moves between them. Translated so far: the 17 specs, the system architecture,
+the 28 ADRs plus `ux-decisions.md`, and the 15 non-wireframe UX documents. Still English only: the 24
 wireframe documents under `design/ux/04-wireframes/` and the project diary — the
 switch on those pages is styled as a fallback and goes to the Spanish home page.
 

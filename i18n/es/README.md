@@ -10,7 +10,7 @@ Desde noviembre de 2026, lo que el proyecto construye es una infraestructura de 
 
 ## Qué está en español y qué no
 
-En español está casi todo: las 16 especificaciones de producto, la arquitectura del sistema, los 27 ADR más el registro de decisiones de UX y los 15 documentos de diseño de UX que no son wireframes. Sesenta documentos.
+En español está casi todo: las 17 especificaciones de producto, la arquitectura del sistema, los 28 ADR más el registro de decisiones de UX y los 15 documentos de diseño de UX que no son wireframes. Sesenta y dos documentos.
 
 Falta una cosa, y es grande: los 24 documentos de wireframes —240 pantallas, más de la mitad de todo lo que hay escrito en este proyecto— siguen solo en inglés, igual que el diario. Si sigues un enlace a un wireframe desde una página en español, vas a terminar en inglés. No está roto: es lo que todavía no se ha traducido. El botón **EN**, arriba a la derecha, te lleva a la documentación completa en cualquier momento.
 
@@ -28,6 +28,8 @@ Las especificaciones de producto, los artefactos de diseño de UX y los document
 - **Cuatro están propuestas:** la [ADR-022](decisions/022-core-modules-and-lanes.md), la [ADR-023](decisions/023-surfaces-chat-admin-field.md), la [ADR-024](decisions/024-event-bus-as-federation.md) y la [ADR-027](decisions/027-third-party-crm-sync-and-connectors.md). Cada una dice qué de lo que contiene ya está decidido y qué no. Lo propuesto no se lee como resuelto.
 
 La revisión de la [ADR-018](decisions/018-ai-agent-posture.md), sobre los agentes de IA, sigue condicionando la producción, y ahora para los dos carriles: ninguno de los dos productos saca el chat a producción antes de que se acepte.
+
+Después llegó la [ADR-028](decisions/028-coaching.md): el Coaching, coaches de IA para cada rol construidos sobre una capa de contexto que fija la organización, es parte del Core. Eso y el nombre *Coach* están decididos; el resto es una propuesta, y lo que pueda hacer un coach más allá de leer la conversación espera por la revisión de la ADR-018.
 
 ## Orden de lectura
 
@@ -49,15 +51,16 @@ La revisión de la [ADR-018](decisions/018-ai-agent-posture.md), sobre los agent
 14. **[messaging.md](spec/messaging.md)** — Comunicaciones internas, notificaciones, cifrado de extremo a extremo.
 15. **[press.md](spec/press.md)** — Prensa, medios, redes sociales, perfiles públicos, respaldos.
 16. **[comms-intelligence.md](spec/comms-intelligence.md)** — Hoja de ruta post-MVP: inteligencia de medios, verificación de datos, mapa de medios, evaluación de candidaturas e investigación de oposición, ordenadas por iteraciones.
+17. **[coaching.md](spec/coaching.md)** — Coaching: coaches de IA para cada rol, la capa de contexto de la organización, y lo que espera por la ADR-018. Propuesto.
 
 ### Después, cómo está construida
 
-17. **[system.md](design/architecture/system.md)** — La arquitectura del sistema completa: topología, modelo de datos, cifrado, sincronización, conservación de datos, stack tecnológico.
-18. **[00-overview.md](design/ux/00-overview.md)** — Puerta de entrada al diseño de UX: orden de lectura, glosario y las convenciones que sigue el resto.
+18. **[system.md](design/architecture/system.md)** — La arquitectura del sistema completa: topología, modelo de datos, cifrado, sincronización, conservación de datos, stack tecnológico.
+19. **[00-overview.md](design/ux/00-overview.md)** — Puerta de entrada al diseño de UX: orden de lectura, glosario y las convenciones que sigue el resto.
 
 ### Y por qué está construida así
 
-Los 27 ADR registran cada decisión de arquitectura, con su contexto, sus alternativas descartadas y lo que cuesta cada una. De la ADR-022 a la ADR-027 registran la dirección de noviembre de 2026; empieza por la ADR-022.
+Los 28 ADR registran cada decisión de arquitectura, con su contexto, sus alternativas descartadas y lo que cuesta cada una. De la ADR-022 a la ADR-027 registran la dirección de noviembre de 2026; empieza por la ADR-022.
 
 - **[ADR-001](decisions/001-platform-architecture.md)** — Arquitectura y despliegue de la plataforma
 - **[ADR-002](decisions/002-security-threat-model.md)** — Seguridad y modelo de amenazas
@@ -86,6 +89,7 @@ Los 27 ADR registran cada decisión de arquitectura, con su contexto, sus altern
 - **[ADR-025](decisions/025-identity-per-client.md)** — Identidad por cliente
 - **[ADR-026](decisions/026-two-lane-pricing.md)** — Precios por carril
 - **[ADR-027](decisions/027-third-party-crm-sync-and-connectors.md)** — Sincronización del CRM con terceros y conectores (propuesta)
+- **[ADR-028](decisions/028-coaching.md)** — Coaching (propuesta)
 - **[ux-decisions.md](decisions/ux-decisions.md)** — Decisiones de UX de la fase de wireframes
 
 ### El diseño en detalle
