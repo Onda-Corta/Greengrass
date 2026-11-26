@@ -158,6 +158,7 @@ function extractTitle(source, fallbackName) {
 const SPEC_ORDER = [
   'pitch', 'demo', 'product', 'mvp', 'users', 'workflows', 'geography', 'security', 'compliance',
   'fundraising', 'integrations', 'support', 'gotv', 'messaging', 'press', 'comms-intelligence',
+  'coaching',
 ];
 const WIREFRAME_ORDER = [
   'navigation-shell', 'dashboards', 'field-mode', 'onboarding', 'messaging',

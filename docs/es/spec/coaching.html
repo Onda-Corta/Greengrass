@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="es" data-base="../../" data-no-results="No hay resultados para">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Coaching · GreenGrass</title>
+<meta name="description" content="Coaching — Documentación de especificación y diseño de GreenGrass.">
+<link rel="alternate" hreflang="en" href="../../spec/coaching.html">
+<link rel="alternate" hreflang="es" href="./coaching.html">
+<link rel="alternate" hreflang="x-default" href="../../spec/coaching.html">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%232563eb'/%3E%3Cstop offset='1' stop-color='%2316a34a'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='32' height='32' rx='7' fill='url(%23g)'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="../../assets/styles.css">
+</head>
+<body>
+<a class="skip-link" href="#content">Saltar al contenido</a>
+<header class="site-header">
+  <button type="button" class="menu-toggle" aria-label="Alternar navegación" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+  <a class="brand" href="../../es/index.html">
+    <span class="brand-mark" aria-hidden="true"></span>
+    <span class="brand-text"><strong>GreenGrass</strong><small>Especificación y diseño</small></span>
+  </a>
+  <div class="search">
+    <input type="search" id="search-input" placeholder="Buscar en la documentación…" autocomplete="off" aria-label="Buscar en la documentación">
+    <div id="search-results" class="search-results" hidden></div>
+  </div>
+  <nav class="lang-switch" aria-label="Idioma"><a class="lang-opt" href="../../spec/coaching.html" hreflang="en" lang="en" title="View this page in English">EN</a><span class="lang-opt active" aria-current="true">ES</span></nav>
+  <button type="button" class="theme-toggle" aria-label="Alternar modo oscuro" title="Alternar modo oscuro">
+    <span class="theme-icon" aria-hidden="true"></span>
+  </button>
+</header>
+<div class="layout">
+  <div class="sidebar-backdrop" hidden></div>
+  <aside class="sidebar" aria-label="Navegación de la documentación">
+    <nav class="nav">
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">Inicio<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../index.html">GreenGrass</a></li></ul></div>
+<div class="nav-section open"><button type="button" class="nav-section-title" aria-expanded="true">Especificaciones<span class="chev" aria-hidden="true"></span></button><ul><li><a href="./pitch.html">Presentación pre-MVP</a></li><li><a href="./demo.html">Especificación de la demostración de aprobación de campaña</a></li><li><a href="./product.html">Proyecto: GreenGrass</a></li><li><a href="./mvp.html">MVP de GreenGrass — plan de producto</a></li><li><a href="./users.html">Usuarios y roles</a></li><li><a href="./workflows.html">Flujos de trabajo principales</a></li><li><a href="./geography.html">Geografía objetivo</a></li><li><a href="./security.html">Seguridad y modelo de amenazas</a></li><li><a href="./compliance.html">Cumplimiento y marco legal</a></li><li><a href="./fundraising.html">Recaudación de fondos e infraestructura de pagos</a></li><li><a href="./integrations.html">Integraciones externas</a></li><li><a href="./support.html">Soporte y puesta en marcha de organizaciones</a></li><li><a href="./gotv.html">GOTV y operaciones del día de elecciones</a></li><li><a href="./messaging.html">Comunicaciones internas y notificaciones</a></li><li><a href="./press.html">Prensa, medios y comunicaciones públicas</a></li><li><a href="./comms-intelligence.html">Inteligencia de comunicaciones — hoja de ruta post-MVP</a></li><li><a href="./coaching.html" aria-current="page" class="active">Coaching</a></li></ul></div>
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">Arquitectura<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../design/architecture/system.html">Arquitectura del sistema</a></li></ul></div>
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">Diseño UX<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../design/ux/00-overview.html">Resumen del diseño de UX</a></li><li><a href="../design/ux/01-information-architecture/navigation-model.html">Modelo de navegación</a></li><li><a href="../design/ux/01-information-architecture/screen-inventory.html">Inventario de pantallas</a></li><li><a href="../design/ux/01-information-architecture/persona-views.html">Vistas por arquetipo</a></li><li><a href="../design/ux/01-information-architecture/url-structure.html">Estructura de URL</a></li><li><a href="../design/ux/02-global-patterns/pattern-catalog.html">Catálogo de patrones</a></li><li><a href="../design/ux/02-global-patterns/offline-sync-patterns.html">Patrones sin conexión y de sincronización</a></li><li><a href="../design/ux/02-global-patterns/notification-patterns.html">Patrones de notificaciones</a></li><li><a href="../design/ux/02-global-patterns/search-patterns.html">Patrones de búsqueda</a></li><li><a href="../design/ux/02-global-patterns/settings-help-patterns.html">Patrones de ajustes y ayuda</a></li><li><a href="../design/ux/02-global-patterns/security-ux-patterns.html">Patrones de UX de seguridad</a></li><li><a href="../design/ux/03-design-system/foundations.html">Fundamentos del sistema de diseño</a></li><li><a href="../design/ux/03-design-system/theming-strategy.html">Estrategia de temas</a></li><li><a href="../design/ux/03-design-system/component-inventory.html">Inventario de componentes</a></li><li><a href="../design/ux/03-design-system/responsive-strategy.html">Estrategia de diseño adaptable</a></li></ul></div>
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">Decisiones<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../decisions/001-platform-architecture.html">ADR-001: Arquitectura y despliegue de la plataforma</a></li><li><a href="../decisions/002-security-threat-model.html">ADR-002: Seguridad y modelo de amenazas</a></li><li><a href="../decisions/003-identity-access-organization.html">ADR-003: Identidad, acceso y organización</a></li><li><a href="../decisions/004-data-model-integrity.html">ADR-004: Modelo de datos e integridad</a></li><li><a href="../decisions/005-offline-first-sync.html">ADR-005: Prioridad sin conexión y sincronización</a></li><li><a href="../decisions/006-field-operations-gotv.html">ADR-006: Operaciones de campo y GOTV</a></li><li><a href="../decisions/007-fundraising-payments.html">ADR-007: Recaudación de fondos y pagos</a></li><li><a href="../decisions/008-communications-messaging.html">ADR-008: Comunicaciones y mensajería</a></li><li><a href="../decisions/009-compliance-legal.html">ADR-009: Cumplimiento y marco legal</a></li><li><a href="../decisions/010-internationalization-localization.html">ADR-010: Internacionalización y localización</a></li><li><a href="../decisions/011-design-system-ux.html">ADR-011: Sistema de diseño y fundamentos de UX</a></li><li><a href="../decisions/012-external-integrations.html">ADR-012: Integraciones externas</a></li><li><a href="../decisions/013-analytics-ai.html">ADR-013: Analítica e IA</a></li><li><a href="../decisions/014-volunteer-onboarding.html">ADR-014: Voluntariado e incorporación</a></li><li><a href="../decisions/015-product-scope.html">ADR-015: Límites del alcance del producto</a></li><li><a href="../decisions/016-cross-cutting-resolutions.html">ADR-016: Resoluciones transversales</a></li><li><a href="../decisions/017-sharing-contract-trust-model.html">ADR-017: El contrato de intercambio como primitiva universal de confianza</a></li><li><a href="../decisions/018-ai-agent-posture.html">ADR-018: Postura ante los agentes de IA</a></li><li><a href="../decisions/019-central-services-and-metered-billing.html">ADR-019: Servicios centrales y facturación medida</a></li><li><a href="../decisions/020-central-service-line-up-and-builders.html">ADR-020: Los cuatro servicios centrales y los constructores</a></li><li><a href="../decisions/021-content-approval-pipeline.html">ADR-021: Flujo de aprobación de contenido</a></li><li><a href="../decisions/022-core-modules-and-lanes.html">ADR-022: Core, módulos y carriles</a></li><li><a href="../decisions/023-surfaces-chat-admin-field.html">ADR-023: Superficies — un Core headless, chat, administración y campo</a></li><li><a href="../decisions/024-event-bus-as-federation.html">ADR-024: El bus de eventos como federación</a></li><li><a href="../decisions/025-identity-per-client.html">ADR-025: Identidad por cliente</a></li><li><a href="../decisions/026-two-lane-pricing.html">ADR-026: Precios por carril</a></li><li><a href="../decisions/027-third-party-crm-sync-and-connectors.html">ADR-027: Sincronización del CRM con terceros y conectores</a></li><li><a href="../decisions/028-coaching.html">ADR-028: Coaching</a></li><li><a href="../decisions/ux-decisions.html">Decisiones de UX — fase de wireframes</a></li></ul></div>
+    </nav>
+  </aside>
+  <main id="content" class="content">
+    <nav class="breadcrumb" aria-label="Ruta de navegación">Especificaciones</nav>
+    <article class="prose">
+<h1 id="coaching" tabindex="-1"><a class="heading-anchor" href="#coaching" aria-hidden="true">#</a> Coaching</h1>
+<p><strong>Coaches de IA para cada rol, construidos sobre lo que la organización dice de sí misma</strong></p>
+<p>Estado: propuesto en la <a href="../decisions/028-coaching.html">ADR-028</a>. Dos cosas están decididas: el Coaching es parte del Core, y el nombre es <em>Coach</em> en inglés y en español. Todo lo demás aquí es una propuesta. Nada de esto llega a producción en ningún carril antes de que se acepte la revisión de la <a href="../decisions/018-ai-agent-posture.html">ADR-018</a>, y lo que aparece en <a href="#a-la-espera-de-la-revisi%C3%B3n-de-la-adr-018">A la espera de la revisión de la ADR-018</a> está registrado, no especificado.
+Redactado: 2026-11-25</p>
+<hr>
+<h2 id="propósito" tabindex="-1"><a class="heading-anchor" href="#propósito" aria-hidden="true">#</a> Propósito</h2>
+<p>Quien organiza aprende el oficio de otra gente: cómo llevar una primera reunión, qué hacer cuando un grupo se estanca, cómo integrar a un miembro callado, qué decir cuando una decisión cae mal. En los lugares para los que se construye GreenGrass, rara vez hay una capacitadora en la sala cuando surge la pregunta.</p>
+<p>Un coach es esa ayuda, dentro del producto, en el momento en que hace falta. Es una conversación con un modelo, preparada para un rol o un propósito, que aconseja, explica y redacta. Trabaja con lo que la persona le cuenta y con lo que la organización escribió sobre sí misma, y no hace nada por su cuenta.</p>
+<h2 id="qué-es-un-coach" tabindex="-1"><a class="heading-anchor" href="#qué-es-un-coach" aria-hidden="true">#</a> Qué es un coach</h2>
+<p>Un coach ayuda a una persona con su propio trabajo. Tiene al lado tres funcionalidades de IA, y cada una hace otra cosa.</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Concierge de IA</th>
+<th>Constructor de texto</th>
+<th>Chat</th>
+<th>Coach</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Para</td>
+<td>Ayuda con la plataforma</td>
+<td>Un borrador a partir de un encargo</td>
+<td>Hacer el trabajo</td>
+<td>Pensar el trabajo</td>
+</tr>
+<tr>
+<td>Lee</td>
+<td>La base de conocimiento y la documentación de la plataforma</td>
+<td>Lo que la persona le entrega</td>
+<td>Lo que la persona puede leer, cuando lo pide</td>
+<td>La conversación, los adjuntos y el contexto que designa la organización</td>
+</tr>
+<tr>
+<td>Actúa</td>
+<td>No; escala a una persona</td>
+<td>No; devuelve un borrador</td>
+<td>Sí; cada escritura confirmada</td>
+<td>No</td>
+</tr>
+<tr>
+<td>Dónde se decide</td>
+<td><a href="./support.html#acompa%C3%B1amiento-en-la-puesta-en-marcha">support.md § Onboarding Concierge</a></td>
+<td><a href="../decisions/020-central-service-line-up-and-builders.html#constructores-el-texto-se-acepta-las-im%C3%A1genes-y-el-video-quedan-propuestos">ADR-020</a></td>
+<td><a href="../decisions/023-surfaces-chat-admin-field.html#el-chat-como-las-manos-de-la-persona">ADR-023</a>, propuesto</td>
+<td>Este documento, propuesto</td>
+</tr>
+</tbody>
+</table>
+<p>Preguntas típicas para un coach:</p>
+<ul>
+<li>«Dos miembros chocan en todas las reuniones y el resto se quedó callado. ¿Qué hago?»</li>
+<li>«Perdimos la votación del presupuesto. Ayúdame a escribir el anuncio.»</li>
+<li>«El sábado llegan cuatro voluntarios nuevos. ¿Cómo llevo la primera hora?»</li>
+<li>«De estas tres prioridades, ¿cuál debería atacar primero el comité, según nuestra estrategia?»</li>
+</ul>
+<h2 id="quién-tiene-un-coach" tabindex="-1"><a class="heading-anchor" href="#quién-tiene-un-coach" aria-hidden="true">#</a> Quién tiene un coach</h2>
+<h3 id="coaches-del-rol" tabindex="-1"><a class="heading-anchor" href="#coaches-del-rol" aria-hidden="true">#</a> Coaches del rol</h3>
+<p>Cada plantilla de rol de <a href="./users.html#modelo-de-permisos">users.md § Permissions Model</a> tiene un coach, salvo Simpatizante: el OA (Org Admin, el Administrador de la organización), cada plantilla de personal, el Voluntario, el Líder de equipo de voluntarios y el Candidato. Una persona ve los coaches de los roles que tiene.</p>
+<p>El carril pone las instrucciones iniciales de cada coach del rol. En Greengrass hablan de organización política; Basecamp pone sus propios roles y sus propias instrucciones. Después la capa de contexto de la organización se aplica a todos.</p>
+<h3 id="coaches-que-escribe-la-organización" tabindex="-1"><a class="heading-anchor" href="#coaches-que-escribe-la-organización" aria-hidden="true">#</a> Coaches que escribe la organización</h3>
+<p>Una organización puede añadir coaches para sus propios fines: uno para quienes presiden un comité por primera vez, uno para sus voluntarios de prensa, uno para sus capitanes del día de elecciones. Un coach escrito tiene:</p>
+<ul>
+<li><strong>Un nombre y un propósito de una línea,</strong> que se muestran donde la gente elige un coach.</li>
+<li><strong>Instrucciones:</strong> con qué ayuda, cómo debe hablar, para qué debe mandar a la gente a otro lado.</li>
+<li><strong>Documentos de contexto:</strong> cuáles de los documentos designados por la organización puede usar.</li>
+<li><strong>Quién puede abrirlo:</strong> por rol.</li>
+<li><strong>Inicios sugeridos:</strong> unos cuantos mensajes que se muestran antes del primero, como <em>Un grupo está atascado</em>.</li>
+</ul>
+<p>Quién puede escribir un coach está abierto (<a href="#preguntas-abiertas">Preguntas abiertas</a>).</p>
+<h2 id="la-capa-de-contexto-de-la-organización" tabindex="-1"><a class="heading-anchor" href="#la-capa-de-contexto-de-la-organización" aria-hidden="true">#</a> La capa de contexto de la organización</h2>
+<p>La organización escribe una vez aquello sobre lo que se construye cada coach.</p>
+<ul>
+<li><strong>Misión y voz.</strong> Para qué existe la organización, a quién sirve, cómo habla.</li>
+<li><strong>Salvaguardas.</strong> Temas que un coach declina, posiciones que nunca toma, palabras que evita. Un coach que llega a una salvaguarda lo dice y remite a la persona a alguien de la organización.</li>
+<li><strong>Documentos de contexto.</strong> Piezas del almacén de contenido (<a href="../decisions/021-content-approval-pipeline.html">ADR-021</a>) que la organización designa como contexto de los coaches: su estrategia, sus materiales de capacitación (<a href="./support.html#m%C3%B3dulo-de-capacitaci%C3%B3n-dentro-de-la-plataforma">support.md § In-Platform Training Module</a>), su base de conocimiento. Cada coach usa solo los documentos designados para él.</li>
+</ul>
+<p>Reglas:</p>
+<ul>
+<li>La capa pertenece a una instancia y nunca pasa a otra.</li>
+<li>Un documento sujeto a un contrato de intercambio no puede designarse (<a href="../decisions/017-sharing-contract-trust-model.html">ADR-017</a>).</li>
+<li>Cada cambio a la capa queda registrado con la persona que lo hizo.</li>
+<li>El carril pone los valores por defecto, para que los coaches de una organización nueva funcionen antes de que haya escrito nada.</li>
+</ul>
+<h2 id="una-conversación-con-un-coach" tabindex="-1"><a class="heading-anchor" href="#una-conversación-con-un-coach" aria-hidden="true">#</a> Una conversación con un coach</h2>
+<ul>
+<li><strong>Empezar.</strong> Desde la página de un coach, desde la caja del coach en la página de inicio de un rol, o desde un inicio sugerido.</li>
+<li><strong>Entrada.</strong> Escribiendo, o con una nota de voz transcrita en el idioma de la persona.</li>
+<li><strong>Adjuntos.</strong> Un documento o una imagen que la persona añade forma parte solo de esa conversación.</li>
+<li><strong>Conversaciones anteriores.</strong> Una persona puede volver a sus propias conversaciones anteriores. Cuánto tiempo se conservan, y si alguien más puede leerlas, es una pregunta para la revisión.</li>
+<li><strong>Compartir.</strong> Un botón de compartir le manda a otra persona de la instancia una copia de solo lectura de la conversación. Qué implica eso para la conservación y para las personas que se nombran en ella es una pregunta para la revisión; hasta que se responda, compartir está dibujado y no especificado.</li>
+<li><strong>El aviso.</strong> Cada conversación muestra que los coaches usan IA y pueden equivocarse, y que la información importante debe comprobarse antes de actuar sobre ella.</li>
+</ul>
+<h2 id="anclaje-en-fuentes-y-citas" tabindex="-1"><a class="heading-anchor" href="#anclaje-en-fuentes-y-citas" aria-hidden="true">#</a> Anclaje en fuentes y citas</h2>
+<p>Un coach dice en qué se apoya cada parte de su respuesta.</p>
+<ul>
+<li><strong>De la organización:</strong> una afirmación tomada de un documento de contexto cita el documento.</li>
+<li><strong>De un autor publicado:</strong> una idea tomada de un libro o un estudio nombra al autor y la obra, para que la persona pueda buscarla y juzgarla.</li>
+<li><strong>Su propio consejo:</strong> todo lo demás se ofrece como consejo, no como un hecho.</li>
+</ul>
+<p>Un coach no afirma ningún hecho, cifra ni dato sobre la organización que no esté en la conversación o en el contexto, como la <a href="../decisions/013-analytics-ai.html">ADR-013</a> les exige a los mensajes generados. Esto adapta <a href="./comms-intelligence.html#82-la-procedencia-es-obligatoria">comms-intelligence.md § 8.2 Provenance is mandatory</a> al consejo. El concierge mantiene su regla más estricta, la base de conocimiento y nada más (<a href="../design/architecture/system.html#concierge-de-ia">system.md § AI concierge</a>), porque una respuesta equivocada sobre ley electoral o cumplimiento tiene consecuencias reales, y un coach que se topa con una pregunta así remite a la persona al concierge o al personal.</p>
+<h2 id="límites-de-un-coach" tabindex="-1"><a class="heading-anchor" href="#límites-de-un-coach" aria-hidden="true">#</a> Límites de un coach</h2>
+<p>Mientras la revisión de la ADR-018 no diga otra cosa:</p>
+<ul>
+<li><strong>Nunca habla primero.</strong> Ningún mensaje, resumen ni recordatorio llega de un coach si la persona no abrió la conversación.</li>
+<li><strong>Nunca actúa.</strong> No cambia ningún registro, no crea tareas, no le envía nada a nadie. Un borrador sale de la conversación solo cuando la persona lo copia, y entonces entra en la aprobación que tenga ese tipo de contenido.</li>
+<li><strong>Nunca lee registros.</strong> Ni contactos, ni registros de votantes, ni grupos, mensajes, donaciones, eventos, datos de auditoría o compartimentos. Si la persona pega algo, el coach lee lo que se pegó.</li>
+<li><strong>Nunca decide sobre una persona.</strong> No puntúa, no ordena ni etiqueta a nadie.</li>
+</ul>
+<h2 id="idiomas" tabindex="-1"><a class="heading-anchor" href="#idiomas" aria-hidden="true">#</a> Idiomas</h2>
+<p>Un coach responde en el idioma en que la persona escribe, y si no, en el idioma de su perfil, como el concierge. Las instrucciones de los coaches del rol y los valores por defecto del carril se escriben primero en inglés y en español, y en cada idioma nuevo antes de que abra un país. Una organización escribe su capa de contexto en los idiomas en que trabaja. Se puede usar un documento de contexto en otro idioma, y el coach dice cuándo está citando de un idioma a otro.</p>
+<h2 id="costo" tabindex="-1"><a class="heading-anchor" href="#costo" aria-hidden="true">#</a> Costo</h2>
+<p>Cada turno es una llamada de inferencia. Se mide por uso bajo la <a href="../decisions/019-central-services-and-metered-billing.html">ADR-019</a> y se cobra según la regla de precio del carril (<a href="../decisions/026-two-lane-pricing.html">ADR-026</a>), o se la factura a la organización su propio proveedor bajo BYOM. La organización puede fijar un tope de gasto para el coaching, como para cualquier servicio medido por uso. Quién paga cuando un voluntario habla con un coach, y qué incluye el plan por defecto, está abierto.</p>
+<h2 id="sin-conexión" tabindex="-1"><a class="heading-anchor" href="#sin-conexión" aria-hidden="true">#</a> Sin conexión</h2>
+<p>Un coach necesita conexión. Sin ella, la página del coach lo dice y ofrece las conversaciones anteriores de la persona si se guardan en el dispositivo, lo que también es una pregunta para la revisión. Ninguna tarea de campo depende de un coach (<a href="../decisions/005-offline-first-sync.html">ADR-005</a>).</p>
+<h2 id="a-la-espera-de-la-revisión-de-la-adr-018" tabindex="-1"><a class="heading-anchor" href="#a-la-espera-de-la-revisión-de-la-adr-018" aria-hidden="true">#</a> A la espera de la revisión de la ADR-018</h2>
+<p>El producto que dio pie a este documento hace más de lo que permiten los límites de arriba. Cada una de estas cosas se registra para que la revisión lo vea todo, y ninguna está especificada para producción.</p>
+<h3 id="resúmenes-del-día" tabindex="-1"><a class="heading-anchor" href="#resúmenes-del-día" aria-hidden="true">#</a> Resúmenes del día</h3>
+<p>Un resumen del alcance de la persona al empezar el día: cuántos grupos están activos, a quién le toca contacto, quién no ha terminado la puesta en marcha, qué grupo se estancó. Lee más allá de la conversación, y o bien habla primero o bien corre según un horario que fijó una persona.</p>
+<h3 id="acciones-recomendadas" tabindex="-1"><a class="heading-anchor" href="#acciones-recomendadas" aria-hidden="true">#</a> Acciones recomendadas</h3>
+<p>Una lista ordenada de sugerencias, cada una con su razón: «Hace 54 días que no hablas con un miembro: a los callados es fácil pasarlos por alto». Lee el historial de contacto y ordena a personas identificables, y el compromiso de la <a href="../decisions/016-cross-cutting-resolutions.html">ADR-016</a> §49, que el personal pueda ver exactamente por qué se hizo una sugerencia, no se cumple con un modelo.</p>
+<h3 id="actuar-desde-un-coach" tabindex="-1"><a class="heading-anchor" href="#actuar-desde-un-coach" aria-hidden="true">#</a> Actuar desde un coach</h3>
+<p><em>Añadir tarea</em> y <em>Contactar</em>, en una recomendación o dentro de una conversación. Bajo la propuesta del chat como las manos de la persona, cada una sería una operación declarada, confirmada con una tarjeta.</p>
+<h3 id="leer-registros" tabindex="-1"><a class="heading-anchor" href="#leer-registros" aria-hidden="true">#</a> Leer registros</h3>
+<p>Una líder pregunta por su propio grupo, y el coach lee la lista de miembros, la asistencia y la actividad reciente del grupo para responder.</p>
+<h3 id="coaches-en-otros-canales" tabindex="-1"><a class="heading-anchor" href="#coaches-en-otros-canales" aria-hidden="true">#</a> Coaches en otros canales</h3>
+<p>Un coach en Telegram o Signal en vez de dentro de la app. Esto depende del canal de chat por defecto (<a href="../decisions/023-surfaces-chat-admin-field.html#costo-y-canal">ADR-023 § Cost and channel</a>).</p>
+<p>Los resúmenes del día y las acciones recomendadas tienen una versión fuera del punto de decisión: conteos y reglas calculados sin un modelo y mostrados como un panel cualquiera. Esa versión necesita una especificación de los grupos locales estables y de quienes los dirigen, que el corpus no tiene (<a href="./users.html#l%C3%ADder-de-equipo-de-voluntarios">users.md § Volunteer Team Lead</a> es un rol para una operación, no para un grupo durante meses).</p>
+<p>Las doce preguntas que esto le envía a la revisión están en <a href="../decisions/028-coaching.html#preguntas-enviadas-a-la-revisi%C3%B3n-de-la-adr-018">ADR-028 § Questions sent to the ADR-018 review</a>.</p>
+<h2 id="preguntas-abiertas" tabindex="-1"><a class="heading-anchor" href="#preguntas-abiertas" aria-hidden="true">#</a> Preguntas abiertas</h2>
+<ol>
+<li><strong>Quién puede escribir un coach.</strong> Solo el OA, el personal, los líderes de equipo, o una alianza o asociación para sus miembros a través del bus (<a href="../decisions/024-event-bus-as-federation.html">ADR-024</a>, también propuesta).</li>
+<li><strong>Quién escribe y mantiene el conocimiento sobre organización del que se nutren los coaches.</strong> GreenGrass, el carril, el cliente o terceros, y en qué idiomas.</li>
+</ol>
+
+    </article>
+  </main>
+  <div class="toc-rail"><nav class="toc" aria-label="En esta página"><div class="toc-label">En esta página</div><ul><li class="toc-2"><a href="#propósito"># Propósito</a></li><li class="toc-2"><a href="#qué-es-un-coach"># Qué es un coach</a></li><li class="toc-2"><a href="#quién-tiene-un-coach"># Quién tiene un coach</a></li><li class="toc-3"><a href="#coaches-del-rol"># Coaches del rol</a></li><li class="toc-3"><a href="#coaches-que-escribe-la-organización"># Coaches que escribe la organización</a></li><li class="toc-2"><a href="#la-capa-de-contexto-de-la-organización"># La capa de contexto de la organización</a></li><li class="toc-2"><a href="#una-conversación-con-un-coach"># Una conversación con un coach</a></li><li class="toc-2"><a href="#anclaje-en-fuentes-y-citas"># Anclaje en fuentes y citas</a></li><li class="toc-2"><a href="#límites-de-un-coach"># Límites de un coach</a></li><li class="toc-2"><a href="#idiomas"># Idiomas</a></li><li class="toc-2"><a href="#costo"># Costo</a></li><li class="toc-2"><a href="#sin-conexión"># Sin conexión</a></li><li class="toc-2"><a href="#a-la-espera-de-la-revisión-de-la-adr-018"># A la espera de la revisión de la ADR-018</a></li><li class="toc-3"><a href="#resúmenes-del-día"># Resúmenes del día</a></li><li class="toc-3"><a href="#acciones-recomendadas"># Acciones recomendadas</a></li><li class="toc-3"><a href="#actuar-desde-un-coach"># Actuar desde un coach</a></li><li class="toc-3"><a href="#leer-registros"># Leer registros</a></li><li class="toc-3"><a href="#coaches-en-otros-canales"># Coaches en otros canales</a></li><li class="toc-2"><a href="#preguntas-abiertas"># Preguntas abiertas</a></li></ul></nav></div>
+</div>
+<script src="../../assets/search.js" defer></script>
+<script src="../../assets/app.js" defer></script>
+</body>
+</html>

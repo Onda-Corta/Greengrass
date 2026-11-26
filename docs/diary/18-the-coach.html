@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en" data-base="../" data-no-results="No results for">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Diary Entry 18: The Coach · GreenGrass</title>
+<meta name="description" content="Diary Entry 18: The Coach — GreenGrass spec &amp; design documentation.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%232563eb'/%3E%3Cstop offset='1' stop-color='%2316a34a'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='32' height='32' rx='7' fill='url(%23g)'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="../assets/styles.css">
+</head>
+<body>
+<a class="skip-link" href="#content">Skip to content</a>
+<header class="site-header">
+  <button type="button" class="menu-toggle" aria-label="Toggle navigation" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+  <a class="brand" href="../index.html">
+    <span class="brand-mark" aria-hidden="true"></span>
+    <span class="brand-text"><strong>GreenGrass</strong><small>Spec &amp; Design</small></span>
+  </a>
+  <div class="search">
+    <input type="search" id="search-input" placeholder="Search docs…" autocomplete="off" aria-label="Search documentation">
+    <div id="search-results" class="search-results" hidden></div>
+  </div>
+  <nav class="lang-switch" aria-label="Language"><span class="lang-opt active" aria-current="true">EN</span><a class="lang-opt lang-opt--fallback" href="../es/index.html" hreflang="es" lang="es" title="Esta página no está traducida. Ir a la documentación en español.">ES</a></nav>
+  <button type="button" class="theme-toggle" aria-label="Toggle dark mode" title="Toggle dark mode">
+    <span class="theme-icon" aria-hidden="true"></span>
+  </button>
+</header>
+<div class="layout">
+  <div class="sidebar-backdrop" hidden></div>
+  <aside class="sidebar" aria-label="Documentation navigation">
+    <nav class="nav">
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">Home<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../index.html">GreenGrass</a></li></ul></div>
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">Specifications<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../spec/pitch.html">Pre-MVP Pitch</a></li><li><a href="../spec/demo.html">Campaign Approval Demo Spec</a></li><li><a href="../spec/product.html">Project: GreenGrass</a></li><li><a href="../spec/mvp.html">GreenGrass MVP — Product Plan</a></li><li><a href="../spec/users.html">Users &amp; Roles</a></li><li><a href="../spec/workflows.html">Core Workflows</a></li><li><a href="../spec/geography.html">Target Geography</a></li><li><a href="../spec/security.html">Security &amp; Threat Model</a></li><li><a href="../spec/compliance.html">Compliance &amp; Legal Framework</a></li><li><a href="../spec/fundraising.html">Fundraising &amp; Payment Infrastructure</a></li><li><a href="../spec/integrations.html">External Integrations</a></li><li><a href="../spec/support.html">Tenant Support &amp; Onboarding</a></li><li><a href="../spec/gotv.html">Get Out The Vote &amp; Election Day Operations</a></li><li><a href="../spec/messaging.html">Internal Communications &amp; Notifications</a></li><li><a href="../spec/press.html">Press, Media &amp; Public Communications</a></li><li><a href="../spec/comms-intelligence.html">Comms Intelligence — Post-MVP Roadmap</a></li><li><a href="../spec/coaching.html">Coaching</a></li></ul></div>
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">Architecture<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../design/architecture/system.html">System Architecture</a></li></ul></div>
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">UX Design<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../design/ux/00-overview.html">UX Design Overview</a></li><li><a href="../design/ux/01-information-architecture/navigation-model.html">Navigation Model</a></li><li><a href="../design/ux/01-information-architecture/screen-inventory.html">Screen Inventory</a></li><li><a href="../design/ux/01-information-architecture/persona-views.html">Persona Views</a></li><li><a href="../design/ux/01-information-architecture/url-structure.html">URL Structure</a></li><li><a href="../design/ux/02-global-patterns/pattern-catalog.html">Pattern Catalog</a></li><li><a href="../design/ux/02-global-patterns/offline-sync-patterns.html">Offline &amp; Sync Patterns</a></li><li><a href="../design/ux/02-global-patterns/notification-patterns.html">Notification Patterns</a></li><li><a href="../design/ux/02-global-patterns/search-patterns.html">Search Patterns</a></li><li><a href="../design/ux/02-global-patterns/settings-help-patterns.html">Settings &amp; Help Patterns</a></li><li><a href="../design/ux/02-global-patterns/security-ux-patterns.html">Security UX Patterns</a></li><li><a href="../design/ux/03-design-system/foundations.html">Design System Foundations</a></li><li><a href="../design/ux/03-design-system/theming-strategy.html">Theming Strategy</a></li><li><a href="../design/ux/03-design-system/component-inventory.html">Component Inventory</a></li><li><a href="../design/ux/03-design-system/responsive-strategy.html">Responsive Strategy</a></li><li><a href="../design/ux/04-wireframes/index.html">Wireframes</a></li><li><a href="../design/ux/04-wireframes/navigation-shell/navigation-shell.html">Navigation Shell Wireframes</a></li><li><a href="../design/ux/04-wireframes/dashboards/dashboards.html">Dashboard Wireframes</a></li><li><a href="../design/ux/04-wireframes/field-mode/field-mode.html">Field Mode Wireframes</a></li><li><a href="../design/ux/04-wireframes/onboarding/onboarding.html">Onboarding Wireframes</a></li><li><a href="../design/ux/04-wireframes/messaging/messaging.html">Messaging Wireframes</a></li><li><a href="../design/ux/04-wireframes/supporter/supporter-portal.html">Supporter Portal Wireframes</a></li><li><a href="../design/ux/04-wireframes/alliance/alliance.html">Alliance Wireframes</a></li><li><a href="../design/ux/04-wireframes/crm/crm.html">CRM / People Wireframes</a></li><li><a href="../design/ux/04-wireframes/field-ops/field-ops.html">Field Operations (Admin) Wireframes</a></li><li><a href="../design/ux/04-wireframes/fundraising/fundraising.html">Fundraising Wireframes</a></li><li><a href="../design/ux/04-wireframes/communications/communications.html">Communications Wireframes</a></li><li><a href="../design/ux/04-wireframes/social-media/social-media.html">Social Media Wireframes</a></li><li><a href="../design/ux/04-wireframes/events/events.html">Events Wireframes</a></li><li><a href="../design/ux/04-wireframes/press/press.html">Press &amp; Media Wireframes</a></li><li><a href="../design/ux/04-wireframes/activism/activism.html">Activism &amp; Engagement Campaign Wireframes</a></li><li><a href="../design/ux/04-wireframes/gotv/gotv.html">GOTV Admin Wireframes</a></li><li><a href="../design/ux/04-wireframes/settings/settings.html">Settings &amp; Admin Wireframes</a></li><li><a href="../design/ux/04-wireframes/auth/auth.html">Authentication Wireframes</a></li><li><a href="../design/ux/04-wireframes/profile/profile.html">User Profile Wireframes</a></li><li><a href="../design/ux/04-wireframes/help/help.html">Support &amp; Help Wireframes</a></li><li><a href="../design/ux/04-wireframes/public/public.html">Public Pages Wireframes</a></li><li><a href="../design/ux/04-wireframes/audit.html">Wireframe Audit Report</a></li><li><a href="../design/ux/04-wireframes/content-ops/content-ops.html">Content Operations Wireframes</a></li></ul></div>
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">Decisions<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../decisions/001-platform-architecture.html">ADR-001: Platform Architecture &amp; Deployment</a></li><li><a href="../decisions/002-security-threat-model.html">ADR-002: Security &amp; Threat Model</a></li><li><a href="../decisions/003-identity-access-organization.html">ADR-003: Identity, Access &amp; Organization</a></li><li><a href="../decisions/004-data-model-integrity.html">ADR-004: Data Model &amp; Integrity</a></li><li><a href="../decisions/005-offline-first-sync.html">ADR-005: Offline-First &amp; Sync</a></li><li><a href="../decisions/006-field-operations-gotv.html">ADR-006: Field Operations &amp; GOTV</a></li><li><a href="../decisions/007-fundraising-payments.html">ADR-007: Fundraising &amp; Payments</a></li><li><a href="../decisions/008-communications-messaging.html">ADR-008: Communications &amp; Messaging</a></li><li><a href="../decisions/009-compliance-legal.html">ADR-009: Compliance &amp; Legal Framework</a></li><li><a href="../decisions/010-internationalization-localization.html">ADR-010: Internationalization &amp; Localization</a></li><li><a href="../decisions/011-design-system-ux.html">ADR-011: Design System &amp; UX Foundations</a></li><li><a href="../decisions/012-external-integrations.html">ADR-012: External Integrations</a></li><li><a href="../decisions/013-analytics-ai.html">ADR-013: Analytics &amp; AI</a></li><li><a href="../decisions/014-volunteer-onboarding.html">ADR-014: Volunteer &amp; Onboarding</a></li><li><a href="../decisions/015-product-scope.html">ADR-015: Product Scope Boundaries</a></li><li><a href="../decisions/016-cross-cutting-resolutions.html">ADR-016: Cross-Cutting Resolutions</a></li><li><a href="../decisions/017-sharing-contract-trust-model.html">ADR-017: The Sharing Contract as Universal Trust Primitive</a></li><li><a href="../decisions/018-ai-agent-posture.html">ADR-018: AI Agent Posture</a></li><li><a href="../decisions/019-central-services-and-metered-billing.html">ADR-019: Central Services &amp; Metered Billing</a></li><li><a href="../decisions/020-central-service-line-up-and-builders.html">ADR-020: Central Service Line-up &amp; Builders</a></li><li><a href="../decisions/021-content-approval-pipeline.html">ADR-021: Content Approval Pipeline</a></li><li><a href="../decisions/022-core-modules-and-lanes.html">ADR-022: Core, Modules &amp; Lanes</a></li><li><a href="../decisions/023-surfaces-chat-admin-field.html">ADR-023: Surfaces — a Headless Core, Chat, Admin &amp; Field</a></li><li><a href="../decisions/024-event-bus-as-federation.html">ADR-024: The Event Bus as Federation</a></li><li><a href="../decisions/025-identity-per-client.html">ADR-025: Identity per Client</a></li><li><a href="../decisions/026-two-lane-pricing.html">ADR-026: Two-Lane Pricing</a></li><li><a href="../decisions/027-third-party-crm-sync-and-connectors.html">ADR-027: Third-Party CRM Sync &amp; Connectors</a></li><li><a href="../decisions/028-coaching.html">ADR-028: Coaching</a></li><li><a href="../decisions/ux-decisions.html">UX Decisions — Wireframe Phase</a></li></ul></div>
+<div class="nav-section open"><button type="button" class="nav-section-title" aria-expanded="true">Diary<span class="chev" aria-hidden="true"></span></button><ul><li><a href="./index.html">Project Diary</a></li><li><a href="./01-from-description-to-specification.html">Entry 1: From Description to Specification</a></li><li><a href="./02-the-architecture-session.html">Entry 2: The Architecture Session</a></li><li><a href="./03-information-architecture.html">Entry 3: Information Architecture</a></li><li><a href="./04-design-system-and-wireframes.html">Entry 4: The Design System and Wireframes</a></li><li><a href="./05-the-wireframe-audit.html">Entry 5: The Wireframe Audit</a></li><li><a href="./06-resolving-the-open-questions.html">Entry 6: Resolving the Open Questions</a></li><li><a href="./07-reconciling-the-architecture.html">Entry 7: Reconciling the Architecture</a></li><li><a href="./08-housekeeping.html">Diary Entry 8: Housekeeping</a></li><li><a href="./09-the-documentation-website.html">Diary Entry 9: The Documentation Website</a></li><li><a href="./10-the-spanish-edition.html">Diary Entry 10: The Spanish Edition</a></li><li><a href="./11-translating-the-rest.html">Diary Entry 11: Translating the Rest</a></li><li><a href="./12-the-agent-question.html">Diary Entry 12: The Agent Question</a></li><li><a href="./13-services-a-la-carte.html">Diary Entry 13: Services à la Carte</a></li><li><a href="./14-the-proposal-under-review.html">Diary Entry 14: The Proposal Under Review</a></li><li><a href="./15-not-a-creator-tool.html">Diary Entry 15: Not a Creator Tool</a></li><li><a href="./16-the-pitch.html">Diary Entry 16: The Pitch</a></li><li><a href="./17-two-lanes.html">Diary Entry 17: Two Lanes</a></li><li><a href="./18-the-coach.html" aria-current="page" class="active">Diary Entry 18: The Coach</a></li></ul></div>
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">Project &amp; Internal<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../claude/MEMORY.html">Memory</a></li><li><a href="../claude/SKILLS.html">Skills</a></li><li><a href="../CLAUDE.html">GreenGrass</a></li></ul></div>
+    </nav>
+  </aside>
+  <main id="content" class="content">
+    <nav class="breadcrumb" aria-label="Breadcrumb">Diary</nav>
+    <article class="prose">
+<h1 id="diary-entry-18-the-coach" tabindex="-1"><a class="heading-anchor" href="#diary-entry-18-the-coach" aria-hidden="true">#</a> Diary Entry 18: The Coach</h1>
+<p><strong>Date:</strong> 2026-11-25</p>
+<hr>
+<h2 id="the-task" tabindex="-1"><a class="heading-anchor" href="#the-task" aria-hidden="true">#</a> The Task</h2>
+<p>On Tuesday I got on a call with Ned and Lars from Tectonica, in Barcelona. Lars shared his screen and walked me through a sandbox: an organization called Progressive Voter Action, full of sample data, with a yellow badge in the corner and a switch for viewing it as the organization or as the leader of a local group. I came out of the call with four screenshots and an idea I didn't have going in.</p>
+<p>There was a lot on those screens. A daily briefing for the organization, a library of videos and tips sorted by where a group is in its life, to-do lists, notes, a public page for each group. Most of it maps onto something the spec already has, or something the spec decided not to have. The piece that stuck was the coach.</p>
+<p>Every role in the sandbox has one. The organization's coach sits at the top of the administrator's home page, under &quot;What do you need to get done today?&quot;, with suggestions like <em>A group is stuck</em> and <em>Announcement talking points</em>. The group leader's coach was in the middle of a conversation when Lars pulled it up. A member had gone to the leader privately about a problem, rather than raising it with the group, and the coach used that to explain Edgar Schein's distinction between a group and a pseudo-group: whether members can deal with their tensions with each other directly, or whether everything has to flow through the leader. Then it asked whether that matched what the leader was seeing.</p>
+<p>That is organizing craft, and GreenGrass has almost none of it. We've spent two years specifying the plumbing of organizing (the CRM, consent per channel, turf, walk lists, the content pipeline) and almost nothing about how to actually do it. The corpus has an AI concierge that can walk you through WhatsApp Business verification, and a training module with quizzes and certification gates. Neither one helps a first-time committee chair figure out what to do when two members stop talking to each other. In the places this platform is built for, there is rarely a trainer in the room when that question comes up.</p>
+<p>So the idea is Tectonica's, and I want that on the record. What follows is what happened when we tried to fit it into a corpus with a gate in the middle of it.</p>
+<h2 id="two-calls-and-two-left-open" tabindex="-1"><a class="heading-anchor" href="#two-calls-and-two-left-open" aria-hidden="true">#</a> Two Calls, and Two Left Open</h2>
+<p>The first call was the name. The sandbox says &quot;eCoach&quot;, and that's their word. Ours is <em>Coach</em>, and it stays <em>Coach</em> in Spanish too, the same way <em>concierge</em> stayed <em>concierge</em>: <em>el coach</em>, <em>los coaches</em>, <em>el Coaching</em>. It's in the glossary now, with a note ruling out <em>asistente</em> and <em>agente</em>, which already belong to other things in this corpus, and <em>entrenador</em>, which sounds like the gym.</p>
+<p>The second call was where coaching lives, and I put it in the Core. Whatever the ADR-018 review ends up deciding about agents (what they can read, what they can do, what gets logged when they do it), coaching is where most people are going to run into it. If coaching were a module, every client that switched it on would carry its own copy of those rules, and sooner or later the chat would be playing by one set and the coaches by another. It's the same argument we made for keeping consent in the CRM, and the same argument for keeping the CRM in the Core: one place where the rule holds, so it can't be honoured in one screen and ignored in the next.</p>
+<p>Two questions I left open, on purpose and with no recommendation attached. Who gets to write a coach: only the Org Admin, staff, team leads, or an alliance writing coaches for its members over the bus. And who writes and maintains the organizing knowledge the coaches draw on, and in which languages. The second one is the expensive one. A lane-neutral coach is only as good as what somebody put into it, and nobody is named yet.</p>
+<h2 id="what-fits-through-the-gate" tabindex="-1"><a class="heading-anchor" href="#what-fits-through-the-gate" aria-hidden="true">#</a> What Fits Through the Gate</h2>
+<p>The irony of this ADR is that the parts of the sandbox that made it feel alive are exactly the parts we can't ship. The briefing that tells the administrator twenty leaders are due for a check-in. The recommendation that says &quot;You have not spoken with Grace Osei in 54 days — the quiet ones are easy to overlook.&quot; The <em>Reach out</em> button next to it. Each of those reads across features, acts on a record, or speaks before anyone asked, and those are three of the four properties ADR-018 gates on.</p>
+<p>So ADR-028 specifies a much smaller thing: a coach that reads the conversation, whatever the person attaches, and the documents the organization has designated for that coach, and returns text. It never speaks first, never acts, and never reads a record. Those are the bounds ADR-020 gave the text builders, applied to a conversation. Everything else from the sandbox is written down in a section that records it for the review and specifies none of it.</p>
+<p>Even the small version isn't clearly through. Reading an organization's strategy and training materials is wider than reading one brief, and whether that counts as &quot;read scope wider than a single feature&quot; is a question only the review can answer. Until it does, ADR-028 treats the coach as gated. That question is the first of twelve the ADR sends to ADR-018, alongside reading records, a coach talking about named members, what happens to the conversations afterward and who can read them, prompt injection from an attached document, and whether a coach is really just the chat with a role's instructions and no tools.</p>
+<p>There's a version of the briefing that sits outside the gate: counts and rules computed without a model and shown as a plain dashboard, which is what ADR-016 did for reallocation suggestions. It needs a specification of local groups first, and that turned out to be the more interesting gap.</p>
+<h2 id="what-the-sandbox-showed-us-about-the-spec" tabindex="-1"><a class="heading-anchor" href="#what-the-sandbox-showed-us-about-the-spec" aria-hidden="true">#</a> What the Sandbox Showed Us About the Spec</h2>
+<p><strong>There is no group leader.</strong> The sandbox is built around standing local groups (a Ward 7 team with a recruitment goal of twenty and a public page of its own) and the people who lead them over months. The corpus has a Volunteer Team Lead, but that role exists for one canvassing day or one phone bank. Everything we've specified is organized around campaigns and operations, not around groups that meet every week whether or not there's an election. ADR-028 records the gap and does not fill it. Filling it is a spec of its own, and probably a conversation with the product side before that.</p>
+<p><strong>The Schein citation became a rule.</strong> The concierge is grounded strictly in the knowledge base, because a wrong answer about election law has real consequences. A coach can't work that way. Advice about a stalled group draws on what people have learned about groups, and some of that is in books. So the coach cites the organization's document when it draws on one, names the author and the work when it borrows an idea, and offers everything else as its own advice and not as fact. It's the provenance rule from comms intelligence, adapted from findings to advice. The concierge keeps its stricter rule, and a coach that runs into a question about compliance sends the person there.</p>
+<p>One more detail I liked. The sandbox carried a banner over the coach saying that a real deployment would layer in the organization's own context (mission, brand, guardrails) and that this sandbox didn't have it yet. A demo that says plainly what it isn't is the same instinct as the pitch's rule that everything it generates is marked as demo output. That banner is also where the context layer in ADR-028 comes from: the organization writes its mission, voice and guardrails once, designates the documents its coaches can use, and every coach builds on that.</p>
+<h2 id="where-it-stands" tabindex="-1"><a class="heading-anchor" href="#where-it-stands" aria-hidden="true">#</a> Where It Stands</h2>
+<table>
+<thead>
+<tr>
+<th>Artifact</th>
+<th>Count</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Specs</td>
+<td>17</td>
+<td><code>coaching.md</code> added; product, support and users cross-referenced</td>
+</tr>
+<tr>
+<td>ADRs</td>
+<td>28</td>
+<td>22 accepted, 6 proposed</td>
+</tr>
+<tr>
+<td>Decided in ADR-028</td>
+<td>2</td>
+<td>Coaching is part of the Core; the name is <em>Coach</em> in English and Spanish</td>
+</tr>
+<tr>
+<td>Questions sent to the ADR-018 review</td>
+<td>12</td>
+<td>Recorded in ADR-018 and ADR-028</td>
+</tr>
+<tr>
+<td>Roles the corpus lacks</td>
+<td>1</td>
+<td>A leader of a standing local group</td>
+</tr>
+<tr>
+<td>Diary entries</td>
+<td>18</td>
+<td>Current</td>
+</tr>
+<tr>
+<td>Production gate</td>
+<td>1</td>
+<td>Open, and now in front of the coaches as well as the chat</td>
+</tr>
+</tbody>
+</table>
+<h2 id="next" tabindex="-1"><a class="heading-anchor" href="#next" aria-hidden="true">#</a> Next</h2>
+<p>The two open questions, which are the product side's to answer. A decision on whether standing local groups belong in the spec at all, because the rule-based briefing and most of what made the sandbox useful depend on it. And the review, which has twelve more questions on it than it did last week.</p>
+
+    </article>
+  </main>
+  <div class="toc-rail"><nav class="toc" aria-label="On this page"><div class="toc-label">On this page</div><ul><li class="toc-2"><a href="#the-task"># The Task</a></li><li class="toc-2"><a href="#two-calls-and-two-left-open"># Two Calls, and Two Left Open</a></li><li class="toc-2"><a href="#what-fits-through-the-gate"># What Fits Through the Gate</a></li><li class="toc-2"><a href="#what-the-sandbox-showed-us-about-the-spec"># What the Sandbox Showed Us About the Spec</a></li><li class="toc-2"><a href="#where-it-stands"># Where It Stands</a></li><li class="toc-2"><a href="#next"># Next</a></li></ul></nav></div>
+</div>
+<script src="../assets/search.js" defer></script>
+<script src="../assets/app.js" defer></script>
+</body>
+</html>

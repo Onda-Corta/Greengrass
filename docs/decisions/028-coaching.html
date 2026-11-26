@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en" data-base="../" data-no-results="No results for">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ADR-028: Coaching · GreenGrass</title>
+<meta name="description" content="ADR-028: Coaching — GreenGrass spec &amp; design documentation.">
+<link rel="alternate" hreflang="en" href="./028-coaching.html">
+<link rel="alternate" hreflang="es" href="../es/decisions/028-coaching.html">
+<link rel="alternate" hreflang="x-default" href="./028-coaching.html">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%232563eb'/%3E%3Cstop offset='1' stop-color='%2316a34a'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='32' height='32' rx='7' fill='url(%23g)'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="../assets/styles.css">
+</head>
+<body>
+<a class="skip-link" href="#content">Skip to content</a>
+<header class="site-header">
+  <button type="button" class="menu-toggle" aria-label="Toggle navigation" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+  <a class="brand" href="../index.html">
+    <span class="brand-mark" aria-hidden="true"></span>
+    <span class="brand-text"><strong>GreenGrass</strong><small>Spec &amp; Design</small></span>
+  </a>
+  <div class="search">
+    <input type="search" id="search-input" placeholder="Search docs…" autocomplete="off" aria-label="Search documentation">
+    <div id="search-results" class="search-results" hidden></div>
+  </div>
+  <nav class="lang-switch" aria-label="Language"><span class="lang-opt active" aria-current="true">EN</span><a class="lang-opt" href="../es/decisions/028-coaching.html" hreflang="es" lang="es" title="Ver esta página en español">ES</a></nav>
+  <button type="button" class="theme-toggle" aria-label="Toggle dark mode" title="Toggle dark mode">
+    <span class="theme-icon" aria-hidden="true"></span>
+  </button>
+</header>
+<div class="layout">
+  <div class="sidebar-backdrop" hidden></div>
+  <aside class="sidebar" aria-label="Documentation navigation">
+    <nav class="nav">
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">Home<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../index.html">GreenGrass</a></li></ul></div>
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">Specifications<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../spec/pitch.html">Pre-MVP Pitch</a></li><li><a href="../spec/demo.html">Campaign Approval Demo Spec</a></li><li><a href="../spec/product.html">Project: GreenGrass</a></li><li><a href="../spec/mvp.html">GreenGrass MVP — Product Plan</a></li><li><a href="../spec/users.html">Users &amp; Roles</a></li><li><a href="../spec/workflows.html">Core Workflows</a></li><li><a href="../spec/geography.html">Target Geography</a></li><li><a href="../spec/security.html">Security &amp; Threat Model</a></li><li><a href="../spec/compliance.html">Compliance &amp; Legal Framework</a></li><li><a href="../spec/fundraising.html">Fundraising &amp; Payment Infrastructure</a></li><li><a href="../spec/integrations.html">External Integrations</a></li><li><a href="../spec/support.html">Tenant Support &amp; Onboarding</a></li><li><a href="../spec/gotv.html">Get Out The Vote &amp; Election Day Operations</a></li><li><a href="../spec/messaging.html">Internal Communications &amp; Notifications</a></li><li><a href="../spec/press.html">Press, Media &amp; Public Communications</a></li><li><a href="../spec/comms-intelligence.html">Comms Intelligence — Post-MVP Roadmap</a></li><li><a href="../spec/coaching.html">Coaching</a></li></ul></div>
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">Architecture<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../design/architecture/system.html">System Architecture</a></li></ul></div>
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">UX Design<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../design/ux/00-overview.html">UX Design Overview</a></li><li><a href="../design/ux/01-information-architecture/navigation-model.html">Navigation Model</a></li><li><a href="../design/ux/01-information-architecture/screen-inventory.html">Screen Inventory</a></li><li><a href="../design/ux/01-information-architecture/persona-views.html">Persona Views</a></li><li><a href="../design/ux/01-information-architecture/url-structure.html">URL Structure</a></li><li><a href="../design/ux/02-global-patterns/pattern-catalog.html">Pattern Catalog</a></li><li><a href="../design/ux/02-global-patterns/offline-sync-patterns.html">Offline &amp; Sync Patterns</a></li><li><a href="../design/ux/02-global-patterns/notification-patterns.html">Notification Patterns</a></li><li><a href="../design/ux/02-global-patterns/search-patterns.html">Search Patterns</a></li><li><a href="../design/ux/02-global-patterns/settings-help-patterns.html">Settings &amp; Help Patterns</a></li><li><a href="../design/ux/02-global-patterns/security-ux-patterns.html">Security UX Patterns</a></li><li><a href="../design/ux/03-design-system/foundations.html">Design System Foundations</a></li><li><a href="../design/ux/03-design-system/theming-strategy.html">Theming Strategy</a></li><li><a href="../design/ux/03-design-system/component-inventory.html">Component Inventory</a></li><li><a href="../design/ux/03-design-system/responsive-strategy.html">Responsive Strategy</a></li><li><a href="../design/ux/04-wireframes/index.html">Wireframes</a></li><li><a href="../design/ux/04-wireframes/navigation-shell/navigation-shell.html">Navigation Shell Wireframes</a></li><li><a href="../design/ux/04-wireframes/dashboards/dashboards.html">Dashboard Wireframes</a></li><li><a href="../design/ux/04-wireframes/field-mode/field-mode.html">Field Mode Wireframes</a></li><li><a href="../design/ux/04-wireframes/onboarding/onboarding.html">Onboarding Wireframes</a></li><li><a href="../design/ux/04-wireframes/messaging/messaging.html">Messaging Wireframes</a></li><li><a href="../design/ux/04-wireframes/supporter/supporter-portal.html">Supporter Portal Wireframes</a></li><li><a href="../design/ux/04-wireframes/alliance/alliance.html">Alliance Wireframes</a></li><li><a href="../design/ux/04-wireframes/crm/crm.html">CRM / People Wireframes</a></li><li><a href="../design/ux/04-wireframes/field-ops/field-ops.html">Field Operations (Admin) Wireframes</a></li><li><a href="../design/ux/04-wireframes/fundraising/fundraising.html">Fundraising Wireframes</a></li><li><a href="../design/ux/04-wireframes/communications/communications.html">Communications Wireframes</a></li><li><a href="../design/ux/04-wireframes/social-media/social-media.html">Social Media Wireframes</a></li><li><a href="../design/ux/04-wireframes/events/events.html">Events Wireframes</a></li><li><a href="../design/ux/04-wireframes/press/press.html">Press &amp; Media Wireframes</a></li><li><a href="../design/ux/04-wireframes/activism/activism.html">Activism &amp; Engagement Campaign Wireframes</a></li><li><a href="../design/ux/04-wireframes/gotv/gotv.html">GOTV Admin Wireframes</a></li><li><a href="../design/ux/04-wireframes/settings/settings.html">Settings &amp; Admin Wireframes</a></li><li><a href="../design/ux/04-wireframes/auth/auth.html">Authentication Wireframes</a></li><li><a href="../design/ux/04-wireframes/profile/profile.html">User Profile Wireframes</a></li><li><a href="../design/ux/04-wireframes/help/help.html">Support &amp; Help Wireframes</a></li><li><a href="../design/ux/04-wireframes/public/public.html">Public Pages Wireframes</a></li><li><a href="../design/ux/04-wireframes/audit.html">Wireframe Audit Report</a></li><li><a href="../design/ux/04-wireframes/content-ops/content-ops.html">Content Operations Wireframes</a></li></ul></div>
+<div class="nav-section open"><button type="button" class="nav-section-title" aria-expanded="true">Decisions<span class="chev" aria-hidden="true"></span></button><ul><li><a href="./001-platform-architecture.html">ADR-001: Platform Architecture &amp; Deployment</a></li><li><a href="./002-security-threat-model.html">ADR-002: Security &amp; Threat Model</a></li><li><a href="./003-identity-access-organization.html">ADR-003: Identity, Access &amp; Organization</a></li><li><a href="./004-data-model-integrity.html">ADR-004: Data Model &amp; Integrity</a></li><li><a href="./005-offline-first-sync.html">ADR-005: Offline-First &amp; Sync</a></li><li><a href="./006-field-operations-gotv.html">ADR-006: Field Operations &amp; GOTV</a></li><li><a href="./007-fundraising-payments.html">ADR-007: Fundraising &amp; Payments</a></li><li><a href="./008-communications-messaging.html">ADR-008: Communications &amp; Messaging</a></li><li><a href="./009-compliance-legal.html">ADR-009: Compliance &amp; Legal Framework</a></li><li><a href="./010-internationalization-localization.html">ADR-010: Internationalization &amp; Localization</a></li><li><a href="./011-design-system-ux.html">ADR-011: Design System &amp; UX Foundations</a></li><li><a href="./012-external-integrations.html">ADR-012: External Integrations</a></li><li><a href="./013-analytics-ai.html">ADR-013: Analytics &amp; AI</a></li><li><a href="./014-volunteer-onboarding.html">ADR-014: Volunteer &amp; Onboarding</a></li><li><a href="./015-product-scope.html">ADR-015: Product Scope Boundaries</a></li><li><a href="./016-cross-cutting-resolutions.html">ADR-016: Cross-Cutting Resolutions</a></li><li><a href="./017-sharing-contract-trust-model.html">ADR-017: The Sharing Contract as Universal Trust Primitive</a></li><li><a href="./018-ai-agent-posture.html">ADR-018: AI Agent Posture</a></li><li><a href="./019-central-services-and-metered-billing.html">ADR-019: Central Services &amp; Metered Billing</a></li><li><a href="./020-central-service-line-up-and-builders.html">ADR-020: Central Service Line-up &amp; Builders</a></li><li><a href="./021-content-approval-pipeline.html">ADR-021: Content Approval Pipeline</a></li><li><a href="./022-core-modules-and-lanes.html">ADR-022: Core, Modules &amp; Lanes</a></li><li><a href="./023-surfaces-chat-admin-field.html">ADR-023: Surfaces — a Headless Core, Chat, Admin &amp; Field</a></li><li><a href="./024-event-bus-as-federation.html">ADR-024: The Event Bus as Federation</a></li><li><a href="./025-identity-per-client.html">ADR-025: Identity per Client</a></li><li><a href="./026-two-lane-pricing.html">ADR-026: Two-Lane Pricing</a></li><li><a href="./027-third-party-crm-sync-and-connectors.html">ADR-027: Third-Party CRM Sync &amp; Connectors</a></li><li><a href="./028-coaching.html" aria-current="page" class="active">ADR-028: Coaching</a></li><li><a href="./ux-decisions.html">UX Decisions — Wireframe Phase</a></li></ul></div>
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">Diary<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../diary/index.html">Project Diary</a></li><li><a href="../diary/01-from-description-to-specification.html">Entry 1: From Description to Specification</a></li><li><a href="../diary/02-the-architecture-session.html">Entry 2: The Architecture Session</a></li><li><a href="../diary/03-information-architecture.html">Entry 3: Information Architecture</a></li><li><a href="../diary/04-design-system-and-wireframes.html">Entry 4: The Design System and Wireframes</a></li><li><a href="../diary/05-the-wireframe-audit.html">Entry 5: The Wireframe Audit</a></li><li><a href="../diary/06-resolving-the-open-questions.html">Entry 6: Resolving the Open Questions</a></li><li><a href="../diary/07-reconciling-the-architecture.html">Entry 7: Reconciling the Architecture</a></li><li><a href="../diary/08-housekeeping.html">Diary Entry 8: Housekeeping</a></li><li><a href="../diary/09-the-documentation-website.html">Diary Entry 9: The Documentation Website</a></li><li><a href="../diary/10-the-spanish-edition.html">Diary Entry 10: The Spanish Edition</a></li><li><a href="../diary/11-translating-the-rest.html">Diary Entry 11: Translating the Rest</a></li><li><a href="../diary/12-the-agent-question.html">Diary Entry 12: The Agent Question</a></li><li><a href="../diary/13-services-a-la-carte.html">Diary Entry 13: Services à la Carte</a></li><li><a href="../diary/14-the-proposal-under-review.html">Diary Entry 14: The Proposal Under Review</a></li><li><a href="../diary/15-not-a-creator-tool.html">Diary Entry 15: Not a Creator Tool</a></li><li><a href="../diary/16-the-pitch.html">Diary Entry 16: The Pitch</a></li><li><a href="../diary/17-two-lanes.html">Diary Entry 17: Two Lanes</a></li><li><a href="../diary/18-the-coach.html">Diary Entry 18: The Coach</a></li></ul></div>
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">Project &amp; Internal<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../claude/MEMORY.html">Memory</a></li><li><a href="../claude/SKILLS.html">Skills</a></li><li><a href="../CLAUDE.html">GreenGrass</a></li></ul></div>
+    </nav>
+  </aside>
+  <main id="content" class="content">
+    <nav class="breadcrumb" aria-label="Breadcrumb">Decisions</nav>
+    <article class="prose">
+<h1 id="adr-028-coaching" tabindex="-1"><a class="heading-anchor" href="#adr-028-coaching" aria-hidden="true">#</a> ADR-028: Coaching</h1>
+<p><strong>Status:</strong> Proposed
+<strong>Date:</strong> 2026-11-25
+<strong>Sources:</strong> <code>spec/coaching.md</code>, <code>spec/users.md</code>, <code>spec/support.md</code>, <code>spec/comms-intelligence.md</code>, <code>design/architecture/system.md</code>, <code>decisions/005-offline-first-sync.md</code>, <code>decisions/013-analytics-ai.md</code>, <code>decisions/014-volunteer-onboarding.md</code>, <code>decisions/016-cross-cutting-resolutions.md</code>, <code>decisions/017-sharing-contract-trust-model.md</code>, <code>decisions/018-ai-agent-posture.md</code>, <code>decisions/019-central-services-and-metered-billing.md</code>, <code>decisions/020-central-service-line-up-and-builders.md</code>, <code>decisions/022-core-modules-and-lanes.md</code>, <code>decisions/023-surfaces-chat-admin-field.md</code>, <code>decisions/026-two-lane-pricing.md</code></p>
+<h2 id="context" tabindex="-1"><a class="heading-anchor" href="#context" aria-hidden="true">#</a> Context</h2>
+<p>On 2026-11-24 the project was shown the sandbox of a distributed-organizing product. It gives every role an AI coach. An organization-management coach sits at the top of the administrator's home page, under the question &quot;What do you need to get done today?&quot;, with suggestions such as <em>A group is stuck</em> and <em>Announcement talking points</em>. A group-leader coach answers a leader who describes a member coming to them privately, and explains it with a named author's idea about how groups form. The organization can write coaches of its own. A context layer the organization sets (mission, brand, guardrails) informs every coach. Around the coaches sit a daily briefing, a ranked list of recommended actions with <em>Add task</em> and <em>Reach out</em> buttons, voice input, past conversations, a share button and a notice that coaches use AI and can make mistakes.</p>
+<p>The corpus has decided AI five times (<a href="./018-ai-agent-posture.html#context">ADR-018 § Context</a>). Two of those decisions are close to a coach and are not one. The AI concierge (<a href="./014-volunteer-onboarding.html#ai-first-support-concierge-with-human-escalation">ADR-014</a>) helps with the platform and is grounded strictly in the knowledge base. A text builder (<a href="./020-central-service-line-up-and-builders.html#builders-text-accepted-images-and-video-proposed">ADR-020</a>) turns a brief into a draft. Nothing in the corpus helps a person think through their own work: how to run a meeting, what to do about a group that has stalled, what to say in an announcement.</p>
+<p>The chat of <a href="./023-surfaces-chat-admin-field.html#the-chat-as-the-persons-hands">ADR-023</a> is the closest thing. A coach shares its shape, a conversation with a model, and much of the sandbox's coaching needs exactly what the chat needs: reading across features, acting on records, speaking first. That is the agent the ADR-018 review exists to settle.</p>
+<p>This ADR is <code>Proposed</code>. Two things in it are decided, and are marked.</p>
+<table>
+<thead>
+<tr>
+<th>Item</th>
+<th>Standing</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Coaching is part of the Core</td>
+<td>Decided</td>
+</tr>
+<tr>
+<td>The name: <em>Coach</em>, in English and in Spanish</td>
+<td>Decided</td>
+</tr>
+<tr>
+<td>What a coach is, and how it differs from the concierge, the builders and the chat</td>
+<td>Proposed</td>
+</tr>
+<tr>
+<td>Role coaches and coaches the organization writes</td>
+<td>Proposed</td>
+</tr>
+<tr>
+<td>The bounded coach</td>
+<td>Proposed</td>
+</tr>
+<tr>
+<td>The organization's context layer</td>
+<td>Proposed</td>
+</tr>
+<tr>
+<td>Briefings, recommended actions, acting from a coach, reading records</td>
+<td>Proposed, and waiting on the ADR-018 review</td>
+</tr>
+<tr>
+<td>Who may write a coach; who writes and maintains the organizing knowledge coaches draw on</td>
+<td>Open</td>
+</tr>
+</tbody>
+</table>
+<h3 id="conflicts-this-adr-resolves" tabindex="-1"><a class="heading-anchor" href="#conflicts-this-adr-resolves" aria-hidden="true">#</a> Conflicts this ADR resolves</h3>
+<ol>
+<li><strong><a href="./022-core-modules-and-lanes.html#what-the-core-contains">ADR-022 § What the Core contains</a></strong> lists no coaching. This ADR adds it, as decided. The Core must stay lane-neutral, and coaching is: what a coach knows about organizing is the client's context and the lane's configuration, not the Core's.</li>
+<li><strong><a href="../design/architecture/system.html#ai-concierge">system.md § AI concierge</a></strong> grounds the concierge strictly in the knowledge base and platform documentation, with &quot;no broader reasoning or external knowledge&quot;. The coach in the sandbox draws on general knowledge of how groups work. The concierge's rule stands as written, for the concierge. The coach's grounding is proposed below and is a different rule.</li>
+<li><strong><a href="../spec/users.html#volunteer-team-lead">users.md § Volunteer Team Lead</a></strong> is a field-level role for an operation: a canvassing day, a phone bank. The sandbox's group leader runs a standing local group over months. No role in the corpus describes that. Named, not resolved: this ADR gives coaches to the roles that exist and adds no role.</li>
+<li><strong><a href="./018-ai-agent-posture.html#no-agent-capability-reaches-production-until-this-adr-is-accepted">ADR-018 § No agent capability reaches production until this ADR is accepted</a></strong> gates three properties the sandbox's coaching has. The briefing and the recommendations read groups, contact history and setup status: read scope wider than one feature. <em>Add task</em> and <em>Reach out</em> act: tool authority. The briefing appears before anyone asks: autonomous action. The gate stands. This ADR splits coaching into a bounded coach, drawn to have none of the four properties, and the rest, which waits.</li>
+<li><strong><a href="./016-cross-cutting-resolutions.html">ADR-016</a> §49</strong> commits that &quot;staff can see exactly why a suggestion was made&quot;, and made reallocation suggestions rule-based for v1 to keep that promise. A model's recommended actions cannot keep it as written. Named, and sent to the review with the recommendations.</li>
+</ol>
+<h2 id="decision" tabindex="-1"><a class="heading-anchor" href="#decision" aria-hidden="true">#</a> Decision</h2>
+<h3 id="coaching-is-part-of-the-core" tabindex="-1"><a class="heading-anchor" href="#coaching-is-part-of-the-core" aria-hidden="true">#</a> Coaching is part of the Core</h3>
+<p><strong>Decided.</strong> Every instance has Coaching, in both lanes, the way every instance has the CRM.</p>
+<p>The reason is the agent posture. Coaching is where most people will meet whatever <a href="./018-ai-agent-posture.html">ADR-018</a> settles: read scope, tool authority, autonomy, audit. If coaching were a module, each client that enabled it would carry its own version of those rules, and the rules could drift between what the chat does and what a coach does. In the Core, coaching is built on the same posture as the chat and changes when the posture changes. It is the CRM's reasoning applied to AI: one place where the rule holds, so it cannot be honoured in one place and ignored in another.</p>
+<p>What follows from that:</p>
+<ul>
+<li><strong>The Core never depends on a module</strong> (<a href="./022-core-modules-and-lanes.html">ADR-022</a>). If a coach is ever allowed to read a module's data, it reads it through operations the module declares in its manifest, and only when the module is enabled.</li>
+<li><strong>Being in the Core does not move coaching past the gate.</strong> The ADR-018 gate binds the whole Core (<a href="./023-surfaces-chat-admin-field.html#the-adr-018-gate-binds-the-whole-core">ADR-023 § The ADR-018 gate binds the whole Core</a>). What may ship before the review is only what has none of the four gated properties.</li>
+<li><strong>The cost is metered.</strong> Every turn is an inference call, metered under <a href="./019-central-services-and-metered-billing.html">ADR-019</a> and priced by each lane's rule (<a href="./026-two-lane-pricing.html">ADR-026</a>), or billed to the client by its own provider under BYOM (<a href="./016-cross-cutting-resolutions.html">ADR-016</a> §38).</li>
+</ul>
+<p><strong>Alternatives considered:</strong> Coaching as a module in the catalogue was rejected for the reason above: a module that is in practice an agent would restate the agent posture per client. Coaching as a political-lane module was rejected because the mechanism is lane-neutral. A commercial client's account teams have roles and craft too. Folding coaches into the chat with no separate concept was not decided either way, and is sent to the review (question 12 below).</p>
+<h3 id="the-name" tabindex="-1"><a class="heading-anchor" href="#the-name" aria-hidden="true">#</a> The name</h3>
+<p><strong>Decided.</strong> The capability is <em>Coaching</em> and each assistant is a <em>Coach</em>, in English and in Spanish. In Spanish both words stay as they are: <em>el coach</em>, <em>los coaches</em>, <em>el Coaching</em>. The sandbox's &quot;eCoach&quot; belongs to another product and is not used. Neither are <em>asistente</em>, which the glossary gives to <code>wizard</code>, <em>agente</em>, which is the AI agent ADR-018 gates, or <em>concierge</em>, which is support's.</p>
+<h3 id="what-a-coach-is" tabindex="-1"><a class="heading-anchor" href="#what-a-coach-is" aria-hidden="true">#</a> What a coach is</h3>
+<p>Proposed.</p>
+<p>A coach is a conversation with a model, set up for one role or one purpose, that helps a person with their own work. It advises, explains and drafts. It is not one of the three AI features it sits beside:</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>AI concierge</th>
+<th>Text builder</th>
+<th>Chat</th>
+<th>Coach</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>For</td>
+<td>Help with the platform</td>
+<td>A draft from a brief</td>
+<td>Doing the work</td>
+<td>Thinking through the work</td>
+</tr>
+<tr>
+<td>Reads</td>
+<td>The knowledge base and platform documentation</td>
+<td>What the person hands it</td>
+<td>What the person may read, when they ask</td>
+<td>The conversation, attachments, and the context the organization designates</td>
+</tr>
+<tr>
+<td>Acts</td>
+<td>No; escalates to a person</td>
+<td>No; returns a draft</td>
+<td>Yes; every write confirmed</td>
+<td>No (the bounded coach)</td>
+</tr>
+<tr>
+<td>Standing</td>
+<td>Accepted (<a href="./014-volunteer-onboarding.html">ADR-014</a>)</td>
+<td>Accepted (<a href="./020-central-service-line-up-and-builders.html">ADR-020</a>)</td>
+<td>Proposed and gated (<a href="./023-surfaces-chat-admin-field.html">ADR-023</a>)</td>
+<td>Proposed (this ADR)</td>
+</tr>
+</tbody>
+</table>
+<p>There are two kinds:</p>
+<ul>
+<li><strong>Role coaches.</strong> One for each role template in <a href="../spec/users.html#permissions-model">users.md § Permissions Model</a> except Supporter, so for the Org Admin, each staff template, the Volunteer, the Volunteer Team Lead and the Candidate. The lane supplies their starting instructions; the commercial lane supplies its own roles.</li>
+<li><strong>Coaches the organization writes.</strong> A name, a purpose, instructions, the context documents it may use, and the roles that may open it. Who may write one is open.</li>
+</ul>
+<h3 id="the-bounded-coach" tabindex="-1"><a class="heading-anchor" href="#the-bounded-coach" aria-hidden="true">#</a> The bounded coach</h3>
+<p>Proposed. These are the bounds of <a href="./020-central-service-line-up-and-builders.html#builders-text-accepted-images-and-video-proposed">ADR-020 § Builders</a>, applied to a conversation.</p>
+<ul>
+<li><strong>A person opens it.</strong> A coach never speaks first and never runs in the background.</li>
+<li><strong>It reads three things:</strong> the conversation, what the person attaches, and the context documents the organization designated for that coach. It has no read path into contacts, voter records, groups, messages, donations, events, audit data or compartments.</li>
+<li><strong>It returns text.</strong> It invokes no platform operation. A draft leaves the conversation only when the person copies it somewhere, and once there it enters whatever approval that kind of content already has (<a href="./021-content-approval-pipeline.html">ADR-021</a>).</li>
+<li><strong>It holds one credential:</strong> to the model provider, under the client's entitlement or its own BYOM provider.</li>
+<li><strong>It keeps ADR-013's guardrails.</strong> It states no fact, figure or claim about the organization that is not in the conversation or the context.</li>
+<li><strong>It says what it rests on.</strong> A statement taken from a context document cites the document. An idea taken from a published author names the author and the work. Everything else is offered as the coach's own advice. This adapts <a href="../spec/comms-intelligence.html#82-provenance-is-mandatory">comms-intelligence.md § 8.2 Provenance is mandatory</a> to advice, where the rule there is written for findings.</li>
+<li><strong>It needs a connection.</strong> No field task depends on a coach (<a href="./005-offline-first-sync.html">ADR-005</a>, <a href="./023-surfaces-chat-admin-field.html">ADR-023</a>).</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Gated property</th>
+<th>The bounded coach</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Read scope</td>
+<td>The conversation, attachments and designated context documents. Whether designated documents count as &quot;wider than a single feature&quot; is question 1 below</td>
+</tr>
+<tr>
+<td>Tool authority</td>
+<td>None</td>
+</tr>
+<tr>
+<td>Autonomous action</td>
+<td>None</td>
+</tr>
+<tr>
+<td>Credential breadth</td>
+<td>The model provider only</td>
+</tr>
+</tbody>
+</table>
+<p>A coach with no context documents reads only what the person hands it, which is a text builder's read scope exactly. A coach with context documents waits on question 1. Until the review answers it, both are treated as gated.</p>
+<h3 id="the-organizations-context-layer" tabindex="-1"><a class="heading-anchor" href="#the-organizations-context-layer" aria-hidden="true">#</a> The organization's context layer</h3>
+<p>Proposed.</p>
+<p>The organization writes once what every coach builds on:</p>
+<ul>
+<li><strong>Mission and voice:</strong> what the organization is for and how it speaks.</li>
+<li><strong>Guardrails:</strong> topics a coach declines, positions it never takes, language it avoids.</li>
+<li><strong>Context documents:</strong> items from the content store (<a href="./021-content-approval-pipeline.html">ADR-021</a>) the organization designates, such as its strategy, its training materials (<a href="../spec/support.html#in-platform-training-module">support.md § In-Platform Training Module</a>) and its knowledge base. Each coach uses the documents designated for it.</li>
+</ul>
+<p>The layer lives in the instance and never crosses to another. A document held under a sharing contract cannot be designated, because the platform is never a party to a contract (<a href="./017-sharing-contract-trust-model.html">ADR-017</a>). Changes to the layer are logged with the person who made them. The lane supplies defaults.</p>
+<p>The context layer is what ADR-018's harness drawing calls <em>Strategy</em> and <em>Knowledge base</em> (<a href="./018-ai-agent-posture.html#the-per-tenant-harness-as-drawn">ADR-018 § The per-tenant harness, as drawn</a>), specified for coaches. That makes it the harness's input, not the harness, and leaves the harness's other two sources, geo data and the CRM, out.</p>
+<h3 id="what-waits-on-the-adr-018-review" tabindex="-1"><a class="heading-anchor" href="#what-waits-on-the-adr-018-review" aria-hidden="true">#</a> What waits on the ADR-018 review</h3>
+<p>Recorded here so the review sees the whole of what was shown. None of it is specified for production, and nothing may be built on it as if it were.</p>
+<ol>
+<li><strong>Briefings.</strong> A daily summary of the person's scope: groups active, people due for contact, setup unfinished. It reads beyond the conversation, and it either speaks first or runs on a schedule a person set.</li>
+<li><strong>Recommended actions.</strong> A ranked list such as &quot;You have not spoken with a member in 54 days.&quot; It reads contact history, raises ADR-016 §49's explainability promise, and ranks identifiable people.</li>
+<li><strong>Acting from a coach.</strong> <em>Add task</em> and <em>Reach out</em>. Under the chat-as-hands proposal these would be declared operations, each confirmed with a card.</li>
+<li><strong>Reading records in the conversation.</strong> A leader asks about their group and the coach reads its roster and activity.</li>
+<li><strong>Coaches in other channels.</strong> A coach in Telegram or Signal, which turns on the default chat channel (<a href="./023-surfaces-chat-admin-field.html#cost-and-channel">ADR-023 § Cost and channel</a>).</li>
+</ol>
+<p>Briefings and recommendations have a version outside the gate: counts and rules computed without a model and shown as an ordinary dashboard, as ADR-016 §49 did for reallocation. That version needs a specification of local groups that the corpus does not have (conflict 3).</p>
+<h3 id="questions-sent-to-the-adr-018-review" tabindex="-1"><a class="heading-anchor" href="#questions-sent-to-the-adr-018-review" aria-hidden="true">#</a> Questions sent to the ADR-018 review</h3>
+<p>Recorded in <a href="./018-ai-agent-posture.html#questions-recorded-by-later-adrs">ADR-018 § Questions recorded by later ADRs</a>. None is answered here.</p>
+<ol>
+<li><strong>Designated context and read scope.</strong> Does reading the context documents an organization designated for a coach count as read scope wider than a single feature? This decides whether the bounded coach is outside the gate. <em>Read scope.</em></li>
+<li><strong>Records.</strong> May a coach read groups, members, contact history or the CRM, to brief, to recommend or to answer? If so, within the person's own scope, as the chat-as-hands proposal says, or narrower, source by source? <em>Read scope; item 2.</em></li>
+<li><strong>Talking about people.</strong> A leader describing a named member's behaviour, and a coach analysing that person's place in the group, is profiling an identifiable person on a political platform. Is that permitted, and on what basis? <em>Item 2.</em></li>
+<li><strong>Acting.</strong> Are <em>Add task</em> and <em>Reach out</em> writes confirmed with a card, or links into the admin UI that the person completes there? <em>Tool authority; item 6.</em></li>
+<li><strong>Briefings.</strong> Is a daily briefing a schedule a person set, which ADR-020 and ADR-023 already allow for sends, or a coach speaking first? <em>Autonomous action; item 6.</em></li>
+<li><strong>Retention and who can read a conversation.</strong> How long conversations are kept, under which tier of <a href="./016-cross-cutting-resolutions.html#4-tiered-data-retention-policy">ADR-016 § 4</a>; what the audit log records; whether anyone but the person can read them, including the Org Admin, given the no-superuser-read-path rule at <a href="../spec/comms-intelligence.html#85-access-and-retention">comms-intelligence.md § 8.5 Access and retention</a>; and what sharing a conversation does. <em>Item 3.</em></li>
+<li><strong>Prompt injection</strong> from attachments, from designated documents, and from the instructions of a coach the organization wrote. <em>Item 1.</em></li>
+<li><strong>Offline.</strong> What a person sees without a connection, given that the people who lead local groups work close to the field. <em>Item 4.</em></li>
+<li><strong>Cost.</strong> Who pays when a volunteer talks to a coach, and what the default tier includes. <em>Item 5; ADR-026.</em></li>
+<li><strong>Contracts.</strong> Whether a coach may ever read data held under a sharing contract, such as a coalition's. Proposed here: never designated as context. <em>Item 7.</em></li>
+<li><strong>The model provider.</strong> Whether a coach may use an external BYOM provider when conversations carry members' names, which then leave the encryption boundary (<a href="../design/architecture/system.html#byom-architecture">system.md § BYOM architecture</a>). <em>Item 8.</em></li>
+<li><strong>Coaches and the chat.</strong> Is a coach the chat of ADR-023 with a role's instructions and no operations, or a surface of its own? This ties to the Campaign Agent recommendation in <a href="./022-core-modules-and-lanes.html#the-module-catalogue">ADR-022 § The module catalogue</a>, which is not decided. <em>The chat-as-hands proposal.</em></li>
+</ol>
+<h3 id="open-questions" tabindex="-1"><a class="heading-anchor" href="#open-questions" aria-hidden="true">#</a> Open questions</h3>
+<p>These do not depend on the review. They are not settled here.</p>
+<ol>
+<li><strong>Who may write a coach.</strong> The Org Admin only, staff, team leads, or an alliance or association for its members over the bus (<a href="./024-event-bus-as-federation.html">ADR-024</a>, itself proposed).</li>
+<li><strong>Who writes and maintains the organizing knowledge coaches draw on.</strong> GreenGrass, the lane, the client or partners, and in which languages.</li>
+</ol>
+<h2 id="consequences" tabindex="-1"><a class="heading-anchor" href="#consequences" aria-hidden="true">#</a> Consequences</h2>
+<p><strong>Benefits:</strong></p>
+<ul>
+<li>Every person gets help with their own work, in their own language, without a trainer in the room</li>
+<li>An organization writes its mission, voice and guardrails once, and every coach keeps to them</li>
+<li>The agent posture applies to coaches and the chat from one place</li>
+<li>The bounded coach is a concrete, small case for the review, with its four properties stated</li>
+</ul>
+<p><strong>Costs:</strong></p>
+<ul>
+<li>Most of what made the sandbox's coaching useful, the briefing and the recommendations, waits on the review</li>
+<li>Every turn is inference, and coaching invites long conversations</li>
+<li>Conversations will contain what people say about other people, before anyone has decided how long they are kept</li>
+<li>Lane-neutral coaches need organizing knowledge that someone has to write, and no one is named yet</li>
+</ul>
+<p><strong>Constraints:</strong></p>
+<ul>
+<li>No coach reaches production in either lane before the ADR-018 review is accepted, unless the review confirms it has none of the four gated properties</li>
+<li>A coach never speaks first, never acts and never reads records until the review says otherwise</li>
+<li>No field task depends on a coach</li>
+<li>A document under a sharing contract is never coach context</li>
+<li>The concierge's grounding rule is unchanged</li>
+</ul>
+<p><strong>Related ADRs:</strong> <a href="./005-offline-first-sync.html">ADR-005</a> (coaches need a connection; field work does not), <a href="./013-analytics-ai.html">ADR-013</a> (the guardrails coaches keep), <a href="./014-volunteer-onboarding.html">ADR-014</a> (the concierge, which a coach is not), <a href="./016-cross-cutting-resolutions.html">ADR-016</a> (§4 retention, §38 BYOM, §49 explainability), <a href="./017-sharing-contract-trust-model.html">ADR-017</a> (contracts are never coach context), <a href="./018-ai-agent-posture.html">ADR-018</a> (the gate; twelve questions sent to the review), <a href="./019-central-services-and-metered-billing.html">ADR-019</a> (inference is metered), <a href="./020-central-service-line-up-and-builders.html">ADR-020</a> (the builder bounds the bounded coach follows), <a href="./021-content-approval-pipeline.html">ADR-021</a> (context documents come from the content store; drafts enter its approval), <a href="./022-core-modules-and-lanes.html">ADR-022</a> (Coaching is part of the Core), <a href="./023-surfaces-chat-admin-field.html">ADR-023</a> (the gate binds the whole Core; the chat a coach resembles), <a href="./024-event-bus-as-federation.html">ADR-024</a> (whether coaches travel over the bus is open), <a href="./026-two-lane-pricing.html">ADR-026</a> (the price of a conversation)</p>
+
+    </article>
+  </main>
+  <div class="toc-rail"><nav class="toc" aria-label="On this page"><div class="toc-label">On this page</div><ul><li class="toc-2"><a href="#context"># Context</a></li><li class="toc-3"><a href="#conflicts-this-adr-resolves"># Conflicts this ADR resolves</a></li><li class="toc-2"><a href="#decision"># Decision</a></li><li class="toc-3"><a href="#coaching-is-part-of-the-core"># Coaching is part of the Core</a></li><li class="toc-3"><a href="#the-name"># The name</a></li><li class="toc-3"><a href="#what-a-coach-is"># What a coach is</a></li><li class="toc-3"><a href="#the-bounded-coach"># The bounded coach</a></li><li class="toc-3"><a href="#the-organizations-context-layer"># The organization's context layer</a></li><li class="toc-3"><a href="#what-waits-on-the-adr-018-review"># What waits on the ADR-018 review</a></li><li class="toc-3"><a href="#questions-sent-to-the-adr-018-review"># Questions sent to the ADR-018 review</a></li><li class="toc-3"><a href="#open-questions"># Open questions</a></li><li class="toc-2"><a href="#consequences"># Consequences</a></li></ul></nav></div>
+</div>
+<script src="../assets/search.js" defer></script>
+<script src="../assets/app.js" defer></script>
+</body>
+</html>

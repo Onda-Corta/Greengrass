@@ -257,6 +257,8 @@ A field-level leadership role for managing a small group of volunteers during op
 - Access org-wide CRM data, financial data, or analytics
 - Send mass communications
 
+This role is for one operation. A person who leads a standing local group over months has no role in this document; [ADR-028](../decisions/028-coaching.md) records the gap and does not fill it.
+
 ---
 
 ### Supporter

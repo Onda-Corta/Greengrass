@@ -257,6 +257,8 @@ Un rol de liderazgo en terreno para manejar un grupo pequeño de voluntarios dur
 - Acceder a los datos del CRM, los datos financieros o la analítica de toda la organización
 - Enviar comunicaciones masivas
 
+Este rol es para una operación. Una persona que dirige un grupo local estable durante meses no tiene rol en este documento; la [ADR-028](../decisions/028-coaching.md) registra el vacío y no lo llena.
+
 ---
 
 ### Simpatizante

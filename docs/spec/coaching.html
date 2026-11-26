@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en" data-base="../" data-no-results="No results for">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Coaching · GreenGrass</title>
+<meta name="description" content="Coaching — GreenGrass spec &amp; design documentation.">
+<link rel="alternate" hreflang="en" href="./coaching.html">
+<link rel="alternate" hreflang="es" href="../es/spec/coaching.html">
+<link rel="alternate" hreflang="x-default" href="./coaching.html">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%232563eb'/%3E%3Cstop offset='1' stop-color='%2316a34a'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='32' height='32' rx='7' fill='url(%23g)'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="../assets/styles.css">
+</head>
+<body>
+<a class="skip-link" href="#content">Skip to content</a>
+<header class="site-header">
+  <button type="button" class="menu-toggle" aria-label="Toggle navigation" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+  <a class="brand" href="../index.html">
+    <span class="brand-mark" aria-hidden="true"></span>
+    <span class="brand-text"><strong>GreenGrass</strong><small>Spec &amp; Design</small></span>
+  </a>
+  <div class="search">
+    <input type="search" id="search-input" placeholder="Search docs…" autocomplete="off" aria-label="Search documentation">
+    <div id="search-results" class="search-results" hidden></div>
+  </div>
+  <nav class="lang-switch" aria-label="Language"><span class="lang-opt active" aria-current="true">EN</span><a class="lang-opt" href="../es/spec/coaching.html" hreflang="es" lang="es" title="Ver esta página en español">ES</a></nav>
+  <button type="button" class="theme-toggle" aria-label="Toggle dark mode" title="Toggle dark mode">
+    <span class="theme-icon" aria-hidden="true"></span>
+  </button>
+</header>
+<div class="layout">
+  <div class="sidebar-backdrop" hidden></div>
+  <aside class="sidebar" aria-label="Documentation navigation">
+    <nav class="nav">
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">Home<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../index.html">GreenGrass</a></li></ul></div>
+<div class="nav-section open"><button type="button" class="nav-section-title" aria-expanded="true">Specifications<span class="chev" aria-hidden="true"></span></button><ul><li><a href="./pitch.html">Pre-MVP Pitch</a></li><li><a href="./demo.html">Campaign Approval Demo Spec</a></li><li><a href="./product.html">Project: GreenGrass</a></li><li><a href="./mvp.html">GreenGrass MVP — Product Plan</a></li><li><a href="./users.html">Users &amp; Roles</a></li><li><a href="./workflows.html">Core Workflows</a></li><li><a href="./geography.html">Target Geography</a></li><li><a href="./security.html">Security &amp; Threat Model</a></li><li><a href="./compliance.html">Compliance &amp; Legal Framework</a></li><li><a href="./fundraising.html">Fundraising &amp; Payment Infrastructure</a></li><li><a href="./integrations.html">External Integrations</a></li><li><a href="./support.html">Tenant Support &amp; Onboarding</a></li><li><a href="./gotv.html">Get Out The Vote &amp; Election Day Operations</a></li><li><a href="./messaging.html">Internal Communications &amp; Notifications</a></li><li><a href="./press.html">Press, Media &amp; Public Communications</a></li><li><a href="./comms-intelligence.html">Comms Intelligence — Post-MVP Roadmap</a></li><li><a href="./coaching.html" aria-current="page" class="active">Coaching</a></li></ul></div>
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">Architecture<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../design/architecture/system.html">System Architecture</a></li></ul></div>
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">UX Design<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../design/ux/00-overview.html">UX Design Overview</a></li><li><a href="../design/ux/01-information-architecture/navigation-model.html">Navigation Model</a></li><li><a href="../design/ux/01-information-architecture/screen-inventory.html">Screen Inventory</a></li><li><a href="../design/ux/01-information-architecture/persona-views.html">Persona Views</a></li><li><a href="../design/ux/01-information-architecture/url-structure.html">URL Structure</a></li><li><a href="../design/ux/02-global-patterns/pattern-catalog.html">Pattern Catalog</a></li><li><a href="../design/ux/02-global-patterns/offline-sync-patterns.html">Offline &amp; Sync Patterns</a></li><li><a href="../design/ux/02-global-patterns/notification-patterns.html">Notification Patterns</a></li><li><a href="../design/ux/02-global-patterns/search-patterns.html">Search Patterns</a></li><li><a href="../design/ux/02-global-patterns/settings-help-patterns.html">Settings &amp; Help Patterns</a></li><li><a href="../design/ux/02-global-patterns/security-ux-patterns.html">Security UX Patterns</a></li><li><a href="../design/ux/03-design-system/foundations.html">Design System Foundations</a></li><li><a href="../design/ux/03-design-system/theming-strategy.html">Theming Strategy</a></li><li><a href="../design/ux/03-design-system/component-inventory.html">Component Inventory</a></li><li><a href="../design/ux/03-design-system/responsive-strategy.html">Responsive Strategy</a></li><li><a href="../design/ux/04-wireframes/index.html">Wireframes</a></li><li><a href="../design/ux/04-wireframes/navigation-shell/navigation-shell.html">Navigation Shell Wireframes</a></li><li><a href="../design/ux/04-wireframes/dashboards/dashboards.html">Dashboard Wireframes</a></li><li><a href="../design/ux/04-wireframes/field-mode/field-mode.html">Field Mode Wireframes</a></li><li><a href="../design/ux/04-wireframes/onboarding/onboarding.html">Onboarding Wireframes</a></li><li><a href="../design/ux/04-wireframes/messaging/messaging.html">Messaging Wireframes</a></li><li><a href="../design/ux/04-wireframes/supporter/supporter-portal.html">Supporter Portal Wireframes</a></li><li><a href="../design/ux/04-wireframes/alliance/alliance.html">Alliance Wireframes</a></li><li><a href="../design/ux/04-wireframes/crm/crm.html">CRM / People Wireframes</a></li><li><a href="../design/ux/04-wireframes/field-ops/field-ops.html">Field Operations (Admin) Wireframes</a></li><li><a href="../design/ux/04-wireframes/fundraising/fundraising.html">Fundraising Wireframes</a></li><li><a href="../design/ux/04-wireframes/communications/communications.html">Communications Wireframes</a></li><li><a href="../design/ux/04-wireframes/social-media/social-media.html">Social Media Wireframes</a></li><li><a href="../design/ux/04-wireframes/events/events.html">Events Wireframes</a></li><li><a href="../design/ux/04-wireframes/press/press.html">Press &amp; Media Wireframes</a></li><li><a href="../design/ux/04-wireframes/activism/activism.html">Activism &amp; Engagement Campaign Wireframes</a></li><li><a href="../design/ux/04-wireframes/gotv/gotv.html">GOTV Admin Wireframes</a></li><li><a href="../design/ux/04-wireframes/settings/settings.html">Settings &amp; Admin Wireframes</a></li><li><a href="../design/ux/04-wireframes/auth/auth.html">Authentication Wireframes</a></li><li><a href="../design/ux/04-wireframes/profile/profile.html">User Profile Wireframes</a></li><li><a href="../design/ux/04-wireframes/help/help.html">Support &amp; Help Wireframes</a></li><li><a href="../design/ux/04-wireframes/public/public.html">Public Pages Wireframes</a></li><li><a href="../design/ux/04-wireframes/audit.html">Wireframe Audit Report</a></li><li><a href="../design/ux/04-wireframes/content-ops/content-ops.html">Content Operations Wireframes</a></li></ul></div>
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">Decisions<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../decisions/001-platform-architecture.html">ADR-001: Platform Architecture &amp; Deployment</a></li><li><a href="../decisions/002-security-threat-model.html">ADR-002: Security &amp; Threat Model</a></li><li><a href="../decisions/003-identity-access-organization.html">ADR-003: Identity, Access &amp; Organization</a></li><li><a href="../decisions/004-data-model-integrity.html">ADR-004: Data Model &amp; Integrity</a></li><li><a href="../decisions/005-offline-first-sync.html">ADR-005: Offline-First &amp; Sync</a></li><li><a href="../decisions/006-field-operations-gotv.html">ADR-006: Field Operations &amp; GOTV</a></li><li><a href="../decisions/007-fundraising-payments.html">ADR-007: Fundraising &amp; Payments</a></li><li><a href="../decisions/008-communications-messaging.html">ADR-008: Communications &amp; Messaging</a></li><li><a href="../decisions/009-compliance-legal.html">ADR-009: Compliance &amp; Legal Framework</a></li><li><a href="../decisions/010-internationalization-localization.html">ADR-010: Internationalization &amp; Localization</a></li><li><a href="../decisions/011-design-system-ux.html">ADR-011: Design System &amp; UX Foundations</a></li><li><a href="../decisions/012-external-integrations.html">ADR-012: External Integrations</a></li><li><a href="../decisions/013-analytics-ai.html">ADR-013: Analytics &amp; AI</a></li><li><a href="../decisions/014-volunteer-onboarding.html">ADR-014: Volunteer &amp; Onboarding</a></li><li><a href="../decisions/015-product-scope.html">ADR-015: Product Scope Boundaries</a></li><li><a href="../decisions/016-cross-cutting-resolutions.html">ADR-016: Cross-Cutting Resolutions</a></li><li><a href="../decisions/017-sharing-contract-trust-model.html">ADR-017: The Sharing Contract as Universal Trust Primitive</a></li><li><a href="../decisions/018-ai-agent-posture.html">ADR-018: AI Agent Posture</a></li><li><a href="../decisions/019-central-services-and-metered-billing.html">ADR-019: Central Services &amp; Metered Billing</a></li><li><a href="../decisions/020-central-service-line-up-and-builders.html">ADR-020: Central Service Line-up &amp; Builders</a></li><li><a href="../decisions/021-content-approval-pipeline.html">ADR-021: Content Approval Pipeline</a></li><li><a href="../decisions/022-core-modules-and-lanes.html">ADR-022: Core, Modules &amp; Lanes</a></li><li><a href="../decisions/023-surfaces-chat-admin-field.html">ADR-023: Surfaces — a Headless Core, Chat, Admin &amp; Field</a></li><li><a href="../decisions/024-event-bus-as-federation.html">ADR-024: The Event Bus as Federation</a></li><li><a href="../decisions/025-identity-per-client.html">ADR-025: Identity per Client</a></li><li><a href="../decisions/026-two-lane-pricing.html">ADR-026: Two-Lane Pricing</a></li><li><a href="../decisions/027-third-party-crm-sync-and-connectors.html">ADR-027: Third-Party CRM Sync &amp; Connectors</a></li><li><a href="../decisions/028-coaching.html">ADR-028: Coaching</a></li><li><a href="../decisions/ux-decisions.html">UX Decisions — Wireframe Phase</a></li></ul></div>
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">Diary<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../diary/index.html">Project Diary</a></li><li><a href="../diary/01-from-description-to-specification.html">Entry 1: From Description to Specification</a></li><li><a href="../diary/02-the-architecture-session.html">Entry 2: The Architecture Session</a></li><li><a href="../diary/03-information-architecture.html">Entry 3: Information Architecture</a></li><li><a href="../diary/04-design-system-and-wireframes.html">Entry 4: The Design System and Wireframes</a></li><li><a href="../diary/05-the-wireframe-audit.html">Entry 5: The Wireframe Audit</a></li><li><a href="../diary/06-resolving-the-open-questions.html">Entry 6: Resolving the Open Questions</a></li><li><a href="../diary/07-reconciling-the-architecture.html">Entry 7: Reconciling the Architecture</a></li><li><a href="../diary/08-housekeeping.html">Diary Entry 8: Housekeeping</a></li><li><a href="../diary/09-the-documentation-website.html">Diary Entry 9: The Documentation Website</a></li><li><a href="../diary/10-the-spanish-edition.html">Diary Entry 10: The Spanish Edition</a></li><li><a href="../diary/11-translating-the-rest.html">Diary Entry 11: Translating the Rest</a></li><li><a href="../diary/12-the-agent-question.html">Diary Entry 12: The Agent Question</a></li><li><a href="../diary/13-services-a-la-carte.html">Diary Entry 13: Services à la Carte</a></li><li><a href="../diary/14-the-proposal-under-review.html">Diary Entry 14: The Proposal Under Review</a></li><li><a href="../diary/15-not-a-creator-tool.html">Diary Entry 15: Not a Creator Tool</a></li><li><a href="../diary/16-the-pitch.html">Diary Entry 16: The Pitch</a></li><li><a href="../diary/17-two-lanes.html">Diary Entry 17: Two Lanes</a></li><li><a href="../diary/18-the-coach.html">Diary Entry 18: The Coach</a></li></ul></div>
+<div class="nav-section"><button type="button" class="nav-section-title" aria-expanded="false">Project &amp; Internal<span class="chev" aria-hidden="true"></span></button><ul><li><a href="../claude/MEMORY.html">Memory</a></li><li><a href="../claude/SKILLS.html">Skills</a></li><li><a href="../CLAUDE.html">GreenGrass</a></li></ul></div>
+    </nav>
+  </aside>
+  <main id="content" class="content">
+    <nav class="breadcrumb" aria-label="Breadcrumb">Specifications</nav>
+    <article class="prose">
+<h1 id="coaching" tabindex="-1"><a class="heading-anchor" href="#coaching" aria-hidden="true">#</a> Coaching</h1>
+<p><strong>AI coaches for every role, built on what the organization says about itself</strong></p>
+<p>Status: proposed in <a href="../decisions/028-coaching.html">ADR-028</a>. Two things are decided: Coaching is part of the Core, and the name is <em>Coach</em> in English and in Spanish. Everything else here is proposed. Nothing here reaches production in either lane before the <a href="../decisions/018-ai-agent-posture.html">ADR-018</a> review is accepted, and the parts listed under <a href="#what-waits-on-the-adr-018-review">What waits on the ADR-018 review</a> are recorded, not specified.
+Drafted: 2026-11-25</p>
+<hr>
+<h2 id="purpose" tabindex="-1"><a class="heading-anchor" href="#purpose" aria-hidden="true">#</a> Purpose</h2>
+<p>People who organize learn the craft from other people: how to run a first meeting, what to do when a group stalls, how to bring a quiet member in, what to say when a decision lands badly. In the places GreenGrass is built for, there is rarely a trainer in the room when the question comes up.</p>
+<p>A coach is that help, in the product, at the moment it is needed. It is a conversation with a model, set up for one role or one purpose, that advises, explains and drafts. It works from what the person tells it and from what the organization has written about itself, and it does nothing on its own.</p>
+<h2 id="what-a-coach-is" tabindex="-1"><a class="heading-anchor" href="#what-a-coach-is" aria-hidden="true">#</a> What a coach is</h2>
+<p>A coach helps a person with their own work. Three AI features sit beside it, and each does something else.</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>AI concierge</th>
+<th>Text builder</th>
+<th>Chat</th>
+<th>Coach</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>For</td>
+<td>Help with the platform</td>
+<td>A draft from a brief</td>
+<td>Doing the work</td>
+<td>Thinking through the work</td>
+</tr>
+<tr>
+<td>Reads</td>
+<td>The knowledge base and platform documentation</td>
+<td>What the person hands it</td>
+<td>What the person may read, when they ask</td>
+<td>The conversation, attachments, and the context the organization designates</td>
+</tr>
+<tr>
+<td>Acts</td>
+<td>No; escalates to a person</td>
+<td>No; returns a draft</td>
+<td>Yes; every write confirmed</td>
+<td>No</td>
+</tr>
+<tr>
+<td>Where it is decided</td>
+<td><a href="./support.html#onboarding-concierge">support.md § Onboarding Concierge</a></td>
+<td><a href="../decisions/020-central-service-line-up-and-builders.html#builders-text-accepted-images-and-video-proposed">ADR-020</a></td>
+<td><a href="../decisions/023-surfaces-chat-admin-field.html#the-chat-as-the-persons-hands">ADR-023</a>, proposed</td>
+<td>This document, proposed</td>
+</tr>
+</tbody>
+</table>
+<p>Typical questions for a coach:</p>
+<ul>
+<li>&quot;Two members keep clashing in meetings and the rest have gone quiet. What do I do?&quot;</li>
+<li>&quot;We lost the vote on the budget. Help me write the announcement.&quot;</li>
+<li>&quot;I have four new volunteers on Saturday. How do I run the first hour?&quot;</li>
+<li>&quot;Which of these three priorities should the committee take first, given our strategy?&quot;</li>
+</ul>
+<h2 id="who-has-a-coach" tabindex="-1"><a class="heading-anchor" href="#who-has-a-coach" aria-hidden="true">#</a> Who has a coach</h2>
+<h3 id="role-coaches" tabindex="-1"><a class="heading-anchor" href="#role-coaches" aria-hidden="true">#</a> Role coaches</h3>
+<p>Each role template in <a href="./users.html#permissions-model">users.md § Permissions Model</a> has a coach, except Supporter: the Org Admin, each staff template, the Volunteer, the Volunteer Team Lead and the Candidate. A person sees the coaches for the roles they hold.</p>
+<p>The lane supplies each role coach's starting instructions. In Greengrass they speak to political organizing; Basecamp supplies its own roles and its own instructions. The organization's context layer then applies to all of them.</p>
+<h3 id="coaches-the-organization-writes" tabindex="-1"><a class="heading-anchor" href="#coaches-the-organization-writes" aria-hidden="true">#</a> Coaches the organization writes</h3>
+<p>An organization can add coaches for its own purposes: a coach for new committee chairs, one for its press volunteers, one for its election-day captains. A written coach has:</p>
+<ul>
+<li><strong>A name and a one-line purpose,</strong> shown where people choose a coach.</li>
+<li><strong>Instructions:</strong> what it helps with, how it should speak, what it should send people elsewhere for.</li>
+<li><strong>Context documents:</strong> which of the organization's designated documents it may use.</li>
+<li><strong>Who may open it:</strong> by role.</li>
+<li><strong>Suggested starters:</strong> a few prompts shown before the first message, such as <em>A group is stuck</em>.</li>
+</ul>
+<p>Who may write a coach is open (<a href="#open-questions">Open questions</a>).</p>
+<h2 id="the-organizations-context-layer" tabindex="-1"><a class="heading-anchor" href="#the-organizations-context-layer" aria-hidden="true">#</a> The organization's context layer</h2>
+<p>The organization writes once what every coach builds on.</p>
+<ul>
+<li><strong>Mission and voice.</strong> What the organization is for, who it serves, how it speaks.</li>
+<li><strong>Guardrails.</strong> Topics a coach declines, positions it never takes, words it avoids. A coach that reaches a guardrail says so and points the person to someone in the organization.</li>
+<li><strong>Context documents.</strong> Items from the content store (<a href="../decisions/021-content-approval-pipeline.html">ADR-021</a>) the organization designates as coach context: its strategy, its training materials (<a href="./support.html#in-platform-training-module">support.md § In-Platform Training Module</a>), its knowledge base. Each coach uses only the documents designated for it.</li>
+</ul>
+<p>Rules:</p>
+<ul>
+<li>The layer belongs to one instance and never crosses to another.</li>
+<li>A document held under a sharing contract cannot be designated (<a href="../decisions/017-sharing-contract-trust-model.html">ADR-017</a>).</li>
+<li>Changing the layer is logged with the person who changed it.</li>
+<li>The lane supplies defaults, so a new organization's coaches work before it has written anything.</li>
+</ul>
+<h2 id="a-conversation-with-a-coach" tabindex="-1"><a class="heading-anchor" href="#a-conversation-with-a-coach" aria-hidden="true">#</a> A conversation with a coach</h2>
+<ul>
+<li><strong>Starting.</strong> From a coach's page, from the coach box on a role's home page, or from a suggested starter.</li>
+<li><strong>Input.</strong> Typing, or a voice note transcribed in the person's language.</li>
+<li><strong>Attachments.</strong> A document or image the person adds becomes part of that conversation only.</li>
+<li><strong>Past conversations.</strong> A person can return to their own past conversations. How long they are kept, and whether anyone else can read them, is a question for the review.</li>
+<li><strong>Sharing.</strong> A share button sends a read-only copy of a conversation to someone else in the instance. What that does to retention and to the people named in it is a question for the review; until it is answered, sharing is drawn and not specified.</li>
+<li><strong>The notice.</strong> Every conversation shows that coaches use AI and can make mistakes, and that important information should be checked before anyone acts on it.</li>
+</ul>
+<h2 id="grounding-and-citations" tabindex="-1"><a class="heading-anchor" href="#grounding-and-citations" aria-hidden="true">#</a> Grounding and citations</h2>
+<p>A coach says what each part of its answer rests on.</p>
+<ul>
+<li><strong>From the organization:</strong> a statement taken from a context document cites the document.</li>
+<li><strong>From a published author:</strong> an idea taken from a book or study names the author and the work, so the person can look it up and judge it.</li>
+<li><strong>Its own advice:</strong> everything else is offered as advice, not as fact.</li>
+</ul>
+<p>A coach states no fact, figure or claim about the organization that is not in the conversation or the context, as <a href="../decisions/013-analytics-ai.html">ADR-013</a> requires of generated messages. This adapts <a href="./comms-intelligence.html#82-provenance-is-mandatory">comms-intelligence.md § 8.2 Provenance is mandatory</a> to advice. The concierge keeps its stricter rule, the knowledge base and nothing else (<a href="../design/architecture/system.html#ai-concierge">system.md § AI concierge</a>), because a wrong answer about election law or compliance has real consequences, and a coach that hits such a question sends the person to the concierge or to staff.</p>
+<h2 id="what-a-coach-never-does" tabindex="-1"><a class="heading-anchor" href="#what-a-coach-never-does" aria-hidden="true">#</a> What a coach never does</h2>
+<p>Until the ADR-018 review says otherwise:</p>
+<ul>
+<li><strong>It never speaks first.</strong> No message, briefing or reminder arrives from a coach unless the person opened the conversation.</li>
+<li><strong>It never acts.</strong> It changes no record, creates no task, sends nothing to anyone. A draft leaves the conversation only when the person copies it, and then enters whatever approval that kind of content has.</li>
+<li><strong>It never reads records.</strong> No contacts, voter records, groups, messages, donations, events, audit data or compartments. If the person pastes something in, the coach reads what was pasted.</li>
+<li><strong>It never decides about a person.</strong> It does not score, rank or label anyone.</li>
+</ul>
+<h2 id="languages" tabindex="-1"><a class="heading-anchor" href="#languages" aria-hidden="true">#</a> Languages</h2>
+<p>A coach answers in the language the person writes in, and falls back to their profile language, as the concierge does. Role coaches' instructions and the lane's defaults are written in English and Spanish first, and in each new language before a country launches. An organization writes its context layer in the languages it works in. A context document in another language can be used, and the coach says when it is quoting across languages.</p>
+<h2 id="cost" tabindex="-1"><a class="heading-anchor" href="#cost" aria-hidden="true">#</a> Cost</h2>
+<p>Every turn is an inference call. It is metered under <a href="../decisions/019-central-services-and-metered-billing.html">ADR-019</a> and priced by the lane's rule (<a href="../decisions/026-two-lane-pricing.html">ADR-026</a>), or billed to the organization by its own provider under BYOM. The organization can set a spend cap for coaching as it can for any metered service. Who pays when a volunteer talks to a coach, and what the default tier includes, is open.</p>
+<h2 id="offline" tabindex="-1"><a class="heading-anchor" href="#offline" aria-hidden="true">#</a> Offline</h2>
+<p>A coach needs a connection. Without one, the coach page says so and offers the person's past conversations if they are kept on the device, which is itself a question for the review. No field task depends on a coach (<a href="../decisions/005-offline-first-sync.html">ADR-005</a>).</p>
+<h2 id="what-waits-on-the-adr-018-review" tabindex="-1"><a class="heading-anchor" href="#what-waits-on-the-adr-018-review" aria-hidden="true">#</a> What waits on the ADR-018 review</h2>
+<p>The product that prompted this document does more than the bounds above allow. Each of these is recorded so the review sees all of it, and none is specified for production.</p>
+<h3 id="briefings" tabindex="-1"><a class="heading-anchor" href="#briefings" aria-hidden="true">#</a> Briefings</h3>
+<p>A summary of the person's scope at the start of the day: how many groups are active, who is due for contact, who has not finished setup, which group has stalled. It reads beyond the conversation, and it either speaks first or runs on a schedule a person set.</p>
+<h3 id="recommended-actions" tabindex="-1"><a class="heading-anchor" href="#recommended-actions" aria-hidden="true">#</a> Recommended actions</h3>
+<p>A ranked list of suggestions with a reason each: &quot;You have not spoken with a member in 54 days — the quiet ones are easy to overlook.&quot; It reads contact history and ranks identifiable people, and <a href="../decisions/016-cross-cutting-resolutions.html">ADR-016</a> §49's promise that staff can see exactly why a suggestion was made does not hold for a model.</p>
+<h3 id="acting-from-a-coach" tabindex="-1"><a class="heading-anchor" href="#acting-from-a-coach" aria-hidden="true">#</a> Acting from a coach</h3>
+<p><em>Add task</em> and <em>Reach out</em>, on a recommendation or inside a conversation. Under the chat-as-hands proposal each would be a declared operation confirmed with a card.</p>
+<h3 id="reading-records" tabindex="-1"><a class="heading-anchor" href="#reading-records" aria-hidden="true">#</a> Reading records</h3>
+<p>A leader asks about their own group, and the coach reads the group's roster, attendance and recent activity to answer.</p>
+<h3 id="coaches-in-other-channels" tabindex="-1"><a class="heading-anchor" href="#coaches-in-other-channels" aria-hidden="true">#</a> Coaches in other channels</h3>
+<p>A coach in Telegram or Signal rather than in the app. This turns on the default chat channel (<a href="../decisions/023-surfaces-chat-admin-field.html#cost-and-channel">ADR-023 § Cost and channel</a>).</p>
+<p>Briefings and recommended actions have a version outside the gate: counts and rules computed without a model and shown as an ordinary dashboard. That version needs a specification of standing local groups and the people who lead them, which the corpus does not have (<a href="./users.html#volunteer-team-lead">users.md § Volunteer Team Lead</a> is a role for one operation, not for a group over months).</p>
+<p>The twelve questions this sends to the review are listed in <a href="../decisions/028-coaching.html#questions-sent-to-the-adr-018-review">ADR-028 § Questions sent to the ADR-018 review</a>.</p>
+<h2 id="open-questions" tabindex="-1"><a class="heading-anchor" href="#open-questions" aria-hidden="true">#</a> Open questions</h2>
+<ol>
+<li><strong>Who may write a coach.</strong> The Org Admin only, staff, team leads, or an alliance or association for its members over the bus (<a href="../decisions/024-event-bus-as-federation.html">ADR-024</a>, itself proposed).</li>
+<li><strong>Who writes and maintains the organizing knowledge coaches draw on.</strong> GreenGrass, the lane, the client or partners, and in which languages.</li>
+</ol>
+
+    </article>
+  </main>
+  <div class="toc-rail"><nav class="toc" aria-label="On this page"><div class="toc-label">On this page</div><ul><li class="toc-2"><a href="#purpose"># Purpose</a></li><li class="toc-2"><a href="#what-a-coach-is"># What a coach is</a></li><li class="toc-2"><a href="#who-has-a-coach"># Who has a coach</a></li><li class="toc-3"><a href="#role-coaches"># Role coaches</a></li><li class="toc-3"><a href="#coaches-the-organization-writes"># Coaches the organization writes</a></li><li class="toc-2"><a href="#the-organizations-context-layer"># The organization's context layer</a></li><li class="toc-2"><a href="#a-conversation-with-a-coach"># A conversation with a coach</a></li><li class="toc-2"><a href="#grounding-and-citations"># Grounding and citations</a></li><li class="toc-2"><a href="#what-a-coach-never-does"># What a coach never does</a></li><li class="toc-2"><a href="#languages"># Languages</a></li><li class="toc-2"><a href="#cost"># Cost</a></li><li class="toc-2"><a href="#offline"># Offline</a></li><li class="toc-2"><a href="#what-waits-on-the-adr-018-review"># What waits on the ADR-018 review</a></li><li class="toc-3"><a href="#briefings"># Briefings</a></li><li class="toc-3"><a href="#recommended-actions"># Recommended actions</a></li><li class="toc-3"><a href="#acting-from-a-coach"># Acting from a coach</a></li><li class="toc-3"><a href="#reading-records"># Reading records</a></li><li class="toc-3"><a href="#coaches-in-other-channels"># Coaches in other channels</a></li><li class="toc-2"><a href="#open-questions"># Open questions</a></li></ul></nav></div>
+</div>
+<script src="../assets/search.js" defer></script>
+<script src="../assets/app.js" defer></script>
+</body>
+</html>
