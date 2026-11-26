@@ -272,7 +272,7 @@ Ordered by dependency, not by appeal. Each releases only when its gate passes.
 | **4** | **Compartmentation primitive** | The ADR from §6, plus per-record access lists, read logging, key scoping | Iterations 1–3 shipped; no dossier work starts before this | ~8 weeks, cross-cutting |
 | **5** | **Candidate vetting** | Self-vetting dossiers under the §8 doctrine | Iteration 4 complete; doctrine written and adopted | ~6 weeks |
 | **6** | **Opposition research** | Same store, external subjects | **Legal review complete per jurisdiction** (§8.4) | ~4 weeks on top of 5 |
-| **7** | **Builders** | The Builders central service. Text drafts from a brief and selected talking points, entering the existing approval workflows. Image and video builders are proposed, not accepted | Iteration 1 in real use. Image and video also need [ADR-018](../decisions/018-ai-agent-posture.md) accepted with item 6 answered | Not yet estimated |
+| **7** | **Builders** | The Builders central service. Drafts from a brief and selected talking points, entering the existing approval workflows. Text, image and video builders are all accepted; image and video carry the review's two conditions | Iteration 1 in real use | Not yet estimated |
 
 **The iterations build four central services** ([ADR-020](../decisions/020-central-service-line-up-and-builders.md)), all running under [ADR-019](../decisions/019-central-services-and-metered-billing.md): enabled per tenant, executed for one tenant per call, nothing retained, metered costs passed through at cost.
 
@@ -293,7 +293,7 @@ Ordered by dependency, not by appeal. Each releases only when its gate passes.
 
 **Iteration 5 before 6** because self-vetting is the same machinery with far lower legal exposure, and it proves the compartment works on material where a mistake is survivable.
 
-**Iteration 7 sits off the main line.** It depends on Iteration 1 and nothing after it: a builder grounds its drafts in the talking points and approved responses the claims ledger holds, and without them the rule against claims not in the source material has little source material to apply. It can run alongside Iterations 2 to 6. A builder reads only what the person invoking it supplies, returns a draft, and has no send authority, so text builders fall outside the ADR-018 gate. Image and video builders wait for it.
+**Iteration 7 sits off the main line.** It depends on Iteration 1 and nothing after it: a builder grounds its drafts in the talking points and approved responses the claims ledger holds, and without them the rule against claims not in the source material has little source material to apply. It can run alongside Iterations 2 to 6. A builder reads only what the person invoking it supplies, returns a draft, and has no send authority, so text builders fall outside the ADR-018 gate — and the review of 2026-11-26 found image and video builders mechanically identical, so they fall outside it too, carrying two conditions: documented consent for depicting a real, identifiable person, and provenance metadata plus visible disclosure on published generated media ([ADR-020](../decisions/020-central-service-line-up-and-builders.md)).
 
 ### 9.2 Kept from the start, despite looking deferrable
 

@@ -1,8 +1,8 @@
 # ADR-018: AI Agent Posture
 
-**Status:** Proposed
+**Status:** Accepted
 **Date:** 2026-09-07
-**Updated:** 2026-09-28 — the proposal under review added; later the same day its worked example was replaced by the WhatsApp approval flow. Status unchanged: nothing in it is accepted. 2026-11-13 — the gate recorded as applying to the whole Core, in both lanes; the chat as the person's hands added to the proposal under review. Status unchanged. 2026-11-25 — questions from ADR-028 (Coaching) recorded. Status unchanged.
+**Updated:** 2026-09-28 — the proposal under review added; later the same day its worked example was replaced by the WhatsApp approval flow. Status unchanged: nothing in it is accepted. 2026-11-13 — the gate recorded as applying to the whole Core, in both lanes; the chat as the person's hands added to the proposal under review. Status unchanged. 2026-11-25 — questions from ADR-028 (Coaching) recorded. Status unchanged. 2026-11-26 — the review held. This ADR is accepted, its eight items resolved and its proposals settled as [§ The review](#the-review) records. The mechanism the review specifies lives in `spec/harness.md`.
 **Sources:** `spec/security.md`, `spec/compliance.md`, `spec/fundraising.md`, `spec/gotv.md`, `spec/comms-intelligence.md`, `design/architecture/system.md`, `decisions/019-central-services-and-metered-billing.md`, `decisions/020-central-service-line-up-and-builders.md`, `decisions/021-content-approval-pipeline.md`, `decisions/022-core-modules-and-lanes.md`, `decisions/023-surfaces-chat-admin-field.md`, `decisions/026-two-lane-pricing.md`, `decisions/028-coaching.md`, `design/ux/04-wireframes/content-ops/content-ops.md`
 
 ## Context
@@ -19,7 +19,7 @@ Each is sound in isolation. None of them asks the systemic question: what change
 
 That question is unasked, and the documents that would have to answer it are silent. [security.md § Threat Actors](../spec/security.md#threat-actors) and [ADR-002](002-security-threat-model.md) contain no reference to AI of any kind. [compliance.md § Data Processing Agreements](../spec/compliance.md#data-processing-agreements) contains the only AI reference in the entire compliance framework, as a sub-processor disclosure obligation.
 
-Meanwhile the doorway is already open. [integrations.md § Integration Principles](../spec/integrations.md#integration-principles) establishes that "tenants bring their own API keys and accounts for external services," and [system.md § BYOM Architecture](../design/architecture/system.md#byom-architecture) already concedes that BYOM prompt data "leaves your encryption boundary." The platform has the plumbing for agents without the posture for them.
+Meanwhile the doorway is already open. [integrations.md § Integration Principles](../spec/integrations.md#integration-principles) establishes that "tenants bring their own API keys and accounts for external services," and [system.md § The harness and the model router](../design/architecture/system.md#the-harness-and-the-model-router) already concedes that BYOM prompt data "leaves your encryption boundary." The platform has the plumbing for agents without the posture for them.
 
 ### Gaps this ADR names
 
@@ -49,6 +49,8 @@ Three contradictions surfaced while assembling this ADR. Following the practice 
 
 ### No agent capability reaches production until this ADR is accepted
 
+*Discharged 2026-11-26: this ADR is accepted. The gate's purpose is fulfilled. The four properties below remain the test every new capability is checked against — now against the posture in [§ The review](#the-review), declared in each module's manifest.*
+
 The five decisions listed above ship as specified. They are bounded, reviewed, and unaffected by this gate.
 
 Anything beyond them is gated. Specifically, a capability is gated if it has any of:
@@ -70,7 +72,7 @@ Added 2026-11-13, and decided in [ADR-023 § The ADR-018 gate binds the whole Co
 
 ## What this ADR must resolve
 
-Acceptance requires an answer to each of the following, recorded here or in the document named.
+Acceptance requires an answer to each of the following, recorded here or in the document named. **Resolved 2026-11-26** — each item's answer is in [§ The eight items, answered](#the-eight-items-answered).
 
 1. **Threat model extension** — a non-human actor in [security.md § Threat Actors](../spec/security.md#threat-actors), covering prompt injection, model exfiltration, and the concentration problem under [security.md § Security Principles](../spec/security.md#security-principles) principle 8.
 2. **Automated decision-making and profiling** — a new section in [compliance.md § Cross-Cutting Compliance Requirements](../spec/compliance.md#cross-cutting-compliance-requirements) covering GDPR Article 22, LGPD Article 20, the status of support scores, and prompt data as a cross-border transfer.
@@ -79,11 +81,11 @@ Acceptance requires an answer to each of the following, recorded here or in the 
 5. **Cost** — reconciliation of per-token inference with [fundraising.md § Platform Revenue Model](../spec/fundraising.md#platform-revenue-model), including who pays under BYOM and what happens on the platform default tier.
 6. **The human-gate principle** — promotion of *machine proposes, human disposes* to a stated cross-cutting principle, with its exceptions enumerated rather than left implicit.
 7. **Compartmented data** — whether an agent may ever read data governed by a sharing contract under [ADR-017](017-sharing-contract-trust-model.md), given that the platform is never a party to a contract.
-8. **BYOM settings screen** — the screen [ADR-016](016-cross-cutting-resolutions.md) committed to, added to the wireframes and the screen inventory, including the encryption-boundary warning already specified at [system.md § BYOM Architecture](../design/architecture/system.md#byom-architecture).
+8. **BYOM settings screen** — the screen [ADR-016](016-cross-cutting-resolutions.md) committed to, added to the wireframes and the screen inventory, including the encryption-boundary warning already specified at [system.md § The harness and the model router](../design/architecture/system.md#the-harness-and-the-model-router).
 
 ## The proposal under review
 
-Everything in this section is a proposal for the review to evaluate. None of it is accepted, none of it appears in the architecture document as structure, and the gate above is unchanged.
+Everything in this section was a proposal for the review to evaluate. *Resolved 2026-11-26 — the review accepted the thesis, bounded as [§ The review](#the-review) records. This section is kept as written, as the record of what was evaluated.*
 
 ### What has changed since the review opened
 
@@ -180,8 +182,105 @@ A prototype conversation, shared alongside the alliance services board and mappe
 
 ### Questions recorded by later ADRs
 
+*Answered 2026-11-26: ADR-020's two in [§ The proposals under review, resolved](#the-proposals-under-review-resolved); ADR-028's twelve at [ADR-028 § The review's answers](028-coaching.md#the-reviews-answers).*
+
 - **From ADR-020:** whether an image or video builder may ever depict a real, identifiable person, and what identification as generated content a published image or video must carry. These belong under item 6 and, for disclosure, under item 2's compliance section.
 - **From ADR-028:** twelve questions about coaches, listed at [ADR-028 § Questions sent to the ADR-018 review](028-coaching.md#questions-sent-to-the-adr-018-review). The first decides whether a coach that reads only the conversation, attachments and the documents an organization designated for it is outside the gate. The rest cover reading records, talking about named people, acting, briefings, retention, prompt injection, offline, cost, contracts, the model provider, and whether a coach is the chat. Coaching is part of the Core, so the gate binds it in both lanes.
+
+## The review
+
+Held 2026-11-26, after the November change of direction settled what the review needed in front of it: two lanes, a headless Core, and the chat proposed as the main surface. The review accepted this ADR and answered its eight items. This section records what was decided and what stays open; the mechanism is specified in [spec/harness.md](../spec/harness.md).
+
+### The thesis: the Core is a per-tenant agent harness
+
+Decided.
+
+- **The Core is a per-tenant agent harness.** One harness per instance, inside the tenant's own enclave; never cross-tenant ([ADR-025](025-identity-per-client.md)). It reads designated sources, holds only credentials the tenant has entitlements for ([ADR-019](019-central-services-and-metered-billing.md)), and reaches action only through operations declared in module manifests ([ADR-022 § The module contract](022-core-modules-and-lanes.md#the-module-contract)). The five accepted AI features stand as narrow harness configurations, their bounds unchanged.
+- **The chat is the harness's primary interface, acting as the person's hands.** The position [ADR-023](023-surfaces-chat-admin-field.md) proposed is adopted: the harness acts under the invoking person's own role, scopes and sharing contracts; reads need no confirmation, writes always do; it never acts in the background; the audit log records the person as the actor and the chat as the channel; the model chooses only among declared operations and cannot invent new ones.
+- ***Machine proposes, human disposes* is a stated cross-cutting principle.** Its forms: (a) **no agent dispatches** — nothing reaches a recipient except through a person's send or a schedule a person set; (b) **every write is confirmed** by the person at the moment it happens; (c) **exceptions are enumerated**, not implicit — the five accepted features' human gates are the enumeration.
+
+A capability that stays inside this posture — the person's scope, declared operations, confirmed writes, entitled credentials, the model router below — needs no further review. Anything beyond it is a new ADR.
+
+### Read scope
+
+Decided, per source. The central question this ADR left open.
+
+- **Interactive reads: the invoking person's scope.** The harness reads what that person may read, at the moment they ask — CRM, support scores, donation totals, everything their role and contracts include. This supersedes the drawing's "reads four sources in its own right": the harness holds no read scope of its own. A person whose role includes support scores can ask the harness about them, which makes item 2 concrete; it gets its compliance answer below, not a read ban.
+- **Designated sources: a tenant act, not a person act.** The tenant designates corpora the harness may ground in regardless of the invoker's scope — strategy documents, the knowledge base, the brand/context layer ([ADR-028](028-coaching.md)), geo data — per audience: org-wide, per role, per coach. Designation is an Org Admin act, logged, and listed in one place a client can audit.
+- **Compartmented data.** Answers item 7: the harness reads compartmented data only under the sharing contract of the person who invoked it, never more than that person could read, and never in the background. A read on someone's behalf is logged as that person's read through the harness — the distinction in the metadata ladder [ADR-017 § Observability](017-sharing-contract-trust-model.md#observability-a-distinction-in-the-metadata-ladder-not-a-new-rung) provides, not a new rung. The no-superuser-read-path rule of [comms-intelligence.md § 8.5](../spec/comms-intelligence.md#85-access-and-retention) binds the harness absolutely, operators and support included.
+- **Background reads: only for schedules a person set.** A briefing or digest may be prepared in the background, reading only designated sources and what the subscribing person may read, evaluated under their scope at preparation time. Never compartmented data. Each background read traces to a schedule a person set — the human gate's first form applied to reads.
+- **Exclusions and the cross-tenant rule.** The harness never reads credentials, keys or secrets; a person's private messages not addressed to or shared with the invoker; anything a lane's policy marks off-limits. And it never reaches into another tenant's instance. Cross-tenant material arrives only as contract-filtered events on the bus ([ADR-024](024-event-bus-as-federation.md)) — filtered at the source, field by field, deny by default — and once delivered it sits in this instance under the contract it arrived under, read only under the compartmented-data rule above. An alliance's harness reads the alliance's own instance, never a member's enclave; no harness is drawn over members. Manifests keep declaring per-module read scope as [ADR-022](022-core-modules-and-lanes.md) requires; these are the rules those declarations are checked against.
+
+### Provider sovereignty: the model router
+
+Decided.
+
+- **A model router per tenant is the only path to a model.** Every model call — chat, coaches, builders, translation, concierge — goes through the tenant's router. No feature calls a provider directly. The router holds the tenant's provider policy, picks provider and model per call, and every call is a metered usage event with an actor ([ADR-019](019-central-services-and-metered-billing.md)).
+- **Provider policy is per tenant.** BYOM stands ([ADR-016](016-cross-cutting-resolutions.md) §38) and extends to any endpoint the tenant names, including a self-hosted model, so inference can stay entirely inside the tenant's infrastructure. The platform default is metered and priced by the lane's rule ([ADR-026](026-two-lane-pricing.md)). Routing rules by data class: the tenant, with lane-supplied defaults, says which providers may carry which classes — public corpus material may go to an external API; prompts carrying personal data only to providers meeting the tenant's residency rules; compartmented data never leaves the tenant's encryption boundary and reaches only in-boundary endpoints.
+- **Standing requirements for any provider,** BYOM or platform: no training on tenant prompts or data; declared retention limits; disclosed as a sub-processor where the law requires; and the encryption-boundary warning of [system.md § The harness and the model router](../design/architecture/system.md#the-harness-and-the-model-router) shown at configuration time, in plain language.
+- **The settings screen exists.** Answers item 8: an admin-UI screen — a new SET screen, screen-inventory entry and wireframe — for providers, credentials, routing rules per data class, the boundary warning and current metering. Credentials live in the tenant's key store like every other tenant-owned credential.
+
+### Audit
+
+Decided. Answers item 3.
+
+- **Person = actor, harness = channel; no non-human actor type is ever added.** Every harness-mediated read and write logs the person as actor, the harness component as channel (chat, a named coach, a builder), the manifest operation invoked, and for writes the confirmation reference. The review answers the item's non-human actor type with a refusal: the harness never acts, persons act through it. [settings.md § SET-018](../design/ux/04-wireframes/settings/settings.md#set-018-audit-trail-viewer)'s audit viewer gains a channel facet.
+- **"On behalf of" is a trigger field,** not a new relation: each entry records what the harness responded to — a person's request, a confirmation tap, or a schedule a person set. A scheduled briefing logs the subscriber as actor, the harness as channel, their schedule as trigger.
+- **Prompts and responses land in [ADR-016](016-cross-cutting-resolutions.md) §4's existing tiers; no new tier.** Bodies go to the Operational tier (OA-configurable 90 days to 5 years, default 2 years, purged like message bodies). Call metadata goes to the audit-trail tier indefinitely: who asked, channel, provider and model, router policy version, tokens and cost, operation, confirmation reference. Provider-side retention is bounded by the standing requirements above.
+- **ADR-016 §49's explainability promise is amended.** Rule-based suggestions still show their rule and inputs. Model-produced output shows provenance instead: the designated sources and context it drew on, the operation, the model and provider, and citations wherever it makes factual claims — [comms-intelligence.md § 8.2](../spec/comms-intelligence.md#82-provenance-is-mandatory). Staff can always see what it stood on, never a fictional chain of reasoning.
+
+### The threat model
+
+Decided. Answers item 1; specified at [security.md § The agent harness](../spec/security.md#the-agent-harness) and [§ Prompt injection](../spec/security.md#prompt-injection).
+
+- **The harness is an attack surface, not a principal.** It enters the threat model as the confused deputy: an attacker steers it, through content it reads, into misusing a legitimate person's scope, or misleads a person into confirming a bad action. It is never a trusted actor — it has no scope of its own.
+- **Prompt injection is a named threat, with architectural countermeasures.** Vectors: monitored articles and posts, inbound messages and email, CSV imports, web pages, and bus events from counterparties — contract-delivered data is adversarial if the other org is compromised. Countermeasures: untrusted content is data, never instructions; injection can propose, never dispose — a steered harness still has only declared operations, and every write needs a tap, with the confirmation card showing operation and target in plain language; attempts are logged.
+- **Model exfiltration is bounded by routing, not vigilance.** Data-class rules mean compartmented data never reaches an external endpoint and personal data only providers meeting residency rules; a steered harness cannot exfiltrate what it cannot route. Tenant provider credentials sit in the tenant's key store.
+- **The concentration problem is designed out.** Principle 8 keeps holding because the harness is not a credential, key or person and holds none: one entitlement per tenant per service, no read scope of its own, no cross-tenant reach, no dispatch path.
+
+### Compliance
+
+Decided. Answers item 2; specified at [compliance.md § Automated processing and the harness](../spec/compliance.md#automated-processing-and-the-harness).
+
+- **The platform makes no solely automated significant decisions, and the harness keeps it so.** Support scores are profiling that predates the harness: rule-computed, read only under the invoker's scope, with lawful basis and the GDPR Article 22 / LGPD Article 20 analysis resting with the tenant as controller. The platform guarantees, as processor: persons decide; every action traces to a person; provenance is inspectable; deletion and export extend to prompt and response bodies. [ADR-009](009-compliance-legal.md)'s refusal of automated content filtering stands untouched.
+- **A prompt carrying personal data to an external endpoint is a cross-border transfer, and routing is the compliance mechanism.** Data-class rules are the tenant's transfer decisions as configuration; the router enforces them; the audit trail records provider, model and policy version per call — the tenant's transfer log. Compartmented data never crosses. The configuration-time warning is the plain-language disclosure.
+- **Model providers are sub-processors.** The platform's DPA and sub-processor list name the platform-default providers; a BYOM provider is the tenant's own sub-processor, disclosed by them. Tenants get a standing document of the harness's data handling: the read-scope rules, routing, retention and human-gate guarantees, readable by their compliance officers and electoral authorities.
+
+### Offline and cost
+
+Decided. Answers items 4 and 5.
+
+- **No harness step on any offline-required path.** Canvassing, voter registration, event check-in, poll-watcher results, sync: [ADR-005](005-offline-first-sync.md)'s paths contain no harness-mediated step. A manifest may not declare a field capability that depends on a model call.
+- **Unavailability degrades explicitly.** Harness surfaces show a plain "needs a connection" state; cached conversations stay readable; the admin UI and field app are unaffected. No queued writes exist by design — every write is confirmed live, so there is nothing to queue. A missed scheduled briefing is visibly absent, not silent.
+- **Cost: resolved by [ADR-026](026-two-lane-pricing.md).** Inference is a metered usage event, priced by each lane's rule; under BYOM the provider bills the tenant directly. With chat as a main surface, inference is a cost of ordinary daily work, not a marginal one — the lane price rules treat it as a line item. The residue — what "cost" includes, the commissions, the platform default tier's allowance, the free plan — stays open in ADR-026, where it belongs.
+
+### The eight items, answered
+
+| # | Item | Answer |
+|---|---|---|
+| 1 | Threat model extension | The harness enters [security.md § The agent harness](../spec/security.md#the-agent-harness) as an attack surface, not a principal; prompt injection is named with architectural countermeasures; concentration is designed out |
+| 2 | Automated decision-making and profiling | [compliance.md § Automated processing and the harness](../spec/compliance.md#automated-processing-and-the-harness): no solely automated significant decisions; support scores stay the tenant's analysis as controller; prompts are transfers, routed and logged |
+| 3 | Audit model | Person = actor, harness = channel; a trigger field, not a new relation; prompts and responses in [ADR-016](016-cross-cutting-resolutions.md) §4's existing tiers; §49's promise amended to provenance |
+| 4 | Offline posture | No harness step on an offline-required path; explicit "needs a connection" degradation; no queued writes |
+| 5 | Cost | Resolved by [ADR-026](026-two-lane-pricing.md): metered under [ADR-019](019-central-services-and-metered-billing.md), priced by lane rule, BYOM billed direct; arithmetic stays open in ADR-026 |
+| 6 | The human-gate principle | Stated: no agent dispatches; every write confirmed at the moment it happens; exceptions enumerated |
+| 7 | Compartmented data | Only under the invoking person's contract, never more than they could read, never in the background, logged as their read |
+| 8 | BYOM settings screen | Owed: a new SET screen, screen-inventory entry and wireframe, carrying the boundary warning and metering |
+
+### The proposals under review, resolved
+
+- **The per-tenant harness as drawn** is accepted, bounded by the person's-hands position. Two of the drawing's three properties stand: the harness is per tenant, and agents feed people while only people dispatch. The third does not: the harness reads no source in its own right — it reads what the invoking person may read, plus what the tenant designated.
+- **The chat as the person's hands** is accepted, as recorded in the thesis above.
+- **The worked example passes the gate** as a bounded feature under its stated bounds. Its six meeting points: (1) its read scope is a valid designation plus the candidate's own messages; (2) speaking first is a schedule the candidate set, and WhatsApp's template rule is unchanged; (3) generated images follow the image-builder answer below; (4) the candidate's tap on Approve is the person's send, and the agent only places the piece in the schedule; (5) a new version voids approval, and the agent is bound — unapproved by its time, a piece does not go; (6) each approval records the candidate as actor and the agent as channel.
+- **ADR-020's two questions are answered.** Image and video builders are mechanically identical to text builders — a person invokes, reads what they hand it, a draft returns, nothing sends — so they are outside the gate and accepted on the same terms. A builder may depict a real, identifiable person only with that person's documented consent recorded and attached to the asset. Published generated media carries provenance metadata — generated, model, date — and a visible disclosure wherever it shows a real person or the law requires; a lane may require more.
+- **ADR-028's twelve questions are answered** at [ADR-028 § The review's answers](028-coaching.md#the-reviews-answers). The load-bearing one: reading the context documents an organization designated for a coach is not read scope wider than a single feature, because designation is a deliberate, logged tenant act. The bounded coach has none of the four gated properties and may ship.
+
+### What stays open
+
+- **The pricing arithmetic.** What "cost" includes, how each commission is calculated, what the platform default tier includes, whether any free tier carries a metered allowance — [ADR-026](026-two-lane-pricing.md)'s open questions, where they belong.
+- **ADR-028's two product questions.** Who may write a coach — now also a security question, since org-written instructions are trusted by designation — and who writes and maintains the organizing knowledge coaches draw on.
+- **The owed screens.** The provider settings screen (item 8), the audit viewer's channel facet, and the screen-inventory and wireframe updates both need.
+- **ADR-022's open questions** are untouched: a name for the Core, operator access by lane, the event bus replacing the federation layer, the voter file as a political-lane module, Parsons as the connector layer, and what happens to a disabled module's data.
 
 ## Consequences
 

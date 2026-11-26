@@ -2,7 +2,7 @@
 
 **Coaches de IA para cada rol, construidos sobre lo que la organización dice de sí misma**
 
-Estado: propuesto en la [ADR-028](../decisions/028-coaching.md). Dos cosas están decididas: el Coaching es parte del Core, y el nombre es *Coach* en inglés y en español. Todo lo demás aquí es una propuesta. Nada de esto llega a producción en ningún carril antes de que se acepte la revisión de la [ADR-018](../decisions/018-ai-agent-posture.md), y lo que aparece en [A la espera de la revisión de la ADR-018](#a-la-espera-de-la-revisión-de-la-adr-018) está registrado, no especificado.
+Estado: propuesto en la [ADR-028](../decisions/028-coaching.md). Tres cosas están decididas: el Coaching es parte del Core; el nombre es *Coach* en inglés y en español; y el coach acotado —que nunca habla primero, nunca actúa y nunca lee registros—, que la revisión de la [ADR-018](../decisions/018-ai-agent-posture.md) del 2026-11-26 encontró fuera del punto de decisión y libre para salir. Todo lo demás aquí es una propuesta. Lo que aparece en [A la espera de la revisión de la ADR-018](#a-la-espera-de-la-revisión-de-la-adr-018) está respondido por la revisión: permitido bajo la postura de [spec/harness.md](harness.md), cada pieza por especificar antes de salir.
 Redactado: 2026-11-25
 
 ---
@@ -22,7 +22,7 @@ Un coach ayuda a una persona con su propio trabajo. Tiene al lado tres funcional
 | Para | Ayuda con la plataforma | Un borrador a partir de un encargo | Hacer el trabajo | Pensar el trabajo |
 | Lee | La base de conocimiento y la documentación de la plataforma | Lo que la persona le entrega | Lo que la persona puede leer, cuando lo pide | La conversación, los adjuntos y el contexto que designa la organización |
 | Actúa | No; escala a una persona | No; devuelve un borrador | Sí; cada escritura confirmada | No |
-| Dónde se decide | [support.md § Onboarding Concierge](support.md#acompañamiento-en-la-puesta-en-marcha) | [ADR-020](../decisions/020-central-service-line-up-and-builders.md#constructores-el-texto-se-acepta-las-imágenes-y-el-video-quedan-propuestos) | [ADR-023](../decisions/023-surfaces-chat-admin-field.md#el-chat-como-las-manos-de-la-persona), propuesto | Este documento, propuesto |
+| Dónde se decide | [support.md § Onboarding Concierge](support.md#acompañamiento-en-la-puesta-en-marcha) | [ADR-020](../decisions/020-central-service-line-up-and-builders.md#constructores-el-texto-se-acepta-las-imágenes-y-el-video-quedan-propuestos) | [ADR-023](../decisions/023-surfaces-chat-admin-field.md#el-chat-como-las-manos-de-la-persona), decidido en la revisión de la ADR-018 | Este documento, propuesto; el coach acotado decidido |
 
 Preguntas típicas para un coach:
 
@@ -71,8 +71,8 @@ Reglas:
 - **Empezar.** Desde la página de un coach, desde la caja del coach en la página de inicio de un rol, o desde un inicio sugerido.
 - **Entrada.** Escribiendo, o con una nota de voz transcrita en el idioma de la persona.
 - **Adjuntos.** Un documento o una imagen que la persona añade forma parte solo de esa conversación.
-- **Conversaciones anteriores.** Una persona puede volver a sus propias conversaciones anteriores. Cuánto tiempo se conservan, y si alguien más puede leerlas, es una pregunta para la revisión.
-- **Compartir.** Un botón de compartir le manda a otra persona de la instancia una copia de solo lectura de la conversación. Qué implica eso para la conservación y para las personas que se nombran en ella es una pregunta para la revisión; hasta que se responda, compartir está dibujado y no especificado.
+- **Conversaciones anteriores.** Una persona puede volver a sus propias conversaciones anteriores. Las conversaciones se conservan bajo el nivel Operacional de la [ADR-016](../decisions/016-cross-cutting-resolutions.md) §4 (90 días a 5 años, 2 por defecto). Una conversación es privada de su persona: el OA ve metadatos —conteos, costo— nunca el contenido.
+- **Compartir.** Un botón de compartir le manda a otra persona de la instancia una copia de solo lectura de la conversación, registrada con la persona que la compartió. La copia es de quien la recibe, conservada bajo el mismo nivel.
 - **El aviso.** Cada conversación muestra que los coaches usan IA y pueden equivocarse, y que la información importante debe comprobarse antes de actuar sobre ella.
 
 ## Anclaje en fuentes y citas
@@ -87,7 +87,7 @@ Un coach no afirma ningún hecho, cifra ni dato sobre la organización que no es
 
 ## Límites de un coach
 
-Mientras la revisión de la ADR-018 no diga otra cosa:
+Estos límites definen al coach acotado, y están decididos. La revisión del 2026-11-26 permite más que ellos —un resumen que una persona programa, operaciones declaradas confirmadas con una tarjeta, lecturas de registros dentro del alcance de la propia persona— y cada una de esas cosas se especifica antes de salir, bajo la postura de [spec/harness.md](harness.md). Hasta entonces:
 
 - **Nunca habla primero.** Ningún mensaje, resumen ni recordatorio llega de un coach si la persona no abrió la conversación.
 - **Nunca actúa.** No cambia ningún registro, no crea tareas, no le envía nada a nadie. Un borrador sale de la conversación solo cuando la persona lo copia, y entonces entra en la aprobación que tenga ese tipo de contenido.
@@ -104,9 +104,11 @@ Cada turno es una llamada de inferencia. Se mide por uso bajo la [ADR-019](../de
 
 ## Sin conexión
 
-Un coach necesita conexión. Sin ella, la página del coach lo dice y ofrece las conversaciones anteriores de la persona si se guardan en el dispositivo, lo que también es una pregunta para la revisión. Ninguna tarea de campo depende de un coach ([ADR-005](../decisions/005-offline-first-sync.md)).
+Un coach necesita conexión. Sin ella, la página del coach lo dice y ofrece las conversaciones anteriores de la persona donde se guardan en el dispositivo. Ninguna tarea de campo depende de un coach ([ADR-005](../decisions/005-offline-first-sync.md)).
 
 ## A la espera de la revisión de la ADR-018
+
+*Respondido el 2026-11-26. La revisión permite cada una de las siguientes bajo la postura —resúmenes como programaciones que una persona fija, actuar como operaciones declaradas confirmadas con una tarjeta, lecturas de registros dentro del alcance de la persona que lo invoca, coaches en los canales que la decisión de canal por defecto permite. Las respuestas están en [ADR-028 § The review's answers](../decisions/028-coaching.md#las-respuestas-de-la-revisión). Nada está todavía especificado para producción; cada pieza necesita su propia especificación antes de salir. La sección se conserva tal como se escribió.*
 
 El producto que dio pie a este documento hace más de lo que permiten los límites de arriba. Cada una de estas cosas se registra para que la revisión lo vea todo, y ninguna está especificada para producción.
 
@@ -132,7 +134,7 @@ Un coach en Telegram o Signal en vez de dentro de la app. Esto depende del canal
 
 Los resúmenes del día y las acciones recomendadas tienen una versión fuera del punto de decisión: conteos y reglas calculados sin un modelo y mostrados como un panel cualquiera. Esa versión necesita una especificación de los grupos locales estables y de quienes los dirigen, que el corpus no tiene ([users.md § Volunteer Team Lead](users.md#líder-de-equipo-de-voluntarios) es un rol para una operación, no para un grupo durante meses).
 
-Las doce preguntas que esto le envía a la revisión están en [ADR-028 § Questions sent to the ADR-018 review](../decisions/028-coaching.md#preguntas-enviadas-a-la-revisión-de-la-adr-018).
+Las doce preguntas que esto le envió a la revisión están en [ADR-028 § Questions sent to the ADR-018 review](../decisions/028-coaching.md#preguntas-enviadas-a-la-revisión-de-la-adr-018) y respondidas en [§ The review's answers](../decisions/028-coaching.md#las-respuestas-de-la-revisión).
 
 ## Preguntas abiertas
 

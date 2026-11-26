@@ -84,6 +84,14 @@ Personal actual o antiguo, voluntarios o integrantes de organizaciones afiliadas
 
 **Probabilidad:** moderada. Las campañas son entornos de mucha rotación y alta carga emocional, con bases de voluntarios grandes y niveles desiguales de verificación.
 
+### El arnés de agentes
+
+Agregado el 2026-11-26, decidido en la revisión de la [ADR-018](../decisions/018-ai-agent-posture.md). No es un nivel: es una superficie de ataque.
+
+El arnés de agentes ([spec/harness.md](harness.md)) nunca es un actor confiable ni un principal. No tiene credenciales, alcance de lectura ni vía de despacho propios; actúa solo como las manos de una persona, bajo el rol, los ámbitos y los contratos de intercambio de esa persona. La amenaza que agrega es el **delegado confundido**: un atacante lo dirige —a través del contenido que lee— para que abuse del alcance de una persona legítima, o engaña a una persona para que confirme una mala acción.
+
+Bajo el principio 8, el arnés no es un punto único de compromiso, porque nunca se le dio nada que concentrar: un derecho de uso por organización y por servicio ([ADR-019](../decisions/019-central-services-and-metered-billing.md)), la política de proveedores en el enrutador de modelos de su propia organización, sin alcance entre organizaciones y sin credencial para el transporte por canal.
+
 ---
 
 ## Activos que hay que proteger
@@ -130,6 +138,8 @@ Personal actual o antiguo, voluntarios o integrantes de organizaciones afiliadas
 6. **Privado por defecto.** Decidido en users.md: privado por defecto, y la visibilidad se activa por decisión expresa.
 7. **Datos soberanos, infraestructura soberana.** Los datos de una organización deben permanecer en jurisdicciones que ella controle.
 8. **Ningún punto único de compromiso.** Ninguna credencial, llave ni persona debería poder exponer la plataforma entera.
+
+El principio 8 cubre al arnés de agentes ([spec/harness.md](harness.md), decidido en la revisión de la [ADR-018](../decisions/018-ai-agent-posture.md)): el arnés no es una credencial, una llave ni una persona, y no tiene ninguna —sin credenciales propias, sin alcance de lectura propio, sin alcance entre organizaciones, sin vía de despacho. No agrega ningún punto único de compromiso. Ver [§ El arnés de agentes](#el-arnés-de-agentes).
 
 ---
 
@@ -294,11 +304,24 @@ Cada organización elige su nivel al momento del aprovisionamiento. Se admite su
 
 ### Validación de entradas y prevención de inyecciones
 
-- Toda entrada de usuario se valida y se sanea en el servidor
-- Consultas parametrizadas (nada de concatenar cadenas en las consultas a la base de datos)
-- Cabeceras de Content Security Policy
+- Toda entrada del usuario se valida y se sanea en el servidor
+- Consultas parametrizadas (nada de concatenación de cadenas en las consultas a la base de datos)
+- Encabezados de Content Security Policy
 - Protección contra XSS en todo el contenido renderizado
-- Validación y aislamiento de los archivos que se suben
+- Validación de archivos subidos y ejecución en un entorno restringido
+
+### Inyección de prompts
+
+Agregado el 2026-11-26, decidido en la revisión de la [ADR-018](../decisions/018-ai-agent-posture.md).
+
+La inyección de prompts es una amenaza nombrada: un atacante planta instrucciones en el contenido que el arnés lee, dirigiéndolo hacia acciones que la persona que lo usa nunca pidió. Vectores: artículos y publicaciones monitoreados (la captura), mensajes y correos entrantes, importaciones de CSV, páginas web y eventos del bus de contrapartes —un dato entregado bajo contrato es adversarial si la otra organización está comprometida.
+
+Las contramedidas son arquitectónicas, no del prompt:
+
+- **El contenido no confiable es dato, nunca instrucciones.** El contenido de esos vectores se marca como no confiable al ingresar y nunca entra al canal de instrucciones. Se puede citar, resumir y referenciar; nunca se obedece. Los documentos designados y las instrucciones de coach escritas por la organización son confiables por designación, y los cambios de designación quedan registrados.
+- **La inyección puede proponer, nunca disponer.** Un arnés completamente dirigido sigue pudiendo invocar solo operaciones declaradas en los manifiestos, y cada escritura necesita el toque de una persona. La tarjeta de confirmación es el cable trampa: muestra la operación y su destino en lenguaje llano, así que una acción rara se ve rara para la persona a punto de aprobarla.
+- **La exfiltración está acotada por el enrutado, no por la vigilancia.** Las reglas por clase de datos del enrutador de modelos de la organización ([spec/harness.md § The model router](harness.md#el-enrutador-de-modelos)) hacen que los datos compartimentados nunca lleguen a un endpoint externo, y que los datos personales solo lleguen a proveedores que cumplen las reglas de residencia. Un arnés dirigido no puede exfiltrar lo que no puede enrutar.
+- **Los intentos quedan registrados.** Un intento de dirección deja rastro en el mismo registro de auditoría que anota cada acción del arnés.
 
 ### Seguridad de la API
 

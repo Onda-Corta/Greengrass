@@ -2,6 +2,7 @@
 
 **Estado:** Propuesta
 **Fecha:** 2026-11-13
+**Actualizada:** 2026-11-26 — la revisión de la [ADR-018](018-ai-agent-posture.md) aceptó el chat como las manos de la persona, decidió el canal por defecto y respondió las cinco preguntas abiertas de abajo. El estado no cambia: la división en tres superficies y la reclasificación de wireframes siguen propuestas.
 **Fuentes:** `spec/pitch.md`, `spec/demo.md`, `design/architecture/system.md`, `design/ux/01-information-architecture/navigation-model.md`, `design/ux/01-information-architecture/screen-inventory.md`, `decisions/005-offline-first-sync.md`, `decisions/018-ai-agent-posture.md`, `decisions/019-central-services-and-metered-billing.md`, `decisions/020-central-service-line-up-and-builders.md`, `decisions/022-core-modules-and-lanes.md`
 
 ## Contexto
@@ -14,7 +15,7 @@ La arquitectura ya lo permite. [system.md § API pública](../design/architectur
 
 Lo que la arquitectura todavía no permite es el chat. Un chat que hace la mayor parte del trabajo diario lee a través de las funcionalidades, guarda credenciales e invoca operaciones. Ese es el agente que la [ADR-018](018-ai-agent-posture.md) condiciona. Es la consecuencia más grande de la nueva dirección, y esta ADR la enfrenta de frente: registra una decisión sobre el punto de decisión, y manda una propuesta a la revisión.
 
-Esta ADR está `Propuesta`. Una cosa en ella está decidida, y está marcada.
+Esta ADR está `Propuesta`. Sus puntos decididos van marcados; la revisión de la ADR-018 del 2026-11-26 añadió varios.
 
 ### Conflictos que resuelve esta ADR
 
@@ -65,7 +66,7 @@ La reclasificación es trabajo pendiente. Requiere un juicio por pantalla y no s
 
 ### El punto de decisión de la ADR-018 abarca todo el Core
 
-**Decidido.** La revisión de la ADR-018 aplica al Core, y por lo tanto a los dos carriles. El chat es una superficie del Core, así que ni Greengrass ni Basecamp lo llevan a producción antes de que la revisión se acepte. La ADR-018 sigue `Propuesta`.
+**Decidido.** La revisión de la ADR-018 aplica al Core, y por lo tanto a los dos carriles. El chat es una superficie del Core, así que ni Greengrass ni Basecamp lo llevan a producción antes de que la revisión se acepte. *Desactivado el 2026-11-26: la revisión aceptó la ADR-018. Lo que vincula a los dos carriles ahora es la postura que fijó ([ADR-018 § The review](018-ai-agent-posture.md#la-revisión)).*
 
 - **Este es el único lugar donde los carriles no son independientes.** [ADR-022 § Dos carriles sobre una misma infraestructura](022-core-modules-and-lanes.md#dos-carriles-sobre-una-misma-infraestructura) dice que un carril no espera por el otro. Los dos esperan por la revisión. Está en la ruta crítica de ambos.
 - **Qué puede salir antes de la revisión:** la UI de administración, la app de campo, y cualquier módulo que no tenga ninguna de las cuatro características condicionadas.
@@ -75,7 +76,7 @@ La reclasificación es trabajo pendiente. Requiere un juicio por pantalla y no s
 
 ### El chat como las manos de la persona
 
-Propuesto, como insumo para la revisión de la ADR-018. Nada de esto está aceptado, y esta ADR no puede aceptarse para la superficie de chat antes que la ADR-018.
+**Decidido el 2026-11-26 en la revisión de la ADR-018** ([ADR-018 § The review](018-ai-agent-posture.md#la-revisión)). La posición de abajo queda adoptada tal como está escrita, y el chat es la interfaz principal del arnés ([spec/harness.md](../spec/harness.md)).
 
 La posición es que el chat es las manos de la persona, no un segundo actor:
 
@@ -91,18 +92,20 @@ La posición queda registrada en [ADR-018 § La propuesta en revisión](018-ai-a
 
 ### Costo y canal
 
-Dos consecuencias prácticas, las dos abiertas.
+Dos consecuencias prácticas. El canal está decidido; el costo está abierto.
 
-- **Costo.** El chat es inferencia en cada turno. Bajo la [ADR-019](019-central-services-and-metered-billing.md) eso es un costo medido, o la factura propia del cliente bajo BYOM. Cuando el chat es la superficie principal, este costo deja de ser marginal, y los precios tienen que contar con él ([ADR-026](026-two-lane-pricing.md)).
-- **Canal.** La propuesta es que el chat tenga por defecto su casa dentro de la app del propio producto, con Telegram o Signal como opciones por cliente. WhatsApp no debe ser el canal que se da por sentado, porque sus términos comerciales prohíben la actividad de partidos políticos ([pitch.md](../spec/pitch.md)).
+- **Costo.** El chat es inferencia en cada turno. Bajo la [ADR-019](019-central-services-and-metered-billing.md) eso es un costo medido, o la factura propia del cliente bajo BYOM. Cuando el chat es la superficie principal, este costo deja de ser marginal, y los precios tienen que contar con él ([ADR-026](026-two-lane-pricing.md)). La revisión lo registró: las reglas de precio de los carriles tratan la inferencia como una línea del estado de cuenta, no como un error de redondeo ([ADR-018 § The review](018-ai-agent-posture.md#la-revisión)).
+- **Canal. Decidido el 2026-11-26 en la revisión.** La casa por defecto del chat es dentro de la app del propio producto, con Telegram o Signal como opciones por cliente. WhatsApp nunca es el canal que se da por sentado, porque sus términos comerciales prohíben la actividad de partidos políticos ([pitch.md](../spec/pitch.md)).
 
 ### Preguntas abiertas
 
-1. **¿Es el chat como las manos de la persona la posición que se manda a la revisión de la ADR-018?** Queda registrada ahí como propuesta en cualquier caso.
-2. **El canal de chat por defecto:** primero el chat dentro de la app, Telegram o Signal por cliente, WhatsApp no se da por sentado.
-3. **La inyección de prompts** desde el contenido que el chat lee. Sin respuesta, y le corresponde al punto 1 de la ADR-018.
-4. **El Agente de Campaña** como este chat con los módulos de contenido activados ([ADR-022 § El catálogo de módulos](022-core-modules-and-lanes.md#el-catálogo-de-módulos)). Recomendado, no decidido.
-5. **Los coaches y el chat.** La [ADR-028](028-coaching.md) pone el Coaching en el Core y le pregunta a la revisión de la ADR-018 si un coach es este chat con las instrucciones de un rol y sin operaciones, o una superficie propia. Sin respuesta.
+Las cinco las respondió la revisión de la ADR-018 el 2026-11-26.
+
+1. **¿Es el chat como las manos de la persona la posición que se manda a la revisión de la ADR-018?** Sí — la revisión la adoptó.
+2. **El canal de chat por defecto:** primero el chat dentro de la app, Telegram o Signal por cliente, WhatsApp nunca se da por sentado. Decidido, arriba.
+3. **La inyección de prompts** desde el contenido que el chat lee. Respondida en [security.md § Prompt injection](../spec/security.md#inyección-de-prompts): el contenido no confiable es dato, nunca instrucciones; la inyección puede proponer, nunca disponer.
+4. **El Agente de Campaña** como este chat con los módulos de contenido activados. Decidido: una persona y un conjunto de módulos, no un módulo ([spec/harness.md § Personas](../spec/harness.md#personas)).
+5. **Los coaches y el chat.** Un coach es una persona del arnés —instrucciones, contexto designado y un conjunto de operaciones declaradas— no una superficie propia ([ADR-028 § The review's answers](028-coaching.md#las-respuestas-de-la-revisión)).
 
 ## Consecuencias
 
@@ -119,10 +122,9 @@ Dos consecuencias prácticas, las dos abiertas.
 - El modelo de navegación y el inventario de pantallas describen una sola aplicación, y los dos necesitan una pasada antes de describir tres superficies
 
 **Restricciones:**
-- Ninguna superficie de chat llega a producción en ninguno de los dos carriles antes de que se acepte la ADR-018
+- El chat queda vinculado por la postura de la ADR-018: solo operaciones declaradas, cada escritura confirmada, el alcance de la propia persona ([ADR-018 § The review](018-ai-agent-posture.md#la-revisión))
 - La app de campo funciona sin conectividad ([ADR-005](005-offline-first-sync.md)); ninguna tarea de campo puede depender del chat
 - Ninguna superficie es un cliente privilegiado del Core: no hay ninguna API de uso solo interno
 - Quien usa el chat no puede hacer nada que no podría hacer en la UI de administración
-- La posición sobre el chat es una propuesta; nada puede construirse sobre ella para producción
 
 **ADR relacionadas:** [ADR-005](005-offline-first-sync.md) (la app de campo sigue siendo la superficie sin conexión), [ADR-011](011-design-system-ux.md) (el sistema de diseño que la UI de administración y la app de campo conservan), [ADR-018](018-ai-agent-posture.md) (el punto de decisión abarca todo el Core; la posición sobre el chat se manda a su revisión), [ADR-019](019-central-services-and-metered-billing.md) (la inferencia es un costo medido), [ADR-020](020-central-service-line-up-and-builders.md) (un envío es la acción de una persona o una programación que fijó una persona), [ADR-022](022-core-modules-and-lanes.md) (el Core headless; el manifiesto declara las superficies de cada módulo), [ADR-026](026-two-lane-pricing.md) (el costo del chat en el precio), [ADR-028](028-coaching.md) (los coaches, que tienen la forma del chat y su mismo punto de decisión)

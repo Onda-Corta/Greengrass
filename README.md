@@ -12,14 +12,14 @@ Puerto Rico (alpha), Brazil, Thailand, India, and Lebanon — each with distinct
 
 ## Project Status
 
-**Current phase: Specification & Design — reopened by a change of product direction; one review still gates production**
+**Current phase: Specification & Design — reopened by a change of product direction; the ADR-018 review is held, and its posture governs what ships**
 
 The product specifications, UX design artifacts and architecture documents were complete as of October 2026. In November 2026 the product direction changed, and six ADRs record it. Two are accepted and reverse earlier decisions. Four are proposed, and the documents they would change are amended only where something is already decided.
 
 | ADR | What it covers | Status |
 |---|---|---|
 | [ADR-022](decisions/022-core-modules-and-lanes.md) | Core, modules and lanes | Proposed. Decided within it: the two lanes, the CRM in the Core, one module for fundraising and payments |
-| [ADR-023](decisions/023-surfaces-chat-admin-field.md) | A headless Core with chat, admin and field surfaces | Proposed. Decided within it: the ADR-018 gate binds the whole Core, in both lanes |
+| [ADR-023](decisions/023-surfaces-chat-admin-field.md) | A headless Core with chat, admin and field surfaces | Proposed. Decided within it: the ADR-018 gate binds the whole Core, in both lanes; the chat as the person's hands, and the default channel |
 | [ADR-024](decisions/024-event-bus-as-federation.md) | The event bus in place of the federation layer | Proposed. Decided within it: an association of agencies works exactly like an alliance of parties |
 | [ADR-025](decisions/025-identity-per-client.md) | Identity per client | Accepted. Supersedes the shared platform identity service and multi-org membership |
 | [ADR-026](decisions/026-two-lane-pricing.md) | Two-lane pricing | Accepted. Supersedes the flat subscription and "no margin on metered costs". The definitions the prices need are open |
@@ -27,11 +27,11 @@ The product specifications, UX design artifacts and architecture documents were 
 
 See [diary entry 17](diary/17-two-lanes.md) for what changed, what was reversed and what is still open.
 
-[ADR-028](decisions/028-coaching.md) followed: Coaching, AI coaches for every role built on a context layer the organization sets, is part of the Core. That and the name *Coach* are decided; the rest is proposed, and what a coach may do beyond reading the conversation waits on the ADR-018 review.
+[ADR-028](decisions/028-coaching.md) followed: Coaching, AI coaches for every role built on a context layer the organization sets, is part of the Core. That, the name *Coach* and the bounded coach are decided; the rest is proposed, and what a coach may do beyond the bounded form is permitted by the review and specified piece by piece.
 
-One question remains open and gates production rather than implementation. The corpus decided AI five times, feature by feature, and never asked what changes if AI agents operate throughout the product. The threat model, the compliance framework and the audit model contain effectively no treatment of a non-human actor. [ADR-018](decisions/018-ai-agent-posture.md) records this as the project's first `Proposed` decision: the five accepted AI features ship as specified, and anything with broader read scope, tool authority or autonomous action waits for the review. See [diary entry 12](diary/12-the-agent-question.md).
+The question that gated production is answered. The corpus had decided AI five times, feature by feature, and never asked what changes if AI agents operate throughout the product. [ADR-018](decisions/018-ai-agent-posture.md) recorded the question and held production for it; its review was held on 2026-11-26, and the ADR is accepted. The answer: **the Core is a per-tenant agent harness.** The harness acts only as a person's hands — the person's own scope, operations declared in module manifests, every write confirmed, nothing dispatched except through a person — and every model call goes through the tenant's own model router, under that tenant's provider policy: BYOM, self-hosted, or the platform default, with routing rules by data class. The mechanism is specified in [spec/harness.md](spec/harness.md); the review's record is [ADR-018 § The review](decisions/018-ai-agent-posture.md#the-review). What stays open is listed there: the pricing arithmetic, two coaching questions, and the owed screens.
 
-The first decision taken since that gate opened is [ADR-019](decisions/019-central-services-and-metered-billing.md): shared capabilities get a home as central services executed per tenant, and the flat pricing model gains a second plane that passes third-party costs through at cost, with no margin. It supplies mechanisms the ADR-018 review can use and resolves nothing that review must decide. See [diary entry 13](diary/13-services-a-la-carte.md). [ADR-020](decisions/020-central-service-line-up-and-builders.md) names the four central services (Capture, Analysis, Builders, channel transport) and sequences them into the comms intelligence roadmap: text builders are accepted, while image and video builders wait for the ADR-018 review. [ADR-021](decisions/021-content-approval-pipeline.md) generalizes post approval into a content pipeline reviewed in rounds, each round kept and every revision request commented; a creator program it first specified was withdrawn the same day, because GreenGrass is not a tool for managing content creators. ADR-018 itself now carries the board's per-tenant agent harness as the proposal under review, with proposed answers for cost, credential breadth, the human gate and compartmented data, and a worked example in which a candidate approves the day's posts over WhatsApp. It remains `Proposed`, and read scope is the question it most needs to settle. See [diary entry 14](diary/14-the-proposal-under-review.md) and [diary entry 15](diary/15-not-a-creator-tool.md).
+The first decision taken since that gate opened is [ADR-019](decisions/019-central-services-and-metered-billing.md): shared capabilities get a home as central services executed per tenant, and the flat pricing model gains a second plane that passes third-party costs through at cost, with no margin. It supplies mechanisms the ADR-018 review can use and resolves nothing that review must decide. See [diary entry 13](diary/13-services-a-la-carte.md). [ADR-020](decisions/020-central-service-line-up-and-builders.md) names the four central services (Capture, Analysis, Builders, channel transport) and sequences them into the comms intelligence roadmap: text builders are accepted, and the review accepted image and video builders on the same terms, with two conditions. [ADR-021](decisions/021-content-approval-pipeline.md) generalizes post approval into a content pipeline reviewed in rounds, each round kept and every revision request commented; a creator program it first specified was withdrawn the same day, because GreenGrass is not a tool for managing content creators. ADR-018 carried the board's per-tenant agent harness as the proposal under review, and a worked example in which a candidate approves the day's posts over WhatsApp — the flow the review passed as a bounded feature. See [diary entry 14](diary/14-the-proposal-under-review.md) and [diary entry 15](diary/15-not-a-creator-tool.md).
 
 ## Documentation Website
 
@@ -57,9 +57,9 @@ npm run serve    # serve docs/ on port 8000
 
 ### Languages
 
-The site is bilingual. Available in Spanish: the 17 specification documents, the system
+The site is bilingual. Available in Spanish: the 18 specification documents, the system
 architecture, the 28 ADRs plus the UX decisions record, and the 15 UX documents
-that aren't wireframes — 62 documents in
+that aren't wireframes — 63 documents in
 all. The 24 wireframe documents and the project diary are still English only. An
 **EN / ES** switch sits in the top-right of the header on every page; pages that aren't
 translated still show it, dimmed, pointing at the Spanish home page, so the Spanish
@@ -113,10 +113,11 @@ If you're new to the project, read the specs in this order:
 14. **[`spec/messaging.md`](spec/messaging.md)** — Internal communications, notifications, E2E encryption.
 15. **[`spec/press.md`](spec/press.md)** — Press, media, social media, public profiles, endorsements.
 16. **[`spec/comms-intelligence.md`](spec/comms-intelligence.md)** — Post-MVP roadmap: media intelligence, fact check, media map, candidate vetting and opposition research, sequenced as iterations.
-17. **[`spec/coaching.md`](spec/coaching.md)** — Coaching: AI coaches for every role, the organization's context layer, and what waits on ADR-018. Proposed.
-18. **[`design/architecture/system.md`](design/architecture/system.md)** — System architecture, data model, infrastructure.
-19. **[`design/ux/00-overview.md`](design/ux/00-overview.md)** — UX design overview with reading order for all 38 UX documents.
-20. **[`decisions/`](decisions/)** — 28 Architecture Decision Records extracting and formalizing decisions from all spec and design documents. ADRs 022 to 027 record the November 2026 direction; read [ADR-022](decisions/022-core-modules-and-lanes.md) first.
+17. **[`spec/coaching.md`](spec/coaching.md)** — Coaching: AI coaches for every role, the organization's context layer. Proposed; the bounded coach decided.
+18. **[`spec/harness.md`](spec/harness.md)** — The agent harness: one per tenant, the model router and provider policy, the human gate, read scope, personas. Accepted in the ADR-018 review.
+19. **[`design/architecture/system.md`](design/architecture/system.md)** — System architecture, data model, infrastructure.
+20. **[`design/ux/00-overview.md`](design/ux/00-overview.md)** — UX design overview with reading order for all 38 UX documents.
+21. **[`decisions/`](decisions/)** — 28 Architecture Decision Records extracting and formalizing decisions from all spec and design documents. ADRs 022 to 027 record the November 2026 direction; read [ADR-022](decisions/022-core-modules-and-lanes.md) first. [ADR-018](decisions/018-ai-agent-posture.md) holds the agent posture and its review.
 
 ## Project Structure
 
@@ -142,7 +143,8 @@ GreenGrass/
 │   ├── messaging.md               # Internal communications
 │   ├── press.md                   # Press, media, public communications
 │   ├── comms-intelligence.md      # Post-MVP roadmap: comms intelligence
-│   └── coaching.md                # Coaching: AI coaches per role (proposed)
+│   ├── coaching.md                # Coaching: AI coaches per role (proposed)
+│   └── harness.md                 # The agent harness: model router, human gate, read scope
 ├── design/
 │   ├── ux/                        # UX design artifacts
 │   │   ├── 00-overview.md         # Reading order and glossary
@@ -157,7 +159,7 @@ GreenGrass/
 │   ├── ...                        # 002-015: security, identity, data, offline, etc.
 │   ├── 016-cross-cutting-resolutions.md  # Resolution of 89 open questions
 │   ├── 017-sharing-contract-trust-model.md  # The contract as universal trust primitive
-│   ├── 018-ai-agent-posture.md    # Proposed — AI agent review gates production
+│   ├── 018-ai-agent-posture.md    # Accepted — the agent posture and its review
 │   ├── 019-central-services-and-metered-billing.md  # Central services, metered pass-through at cost
 │   ├── 020-central-service-line-up-and-builders.md  # Capture, Analysis, Builders, transport
 │   ├── 021-content-approval-pipeline.md  # Content pipeline, review in rounds

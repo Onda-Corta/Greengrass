@@ -143,7 +143,7 @@ A lane is a product and brand on the Core: Greengrass for political clients, Bas
 
 ### Surfaces
 
-Proposed in [ADR-023](../../decisions/023-surfaces-chat-admin-field.md). Every surface calls the [Public API](#public-api): a chat UI, an admin UI and the field app. The field app stays the offline surface ([Offline Architecture](#offline-architecture)). The chat surface is gated by ADR-018 in both lanes (decided) and does not appear in this document as structure.
+Proposed in [ADR-023](../../decisions/023-surfaces-chat-admin-field.md). Every surface calls the [Public API](#public-api): a chat UI, an admin UI and the field app. The field app stays the offline surface ([Offline Architecture](#offline-architecture)). The chat surface is decided as the harness's primary interface ([ADR-018](../../decisions/018-ai-agent-posture.md) review; [spec/harness.md](../../spec/harness.md)) and appears in this document as [The harness and the model router](#the-harness-and-the-model-router).
 
 ---
 
@@ -280,7 +280,7 @@ UsageEvent (metadata only — no content; audit-trail retention tier)
 ├── id (UUID)
 ├── tenant → TenantRegistration
 ├── entitlement → Entitlement
-├── actor (an Account in the tenant's own instance, or a non-human actor type once ADR-018 defines one)
+├── actor (an Account in the tenant's own instance — the actor is always a person; the channel and trigger fields record harness mediation, ADR-018 review)
 ├── contract_reference (the sharing contract the call ran under, if any)
 ├── units, quantity
 ├── supplier_cost, currency
@@ -1152,36 +1152,39 @@ ContentItem
 
 ## AI Integration
 
-**DECIDED:** BYOM (Bring Your Own Model) — provider-agnostic, org-configured. Supersedes the previous hybrid (managed-key vs BYOK) model per [ADR-016 §38](../../decisions/016-cross-cutting-resolutions.md). Supersedes [ADR-013](../../decisions/013-analytics-ai.md) AI model decision.
+**DECIDED:** the Core is a per-tenant agent harness, and every model call goes through that tenant's model router. Decided in the [ADR-018](../../decisions/018-ai-agent-posture.md) review, 2026-11-26, and specified in [spec/harness.md](../../spec/harness.md). BYOM ([ADR-016 §38](../../decisions/016-cross-cutting-resolutions.md)) stands, as a property of the router's provider policy. Supersedes [ADR-013](../../decisions/013-analytics-ai.md) AI model decision.
 
-### BYOM architecture
+### The harness and the model router
 
 ```
-┌─────────────────────────────────────────────────┐
-│                AI Abstraction Layer               │
-│                                                   │
-│  Common interface: generate(prompt, context)       │
-│  Capabilities: text generation, translation,       │
-│                summarization, KB-grounded Q&A      │
-│                                                   │
-│  ┌─────────────┐  ┌─────────────┐  ┌──────────┐  │
-│  │  Org's Own   │  │  Platform    │  │ Provider  │  │
-│  │  Provider    │  │  Default     │  │ Registry  │  │
-│  │  (BYOM)      │  │  (fallback)  │  │          │  │
-│  └──────┬──────┘  └──────┬──────┘  └──────────┘  │
-└─────────┼────────────────┼────────────────────────┘
-          │                │
-     Org's AI API    Platform-managed
-     endpoint        model
+  Chat · Coaches · Builders · Translation · Concierge
+                    │   (every call, no exceptions)
+                    ▼
+┌───────────────────────────────────────────────┐
+│            Tenant's model router              │
+│  provider policy · data-class rules · metering │
+└──────┬──────────────┬──────────────┬─────────┘
+       ▼              ▼              ▼
+  Org's provider   Self-hosted    Platform default
+  (BYOM)           model (BYOM)   (metered)
+
+  Routing by data class:
+    public        ──► external API allowed
+    personal      ──► residency-meeting providers only
+    compartmented ──► in-boundary endpoints only
 ```
 
-**BYOM configuration:** The OA configures their AI provider in settings — API endpoint, credentials, and model identifier. The platform's AI features (message generation, translation, concierge) route through the org's configured provider. This follows the same self-sovereignty pattern as BYOK for encryption.
+**One router per tenant.** Every model call — chat, coaches, builders, translation, concierge — goes through the tenant's model router. No feature calls a provider directly. The router holds the tenant's provider policy, picks provider and model per call, enforces the data-class routing rules, and meters every call under [ADR-019](../../decisions/019-central-services-and-metered-billing.md).
 
-**Platform default:** Orgs without their own AI infrastructure get a platform-managed model. All AI features work out of the box for smaller orgs.
+**Provider policy per tenant.** BYOM: the org's own provider, endpoint and credentials — extended by the review to any endpoint the tenant names, including a self-hosted model, so inference can stay entirely inside the tenant's infrastructure. Platform default: the platform's provider, metered and priced by the lane's rule ([ADR-026](../../decisions/026-two-lane-pricing.md)).
 
-**Provider-agnostic interface:** The platform defines what it needs (text generation with language support, structured output, grounding), not which specific model. An abstraction layer handles provider-specific API differences — the same adapter pattern used for payments and communications.
+**Routing rules by data class.** The tenant, starting from lane-supplied defaults, says which providers may carry which classes: public corpus material may go to an external API; prompts carrying personal data go only to providers meeting the tenant's residency rules; compartmented data never leaves the tenant's encryption boundary and reaches only in-boundary endpoints. Standing requirements for any provider, BYOM or platform: no training on tenant prompts or data; declared retention limits; disclosed as a sub-processor where the law requires.
 
-**BYOK + BYOM interaction:** When a BYOK tenant configures an external BYOM provider, data sent to the AI provider leaves the tenant's encryption perimeter. This is the tenant's informed choice — the platform surfaces a clear warning during BYOM configuration: *"Your AI provider will receive unencrypted prompt data. This data leaves your encryption boundary."* The OA must acknowledge this tradeoff. Tenants at Maximum security tier who require data to stay within their perimeter must self-host their AI model.
+**Provider-agnostic interface:** The platform defines what it needs (text generation with language support, structured output, grounding), not which specific model. The router's adapter layer handles provider-specific API differences — the same adapter pattern used for payments and communications.
+
+**The human gate and read scope** are specified in [spec/harness.md](../../spec/harness.md): the harness reads what the invoking person may read plus what the tenant designated; every write is confirmed by the person at the moment it happens; nothing reaches a recipient except through a person's send or a schedule a person set. The five AI features below are narrow harness configurations; their bounds are unchanged.
+
+**BYOK + BYOM interaction:** When a BYOK tenant configures an external BYOM provider, data sent to the AI provider leaves the tenant's encryption perimeter. This is the tenant's informed choice — the platform surfaces a clear warning during provider configuration: *"Your AI provider will receive unencrypted prompt data. This data leaves your encryption boundary."* The OA must acknowledge this tradeoff. Tenants at Maximum security tier who require data to stay within their perimeter route every class to in-boundary endpoints, or self-host their model.
 
 ### Activism message generation
 
@@ -1295,7 +1298,7 @@ The integration detail screen shows a health timeline (last 30 days) so the OA c
 
 **Verify:** that Parsons has a NationBuilder connector and what it covers; Parsons' licence; NationBuilder's API rate limits and webhook coverage. None of these is confirmed.
 
-Data sent to an outside CRM leaves the encryption perimeter and needs the same acknowledgement as BYOM ([BYOM architecture](#byom-architecture)).
+Data sent to an outside CRM leaves the encryption perimeter and needs the same acknowledgement as BYOM ([the model router](#the-harness-and-the-model-router)).
 
 ### Public API
 
@@ -1331,7 +1334,7 @@ Every capability is one of two things. An **internal module** runs inside the te
 | **Builders** | `builder_text`, `builder_image`, `builder_video` | Only the brief, talking points and assets the invoking person supplies | A draft in the tenant, marked as generated | Inference and generation |
 | **Channel transport** | `channel_transport`, `mutual_suppression` | The tenant's own outbound messages | The recipient, after the three send-time layers | SMS and WhatsApp gateways per message |
 
-**Builders never send.** A builder is invoked by a person with a brief, has no read path into contacts, voter records, messages, donations or compartments, and holds no credential to channel transport. Its draft enters the approval workflow that already applies to that content. Builders route through the AI abstraction layer like every other AI feature ([BYOM architecture](#byom-architecture)); under BYOM the tenant's own provider bills the tenant and nothing passes through. `builder_text` can be enabled. `builder_image` and `builder_video` exist in the catalogue but cannot be enabled until [ADR-018](../../decisions/018-ai-agent-posture.md) is accepted with its human-gate item answered.
+**Builders never send.** A builder is invoked by a person with a brief, has no read path into contacts, voter records, messages, donations or compartments, and holds no credential to channel transport. Its draft enters the approval workflow that already applies to that content. Builders route through the model router like every other AI feature ([the model router](#the-harness-and-the-model-router)); under BYOM the tenant's own provider bills the tenant and nothing passes through. All three can be enabled: the review of 2026-11-26 accepted `builder_image` and `builder_video` on the same terms as `builder_text`, with documented consent for depicting a real, identifiable person and provenance metadata plus visible disclosure on published generated media.
 
 **Build order** follows [comms-intelligence.md § 9. The iterations](../../spec/comms-intelligence.md#9-the-iterations): Capture is Iteration 3, gated on the corpus probe; research delivery is Iterations 5 and 6, after the compartmentation primitive; Builders is Iteration 7. Channel transport and mutual suppression are part of the platform's communication infrastructure, not the roadmap.
 
@@ -1361,7 +1364,7 @@ Tenant App ──► Adapter (scoped credential) ──► Central Service ─�
 The platform layer gains one component in three parts, holding metadata only. Its entities are in the [Data Model](#data-model).
 
 - **Catalogue.** Which services exist, in which countries and at which isolation tiers, from which supplier, at what pass-through unit price, and whether a call carries tenant data beyond the encryption perimeter.
-- **Entitlements.** One per tenant per service, created by an Org Admin. Each carries a credential scoped to that tenant and that service, consumed through the integration hub's adapter layer. Enabling a service flagged as leaving the perimeter requires the same explicit acknowledgement as BYOM configuration ([BYOM architecture](#byom-architecture)). Each entitlement carries a spend cap with a soft warning and a hard stop. Nothing is enabled by default.
+- **Entitlements.** One per tenant per service, created by an Org Admin. Each carries a credential scoped to that tenant and that service, consumed through the integration hub's adapter layer. Enabling a service flagged as leaving the perimeter requires the same explicit acknowledgement as BYOM configuration ([the model router](#the-harness-and-the-model-router)). Each entitlement carries a spend cap with a soft warning and a hard stop. Nothing is enabled by default.
 - **Metering.** Every call emits a usage event on the tenant's own event stream: tenant, service, units, supplier cost, invoking actor and governing contract. Usage events are audit-trail metadata under ADR-016 §4 and never retain content. The billing pipeline and the tenant's own audit view are both subscribers.
 
 **Entitlements bound any future agent.** An agent acting for a tenant can hold no credential to a service the tenant has not enabled, and every call it makes is a metered event with an actor. This supplies the credential-breadth mechanism [ADR-018](../../decisions/018-ai-agent-posture.md) asks for without resolving that ADR or adding any agent capability.
@@ -1525,4 +1528,4 @@ For self-hosted tenants, GreenGrass provides:
 16. ~~Shared capabilities and usage-based cost~~ → Central services executed per tenant, with metered pass-through at cost and no margin, per [ADR-019](../../decisions/019-central-services-and-metered-billing.md). Amends the flat-only revenue model in ADR-007. The "no margin" part is superseded by item 17.
 17. ~~Pricing with a commercial lane~~ → Pricing is a lane rule on top of the metered cost: cost plus a commission in the political lane, cost plus a 30% margin plus a commission in the commercial lane, per [ADR-026](../../decisions/026-two-lane-pricing.md). Its definitions are open there.
 
-**Reopened by the November 2026 direction, and not resolved.** Four proposed ADRs carry open questions that touch this document: whether the event bus replaces the federation layer ([ADR-024](../../decisions/024-event-bus-as-federation.md)); whether the voter file leaves the Core, and what the Core is called ([ADR-022](../../decisions/022-core-modules-and-lanes.md)); the chat surface, which waits on [ADR-018](../../decisions/018-ai-agent-posture.md) ([ADR-023](../../decisions/023-surfaces-chat-admin-field.md)); and Parsons as the connector layer ([ADR-027](../../decisions/027-third-party-crm-sync-and-connectors.md)).
+**Reopened by the November 2026 direction, and not resolved.** Three proposed ADRs carry open questions that touch this document: whether the event bus replaces the federation layer ([ADR-024](../../decisions/024-event-bus-as-federation.md)); whether the voter file leaves the Core, and what the Core is called ([ADR-022](../../decisions/022-core-modules-and-lanes.md)); and Parsons as the connector layer ([ADR-027](../../decisions/027-third-party-crm-sync-and-connectors.md)). The chat surface, which waited on [ADR-018](../../decisions/018-ai-agent-posture.md), was decided in the review of 2026-11-26 as the harness's primary interface ([ADR-023](../../decisions/023-surfaces-chat-admin-field.md); [The harness and the model router](#the-harness-and-the-model-router)).

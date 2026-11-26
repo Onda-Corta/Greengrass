@@ -84,6 +84,14 @@ Current or former staff, volunteers, or affiliated org members.
 
 **Likelihood:** Moderate. Campaigns are high-turnover, emotionally charged environments with large volunteer bases and varying levels of vetting.
 
+### The agent harness
+
+Added 2026-11-26, decided in the [ADR-018](../decisions/018-ai-agent-posture.md) review. Not a tier: an attack surface.
+
+The agent harness ([spec/harness.md](harness.md)) is never a trusted actor and never a principal. It holds no credentials, no read scope and no dispatch path of its own; it acts only as a person's hands, under that person's role, scopes and sharing contracts. The threat it adds is the **confused deputy**: an attacker steers it — through content it reads — into misusing a legitimate person's scope, or misleads a person into confirming a bad action.
+
+Under principle 8, the harness is not a single point of compromise, because it was never given anything to concentrate: one entitlement per tenant per service ([ADR-019](../decisions/019-central-services-and-metered-billing.md)), provider policy in its own tenant's model router, no cross-tenant reach, and no credential to channel transport.
+
 ---
 
 ## Assets to Protect
@@ -130,6 +138,8 @@ Current or former staff, volunteers, or affiliated org members.
 6. **Default to private.** Decided in users.md — private by default, opt-in to visibility.
 7. **Sovereign data, sovereign infrastructure.** Tenant data should stay within jurisdictions the tenant controls.
 8. **No single point of compromise.** No single credential, key, or person should be able to expose the entire platform.
+
+Principle 8 covers the agent harness ([spec/harness.md](harness.md), decided in the [ADR-018](../decisions/018-ai-agent-posture.md) review): the harness is not a credential, key or person, and it holds none — no credentials of its own, no read scope of its own, no cross-tenant reach, no dispatch path. It adds no single point of compromise. See [§ The agent harness](#the-agent-harness).
 
 ---
 
@@ -299,6 +309,19 @@ Tenants select their tier at provisioning time. Tier upgrades are supported with
 - Content Security Policy headers
 - XSS protection on all rendered content
 - File upload validation and sandboxing
+
+### Prompt injection
+
+Added 2026-11-26, decided in the [ADR-018](../decisions/018-ai-agent-posture.md) review.
+
+Prompt injection is a named threat: an attacker plants instructions in content the harness reads, steering it toward actions the person using it never asked for. Vectors: monitored articles and posts (Capture), inbound messages and email, CSV imports, web pages, and bus events from counterparties — contract-delivered data is adversarial if the other organization is compromised.
+
+Countermeasures are architectural, not prompt-level:
+
+- **Untrusted content is data, never instructions.** Content from those vectors is marked untrusted at ingestion and never enters the instruction channel. It can be quoted, summarized and cited; it is never obeyed. Designated documents and org-written coach instructions are trusted by designation, and designation changes are logged.
+- **Injection can propose, never dispose.** A fully steered harness can still only invoke declared manifest operations, and every write needs a person's tap. The confirmation card is the tripwire: it shows the operation and its target in plain language, so an odd action looks odd to the person about to approve it.
+- **Exfiltration is bounded by routing, not vigilance.** Data-class rules in the tenant's model router ([spec/harness.md § The model router](harness.md#the-model-router)) mean compartmented data never reaches an external endpoint, and personal data reaches only providers meeting residency rules. A steered harness cannot exfiltrate what it cannot route.
+- **Attempts are logged.** An attempted steer leaves a trail in the same audit trail that records every harness action.
 
 ### API Security
 

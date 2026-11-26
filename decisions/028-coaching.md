@@ -2,6 +2,7 @@
 
 **Status:** Proposed
 **Date:** 2026-11-25
+**Updated:** 2026-11-26 — the [ADR-018](018-ai-agent-posture.md) review answered the twelve questions this ADR sent. The bounded coach has none of the four gated properties and may ship; briefings, recommended actions, acting from a coach and reading records are permitted under the posture and remain unspecified product work. The answers are in § The review's answers. Status unchanged: who may write a coach, and who maintains the organizing knowledge, are still open.
 **Sources:** `spec/coaching.md`, `spec/users.md`, `spec/support.md`, `spec/comms-intelligence.md`, `design/architecture/system.md`, `decisions/005-offline-first-sync.md`, `decisions/013-analytics-ai.md`, `decisions/014-volunteer-onboarding.md`, `decisions/016-cross-cutting-resolutions.md`, `decisions/017-sharing-contract-trust-model.md`, `decisions/018-ai-agent-posture.md`, `decisions/019-central-services-and-metered-billing.md`, `decisions/020-central-service-line-up-and-builders.md`, `decisions/022-core-modules-and-lanes.md`, `decisions/023-surfaces-chat-admin-field.md`, `decisions/026-two-lane-pricing.md`
 
 ## Context
@@ -20,9 +21,9 @@ This ADR is `Proposed`. Two things in it are decided, and are marked.
 | The name: *Coach*, in English and in Spanish | Decided |
 | What a coach is, and how it differs from the concierge, the builders and the chat | Proposed |
 | Role coaches and coaches the organization writes | Proposed |
-| The bounded coach | Proposed |
+| The bounded coach | Decided, and outside the gate ([ADR-018 § The review](018-ai-agent-posture.md#the-review)) |
 | The organization's context layer | Proposed |
-| Briefings, recommended actions, acting from a coach, reading records | Proposed, and waiting on the ADR-018 review |
+| Briefings, recommended actions, acting from a coach, reading records | Answered by the review; permitted under the posture, not yet specified |
 | Who may write a coach; who writes and maintains the organizing knowledge coaches draw on | Open |
 
 ### Conflicts this ADR resolves
@@ -90,7 +91,7 @@ Proposed. These are the bounds of [ADR-020 § Builders](020-central-service-line
 | Autonomous action | None |
 | Credential breadth | The model provider only |
 
-A coach with no context documents reads only what the person hands it, which is a text builder's read scope exactly. A coach with context documents waits on question 1. Until the review answers it, both are treated as gated.
+A coach with no context documents reads only what the person hands it, which is a text builder's read scope exactly. A coach with context documents waited on question 1. The review answered it: designated context is not read scope wider than a single feature, because designation is a deliberate, logged tenant act ([§ The review's answers](#the-reviews-answers)). The bounded coach, with or without context documents, has none of the four gated properties and may ship.
 
 ### The organization's context layer
 
@@ -108,6 +109,8 @@ The context layer is what ADR-018's harness drawing calls *Strategy* and *Knowle
 
 ### What waits on the ADR-018 review
 
+*Answered 2026-11-26: the review permits each of these under the posture — see [§ The review's answers](#the-reviews-answers). None of it is yet specified for production; each needs its own specification before it ships. The section is kept as written, as the record of what was shown.*
+
 Recorded here so the review sees the whole of what was shown. None of it is specified for production, and nothing may be built on it as if it were.
 
 1. **Briefings.** A daily summary of the person's scope: groups active, people due for contact, setup unfinished. It reads beyond the conversation, and it either speaks first or runs on a schedule a person set.
@@ -120,7 +123,7 @@ Briefings and recommendations have a version outside the gate: counts and rules 
 
 ### Questions sent to the ADR-018 review
 
-Recorded in [ADR-018 § Questions recorded by later ADRs](018-ai-agent-posture.md#questions-recorded-by-later-adrs). None is answered here.
+Recorded in [ADR-018 § Questions recorded by later ADRs](018-ai-agent-posture.md#questions-recorded-by-later-adrs). All twelve are answered in [§ The review's answers](#the-reviews-answers); the questions are kept here as asked.
 
 1. **Designated context and read scope.** Does reading the context documents an organization designated for a coach count as read scope wider than a single feature? This decides whether the bounded coach is outside the gate. *Read scope.*
 2. **Records.** May a coach read groups, members, contact history or the CRM, to brief, to recommend or to answer? If so, within the person's own scope, as the chat-as-hands proposal says, or narrower, source by source? *Read scope; item 2.*
@@ -132,7 +135,7 @@ Recorded in [ADR-018 § Questions recorded by later ADRs](018-ai-agent-posture.m
 8. **Offline.** What a person sees without a connection, given that the people who lead local groups work close to the field. *Item 4.*
 9. **Cost.** Who pays when a volunteer talks to a coach, and what the default tier includes. *Item 5; ADR-026.*
 10. **Contracts.** Whether a coach may ever read data held under a sharing contract, such as a coalition's. Proposed here: never designated as context. *Item 7.*
-11. **The model provider.** Whether a coach may use an external BYOM provider when conversations carry members' names, which then leave the encryption boundary ([system.md § BYOM architecture](../design/architecture/system.md#byom-architecture)). *Item 8.*
+11. **The model provider.** Whether a coach may use an external BYOM provider when conversations carry members' names, which then leave the encryption boundary ([system.md § The harness and the model router](../design/architecture/system.md#the-harness-and-the-model-router)). *Item 8.*
 12. **Coaches and the chat.** Is a coach the chat of ADR-023 with a role's instructions and no operations, or a surface of its own? This ties to the Campaign Agent recommendation in [ADR-022 § The module catalogue](022-core-modules-and-lanes.md#the-module-catalogue), which is not decided. *The chat-as-hands proposal.*
 
 ### Open questions
@@ -141,6 +144,23 @@ These do not depend on the review. They are not settled here.
 
 1. **Who may write a coach.** The Org Admin only, staff, team leads, or an alliance or association for its members over the bus ([ADR-024](024-event-bus-as-federation.md), itself proposed).
 2. **Who writes and maintains the organizing knowledge coaches draw on.** GreenGrass, the lane, the client or partners, and in which languages.
+
+## The review's answers
+
+The ADR-018 review of 2026-11-26 answered the twelve questions. Each answer; the mechanism behind it is in [spec/harness.md](../spec/harness.md).
+
+1. **Designated context and read scope.** Reading the context documents an organization designated for a coach is not read scope wider than a single feature. Designation is a deliberate, logged, auditable tenant act, naming exactly that corpus for exactly that coach. The bounded coach has none of the four gated properties and is outside the gate.
+2. **Records.** A coach with manifest-declared read operations reads within the invoking person's own scope, the same rule as the chat. The bounded coach stays record-free; adding record reads is a declared operation, not a new posture.
+3. **Talking about people.** Permitted within the person's own scope. It is advice to a person, not a decision about the subject — the platform makes no solely automated significant decisions ([compliance.md § Automated processing and the harness](../spec/compliance.md#automated-processing-and-the-harness)). Provenance and the context layer's guardrails apply.
+4. **Acting.** *Add task* and *Reach out* are writes: declared operations, each confirmed with a card at the moment it happens.
+5. **Briefings.** A schedule a person set. The briefing reads designated sources and what the subscribing person may read, evaluated under their scope at preparation time; never compartmented data.
+6. **Retention and who can read a conversation.** Conversations are prompt and response bodies: the Operational tier of [ADR-016 § 4](016-cross-cutting-resolutions.md#4-tiered-data-retention-policy) (90 days to 5 years, default 2), with call metadata kept indefinitely in the audit tier. A coach conversation is private to its person; the Org Admin sees metadata — counts, cost — never content, under the no-superuser-read-path rule. Sharing sends a read-only copy to the chosen recipients, logged.
+7. **Prompt injection.** Attachments are untrusted content: data, never instructions ([security.md § Prompt injection](../spec/security.md#prompt-injection)). Designated documents and org-written coach instructions are trusted by designation, and designation changes are logged — which makes who may write a coach a security question, recorded in [ADR-018 § The review](018-ai-agent-posture.md#the-review).
+8. **Offline.** A coach needs a connection; the coach page says so and offers cached conversations. No field task depends on a coach.
+9. **Cost.** Metered to the client under [ADR-019](019-central-services-and-metered-billing.md), priced by the lane's rule ([ADR-026](026-two-lane-pricing.md)); under BYOM the client's own provider bills it. What the default tier includes stays open in ADR-026.
+10. **Contracts.** A coach reads data held under a sharing contract only under the invoking person's contract, never more than that person could read, and never in the background. The proposal here stands: a contract document is never designated as context.
+11. **The model provider.** Conversation content is personal data, and routes only per the tenant's data-class rules under [spec/harness.md § The model router](../spec/harness.md#the-model-router). A tenant that wants members' names never to leave its boundary routes that class to in-boundary endpoints only.
+12. **Coaches and the chat.** A coach is a harness persona: instructions, designated context and a declared operation set. The bounded coach is the zero-operation case; the chat is the general case. One harness, many personas ([spec/harness.md § Personas](../spec/harness.md#personas)).
 
 ## Consequences
 
@@ -157,8 +177,7 @@ These do not depend on the review. They are not settled here.
 - Lane-neutral coaches need organizing knowledge that someone has to write, and no one is named yet
 
 **Constraints:**
-- No coach reaches production in either lane before the ADR-018 review is accepted, unless the review confirms it has none of the four gated properties
-- A coach never speaks first, never acts and never reads records until the review says otherwise
+- The bounded coach ships inside its bounds: it never speaks first, never acts and never reads records. Briefings, acting and record reads are permitted by the review under the posture — a schedule a person set, declared operations confirmed with a card, the invoking person's scope — and each is specified before it ships
 - No field task depends on a coach
 - A document under a sharing contract is never coach context
 - The concierge's grounding rule is unchanged

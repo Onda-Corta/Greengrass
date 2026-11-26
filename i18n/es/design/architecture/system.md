@@ -143,7 +143,7 @@ Un carril es un producto y una marca sobre el Core: Greengrass para los clientes
 
 ### Superficies
 
-Propuesto en la [ADR-023](../../decisions/023-surfaces-chat-admin-field.md). Toda superficie llama a la [API pública](#api-pública): un UI de chat, una UI de administración y la app de campo. La app de campo sigue siendo la superficie sin conexión ([Arquitectura sin conexión](#arquitectura-sin-conexión)). La superficie de chat está condicionada por la ADR-018 en los dos carriles (decidido) y no aparece en este documento como estructura.
+Propuesto en la [ADR-023](../../decisions/023-surfaces-chat-admin-field.md). Toda superficie llama a la [API pública](#api-pública): un UI de chat, una UI de administración y la app de campo. La app de campo sigue siendo la superficie sin conexión ([Arquitectura sin conexión](#arquitectura-sin-conexión)). La superficie de chat está decidida como la interfaz principal del arnés (la revisión de la [ADR-018](../../decisions/018-ai-agent-posture.md); [spec/harness.md](../../spec/harness.md)) y aparece en este documento como [El arnés y el enrutador de modelos](#el-arnés-y-el-enrutador-de-modelos).
 
 ---
 
@@ -280,7 +280,7 @@ UsageEvent (solo metadatos — sin contenido; nivel de conservación del registr
 ├── id (UUID)
 ├── tenant → TenantRegistration
 ├── entitlement → Entitlement
-├── actor (una Account en la instancia propia de la organización, o un tipo de actor no humano cuando la ADR-018 defina uno)
+├── actor (una Account en la instancia propia de la organización — el actor siempre es una persona; los campos de canal y disparador registran la mediación del arnés, revisión de la ADR-018)
 ├── contract_reference (el contrato de intercambio bajo el que corrió la llamada, si lo hay)
 ├── units, quantity
 ├── supplier_cost, currency
@@ -1154,38 +1154,41 @@ ContentItem
 
 ## Integración de IA
 
-**DECIDIDO:** BYOM (Bring Your Own Model — la organización configura su propio proveedor de IA) — independiente del proveedor, configurado por la organización. Deja sin efecto el modelo híbrido anterior (llave gestionada frente a BYOK), según la [ADR-016 §38](../../decisions/016-cross-cutting-resolutions.md). Deja sin efecto la decisión de modelo de IA de la [ADR-013](../../decisions/013-analytics-ai.md).
+**DECIDIDO:** el Core es un arnés de agentes por cliente, y cada llamada a un modelo pasa por el enrutador de modelos de esa organización. Decidido en la revisión de la [ADR-018](../../decisions/018-ai-agent-posture.md), 2026-11-26, y especificado en [spec/harness.md](../../spec/harness.md). BYOM (la [ADR-016 §38](../../decisions/016-cross-cutting-resolutions.md)) sigue, como una propiedad de la política de proveedores del enrutador. Deja sin efecto la decisión de modelo de IA de la [ADR-013](../../decisions/013-analytics-ai.md).
 
-### Arquitectura BYOM
+### El arnés y el enrutador de modelos
 
 ```
-┌─────────────────────────────────────────────────────────────────┐
-│                    Capa de abstracción de IA                    │
-│                                                                 │
-│  Interfaz común: generate(prompt, context)                      │
-│  Capacidades: generación de texto, traducción,                  │
-│                resumen, preguntas y respuestas ancladas         │
-│                en la base de conocimiento                       │
-│                                                                 │
-│  ┌────────────────┐  ┌────────────────────┐  ┌───────────────┐  │
-│  │  Proveedor     │  │  Predeterminado    │  │  Registro de  │  │
-│  │  propio de la  │  │  de la plataforma  │  │  proveedores  │  │
-│  │  organización  │  │  (reserva)         │  │               │  │
-│  │  (BYOM)        │  │                    │  │               │  │
-│  └───────┬────────┘  └─────────┬──────────┘  └───────────────┘  │
-└──────────┼─────────────────────┼────────────────────────────────┘
-           │                     │
-     API de IA de la       Modelo gestionado
-     organización          por la plataforma
+  Chat · Coaches · Constructores · Traducción · Concierge
+                        │   (cada llamada, sin excepciones)
+                        ▼
+┌──────────────────────────────────────────────────────┐
+│        Enrutador de modelos de la organización       │
+│  política de proveedores · reglas por clase de datos │
+│  · medición                                          │
+└──────┬────────────────┬───────────────┬──────────────┘
+       ▼                ▼               ▼
+  Proveedor propio   Modelo          Predeterminado
+  de la organización autoalojado     de la plataforma
+  (BYOM)             (BYOM)          (medido)
+
+  Enrutado por clase de datos:
+    público         ──► API externa permitida
+    personal        ──► solo proveedores que cumplen la residencia
+    compartimentado ──► solo endpoints dentro del perímetro
 ```
 
-**Configuración de BYOM:** El OA configura su proveedor de IA en los ajustes — endpoint de la API, credenciales e identificador del modelo. Las funcionalidades de IA de la plataforma (generación de mensajes, traducción, concierge) pasan por el proveedor que configuró la organización. Sigue el mismo patrón de autosoberanía que BYOK para el cifrado.
+**Un enrutador por organización.** Cada llamada a un modelo —chat, coaches, constructores, traducción, concierge— pasa por el enrutador de modelos de la organización. Ninguna funcionalidad llama directamente a un proveedor. El enrutador guarda la política de proveedores de la organización, elige proveedor y modelo en cada llamada, hace cumplir las reglas de enrutado por clase de datos y mide cada llamada según la [ADR-019](../../decisions/019-central-services-and-metered-billing.md).
 
-**Predeterminado de la plataforma:** Las organizaciones sin infraestructura de IA propia reciben un modelo gestionado por la plataforma. Todas las funcionalidades de IA funcionan de entrada para las organizaciones más chicas.
+**Política de proveedores por organización.** BYOM: el proveedor, el endpoint y las credenciales propios de la organización —ampliado por la revisión a cualquier endpoint que la organización nombre, incluido un modelo autoalojado, de modo que la inferencia puede quedarse por completo dentro de la infraestructura de la organización. Predeterminado de la plataforma: el proveedor de la plataforma, medido y con el precio fijado por la regla de su carril (la [ADR-026](../../decisions/026-two-lane-pricing.md)).
 
-**Interfaz independiente del proveedor:** La plataforma define lo que necesita (generación de texto con soporte de idiomas, salida estructurada, anclaje en fuentes), no qué modelo concreto. Una capa de abstracción absorbe las diferencias de API entre proveedores — el mismo patrón de adaptadores que se usa en pagos y comunicaciones.
+**Reglas de enrutado por clase de datos.** La organización, partiendo de los valores por defecto que entrega su carril, dice qué proveedores pueden llevar qué clases: el material público del corpus puede ir a una API externa; los prompts que llevan datos personales van solo a proveedores que cumplen las reglas de residencia de la organización; los datos compartimentados nunca salen de su perímetro de cifrado y llegan solo a endpoints dentro de él. Requisitos permanentes para cualquier proveedor, BYOM o de la plataforma: no entrenar con los prompts ni los datos de la organización; límites de conservación declarados; declarado como subencargado donde la ley lo exige.
 
-**Interacción entre BYOK y BYOM:** Cuando una organización con BYOK configura un proveedor BYOM externo, los datos que se envían al proveedor de IA salen del perímetro de cifrado de la organización. Es una decisión informada de la organización — la plataforma muestra una advertencia clara durante la configuración de BYOM: *"Tu proveedor de IA recibirá los datos del prompt sin cifrar. Estos datos salen de tu límite de cifrado."* El OA tiene que aceptar ese compromiso. Las organizaciones en el nivel de seguridad Máximo que necesiten que los datos no salgan de su perímetro tienen que autoalojar su modelo de IA.
+**Interfaz independiente del proveedor:** La plataforma define lo que necesita (generación de texto con soporte de idiomas, salida estructurada, anclaje en fuentes), no qué modelo concreto. La capa de adaptadores del enrutador absorbe las diferencias de API entre proveedores — el mismo patrón de adaptadores que se usa en pagos y comunicaciones.
+
+**La compuerta humana y el alcance de lectura** están especificados en [spec/harness.md](../../spec/harness.md): el arnés lee lo que la persona que lo invoca puede leer, más lo que la organización designó; cada escritura la confirma la persona en el momento en que ocurre; nada llega a un destinatario salvo por el envío de una persona o una programación que una persona fijó. Las cinco funcionalidades de IA de abajo son configuraciones acotadas del arnés; sus límites no cambian.
+
+**Interacción entre BYOK y BYOM:** Cuando una organización con BYOK configura un proveedor BYOM externo, los datos que se envían al proveedor de IA salen del perímetro de cifrado de la organización. Es una decisión informada de la organización — la plataforma muestra una advertencia clara durante la configuración del proveedor: *"Tu proveedor de IA recibirá los datos del prompt sin cifrar. Estos datos salen de tu límite de cifrado."* El OA tiene que aceptar ese compromiso. Las organizaciones en el nivel de seguridad Máximo que necesiten que los datos no salgan de su perímetro enrutan cada clase a endpoints dentro de él, o autoalojan su modelo.
 
 ### Generación de mensajes de activismo
 
@@ -1299,7 +1302,7 @@ La pantalla de detalle de la integración muestra una línea de tiempo de estado
 
 **Verificar:** que Parsons tiene un conector de NationBuilder, y qué cubre; la licencia de Parsons; los límites de solicitudes de la API de NationBuilder y qué cubren sus webhooks. Nada de esto está confirmado.
 
-Los datos que se envían a un CRM externo salen del perímetro de cifrado y exigen la misma aceptación explícita que BYOM ([Arquitectura BYOM](#arquitectura-byom)).
+Los datos que se envían a un CRM externo salen del perímetro de cifrado y exigen la misma aceptación explícita que BYOM ([el enrutador de modelos](#el-arnés-y-el-enrutador-de-modelos)).
 
 ### API pública
 
@@ -1335,7 +1338,7 @@ Cada capacidad es una de dos cosas. Un **módulo interno** corre dentro de la in
 | **Constructores** | `builder_text`, `builder_image`, `builder_video` | Solo el encargo, los puntos de mensaje y los archivos que entrega la persona que lo invoca | Un borrador en la organización, marcado como generado | Inferencia y generación |
 | **Transporte por canal** | `channel_transport`, `mutual_suppression` | Los mensajes de salida de la propia organización | El destinatario, después de las tres capas del momento del envío | Pasarelas de SMS y WhatsApp, por mensaje |
 
-**Los constructores nunca envían.** A un constructor lo invoca una persona con un encargo; no tiene vía de lectura hacia contactos, registros de votantes, mensajes, donaciones ni compartimentos, y no tiene credencial para el transporte por canal. Su borrador entra en el flujo de aprobación que ya aplica a ese contenido. Los constructores pasan por la capa de abstracción de IA como cualquier otra funcionalidad de IA ([Arquitectura BYOM](#arquitectura-byom)); con BYOM, el proveedor propio de la organización le factura a ella y no hay nada que trasladar. `builder_text` se puede activar. `builder_image` y `builder_video` existen en el catálogo pero no se pueden activar hasta que la [ADR-018](../../decisions/018-ai-agent-posture.md) se acepte con su punto sobre la compuerta humana respondido.
+**Los constructores nunca envían.** A un constructor lo invoca una persona con un encargo; no tiene vía de lectura hacia contactos, registros de votantes, mensajes, donaciones ni compartimentos, y no tiene credencial para el transporte por canal. Su borrador entra en el flujo de aprobación que ya aplica a ese contenido. Los constructores pasan por el enrutador de modelos como cualquier otra funcionalidad de IA ([el enrutador de modelos](#el-arnés-y-el-enrutador-de-modelos)); con BYOM, el proveedor propio de la organización le factura a ella y no hay nada que trasladar. Los tres se pueden activar: la revisión del 2026-11-26 aceptó `builder_image` y `builder_video` en los mismos términos que `builder_text`, con consentimiento documentado para retratar a una persona real e identificable, y metadatos de procedencia más identificación visible en los medios generados que se publican.
 
 **El orden de construcción** sigue [comms-intelligence.md § 9. Las iteraciones](../../spec/comms-intelligence.md#9-las-iteraciones): la captura es la Iteración 3, condicionada al sondeo de corpus; la entrega de investigación son las Iteraciones 5 y 6, después de la primitiva de compartimentación; los constructores son la Iteración 7. El transporte por canal y la supresión mutua son parte de la infraestructura de comunicaciones de la plataforma, no de la hoja de ruta.
 
@@ -1365,7 +1368,7 @@ App de la organización ──► Adaptador (credencial acotada) ──► Servi
 La capa de plataforma gana un componente en tres partes, que guarda solo metadatos. Sus entidades están en el [Modelo de datos](#modelo-de-datos).
 
 - **Catálogo.** Qué servicios existen, en qué países y en qué niveles de aislamiento, de qué proveedor, a qué precio unitario trasladado, y si una llamada lleva datos de la organización más allá del perímetro de cifrado.
-- **Derechos de uso.** Uno por organización y por servicio, creado por un Administrador de la organización. Cada uno lleva una credencial acotada a esa organización y a ese servicio, consumida a través de la capa de adaptadores del centro de integraciones. Activar un servicio marcado como que sale del perímetro exige la misma aceptación explícita que la configuración de BYOM ([Arquitectura BYOM](#arquitectura-byom)). Cada derecho de uso lleva un tope de gasto con un aviso y un corte. Nada viene activado por defecto.
+- **Derechos de uso.** Uno por organización y por servicio, creado por un Administrador de la organización. Cada uno lleva una credencial acotada a esa organización y a ese servicio, consumida a través de la capa de adaptadores del centro de integraciones. Activar un servicio marcado como que sale del perímetro exige la misma aceptación explícita que la configuración de BYOM ([el enrutador de modelos](#el-arnés-y-el-enrutador-de-modelos)). Cada derecho de uso lleva un tope de gasto con un aviso y un corte. Nada viene activado por defecto.
 - **Medición.** Cada llamada emite un evento de uso en el flujo de eventos propio de la organización: organización, servicio, unidades, costo del proveedor, actor que invoca y contrato que rige. Los eventos de uso son metadatos del registro de auditoría según la ADR-016 §4 y nunca conservan contenido. La cadena de facturación y la vista de auditoría de la propia organización son ambas suscriptoras.
 
 **Los derechos de uso acotan a cualquier agente futuro.** Un agente que actúa para una organización no puede tener credencial a ningún servicio que la organización no haya activado, y cada llamada que hace es un evento medido con un actor. Esto aporta el mecanismo de amplitud de credenciales que pide la [ADR-018](../../decisions/018-ai-agent-posture.md) sin resolver esa ADR ni añadir ninguna capacidad de agente.
@@ -1529,4 +1532,4 @@ Para las organizaciones autoalojadas, GreenGrass entrega:
 16. ~~Capacidades compartidas y costo por uso~~ → Servicios centrales ejecutados por organización, con traslado al costo medido por uso y sin margen, según la [ADR-019](../../decisions/019-central-services-and-metered-billing.md). Enmienda el modelo de ingresos solo fijo de la ADR-007. La parte de «sin margen» queda sin efecto por el punto 17.
 17. ~~Precios con un carril comercial~~ → El precio es una regla del carril encima del costo medido: al costo más una comisión en el carril político, al costo más un margen de 30 % más una comisión en el carril comercial, según la [ADR-026](../../decisions/026-two-lane-pricing.md). Sus definiciones quedan abiertas ahí.
 
-**Reabierto por la dirección de noviembre de 2026, y sin resolver.** Cuatro ADR propuestas traen preguntas abiertas que tocan este documento: si el bus de eventos reemplaza la capa de federación (la [ADR-024](../../decisions/024-event-bus-as-federation.md)); si el padrón electoral sale del Core, y cómo se llama el Core (la [ADR-022](../../decisions/022-core-modules-and-lanes.md)); la superficie de chat, que espera por la [ADR-018](../../decisions/018-ai-agent-posture.md) (la [ADR-023](../../decisions/023-surfaces-chat-admin-field.md)); y Parsons como capa de conectores (la [ADR-027](../../decisions/027-third-party-crm-sync-and-connectors.md)).
+**Reabierto por la dirección de noviembre de 2026, y sin resolver.** Tres ADR propuestas traen preguntas abiertas que tocan este documento: si el bus de eventos reemplaza la capa de federación (la [ADR-024](../../decisions/024-event-bus-as-federation.md)); si el padrón electoral sale del Core, y cómo se llama el Core (la [ADR-022](../../decisions/022-core-modules-and-lanes.md)); y Parsons como capa de conectores (la [ADR-027](../../decisions/027-third-party-crm-sync-and-connectors.md)). La superficie de chat, que esperaba por la [ADR-018](../../decisions/018-ai-agent-posture.md), quedó decidida en la revisión del 2026-11-26 como la interfaz principal del arnés (la [ADR-023](../../decisions/023-surfaces-chat-admin-field.md); [El arnés y el enrutador de modelos](#el-arnés-y-el-enrutador-de-modelos)).

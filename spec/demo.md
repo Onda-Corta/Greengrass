@@ -2,7 +2,7 @@
 
 **A working demonstration, to open the door for GreenGrass with real candidacies and regional committees**
 
-Status: a pitch, not a specification. Nothing it describes is accepted, and [ADR-018](../decisions/018-ai-agent-posture.md) remains proposed.
+Status: a pitch, not a specification. [ADR-018](../decisions/018-ai-agent-posture.md) is accepted since 2026-11-26, and its worked example — the flow this pitch demonstrates — passed the gate as a bounded feature. The pitch stays a pitch: it holds no records, publishes nothing, and commits the platform to nothing beyond what the review decided.
 Code: in a separate private repository, `Onda-Corta/campaign-agent-demo`. It is not GreenGrass code. At the time of this revision it holds working code for most of its work plan: the bot and registration, the drafting, the approvals, the team's screen, the demo clock, the guardrails and the reset. The asset builder is being built there now, and a mock draws the artwork until it is ready.
 Standalone version, for candidacies: [pitch.md](pitch.md).
 Drafted: 2026-09-29
@@ -23,13 +23,13 @@ This flow was chosen for three reasons:
 
 1. **It happens in a chat, on their own phone.** The pitch asks nobody to learn a new screen. In the target markets the campaign runs on WhatsApp, and the demonstration runs on Telegram as a stand-in (§2), so the one thing it asks is a free app.
 2. **It shows the rule that makes GreenGrass trustworthy.** Nothing goes out unless a named person approved that exact version. In the pitch that is not a promise; it is on screen.
-3. **It serves the ADR-018 review.** Running the worked example with real people produces concrete evidence on the six places it meets the gate (§7).
+3. **It served the ADR-018 review.** Running the worked example with real people produced concrete evidence on the six places it met the gate (§7), which the review of 2026-11-26 resolved.
 
 ## 2. What it is not
 
 - **It is not the MVP.** The [MVP](mvp.md) tests whether sovereign political organizations will pool their data. This pitch tests neither that assumption nor any other: it opens the conversation. The two must not be confused.
-- **It is not GreenGrass code.** It lives in `Onda-Corta/campaign-agent-demo`, outside this corpus. None of that code moves into the platform without first clearing the ADR-018 review.
-- **It does not accept ADR-018.** It runs inside the bounds the proposal under review suggests, and so puts them to the test, but it does not decide them. ADR-018 remains proposed.
+- **It is not GreenGrass code.** It lives in `Onda-Corta/campaign-agent-demo`, outside this corpus. None of that code moves into the platform as is; production code is platform code, written against [spec/harness.md](harness.md).
+- **It did not pre-empt ADR-018.** It ran inside the bounds the proposal under review suggested, and put them to the test. The review of 2026-11-26 accepted ADR-018 and passed the worked example as a bounded feature ([ADR-018 § The review](../decisions/018-ai-agent-posture.md#the-review)).
 - **It publishes nothing.** No piece reaches a real X, Facebook or Instagram account.
 - **It does not commit GreenGrass to Telegram or to WhatsApp.** The demonstration runs on Telegram because it needs no business verification, display-name review or approved templates: a bot is set up in minutes. WhatsApp's business terms prohibit political party activity, so the pitch does not promise it either. The wording on slides and in the run of show is "the demonstration runs on Telegram; the production channel is decided with each campaign". The demonstration keeps the channel behind a thin interface so another can be added.
 
@@ -44,7 +44,7 @@ This flow was chosen for three reasons:
 - **Everything it generates is marked as demo output**, on every surface: the artwork, the PDF, each chat message, the team's screen and the ledger. The mark comes from the harness, never from the model, so a prompt cannot remove it. This matters more now that visitors can name real candidates when they register.
 - **It never invents a quote.** A reply from the model is checked before anything reaches the chat: a quote has to appear word for word in a public statement that someone checked by eye against its source, a figure has to appear in the folder or in the principal's message, and every source has to be in the principal's own folder. A reply that fails goes back to the model with the problems listed, up to three times, and then the morning fails instead of going out. For a candidacy whose only source is what a visitor typed, the output carries no words or positions that were not given. Gaps are shown, not filled.
 
-Three things would take it across the line, and none is done while ADR-018 remains proposed: loading a contact list, connecting a real social media account, or anyone continuing to use it day to day after the pitch. If a candidacy asks to keep the tool, the honest answer is *not yet*, and the invitation is to the pilot.
+Three things would take it across the line, and none is done while the pitch remains a pitch: loading a contact list, connecting a real social media account, or anyone continuing to use it day to day after the pitch. If a candidacy asks to keep the tool, the honest answer is *not yet* — production use is platform use, inside the ADR-018 posture — and the invitation is to the pilot.
 
 ## 4. The script
 
@@ -112,13 +112,13 @@ Every part of the pitch corresponds to something the specification already names
 | The asset builder, its layouts and brand kits | None. It sets an approved headline, a name and a date over a campaign's colours, type and logotype, and generates nothing, so it is not the image builder. It is the demo's own code, not a GreenGrass component | Outside the gate |
 | Pieces, rounds, versions and approvals | The [content pipeline](../decisions/021-content-approval-pipeline.md#the-content-pipeline-generalizes-post-approval): every round kept, every revision request commented | Accepted |
 | Usage events with their cost | [ADR-019](../decisions/019-central-services-and-metered-billing.md#two-billing-planes-and-no-margin-on-the-second)'s metering and pass-through at cost | Accepted |
-| The record of each approval | The "on behalf of" relation, proposed for [ADR-018](../decisions/018-ai-agent-posture.md#what-this-adr-must-resolve) item 3 | Proposed |
+| The record of each approval | The channel and trigger fields the review gave the audit trail ([ADR-018 § The review](../decisions/018-ai-agent-posture.md#the-review)) | Accepted |
 | The simulated publisher | The social media adapter ([system.md § Social media](../design/architecture/system.md#social-media)), not connected | Accepted, not used |
-| The Campaign Agent | ADR-018's agent harness, reduced to a single conversation per principal | Proposed |
+| The Campaign Agent | The chat with content modules enabled — a persona and a module set, not a module ([spec/harness.md § Personas](harness.md#personas)) | Accepted |
 
 ## 7. The worked example's six points, in the pitch
 
-ADR-018's worked example meets the gate in six places. The pitch decides none of them. What it does is pick, in each, the most conservative side that still lets the flow be seen.
+ADR-018's worked example meets the gate in six places. The pitch decided none of them — the review of 2026-11-26 did, in the flow's favor ([ADR-018 § The proposals under review, resolved](../decisions/018-ai-agent-posture.md#the-proposals-under-review-resolved)). What the pitch did was pick, in each, the most conservative side that still lets the flow be seen.
 
 | Point | What the pitch does |
 |---|---|
@@ -198,7 +198,7 @@ For a rehearsed morning of its own, which is only done with a campaign that has 
 
 ## 11. What the pitch does not prove
 
-- **That ADR-018's bounds are enough.** It applies them in the narrowest case possible: one conversation per principal, no voter data, no real publishing. The review still has to decide read scope, the threat model, audit, offline and the BYOM screen.
+- **That the accepted bounds are enough in practice.** The review decided read scope, the threat model, audit, offline and the BYOM screen; the pitch applied the bounds in the narrowest case possible — one conversation per principal, no voter data, no real publishing — and proves nothing about the wider ones.
 - **Anything about the image builder.** The asset builder generates no images, on purpose.
 - **That the agent never misstates a position.** The checks catch invented quotes, figures, sources and links. They cannot catch an invented argument in the principal's voice that the folder does not support; the bake-off produced one. Approval is the safeguard: nothing goes out until a named person approves that exact version, and the talking points carry their sources so the person can check.
 - **That the knowledge base scales.** A few documents fit whole in the prompt. A real knowledge base needs retrieval, and with it read-scope questions that do not come up here.
@@ -232,5 +232,5 @@ If time slips, the cuts go in this order: the team's screen is reduced to the in
 2. **The redesign.** The first layout is a placeholder. Whether the artwork, the layouts and the formats are redesigned before 2026-10-12 or after the pitch is not decided. The rest of the asset builder does not change either way.
 3. **Photos.** Whether the artwork carries the campaign's photos at the pitch. For now every artwork goes without one, and adding them is optional work. A demonstration without photos still shows the flow, but looks less like what a campaign posts.
 4. **Recordings.** A recording of the pitch carries a real person's voice or words saying things an agent drafted. It is not shown to another campaign without that person's written permission. The backup screen recording carries the same demo marking.
-5. **What to offer whoever says yes.** The answer to "I want to use it tomorrow" is the pilot, and the pilot waits on the ADR-018 review for anything agent-shaped. That has to be said well, and before anyone asks.
+5. **What to offer whoever says yes.** The answer to "I want to use it tomorrow" is the pilot, and everything agent-shaped in the pilot runs inside the ADR-018 posture. That has to be said well, and before anyone asks.
 6. **What a committee maps to.** The specification has no regional-committee organization type (§6). Whether a committee is a campaign under a party or something new is not decided here.

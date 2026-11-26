@@ -3,6 +3,7 @@
 **Status:** Accepted
 **Date:** 2026-03-03
 **Sources:** `spec/security.md`, `spec/compliance.md`, `spec/workflows.md`, `spec/users.md`, `design/architecture/system.md`
+**Amended by:** [ADR-018](018-ai-agent-posture.md) § The review — the audit trail gains a channel and a trigger for harness-mediated actions; the actor is always a person, and no non-human actor type exists.
 
 ## Context
 
@@ -15,6 +16,8 @@ GreenGrass manages politically sensitive data — voter contact records with sen
 Every data change is logged: who, what, when, from where. This includes CRM edits, financial transactions, permission changes, logins, data exports, record merges, bulk operations, and session events. The audit trail is immutable — entries cannot be modified or deleted by any user including Platform Admin. A separate Platform Admin audit trail logs all GreenGrass team actions.
 
 Audit log retention is 10 years globally, matching Lebanon's commercial records requirement as the longest among target countries. One rule everywhere eliminates the risk of premature deletion from incorrect jurisdiction-specific retention logic.
+
+For actions mediated by the agent harness ([spec/harness.md](../spec/harness.md), decided in the [ADR-018](018-ai-agent-posture.md) review), the entry also records the **channel** — chat, a named coach, a builder — and the **trigger**: a person's request, a confirmation tap, or a schedule a person set. The actor is always a person; no non-human actor type exists. Prompt and response bodies are retained under the Operational tier of [ADR-016](016-cross-cutting-resolutions.md) §4, and call metadata — provider, model, tokens, cost, operation, confirmation reference — under the audit-trail tier.
 
 **Alternatives considered:** Per-jurisdiction retention periods were rejected because structured event data is cheap to store relative to the compliance risk of getting jurisdiction-specific retention wrong.
 

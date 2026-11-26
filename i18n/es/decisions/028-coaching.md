@@ -2,6 +2,7 @@
 
 **Estado:** Propuesta
 **Fecha:** 2026-11-25
+**Actualizada:** 2026-11-26 — la revisión de la [ADR-018](018-ai-agent-posture.md) respondió las doce preguntas que esta ADR envió. El coach acotado no tiene ninguna de las cuatro características condicionadas y puede salir; los resúmenes del día, las acciones recomendadas, actuar desde un coach y leer registros están permitidos bajo la postura y siguen siendo trabajo de producto sin especificar. Las respuestas están en § Las respuestas de la revisión. El estado no cambia: quién puede escribir un coach y quién mantiene el conocimiento sobre organización siguen abiertos.
 **Fuentes:** `spec/coaching.md`, `spec/users.md`, `spec/support.md`, `spec/comms-intelligence.md`, `design/architecture/system.md`, `decisions/005-offline-first-sync.md`, `decisions/013-analytics-ai.md`, `decisions/014-volunteer-onboarding.md`, `decisions/016-cross-cutting-resolutions.md`, `decisions/017-sharing-contract-trust-model.md`, `decisions/018-ai-agent-posture.md`, `decisions/019-central-services-and-metered-billing.md`, `decisions/020-central-service-line-up-and-builders.md`, `decisions/022-core-modules-and-lanes.md`, `decisions/023-surfaces-chat-admin-field.md`, `decisions/026-two-lane-pricing.md`
 
 ## Contexto
@@ -20,9 +21,9 @@ Esta ADR está `Propuesta`. Dos cosas en ella están decididas, y van marcadas.
 | El nombre: *Coach*, en inglés y en español | Decidido |
 | Qué es un coach, y en qué se distingue del concierge, los constructores y el chat | Propuesto |
 | Los coaches del rol y los coaches que escribe la organización | Propuesto |
-| El coach acotado | Propuesto |
+| El coach acotado | Decidido, y fuera del punto de decisión ([ADR-018 § The review](018-ai-agent-posture.md#la-revisión)) |
 | La capa de contexto de la organización | Propuesto |
-| Resúmenes del día, acciones recomendadas, actuar desde un coach, leer registros | Propuesto, y a la espera de la revisión de la ADR-018 |
+| Resúmenes del día, acciones recomendadas, actuar desde un coach, leer registros | Respondidos por la revisión; permitidos bajo la postura, todavía sin especificar |
 | Quién puede escribir un coach; quién escribe y mantiene el conocimiento sobre organización del que se nutren los coaches | Abierto |
 
 ### Conflictos que resuelve esta ADR
@@ -90,7 +91,7 @@ Propuesto. Son los límites de la [ADR-020 § Builders](020-central-service-line
 | Acción autónoma | Ninguna |
 | Amplitud de credenciales | Solo el proveedor del modelo |
 
-Un coach sin documentos de contexto lee solo lo que la persona le entrega, que es exactamente el alcance de lectura de un constructor de texto. Un coach con documentos de contexto espera por la pregunta 1. Hasta que la revisión la responda, los dos se tratan como condicionados.
+Un coach sin documentos de contexto lee solo lo que la persona le entrega, que es exactamente el alcance de lectura de un constructor de texto. Un coach con documentos de contexto esperaba por la pregunta 1. La revisión la respondió: el contexto designado no es alcance de lectura más amplio que una sola funcionalidad, porque la designación es un acto deliberado y registrado de la organización ([§ Las respuestas de la revisión](#las-respuestas-de-la-revisión)). El coach acotado, con o sin documentos de contexto, no tiene ninguna de las cuatro características condicionadas y puede salir.
 
 ### La capa de contexto de la organización
 
@@ -108,6 +109,8 @@ La capa de contexto es lo que el dibujo del arnés de la ADR-018 llama *Estrateg
 
 ### A la espera de la revisión de la ADR-018
 
+*Respondido el 2026-11-26: la revisión permite cada una de estas cosas bajo la postura —ver [§ Las respuestas de la revisión](#las-respuestas-de-la-revisión). Nada de esto está todavía especificado para producción; cada pieza necesita su propia especificación antes de salir. La sección se conserva tal como se escribió, como registro de lo que se mostró.*
+
 Se registra aquí para que la revisión vea todo lo que se mostró. Nada de esto está especificado para producción, y nada puede construirse sobre ello como si estuviera decidido.
 
 1. **Resúmenes del día.** Un resumen diario del alcance de la persona: grupos activos, personas a las que toca contactar, puestas en marcha sin terminar. Lee más allá de la conversación, y o bien habla primero o bien corre según un horario que fijó una persona.
@@ -120,7 +123,7 @@ Los resúmenes del día y las recomendaciones tienen una versión fuera del punt
 
 ### Preguntas enviadas a la revisión de la ADR-018
 
-Registradas en [ADR-018 § Questions recorded by later ADRs](018-ai-agent-posture.md#preguntas-anotadas-por-adr-posteriores). Aquí no se responde ninguna.
+Registradas en [ADR-018 § Questions recorded by later ADRs](018-ai-agent-posture.md#preguntas-anotadas-por-adr-posteriores). Las doce están respondidas en [§ Las respuestas de la revisión](#las-respuestas-de-la-revisión); las preguntas se conservan tal como se hicieron.
 
 1. **Contexto designado y alcance de lectura.** ¿Leer los documentos de contexto que una organización designó para un coach cuenta como alcance de lectura más amplio que una sola funcionalidad? Esto decide si el coach acotado queda fuera del punto de decisión. *Alcance de lectura.*
 2. **Registros.** ¿Puede un coach leer grupos, miembros, historial de contacto o el CRM, para resumir, para recomendar o para responder? Si es así, ¿dentro del propio alcance de la persona, como dice la propuesta del chat como las manos de la persona, o más estrecho, fuente por fuente? *Alcance de lectura; punto 2.*
@@ -132,7 +135,7 @@ Registradas en [ADR-018 § Questions recorded by later ADRs](018-ai-agent-postur
 8. **Sin conexión.** Qué ve una persona sin conexión, dado que quienes dirigen grupos locales trabajan cerca del campo. *Punto 4.*
 9. **Costo.** Quién paga cuando un voluntario habla con un coach, y qué incluye el plan por defecto. *Punto 5; ADR-026.*
 10. **Contratos.** Si un coach puede leer alguna vez datos sujetos a un contrato de intercambio, como los de una coalición. Lo que se propone aquí: nunca se designan como contexto. *Punto 7.*
-11. **El proveedor del modelo.** Si un coach puede usar un proveedor BYOM externo cuando las conversaciones llevan nombres de miembros, que entonces salen de la frontera de cifrado ([system.md § BYOM architecture](../design/architecture/system.md#arquitectura-byom)). *Punto 8.*
+11. **El proveedor del modelo.** Si un coach puede usar un proveedor BYOM externo cuando las conversaciones llevan nombres de miembros, que entonces salen de la frontera de cifrado ([system.md § El arnés y el enrutador de modelos](../design/architecture/system.md#el-arnés-y-el-enrutador-de-modelos)). *Punto 8.*
 12. **Los coaches y el chat.** ¿Un coach es el chat de la ADR-023 con las instrucciones de un rol y sin operaciones, o una superficie propia? Esto se ata a la recomendación del Agente de Campaña en [ADR-022 § The module catalogue](022-core-modules-and-lanes.md#el-catálogo-de-módulos), que no está decidida. *La propuesta del chat como las manos de la persona.*
 
 ### Preguntas abiertas
@@ -141,6 +144,23 @@ Estas no dependen de la revisión. No se resuelven aquí.
 
 1. **Quién puede escribir un coach.** Solo el OA, el personal, los líderes de equipo, o una alianza o asociación para sus miembros a través del bus ([ADR-024](024-event-bus-as-federation.md), también propuesta).
 2. **Quién escribe y mantiene el conocimiento sobre organización del que se nutren los coaches.** GreenGrass, el carril, el cliente o terceros, y en qué idiomas.
+
+## Las respuestas de la revisión
+
+La revisión de la ADR-018 del 2026-11-26 respondió las doce preguntas. Cada respuesta; el mecanismo detrás está en [spec/harness.md](../spec/harness.md).
+
+1. **Contexto designado y alcance de lectura.** Leer los documentos de contexto que una organización designó para un coach no es alcance de lectura más amplio que una sola funcionalidad. La designación es un acto deliberado, registrado y auditable de la organización, que nombra exactamente ese corpus para exactamente ese coach. El coach acotado no tiene ninguna de las cuatro características condicionadas y queda fuera del punto de decisión.
+2. **Registros.** Un coach con operaciones de lectura declaradas en el manifiesto lee dentro del alcance de la propia persona que lo invoca, la misma regla que el chat. El coach acotado sigue sin leer registros; añadir lecturas de registros es una operación declarada, no una postura nueva.
+3. **Hablar de personas.** Permitido dentro del alcance de la propia persona. Es consejo para una persona, no una decisión sobre el sujeto —la plataforma no toma decisiones significativas únicamente automatizadas ([compliance.md § Automated processing and the harness](../spec/compliance.md#procesamiento-automatizado-y-el-arnés)). La procedencia y las salvaguardas de la capa de contexto aplican.
+4. **Actuar.** *Añadir tarea* y *Contactar* son escrituras: operaciones declaradas, cada una confirmada con una tarjeta en el momento en que ocurre.
+5. **Resúmenes del día.** Una programación que una persona fijó. El resumen lee fuentes designadas y lo que la persona suscriptora puede leer, evaluado bajo su alcance en el momento de la preparación; nunca datos compartimentados.
+6. **Conservación y quién puede leer una conversación.** Las conversaciones son cuerpos de prompts y respuestas: el nivel Operacional de la [ADR-016 § 4](016-cross-cutting-resolutions.md#4-política-de-conservación-de-datos-por-niveles) (90 días a 5 años, 2 por defecto), con los metadatos de la llamada conservados indefinidamente en el nivel de auditoría. Una conversación con un coach es privada de su persona; el OA ve metadatos —conteos, costo— nunca el contenido, bajo la regla de que no hay ruta de lectura de superusuario. Compartir manda una copia de solo lectura a las personas elegidas, registrada.
+7. **Inyección de prompts.** Los adjuntos son contenido no confiable: dato, nunca instrucciones ([security.md § Prompt injection](../spec/security.md#inyección-de-prompts)). Los documentos designados y las instrucciones de coach escritas por la organización son confiables por designación, y los cambios de designación quedan registrados —lo que convierte a quién puede escribir un coach en una pregunta de seguridad, registrada en [ADR-018 § The review](018-ai-agent-posture.md#la-revisión).
+8. **Sin conexión.** Un coach necesita conexión; la página del coach lo dice y ofrece las conversaciones en caché. Ninguna tarea de campo depende de un coach.
+9. **Costo.** Medido al cliente bajo la [ADR-019](019-central-services-and-metered-billing.md), con precio según la regla del carril ([ADR-026](026-two-lane-pricing.md)); con BYOM el propio proveedor del cliente le factura. Qué incluye el plan por defecto sigue abierto en la ADR-026.
+10. **Contratos.** Un coach lee datos sujetos a un contrato de intercambio solo bajo el contrato de la persona que lo invocó, nunca más de lo que esa persona podría leer, y nunca en segundo plano. Lo propuesto aquí se mantiene: un documento bajo contrato nunca se designa como contexto.
+11. **El proveedor del modelo.** El contenido de una conversación es datos personales, y se enruta solo según las reglas por clase de datos de la organización bajo [spec/harness.md § The model router](../spec/harness.md#el-enrutador-de-modelos). Una organización que quiera que los nombres de sus miembros no salgan nunca enruta esa clase solo a endpoints dentro de la frontera de cifrado.
+12. **Los coaches y el chat.** Un coach es una persona del arnés: instrucciones, contexto designado y un conjunto de operaciones declaradas. El coach acotado es el caso de cero operaciones; el chat es el caso general. Un solo arnés, muchas personas ([spec/harness.md § Personas](../spec/harness.md#personas)).
 
 ## Consecuencias
 
@@ -157,8 +177,7 @@ Estas no dependen de la revisión. No se resuelven aquí.
 - Unos coaches neutrales respecto al carril necesitan conocimiento sobre organización que alguien tiene que escribir, y todavía no hay nadie nombrado
 
 **Restricciones:**
-- Ningún coach llega a producción en ningún carril antes de que se acepte la revisión de la ADR-018, salvo que la revisión confirme que no tiene ninguna de las cuatro características condicionadas
-- Un coach nunca habla primero, nunca actúa y nunca lee registros mientras la revisión no diga otra cosa
+- El coach acotado sale dentro de sus límites: nunca habla primero, nunca actúa y nunca lee registros. Los resúmenes del día, actuar y leer registros están permitidos por la revisión bajo la postura —una programación que una persona fijó, operaciones declaradas confirmadas con una tarjeta, el alcance de la persona que lo invoca— y cada uno se especifica antes de salir
 - Ninguna tarea de campo depende de un coach
 - Un documento sujeto a un contrato de intercambio nunca es contexto de un coach
 - La regla de anclaje del concierge no cambia

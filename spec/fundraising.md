@@ -303,6 +303,8 @@ Already decided in workflows.md: real-time fundraising thermometer, Finance Dire
 
 **The Core meters cost only.** Every call to a central service emits a usage event with the supplier cost, as ADR-019 decided. Each lane applies its own price rule on top. A client's statement shows cost, margin and commission as separate lines.
 
+**Inference is a line item.** Every model call through the tenant's model router is a metered usage event like any other central-service call ([spec/harness.md](harness.md)); under BYOM the client's provider bills the client directly. With chat as a main surface, inference is a cost of ordinary daily work, not a marginal one — the lane price rules treat it as a line item, not a rounding error ([ADR-018 § The review](../decisions/018-ai-agent-posture.md#the-review)).
+
 **Kept from ADR-019,** because the new prices rely on it: per-call metering of supplier cost, itemised statements, spend caps with a soft warning and a hard stop, nothing enabled by default, and alliances paying for members.
 
 **Alliances paying for members.** An alliance can absorb the metered costs of its members' use of central services. This is a setting on the affiliation, `member_pays` (default) or `alliance_pays`, chosen when the alliance is set up and shown to each member before it accepts affiliation ([workflows.md § 1. Tenant Onboarding](workflows.md#1-tenant-onboarding)). Changing it on a live affiliation requires the Org Admins of both sides, the same rule that governs donation split changes. Paying is not seeing: results land in the member tenant under the member's keys, and the alliance receives the statement, never the content. An association of agencies in the commercial lane can pay for its members the same way.

@@ -2,6 +2,7 @@
 
 **Estado:** Propuesta
 **Fecha:** 2026-11-13
+**Actualizada:** 2026-11-26 — la revisión de la [ADR-018](018-ai-agent-posture.md) decidió dos puntos que esta ADR tenía abiertos o recomendados: el Core es un arnés de agentes por cliente con el chat como su interfaz principal ([spec/harness.md](../spec/harness.md)), y el Agente de Campaña es ese chat con los módulos de contenido activados. Las dos filas pasan a Decidido abajo. El estado no cambia: el padrón electoral y un nombre para el Core siguen abiertos.
 **Fuentes:** `spec/product.md`, `spec/users.md`, `spec/security.md`, `spec/comms-intelligence.md`, `spec/mvp.md`, `design/architecture/system.md`, `decisions/001-platform-architecture.md`, `decisions/015-product-scope.md`, `decisions/017-sharing-contract-trust-model.md`, `decisions/019-central-services-and-metered-billing.md`, `decisions/020-central-service-line-up-and-builders.md`, `decisions/021-content-approval-pipeline.md`
 
 ## Contexto
@@ -20,6 +21,7 @@ Esta ADR está `Propuesta` porque dos cosas de las que depende siguen abiertas: 
 | Cada cliente corre su propia instancia, con sus propios datos y sus propias cuentas | Decidido ([ADR-001](001-platform-architecture.md), [ADR-025](025-identity-per-client.md)) |
 | El CRM es parte del Core | Decidido |
 | El Coaching es parte del Core | Decidido ([ADR-028](028-coaching.md)) |
+| El Core es un arnés de agentes por cliente; el chat es su interfaz principal | Decidido ([ADR-018 § The review](018-ai-agent-posture.md#la-revisión); [spec/harness.md](../spec/harness.md)) |
 | Recaudación y pagos es un solo módulo con una capa de pagos compartida | Decidido |
 | Los módulos los construye primero GreenGrass; el contrato de módulo se diseña para que terceros aprobados puedan construir después | Decidido |
 | El vocabulario, incluido el cambio de nombre del «módulo interno» de la ADR-019 | Propuesto |
@@ -27,7 +29,7 @@ Esta ADR está `Propuesta` porque dos cosas de las que depende siguen abiertas: 
 | Qué le exigen los carriles al diseño | Propuesto |
 | El contrato de módulo y el catálogo de módulos | Propuesto |
 | El padrón electoral como módulo del carril político, fuera del Core | Recomendado, no decidido |
-| El Agente de Campaña como el chat con los módulos de contenido activados, no como módulo | Recomendado, no decidido |
+| El Agente de Campaña como el chat con los módulos de contenido activados, no como módulo | Decidido ([ADR-018 § The review](018-ai-agent-posture.md#la-revisión)) |
 | Un nombre para el Core; el acceso de los operadores por carril; los datos de un módulo desactivado; el nombre «Basecamp» | Abierto |
 
 ### Conflictos que resuelve esta ADR
@@ -116,6 +118,7 @@ Toda instancia recibe todo esto, siempre. El Core es headless: cada elemento es 
 | Comercio | Catálogo, derechos de uso, medición de uso | [ADR-019](019-central-services-and-metered-billing.md) |
 | Eventos | El flujo de eventos de cada cliente y el bus ([ADR-024](024-event-bus-as-federation.md)) | [system.md § Arquitectura de analítica](../design/architecture/system.md#arquitectura-de-analítica) |
 | Coaching | Coaches del rol, coaches que escribe la organización, la capa de contexto de la organización | [ADR-028](028-coaching.md) |
+| El arnés de agentes | El arnés por cliente, su enrutador de modelos y sus personas; las operaciones declaradas y la compuerta humana | [ADR-018 § The review](018-ai-agent-posture.md#la-revisión); [spec/harness.md](../spec/harness.md) |
 | Configuración de carril | Marca, vocabulario, visibilidad del catálogo, reglas de precio, políticas por defecto | Nuevo, arriba |
 | Infraestructura común | Centro de integraciones y conectores, abstracción de IA (BYOM), localización, motor de sincronización sin conexión, API pública y webhooks | [system.md](../design/architecture/system.md), [ADR-005](005-offline-first-sync.md), [ADR-010](010-internationalization-localization.md), [ADR-016](016-cross-cutting-resolutions.md) §38 |
 
@@ -123,7 +126,7 @@ Toda instancia recibe todo esto, siempre. El Core es headless: cada elemento es 
 
 **Dos primitivas de la inteligencia de comunicaciones resultan ser del Core. Propuesto.** [comms-intelligence.md § 5. Siete funcionalidades son tres primitivas](../spec/comms-intelligence.md#5-siete-funcionalidades-son-tres-primitivas) nombra tres. El grafo de actores (medios, propiedad, periodistas, analistas) son entidades y relaciones del CRM, así que extiende el CRM del Core. El libro de afirmaciones (afirmación, fuentes, estado de verificación, respuesta aprobada) es una pieza de contenido, así que extiende el almacén de contenido del Core. Solo el expediente compartimentado es propio de un módulo, y su mecanismo de acceso son los contratos de la ADR-017, que son del Core.
 
-El resto de la tabla está propuesto. La identidad por cliente se decide en la [ADR-025](025-identity-per-client.md), y el Coaching como parte del Core en la [ADR-028](028-coaching.md), que deja lo que puede hacer un coach a la revisión de la [ADR-018](018-ai-agent-posture.md).
+El resto de la tabla está propuesto. La identidad por cliente se decide en la [ADR-025](025-identity-per-client.md), y el Coaching como parte del Core en la [ADR-028](028-coaching.md); lo que puede hacer un coach está respondido en [ADR-028 § The review's answers](028-coaching.md#las-respuestas-de-la-revisión).
 
 **Alternativas consideradas:** Se consideró y se descartó hacer del CRM un módulo. Casi todos los módulos dependerían entonces de él, y cada módulo tendría que hacer valer el consentimiento por su cuenta, que es como una baja se respeta en un sitio y se ignora en otro.
 
@@ -148,7 +151,8 @@ Todo módulo trae un manifiesto que declara:
 - **Superficies:** sus operaciones de chat, cada una marcada como de lectura o de escritura, con la tarjeta de confirmación para las escrituras; sus pantallas de administración y sus entradas de navegación; sus capacidades de campo y su comportamiento sin conexión ([ADR-023](023-surfaces-chat-admin-field.md)).
 - **Servicios:** los servicios centrales a los que llama, y por lo tanto los derechos de uso que necesita.
 - **Perímetro:** qué datos salen de la frontera de cifrado, y qué niveles de aislamiento y jurisdicciones admite.
-- **Situación frente a la ADR-018:** alcance de lectura, capacidad de invocar herramientas, autonomía y amplitud de credenciales, las cuatro características que la [ADR-018](018-ai-agent-posture.md#ninguna-capacidad-de-agente-llega-a-producción-hasta-que-se-acepte-esta-adr) condiciona.
+- **Arnés:** las personas que aporta, las fuentes de contexto que ofrece para designación, y las clases de datos que tocan sus operaciones, para que el [enrutador de modelos](../spec/harness.md#el-enrutador-de-modelos) pueda enrutarlas.
+- **Situación frente a la ADR-018:** alcance de lectura, capacidad de invocar herramientas, autonomía y amplitud de credenciales, las cuatro características que la [ADR-018](018-ai-agent-posture.md#ninguna-capacidad-de-agente-llega-a-producción-hasta-que-se-acepte-esta-adr) condiciona —declaradas contra la postura que fijó la revisión ([ADR-018 § The review](018-ai-agent-posture.md#la-revisión)). Un módulo dentro de la postura no necesita ninguna revisión más; cualquier cosa más allá es una ADR nueva.
 
 **Entrega.** Los módulos propios vienen en la imagen de despliegue y se activan por derecho de uso. La ADR-001 no cambia: no hay despliegues por módulo.
 
@@ -165,7 +169,7 @@ Propuesto. Los nombres son de quien dirige el producto. Todos los módulos puede
 | Monitoreo de radio y TV | Los dos | Captura (medios de difusión, transcritos), grafo de actores | Chat (resumen), administración | Sondeo de corpus de la Iteración 0; la transcripción es un costo medido |
 | Monitoreo de redes | Los dos | Captura (cuentas públicas) | Chat, administración | Sondeo de corpus de la Iteración 0; solo cuentas públicas |
 | Resumen de prensa | Los dos | Captura (prensa), constructor de texto | Chat (resumen diario) | Sondeo de corpus de la Iteración 0 |
-| Constructor de artes publicitarios | Los dos | Constructores, flujo de contenido, plantillas de identidad visual | Chat, administración | Las composiciones con plantilla están bien, como en la demostración; las imágenes generadas esperan a la [ADR-018](018-ai-agent-posture.md) |
+| Constructor de artes publicitarios | Los dos | Constructores, flujo de contenido, plantillas de identidad visual | Chat, administración | Las composiciones con plantilla están bien, como en la demostración; las imágenes generadas llevan las dos condiciones de la revisión ([ADR-020](020-central-service-line-up-and-builders.md)) |
 | Distribución de contenido | Los dos | Transporte por canal, flujo de contenido, CRM | Chat, administración | El contacto de la especificación, más prensa y redes |
 | Manejo de crisis | Los dos | Módulos de monitoreo, libro de afirmaciones, puntos de mensaje | Chat, administración | Nombrado, todavía sin especificar |
 | Encuestas y sondeos | Los dos | CRM, transporte por canal | Administración, chat | Nombrado, todavía sin especificar |
@@ -182,7 +186,7 @@ Propuesto. Los nombres son de quien dirige el producto. Todos los módulos puede
 - **Manejo de crisis es el flujo de trabajo del libro de afirmaciones** de [comms-intelligence.md § 5.2 El libro de afirmaciones](../spec/comms-intelligence.md#52-el-libro-de-afirmaciones): un ataque aparece en el monitoreo, se vuelve una afirmación, se documenta con fuentes y se adjudica, y la respuesta se vuelve un punto de mensaje. La especificación tiene la primitiva y ningún módulo con este nombre.
 - **Encuestas y sondeos no tiene especificación alguna.** La ADR-020 da una regla que hay que conservar: las encuestas propias de un cliente son datos suyos y nunca entran al corpus compartido.
 - **Recaudación y pagos es un solo módulo con una capa de pagos compartida. Decidido.** En el carril comercial significa integración con ATH Móvil y otros servicios de micropagos y de pagos en línea, como Stripe. Esos son los adaptadores de pago que [system.md § Patrón de adaptadores de pago](../design/architecture/system.md#patrón-de-adaptadores-de-pago) ya especifica, así que los dos carriles comparten los adaptadores. El carril político añade encima el manejo de donaciones: límites de contribución, reportes de financiamiento de campaña y repartos de la alianza ([fundraising.md](../spec/fundraising.md), [compliance.md](../spec/compliance.md)).
-- **El Agente de Campaña no es un módulo. Recomendado, no decidido.** Si el chat actúa como la persona ([ADR-023](023-surfaces-chat-admin-field.md)), el agente de la demostración es ese chat con los módulos de contenido activados.
+- **El Agente de Campaña no es un módulo. Decidido en la revisión de la [ADR-018](018-ai-agent-posture.md).** El agente de la demostración es el chat con los módulos de contenido activados: una persona y un conjunto de módulos, no un módulo ([spec/harness.md § Personas](../spec/harness.md#personas)).
 
 **Nombrados, todavía sin especificar.** Manejo de crisis y Encuestas y sondeos están en el catálogo y no están especificados en ninguna parte. Esta ADR no los especifica. Cada uno necesita su propia especificación antes de construirse.
 
@@ -192,11 +196,10 @@ Ninguna de estas se resuelve aquí. Donde la dirección tiene una recomendación
 
 1. **Un nombre para el Core**, ahora que Greengrass es un carril. También dónde vive su especificación: hoy todo está en el repositorio de Greengrass.
 2. **El padrón electoral** como módulo del carril político, no como parte del Core. Recomendado arriba.
-3. **El Agente de Campaña** como el chat con los módulos de contenido activados, no como módulo. Recomendado arriba.
-4. **Los datos de un módulo desactivado:** se conservan en solo lectura, se exportan, o se purgan según el calendario de conservación operativa.
-5. **El acceso de los operadores por carril,** incluido el acceso de Onda Corta a los dos, y qué se les dice a los clientes políticos.
-6. **El nombre «Basecamp».** Es también el producto de gestión de proyectos de 37signals, en la misma categoría amplia de software. Necesita una verificación de marca registrada antes de aparecer en nada público.
-7. **Definiciones.** «La dueña del producto» y «la Comercializadora» se usan tal como se dieron y no están definidas en ninguna parte.
+3. **Los datos de un módulo desactivado:** se conservan en solo lectura, se exportan, o se purgan según el calendario de conservación operativa.
+4. **El acceso de los operadores por carril,** incluido el acceso de Onda Corta a los dos, y qué se les dice a los clientes políticos.
+5. **El nombre «Basecamp».** Es también el producto de gestión de proyectos de 37signals, en la misma categoría amplia de software. Necesita una verificación de marca registrada antes de aparecer en nada público.
+6. **Definiciones.** «La dueña del producto» y «la Comercializadora» se usan tal como se dieron y no están definidas en ninguna parte.
 
 ### Orden interno: avisos de enmienda
 
@@ -223,7 +226,7 @@ Una ADR propuesta no enmienda nada hasta que se acepta. Esta ADR añade una lín
 - Las reglas de la [ADR-019](019-central-services-and-metered-billing.md) para los servicios centrales no cambian: un cliente por llamada, nada conservado, solo se comparten datos públicos
 - El Core nunca depende de un módulo
 - Un carril es configuración, nunca una bifurcación
-- El punto de decisión de la [ADR-018](018-ai-agent-posture.md) aplica a todo el Core, y por lo tanto a los dos carriles ([ADR-023](023-surfaces-chat-admin-field.md))
+- La postura de la [ADR-018](018-ai-agent-posture.md) aplica a todo el Core, y por lo tanto a los dos carriles: el punto de decisión que decidió la [ADR-023](023-surfaces-chat-admin-field.md) quedó desactivado por la revisión, y la postura que esta fijó ([ADR-018 § The review](018-ai-agent-posture.md#la-revisión)) vincula el manifiesto de cada módulo
 - Nada de lo que esta ADR marca como propuesto, recomendado o abierto puede usarse como base para construir como si estuviera decidido
 
 **ADR relacionadas:** [ADR-001](001-platform-architecture.md) (una instancia por cliente, reafirmada), [ADR-015](015-product-scope.md) (enmienda propuesta: el catálogo nombra módulos fuera de su lista de alcance), [ADR-017](017-sharing-contract-trust-model.md) (los contratos son del Core), [ADR-018](018-ai-agent-posture.md) (el manifiesto declara la situación de cada módulo frente al punto de decisión), [ADR-019](019-central-services-and-metered-billing.md) (enmienda propuesta: «módulo interno» pasa a ser «componente de instancia»; el catálogo, los derechos de uso y la medición de uso son del Core), [ADR-020](020-central-service-line-up-and-builders.md) (enmienda propuesta: el único monitor de medios se empaqueta como tres módulos; los cuatro servicios no cambian), [ADR-021](021-content-approval-pipeline.md) (el flujo de contenido es del Core), [ADR-023](023-surfaces-chat-admin-field.md) (superficies), [ADR-024](024-event-bus-as-federation.md) (el bus; alianzas y asociaciones), [ADR-025](025-identity-per-client.md) (identidad por cliente), [ADR-026](026-two-lane-pricing.md) (precios), [ADR-027](027-third-party-crm-sync-and-connectors.md) (sincronización y conectores), [ADR-028](028-coaching.md) (el Coaching es parte del Core)
