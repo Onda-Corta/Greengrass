@@ -70,7 +70,7 @@ GreenGrass/
 │   └── architecture/
 │       └── system.md              # System architecture and data model
 ├── decisions/                     # Architecture Decision Records (28 ADRs)
-├── diary/                         # Project diary (17 entries)
+├── diary/                         # Project diary (18 entries)
 ├── scripts/build.mjs              # Documentation site generator (Node + markdown-it)
 ├── scripts/dev.sh                 # One-command local preview (install, build, serve)
 ├── site-assets/                   # Site styles + client-side scripts (search, nav)
