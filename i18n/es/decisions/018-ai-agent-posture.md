@@ -280,7 +280,7 @@ Decidido. Responde los puntos 4 y 5.
 - **La aritmética de los precios.** Qué incluye el «costo», cómo se calcula cada comisión, qué incluye el plan por defecto de la plataforma, si algún plan gratuito lleva saldo medido —preguntas abiertas de la [ADR-026](026-two-lane-pricing.md), que es donde les toca.
 - **Las dos preguntas de producto de la ADR-028.** Quién puede escribir un coach —ahora también una pregunta de seguridad, porque las instrucciones escritas por la organización son confiables por designación— y quién escribe y mantiene el conocimiento sobre organización del que se nutren los coaches.
 - **Las pantallas debidas.** La pantalla de ajustes de proveedores (punto 8), la faceta de canal del visor de auditoría, y las entradas en el inventario de pantallas y en los wireframes que las dos necesitan.
-- **Las preguntas abiertas de la ADR-022** quedan intactas: un nombre para el Core, el acceso de operadores por carril, el bus de eventos en lugar de la capa de federación, el padrón electoral como módulo del carril político, Parsons como capa de conectores, y qué pasa con los datos de un módulo desactivado.
+- **Las preguntas abiertas de la ADR-022** quedan intactas: un nombre para el Core, el acceso de operadores por carril, el bus de eventos en lugar de la capa de federación, el padrón electoral como módulo del carril político, Parsons como capa de conectores, y qué pasa con los datos de un módulo desactivado. *Actualizado el 2026-11-26: el punto del bus de eventos quedó decidido — la [ADR-024](024-event-bus-as-federation.md) está aceptada.*
 
 ## Consecuencias
 

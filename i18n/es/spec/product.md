@@ -35,7 +35,7 @@
 |---|---|---|
 | Core, módulos y carriles | [ADR-022](../decisions/022-core-modules-and-lanes.md) | Propuesta. Los dos carriles, el CRM dentro del Core y una instancia por cliente están decididos |
 | Un Core headless, chat, administración y campo | [ADR-023](../decisions/023-surfaces-chat-admin-field.md) | Propuesta. El chat espera a la revisión de la [ADR-018](../decisions/018-ai-agent-posture.md), en los dos carriles |
-| Un bus de eventos entre instancias | [ADR-024](../decisions/024-event-bus-as-federation.md) | Propuesta |
+| Un bus de eventos entre instancias | [ADR-024](../decisions/024-event-bus-as-federation.md) | Aceptada |
 | Cada cliente guarda sus propias cuentas | [ADR-025](../decisions/025-identity-per-client.md) | Aceptada |
 | Los precios | [ADR-026](../decisions/026-two-lane-pricing.md) | Aceptada; las definiciones que necesitan están abiertas |
 | Sincronización con CRM de terceros | [ADR-027](../decisions/027-third-party-crm-sync-and-connectors.md) | Propuesta. NationBuilder por CSV está decidido |

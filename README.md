@@ -14,13 +14,13 @@ Puerto Rico (alpha), Brazil, Thailand, India, and Lebanon — each with distinct
 
 **Current phase: Specification & Design — reopened by a change of product direction; the ADR-018 review is held, and its posture governs what ships**
 
-The product specifications, UX design artifacts and architecture documents were complete as of October 2026. In November 2026 the product direction changed, and six ADRs record it. Two are accepted and reverse earlier decisions. Four are proposed, and the documents they would change are amended only where something is already decided.
+The product specifications, UX design artifacts and architecture documents were complete as of October 2026. In November 2026 the product direction changed, and six ADRs record it. Three are accepted and reverse earlier decisions. Three are proposed, and the documents they would change are amended only where something is already decided.
 
 | ADR | What it covers | Status |
 |---|---|---|
 | [ADR-022](decisions/022-core-modules-and-lanes.md) | Core, modules and lanes | Proposed. Decided within it: the two lanes, the CRM in the Core, one module for fundraising and payments |
 | [ADR-023](decisions/023-surfaces-chat-admin-field.md) | A headless Core with chat, admin and field surfaces | Proposed. Decided within it: the ADR-018 gate binds the whole Core, in both lanes; the chat as the person's hands, and the default channel |
-| [ADR-024](decisions/024-event-bus-as-federation.md) | The event bus in place of the federation layer | Proposed. Decided within it: an association of agencies works exactly like an alliance of parties |
+| [ADR-024](decisions/024-event-bus-as-federation.md) | The event bus between instances | Accepted. Supersedes the central federation layer; an alliance is a client like any other. The NATS features the bus needs stay unverified |
 | [ADR-025](decisions/025-identity-per-client.md) | Identity per client | Accepted. Supersedes the shared platform identity service and multi-org membership |
 | [ADR-026](decisions/026-two-lane-pricing.md) | Two-lane pricing | Accepted. Supersedes the flat subscription and "no margin on metered costs". The definitions the prices need are open |
 | [ADR-027](decisions/027-third-party-crm-sync-and-connectors.md) | Third-party CRM sync and connectors | Proposed. Decided within it: NationBuilder sync, by CSV first |
@@ -165,12 +165,12 @@ GreenGrass/
 │   ├── 021-content-approval-pipeline.md  # Content pipeline, review in rounds
 │   ├── 022-core-modules-and-lanes.md  # Proposed — Core, modules, two lanes
 │   ├── 023-surfaces-chat-admin-field.md  # Proposed — headless Core; chat, admin, field
-│   ├── 024-event-bus-as-federation.md  # Proposed — the bus in place of the federation layer
+│   ├── 024-event-bus-as-federation.md  # Accepted — the event bus between instances
 │   ├── 025-identity-per-client.md  # Identity per client; supersedes platform identity
 │   ├── 026-two-lane-pricing.md    # Pricing as a lane rule; supersedes flat and no-margin
 │   ├── 027-third-party-crm-sync-and-connectors.md  # Proposed — NationBuilder sync, connectors
 │   └── 028-coaching.md            # Proposed — Coaching in the Core
-├── diary/                         # Project diary (18 entries)
+├── diary/                         # Project diary (20 entries)
 ├── scripts/
 │   ├── build.mjs                  # Documentation site generator
 │   └── dev.sh                     # One-command local preview (install, build, serve)

@@ -16,7 +16,7 @@ Debajo de ese plan hay un solo supuesto estructural que nunca se ha puesto a pru
 
 > **Las organizaciones políticas soberanas van a juntar sus datos entre sí si las reglas son las correctas.**
 
-De él dependen todas las funcionalidades de alianza de la especificación. La capa de federación, los contratos de intercambio por recurso, la deduplicación entre organizaciones, las campañas conjuntas, el reparto de la recaudación por consentimiento unánime, la rotación de llaves de la alianza — todo eso presume que partidos que cuidan sus listas como su activo institucional central las van a entregar a un arreglo compartido si la gobernanza es lo bastante buena.
+De él dependen todas las funcionalidades de alianza de la especificación. El bus de eventos entre instancias, los contratos de intercambio por recurso, la deduplicación entre organizaciones, las campañas conjuntas, el reparto de la recaudación por consentimiento unánime, la rotación de llaves de la alianza — todo eso presume que partidos que cuidan sus listas como su activo institucional central las van a entregar a un arreglo compartido si la gobernanza es lo bastante buena.
 
 Si ese supuesto es falso, más o menos un tercio del producto especificado es peso muerto y GreenGrass es un CRM de campaña de organización única compitiendo por funcionalidades con NationBuilder, NGP VAN y Action Network. Ese es un negocio mucho peor.
 
@@ -190,7 +190,7 @@ Seis preguntas, cada una apuntando a una clase distinta de obstáculo:
 
 Esa última pregunta es lo más directamente útil de este plan para la construcción. Define la lista de campos de denegación por defecto de ALLY-005 con las palabras de los propios partidos y no con nuestras suposiciones.
 
-**Por qué esto importa más allá de levantar requisitos:** varios de estos obstáculos no son «confianza» en el sentido que supone la especificación. La capa de federación, los contratos de intercambio por recurso y la gobernanza por consentimiento unánime están todos diseñados contra un modelo de *sospecha*. Si la restricción real es la capacidad, la legalidad o la autorización, toda esa maquinaria elaborada de consentimiento resuelve un problema que estos partidos no tienen. Ver §9.2.
+**Por qué esto importa más allá de levantar requisitos:** varios de estos obstáculos no son «confianza» en el sentido que supone la especificación. El bus de eventos, los contratos de intercambio por recurso y la gobernanza por consentimiento unánime están todos diseñados contra un modelo de *sospecha*. Si la restricción real es la capacidad, la legalidad o la autorización, toda esa maquinaria elaborada de consentimiento resuelve un problema que estos partidos no tienen. Ver §9.2.
 
 **Hazla antes de que cierre la Fase 0.** Puede reordenar todo lo que viene después.
 
@@ -264,7 +264,7 @@ La gobernanza es de N partes con consentimiento unánime. Aquí es donde la espe
 
 **9.1 No hay campaña conjunta en curso contra la cual probar.** *Probabilidad: alta. Gravedad: alta — vuelve A5 imposible de probar, y A5 es lo que separa el intercambio real del teatro.* Mitigación: apuntar a la ventana de formación de coalición, o engancharlo a una actividad conjunta no electoral (§7).
 
-**9.2 El obstáculo puede no ser la confianza.** *Probabilidad: media. Gravedad: estratégica.* Si las entrevistas de preparación (§6.4) muestran que la restricción real es la capacidad, la legalidad o la autorización política, y no la sospecha, entonces la maquinaria elaborada de consentimiento de la especificación —la capa de federación, los contratos de intercambio por recurso, la gobernanza por consentimiento unánime— resuelve un problema que estos partidos no tienen. Eso no mata el producto, pero le cambia el alcance de forma sustancial y baja el valor de la superficie de alianzas del ADR-016 §78–82.
+**9.2 El obstáculo puede no ser la confianza.** *Probabilidad: media. Gravedad: estratégica.* Si las entrevistas de preparación (§6.4) muestran que la restricción real es la capacidad, la legalidad o la autorización política, y no la sospecha, entonces la maquinaria elaborada de consentimiento de la especificación —el bus de eventos entre instancias, los contratos de intercambio por recurso, la gobernanza por consentimiento unánime— resuelve un problema que estos partidos no tienen. Eso no mata el producto, pero le cambia el alcance de forma sustancial y baja el valor de la superficie de alianzas del ADR-016 §78–82.
 
 **9.3 La madurez desigual de los datos produce un falso negativo.** *Probabilidad: alta. Gravedad: alta.* La fricción del PIP se lee mal como falta de voluntad del PIP. Mitigación: una persona dedicada al soporte de los socios; hacerles el trabajo de limpieza *a ellos* en la Fase 1; medir la voluntad por las decisiones tomadas, no por los archivos bien formateados.
 

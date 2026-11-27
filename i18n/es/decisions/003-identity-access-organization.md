@@ -79,4 +79,4 @@ Campañas distintas dentro de una misma alianza pueden usar modelos distintos.
 - La visibilidad que tiene la alianza sobre personas presentes en varias organizaciones se limita a metadatos de coordinación, salvo que existan reglas explícitas para compartir
 - El consentimiento de la persona prevalece sobre la configuración de intercambio de la organización
 
-**ADR relacionados:** [ADR-001](001-platform-architecture.md) (modelo de federación), [ADR-002](002-security-threat-model.md) (métodos de autenticación), [ADR-004](004-data-model-integrity.md) (registro de auditoría para los cambios de permisos), [ADR-008](008-communications-messaging.md) (cifrado de las comunicaciones de la alianza)
+**ADR relacionados:** [ADR-001](001-platform-architecture.md) (modelo de afiliación), [ADR-002](002-security-threat-model.md) (métodos de autenticación), [ADR-004](004-data-model-integrity.md) (registro de auditoría para los cambios de permisos), [ADR-008](008-communications-messaging.md) (cifrado de las comunicaciones de la alianza)

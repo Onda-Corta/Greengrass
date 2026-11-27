@@ -22,13 +22,13 @@ En GreenGrass, cada unidad cliente es una **organización**. En los términos de
 
 ### Jerarquía organizativa
 
-**DECIDIDO:** El modelo organizativo es una federación de entidades soberanas conectadas por afiliación, no por propiedad.
+**DECIDIDO:** El modelo organizativo es una afiliación de entidades soberanas, conectadas voluntariamente, nunca por propiedad.
 
 **Tipos de entidad:**
 
 | Entidad | Tipo de organización | Descripción |
 |--------|------------|-------------|
-| Alianza | Ligera | Coalición de partidos, organizaciones o candidatos. Tiene su propia facturación, personal, bolsa de voluntarios, datos de miembros y simpatizantes, y campañas conjuntas. No duplica el conjunto completo de herramientas de CRM, recaudación y comunicaciones de sus miembros. |
+| Alianza | Completa | Coalición de partidos, organizaciones o candidatos. Una cliente como cualquier otra: su propia instancia, facturación, personal, bolsa de voluntarios, datos de miembros y simpatizantes, y campañas conjuntas. Por lo general activa pocos módulos: coordina a los miembros en vez de duplicar sus herramientas de CRM, recaudación y comunicaciones. |
 | Partido / Organización | Completa | Partido político, organización de incidencia, movimiento. Acceso completo a la plataforma: CRM, recaudación de fondos, comunicaciones, analítica, facturación y cuentas propias. |
 | Candidato | Completa | Persona que se postula a un cargo. Acceso completo a la plataforma: datos, facturación y cuentas propias. |
 | Campaña | Ninguna (hereda) | Pertenece a su entidad matriz (candidato, partido, organización o alianza). Hereda la facturación y la estructura administrativa de su matriz. |
@@ -36,7 +36,7 @@ En GreenGrass, cada unidad cliente es una **organización**. En los términos de
 **Modelo de afiliación:**
 
 ```
-Alianza (soberana, capa de coordinación)
+Alianza (soberana, coordina a sus miembros)
 ├── Partido / Organización (organización soberana) ── afiliación
 │   └── Campaña(s)
 ├── Candidato (organización soberana) ── afiliación
@@ -59,10 +59,8 @@ Partido (soberano)
 - **Las afiliaciones son voluntarias y no transfieren la propiedad.** Un partido no es dueño de los datos de un candidato. Una alianza no es dueña de los datos de sus miembros. La afiliación define los límites de la cooperación, no el control.
 - **Un candidato puede afiliarse a un partido u operar de forma independiente.** Un candidato independiente con una sola campaña es sencillamente una organización soberana que opera por su cuenta.
 - **Las campañas pertenecen a su entidad matriz** (candidato, partido/organización o alianza). No son soberanas: heredan la facturación y la estructura administrativa de su matriz.
-- **Las alianzas son organizaciones ligeras** con capacidades operativas propias: cuentas de personal, bolsas de voluntarios, datos de miembros y simpatizantes, campañas conjuntas y facturación de los costos compartidos. No replican el conjunto completo de herramientas de la plataforma (CRM completo, herramientas de recaudación, suite de comunicaciones); esas siguen en manos de cada entidad miembro.
+- **Las alianzas son clientes completos** con su propia instancia y capacidades operativas propias: cuentas de personal, bolsas de voluntarios, datos de miembros y simpatizantes, campañas conjuntas y facturación de los costos compartidos. Por lo general activan pocos módulos: coordinan a los miembros en vez de replicar el conjunto completo de herramientas de la plataforma (CRM completo, herramientas de recaudación, suite de comunicaciones), que sigue en manos de cada entidad miembro. Lo que fluye entre un miembro y la alianza fluye como eventos filtrados por contrato sobre el bus ([ADR-024](../decisions/024-event-bus-as-federation.md)).
 - **Operar por cuenta propia** siempre es posible. Cualquier entidad puede funcionar sin afiliaciones.
-
-<!-- REVISIT: «Las alianzas son organizaciones ligeras», arriba. La dirección de noviembre de 2026 dice que una alianza es un cliente como cualquier otro, con su propia instancia, y que una asociación de agencias en el carril comercial funciona exactamente igual que una alianza. La ADR-024 (propuesta) nombra el conflicto y propone que «ligera» quiera decir pocos módulos activados. Se deja como está hasta que se decida la ADR-024. -->
 
 ### Intercambio entre organizaciones dentro de una alianza
 
@@ -440,7 +438,7 @@ La descripción del producto especifica "acceso explícito con cuenta propia par
 - Los ámbitos **se suman**: alguien asignado al Distrito 5 y al Distrito 6 ve los dos.
 - **El Administrador de la organización no tiene ámbito por defecto**: ve todo lo de su organización. Se le puede acotar si conviene (por ejemplo, un partido grande donde los administradores regionales manejan su propia zona).
 - Los ámbitos actúan como **filtro sobre el acceso a los datos**, no sobre el acceso a las funcionalidades. Un Director de campo acotado tiene las mismas herramientas que uno sin ámbito; simplemente ve otra porción de los datos.
-- Los ámbitos **se componen con el modelo de federación**: los límites entre organizaciones son el ámbito más externo, y dentro de una organización el ámbito geográfico, de equipo o de campaña estrecha aún más.
+- Los ámbitos **se componen con el modelo de contratos**: entre instancias, los contratos de intercambio gobiernan lo que fluye ([ADR-017](../decisions/017-sharing-contract-trust-model.md), transportados por el bus, [ADR-024](../decisions/024-event-bus-as-federation.md)); dentro de una organización el ámbito geográfico, de equipo o de campaña estrecha desde el límite de la organización hacia adentro.
 
 <!-- REVISIT: El ámbito geográfico depende del modelo de datos geográficos (cómo se estructuran y anidan precintos, distritos, territorios y regiones). Eso debería definirse en la especificación de arquitectura. -->
 
@@ -449,7 +447,7 @@ La descripción del producto especifica "acceso explícito con cuenta propia par
 ## Preguntas abiertas
 
 1. ~~**Pertenencia a varias organizaciones**~~ — **RESUELTO**, y después revertido. Primero se resolvió como perfiles federados; queda sin efecto por la [ADR-025](../decisions/025-identity-per-client.md): la identidad es por cliente. Ver la sección Pertenencia a varias organizaciones más arriba.
-2. ~~**Jerarquía organizativa**~~ — **RESUELTO.** Federación multinivel de entidades soberanas. Ver la sección Jerarquía organizativa más arriba.
+2. ~~**Jerarquía organizativa**~~ — **RESUELTO.** Una afiliación de entidades soberanas, en varios niveles. Ver la sección Jerarquía organizativa más arriba.
 3. ~~**Cambios de rol**~~ — **RESUELTO.** Las plantillas se suman. Pasar de simpatizante a voluntario y de ahí a personal significa agregar plantillas, no reemplazarlas. Todo el historial de actividad previo viaja con la identidad de plataforma (desde la [ADR-025](../decisions/025-identity-per-client.md): con la cuenta de la persona en la instancia de esa organización). Las autorizaciones son proporcionales al rol: un simpatizante puede pasar solo a voluntario (apuntándose a un turno), pero los roles de personal los tiene que conceder el Administrador de la organización.
 4. ~~**Visibilidad de datos entre roles**~~ — **RESUELTO.** Configuración por organización, privado por defecto. Cada organización decide sus propias reglas de visibilidad (por ejemplo, si los voluntarios ven a sus compañeros de turno, o si los nombres de los donantes se muestran públicamente). La plataforma arranca con la visibilidad mínima: para abrir más, la organización tiene que activarlo. Esto responde a la variedad de contextos de seguridad política entre despliegues.
 5. ~~**Delegación**~~ — **RESUELTO.** Dos mecanismos:
@@ -474,6 +472,6 @@ La descripción del producto especifica "acceso explícito con cuenta propia par
    - Monitorear el sistema, ver paneles de salud y manejar la infraestructura
    - Manejar despliegues (empujar actualizaciones a todas las organizaciones en la arquitectura de organización única)
    - Ver en modo lectura todos los datos de una organización, para soporte y depuración
-   - Manejar las afiliaciones de alianza a nivel de plataforma
+   - Manejar el aprovisionamiento de organizaciones y los modos de facturación de las afiliaciones (`alliance_pays`) a nivel de plataforma — las afiliaciones en sí son contratos entre instancias, de los que la plataforma nunca es parte ([ADR-017](../decisions/017-sharing-contract-trust-model.md))
 
    **Excluido explícitamente:** La suplantación de usuarios. Un Administrador de la plataforma no puede iniciar sesión ni actuar como usuario de una organización. El soporte y la depuración se hacen con visibilidad de solo lectura, no asumiendo la identidad de otra persona. Así se preservan la confianza de las organizaciones y la integridad del registro de auditoría.

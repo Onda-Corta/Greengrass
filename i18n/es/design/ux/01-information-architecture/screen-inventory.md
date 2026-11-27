@@ -356,7 +356,7 @@ Este inventario se deriva de los 12 documentos de especificación y del modelo d
 | PROF-002 | Preferencias de notificaciones | Toda persona autenticada | No | Sí | messaging.md — notificaciones |
 | PROF-003 | Ajustes de seguridad (personales) | Toda persona autenticada | No | Sí | security.md — passkeys |
 | PROF-004 | Preferencia de idioma | Toda persona autenticada | No | Sí | geography.md — localización |
-| PROF-005 | Selector de organización | Usuarios multiorganización | No | Sí | users.md — federación |
+| PROF-005 | Selector de organización | Usuarios multiorganización | No | Sí | users.md — sin efecto por la [ADR-025](../../../decisions/025-identity-per-client.md): no hay selector de organización |
 
 ## 22. Operaciones de contenido
 

@@ -142,7 +142,7 @@ Recorded in [ADR-018 § Questions recorded by later ADRs](018-ai-agent-posture.m
 
 These do not depend on the review. They are not settled here.
 
-1. **Who may write a coach.** The Org Admin only, staff, team leads, or an alliance or association for its members over the bus ([ADR-024](024-event-bus-as-federation.md), itself proposed).
+1. **Who may write a coach.** The Org Admin only, staff, team leads, or an alliance or association for its members over the bus ([ADR-024](024-event-bus-as-federation.md)).
 2. **Who writes and maintains the organizing knowledge coaches draw on.** GreenGrass, the lane, the client or partners, and in which languages.
 
 ## The review's answers

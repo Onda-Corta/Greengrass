@@ -138,5 +138,5 @@ The twelve questions this sent to the review are listed in [ADR-028 § Questions
 
 ## Open questions
 
-1. **Who may write a coach.** The Org Admin only, staff, team leads, or an alliance or association for its members over the bus ([ADR-024](../decisions/024-event-bus-as-federation.md), itself proposed).
+1. **Who may write a coach.** The Org Admin only, staff, team leads, or an alliance or association for its members over the bus ([ADR-024](../decisions/024-event-bus-as-federation.md)).
 2. **Who writes and maintains the organizing knowledge coaches draw on.** GreenGrass, the lane, the client or partners, and in which languages.

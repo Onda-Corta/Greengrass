@@ -486,7 +486,7 @@ un *registro* de decisión de arquitectura, como ya dice la portada en español.
 | service worker | **service worker** | Se mantiene, masculino. |
 | IP warm-up | **calentamiento de IP** | Jerga de entregabilidad. No *precalentamiento*. |
 | deliverability | **entregabilidad** | Término del oficio. No *capacidad de entrega*, que se confunde con el volumen de envío. |
-| federation layer / federated identity | **capa de federación** / **identidad federada** | |
+| federation layer / federated identity | **capa de federación** / **identidad federada** | Vocabulario retirado con la aceptación de la ADR-024 y la ADR-025: se mantiene solo donde el texto conserva el diseño anterior a la vista (las notas de «se conserva para que el cambio de criterio quede a la vista») y en las ADR históricas que lo nombran como lo reemplazado. En el texto vivo, *federation* no aparece: es **afiliación** (gobernanza) o **el bus de eventos** (mecanismo). |
 | human in the loop | **intervención humana** | *Sin intervención humana*. No *humano en el bucle*. |
 | vendor lock-in | **dependencia del proveedor** | No se deja *lock-in*, no *cautiverio*. |
 | map tile | **tesela de mapa** | Nunca *azulejo* ni *baldosa*. |
@@ -1418,3 +1418,24 @@ enmiendas que la revisión deja en los demás documentos.
 | cross-border transfer | **transferencia transfronteriza** | Ya fijado. Un prompt con datos personales a un endpoint externo es una. |
 | standing document (de cumplimiento) | **documento permanente** | Lo que la organización recibe: el manejo de datos del arnés, legible por su oficial de cumplimiento. |
 | distributed-organizing product | **producto de organización distribuida** | |
+
+# Términos añadidos para la aceptación de la ADR-024 (el bus entre instancias)
+
+## Reglas resueltas
+
+- *Federation* como vocabulario queda retirado. La gobernanza es **afiliación**; el mecanismo es **el bus de eventos**. La palabra solo se conserva donde el texto muestra el diseño anterior a la vista.
+- «Ligera», aplicada a una alianza, queda redefinida: con pocos módulos activados, no una organización de otro tipo. En los textos vivos ya no hay `tenant_type`.
+- Las notas de reversión siguen la fórmula ya usada: *Se conserva para que el cambio de criterio quede a la vista:*.
+
+## Tabla
+
+| Inglés | Español | Nota |
+|---|---|---|
+| affiliation (de entidades soberanas) | **afiliación** | Ya en uso; se formaliza como el término de gobernanza que reemplaza a *federation*. |
+| export filter | **filtro de exportación** | Componente del Core: compila el contrato en el filtro en el origen del flujo. |
+| import landing | **destino de importación** | Componente del Core: escribe lo entregado en el almacén de la instancia, marcado con su contrato y como contenido no confiable. Acuñado aquí. |
+| schema versioning | **versionado de esquemas** | Una exportación nunca emite una versión que la receptora no dijo entender. |
+| untrusted at ingestion | **no confiable al incorporarlo** | Como `untrusted content → contenido no confiable`, ya fijado. *Los eventos del bus son datos no confiables.* |
+| contract key | **llave de contrato** | La tienen los miembros, nunca GreenGrass; rota al cambiar la membresía. |
+| kept so the reversal is visible | **se conserva para que el cambio de criterio quede a la vista** | Fórmula fija de las notas de reversión. |
+| cross-organization dedup | **deduplicación entre organizaciones** | Ya en uso. Lo que la capa anterior prometía y el bus no reemplaza. |

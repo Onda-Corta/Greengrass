@@ -154,7 +154,7 @@ When GOTV operations activate, the platform transforms. Dashboards change, notif
 | **Detail panel** | A contextual right panel on desktop that shows additional information without navigating away (e.g., viewing a contact while browsing a list). |
 | **Duress mode** | A security feature where logging in with a special passkey shows a sanitized version of the platform with plausible but scrubbed data. |
 | **War room** | The real-time GOTV operations center active on election day. Includes turnout tracking, resource reallocation, issue escalation, and communication coordination. |
-| **Alliance** | A federation of sovereign organizations sharing resources, coordinating campaigns, and splitting fundraising through explicit sharing rules. |
+| **Alliance** | An affiliation of sovereign organizations sharing resources, coordinating campaigns, and splitting fundraising through explicit sharing rules. |
 | **GOTV** | Get Out The Vote — election day operations focused on ensuring identified supporters actually vote. |
 
 ## Cross-References to Specs
