@@ -24,8 +24,8 @@ Puerto Rico (alfa), Brasil, Tailandia, India y Líbano — cada uno con su propi
 
 Las especificaciones de producto, los artefactos de diseño de UX y los documentos de arquitectura estaban terminados en octubre de 2026. En noviembre cambió la dirección: una infraestructura compartida, con un Core y módulos, que se ofrece por dos carriles, Greengrass y Basecamp. Seis ADR registran el cambio.
 
-- **Dos están aceptadas** y dejan sin efecto decisiones anteriores: la [ADR-025](decisions/025-identity-per-client.md) (cada cliente guarda sus propias cuentas) y la [ADR-026](decisions/026-two-lane-pricing.md) (el precio es una regla de cada carril; las definiciones que necesita siguen abiertas).
-- **Cuatro están propuestas:** la [ADR-022](decisions/022-core-modules-and-lanes.md), la [ADR-023](decisions/023-surfaces-chat-admin-field.md), la [ADR-024](decisions/024-event-bus-as-federation.md) y la [ADR-027](decisions/027-third-party-crm-sync-and-connectors.md). Cada una dice qué de lo que contiene ya está decidido y qué no. Lo propuesto no se lee como resuelto.
+- **Tres están aceptadas** y dejan sin efecto decisiones anteriores: la [ADR-024](decisions/024-event-bus-as-federation.md) (el bus de eventos entre instancias reemplaza la capa central de federación; las funciones de NATS que necesita siguen sin verificar), la [ADR-025](decisions/025-identity-per-client.md) (cada cliente guarda sus propias cuentas) y la [ADR-026](decisions/026-two-lane-pricing.md) (el precio es una regla de cada carril; las definiciones que necesita siguen abiertas).
+- **Tres están propuestas:** la [ADR-022](decisions/022-core-modules-and-lanes.md), la [ADR-023](decisions/023-surfaces-chat-admin-field.md) y la [ADR-027](decisions/027-third-party-crm-sync-and-connectors.md). Cada una dice qué de lo que contiene ya está decidido y qué no. Lo propuesto no se lee como resuelto.
 
 La revisión de la [ADR-018](decisions/018-ai-agent-posture.md), sobre los agentes de IA, se celebró el 2026-11-26, y la ADR está aceptada. La respuesta: **el Core es un arnés de agentes por cliente**. El arnés actúa solo como las manos de la persona —el alcance de la propia persona, operaciones declaradas en los manifiestos de los módulos, cada escritura confirmada, nada se despacha salvo por una persona— y cada llamada a un modelo pasa por el enrutador de modelos del propio cliente, bajo su política de proveedores: BYOM, un modelo autoalojado o el proveedor por defecto de la plataforma, con reglas de enrutado por clase de datos. El mecanismo está especificado en [spec/harness.md](spec/harness.md); el registro de la revisión está en [ADR-018 § The review](decisions/018-ai-agent-posture.md#la-revisión).
 
@@ -86,7 +86,7 @@ Los 28 ADR registran cada decisión de arquitectura, con su contexto, sus altern
 - **[ADR-021](decisions/021-content-approval-pipeline.md)** — Flujo de aprobación de contenido
 - **[ADR-022](decisions/022-core-modules-and-lanes.md)** — Core, módulos y carriles (propuesta)
 - **[ADR-023](decisions/023-surfaces-chat-admin-field.md)** — Superficies: un Core headless, chat, administración y campo (propuesta)
-- **[ADR-024](decisions/024-event-bus-as-federation.md)** — El bus de eventos como federación (propuesta)
+- **[ADR-024](decisions/024-event-bus-as-federation.md)** — El bus de eventos entre instancias
 - **[ADR-025](decisions/025-identity-per-client.md)** — Identidad por cliente
 - **[ADR-026](decisions/026-two-lane-pricing.md)** — Precios por carril
 - **[ADR-027](decisions/027-third-party-crm-sync-and-connectors.md)** — Sincronización del CRM con terceros y conectores (propuesta)

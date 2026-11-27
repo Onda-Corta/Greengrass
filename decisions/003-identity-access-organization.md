@@ -79,4 +79,4 @@ Different campaigns within the same alliance can use different models.
 - Alliance visibility of cross-tenant people is limited to coordination metadata unless explicit sharing rules are in place
 - Person-level consent overrides org-level sharing settings
 
-**Related ADRs:** [ADR-001](001-platform-architecture.md) (federation model), [ADR-002](002-security-threat-model.md) (authentication methods), [ADR-004](004-data-model-integrity.md) (audit trail for permission changes), [ADR-008](008-communications-messaging.md) (alliance communication encryption)
+**Related ADRs:** [ADR-001](001-platform-architecture.md) (affiliation model), [ADR-002](002-security-threat-model.md) (authentication methods), [ADR-004](004-data-model-integrity.md) (audit trail for permission changes), [ADR-008](008-communications-messaging.md) (alliance communication encryption)

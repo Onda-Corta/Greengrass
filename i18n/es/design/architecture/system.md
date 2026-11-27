@@ -2,9 +2,9 @@
 
 ## Resumen
 
-GreenGrass es una plataforma federada y de organización única para la gestión de campañas políticas de base. Este documento define la arquitectura del sistema — cómo encajan los componentes, cómo fluyen los datos y cómo la infraestructura sostiene los requisitos de producto definidos en los documentos de especificación.
+GreenGrass es una plataforma de organización única para la gestión de campañas políticas de base, construida sobre la afiliación entre organizaciones soberanas. Este documento define la arquitectura del sistema — cómo encajan los componentes, cómo fluyen los datos y cómo la infraestructura sostiene los requisitos de producto definidos en los documentos de especificación.
 
-**Nota de lectura, añadida el 2026-11-13.** La dirección del producto cambió después de que se escribió este documento, y seis ADR registran el cambio. Dos están aceptadas y aquí aparecen como estructura: la identidad es por cliente (la [ADR-025](../../decisions/025-identity-per-client.md)) y el precio es una regla del carril (la [ADR-026](../../decisions/026-two-lane-pricing.md)). Cuatro están propuestas y aquí aparecen solo en secciones marcadas como propuestas: el Core, los módulos y los carriles (la [ADR-022](../../decisions/022-core-modules-and-lanes.md)), las superficies (la [ADR-023](../../decisions/023-surfaces-chat-admin-field.md)), el bus de eventos (la [ADR-024](../../decisions/024-event-bus-as-federation.md)) y la sincronización con terceros (la [ADR-027](../../decisions/027-third-party-crm-sync-and-connectors.md)). En este documento, «GreenGrass» es la infraestructura. Una *organización*, aquí, es lo que esas ADR llaman la *instancia de un cliente*.
+**Nota de lectura, añadida el 2026-11-13, actualizada el 2026-11-26.** La dirección del producto cambió después de que se escribió este documento, y seis ADR registran el cambio. Tres están aceptadas y aquí aparecen como estructura: la identidad es por cliente (la [ADR-025](../../decisions/025-identity-per-client.md)), el precio es una regla del carril (la [ADR-026](../../decisions/026-two-lane-pricing.md)), y el flujo entre organizaciones corre por exportaciones de eventos filtradas por contrato entre instancias (la [ADR-024](../../decisions/024-event-bus-as-federation.md)). Tres están propuestas y aquí aparecen solo en secciones marcadas como propuestas: el Core, los módulos y los carriles (la [ADR-022](../../decisions/022-core-modules-and-lanes.md)), las superficies (la [ADR-023](../../decisions/023-surfaces-chat-admin-field.md)) y la sincronización con terceros (la [ADR-027](../../decisions/027-third-party-crm-sync-and-connectors.md)). En este documento, «GreenGrass» es la infraestructura. Una *organización*, aquí, es lo que esas ADR llaman la *instancia de un cliente*.
 
 <!-- REVISIT: este documento describe la plataforma como hecha «para la gestión de campañas políticas de base». Con la ADR-022, la infraestructura sirve a dos carriles, el político y el comercial, y las partes de este documento que son solo políticas (el padrón electoral, el día de elecciones, el cumplimiento del financiamiento de campañas) pasan a ser política del carril político. El texto queda como está hasta que se acepte la ADR-022. -->
 
@@ -13,7 +13,7 @@ GreenGrass es una plataforma federada y de organización única para la gestión
 Estas decisiones de producto (tomadas en las especificaciones) son las que más pesan en la arquitectura:
 
 1. **Aislamiento de organización única** con niveles de seguridad escalonados (contenedor → clúster → cuenta de proveedor de nube → autoalojado)
-2. **Modelo de federación** — entidades soberanas conectadas por afiliación, no un sistema monolítico multiorganización
+2. **Afiliación de entidades soberanas** — conectadas voluntariamente, no un sistema monolítico multiorganización; el flujo entre organizaciones corre por exportaciones de eventos filtradas por contrato (la [ADR-024](../../decisions/024-event-bus-as-federation.md))
 3. **BYOK (Bring Your Own Key — la organización controla su propia llave de cifrado) por defecto** — la plataforma no puede leer los datos de una organización a menos que esta opte por llaves gestionadas
 4. **Residencia de datos por país** — los datos de la organización se quedan en el país que ella elija
 5. **Diseño con prioridad sin conexión (offline-first) para las operaciones de campo** — el trabajo de campo, la inscripción de votantes y el registro de entrada en eventos tienen que funcionar sin conectividad
@@ -42,11 +42,6 @@ Estas decisiones de producto (tomadas en las especificaciones) son las que más 
 │  │    metadatos; ADR-019)                                     │  │
 │  └──────┬──────────────────┬──────────────────────────────────┘  │
 │  ┌──────┴──────────────────┴──────────────────────────────────┐  │
-│  │                Capa de federación / alianza                │  │
-│  │ (coordinación entre organizaciones, reglas de intercambio, │  │
-│  │   deduplicación, no volver a tocar, campañas conjuntas)    │  │
-│  └──────┬──────────────────┬──────────────────────────────────┘  │
-│  ┌──────┴──────────────────┴──────────────────────────────────┐  │
 │  │   Servicios centrales (captura, análisis, constructores,   │  │
 │  │   transporte por canal) — código compartido, ejecutado     │  │
 │  │   por organización bajo sus llaves, nada se conserva       │  │
@@ -72,19 +67,19 @@ Estas decisiones de producto (tomadas en las especificaciones) son las que más 
     └────────────────┘   └────────────────┘
 ```
 
-### Arquitectura de tres capas:
+### Dos capas, y el bus entre instancias:
 
-1. **Capa de plataforma** — servicios compartidos que existen fuera de cualquier organización: aprovisionamiento, administración de la plataforma, facturación. Es la única capa que ve a través de las organizaciones. La identidad ya no está aquí: cada organización corre su propio servicio de identidad (la [ADR-025](../../decisions/025-identity-per-client.md)).
+1. **Capa de plataforma** — servicios compartidos que existen fuera de cualquier organización: aprovisionamiento, administración de la plataforma, facturación. Es la única capa que ve a través de las organizaciones, y guarda solo metadatos. La identidad ya no está aquí: cada organización corre su propio servicio de identidad (la [ADR-025](../../decisions/025-identity-per-client.md)). Cualquier retransmisor entre instancias vive aquí y ve metadatos de enrutamiento, nunca contenido (la [ADR-024](../../decisions/024-event-bus-as-federation.md)).
 
-2. **Capa de federación** — media las interacciones entre organizaciones: coordinación de alianzas, gestión de recursos compartidos, deduplicación entre organizaciones, orquestación de campañas conjuntas. Opera sobre reglas de intercambio explícitas y nunca tiene acceso general a los datos de una organización.
+2. **Capa de organización** — una instancia de aplicación completa y aislada por cada entidad soberana (partido, organización, candidatura o alianza). Cada organización tiene su propio servidor de aplicación, base de datos, caché y cola de trabajos. Ninguna organización puede ver los datos de otra salvo como eventos filtrados por el contrato de intercambio entre ambas, entregados por el bus.
 
-3. **Capa de organización** — una instancia de aplicación completa y aislada por cada entidad soberana (partido, organización o candidatura). Cada organización tiene su propio servidor de aplicación, base de datos, caché y cola de trabajos. Ninguna organización puede ver los datos de otra salvo a través de las reglas de intercambio de la capa de federación.
+*Se conserva para que el cambio de criterio quede a la vista:* hasta el 2026-11-26 esta era una arquitectura de tres capas. Entre la capa de plataforma y la de organización había una **capa de federación** central que mediaba las interacciones entre organizaciones —coordinación de alianzas, gestión de recursos compartidos, deduplicación entre organizaciones, orquestación de campañas conjuntas— operando sobre reglas de intercambio explícitas y sin guardar nunca datos de las organizaciones. La [ADR-024](../../decisions/024-event-bus-as-federation.md) la eliminó: lo que llevaba se reubica en las exportaciones de eventos filtradas por contrato entre instancias y en la instancia propia de la alianza, más abajo.
 
-**Los servicios centrales no son una cuarta capa.** Son capacidades alojadas en la plataforma que una organización activa desde el catálogo y que se ejecutan por organización, bajo sus llaves y sus contratos, sin conservar nada entre llamadas ([ADR-019](../../decisions/019-central-services-and-metered-billing.md)). El catálogo, los derechos de uso y la medición que los rigen son componentes de la capa de plataforma que guardan solo metadatos. Ver [Arquitectura de servicios centrales](#arquitectura-de-servicios-centrales).
+**Los servicios centrales no son una tercera capa.** Son capacidades alojadas en la plataforma que una organización activa desde el catálogo y que se ejecutan por organización, bajo sus llaves y sus contratos, sin conservar nada entre llamadas ([ADR-019](../../decisions/019-central-services-and-metered-billing.md)). El catálogo, los derechos de uso y la medición que los rigen son componentes de la capa de plataforma que guardan solo metadatos. Ver [Arquitectura de servicios centrales](#arquitectura-de-servicios-centrales).
 
-### Propuesto: el bus de eventos en lugar de la capa de federación
+### El bus de eventos entre instancias
 
-Propuesto en la [ADR-024](../../decisions/024-event-bus-as-federation.md), y no aceptado. Mientras no se acepte, la capa de federación de arriba es el diseño especificado.
+Decidido en la [ADR-024](../../decisions/024-event-bus-as-federation.md), 2026-11-26. El flujo entre organizaciones corre por exportaciones de eventos filtradas por contrato entre instancias; no hay ningún componente central que guarde o medie datos entre organizaciones.
 
 ```
 ┌─────────────┐  exportaciones filtradas  ┌─────────────┐
@@ -101,10 +96,18 @@ Propuesto en la [ADR-024](../../decisions/024-event-bus-as-federation.md), y no 
    Cualquier retransmisor que opere GreenGrass ve metadatos de enrutamiento, nunca contenido.
 ```
 
-- **El flujo de eventos de cada instancia se vuelve su columna vertebral de integración.** El flujo que hoy alimenta la analítica ([Arquitectura de analítica](#arquitectura-de-analítica)) llevaría los eventos de dominio del Core y de cada módulo: `person.created`, `consent.changed`, `interaction.recorded`, `donation.received`, `content.approved`.
-- **La federación pasa a ser exportaciones entre instancias.** Cada organización exporta un subconjunto de su flujo a las instancias con las que tiene contratos de intercambio. La exportación se filtra en el origen, campo por campo y denegado por defecto, y va cifrada con las llaves del contrato, que están en manos de los miembros.
-- **Una alianza es una tercera instancia que se suscribe.** No tiene una capa propia. Una asociación de agencias en el carril comercial tiene la misma forma; esa parte está decidida.
-- **Ningún componente central guarda ni media datos entre organizaciones.** La capa de plataforma se quedaría con el aprovisionamiento, el catálogo, los derechos de uso, la medición y cualquier retransmisor.
+- **El flujo de eventos de cada instancia es su columna vertebral de integración.** El flujo que alimenta la analítica ([Arquitectura de analítica](#arquitectura-de-analítica)) lleva los eventos de dominio del Core y de cada módulo: `person.created`, `consent.changed`, `interaction.recorded`, `donation.received`, `content.approved`.
+- **El flujo entre organizaciones son exportaciones entre instancias.** Cada organización exporta un subconjunto de su flujo a las instancias con las que tiene contratos de intercambio. La exportación se filtra en el origen, campo por campo y denegado por defecto, y va cifrada con las llaves del contrato, que están en manos de los miembros.
+- **Una alianza es una tercera instancia que se suscribe.** No tiene una capa propia: la coordinación de la alianza, las campañas conjuntas y los puntos de mensaje compartidos viven en la instancia de la alianza y viajan como eventos, en las dos direcciones. Una asociación de agencias en el carril comercial tiene la misma forma; esa parte está decidida.
+- **Ningún componente central guarda ni media datos entre organizaciones.** La capa de plataforma se queda con el aprovisionamiento, el catálogo, los derechos de uso, la medición y cualquier retransmisor.
+
+**El filtro de exportación.** Un componente del Core en cada instancia. Compila cada contrato de intercambio en el filtro en el origen sobre el flujo de esa instancia: qué tipos de evento pueden salir hacia qué contraparte, qué campos, con denegación por defecto, aplicado antes de que un evento se publique en una exportación. Enmendar el contrato recompila el filtro; revocarlo detiene la exportación en el origen. Hacer cumplir el contrato en el origen significa que un error de filtrado es una fuga — el costo que la [ADR-017](../../decisions/017-sharing-contract-trust-model.md) ya nombra para los contratos.
+
+**El destino de importación.** Un componente del Core en cada instancia. Escribe los eventos entregados bajo un contrato en el almacén de la instancia, marcados con el contrato con el que llegaron, y los marca como contenido no confiable al incorporarlos: una carga de una contraparte es dato, nunca instrucciones ([security.md § Inyección de prompts](../../spec/security.md#inyección-de-prompts)). Una vez incorporado, un evento entregado se lee bajo las reglas de datos compartimentados — por las personas según la [ADR-017](../../decisions/017-sharing-contract-trust-model.md), y por el arnés según [spec/harness.md § Alcance de lectura](../../spec/harness.md#alcance-de-lectura).
+
+**Versionado de esquemas.** Los esquemas de eventos son un contrato entre instancias que pueden correr versiones distintas (la [ADR-022](../../decisions/022-core-modules-and-lanes.md)). Una exportación declara sus versiones de esquema, y nunca emite una versión que la instancia receptora no haya dicho que entiende.
+
+**Lo que no tiene reemplazo.** La deduplicación entre organizaciones —la promesa de la capa anterior de ver que una persona existe en varias organizaciones miembro— se fue con la capa. Sin identidad compartida (la [ADR-025](../../decisions/025-identity-per-client.md)), hacer coincidir personas entre instancias existe solo como un término de contrato, y el índice ciego con llave de contrato de la supresión mutua ([Motor de orquestación entre canales](#motor-de-orquestación-entre-canales)) es el único término de ese tipo especificado. Todo lo demás queda abierto; la [ADR-025](../../decisions/025-identity-per-client.md) anota la brecha.
 
 **Verificar:** que NATS permite exportar e importar flujos entre cuentas y nodos hoja, sobre clústeres separados y nubes separadas. Todavía no está confirmado.
 
@@ -125,7 +128,7 @@ El Core es lo que toda instancia tiene siempre, en los dos carriles. Es headless
 | Contenido | Almacén de contenido, recursos versionados, flujo de aprobación por rondas |
 | Entrega | Transporte por canal con verificación de consentimiento, topes de frecuencia, la ventana de silencio y la supresión mutua |
 | Comercio | Catálogo, derechos de uso, medición de uso |
-| Eventos | El flujo de eventos de cada cliente y el bus |
+| Eventos | El flujo de eventos de cada cliente y el bus: el filtro de exportación y el destino de importación entre instancias |
 | Configuración de carril | Marca, vocabulario, qué muestra el catálogo, reglas de precio, políticas por defecto |
 | Infraestructura común | Centro de integraciones y conectores, abstracción de IA (BYOM), localización, motor de sincronización sin conexión, API pública y webhooks |
 
@@ -229,7 +232,6 @@ La identidad ya no es una entidad a nivel de plataforma. `PlatformIdentity`, que
 TenantRegistration
 ├── id (UUID)
 ├── entity_type (alliance | party_org | candidate)
-├── tenant_type (lightweight | full)
 ├── name
 ├── country
 ├── hosting_tier (standard | enhanced | maximum | self_hosted)
@@ -247,7 +249,7 @@ Affiliation
 ├── parent_tenant → TenantRegistration (alianza o partido)
 ├── child_tenant → TenantRegistration (partido, organización o candidatura)
 ├── affiliation_type (alliance_member | party_candidate)
-├── sharing_rules (marcas de activación por recurso)
+├── sharing_contract (el contrato entre las dos instancias — ADR-017; sus exportaciones corren por el bus — ADR-024)
 ├── billing_mode (member_pays | alliance_pays) — se fija en la puesta en marcha; solo lo cambian los dos OA
 ├── status (pending | active | revoked)
 ├── created_at
@@ -255,7 +257,7 @@ Affiliation
 
 ServiceCatalogueEntry
 ├── id (UUID)
-├── service (capture | electoral_analysis | opposition_research | builder_text | builder_image | builder_video | channel_transport | mutual_suppression)
+├── service (capture | electoral_analysis | opposition_research | builder_text | builder_image | builder_video | channel_transport)
 ├── countries[] (dónde se ofrece)
 ├── hosting_tiers[] (standard | enhanced | maximum | self_hosted)
 ├── supplier (quién factura el costo variable; nulo si no hay)
@@ -550,7 +552,7 @@ La instancia de cada organización corre su propio servicio de identidad y guard
 
 La pantalla de inicio de sesión detecta automáticamente el soporte de WebAuthn. Los dispositivos por debajo del umbral de passkey reciben autenticación por enlace mágico de forma automática — nadie tiene que decidir nada.
 
-**Sin federación de perfiles.** El diseño original mapeaba una identidad de plataforma con un perfil en cada organización a la que pertenecía la persona, y le mostraba un selector de organización a quien estuviera en más de una. Eso ya no existe. Una cuenta pertenece a una sola instancia. Una persona que trabaja en dos organizaciones tiene dos cuentas e inicia sesión en cada una en su propia dirección.
+**Sin perfiles compartidos.** El diseño original mapeaba una identidad de plataforma con un perfil en cada organización a la que pertenecía la persona, y le mostraba un selector de organización a quien estuviera en más de una. Eso ya no existe. Una cuenta pertenece a una sola instancia. Una persona que trabaja en dos organizaciones tiene dos cuentas e inicia sesión en cada una en su propia dirección.
 
 **Gestor de sesiones:** Emite y valida los tokens de sesión. Aplica la duración de sesión según el rol (decidido en users.md). Maneja la revocación remota — cuando un Coordinador de voluntarios revoca una sesión, el gestor invalida el token de inmediato.
 
@@ -618,12 +620,8 @@ Los cambios de configuración rutinarios no requieren la aprobación de dos OA.
 
 ### Jerarquía de llaves
 
-<!-- REVISIT: la jerarquía de abajo todavía muestra una «Llave de cifrado del servicio de identidad» bajo la Llave maestra de la plataforma, que cifra «los datos de identidad de plataforma». Con la ADR-025 no hay datos de identidad de plataforma: las cuentas viven en cada instancia, bajo las llaves de esa organización. También muestra una «Llave de la capa de federación», que la ADR-024 quitaría si se acepta. El diagrama queda como está hasta que se concilie la jerarquía de llaves. -->
-
 ```
 Llave maestra de la plataforma (en poder de GreenGrass, respaldada por HSM)
-├── Llave de cifrado del servicio de identidad (cifra los datos de identidad de plataforma)
-├── Llave de la capa de federación (cifra los datos de coordinación entre organizaciones)
 └── Llaves por organización
     ├── BYOK: llave maestra de la organización (generada y en poder de la organización)
     │   ├── Llaves de cifrado de datos (DEK — por tabla o por campo)
@@ -631,7 +629,15 @@ Llave maestra de la plataforma (en poder de GreenGrass, respaldada por HSM)
     └── Gestionada: llave maestra de la organización (en poder de GreenGrass, en Vault)
         ├── Llaves de cifrado de datos (DEK)
         └── Llaves de mensajería
+
+Llaves de contrato (por contrato de intercambio, p. ej. la llave de grupo
+de la alianza): las generan y las tienen los miembros del contrato, nunca
+GreenGrass; rotan cuando cambia la membresía (ADR-008, ADR-024). Las
+exportaciones del bus se cifran con estas llaves; cualquier retransmisor
+ve solo metadatos de enrutamiento.
 ```
+
+*Se conserva para que el cambio de criterio quede a la vista:* esta jerarquía mostraba antes una «Llave de cifrado del servicio de identidad» que cifraba datos de identidad de plataforma, que ya no existen con la [ADR-025](../../decisions/025-identity-per-client.md), y una «Llave de la capa de federación» que cifraba los datos de coordinación entre organizaciones, que ya no existe con la [ADR-024](../../decisions/024-event-bus-as-federation.md). Las dos salen; nada central cifra el flujo entre organizaciones, porque nada central puede leerlo.
 
 ### Cifrado de sobre
 
@@ -917,7 +923,7 @@ App de la organización → Programador de publicaciones → Adaptador de plataf
 
 ### Motor de orquestación entre canales
 
-(Capas 1 y 2 decididas en [ADR-016 §2](../../decisions/016-cross-cutting-resolutions.md); capa 3 en la [ADR-019](../../decisions/019-central-services-and-metered-billing.md))
+(Capas 1 y 2 decididas en [ADR-016 §2](../../decisions/016-cross-cutting-resolutions.md); capa 3 en la [ADR-019](../../decisions/019-central-services-and-metered-billing.md), movida de un servicio central al bus por la [ADR-024](../../decisions/024-event-bus-as-federation.md))
 
 Las comunicaciones se rigen por tres capas que se aplican al momento de enviar, en orden. Las dos primeras son de la propia organización. La tercera aplica solo a una organización que está en una alianza cuyo contrato de intercambio incluye el término de supresión.
 
@@ -925,15 +931,15 @@ Las comunicaciones se rigen por tres capas que se aplican al momento de enviar, 
 
 **Capa 2 — Ventana de silencio entre canales** (nueva): Después de contactar a una persona por *cualquier* canal sobre un tema concreto, los mensajes del mismo tema por otros canales se suprimen durante una ventana configurable (por defecto: 24 horas). Se permiten temas distintos por canales distintos, hasta el tope de cada canal.
 
-**Capa 3 — Supresión mutua entre organizaciones** (el primer servicio central, [ADR-019](../../decisions/019-central-services-and-metered-billing.md)): Para los destinatarios que pasan las capas 1 y 2, el enrutador le pregunta al servicio de supresión mutua si algún otro miembro de la alianza contactó a cada uno en los últimos N días, donde N es un término del contrato de intercambio de la alianza. La respuesta es una marca de sí/no por destinatario. No dice qué miembro, ni cuándo, ni por qué canal. Es la primitiva del piloto ([mvp.md § La primitiva de coordinación central: la supresión mutua](../../spec/mvp.md#la-primitiva-de-coordinación-central-la-supresión-mutua)) puesta en la ruta de envío.
+**Capa 3 — Supresión mutua entre organizaciones** (Core, transportada como solicitud y respuesta sobre el bus, la [ADR-024](../../decisions/024-event-bus-as-federation.md)): Para los destinatarios que pasan las capas 1 y 2, el enrutador les pregunta a los otros miembros de la alianza, por el bus, si alguno de ellos contactó a cada destinatario en los últimos N días, donde N es un término del contrato de intercambio de la alianza. La respuesta es una marca de sí/no por destinatario. No dice qué miembro, ni cuándo, ni por qué canal. Es la primitiva del piloto ([mvp.md § La primitiva de coordinación central: la supresión mutua](../../spec/mvp.md#la-primitiva-de-coordinación-central-la-supresión-mutua)) puesta en la ruta de envío.
 
 - **Va última a propósito.** Una organización les pregunta a sus socios solo por las personas a las que de verdad está a punto de escribirles, nunca por su lista entera. Por quien las capas 1 y 2 retienen no se pregunta nunca.
-- **Corre solo para la organización que envía.** Cada uno de los otros miembros responde desde su propio historial de contacto, dentro de su propia instancia, y lo que sale de esa instancia es la marca. El servicio combina las marcas y no guarda nada. A los otros miembros no se les representa: responden bajo el contrato que concedieron. No existe ningún libro compartido fuera de las organizaciones.
+- **Corre solo para la organización que envía.** Cada uno de los otros miembros responde desde su propio historial de contacto, dentro de su propia instancia, y lo que sale de esa instancia es la marca. La instancia que pregunta combina las marcas y no guarda nada más allá del registro del envío. A los otros miembros no se les representa: responden bajo el contrato que concedieron. No existe ningún libro compartido fuera de las organizaciones.
 - **Direccional y revocable.** Un miembro solo responde a quien su contrato le concede el término de supresión. Retirar el término es unilateral y tiene efecto desde la llamada siguiente. Un registro cuya persona se dio de baja del intercambio de datos nunca produce una marca ([users.md § Intercambio entre organizaciones dentro de una alianza](../../spec/users.md#intercambio-entre-organizaciones-dentro-de-una-alianza)).
-- **El cruce necesita un índice con llave de la alianza.** El índice ciego descrito en [Cifrado a nivel de aplicación](#cifrado-a-nivel-de-aplicación) lleva la llave de cada organización, así que por diseño no puede cruzar entre organizaciones. La supresión cruza sobre un segundo índice ciego de teléfono y correo normalizados, con una llave por contrato de alianza, porque las llaves se acotan a los contratos ([ADR-017 § Los compartimentos son el peldaño más bajo, no una primitiva nueva](../../decisions/017-sharing-contract-trust-model.md#los-compartimentos-son-el-peldaño-más-bajo-no-una-primitiva-nueva)). La llave la tienen los miembros, nunca GreenGrass, y rota cuando cambia la membresía, como las llaves de mensajería de la alianza según la [ADR-008](../../decisions/008-communications-messaging.md). El servicio ve tokens que no puede revertir.
+- **El cruce necesita un índice con llave de la alianza.** El índice ciego descrito en [Cifrado a nivel de aplicación](#cifrado-a-nivel-de-aplicación) lleva la llave de cada organización, así que por diseño no puede cruzar entre organizaciones. La supresión cruza sobre un segundo índice ciego de teléfono y correo normalizados, con una llave por contrato de alianza, porque las llaves se acotan a los contratos ([ADR-017 § Los compartimentos son el peldaño más bajo, no una primitiva nueva](../../decisions/017-sharing-contract-trust-model.md#los-compartimentos-son-el-peldaño-más-bajo-no-una-primitiva-nueva)). La llave la tienen los miembros, nunca GreenGrass, y rota cuando cambia la membresía, como las llaves de mensajería de la alianza según la [ADR-008](../../decisions/008-communications-messaging.md). El intercambio lleva solo tokens que GreenGrass no puede revertir.
 - **Un miembro que no responde no es un veto.** Si la instancia de un miembro no responde dentro de la ventana de envío, el envío sigue sin las marcas de ese miembro y el registro del envío anota qué miembro no respondió. La caída de un miembro nunca detiene las operaciones de otro.
 - **Preguntar queda a la vista.** El registro de auditoría de cada miembro que responde anota cada consulta que contesta: quién preguntó, bajo qué contrato, por cuántos destinatarios, cuántas marcas. Nunca los destinatarios mismos. Un miembro con la llave de la alianza podría calcular tokens de personas con las que no tiene relación y preguntar por ellas. El enrutador nunca lo hace, pero un miembro hostil podría saltarse su propio enrutador. El registro de auditoría deja ese tanteo a la vista y la revocación le pone fin; no se puede eliminar por diseño, por la misma razón que da [mvp.md § 8. Qué cuesta lo «igualitario» en la arquitectura](../../spec/mvp.md#8-qué-cuesta-lo-igualitario-en-la-arquitectura) sobre el poder de negociación.
-- **Sin plano medido salvo que a GreenGrass le facturen por llamada.** La verificación no tiene proveedor. Salvo que un proveedor de nube le facture a GreenGrass por unidad por correrla, no genera ninguna factura medida, y según la ADR-019 entonces no hay nada que trasladar. Igual necesita un derecho de uso, y cada llamada igual emite un evento de uso, porque el evento es el registro de auditoría. Sus llamadas llevan solo tokens que GreenGrass no puede revertir, así que no sale del perímetro de cifrado y no necesita la aceptación explícita en el nivel Máximo.
+- **Sin plano medido y sin entrada en el catálogo.** La verificación no tiene proveedor y, desde la [ADR-024](../../decisions/024-event-bus-as-federation.md), tampoco servicio central: es Entrega del Core hablando con otras instancias por el bus, así que no hay nada que trasladar y ningún derecho de uso que activar. Cada pregunta y cada respuesta es un evento en el flujo propio de la instancia, porque el evento es el registro de auditoría. Sus llamadas llevan solo tokens que GreenGrass no puede revertir, así que no sale del perímetro de cifrado y no necesita la aceptación explícita en el nivel Máximo.
 
 **Aplicación:** El enrutador de canales revisa las tres capas, en orden, antes de despachar cualquier mensaje. Un mensaje que pasa el tope de su canal puede quedar aplazado igualmente por la ventana de silencio entre canales. Los mensajes aplazados se vuelven a evaluar en la siguiente ventana de envío. Un destinatario marcado por la supresión mutua se omite en vez de aplazarse, porque aplazarlo daría la misma respuesta hasta que se cumplan los N días, y la omisión queda anotada en el envío para que el equipo vea por qué bajó el conteo.
 
@@ -1022,7 +1028,7 @@ Las pantallas de eventos muestran los ingresos por entradas como métrica, pero 
                                └────────────────────┘     └──────────────┘
 ```
 
-**Propuesto:** la [ADR-024](../../decisions/024-event-bus-as-federation.md) haría de este flujo de eventos por organización la columna vertebral de integración de la instancia, que llevaría los eventos de dominio del Core y de cada módulo, y el medio por el que viajan las exportaciones filtradas por contrato entre instancias. Ver [Propuesto: el bus de eventos en lugar de la capa de federación](#propuesto-el-bus-de-eventos-en-lugar-de-la-capa-de-federación). No aceptado.
+**Decidido en la [ADR-024](../../decisions/024-event-bus-as-federation.md):** este flujo de eventos por organización es la columna vertebral de integración de la instancia, lleva los eventos de dominio del Core y de cada módulo, y es el medio por el que viajan las exportaciones filtradas por contrato entre instancias. Ver [El bus de eventos entre instancias](#el-bus-de-eventos-entre-instancias).
 
 ### Cadena en tiempo real (operaciones activas)
 
@@ -1104,9 +1110,9 @@ Ninguna capa bloquea por sí sola (salvo la identidad). Las capas se acumulan: u
 
 (Decidido en [ADR-016 §48](../../decisions/016-cross-cutting-resolutions.md))
 
-Las organizaciones miembro de una alianza pueden aportar conductores a una bolsa compartida para el transporte a las urnas el día de elecciones. Es opcional por alianza y lo activa quien lidera la alianza en los ajustes de GOTV.
+Las organizaciones miembro de una alianza pueden aportar conductores a una bolsa compartida para el transporte a las urnas el día de elecciones. Es opcional por alianza y lo activa quien lidera la alianza en los ajustes de GOTV. La bolsa vive en la instancia propia de la alianza: los miembros publican la disponibilidad de conductores como exportaciones filtradas por contrato sobre el bus, y las asignaciones viajan de vuelta por el mismo camino (la [ADR-024](../../decisions/024-event-bus-as-federation.md)).
 
-**Prioridad de asignación:** Primero los conductores de la propia organización, después la bolsa de la alianza. Cada organización ve en sus reportes solo los traslados que cubrieron sus propios conductores. El panel de la alianza muestra métricas agregadas de traslados.
+**Prioridad de asignación:** Primero los conductores de la propia organización, después la bolsa de la alianza. Cada organización ve en sus reportes solo los traslados que cubrieron sus propios conductores. El panel de la instancia de la alianza muestra métricas agregadas de traslados, construidas con lo que entregaron los contratos de los miembros.
 
 **Límite de los datos:** Los datos de la solicitud de transporte (nombre del votante, dirección de recogida) se comparten solo con la organización del conductor asignado y solo mientras dura el traslado. Del transporte no queda ningún intercambio de datos permanente entre organizaciones.
 
@@ -1325,7 +1331,7 @@ Es un compromiso central con el modelo de soberanía — quien puede construir s
 
 **Enmendado por la [ADR-026](../../decisions/026-two-lane-pricing.md):** las dos últimas oraciones de este párrafo describen el modelo de ingresos que decidió la ADR-019, que queda sin efecto. El Core sigue midiendo el costo del proveedor de cada llamada a un servicio central. Lo que paga un cliente es ese costo más la regla de precio de su carril: una comisión en el carril político; un margen de 30 % y una comisión en el carril comercial. **Propuesto por la [ADR-022](../../decisions/022-core-modules-and-lanes.md):** «módulo interno» pasaría a llamarse «componente de instancia», para que «módulo» pueda nombrar la unidad que un cliente activa. Ver [Core, módulos y carriles](#core-módulos-y-carriles).
 
-Cada capacidad es una de dos cosas. Un **módulo interno** corre dentro de la instancia de la organización sobre sus propios datos: CRM, operaciones de campo, GOTV, recaudación de fondos, eventos, mensajería interna, redacción de comunicaciones. Activar uno por organización es activar funcionalidades por configuración dentro de una instalación de organización única; nada del aislamiento cambia. Un **servicio central** es una capacidad alojada en la plataforma que una organización activa desde el catálogo: captura de medios desde fuentes públicas, análisis electoral, entrega de investigación de la oposición, generación de texto, imagen y video, transporte por canal, y la verificación de supresión mutua del piloto. Los módulos internos los cubre la suscripción fija. Los servicios centrales cargan costos que a GreenGrass misma le facturan por unidad, y que se trasladan a la organización al costo, sin margen ([fundraising.md § Modelo de ingresos de la plataforma](../../spec/fundraising.md#modelo-de-ingresos-de-la-plataforma)).
+Cada capacidad es una de dos cosas. Un **módulo interno** corre dentro de la instancia de la organización sobre sus propios datos: CRM, operaciones de campo, GOTV, recaudación de fondos, eventos, mensajería interna, redacción de comunicaciones. Activar uno por organización es activar funcionalidades por configuración dentro de una instalación de organización única; nada del aislamiento cambia. Un **servicio central** es una capacidad alojada en la plataforma que una organización activa desde el catálogo: captura de medios desde fuentes públicas, análisis electoral, entrega de investigación de la oposición, generación de texto, imagen y video, y transporte por canal. La verificación de supresión mutua del piloto fue la primera de estas; desde la [ADR-024](../../decisions/024-event-bus-as-federation.md) es Entrega del Core, no un servicio central. Los módulos internos los cubre la suscripción fija. Los servicios centrales cargan costos que a GreenGrass misma le facturan por unidad, y que se trasladan a la organización al costo, sin margen ([fundraising.md § Modelo de ingresos de la plataforma](../../spec/fundraising.md#modelo-de-ingresos-de-la-plataforma)).
 
 ### Los cuatro servicios
 
@@ -1336,11 +1342,11 @@ Cada capacidad es una de dos cosas. Un **módulo interno** corre dentro de la in
 | **Captura** | `capture` | Prensa publicada, medios de difusión (transcritos), cuentas públicas de redes sociales, encuestas publicadas. Nunca mensajería cerrada | La bandeja de monitoreo de la organización | Proveedores de transcripción y de datos, cuando facturan por unidad |
 | **Análisis** | `electoral_analysis`, `opposition_research` | Resultados publicados (se comparten como el corpus de captura); hallazgos de investigación (nunca se comparten) | La organización; la investigación, en el compartimento que nombre su contrato | Inferencia, cuando se usa |
 | **Constructores** | `builder_text`, `builder_image`, `builder_video` | Solo el encargo, los puntos de mensaje y los archivos que entrega la persona que lo invoca | Un borrador en la organización, marcado como generado | Inferencia y generación |
-| **Transporte por canal** | `channel_transport`, `mutual_suppression` | Los mensajes de salida de la propia organización | El destinatario, después de las tres capas del momento del envío | Pasarelas de SMS y WhatsApp, por mensaje |
+| **Transporte por canal** | `channel_transport` | Los mensajes de salida de la propia organización | El destinatario, después de las tres capas del momento del envío | Pasarelas de SMS y WhatsApp, por mensaje |
 
 **Los constructores nunca envían.** A un constructor lo invoca una persona con un encargo; no tiene vía de lectura hacia contactos, registros de votantes, mensajes, donaciones ni compartimentos, y no tiene credencial para el transporte por canal. Su borrador entra en el flujo de aprobación que ya aplica a ese contenido. Los constructores pasan por el enrutador de modelos como cualquier otra funcionalidad de IA ([el enrutador de modelos](#el-arnés-y-el-enrutador-de-modelos)); con BYOM, el proveedor propio de la organización le factura a ella y no hay nada que trasladar. Los tres se pueden activar: la revisión del 2026-11-26 aceptó `builder_image` y `builder_video` en los mismos términos que `builder_text`, con consentimiento documentado para retratar a una persona real e identificable, y metadatos de procedencia más identificación visible en los medios generados que se publican.
 
-**El orden de construcción** sigue [comms-intelligence.md § 9. Las iteraciones](../../spec/comms-intelligence.md#9-las-iteraciones): la captura es la Iteración 3, condicionada al sondeo de corpus; la entrega de investigación son las Iteraciones 5 y 6, después de la primitiva de compartimentación; los constructores son la Iteración 7. El transporte por canal y la supresión mutua son parte de la infraestructura de comunicaciones de la plataforma, no de la hoja de ruta.
+**El orden de construcción** sigue [comms-intelligence.md § 9. Las iteraciones](../../spec/comms-intelligence.md#9-las-iteraciones): la captura es la Iteración 3, condicionada al sondeo de corpus; la entrega de investigación son las Iteraciones 5 y 6, después de la primitiva de compartimentación; los constructores son la Iteración 7. El transporte por canal es parte de la infraestructura de comunicaciones de la plataforma, no de la hoja de ruta. La supresión mutua ya no está en el catálogo: con la [ADR-024](../../decisions/024-event-bus-as-federation.md) es Entrega del Core, transportada por el bus ([Motor de orquestación entre canales](#motor-de-orquestación-entre-canales)).
 
 ### Ejecución por organización
 
@@ -1482,7 +1488,9 @@ País A (p. ej., EE. UU./Puerto Rico)      País B (p. ej., Brasil)
                         │  (jurisdicción de           │
                         │   constitución)             │
                         │                             │
-                        │  - Capa de federación       │
+                        │  - Retransmisor (solo       │
+                        │    metadatos de             │
+                        │    enrutamiento)            │
                         │  - Admin. de la plataforma  │
                         │  - Facturación              │
                         │  - Orquestador de           │
@@ -1490,7 +1498,7 @@ País A (p. ej., EE. UU./Puerto Rico)      País B (p. ej., Brasil)
                         └─────────────────────────────┘
 ```
 
-La identidad ya no aparece en este diagrama: no hay principal de identidad ni réplica por país, porque cada organización corre su propio servicio de identidad (la [ADR-025](../../decisions/025-identity-per-client.md)). La capa de federación se queda en el diagrama hasta que se decida la [ADR-024](../../decisions/024-event-bus-as-federation.md).
+La identidad ya no aparece en este diagrama: no hay principal de identidad ni réplica por país, porque cada organización corre su propio servicio de identidad (la [ADR-025](../../decisions/025-identity-per-client.md)). Tampoco aparece ningún componente de flujo entre organizaciones: con la [ADR-024](../../decisions/024-event-bus-as-federation.md) ese flujo corre entre instancias por el bus, y la plataforma central tiene a lo sumo un retransmisor que solo ve metadatos de enrutamiento.
 
 ### Despliegue autoalojado
 
@@ -1532,4 +1540,4 @@ Para las organizaciones autoalojadas, GreenGrass entrega:
 16. ~~Capacidades compartidas y costo por uso~~ → Servicios centrales ejecutados por organización, con traslado al costo medido por uso y sin margen, según la [ADR-019](../../decisions/019-central-services-and-metered-billing.md). Enmienda el modelo de ingresos solo fijo de la ADR-007. La parte de «sin margen» queda sin efecto por el punto 17.
 17. ~~Precios con un carril comercial~~ → El precio es una regla del carril encima del costo medido: al costo más una comisión en el carril político, al costo más un margen de 30 % más una comisión en el carril comercial, según la [ADR-026](../../decisions/026-two-lane-pricing.md). Sus definiciones quedan abiertas ahí.
 
-**Reabierto por la dirección de noviembre de 2026, y sin resolver.** Tres ADR propuestas traen preguntas abiertas que tocan este documento: si el bus de eventos reemplaza la capa de federación (la [ADR-024](../../decisions/024-event-bus-as-federation.md)); si el padrón electoral sale del Core, y cómo se llama el Core (la [ADR-022](../../decisions/022-core-modules-and-lanes.md)); y Parsons como capa de conectores (la [ADR-027](../../decisions/027-third-party-crm-sync-and-connectors.md)). La superficie de chat, que esperaba por la [ADR-018](../../decisions/018-ai-agent-posture.md), quedó decidida en la revisión del 2026-11-26 como la interfaz principal del arnés (la [ADR-023](../../decisions/023-surfaces-chat-admin-field.md); [El arnés y el enrutador de modelos](#el-arnés-y-el-enrutador-de-modelos)).
+**Reabierto por la dirección de noviembre de 2026, y sin resolver.** Dos ADR propuestas traen preguntas abiertas que tocan este documento: si el padrón electoral sale del Core, y cómo se llama el Core (la [ADR-022](../../decisions/022-core-modules-and-lanes.md)); y Parsons como capa de conectores (la [ADR-027](../../decisions/027-third-party-crm-sync-and-connectors.md)). La superficie de chat, que esperaba por la [ADR-018](../../decisions/018-ai-agent-posture.md), quedó decidida en la revisión del 2026-11-26 como la interfaz principal del arnés (la [ADR-023](../../decisions/023-surfaces-chat-admin-field.md); [El arnés y el enrutador de modelos](#el-arnés-y-el-enrutador-de-modelos)). El bus en lugar de la capa central se decidió ese mismo día (la [ADR-024](../../decisions/024-event-bus-as-federation.md)); su dependencia de NATS sigue marcada *Verificar* en [El bus de eventos entre instancias](#el-bus-de-eventos-entre-instancias).

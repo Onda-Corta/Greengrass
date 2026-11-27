@@ -22,13 +22,13 @@ Each GreenGrass tenant is an **organization**. In the terms of [ADR-022](../deci
 
 ### Organization Hierarchy
 
-**DECIDED:** The org model is a federation of sovereign entities connected by affiliation, not ownership.
+**DECIDED:** The org model is an affiliation of sovereign entities, connected voluntarily, never by ownership.
 
 **Entity types:**
 
 | Entity | Tenant type | Description |
 |--------|------------|-------------|
-| Alliance | Lightweight | Coalition of parties, orgs, and/or candidates. Has its own billing, staff, volunteer pool, member/supporter data, and joint campaigns. Does not duplicate the full CRM/fundraising/comms stack of its members. |
+| Alliance | Full | Coalition of parties, orgs, and/or candidates. A client like any other: its own instance, billing, staff, volunteer pool, member/supporter data, and joint campaigns. Typically enables few modules — it coordinates members rather than duplicating their CRM/fundraising/comms stacks. |
 | Party / Organization | Full | Political party, advocacy org, movement. Complete platform access — CRM, fundraising, comms, analytics, own billing and accounts. |
 | Candidate | Full | Individual running for office. Complete platform access — own data, billing, accounts. |
 | Campaign | None (inherits) | Belongs to its parent entity (candidate, party, org, or alliance). Inherits parent's billing and admin structure. |
@@ -36,7 +36,7 @@ Each GreenGrass tenant is an **organization**. In the terms of [ADR-022](../deci
 **Affiliation model:**
 
 ```
-Alliance (sovereign, coordination layer)
+Alliance (sovereign, coordinates its members)
 ├── Party / Organization (sovereign tenant) ── affiliation
 │   └── Campaign(s)
 ├── Candidate (sovereign tenant) ── affiliation
@@ -59,10 +59,8 @@ Party (sovereign)
 - **Affiliations are voluntary and do not transfer ownership.** A party does not own a candidate's data. An alliance does not own its members' data. Affiliation defines cooperation boundaries, not control.
 - **Candidates can affiliate with a party, or operate independently.** An independent candidate with one campaign is just a standalone sovereign tenant.
 - **Campaigns belong to their parent entity** (candidate, party/org, or alliance). They are not sovereign — they inherit their parent's billing and administrative structure.
-- **Alliances are lightweight tenants** with their own operational capabilities: staff accounts, volunteer pools, member/supporter data, joint campaigns, and billing for shared costs. They do not replicate the full platform stack (full CRM, fundraising tools, comms suite) — member entities retain those independently.
+- **Alliances are full clients** with their own instance and their own operational capabilities: staff accounts, volunteer pools, member/supporter data, joint campaigns, and billing for shared costs. They typically enable few modules — they coordinate members rather than replicate the full platform stack (full CRM, fundraising tools, comms suite), which member entities retain independently. What flows between a member and the alliance flows as contract-filtered events over the bus ([ADR-024](../decisions/024-event-bus-as-federation.md)).
 - **Standalone operation** is always supported. Any entity can operate without affiliations.
-
-<!-- REVISIT: "Alliances are lightweight tenants" above. The November 2026 direction says an alliance is a client like any other, with its own instance, and that an association of agencies in the commercial lane works exactly like an alliance. ADR-024 (proposed) names the conflict and proposes that "lightweight" means few modules enabled. Left as written until ADR-024 is decided. -->
 
 ### Cross-org sharing within alliances
 
@@ -440,7 +438,7 @@ The product description specifies "explicit login access for everyone, with easy
 - Scopes are **additive** — a user assigned to District 5 and District 6 sees both.
 - **Org Admin is unscoped by default** — full visibility across the tenant. Can be scoped down if desired (e.g., a large party where regional admins manage their own area).
 - Scopes apply as a **filter on data access**, not on feature access. A scoped Field Director has the same tools as an unscoped one — they just see a different slice of data.
-- Scopes **compose with the federation model** — tenant boundaries are the outermost scope, then geographic/team/campaign scoping narrows within a tenant.
+- Scopes **compose with the contract model** — across instances, sharing contracts govern what flows ([ADR-017](../decisions/017-sharing-contract-trust-model.md), carried by the bus, [ADR-024](../decisions/024-event-bus-as-federation.md)); within a tenant, geographic/team/campaign scoping narrows from the tenant boundary inward.
 
 <!-- REVISIT: Geographic scoping depends on the geographic data model (how precincts, districts, turfs, and regions are structured and nested). This should be defined in the architecture spec. -->
 
@@ -449,7 +447,7 @@ The product description specifies "explicit login access for everyone, with easy
 ## Open Questions
 
 1. ~~**Multi-org membership**~~ — **RESOLVED**, then reversed. First resolved as federated profiles; superseded by [ADR-025](../decisions/025-identity-per-client.md): identity is per client. See Multi-org membership section above.
-2. ~~**Organization hierarchy**~~ — **RESOLVED.** Multi-level federation of sovereign entities. See Organization Hierarchy section above.
+2. ~~**Organization hierarchy**~~ — **RESOLVED.** An affiliation of sovereign entities, at multiple levels. See Organization Hierarchy section above.
 3. ~~**Role transitions**~~ — **RESOLVED.** Templates are additive. Transitioning from supporter to volunteer to staff means adding templates, not replacing them. All prior activity history carries forward on the platform identity (since [ADR-025](../decisions/025-identity-per-client.md): on the person's account in that organization's instance). Approval gates are role-appropriate: a supporter can self-promote to volunteer (sign up for a shift), but staff roles require Org Admin to grant.
 4. ~~**Data visibility across roles**~~ — **RESOLVED.** Per-tenant configuration, private by default. Each org decides its own visibility rules (e.g., whether volunteers can see co-volunteers on a shift, whether donor names are shown publicly). The platform defaults to minimal visibility — orgs must opt in to more open settings. This accounts for the range of political safety contexts across deployments.
 5. ~~**Delegation**~~ — **RESOLVED.** Two mechanisms:
@@ -474,6 +472,6 @@ The product description specifies "explicit login access for everyone, with easy
    - System monitoring, health dashboards, and infrastructure management
    - Deployment management (push updates across tenants in the single-tenant architecture)
    - Full read visibility into tenant data for support and debugging
-   - Manage alliance affiliations at the platform level
+   - Manage tenant provisioning and affiliation billing modes (`alliance_pays`) at the platform level — affiliations themselves are contracts between instances, which the platform is never a party to ([ADR-017](../decisions/017-sharing-contract-trust-model.md))
 
    **Explicitly excluded:** User impersonation. Platform Admins cannot log in as or act as a tenant user. Support and debugging is done through read-only visibility, not by assuming another identity. This preserves tenant trust and audit trail integrity.

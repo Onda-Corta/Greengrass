@@ -356,7 +356,7 @@ This inventory is derived from the 12 spec documents and the navigation model. I
 | PROF-002 | Notification Preferences | All authenticated | No | Yes | messaging.md — notifications |
 | PROF-003 | Security Settings (Personal) | All authenticated | No | Yes | security.md — passkeys |
 | PROF-004 | Language Preference | All authenticated | No | Yes | geography.md — localization |
-| PROF-005 | Tenant Switcher | Multi-tenant users | No | Yes | users.md — federation |
+| PROF-005 | Tenant Switcher | Multi-tenant users | No | Yes | users.md — superseded by [ADR-025](../../../decisions/025-identity-per-client.md): no tenant selector |
 
 ## 22. Content Operations
 

@@ -138,5 +138,5 @@ Las doce preguntas que esto le envió a la revisión están en [ADR-028 § Quest
 
 ## Preguntas abiertas
 
-1. **Quién puede escribir un coach.** Solo el OA, el personal, los líderes de equipo, o una alianza o asociación para sus miembros a través del bus ([ADR-024](../decisions/024-event-bus-as-federation.md), también propuesta).
+1. **Quién puede escribir un coach.** Solo el OA, el personal, los líderes de equipo, o una alianza o asociación para sus miembros a través del bus ([ADR-024](../decisions/024-event-bus-as-federation.md)).
 2. **Quién escribe y mantiene el conocimiento sobre organización del que se nutren los coaches.** GreenGrass, el carril, el cliente o terceros, y en qué idiomas.

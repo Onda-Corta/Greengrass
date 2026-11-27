@@ -3,7 +3,7 @@
 **Status:** Accepted
 **Date:** 2026-03-03
 **Sources:** `design/architecture/system.md`, `spec/users.md`, `spec/workflows.md`, `spec/product.md`
-**Amendment proposed by:** [ADR-024](024-event-bus-as-federation.md) (Proposed) — the central federation layer that mediates cross-tenant flow would be replaced by contract-filtered event exports between instances, and an alliance would be a client like any other, with its own instance. Nothing below changes until ADR-024 is accepted. Single-tenant isolation is reaffirmed by [ADR-022](022-core-modules-and-lanes.md) and is not in question.
+**Amended by:** [ADR-024](024-event-bus-as-federation.md) (Accepted 2026-11-26) — the central federation layer that mediated cross-tenant flow is replaced by contract-filtered event exports between instances, and an alliance is a client like any other, with its own instance. The affiliation section below is rewritten accordingly. Single-tenant isolation is reaffirmed by [ADR-022](022-core-modules-and-lanes.md) and is not in question.
 
 ## Context
 
@@ -26,9 +26,11 @@ Tenants select their tier at provisioning and can upgrade without data migration
 
 **Alternatives considered:** Multi-tenant with logical isolation was rejected because compromising one tenant could expose others, and per-tenant security policies (encryption keys, data residency, isolation level) become exponentially harder to enforce in a shared database. Multi-tenant with physical isolation was considered but offers no meaningful advantage over single-tenant while adding coordination complexity.
 
-### Federation model over monolithic multi-tenancy
+### Affiliation over monolithic multi-tenancy
 
-Organizations are sovereign entities connected by voluntary affiliation, not subdivisions of a monolithic system. Each entity (party, candidate, advocacy org) is a full tenant with its own data, billing, and administrative control. Alliances are lightweight coordination tenants that enable resource sharing across sovereign members without transferring ownership. Campaigns inherit from their parent entity.
+Organizations are sovereign entities connected by voluntary affiliation, not subdivisions of a monolithic system. Each entity (party, candidate, advocacy org) is a full tenant with its own data, billing, and administrative control. An alliance is a tenant like any other — its own instance, its own accounts, typically few modules enabled — and coordination between members runs as contract-filtered event exports between instances, with no central component ([ADR-024](024-event-bus-as-federation.md)). Campaigns inherit from their parent entity.
+
+*Kept so the reversal is visible:* until 2026-11-26 this section was "Federation model over monolithic multi-tenancy", and alliances were "lightweight coordination tenants" served by a central federation layer that mediated cross-tenant flow. [ADR-024](024-event-bus-as-federation.md) removed the layer and made the alliance a full client.
 
 **Alternatives considered:** A hierarchical ownership model (party owns candidate data) was rejected because it contradicts the sovereignty principle — a candidate's data belongs to the candidate, and an alliance cannot compel data sharing from members.
 
@@ -52,7 +54,7 @@ Tenant creation is self-serve with no human in the loop. The provisioning pipeli
 - Compromising one tenant cannot expose another — blast radius is limited to a single organization
 - Per-tenant security policies (encryption keys, data residency, access controls) are architecturally enforced, not just configured
 - Tenants can be placed in any country without architectural changes
-- The federation model respects organizational sovereignty — critical for political contexts where data ownership has safety implications
+- The affiliation model respects organizational sovereignty — critical for political contexts where data ownership has safety implications
 - Mobile-first ensures the platform works for the actual devices volunteers use
 
 **Costs:**

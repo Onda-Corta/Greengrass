@@ -280,7 +280,7 @@ Decided. Answers items 4 and 5.
 - **The pricing arithmetic.** What "cost" includes, how each commission is calculated, what the platform default tier includes, whether any free tier carries a metered allowance — [ADR-026](026-two-lane-pricing.md)'s open questions, where they belong.
 - **ADR-028's two product questions.** Who may write a coach — now also a security question, since org-written instructions are trusted by designation — and who writes and maintains the organizing knowledge coaches draw on.
 - **The owed screens.** The provider settings screen (item 8), the audit viewer's channel facet, and the screen-inventory and wireframe updates both need.
-- **ADR-022's open questions** are untouched: a name for the Core, operator access by lane, the event bus replacing the federation layer, the voter file as a political-lane module, Parsons as the connector layer, and what happens to a disabled module's data.
+- **ADR-022's open questions** are untouched: a name for the Core, operator access by lane, the event bus replacing the federation layer, the voter file as a political-lane module, Parsons as the connector layer, and what happens to a disabled module's data. *Updated 2026-11-26: the event-bus item is decided — [ADR-024](024-event-bus-as-federation.md) is accepted.*
 
 ## Consequences
 

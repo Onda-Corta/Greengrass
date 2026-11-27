@@ -2,9 +2,9 @@
 
 ## Overview
 
-GreenGrass is a single-tenant, federated platform for grassroots political campaign management. This document defines the system architecture — how the components fit together, how data flows, and how the infrastructure supports the product requirements defined in the spec documents.
+GreenGrass is a single-tenant platform for grassroots political campaign management, built on affiliation between sovereign organizations. This document defines the system architecture — how the components fit together, how data flows, and how the infrastructure supports the product requirements defined in the spec documents.
 
-**Reading note, added 2026-11-13.** The product direction changed after this document was written, and six ADRs record the change. Two are accepted and are reflected here as structure: identity is per client ([ADR-025](../../decisions/025-identity-per-client.md)) and pricing is a lane rule ([ADR-026](../../decisions/026-two-lane-pricing.md)). Four are proposed and appear here only in sections marked as proposals: the Core, modules and lanes ([ADR-022](../../decisions/022-core-modules-and-lanes.md)), surfaces ([ADR-023](../../decisions/023-surfaces-chat-admin-field.md)), the event bus ([ADR-024](../../decisions/024-event-bus-as-federation.md)) and third-party sync ([ADR-027](../../decisions/027-third-party-crm-sync-and-connectors.md)). "GreenGrass" in this document means the infrastructure. A *tenant* here is what those ADRs call a *client's instance*.
+**Reading note, added 2026-11-13, updated 2026-11-26.** The product direction changed after this document was written, and six ADRs record the change. Three are accepted and are reflected here as structure: identity is per client ([ADR-025](../../decisions/025-identity-per-client.md)), pricing is a lane rule ([ADR-026](../../decisions/026-two-lane-pricing.md)), and cross-organization flow runs as contract-filtered event exports between instances ([ADR-024](../../decisions/024-event-bus-as-federation.md)). Three are proposed and appear here only in sections marked as proposals: the Core, modules and lanes ([ADR-022](../../decisions/022-core-modules-and-lanes.md)), surfaces ([ADR-023](../../decisions/023-surfaces-chat-admin-field.md)) and third-party sync ([ADR-027](../../decisions/027-third-party-crm-sync-and-connectors.md)). "GreenGrass" in this document means the infrastructure. A *tenant* here is what those ADRs call a *client's instance*.
 
 <!-- REVISIT: this document describes the platform as "for grassroots political campaign management". Under ADR-022 the infrastructure serves two lanes, political and commercial, and the political-only parts of this document (the voter file, election day, campaign-finance compliance) become policy of the political lane. The text is left as written until ADR-022 is accepted. -->
 
@@ -13,7 +13,7 @@ GreenGrass is a single-tenant, federated platform for grassroots political campa
 These product decisions (from the specs) have the strongest influence on architecture:
 
 1. **Single-tenant isolation** with tiered security levels (container → cluster → cloud account → self-hosted)
-2. **Federation model** — sovereign entities connected by affiliation, not a monolithic multi-tenant system
+2. **Affiliation of sovereign entities** — connected voluntarily, not a monolithic multi-tenant system; cross-organization flow runs as contract-filtered event exports ([ADR-024](../../decisions/024-event-bus-as-federation.md))
 3. **BYOK by default** — the platform cannot read tenant data unless the tenant opts into managed keys
 4. **Per-country data residency** — tenant data stays in a country the tenant chooses
 5. **Offline-first for field operations** — canvassing, voter registration, and event check-in must work without connectivity
@@ -42,11 +42,6 @@ These product decisions (from the specs) have the strongest influence on archite
 │  │    metadata only; ADR-019)                          │   │
 │  └──────┬─────────────────┬──────────────────────────┘   │
 │  ┌──────┴─────────────────┴──────────────────────────┐   │
-│  │              Federation / Alliance Layer            │   │
-│  │     (cross-tenant coordination, sharing rules,      │   │
-│  │      dedup, don't-re-knock, joint campaigns)        │   │
-│  └──────┬─────────────────┬──────────────────────────┘   │
-│  ┌──────┴─────────────────┴──────────────────────────┐   │
 │  │   Central Services (capture, analysis, builders,    │   │
 │  │   channel transport) — shared code, executed per    │   │
 │  │   tenant under its keys, nothing retained           │   │
@@ -72,19 +67,19 @@ These product decisions (from the specs) have the strongest influence on archite
     └────────────┘     └────────────┘
 ```
 
-### Three-layer architecture:
+### Two layers, and the bus between instances:
 
-1. **Platform layer** — shared services that exist outside any tenant: provisioning, platform admin, billing. This is the only layer that sees across tenants. Identity is no longer here: each tenant runs its own identity service ([ADR-025](../../decisions/025-identity-per-client.md)).
+1. **Platform layer** — shared services that exist outside any tenant: provisioning, platform admin, billing. This is the only layer that sees across tenants, and it holds metadata only. Identity is no longer here: each tenant runs its own identity service ([ADR-025](../../decisions/025-identity-per-client.md)). Any relay between instances sits here and sees routing metadata, never content ([ADR-024](../../decisions/024-event-bus-as-federation.md)).
 
-2. **Federation layer** — mediates cross-tenant interactions: alliance coordination, shared resource management, dedup across orgs, joint campaign orchestration. Operates on explicit sharing rules, never has blanket access to tenant data.
+2. **Tenant layer** — one complete, isolated application instance per sovereign entity (party, org, candidate, or alliance). Each tenant has its own application server, database, cache, and job queue. No tenant can see another tenant's data except as events filtered by the sharing contract between them, delivered over the bus.
 
-3. **Tenant layer** — one complete, isolated application instance per sovereign entity (party, org, or candidate). Each tenant has its own application server, database, cache, and job queue. No tenant can see another tenant's data except through the federation layer's sharing rules.
+*Kept so the reversal is visible:* until 2026-11-26 this was a three-layer architecture. Between the platform and tenant layers sat a central **federation layer** that mediated cross-tenant interactions — alliance coordination, shared resource management, dedup across orgs, joint campaign orchestration — operating on explicit sharing rules and never holding tenant data. [ADR-024](../../decisions/024-event-bus-as-federation.md) removed it: what it carried is re-homed to contract-filtered event exports between instances and to the alliance's own instance, below.
 
-**Central services are not a fourth layer.** They are platform-hosted capabilities that a tenant enables from the catalogue and that execute per tenant, under that tenant's keys and contracts, retaining nothing between calls ([ADR-019](../../decisions/019-central-services-and-metered-billing.md)). The catalogue, entitlements and metering that govern them are platform-layer components holding metadata only. See [Central Services Architecture](#central-services-architecture).
+**Central services are not a third layer.** They are platform-hosted capabilities that a tenant enables from the catalogue and that execute per tenant, under that tenant's keys and contracts, retaining nothing between calls ([ADR-019](../../decisions/019-central-services-and-metered-billing.md)). The catalogue, entitlements and metering that govern them are platform-layer components holding metadata only. See [Central Services Architecture](#central-services-architecture).
 
-### Proposed: the event bus in place of the federation layer
+### The event bus between instances
 
-Proposed in [ADR-024](../../decisions/024-event-bus-as-federation.md), and not accepted. Until it is, the federation layer above is the specified design.
+Decided in [ADR-024](../../decisions/024-event-bus-as-federation.md), 2026-11-26. Cross-organization flow runs as contract-filtered event exports between instances; there is no central component that holds or mediates cross-organization data.
 
 ```
 ┌─────────────┐   contract-filtered,   ┌─────────────┐
@@ -101,10 +96,18 @@ Proposed in [ADR-024](../../decisions/024-event-bus-as-federation.md), and not a
    Any relay GreenGrass operates sees routing metadata, never content.
 ```
 
-- **Each instance's event stream becomes its integration spine.** The stream that today feeds analytics ([Analytics Architecture](#analytics-architecture)) would carry the domain events of the Core and of every module: `person.created`, `consent.changed`, `interaction.recorded`, `donation.received`, `content.approved`.
-- **Federation becomes exports between instances.** Each organization exports a subset of its stream to the instances it has sharing contracts with. The export is filtered at the source, field by field and deny by default, and encrypted under the contract's keys, which the members hold.
-- **An alliance is a third instance that subscribes.** It has no layer of its own. An association of agencies in the commercial lane has the same shape; that part is decided.
-- **No central component holds or mediates cross-organization data.** The platform layer would keep provisioning, the catalogue, entitlements, metering and any relay.
+- **Each instance's event stream is its integration spine.** The stream that feeds analytics ([Analytics Architecture](#analytics-architecture)) carries the domain events of the Core and of every module: `person.created`, `consent.changed`, `interaction.recorded`, `donation.received`, `content.approved`.
+- **Cross-organization flow is exports between instances.** Each organization exports a subset of its stream to the instances it has sharing contracts with. The export is filtered at the source, field by field and deny by default, and encrypted under the contract's keys, which the members hold.
+- **An alliance is a third instance that subscribes.** It has no layer of its own: alliance coordination, joint campaigns and shared talking points live in the alliance's instance and travel as events, in both directions. An association of agencies in the commercial lane has the same shape; that part is decided.
+- **No central component holds or mediates cross-organization data.** The platform layer keeps provisioning, the catalogue, entitlements, metering and any relay.
+
+**The export filter.** A Core component in every instance. It compiles each sharing contract into the source-side filter on that instance's stream: which event types may leave for which counterparty, which fields, deny by default, applied before an event is published to an export. Amending the contract recompiles the filter; revoking it stops the export at the source. Enforcement at the source means a filtering bug is a leak — the cost [ADR-017](../../decisions/017-sharing-contract-trust-model.md) already names for contracts.
+
+**The import landing.** A Core component in every instance. It writes events delivered under a contract into the instance's store, tagged with the contract they arrived under, and marks them untrusted at ingestion: a payload from a counterparty is data, never instructions ([security.md § Prompt injection](../../spec/security.md#prompt-injection)). Once landed, a delivered event is read under the compartmented-data rules — by people under [ADR-017](../../decisions/017-sharing-contract-trust-model.md), and by the harness under [spec/harness.md § Read scope](../../spec/harness.md#read-scope).
+
+**Schema versioning.** Event schemas are a contract between instances that may run different versions ([ADR-022](../../decisions/022-core-modules-and-lanes.md)). An export declares its schema versions, and never emits a version the receiving instance has not said it understands.
+
+**What has no replacement.** Cross-organization dedup — the old layer's promise to see that a person exists across member tenants — is gone with the layer. With no shared identity ([ADR-025](../../decisions/025-identity-per-client.md)), matching people across instances exists only as a contract term, and mutual suppression's contract-keyed blind index ([Cross-channel orchestration engine](#cross-channel-orchestration-engine)) is the only such term specified. Anything more is open; [ADR-025](../../decisions/025-identity-per-client.md) records the gap.
 
 **Verify:** that NATS supports exporting and importing streams across accounts and leaf nodes over separate clusters and separate clouds. This is not yet confirmed.
 
@@ -125,7 +128,7 @@ The Core is what every instance always has, in both lanes. It is headless: each 
 | Content | Content store, versioned assets, approval pipeline in rounds |
 | Delivery | Channel transport with consent checks, frequency caps, the quiet window and mutual suppression |
 | Commerce | Catalogue, entitlements, metering |
-| Events | The per-client event stream and the bus |
+| Events | The per-client event stream and the bus: the export filter and the import landing between instances |
 | Lane configuration | Brand, vocabulary, catalogue visibility, price rules, policy defaults |
 | Plumbing | Integration hub and connectors, AI abstraction (BYOM), localization, offline sync engine, public API and webhooks |
 
@@ -229,7 +232,6 @@ Identity is no longer a platform-level entity. `PlatformIdentity`, which headed 
 TenantRegistration
 ├── id (UUID)
 ├── entity_type (alliance | party_org | candidate)
-├── tenant_type (lightweight | full)
 ├── name
 ├── country
 ├── hosting_tier (standard | enhanced | maximum | self_hosted)
@@ -247,7 +249,7 @@ Affiliation
 ├── parent_tenant → TenantRegistration (alliance or party)
 ├── child_tenant → TenantRegistration (party, org, or candidate)
 ├── affiliation_type (alliance_member | party_candidate)
-├── sharing_rules (per-resource opt-in flags)
+├── sharing_contract (the contract between the two instances — ADR-017; its exports run over the bus — ADR-024)
 ├── billing_mode (member_pays | alliance_pays) — set at onboarding, changed only by both OAs
 ├── status (pending | active | revoked)
 ├── created_at
@@ -255,7 +257,7 @@ Affiliation
 
 ServiceCatalogueEntry
 ├── id (UUID)
-├── service (capture | electoral_analysis | opposition_research | builder_text | builder_image | builder_video | channel_transport | mutual_suppression)
+├── service (capture | electoral_analysis | opposition_research | builder_text | builder_image | builder_video | channel_transport)
 ├── countries[] (where it is offered)
 ├── hosting_tiers[] (standard | enhanced | maximum | self_hosted)
 ├── supplier (who bills the variable cost; null if none)
@@ -550,7 +552,7 @@ Each tenant's instance runs its own identity service and holds its own accounts.
 
 The login screen auto-detects WebAuthn support. Devices below the passkey threshold get magic link authentication automatically — no user decision needed.
 
-**No profile federation.** The original design mapped one platform identity to a profile in each tenant a person belonged to, and showed a tenant selector to anyone in more than one. That is gone. An account belongs to one instance. A person who works in two organizations has two accounts and logs in to each at its own address.
+**No shared profiles.** The original design mapped one platform identity to a profile in each tenant a person belonged to, and showed a tenant selector to anyone in more than one. That is gone. An account belongs to one instance. A person who works in two organizations has two accounts and logs in to each at its own address.
 
 **Session manager:** Issues and validates session tokens. Enforces role-based session duration (decided in users.md). Handles remote revocation — when a Volunteer Coordinator revokes a session, the session manager invalidates the token immediately.
 
@@ -618,12 +620,8 @@ Routine settings changes do not require two-OA approval.
 
 ### Key hierarchy
 
-<!-- REVISIT: the hierarchy below still shows an "Identity Service Encryption Key" under the Platform Master Key, encrypting "platform identity data". Under ADR-025 there is no platform identity data: accounts live in each instance, under that tenant's keys. It also shows a "Federation Layer Key", which ADR-024 would remove if accepted. The diagram is left as written until the key hierarchy is reconciled. -->
-
 ```
 Platform Master Key (held by GreenGrass, HSM-backed)
-├── Identity Service Encryption Key (encrypts platform identity data)
-├── Federation Layer Key (encrypts cross-tenant coordination data)
 └── Per-Tenant Keys
     ├── BYOK: Tenant Master Key (generated and held by tenant)
     │   ├── Data Encryption Keys (DEKs — per-table or per-field)
@@ -631,7 +629,14 @@ Platform Master Key (held by GreenGrass, HSM-backed)
     └── Managed: Tenant Master Key (held by GreenGrass in Vault)
         ├── Data Encryption Keys (DEKs)
         └── Messaging Keys
+
+Contract keys (per sharing contract, e.g. the alliance group key):
+generated and held by the contract's members, never by GreenGrass;
+rotate on membership change (ADR-008, ADR-024). Bus exports are
+encrypted under these keys; any relay sees routing metadata only.
 ```
+
+*Kept so the reversal is visible:* this hierarchy previously showed an "Identity Service Encryption Key" encrypting platform identity data, which no longer exists under [ADR-025](../../decisions/025-identity-per-client.md), and a "Federation Layer Key" encrypting cross-tenant coordination data, which no longer exists under [ADR-024](../../decisions/024-event-bus-as-federation.md). Both are removed; nothing central encrypts cross-organization flow, because nothing central can read it.
 
 ### Envelope encryption
 
@@ -915,7 +920,7 @@ Tenant App → Post Scheduler → Platform Adapter → Social Media API
 
 ### Cross-channel orchestration engine
 
-(Layers 1 and 2 decided in [ADR-016 §2](../../decisions/016-cross-cutting-resolutions.md); layer 3 in [ADR-019](../../decisions/019-central-services-and-metered-billing.md))
+(Layers 1 and 2 decided in [ADR-016 §2](../../decisions/016-cross-cutting-resolutions.md); layer 3 in [ADR-019](../../decisions/019-central-services-and-metered-billing.md), moved from a central service to the bus by [ADR-024](../../decisions/024-event-bus-as-federation.md))
 
 Communications are governed by three layers enforced at send time, in order. The first two are the tenant's own. The third applies only to a tenant in an alliance whose sharing contract carries the suppression term.
 
@@ -923,15 +928,15 @@ Communications are governed by three layers enforced at send time, in order. The
 
 **Layer 2 — Cross-channel quiet window** (new): After contacting a person on *any* channel about a specific topic, same-topic messages on other channels are suppressed for a configurable window (default: 24 hours). Different topics on different channels are allowed, up to each channel's per-channel cap.
 
-**Layer 3 — Cross-tenant mutual suppression** (the first central service, [ADR-019](../../decisions/019-central-services-and-metered-billing.md)): For recipients that pass layers 1 and 2, the router asks the mutual suppression service whether any other alliance member contacted each of them in the last N days, where N is a term of the alliance's sharing contract. The answer is one yes/no flag per recipient. It does not say which member, when, or on what channel. This is the pilot's primitive ([mvp.md § The core coordination primitive: mutual suppression](../../spec/mvp.md#the-core-coordination-primitive-mutual-suppression)) placed in the send path.
+**Layer 3 — Cross-tenant mutual suppression** (Core, carried as request and reply over the bus, [ADR-024](../../decisions/024-event-bus-as-federation.md)): For recipients that pass layers 1 and 2, the router asks the other alliance members, over the bus, whether any of them contacted each recipient in the last N days, where N is a term of the alliance's sharing contract. The answer is one yes/no flag per recipient. It does not say which member, when, or on what channel. This is the pilot's primitive ([mvp.md § The core coordination primitive: mutual suppression](../../spec/mvp.md#the-core-coordination-primitive-mutual-suppression)) placed in the send path.
 
 - **It runs last on purpose.** A tenant asks its partners only about people it is actually about to message, never about its whole list. Anyone layers 1 and 2 hold back is never asked about.
-- **It runs for the sending tenant alone.** Each other member answers from its own contact history, inside its own instance, and what leaves that instance is the flag. The service combines the flags and keeps nothing. The other members are not acted for; they answer under the contract they granted. No shared ledger exists outside the tenants.
+- **It runs for the sending tenant alone.** Each other member answers from its own contact history, inside its own instance, and what leaves that instance is the flag. The asking instance combines the flags and keeps nothing beyond the send record. The other members are not acted for; they answer under the contract they granted. No shared ledger exists outside the tenants.
 - **Directional and revocable.** A member answers only askers its contract grants the suppression term to. Withdrawing the term is unilateral and takes effect on the next call. A record whose person has opted out of data sharing never produces a flag ([users.md § Cross-org sharing within alliances](../../spec/users.md#cross-org-sharing-within-alliances)).
-- **Matching needs an alliance-keyed index.** The blind index under [Application-level encryption](#application-level-encryption) is keyed per tenant, so by design it cannot match across tenants. Suppression matches on a second blind index over normalized phone and email, keyed per alliance contract, since keys scope to contracts ([ADR-017 § Compartments are the bottom rung, not a new primitive](../../decisions/017-sharing-contract-trust-model.md#compartments-are-the-bottom-rung-not-a-new-primitive)). The key is held by the members, never by GreenGrass, and rotates when membership changes, as alliance messaging keys do under [ADR-008](../../decisions/008-communications-messaging.md). The service sees tokens it cannot reverse.
+- **Matching needs an alliance-keyed index.** The blind index under [Application-level encryption](#application-level-encryption) is keyed per tenant, so by design it cannot match across tenants. Suppression matches on a second blind index over normalized phone and email, keyed per alliance contract, since keys scope to contracts ([ADR-017 § Compartments are the bottom rung, not a new primitive](../../decisions/017-sharing-contract-trust-model.md#compartments-are-the-bottom-rung-not-a-new-primitive)). The key is held by the members, never by GreenGrass, and rotates when membership changes, as alliance messaging keys do under [ADR-008](../../decisions/008-communications-messaging.md). The exchange carries only tokens GreenGrass cannot reverse.
 - **An unanswered member is not a veto.** If a member's instance does not answer within the send window, the send proceeds without that member's flags and the send record notes which member did not answer. One member's outage never halts another member's operations.
 - **Asking is visible.** Each answering member's audit log records every query it answers: who asked, under which contract, how many recipients, how many flags. Never the recipients themselves. A member holding the alliance key could compute tokens for people it has no relationship with and ask about them. The router never does this, but a hostile member could bypass its own router. The audit trail makes that probing visible and revocation ends it; it cannot be designed away, for the same reason [mvp.md § 8. What "egalitarian" costs architecturally](../../spec/mvp.md#8-what-egalitarian-costs-architecturally) gives about leverage.
-- **No metered plane unless GreenGrass is billed per call.** The check has no supplier. Unless a cloud provider bills GreenGrass by the unit to run it, it generates no metered bill, and under ADR-019 there is then nothing to pass through. It still needs an entitlement, and each call still emits a usage event, because the event is the audit record. Its calls carry only tokens GreenGrass cannot reverse, so it does not leave the encryption perimeter and needs no acknowledgement at the Maximum tier.
+- **No metered plane, and no catalogue entry.** The check has no supplier and, since [ADR-024](../../decisions/024-event-bus-as-federation.md), no central service either: it is Core Delivery talking to other instances over the bus, so there is nothing to pass through and no entitlement to enable. Each ask and each answer is an event on the instance's own stream, because the event is the audit record. Its calls carry only tokens GreenGrass cannot reverse, so it does not leave the encryption perimeter and needs no acknowledgement at the Maximum tier.
 
 **Enforcement:** The channel router checks all three layers, in order, before dispatching any message. A message that passes the per-channel cap may still be deferred by the cross-channel quiet window. Deferred messages are re-evaluated at the next send window. A recipient flagged by mutual suppression is skipped rather than deferred, since deferring would return the same answer until the N days run out, and the skip is recorded on the send so staff can see why the count dropped.
 
@@ -1020,7 +1025,7 @@ Event screens display ticket revenue as a metric but link to the fundraising sys
                    └──────────────┘     └──────────────┘
 ```
 
-**Proposed:** [ADR-024](../../decisions/024-event-bus-as-federation.md) would make this per-tenant event stream the instance's integration spine, carrying the domain events of the Core and every module, and the carrier of contract-filtered exports between instances. See [Proposed: the event bus in place of the federation layer](#proposed-the-event-bus-in-place-of-the-federation-layer). Not accepted.
+**Decided in [ADR-024](../../decisions/024-event-bus-as-federation.md):** this per-tenant event stream is the instance's integration spine, carrying the domain events of the Core and every module, and the carrier of contract-filtered exports between instances. See [The event bus between instances](#the-event-bus-between-instances).
 
 ### Real-time pipeline (active operations)
 
@@ -1102,9 +1107,9 @@ No single layer is blocking (except identity). The layers compound: a fraudulent
 
 (Decided in [ADR-016 §48](../../decisions/016-cross-cutting-resolutions.md))
 
-Alliance members can contribute drivers to a shared pool for election day rides-to-polls. Opt-in per alliance, enabled by the alliance lead in GOTV settings.
+Alliance members can contribute drivers to a shared pool for election day rides-to-polls. Opt-in per alliance, enabled by the alliance lead in GOTV settings. The pool lives in the alliance's own instance: members publish driver availability as contract-filtered exports over the bus, and assignments travel back the same way ([ADR-024](../../decisions/024-event-bus-as-federation.md)).
 
-**Routing priority:** Same-org drivers first, then alliance pool. Each org sees only rides fulfilled by their own drivers in their own reporting. The alliance dashboard shows aggregate ride metrics.
+**Routing priority:** Same-org drivers first, then alliance pool. Each org sees only rides fulfilled by their own drivers in their own reporting. The alliance instance's dashboard shows aggregate ride metrics, built from what the members' contracts delivered.
 
 **Data boundary:** Ride request data (voter name, pickup address) is shared only with the assigned driver's org for the duration of the ride. No persistent cross-org data sharing from ride fulfillment.
 
@@ -1321,7 +1326,7 @@ This is a core commitment to the sovereignty model — tenants who can build on 
 
 **Amended by [ADR-026](../../decisions/026-two-lane-pricing.md):** the last two sentences of this paragraph describe the revenue model ADR-019 decided, which is superseded. The Core still meters the supplier cost of every central-service call. What a client pays is that cost plus its lane's price rule: a commission in the political lane; a 30% margin and a commission in the commercial lane. **Proposed by [ADR-022](../../decisions/022-core-modules-and-lanes.md):** "internal module" would be renamed "in-tenant component", so that "module" can mean the unit a client enables. See [Core, Modules and Lanes](#core-modules-and-lanes).
 
-Every capability is one of two things. An **internal module** runs inside the tenant instance on the tenant's own data: CRM, field operations, GOTV, fundraising, events, internal messaging, outreach composition. Enabling one per tenant is feature flagging inside a single-tenant deployment; nothing about tenant isolation changes. A **central service** is a platform-hosted capability a tenant enables from the catalogue: media capture over public sources, electoral analysis, opposition research delivery, text, image and video generation, channel transport, and the pilot's mutual suppression check. Internal modules are covered by the flat subscription. Central services carry costs that GreenGrass is itself billed for by the unit, which pass through to the tenant at cost, with no margin ([fundraising.md § Platform Revenue Model](../../spec/fundraising.md#platform-revenue-model)).
+Every capability is one of two things. An **internal module** runs inside the tenant instance on the tenant's own data: CRM, field operations, GOTV, fundraising, events, internal messaging, outreach composition. Enabling one per tenant is feature flagging inside a single-tenant deployment; nothing about tenant isolation changes. A **central service** is a platform-hosted capability a tenant enables from the catalogue: media capture over public sources, electoral analysis, opposition research delivery, text, image and video generation, and channel transport. The pilot's mutual suppression check was the first of these; since [ADR-024](../../decisions/024-event-bus-as-federation.md) it is Core Delivery, not a central service. Internal modules are covered by the flat subscription. Central services carry costs that GreenGrass is itself billed for by the unit, which pass through to the tenant at cost, with no margin ([fundraising.md § Platform Revenue Model](../../spec/fundraising.md#platform-revenue-model)).
 
 ### The four services
 
@@ -1332,11 +1337,11 @@ Every capability is one of two things. An **internal module** runs inside the te
 | **Capture** | `capture` | Published press, broadcast (transcribed), public social accounts, published polls. Never closed messaging | The tenant's monitoring inbox | Transcription and data suppliers, where they bill per unit |
 | **Analysis** | `electoral_analysis`, `opposition_research` | Published results (shared like the capture corpus); research findings (never shared) | The tenant; research into the compartment its contract names | Inference, where used |
 | **Builders** | `builder_text`, `builder_image`, `builder_video` | Only the brief, talking points and assets the invoking person supplies | A draft in the tenant, marked as generated | Inference and generation |
-| **Channel transport** | `channel_transport`, `mutual_suppression` | The tenant's own outbound messages | The recipient, after the three send-time layers | SMS and WhatsApp gateways per message |
+| **Channel transport** | `channel_transport` | The tenant's own outbound messages | The recipient, after the three send-time layers | SMS and WhatsApp gateways per message |
 
 **Builders never send.** A builder is invoked by a person with a brief, has no read path into contacts, voter records, messages, donations or compartments, and holds no credential to channel transport. Its draft enters the approval workflow that already applies to that content. Builders route through the model router like every other AI feature ([the model router](#the-harness-and-the-model-router)); under BYOM the tenant's own provider bills the tenant and nothing passes through. All three can be enabled: the review of 2026-11-26 accepted `builder_image` and `builder_video` on the same terms as `builder_text`, with documented consent for depicting a real, identifiable person and provenance metadata plus visible disclosure on published generated media.
 
-**Build order** follows [comms-intelligence.md § 9. The iterations](../../spec/comms-intelligence.md#9-the-iterations): Capture is Iteration 3, gated on the corpus probe; research delivery is Iterations 5 and 6, after the compartmentation primitive; Builders is Iteration 7. Channel transport and mutual suppression are part of the platform's communication infrastructure, not the roadmap.
+**Build order** follows [comms-intelligence.md § 9. The iterations](../../spec/comms-intelligence.md#9-the-iterations): Capture is Iteration 3, gated on the corpus probe; research delivery is Iterations 5 and 6, after the compartmentation primitive; Builders is Iteration 7. Channel transport is part of the platform's communication infrastructure, not the roadmap. Mutual suppression is no longer in the catalogue: under [ADR-024](../../decisions/024-event-bus-as-federation.md) it is Core Delivery, carried by the bus ([Cross-channel orchestration engine](#cross-channel-orchestration-engine)).
 
 ### Per-tenant execution
 
@@ -1478,7 +1483,8 @@ Country A (e.g., US/Puerto Rico)          Country B (e.g., Brazil)
                    │  (incorporation       │
                    │   jurisdiction)       │
                    │                       │
-                   │  - Federation layer   │
+                   │  - Relay (routing    │
+                   │    metadata only)    │
                    │  - Platform Admin     │
                    │  - Billing            │
                    │  - Provisioning       │
@@ -1486,7 +1492,7 @@ Country A (e.g., US/Puerto Rico)          Country B (e.g., Brazil)
                    └──────────────────────┘
 ```
 
-Identity no longer appears in this diagram: there is no identity primary and no per-country replica, since each tenant runs its own identity service ([ADR-025](../../decisions/025-identity-per-client.md)). The federation layer stays in the diagram until [ADR-024](../../decisions/024-event-bus-as-federation.md) is decided.
+Identity no longer appears in this diagram: there is no identity primary and no per-country replica, since each tenant runs its own identity service ([ADR-025](../../decisions/025-identity-per-client.md)). No cross-organization flow component appears either: under [ADR-024](../../decisions/024-event-bus-as-federation.md) that flow runs between instances over the bus, and the central platform holds at most a relay that sees routing metadata only.
 
 ### Self-hosted deployment
 
@@ -1528,4 +1534,4 @@ For self-hosted tenants, GreenGrass provides:
 16. ~~Shared capabilities and usage-based cost~~ → Central services executed per tenant, with metered pass-through at cost and no margin, per [ADR-019](../../decisions/019-central-services-and-metered-billing.md). Amends the flat-only revenue model in ADR-007. The "no margin" part is superseded by item 17.
 17. ~~Pricing with a commercial lane~~ → Pricing is a lane rule on top of the metered cost: cost plus a commission in the political lane, cost plus a 30% margin plus a commission in the commercial lane, per [ADR-026](../../decisions/026-two-lane-pricing.md). Its definitions are open there.
 
-**Reopened by the November 2026 direction, and not resolved.** Three proposed ADRs carry open questions that touch this document: whether the event bus replaces the federation layer ([ADR-024](../../decisions/024-event-bus-as-federation.md)); whether the voter file leaves the Core, and what the Core is called ([ADR-022](../../decisions/022-core-modules-and-lanes.md)); and Parsons as the connector layer ([ADR-027](../../decisions/027-third-party-crm-sync-and-connectors.md)). The chat surface, which waited on [ADR-018](../../decisions/018-ai-agent-posture.md), was decided in the review of 2026-11-26 as the harness's primary interface ([ADR-023](../../decisions/023-surfaces-chat-admin-field.md); [The harness and the model router](#the-harness-and-the-model-router)).
+**Reopened by the November 2026 direction, and not resolved.** Two proposed ADRs carry open questions that touch this document: whether the voter file leaves the Core, and what the Core is called ([ADR-022](../../decisions/022-core-modules-and-lanes.md)); and Parsons as the connector layer ([ADR-027](../../decisions/027-third-party-crm-sync-and-connectors.md)). The chat surface, which waited on [ADR-018](../../decisions/018-ai-agent-posture.md), was decided in the review of 2026-11-26 as the harness's primary interface ([ADR-023](../../decisions/023-surfaces-chat-admin-field.md); [The harness and the model router](#the-harness-and-the-model-router)). The bus replacing the central layer was decided the same day ([ADR-024](../../decisions/024-event-bus-as-federation.md)); its NATS dependency stays marked *Verify* at [The event bus between instances](#the-event-bus-between-instances).

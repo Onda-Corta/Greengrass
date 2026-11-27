@@ -142,7 +142,7 @@ Registradas en [ADR-018 § Questions recorded by later ADRs](018-ai-agent-postur
 
 Estas no dependen de la revisión. No se resuelven aquí.
 
-1. **Quién puede escribir un coach.** Solo el OA, el personal, los líderes de equipo, o una alianza o asociación para sus miembros a través del bus ([ADR-024](024-event-bus-as-federation.md), también propuesta).
+1. **Quién puede escribir un coach.** Solo el OA, el personal, los líderes de equipo, o una alianza o asociación para sus miembros a través del bus ([ADR-024](024-event-bus-as-federation.md)).
 2. **Quién escribe y mantiene el conocimiento sobre organización del que se nutren los coaches.** GreenGrass, el carril, el cliente o terceros, y en qué idiomas.
 
 ## Las respuestas de la revisión

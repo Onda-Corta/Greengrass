@@ -116,11 +116,11 @@ The candidate persona (users.md) has unique communication needs:
 
 Alliances (workflows.md) need cross-org communication:
 
-- **Alliance coordination channel** — a shared group conversation that includes designated representatives from each member org. Operates at the federation layer.
-- **Cross-org DMs** — alliance staff can send direct messages to staff at other member orgs (subject to alliance sharing rules).
-- **Alliance broadcasts** — the alliance coordinator can send announcements to all member orgs.
+- **Alliance coordination channel** — a shared group conversation that includes designated representatives from each member org. It lives in the alliance's own instance, where each member org's representatives hold their own accounts ([users.md § Multi-org membership](users.md#multi-org-membership)).
+- **Cross-org DMs** — alliance staff can send direct messages to staff at other member orgs, in the alliance's instance (subject to alliance sharing rules).
+- **Alliance broadcasts** — the alliance coordinator can send announcements to all member orgs. Announcements reach member instances as contract-filtered events over the bus ([ADR-024](../decisions/024-event-bus-as-federation.md)).
 
-**DECIDED: Per-org key negotiation.** Alliance messages use an independently generated alliance group key, distributed to each member org encrypted with that org's public key. Key rotation occurs on every alliance membership change (org joins or leaves), ensuring forward secrecy (new members can't read historical messages) and post-compromise security (departing members can't read future messages). Rotating the key is a real ceremony, which makes an org joining or leaving feel like the consequential act it is and gives the join/leave flow a concrete moment to build around. More complex than federation-layer encryption, but consistent with the sovereignty model — no new trust boundary is introduced.
+**DECIDED: Per-org key negotiation.** Alliance messages use an independently generated alliance group key, distributed to each member org encrypted with that org's public key. Key rotation occurs on every alliance membership change (org joins or leaves), ensuring forward secrecy (new members can't read historical messages) and post-compromise security (departing members can't read future messages). Rotating the key is a real ceremony, which makes an org joining or leaving feel like the consequential act it is and gives the join/leave flow a concrete moment to build around. More complex than centrally mediated encryption, but consistent with the sovereignty model — no new trust boundary is introduced.
 
 ## War Room Communication
 

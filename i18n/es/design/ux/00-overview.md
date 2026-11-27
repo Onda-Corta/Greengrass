@@ -155,7 +155,7 @@ Cuando se activan las operaciones de GOTV, la plataforma se transforma. Los pane
 | **Panel de detalle** | Un panel contextual a la derecha, en escritorio, que muestra información adicional sin salir de donde se está (por ejemplo, ver un contacto mientras se recorre una lista). |
 | **Modo de coacción** | Una funcionalidad de seguridad: iniciar sesión con un passkey especial muestra una versión saneada de la plataforma, con datos verosímiles pero depurados. |
 | **Centro de mando** | Donde se dirige la operación de GOTV del día de elecciones en tiempo real. Incluye el seguimiento de la participación, la reasignación de recursos, el escalamiento de problemas y la coordinación de las comunicaciones. |
-| **Alianza** | Una federación de organizaciones soberanas que comparten recursos, coordinan campañas y reparten la recaudación mediante reglas de intercambio explícitas. |
+| **Alianza** | Una afiliación de organizaciones soberanas que comparten recursos, coordinan campañas y reparten la recaudación mediante reglas de intercambio explícitas. |
 | **GOTV** | Get Out The Vote — movilización del voto: las operaciones del día de elecciones centradas en lograr que los simpatizantes identificados voten de verdad. |
 
 ## Referencias cruzadas a las especificaciones

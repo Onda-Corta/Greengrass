@@ -16,7 +16,7 @@ Underneath that plan sits a single load-bearing assumption that has never been t
 
 > **Sovereign political organizations will pool data with each other under the right rules.**
 
-Every alliance feature in the spec depends on it. The federation layer, the per-resource sharing contracts, cross-org dedup, joint campaigns, unanimous-consent fundraising splits, alliance key rotation — all of it presumes that parties who guard their lists as their core institutional asset will hand them into a shared arrangement if the governance is good enough.
+Every alliance feature in the spec depends on it. The event bus between instances, the per-resource sharing contracts, cross-org dedup, joint campaigns, unanimous-consent fundraising splits, alliance key rotation — all of it presumes that parties who guard their lists as their core institutional asset will hand them into a shared arrangement if the governance is good enough.
 
 If that assumption is false, roughly a third of the specified product is dead weight and GreenGrass is a single-tenant campaign CRM competing with NationBuilder, NGP VAN, and Action Network on features. That is a much worse business.
 
@@ -190,7 +190,7 @@ Six questions, each aimed at a different class of blocker:
 
 That last question is the most directly useful thing in this plan for the build. It defines the default-deny field list in ALLY-005 from the parties' own words rather than from our guesses.
 
-**Why this matters beyond requirements-gathering:** several of these blockers are not "trust" in the sense the spec assumes. The federation layer, per-resource sharing contracts, and unanimous-consent governance are all designed against a *suspicion* model. If the binding constraint is capacity, legality, or authorization, the elaborate consent machinery solves a problem these parties do not have. See §9.2.
+**Why this matters beyond requirements-gathering:** several of these blockers are not "trust" in the sense the spec assumes. The event bus, per-resource sharing contracts, and unanimous-consent governance are all designed against a *suspicion* model. If the binding constraint is capacity, legality, or authorization, the elaborate consent machinery solves a problem these parties do not have. See §9.2.
 
 **Run before Phase 0 closes.** It can reorder everything downstream.
 
@@ -264,7 +264,7 @@ Governance is N-party with unanimous consent. This is where the existing spec ha
 
 **9.1 No live joint campaign to test against.** *Likelihood: high. Severity: high — it makes A5 untestable, and A5 is what separates real pooling from theater.* Mitigation: target the coalition-formation window, or attach to a non-electoral joint activity (§7).
 
-**9.2 The blocker may not be trust at all.** *Likelihood: medium. Severity: strategic.* If the readiness interviews (§6.4) show the binding constraint is capacity, legality, or political authorization rather than suspicion, then the spec's elaborate consent machinery — the federation layer, per-resource sharing contracts, unanimous-consent governance — solves a problem these parties do not have. That does not kill the product, but it substantially rescopes it and lowers the value of the ADR-016 §78–82 alliance surface.
+**9.2 The blocker may not be trust at all.** *Likelihood: medium. Severity: strategic.* If the readiness interviews (§6.4) show the binding constraint is capacity, legality, or political authorization rather than suspicion, then the spec's elaborate consent machinery — the event bus between instances, per-resource sharing contracts, unanimous-consent governance — solves a problem these parties do not have. That does not kill the product, but it substantially rescopes it and lowers the value of the ADR-016 §78–82 alliance surface.
 
 **9.3 Asymmetric data maturity produces a false negative.** *Likelihood: high. Severity: high.* PIP's friction gets misread as PIP's unwillingness. Mitigation: dedicated partner-support person; do the wrangling *for* them in Phase 1; measure willingness by decisions made, not by files formatted correctly.
 

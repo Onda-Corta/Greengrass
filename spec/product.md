@@ -35,7 +35,7 @@
 |---|---|---|
 | Core, modules and lanes | [ADR-022](../decisions/022-core-modules-and-lanes.md) | Proposed. The two lanes, the CRM in the Core and one instance per client are decided |
 | A headless Core, chat, admin and field | [ADR-023](../decisions/023-surfaces-chat-admin-field.md) | Proposed. The chat waits on the [ADR-018](../decisions/018-ai-agent-posture.md) review, in both lanes |
-| An event bus between instances | [ADR-024](../decisions/024-event-bus-as-federation.md) | Proposed |
+| An event bus between instances | [ADR-024](../decisions/024-event-bus-as-federation.md) | Accepted |
 | Each client holds its own accounts | [ADR-025](../decisions/025-identity-per-client.md) | Accepted |
 | The prices | [ADR-026](../decisions/026-two-lane-pricing.md) | Accepted; the definitions they need are open |
 | Sync with third-party CRMs | [ADR-027](../decisions/027-third-party-crm-sync-and-connectors.md) | Proposed. NationBuilder by CSV is decided |

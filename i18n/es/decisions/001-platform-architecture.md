@@ -3,7 +3,7 @@
 **Estado:** Aceptada
 **Fecha:** 2026-03-03
 **Fuentes:** `design/architecture/system.md`, `spec/users.md`, `spec/workflows.md`, `spec/product.md`
-**Enmienda propuesta por:** [ADR-024](024-event-bus-as-federation.md) (Propuesta) — la capa central de federación que media el flujo entre organizaciones se reemplazaría por exportaciones de eventos filtradas por contrato entre instancias, y una alianza sería un cliente como cualquier otro, con su propia instancia. Nada de lo que sigue cambia hasta que se acepte la ADR-024. El aislamiento de organización única lo reafirma la [ADR-022](022-core-modules-and-lanes.md) y no está en cuestión.
+**Enmendada por:** [ADR-024](024-event-bus-as-federation.md) (Aceptada el 2026-11-26) — la capa central de federación que mediaba el flujo entre organizaciones queda reemplazada por exportaciones de eventos filtradas por contrato entre instancias, y una alianza es un cliente como cualquier otro, con su propia instancia. La sección de afiliación de abajo quedó reescrita a tono. El aislamiento de organización única lo reafirma la [ADR-022](022-core-modules-and-lanes.md) y no está en cuestión.
 
 ## Contexto
 
@@ -26,9 +26,11 @@ Cada organización elige su nivel durante el aprovisionamiento y puede subir de 
 
 **Alternativas consideradas:** Se descartó la arquitectura multiorganización con aislamiento lógico porque comprometer una organización podría exponer a las demás, y porque hacer cumplir políticas de seguridad por organización (llaves de cifrado, residencia de datos, nivel de aislamiento) se vuelve exponencialmente más difícil en una base de datos compartida. Se consideró la multiorganización con aislamiento físico, pero no ofrece ninguna ventaja real frente a la organización única y añade complejidad de coordinación.
 
-### Modelo de federación en vez de multiorganización monolítica
+### Afiliación en vez de multiorganización monolítica
 
-Las organizaciones son entidades soberanas conectadas por afiliación voluntaria, no subdivisiones de un sistema monolítico. Cada entidad (partido, candidato, organización de incidencia) es una organización cliente completa, con sus propios datos, su propia facturación y su propio control administrativo. Las alianzas son organizaciones cliente ligeras, dedicadas a la coordinación, que permiten compartir recursos entre miembros soberanos sin transferir la propiedad. Las campañas heredan de su entidad matriz.
+Las organizaciones son entidades soberanas conectadas por afiliación voluntaria, no subdivisiones de un sistema monolítico. Cada entidad (partido, candidato, organización de incidencia) es una organización cliente completa, con sus propios datos, su propia facturación y su propio control administrativo. Una alianza es una organización cliente como cualquier otra —su propia instancia, sus propias cuentas, por lo general pocos módulos activados— y la coordinación entre miembros corre por exportaciones de eventos filtradas por contrato entre instancias, sin ningún componente central ([ADR-024](024-event-bus-as-federation.md)). Las campañas heredan de su entidad matriz.
+
+*Se conserva para que el cambio de criterio quede a la vista:* hasta el 2026-11-26 esta sección se llamaba «Modelo de federación en vez de multiorganización monolítica», y las alianzas eran «organizaciones cliente ligeras, dedicadas a la coordinación», servidas por una capa central de federación que mediaba el flujo entre organizaciones. La [ADR-024](024-event-bus-as-federation.md) eliminó la capa e hizo de la alianza un cliente completo.
 
 **Alternativas consideradas:** Se descartó un modelo de propiedad jerárquico (el partido es dueño de los datos del candidato) porque contradice el principio de soberanía: los datos de un candidato son del candidato, y una alianza no puede obligar a sus miembros a compartir datos.
 
@@ -52,7 +54,7 @@ Crear una organización es autoservicio, sin intervención humana. La cadena de 
 - Comprometer una organización no puede exponer a otra: el radio de impacto se limita a una sola organización
 - Las políticas de seguridad por organización (llaves de cifrado, residencia de datos, controles de acceso) se hacen cumplir desde la arquitectura, no solo por configuración
 - Se puede colocar una organización en cualquier país sin cambios de arquitectura
-- El modelo de federación respeta la soberanía de cada organización, algo crítico en contextos políticos donde la propiedad de los datos tiene consecuencias para la seguridad de las personas
+- El modelo de afiliación respeta la soberanía de cada organización, algo crítico en contextos políticos donde la propiedad de los datos tiene consecuencias para la seguridad de las personas
 - La prioridad móvil garantiza que la plataforma funcione en los dispositivos que los voluntarios realmente usan
 
 **Costos:**
